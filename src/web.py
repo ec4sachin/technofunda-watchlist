@@ -80,7 +80,27 @@ input,select{font:15px var(--f-body);color:var(--ink);background:var(--surface);
 .bar i{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:3px}
 .bar.low i{background:var(--down)}
 .bar u{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--ink);opacity:.55}
-.acts{display:flex;gap:6px;justify-content:flex-end}
+.acts{display:grid;grid-template-columns:auto auto;gap:6px;justify-content:end}
+.btn.buy,.btn.sell{color:#fff;font:800 15px var(--f-display);justify-content:center;letter-spacing:.02em}
+.btn.buy{background:#15803D;border-color:#15803D}.btn.sell{background:#C62828;border-color:#C62828}
+.btn.buy:hover{background:#166534}.btn.sell:hover{background:#B71C1C}
+.order{position:fixed;z-index:26;left:50%;top:50%;transform:translate(-50%,-50%);width:min(420px,calc(100vw - 24px));max-height:calc(100vh - 24px);overflow:auto;
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.3)}
+.order .oh{padding:14px 16px;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.order .oh.buy{background:#15803D}.order .oh.sell{background:#C62828}
+.order .oh h3{margin:0;font:700 18px var(--f-display)}
+.order .oh .x{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.35);color:#fff}
+.order .ob{padding:14px 16px;display:flex;flex-direction:column;gap:12px}
+.order .fr{display:grid;grid-template-columns:120px 1fr;gap:8px;align-items:center}
+.order .fr label{font-size:13px;color:var(--muted)}
+.order .seg{display:flex;gap:4px;flex-wrap:wrap}
+.order .seg button{appearance:none;flex:1;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:7px 8px;font:600 13px var(--f-body);cursor:pointer}
+.order .seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.order .est{display:flex;justify-content:space-between;font-size:14px;border-top:1px solid var(--line);padding-top:10px}
+.order .est b{font-family:var(--f-mono)}
+.order .place{width:100%;justify-content:center;padding:11px;font-size:15px}
+.order .place:disabled{opacity:.5;cursor:not-allowed}
+.order .note{font-size:12.5px;color:var(--muted);margin:0}
 .btn{display:inline-flex;align-items:center;gap:4px;font:600 13px var(--f-body);padding:7px 11px;border-radius:8px;text-decoration:none;border:1px solid var(--line);color:var(--ink);background:var(--surface);cursor:pointer;white-space:nowrap}
 .btn.pri{background:var(--accent);border-color:var(--accent);color:var(--surface)}
 details{grid-column:1/-1}
@@ -112,7 +132,7 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
 @media (max-width:720px){
   .row{grid-template-columns:minmax(0,1fr) auto}
   .row .mk{grid-column:1/-1;order:3}
-  .row .acts{grid-column:1/-1;order:4;justify-content:flex-start}
+  .row .acts{grid-column:1/-1;order:4;justify-content:start;grid-template-columns:repeat(4,auto)}
   .row .pricecol{text-align:right}
 }
 @media (prefers-reduced-motion:no-preference){.bar i{transition:width .4s ease}}
@@ -198,6 +218,8 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
   <p class="note" id="note"></p>
 </main>
 
+<div class="scrim" id="oscrim" hidden style="z-index:25"></div>
+<div class="order" id="order" role="dialog" aria-modal="true" aria-labelledby="o-title" hidden></div>
 <div class="ctx" id="ctx" role="menu" hidden></div>
 <div class="toast" id="toast" role="status" hidden></div>
 <div class="scrim" id="scrim" hidden></div>
@@ -238,7 +260,8 @@ function stockRow(r, list){
       <div class="ema ${gap == null ? "mut" : gap >= 0 ? "up" : "down"}">${gap == null ? (c ? "New listing: under 200 days" : "200 EMA n/a") : (gap >= 0 ? "▲ " : "▼ ") + Math.abs(gap).toFixed(1) + "% " + (gap >= 0 ? "above" : "below") + " 200 EMA"}</div></div>
     <div class="mk"><div class="top"><span>Marks${r.last_fund_check ? " · " + esc(r.last_fund_check) : ""}</span><b>${mk == null ? "not marked yet" : mk + " / " + FULL}</b></div>
       <div class="bar ${mk != null && mk < PASS ? "low" : ""}" role="img" aria-label="${mk == null ? "No marks yet" : mk + " of " + FULL + " marks, pass mark " + PASS}"><i style="width:${pct}%"></i><u style="left:${PASS / FULL * 100}%"></u></div></div>
-    <div class="acts"><button class="btn pri" data-open="${esc(r.symbol)}" data-tab="chart">Chart</button><button class="btn" data-open="${esc(r.symbol)}" data-tab="fund">Screener</button></div>
+    <div class="acts"><button class="btn pri" data-open="${esc(r.symbol)}" data-tab="chart">Chart</button><button class="btn" data-open="${esc(r.symbol)}" data-tab="fund">Screener</button>
+      <button class="btn buy" data-order="BUY" data-sym="${esc(r.symbol)}" aria-label="Buy ${esc(r.name || r.symbol)}" title="Buy">B</button><button class="btn sell" data-order="SELL" data-sym="${esc(r.symbol)}" aria-label="Sell ${esc(r.name || r.symbol)}" title="Sell">S</button></div>
   </article>`;
 }
 
@@ -604,6 +627,44 @@ function showToast(html){
   clearTimeout(toastTimer); toastTimer = setTimeout(() => t.hidden = true, 9000);
 }
 
+// ---------------- Buy / Sell order ticket (ready for the broker connection later)
+const ORD = {side: "BUY", sym: "", type: "MARKET", product: "CNC", broker: "ZERODHA", qty: 1, price: ""};
+try { Object.assign(ORD, JSON.parse(localStorage.getItem("tf-order") || "{}")); } catch (e) {}
+const BROKER_READY = false;  // switches to true when Zerodha / Angel One is connected through the VPS
+function openOrder(sym, side){
+  const [r] = findRow(sym); if (!r) return;
+  Object.assign(ORD, {side, sym, price: ""});
+  drawOrder(r);
+  document.getElementById("oscrim").hidden = false; document.getElementById("order").hidden = false;
+  document.getElementById("o-qty").focus();
+}
+function closeOrder(){ document.getElementById("order").hidden = true; document.getElementById("oscrim").hidden = true; }
+function drawOrder(r){
+  const c = num(r.last_close), buy = ORD.side === "BUY";
+  const seg = (key, opts) => `<div class="seg" role="group">${opts.map(([v, l]) => `<button data-oset="${key}" data-val="${v}" aria-pressed="${ORD[key] === v}">${l}</button>`).join("")}</div>`;
+  document.getElementById("order").innerHTML = `
+    <div class="oh ${buy ? "buy" : "sell"}"><div><h3 id="o-title">${buy ? "BUY" : "SELL"} · ${esc(r.name || r.symbol)}</h3>
+      <div style="font-size:12.5px;opacity:.9">${esc(r.symbol)} · last close ${c ? fmtINR(c) : "—"}</div></div>
+      <button class="x" data-oclose aria-label="Close">✕</button></div>
+    <div class="ob">
+      <div class="fr"><label>Broker</label>${seg("broker", [["ZERODHA", "Zerodha"], ["ANGEL", "Angel One"]])}</div>
+      <div class="fr"><label>Product</label>${seg("product", [["CNC", "Delivery"], ["MIS", "Intraday"]])}</div>
+      <div class="fr"><label>Order type</label>${seg("type", [["MARKET", "Market"], ["LIMIT", "Limit"]])}</div>
+      <div class="fr"><label for="o-qty">Quantity</label><input id="o-qty" type="number" inputmode="numeric" min="1" step="1" value="${ORD.qty}"></div>
+      <div class="fr" ${ORD.type === "LIMIT" ? "" : "hidden"}><label for="o-price">Limit price ₹</label><input id="o-price" type="number" inputmode="decimal" min="0" step="0.05" value="${ORD.price || (c || "")}"></div>
+      <div class="est"><span>Approx. value</span><b id="o-est">—</b></div>
+      <button class="btn place ${buy ? "buy" : "sell"}" data-oplace ${BROKER_READY ? "" : "disabled"}>${buy ? "Place BUY order" : "Place SELL order"}</button>
+      <p class="note">${BROKER_READY ? "The order goes to your broker immediately." : "🔒 No broker is connected yet, so no order can be placed from here. This button will work once Zerodha / Angel One is connected through your VPS. Your choices above are remembered."}</p>
+    </div>`;
+  const est = () => { const q = +document.getElementById("o-qty").value || 0, pi = document.getElementById("o-price");
+    const pr = ORD.type === "LIMIT" ? (+pi.value || 0) : (c || 0); ORD.qty = q; if (ORD.type === "LIMIT") ORD.price = pi.value;
+    document.getElementById("o-est").textContent = q && pr ? fmtINR(Math.round(q * pr * 100) / 100) : "—";
+    try { localStorage.setItem("tf-order", JSON.stringify({type: ORD.type, product: ORD.product, broker: ORD.broker, qty: ORD.qty})); } catch (e) {} };
+  document.getElementById("o-qty").addEventListener("input", est);
+  document.getElementById("o-price").addEventListener("input", est);
+  est();
+}
+
 function fundHTML(f){
   if (!f) return `<div class="empty">Screener numbers appear after the next robot run (7 AM).</div>`;
   const pc = v => v == null ? "—" : fmtN(v, 1) + "%";
@@ -634,6 +695,9 @@ function fundHTML(f){
 document.addEventListener("click", e => {
   const o = e.target.closest("[data-open]"); if (o) { openPanel(o.dataset.open, o.dataset.tab); return; }
   const pt = e.target.closest("[data-p]"); if (pt && cur) { curTab = pt.dataset.p; drawPanel(); return; }
+  const ob = e.target.closest("[data-order]"); if (ob) { openOrder(ob.dataset.sym, ob.dataset.order); return; }
+  const os = e.target.closest("[data-oset]"); if (os) { ORD[os.dataset.oset] = os.dataset.val; const [r] = findRow(ORD.sym); if (r) drawOrder(r); return; }
+  if (e.target.closest("[data-oclose]") || e.target.id === "oscrim") { closeOrder(); return; }
   const ai = e.target.closest("[data-alert-op]"); if (ai) { closeMenu(); saveAlert(cur.r.symbol, cur.r.name, ai.dataset.alertOp, +ai.dataset.alertPrice); return; }
   const sv = e.target.closest("[data-save-alert]"); if (sv && cur) { if (!connected()) { needConnect(); return; } saveAlert(cur.r.symbol, cur.r.name, document.getElementById("a-op").value, document.getElementById("a-price").value); return; }
   const da = e.target.closest("[data-del-alert]"); if (da) { deleteAlert(+da.dataset.delAlert, da); return; }
@@ -656,7 +720,8 @@ document.addEventListener("click", e => {
 });
 document.getElementById("p-close").addEventListener("click", closePanel);
 document.getElementById("scrim").addEventListener("click", closePanel);
-document.addEventListener("keydown", e => { if (e.key !== "Escape") return; if (!document.getElementById("ctx").hidden) { closeMenu(); return; } if (cur) closePanel(); });
+document.addEventListener("keydown", e => { if (e.key !== "Escape") return; if (!document.getElementById("ctx").hidden) { closeMenu(); return; }
+  if (!document.getElementById("order").hidden) { closeOrder(); return; } if (cur) closePanel(); });
 document.addEventListener("scroll", closeMenu, true);
 
 function show(v){
