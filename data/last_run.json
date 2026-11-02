@@ -9,14 +9,149 @@
  "warnings": [],
  "first_marked": [
   [
+   "513472",
+   "Simplex Castings",
+   "8.3/11"
+  ],
+  [
+   "513507",
+   "Guj. Containers",
+   "7.3/11"
+  ],
+  [
+   "524218",
+   "Resonance Speci.",
+   "9.2/11"
+  ],
+  [
+   "530741",
+   "Ovobel Foods",
+   "9.2/11"
+  ],
+  [
+   "543963",
+   "Shelter Pharma",
+   "5.5/11"
+  ],
+  [
+   "544141",
+   "Pune e-Stock Broking",
+   "5.5/11"
+  ],
+  [
+   "544442",
+   "Chemkart India",
+   "9.2/11"
+  ],
+  [
+   "544464",
+   "Umiya Mobile",
+   "9.2/11"
+  ],
+  [
+   "544694",
+   "Accretion Nutraveda",
+   "7.3/11"
+  ],
+  [
+   "ACETEC",
+   "Acetech E-Commerce",
+   "7.3/11"
+  ],
+  [
+   "DURLAX",
+   "Durlax Top",
+   "5.5/11"
+  ],
+  [
+   "EIMCOELECO",
+   "Eimco Elecon (India)",
+   "7.3/11"
+  ],
+  [
    "ESCONET",
    "Esconet",
    "7.3/11"
   ],
   [
+   "HOACFOODS",
+   "Hoac Foods",
+   "8.3/11"
+  ],
+  [
+   "INTEGRITY",
+   "Integrity Infra.",
+   "9.2/11"
+  ],
+  [
+   "KRISHNADEF",
+   "Krishna Defence",
+   "10.1/11"
+  ],
+  [
+   "MEGAFLEX",
+   "Mega Flex Plast.",
+   "6.4/11"
+  ],
+  [
+   "OMAXAUTO",
+   "Omax Autos",
+   "7.3/11"
+  ],
+  [
+   "PATELRMART",
+   "Patel Retail",
+   "7.3/11"
+  ],
+  [
+   "PRIZOR",
+   "Prizor Viztech",
+   "11/11"
+  ],
+  [
+   "RAMBHAJO",
+   "Advit Jewels",
+   "5.5/11"
+  ],
+  [
+   "RATNAVEER",
+   "Ratnaveer Precision Engineering",
+   "8.3/11"
+  ],
+  [
+   "SAAKSHI",
+   "Saakshi Medtech",
+   "9.2/11"
+  ],
+  [
+   "SAHANA",
+   "Sahana System",
+   "7.3/11"
+  ],
+  [
    "SHANTIGOLD",
    "Shanti Gold International",
-   "8.3/11 (was 3.7/11)"
+   "8.3/11"
+  ],
+  [
+   "SHETHJI",
+   "Shreeji Global",
+   "9.2/11"
+  ],
+  [
+   "SHRINGARMS",
+   "Shringar House",
+   "7.3/11"
+  ],
+  [
+   "SUPREMEPWR",
+   "Supreme Power Equipment",
+   "10.1/11"
+  ],
+  [
+   "TEAMTECH",
+   "Teamtech Formwork",
+   "10.1/11"
   ]
  ],
  "new_listing": [
@@ -54,5 +189,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "02 Nov 2026, 03:29 PM IST"
+ "run_at": "02 Nov 2026, 03:42 PM IST"
 }
