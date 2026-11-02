@@ -80,10 +80,18 @@ input,select{font:15px var(--f-body);color:var(--ink);background:var(--surface);
 .bar i{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:3px}
 .bar.low i{background:var(--down)}
 .bar u{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--ink);opacity:.55}
-.acts{display:grid;grid-template-columns:auto auto;gap:6px;justify-content:end}
-.btn.buy,.btn.sell{color:#fff;font:800 15px var(--f-display);justify-content:center;letter-spacing:.02em}
+.acts{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.acts .r1,.acts .r2{display:flex;gap:6px}
+.btn.buy,.btn.sell{color:#fff;font:800 13px var(--f-display);justify-content:center;letter-spacing:.02em}
+.acts .btn.buy,.acts .btn.sell{width:32px;height:28px;padding:0;border-radius:7px}
 .btn.buy{background:#15803D;border-color:#15803D}.btn.sell{background:#C62828;border-color:#C62828}
 .btn.buy:hover{background:#166534}.btn.sell:hover{background:#B71C1C}
+.pos{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 18px;align-items:baseline;border-top:1px dashed var(--line);padding-top:8px;font-size:13px;color:var(--muted);cursor:pointer;
+  background:none;border-left:0;border-right:0;border-bottom:0;text-align:left;font-family:inherit}
+.pos b{font:600 13.5px var(--f-mono);color:var(--ink)}
+.pos .pl{font:700 13.5px var(--f-mono)}
+.pos .tag{font:700 11px var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-bottom:12px}
 .order{position:fixed;z-index:26;left:50%;top:50%;transform:translate(-50%,-50%);width:min(420px,calc(100vw - 24px));max-height:calc(100vh - 24px);overflow:auto;
   background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.3)}
 .order .oh{padding:14px 16px;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:10px}
@@ -132,7 +140,7 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
 @media (max-width:720px){
   .row{grid-template-columns:minmax(0,1fr) auto}
   .row .mk{grid-column:1/-1;order:3}
-  .row .acts{grid-column:1/-1;order:4;justify-content:start;grid-template-columns:repeat(4,auto)}
+  .row .acts{grid-column:1/-1;order:4;flex-direction:row;align-items:center;justify-content:flex-start}
   .row .pricecol{text-align:right}
 }
 @media (prefers-reduced-motion:no-preference){.bar i{transition:width .4s ease}}
@@ -147,7 +155,9 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
 .x{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;width:36px;height:36px;font-size:18px;cursor:pointer;flex:none}
 .ph-stats{display:flex;flex-wrap:wrap;gap:6px 16px;margin:10px 0 4px;font-size:13px;color:var(--muted)}
 .ph-stats b{color:var(--ink);font:600 14px var(--f-mono)}
-.ptabs{display:flex;gap:2px;margin-top:6px}
+.ptabs{display:flex;gap:2px;margin-top:6px;overflow-x:auto;scrollbar-width:none}
+.ptabs::-webkit-scrollbar{display:none}
+.ptabs .tab{padding:10px 12px 12px}
 .pb{flex:1;overflow-y:auto;padding:16px max(16px,env(safe-area-inset-right,0px)) 24px 16px}
 .ranges{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;align-items:center}
 .rg{appearance:none;font:600 12.5px var(--f-body);padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer}
@@ -230,9 +240,10 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
     <div class="ph-stats" id="p-stats"></div>
     <nav class="ptabs" role="tablist" aria-label="Stock details">
       <button class="tab" role="tab" data-p="chart">Chart</button>
-      <button class="tab" role="tab" data-p="fund">Screener numbers</button>
+      <button class="tab" role="tab" data-p="fund">Screener</button>
       <button class="tab" role="tab" data-p="marks">Marks</button>
       <button class="tab" role="tab" data-p="alert">🔔 Alert</button>
+      <button class="tab" role="tab" data-p="pos">Position</button>
     </nav>
   </div>
   <div class="pb" id="p-body"></div>
@@ -260,8 +271,9 @@ function stockRow(r, list){
       <div class="ema ${gap == null ? "mut" : gap >= 0 ? "up" : "down"}">${gap == null ? (c ? "New listing: under 200 days" : "200 EMA n/a") : (gap >= 0 ? "▲ " : "▼ ") + Math.abs(gap).toFixed(1) + "% " + (gap >= 0 ? "above" : "below") + " 200 EMA"}</div></div>
     <div class="mk"><div class="top"><span>Marks${r.last_fund_check ? " · " + esc(r.last_fund_check) : ""}</span><b>${mk == null ? "not marked yet" : mk + " / " + FULL}</b></div>
       <div class="bar ${mk != null && mk < PASS ? "low" : ""}" role="img" aria-label="${mk == null ? "No marks yet" : mk + " of " + FULL + " marks, pass mark " + PASS}"><i style="width:${pct}%"></i><u style="left:${PASS / FULL * 100}%"></u></div></div>
-    <div class="acts"><button class="btn pri" data-open="${esc(r.symbol)}" data-tab="chart">Chart</button><button class="btn" data-open="${esc(r.symbol)}" data-tab="fund">Screener</button>
-      <button class="btn buy" data-order="BUY" data-sym="${esc(r.symbol)}" aria-label="Buy ${esc(r.name || r.symbol)}" title="Buy">B</button><button class="btn sell" data-order="SELL" data-sym="${esc(r.symbol)}" aria-label="Sell ${esc(r.name || r.symbol)}" title="Sell">S</button></div>
+    <div class="acts"><div class="r1"><button class="btn pri" data-open="${esc(r.symbol)}" data-tab="chart">Chart</button><button class="btn" data-open="${esc(r.symbol)}" data-tab="fund">Screener</button></div>
+      <div class="r2"><button class="btn buy" data-order="BUY" data-sym="${esc(r.symbol)}" aria-label="Buy ${esc(r.name || r.symbol)}" title="Buy">B</button><button class="btn sell" data-order="SELL" data-sym="${esc(r.symbol)}" aria-label="Sell ${esc(r.name || r.symbol)}" title="Sell">S</button></div></div>
+    ${posStrip(r)}
   </article>`;
 }
 
@@ -350,7 +362,8 @@ function closePanel(){
   cur = null;
 }
 function drawPanel(){
-  document.querySelectorAll("[data-p]").forEach(t => t.setAttribute("aria-selected", t.dataset.p === curTab));
+  document.querySelectorAll("[data-p]").forEach(t => { t.setAttribute("aria-selected", t.dataset.p === curTab);
+    if (t.dataset.p === curTab && t.scrollIntoView) t.scrollIntoView({block: "nearest", inline: "nearest"}); });
   if (chartObj) { chartObj.remove(); chartObj = null; }
   const body = document.getElementById("p-body"), r = cur.r;
   const links = `<div class="plinks"><a class="btn" href="${esc(r.chart)}" target="_blank" rel="noopener">Open in TradingView ↗</a><a class="btn" href="${esc(r.screener)}" target="_blank" rel="noopener">Open full Screener page ↗</a></div>`;
@@ -366,6 +379,8 @@ function drawPanel(){
     drawChart();
   } else if (curTab === "fund") {
     body.innerHTML = fundHTML(D.fund[r.symbol]) + links;
+  } else if (curTab === "pos") {
+    body.innerHTML = posHTML(r) + links;
   } else if (curTab === "alert") {
     body.innerHTML = alertHTML(r) + links;
     const upd = () => {
@@ -634,6 +649,7 @@ const BROKER_READY = false;  // switches to true when Zerodha / Angel One is con
 function openOrder(sym, side){
   const [r] = findRow(sym); if (!r) return;
   Object.assign(ORD, {side, sym, price: ""});
+  if (side === "SELL" && POS[sym] && POS[sym].qty > 0) ORD.qty = POS[sym].qty;
   drawOrder(r);
   document.getElementById("oscrim").hidden = false; document.getElementById("order").hidden = false;
   document.getElementById("o-qty").focus();
@@ -665,6 +681,46 @@ function drawOrder(r){
   est();
 }
 
+// ---------------- My positions (kept only on this device until a broker is connected)
+let POS = {}; try { POS = JSON.parse(localStorage.getItem("tf-pos") || "{}") || {}; } catch (e) {}
+const savePos = () => { try { localStorage.setItem("tf-pos", JSON.stringify(POS)); return true; } catch (e) { return false; } };
+function posCalc(r){
+  const p = POS[r.symbol]; if (!p || !(p.qty > 0) || !(p.avg > 0)) return null;
+  const ltp = num(r.last_close), inv = p.qty * p.avg, val = ltp ? p.qty * ltp : null, pl = val != null ? val - inv : null;
+  return {qty: p.qty, avg: p.avg, inv, val, pl, pct: pl != null ? pl / inv * 100 : null, ltp};
+}
+const signed = (v, d = 2) => (v > 0 ? "+" : v < 0 ? "−" : "") + "₹" + Math.abs(v).toLocaleString("en-IN", {maximumFractionDigits: d});
+function posStrip(r){
+  const p = posCalc(r); if (!p) return "";
+  const cls = p.pl == null ? "" : p.pl >= 0 ? "up" : "down";
+  return `<button class="pos" data-open="${esc(r.symbol)}" data-tab="pos" aria-label="My position in ${esc(r.name || r.symbol)}">
+    <span class="tag">My position</span>
+    <span>Qty <b>${fmtN(p.qty, 0)}</b></span><span>Avg <b>${fmtINR(p.avg)}</b></span><span>Invested <b>${fmtINR(Math.round(p.inv))}</b></span>
+    <span>P&amp;L <span class="pl ${cls}">${p.pl == null ? "—" : signed(p.pl, 0)}</span></span>
+    <span class="pl ${cls}">${p.pct == null ? "" : (p.pct >= 0 ? "▲ " : "▼ ") + Math.abs(p.pct).toFixed(2) + "%"}</span></button>`;
+}
+function posHTML(r){
+  const p = posCalc(r), have = POS[r.symbol] || {};
+  const kv = (k, v, cls = "") => `<div class="kv"><div class="k">${k}</div><div class="v ${cls}">${v}</div></div>`;
+  const cls = p && p.pl != null ? (p.pl >= 0 ? "up" : "down") : "";
+  return (p ? `<div class="pgrid">${kv("Quantity", fmtN(p.qty, 0))}${kv("Avg buy price", fmtINR(p.avg))}${kv("Invested", fmtINR(Math.round(p.inv)))}
+      ${kv("Current value", p.val != null ? fmtINR(Math.round(p.val)) : "—")}${kv("Profit / Loss", p.pl != null ? signed(p.pl, 0) : "—", cls)}
+      ${kv("Gain / Loss %", p.pct != null ? (p.pct >= 0 ? "+" : "") + p.pct.toFixed(2) + "%" : "—", cls)}</div>` : "") +
+    `<div class="aform"><label for="p-qty">Quantity</label><input id="p-qty" type="number" inputmode="numeric" min="0" step="1" value="${have.qty || ""}" placeholder="e.g. 50">
+      <label for="p-avg">Avg buy price ₹</label><input id="p-avg" type="number" inputmode="decimal" min="0" step="0.01" value="${have.avg || ""}" placeholder="e.g. 285.40">
+      <button class="btn pri" data-pos-save>Save</button>${p ? `<button class="btn" data-pos-del>Remove</button>` : ""}</div>
+    <p class="src">Copy quantity and average price from your Zerodha / Angel One holdings. Profit and loss use the last closing price
+      (${p && p.ltp ? fmtINR(p.ltp) : "—"}). Saved only on this device and never uploaded. When your broker is connected, positions fill in automatically.</p>`;
+}
+function totalsStat(){
+  let inv = 0, val = 0, n = 0;
+  for (const k of ["SP", "DT"]) for (const r of D[k]) { const p = posCalc(r); if (p && p.val != null) { inv += p.inv; val += p.val; n++; } }
+  if (!n) return "";
+  const pl = val - inv, pct = pl / inv * 100;
+  return `<div class="stat"><div class="k">My positions · ${n}</div><div class="v ${pl >= 0 ? "up" : "down"}">${signed(pl, 0)}<small>${(pct >= 0 ? "+" : "") + pct.toFixed(2)}% on ${fmtINR(Math.round(inv))}</small></div></div>`;
+}
+function posChanged(){ drawList(); drawStrip(); if (cur && curTab === "pos") drawPanel(); }
+
 function fundHTML(f){
   if (!f) return `<div class="empty">Screener numbers appear after the next robot run (7 AM).</div>`;
   const pc = v => v == null ? "—" : fmtN(v, 1) + "%";
@@ -695,6 +751,11 @@ function fundHTML(f){
 document.addEventListener("click", e => {
   const o = e.target.closest("[data-open]"); if (o) { openPanel(o.dataset.open, o.dataset.tab); return; }
   const pt = e.target.closest("[data-p]"); if (pt && cur) { curTab = pt.dataset.p; drawPanel(); return; }
+  if (e.target.closest("[data-pos-save]") && cur) { const q = +document.getElementById("p-qty").value, a = +document.getElementById("p-avg").value;
+    if (!(q > 0) || !(a > 0)) { showToast("Enter both quantity and average price."); return; }
+    POS[cur.r.symbol] = {qty: q, avg: a, updated: new Date().toISOString().slice(0, 10)};
+    showToast(savePos() ? "✅ Position saved on this device." : "⚠️ This browser is blocking storage, so the position can't be saved."); posChanged(); return; }
+  if (e.target.closest("[data-pos-del]") && cur) { delete POS[cur.r.symbol]; savePos(); showToast("Position removed."); posChanged(); return; }
   const ob = e.target.closest("[data-order]"); if (ob) { openOrder(ob.dataset.sym, ob.dataset.order); return; }
   const os = e.target.closest("[data-oset]"); if (os) { ORD[os.dataset.oset] = os.dataset.val; const [r] = findRow(ORD.sym); if (r) drawOrder(r); return; }
   if (e.target.closest("[data-oclose]") || e.target.id === "oscrim") { closeOrder(); return; }
@@ -735,6 +796,7 @@ function show(v){
   if (v === "sp" || v === "dt") drawList();
 }
 
+let drawStrip = () => {};
 (function init(){
   const r = D.run || {};
   const changes = ["added", "to_dt", "to_sp", "removed"].reduce((n, k) => n + ((r[k] || []).length), 0);
@@ -744,11 +806,12 @@ function show(v){
   document.getElementById("runline").textContent = r.run_at ? "Last run " + r.run_at + (r.price_date ? " · prices of " + r.price_date : "") : "Waiting for first run";
   const stat = (k, v, sub, cls) => `<div class="stat"><div class="k">${k}</div><div class="v ${cls || ""}">${v}${sub ? `<small>${sub}</small>` : ""}</div></div>`;
   const avg = l => { const m = l.map(marksOf).filter(x => x != null); return m.length ? (m.reduce((a, b) => a + b, 0) / m.length).toFixed(1) : "—"; };
-  document.getElementById("strip").innerHTML =
+  drawStrip = () => { document.getElementById("strip").innerHTML =
     stat("SP · above 200 EMA", D.SP.length, "stocks") +
     stat("DT · below 200 EMA", D.DT.length, "stocks", D.DT.length ? "down" : "") +
     stat("Changes in last run", changes, (r.added || []).length ? `${r.added.length} added` : "") +
-    stat("Average marks (SP)", avg(D.SP), "/ " + FULL);
+    stat("Average marks (SP)", avg(D.SP), "/ " + FULL) + totalsStat(); };
+  drawStrip();
   document.getElementById("note").textContent =
     `New stocks need ${D.cfg.pass_new} of ${FULL} marks to enter SP; SP and DT stocks need ${PASS} of ${FULL} on the monthly review (1st of each month). ` +
     `The black line on each marks bar is the pass mark. Marks shown are the automatic part of the TechnoFunda system, scaled to ${FULL}.` + (D.cfg.banner ? " " + D.cfg.banner : "");
