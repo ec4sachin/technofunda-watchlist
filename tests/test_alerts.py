@@ -82,10 +82,10 @@ def test_dashboard_requests():
     n = alerts.ingest_requests(store, folder, "t", CHAT, SP, DT)
     assert n == 3 and [(a["id"], a["symbol"], a["op"], a["price"], a["source"]) for a in store["alerts"]] == \
         [(1, "SAHANA", "above", 950.0, "dashboard"), (2, "SUPREMEPWR", "below", 230.5, "dashboard")]
-    assert sorted(os.listdir(folder)) == [".keep"] and "set from dashboard" in sent[0]
+    assert sorted(os.listdir(folder)) == [".keep"]  # saved quietly, no Telegram message
     put("4-d.json", {"action": "delete", "id": 1})
     alerts.ingest_requests(store, folder, "t", CHAT, SP, DT)
-    assert [a["id"] for a in store["alerts"]] == [2] and "deleted from dashboard" in sent[-1]
+    assert [a["id"] for a in store["alerts"]] == [2] and sent == []
     print("Dashboard requests OK")
 
 

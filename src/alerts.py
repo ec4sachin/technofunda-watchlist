@@ -238,16 +238,12 @@ def ingest_requests(store, folder, token, chat_id, sp, dt, now=None):
                      "status": "active", "created": now.strftime("%d %b %Y %I:%M %p"), "source": "dashboard"}
                 store["next_id"] += 1
                 store["alerts"].append(a)
-                tg.send(token, chat_id, f"✅ Alert {a['id']} set from dashboard: <b>{html.escape(name)}</b> ({sym}) {op} ₹{a['price']:g}")
         elif action == "delete":
             try:
                 aid = int(req.get("id"))
             except (TypeError, ValueError):
                 aid = None
-            gone = [a for a in store["alerts"] if a["id"] == aid]
             store["alerts"] = [a for a in store["alerts"] if a["id"] != aid]
-            if gone:
-                tg.send(token, chat_id, f"🗑 Alert {aid} deleted from dashboard ({html.escape(gone[0]['name'])} {gone[0]['op']} ₹{gone[0]['price']:g}).")
         os.remove(path)
         done += 1
     return done
