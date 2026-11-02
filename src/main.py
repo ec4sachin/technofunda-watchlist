@@ -291,6 +291,7 @@ def main():
     storage.save_json("last_run.json", summary)
     alert_store = storage.load_json("alerts.json", {})
     alert_store["as_of"] = summary["run_at"]
+    rules_cfg = {**rules_cfg, "_repo": os.getenv("GITHUB_REPOSITORY", "")}
     web.build(sp, dt, summary, storage.load_history(), rules_cfg, snaps=snaps, charts=charts or None, alerts=alert_store)
 
     msg = build_message(report, sp, dt, now.strftime("%d %b %Y"), str(settings.get("dashboard_url") or "").strip())

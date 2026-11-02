@@ -201,6 +201,58 @@ def process_commands(store, token, chat_id, sp, dt, now=None):
     return changed
 
 
+# ---------------------------------------------------------------- requests from the dashboard
+def ingest_requests(store, folder, token, chat_id, sp, dt, now=None):
+    """The dashboard saves one small file per click in data/alert_requests/. Apply them, then remove them.
+
+    File content: {"action": "add", "symbol": "SAHANA", "name": "...", "op": "above", "price": 950}
+               or {"action": "delete", "id": 3}
+    Returns the number of requests applied.
+    """
+    import json
+    now = now or datetime.now(IST)
+    if not os.path.isdir(folder):
+        return 0
+    done = 0
+    for fname in sorted(os.listdir(folder)):
+        path = os.path.join(folder, fname)
+        if not fname.endswith(".json"):
+            continue
+        try:
+            with open(path, encoding="utf-8") as f:
+                req = json.load(f)
+        except (OSError, ValueError):
+            os.remove(path)
+            continue
+        action = str(req.get("action", "")).lower()
+        if action == "add":
+            sym, name = resolve(str(req.get("symbol", "")), sp, dt)
+            op = "below" if str(req.get("op", "")).lower() == "below" else "above"
+            try:
+                price = float(req.get("price"))
+            except (TypeError, ValueError):
+                price = 0.0
+            if sym and price > 0:
+                name = req.get("name") or name
+                a = {"id": store["next_id"], "symbol": sym, "name": name, "op": op, "price": round(price, 2),
+                     "status": "active", "created": now.strftime("%d %b %Y %I:%M %p"), "source": "dashboard"}
+                store["next_id"] += 1
+                store["alerts"].append(a)
+                tg.send(token, chat_id, f"✅ Alert {a['id']} set from dashboard: <b>{html.escape(name)}</b> ({sym}) {op} ₹{a['price']:g}")
+        elif action == "delete":
+            try:
+                aid = int(req.get("id"))
+            except (TypeError, ValueError):
+                aid = None
+            gone = [a for a in store["alerts"] if a["id"] == aid]
+            store["alerts"] = [a for a in store["alerts"] if a["id"] != aid]
+            if gone:
+                tg.send(token, chat_id, f"🗑 Alert {aid} deleted from dashboard ({html.escape(gone[0]['name'])} {gone[0]['op']} ₹{gone[0]['price']:g}).")
+        os.remove(path)
+        done += 1
+    return done
+
+
 # ---------------------------------------------------------------- checking
 def check_alerts(store, token, chat_id, sp, dt, lang="hi", now=None):
     """Check active alerts against live prices. Returns the alerts that fired."""

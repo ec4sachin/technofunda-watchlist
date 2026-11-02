@@ -162,6 +162,7 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
   border-radius:10px;padding:10px 12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;max-width:calc(100vw - 32px);font-size:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
 .toast code{font:600 13px var(--f-mono)}
 .toast a{color:var(--surface);font-weight:700}
+.ev .btn{grid-column:2;justify-self:end}
 .steps{margin:12px 0 0;padding-left:20px;color:var(--muted);font-size:13.5px;display:flex;flex-direction:column;gap:4px}
 
 </style>
@@ -345,11 +346,13 @@ function drawPanel(){
   } else if (curTab === "alert") {
     body.innerHTML = alertHTML(r) + links;
     const upd = () => {
-      const op = document.getElementById("a-op").value, v = document.getElementById("a-price").value.trim();
-      document.getElementById("a-cmd").textContent = `/alert ${r.symbol} ${op} ${v || "PRICE"}`;
+      const op = document.getElementById("a-op").value, v = document.getElementById("a-price").value.trim(), box = document.getElementById("a-cmd");
+      if (box) box.textContent = `/alert ${r.symbol} ${op} ${v || "PRICE"}`;
     };
     document.getElementById("a-op").addEventListener("change", upd);
     document.getElementById("a-price").addEventListener("input", upd);
+    document.getElementById("a-price").addEventListener("keydown", e => { if (e.key === "Enter" && connected())
+      saveAlert(r.symbol, r.name, document.getElementById("a-op").value, e.target.value); });
     upd();
   } else {
     let checks = []; try { checks = JSON.parse(r.marks_detail || "[]"); } catch (e) {}
@@ -429,7 +432,7 @@ async function drawChart(){
     (candles ? "" : "Open/high/low prices are not available for this stock, so a line chart is shown. ") +
     (bars.length < 200 ? "EMA 200 appears once there are 200 candles." : "");
   cur.bars = bars; cur.main = main;
-  for (const a of (AL.active || []).filter(x => x.symbol === sym))
+  for (const a of [...activeAlerts(), ...AL.pending].filter(x => x.symbol === sym))
     main.createPriceLine({price: +a.price, color: tok("--accent"), lineWidth: 1, lineStyle: 2, axisLabelVisible: true, title: "🔔 " + a.op});
   attachMenu(box);
   setRange();
@@ -443,34 +446,131 @@ function setRange(){
   const fromStr = from.toISOString().slice(0, 10), i = b.findIndex(x => x.end >= fromStr);
   chartObj.timeScale().setVisibleRange({from: b[Math.max(0, i)].time, to: b[n - 1].time});
 }
+// ---------------- Alerts: one-click saving through the user's own GitHub key (kept only in this browser)
 const AL = D.alerts || {active: [], done: [], bot: ""};
-const botLink = AL.bot ? `<a class="btn pri" href="https://t.me/${esc(AL.bot)}" target="_blank" rel="noopener">Open Telegram bot ↗</a>` : "";
-function alertRows(list){
+AL.pending = []; AL.deleting = new Set();
+const REPO = D.cfg.repo || (location.hostname.endsWith(".github.io") && location.pathname.split("/")[1]
+  ? location.hostname.split(".")[0] + "/" + location.pathname.split("/")[1] : "");
+let GH = ""; try { GH = localStorage.getItem("tf-gh-token") || ""; } catch (e) {}
+const connected = () => !!(GH && REPO);
+const botLink = AL.bot ? `<a class="btn" href="https://t.me/${esc(AL.bot)}" target="_blank" rel="noopener">Open Telegram bot ↗</a>` : "";
+async function gh(path, opts = {}){
+  const r = await fetch("https://api.github.com" + path, Object.assign({}, opts, {headers: Object.assign({
+    Authorization: "Bearer " + GH, Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28"}, opts.headers || {})}));
+  if (!r.ok) { const e = new Error("GitHub said " + r.status); e.status = r.status; throw e; }
+  return r.status === 204 ? null : (opts.raw ? r.text() : r.json());
+}
+const b64 = t => btoa(unescape(encodeURIComponent(t)));
+async function sendRequest(obj){
+  const name = Date.now() + "-" + Math.random().toString(36).slice(2, 7) + ".json";
+  await gh(`/repos/${REPO}/contents/data/alert_requests/${name}`, {method: "PUT",
+    body: JSON.stringify({message: `Alert from dashboard: ${obj.action} ${obj.symbol || "#" + obj.id}`, content: b64(JSON.stringify(obj))})});
+  try { await gh(`/repos/${REPO}/actions/workflows/alerts.yml/dispatches`, {method: "POST", body: JSON.stringify({ref: "main"})}); } catch (e) {}
+}
+function saveError(e){
+  const why = e.status === 401 ? "the GitHub key is wrong or has expired" : e.status === 403 ? "the GitHub key is missing a permission"
+    : e.status === 404 ? "the GitHub key can't see this repository" : "GitHub could not be reached";
+  showToast(`⚠️ Alert not saved: ${why}. Open the <b>Alerts</b> tab → <b>Connect</b> to fix it.`);
+}
+async function saveAlert(sym, name, op, price){
+  price = +(+price).toFixed(2);
+  if (!(price > 0)) { showToast("Type a price first."); return; }
+  if (!connected()) { alertFromMenu(op, price, sym); return; }
+  showToast(`Saving alert: ${esc(name || sym)} ${op} ₹${fmtN(price)}…`);
+  try {
+    await sendRequest({action: "add", symbol: sym, name: name || sym, op, price});
+    AL.pending.push({symbol: sym, name: name || sym, op, price});
+    if (cur && cur.r.symbol === sym && cur.main) cur.main.createPriceLine({price, color: tok("--accent"), lineWidth: 1, lineStyle: 2, axisLabelVisible: true, title: "🔔 " + op});
+    showToast(`✅ Alert saved: <b>${esc(name || sym)}</b> ${op} ₹${fmtN(price)}. Telegram will confirm in about a minute.`);
+    redrawAlertViews();
+    laterRefresh();
+  } catch (e) { saveError(e); }
+}
+async function deleteAlert(id, btn){
+  if (btn && btn.dataset.armed !== "1") { btn.dataset.armed = "1"; btn.textContent = "Tap again to delete";
+    setTimeout(() => { if (btn.isConnected) { btn.dataset.armed = ""; btn.textContent = "Delete"; } }, 3000); return; }
+  try { await sendRequest({action: "delete", id}); AL.deleting.add(id);
+    showToast(`🗑 Alert ${id} will be deleted. Telegram will confirm in about a minute.`); redrawAlertViews(); laterRefresh(); }
+  catch (e) { saveError(e); }
+}
+function laterRefresh(){ for (const ms of [60000, 120000, 240000]) setTimeout(refreshAlerts, ms); }
+async function refreshAlerts(){
+  if (!REPO) return;
+  try {
+    const txt = connected()
+      ? await gh(`/repos/${REPO}/contents/data/alerts.json`, {raw: true, headers: {Accept: "application/vnd.github.raw+json"}})
+      : await fetch(`https://raw.githubusercontent.com/${REPO}/main/data/alerts.json`).then(r => r.ok ? r.text() : Promise.reject(r.status));
+    const st = JSON.parse(txt), items = st.alerts || [];
+    AL.active = items.filter(a => a.status === "active");
+    AL.done = items.filter(a => a.status === "triggered").slice(-10).reverse();
+    AL.bot = AL.bot || st.bot_username || "";
+    AL.pending = AL.pending.filter(p => !AL.active.some(a => a.symbol === p.symbol && a.op === p.op && +a.price === +p.price));
+    for (const id of [...AL.deleting]) if (!AL.active.some(a => a.id === id)) AL.deleting.delete(id);
+    AL.live = true; redrawAlertViews();
+  } catch (e) {}
+}
+function redrawAlertViews(){
+  drawAlerts();
+  document.getElementById("c-alerts").textContent = activeAlerts().length + AL.pending.length;
+  if (cur && curTab === "alert") drawPanel();
+}
+const activeAlerts = () => (AL.active || []).filter(a => !AL.deleting.has(a.id));
+function alertRows(list, canDelete){
   return list.map(a => `<div><div><b>${esc(a.name || a.symbol)}</b> <span class="sym mut">${esc(a.symbol)}</span></div>` +
-    `<span class="pill ${a.status === "triggered" ? "p-add" : "p-sp"}">${a.status === "triggered" ? "Hit ₹" + fmtN(a.hit_price) : "#" + a.id}</span>` +
-    `<div class="why">${a.op} ₹${fmtN(a.price)} · ${a.status === "triggered" ? "triggered " + esc(a.hit_at || "") : "set " + esc(a.created || "")}</div></div>`).join("");
+    `<span class="pill ${a.status === "triggered" ? "p-add" : a.pending ? "p-warn" : "p-sp"}">${a.status === "triggered" ? "Hit ₹" + fmtN(a.hit_price) : a.pending ? "Saving…" : "#" + a.id}</span>` +
+    `<div class="why">${a.op} ₹${fmtN(a.price)} · ${a.status === "triggered" ? "triggered " + esc(a.hit_at || "") : a.pending ? "sent from this dashboard" : "set " + esc(a.created || "")}</div>` +
+    (canDelete && a.status === "active" && !a.pending && connected() ? `<button class="btn" data-del-alert="${a.id}">Delete</button>` : "") + `</div>`).join("");
 }
 function alertHTML(r){
-  const c = num(r.last_close), mine = (AL.active || []).filter(a => a.symbol === r.symbol);
-  return `<div class="aform"><label for="a-op">Alert me when the price is</label>
+  const c = num(r.last_close);
+  const mine = [...activeAlerts().filter(a => a.symbol === r.symbol), ...AL.pending.filter(a => a.symbol === r.symbol).map(a => Object.assign({pending: true, status: "active"}, a))];
+  const form = `<div class="aform"><label for="a-op">Alert me when the price is</label>
       <select id="a-op"><option value="above">at or above</option><option value="below">at or below</option></select>
-      <span>₹</span><input id="a-price" type="number" inputmode="decimal" step="0.05" min="0" placeholder="${c ? Math.round(c) : "price"}" aria-label="Alert price"></div>
-    <div class="cmd"><code id="a-cmd"></code><button class="btn" id="a-copy" data-copy="a-cmd">Copy</button>${botLink}</div>
-    <ol class="steps"><li>Type your price above and tap <b>Copy</b>.</li><li>Open your Telegram bot and paste the message, then send it.</li>
-      <li>The bot replies "Alert set". During market hours you get a message and a voice note when the price is reached.</li></ol>` +
-    (mine.length ? `<h2>Active alerts for this stock<span class="cnt">${mine.length}</span></h2><div class="ev">${alertRows(mine)}</div>` : "") +
+      <span>₹</span><input id="a-price" type="number" inputmode="decimal" step="0.05" min="0" placeholder="${c ? Math.round(c) : "price"}" aria-label="Alert price">
+      ${connected() ? `<button class="btn pri" data-save-alert>🔔 Set alert</button>` : ""}</div>`;
+  const how = connected()
+    ? `<p class="src">One click saves it. Telegram confirms in about a minute. You can also right-click on the chart.</p>`
+    : `<div class="cmd"><code id="a-cmd"></code><button class="btn" id="a-copy" data-copy="a-cmd">Copy</button>${botLink}</div>
+       <ol class="steps"><li>Type your price above and tap <b>Copy</b>.</li><li>Open your Telegram bot, paste and send.</li>
+       <li>For one-click alerts without Telegram, connect this dashboard once: <a href="#alerts" data-goto-alerts>Alerts tab → Connect</a>.</li></ol>`;
+  return form + how +
+    (mine.length ? `<h2>Alerts for this stock<span class="cnt">${mine.length}</span></h2><div class="ev">${alertRows(mine, true)}</div>` : "") +
     `<p class="src">Prices are checked every 15 minutes, Mon–Fri 9:15 AM–3:30 PM, and can be up to about 15 minutes late. Last close ${c ? fmtINR(c) : "—"}.</p>`;
 }
-function drawAlerts(){
-  const act = AL.active || [], done = AL.done || [];
-  document.getElementById("v-alerts").innerHTML =
-    `<div class="aform" style="display:block"><b>Set an alert:</b> open any stock → <b>🔔 Alert</b> tab, or send your bot a message like <code>/alert SAHANA above 950</code>.
-      Send <code>/alerts</code> for the live list, <code>/delete 3</code> to remove one, <code>/price SAHANA</code> for the current price.
-      <div class="cmd">${botLink}</div></div>` +
-    `<h2>Active alerts<span class="cnt">${act.length}</span></h2>` + (act.length ? `<div class="ev">${alertRows(act)}</div>` : `<div class="empty">No active alerts.</div>`) +
-    (done.length ? `<h2>Recently triggered<span class="cnt">${done.length}</span></h2><div class="ev">${alertRows(done)}</div>` : "") +
-    `<p class="src">This list is from the last daily update${AL.as_of ? " (" + esc(AL.as_of) + ")" : ""}. Telegram always has the latest: send /alerts.</p>`;
+function connectBox(){
+  if (!REPO) return `<div class="aform" style="display:block">One-click alerts need the dashboard's GitHub address. They will switch on after the next daily robot run.</div>`;
+  if (connected()) return `<div class="aform" style="display:flex;justify-content:space-between">
+      <span>✅ <b>One-click alerts are on</b> on this device (connected to <span class="sym">${esc(REPO)}</span>).</span>
+      <button class="btn" data-gh-disconnect>Disconnect</button></div>`;
+  return `<div class="aform" style="display:block"><b>Turn on one-click alerts (once per phone or computer)</b>
+    <ol class="steps"><li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → new fine-grained token ↗</a></li>
+      <li>Token name: <b>watchlist dashboard</b>. Expiration: <b>1 year</b>.</li>
+      <li>Repository access: <b>Only select repositories</b> → <b>${esc(REPO.split("/")[1] || "technofunda-watchlist")}</b>.</li>
+      <li>Permissions → Repository: <b>Contents: Read and write</b> and <b>Actions: Read and write</b>.</li>
+      <li><b>Generate token</b>, copy it, paste it here and tap Connect.</li></ol>
+    <div class="cmd"><input id="gh-key" type="password" autocomplete="off" placeholder="github_pat_…" aria-label="GitHub token" style="flex:1;min-width:0">
+      <button class="btn pri" data-gh-connect>Connect</button></div>
+    <p class="src">The key is stored only in this browser and is sent only to GitHub. It can change files in this one repository only. Disconnect any time, or delete the token on GitHub.</p></div>`;
 }
+function drawAlerts(){
+  const act = [...activeAlerts(), ...AL.pending.map(a => Object.assign({pending: true, status: "active"}, a))], done = AL.done || [];
+  document.getElementById("v-alerts").innerHTML = connectBox() +
+    `<div class="aform" style="display:block;margin-top:10px"><b>Set an alert:</b> right-click (long-press) on any chart, or open a stock → <b>🔔 Alert</b>.
+      In Telegram: <code>/alert SAHANA above 950</code>, <code>/alerts</code>, <code>/delete 3</code>, <code>/price SAHANA</code>.
+      <div class="cmd">${botLink}</div></div>` +
+    `<h2>Active alerts<span class="cnt">${act.length}</span></h2>` + (act.length ? `<div class="ev">${alertRows(act, true)}</div>` : `<div class="empty">No active alerts.</div>`) +
+    (done.length ? `<h2>Recently triggered<span class="cnt">${done.length}</span></h2><div class="ev">${alertRows(done)}</div>` : "") +
+    `<p class="src">${AL.live ? "Live list from GitHub." : "List from the last daily update" + (AL.as_of ? " (" + esc(AL.as_of) + ")" : "") + "."} Telegram always has the latest: send /alerts.</p>`;
+}
+async function ghConnect(){
+  const inp = document.getElementById("gh-key"), key = (inp.value || "").trim();
+  if (!key) { showToast("Paste the GitHub token first."); return; }
+  GH = key;
+  try { await gh(`/repos/${REPO}`); try { localStorage.setItem("tf-gh-token", key); } catch (e) {}
+    showToast("✅ Connected. One-click alerts are on for this device."); refreshAlerts(); redrawAlertViews(); }
+  catch (e) { GH = ""; showToast(`⚠️ That key did not work (${e.status === 401 ? "wrong or expired" : e.status === 404 ? "no access to " + esc(REPO) : "GitHub error " + (e.status || "")}).`); }
+}
+function ghDisconnect(){ GH = ""; try { localStorage.removeItem("tf-gh-token"); } catch (e) {} showToast("Disconnected on this device."); redrawAlertViews(); }
 
 // ---------------- Right-click (or long-press) on the chart -> set an alert at that price
 const tick = p => Math.round(p * 20) / 20;  // NSE tick size 0.05
@@ -503,10 +603,10 @@ function showToast(html){
   const t = document.getElementById("toast"); t.innerHTML = html; t.hidden = false;
   clearTimeout(toastTimer); toastTimer = setTimeout(() => t.hidden = true, 9000);
 }
-function alertFromMenu(op, price){
-  const cmd = `/alert ${cur.r.symbol} ${op} ${price}`;
+function alertFromMenu(op, price, sym){
+  const cmd = `/alert ${sym || cur.r.symbol} ${op} ${price}`;
   const tg = AL.bot ? ` <a href="https://t.me/${esc(AL.bot)}" target="_blank" rel="noopener">Open Telegram ↗</a>` : "";
-  const ok = () => showToast(`✅ Copied <code>${esc(cmd)}</code> — paste it in your Telegram bot and send.${tg}`);
+  const ok = () => showToast(`✅ Copied <code>${esc(cmd)}</code> — paste it in your Telegram bot and send.${tg} <a href="#alerts" data-goto-alerts>Turn on one-click</a>`);
   const fail = () => showToast(`Send this to your Telegram bot: <code style="user-select:all">${esc(cmd)}</code>${tg}`);
   try { navigator.clipboard.writeText(cmd).then(ok, fail); } catch (e) { fail(); }
 }
@@ -541,7 +641,12 @@ function fundHTML(f){
 document.addEventListener("click", e => {
   const o = e.target.closest("[data-open]"); if (o) { openPanel(o.dataset.open, o.dataset.tab); return; }
   const pt = e.target.closest("[data-p]"); if (pt && cur) { curTab = pt.dataset.p; drawPanel(); return; }
-  const ai = e.target.closest("[data-alert-op]"); if (ai) { closeMenu(); alertFromMenu(ai.dataset.alertOp, +ai.dataset.alertPrice); return; }
+  const ai = e.target.closest("[data-alert-op]"); if (ai) { closeMenu(); saveAlert(cur.r.symbol, cur.r.name, ai.dataset.alertOp, +ai.dataset.alertPrice); return; }
+  const sv = e.target.closest("[data-save-alert]"); if (sv && cur) { saveAlert(cur.r.symbol, cur.r.name, document.getElementById("a-op").value, document.getElementById("a-price").value); return; }
+  const da = e.target.closest("[data-del-alert]"); if (da) { deleteAlert(+da.dataset.delAlert, da); return; }
+  if (e.target.closest("[data-gh-connect]")) { ghConnect(); return; }
+  if (e.target.closest("[data-gh-disconnect]")) { ghDisconnect(); return; }
+  if (e.target.closest("[data-goto-alerts]")) { e.preventDefault(); closePanel(); location.hash = "alerts"; show("alerts"); return; }
   const ac = e.target.closest("[data-alert-custom]"); if (ac) { closeMenu(); const pr = ac.dataset.alertCustom; curTab = "alert"; drawPanel();
     const inp = document.getElementById("a-price"); inp.value = pr; inp.dispatchEvent(new Event("input")); inp.focus(); return; }
   if (!e.target.closest("#ctx")) closeMenu();
@@ -591,6 +696,7 @@ function show(v){
     `The black line on each marks bar is the pass mark. Marks shown are the automatic part of the TechnoFunda system, scaled to ${FULL}.` + (D.cfg.banner ? " " + D.cfg.banner : "");
   drawToday(); drawHistory(); drawAlerts();
   document.getElementById("c-alerts").textContent = (AL.active || []).length;
+  refreshAlerts();
   document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => { location.hash = t.dataset.v; show(t.dataset.v); }));
   document.getElementById("q").addEventListener("input", drawList);
   document.getElementById("sort").addEventListener("change", drawList);
@@ -632,7 +738,8 @@ def page_data(sp, dt, run, history, rules_cfg, banner="", snaps=None, charts=Non
         "alerts": _alerts_view(alerts),
         "charts": charts,  # None on the live site: the page loads charts/SYMBOL.json instead
         "cfg": {"full": rules_cfg.get("full_marks", 11), "pass_new": rules_cfg.get("new_stock_pass", 7),
-                "pass_monthly": rules_cfg.get("monthly_pass", 7), "banner": banner},
+                "pass_monthly": rules_cfg.get("monthly_pass", 7), "banner": banner,
+                "repo": rules_cfg.get("_repo", "")},
     }
 
 

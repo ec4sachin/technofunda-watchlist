@@ -64,6 +64,31 @@ def test():
     print("Alerts OK")
 
 
+def test_dashboard_requests():
+    """Files saved by the dashboard (one per click) become alerts / deletions, then are removed."""
+    import json
+    import tempfile
+    sent = []
+    tg.send = lambda token, chat, text: sent.append(text)
+    folder = tempfile.mkdtemp()
+    def put(name, obj):
+        with open(os.path.join(folder, name), "w") as f:
+            json.dump(obj, f)
+    store = alerts.empty_store()
+    put("1-a.json", {"action": "add", "symbol": "SAHANA", "name": "Sahana System", "op": "above", "price": 950})
+    put("2-b.json", {"action": "add", "symbol": "SUPREMEPWR", "op": "below", "price": "230.5"})
+    put("3-c.json", {"action": "add", "symbol": "SAHANA", "op": "above", "price": "oops"})   # bad price -> ignored
+    open(os.path.join(folder, ".keep"), "w").close()
+    n = alerts.ingest_requests(store, folder, "t", CHAT, SP, DT)
+    assert n == 3 and [(a["id"], a["symbol"], a["op"], a["price"], a["source"]) for a in store["alerts"]] == \
+        [(1, "SAHANA", "above", 950.0, "dashboard"), (2, "SUPREMEPWR", "below", 230.5, "dashboard")]
+    assert sorted(os.listdir(folder)) == [".keep"] and "set from dashboard" in sent[0]
+    put("4-d.json", {"action": "delete", "id": 1})
+    alerts.ingest_requests(store, folder, "t", CHAT, SP, DT)
+    assert [a["id"] for a in store["alerts"]] == [2] and "deleted from dashboard" in sent[-1]
+    print("Dashboard requests OK")
+
+
 def test_voice_file():
     """The mp3 from text-to-speech is turned into a Telegram voice note (.ogg)."""
     import importlib
@@ -84,5 +109,6 @@ def test_voice_file():
 
 if __name__ == "__main__":
     test()
+    test_dashboard_requests()
     test_voice_file()
     print("ALL ALERT TESTS PASSED")

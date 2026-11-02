@@ -27,6 +27,9 @@ def main():
     if not store.get("bot_username"):
         store["bot_username"] = tg.bot_username(token)
         tg.set_commands(token)
+    applied = alerts.ingest_requests(store, os.path.join(storage.DATA, "alert_requests"), token, chat, sp, dt)
+    if applied:
+        print(f"Applied {applied} request(s) from the dashboard.")
     alerts.process_commands(store, token, chat, sp, dt)
     if alerts.market_open() or "--force" in sys.argv:
         fired = alerts.check_alerts(store, token, chat, sp, dt, lang)
