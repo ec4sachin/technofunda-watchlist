@@ -1,196 +1,34 @@
 {
- "added": [
-  [
-   "PRIZOR",
-   "Prizor Viztech",
-   "marks 11/11 · TTM Profit > 30%, Daily Volume Scan, 52W High"
-  ],
-  [
-   "TEAMTECH",
-   "Teamtech Formwork",
-   "marks 10.1/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "544141",
-   "Pune e-Stock Broking",
-   "marks 5.5/11 · TTM Profit > 30%, Daily Volume Scan, 52W High"
-  ],
-  [
-   "524218",
-   "Resonance Speci.",
-   "marks 9.2/11 · TTM Profit > 30%, Daily Volume Scan, Weekly Volume Scan, 52W High"
-  ],
-  [
-   "513507",
-   "Guj. Containers",
-   "marks 7.3/11 · TTM Profit > 30%, Daily Volume Scan, 52W High, Weekly Volume Scan"
-  ],
-  [
-   "KRISHNADEF",
-   "Krishna Defence",
-   "marks 10.1/11 · Daily Volume Scan"
-  ],
-  [
-   "DURLAX",
-   "Durlax Top",
-   "marks 5.5/11 · Daily Volume Scan"
-  ],
-  [
-   "OMAXAUTO",
-   "Omax Autos",
-   "marks 7.3/11 · Daily Volume Scan"
-  ],
-  [
-   "ESCONET",
-   "Esconet",
-   "marks 7.3/11 · Daily Volume Scan, Weekly Volume Scan"
-  ],
-  [
-   "INTEGRITY",
-   "Integrity Infra.",
-   "marks 9.2/11 · Weekly Volume Scan"
-  ],
-  [
-   "SHRINGARMS",
-   "Shringar House",
-   "marks 7.3/11 · Ready after 6 Months"
-  ],
-  [
-   "ACETEC",
-   "Acetech E-Commerce",
-   "marks 7.3/11 · 52W High"
-  ],
-  [
-   "544464",
-   "Umiya Mobile",
-   "marks 9.2/11 · 52W High"
-  ],
-  [
-   "HOACFOODS",
-   "Hoac Foods",
-   "marks 8.3/11 · 52W High"
-  ],
-  [
-   "530741",
-   "Ovobel Foods",
-   "marks 9.2/11 · 52W High"
-  ],
-  [
-   "SHETHJI",
-   "Shreeji Global",
-   "marks 9.2/11 · 52W High"
-  ],
-  [
-   "543963",
-   "Shelter Pharma",
-   "marks 5.5/11 · 52W High"
-  ],
-  [
-   "SAAKSHI",
-   "Saakshi Medtech",
-   "marks 9.2/11 · 52W High"
-  ],
-  [
-   "RAMBHAJO",
-   "Advit Jewels",
-   "marks 5.5/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "544442",
-   "Chemkart India",
-   "marks 9.2/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "544694",
-   "Accretion Nutraveda",
-   "marks 7.3/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "MEGAFLEX",
-   "Mega Flex Plast.",
-   "marks 6.4/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "513472",
-   "Simplex Castings",
-   "marks 8.3/11 · Weekly Volume Scan"
-  ]
- ],
- "rejected": [
-  [
-   "MADHUSUDAN",
-   "Madhusudan Masa",
-   "4.6/11"
-  ],
-  [
-   "ALMONDZ",
-   "Almondz Global",
-   "2.8/11"
-  ],
-  [
-   "501151",
-   "Kartik Invest.",
-   "4.6/11"
-  ],
-  [
-   "544686",
-   "Shayona Eng.",
-   "4.6/11"
-  ],
-  [
-   "GJL",
-   "Grover Jewells",
-   "4.6/11"
-  ]
- ],
+ "added": [],
+ "rejected": [],
  "to_dt": [],
  "to_sp": [],
  "removed": [],
  "unchecked": [],
  "no_price": [
   [
-   "TEAMTECH",
-   "Teamtech Formwork"
-  ],
-  [
-   "544141",
-   "Pune e-Stock Broking"
-  ],
-  [
-   "524218",
-   "Resonance Speci."
+   "513472",
+   "Simplex Castings"
   ],
   [
    "513507",
    "Guj. Containers"
   ],
   [
-   "INTEGRITY",
-   "Integrity Infra."
-  ],
-  [
-   "ACETEC",
-   "Acetech E-Commerce"
-  ],
-  [
-   "544464",
-   "Umiya Mobile"
+   "524218",
+   "Resonance Speci."
   ],
   [
    "530741",
    "Ovobel Foods"
   ],
   [
-   "SHETHJI",
-   "Shreeji Global"
-  ],
-  [
    "543963",
    "Shelter Pharma"
   ],
   [
-   "RAMBHAJO",
-   "Advit Jewels"
+   "544141",
+   "Pune e-Stock Broking"
   ],
   [
    "544442",
@@ -201,55 +39,32 @@
    "Accretion Nutraveda"
   ],
   [
-   "513472",
-   "Simplex Castings"
+   "ACETEC",
+   "Acetech E-Commerce"
+  ],
+  [
+   "RAMBHAJO",
+   "Advit Jewels"
+  ],
+  [
+   "TEAMTECH",
+   "Teamtech Formwork"
   ]
  ],
  "warnings": [],
- "first_marked": [
-  [
-   "EIMCOELECO",
-   "Eimco Elecon (India)",
-   "7.3/11"
-  ],
-  [
-   "PATELRMART",
-   "Patel Retail",
-   "7.3/11"
-  ],
-  [
-   "RATNAVEER",
-   "Ratnaveer Precision Engineering",
-   "8.3/11"
-  ],
-  [
-   "SAHANA",
-   "Sahana System",
-   "7.3/11"
-  ],
-  [
-   "SHANTIGOLD",
-   "Shanti Gold International",
-   "3.7/11"
-  ],
-  [
-   "SUPREMEPWR",
-   "Supreme Power Equipment",
-   "10.1/11"
-  ]
- ],
+ "first_marked": [],
  "per_alert": {
-  "TTM Profit > 30%": 12,
-  "52W High": 21,
-  "Daily Volume Scan": 8,
-  "Weekly Volume Scan": 6,
-  "Ready after 6 Months": 1
+  "TTM Profit > 30%": 0,
+  "52W High": 0,
+  "Daily Volume Scan": 0,
+  "Weekly Volume Scan": 0,
+  "Ready after 6 Months": 0
  },
- "email_total": 28,
+ "email_total": 0,
  "already_listed": 0,
- "price_date": "30 Oct 2026",
+ "price_date": "02 Nov 2026",
  "monthly_pass": 0,
- "mode": "auto",
+ "mode": "daily",
  "monthly_done": false,
- "run_at": "02 Nov 2026, 02:52 PM IST"
+ "run_at": "02 Nov 2026, 03:21 PM IST"
 }
