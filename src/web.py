@@ -20,7 +20,7 @@ FRAGMENT = r"""<title>TechnoFunda Watchlist</title>
 :root{
   --bg:#F2F4F7; --surface:#FFFFFF; --ink:#152033; --muted:#5D6878; --line:#DDE2E9;
   --accent:#2C47B8; --accent-soft:#E6EBFA;
-  --up:#16794A; --up-soft:#E3F3EA; --down:#BE3329; --down-soft:#FBE7E5; --warn:#9A6408; --warn-soft:#FBF0DA;
+  --up:#16794A; --up-soft:#E3F3EA; --down:#BE3329; --down-soft:#FBE7E5; --warn:#9A6408; --warn-soft:#FBF0DA; --e10:#0E7490; --e20:#7C3AED;
   --f-display:"Archivo","Arial Narrow",system-ui,sans-serif;
   --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
@@ -28,12 +28,12 @@ FRAGMENT = r"""<title>TechnoFunda Watchlist</title>
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0D131B; --surface:#151D28; --ink:#E5EAF1; --muted:#93A0B1; --line:#253142;
   --accent:#93A8FF; --accent-soft:#1E2A4D;
-  --up:#4FC48D; --up-soft:#15301F; --down:#F1786C; --down-soft:#3A1A17; --warn:#E5B456; --warn-soft:#352813;
+  --up:#4FC48D; --up-soft:#15301F; --down:#F1786C; --down-soft:#3A1A17; --warn:#E5B456; --warn-soft:#352813; --e10:#22D3EE; --e20:#B39DFF;
   color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0D131B; --surface:#151D28; --ink:#E5EAF1; --muted:#93A0B1; --line:#253142;
   --accent:#93A8FF; --accent-soft:#1E2A4D;
-  --up:#4FC48D; --up-soft:#15301F; --down:#F1786C; --down-soft:#3A1A17; --warn:#E5B456; --warn-soft:#352813;
+  --up:#4FC48D; --up-soft:#15301F; --down:#F1786C; --down-soft:#3A1A17; --warn:#E5B456; --warn-soft:#352813; --e10:#22D3EE; --e20:#B39DFF;
   color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -134,6 +134,8 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
 .rg[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
 .legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12.5px;color:var(--muted);margin-left:auto}
 .legend i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
+.legend button{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:3px 9px;font:500 12px var(--f-body);cursor:pointer}
+.legend button[aria-pressed="false"]{opacity:.45;text-decoration:line-through}
 .chartbox{height:min(380px,52vh);background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
 .kgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 .kv{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
@@ -147,6 +149,11 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
 .plinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .src{color:var(--muted);font-size:12px;margin-top:10px}
 @media (max-width:720px){.panel{width:100%;box-shadow:none}}
+.aform{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
+.aform input{width:130px}
+.cmd{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.cmd code{font:500 14px var(--f-mono);background:var(--surface);border:1px dashed var(--accent);color:var(--ink);padding:8px 10px;border-radius:8px;user-select:all;overflow-wrap:anywhere}
+.steps{margin:12px 0 0;padding-left:20px;color:var(--muted);font-size:13.5px;display:flex;flex-direction:column;gap:4px}
 
 </style>
 
@@ -157,6 +164,7 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
     <button class="tab" role="tab" data-v="dt" id="t-dt">DT<b id="c-dt">0</b></button>
     <button class="tab" role="tab" data-v="today" id="t-today">Today<b id="c-today">0</b></button>
     <button class="tab" role="tab" data-v="history" id="t-history">History</button>
+    <button class="tab" role="tab" data-v="alerts" id="t-alerts">Alerts<b id="c-alerts">0</b></button>
   </nav>
 </div></header>
 
@@ -175,6 +183,7 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
     <div class="list" id="list"></div>
   </section>
   <section id="v-today" hidden></section>
+  <section id="v-alerts" hidden></section>
   <section id="v-history" hidden><div class="tbl"><table><thead><tr><th>Date</th><th>Stock</th><th>Change</th><th>Reason</th></tr></thead><tbody id="hist"></tbody></table></div></section>
   <p class="note" id="note"></p>
 </main>
@@ -189,6 +198,7 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
       <button class="tab" role="tab" data-p="chart">Chart</button>
       <button class="tab" role="tab" data-p="fund">Screener numbers</button>
       <button class="tab" role="tab" data-p="marks">Marks</button>
+      <button class="tab" role="tab" data-p="alert">🔔 Alert</button>
     </nav>
   </div>
   <div class="pb" id="p-body"></div>
@@ -260,6 +270,8 @@ function drawHistory(){
 // ---------------- Stock panel (Chart · Screener numbers · Marks), all inside this page
 const LW_URL = "https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js";
 let lwLoad = null, chartObj = null, cur = null, curTab = "chart", curRange = 260, curTf = "D";
+let emaOn = {10: true, 20: true, 50: true, 200: true};
+try { emaOn = Object.assign(emaOn, JSON.parse(localStorage.getItem("tf-ema") || "{}")); } catch (e) {}
 const chartCache = {};
 function loadLW(){
   if (window.LightweightCharts) return Promise.resolve();
@@ -317,6 +329,15 @@ function drawPanel(){
     drawChart();
   } else if (curTab === "fund") {
     body.innerHTML = fundHTML(D.fund[r.symbol]) + links;
+  } else if (curTab === "alert") {
+    body.innerHTML = alertHTML(r) + links;
+    const upd = () => {
+      const op = document.getElementById("a-op").value, v = document.getElementById("a-price").value.trim();
+      document.getElementById("a-cmd").textContent = `/alert ${r.symbol} ${op} ${v || "PRICE"}`;
+    };
+    document.getElementById("a-op").addEventListener("change", upd);
+    document.getElementById("a-price").addEventListener("input", upd);
+    upd();
   } else {
     let checks = []; try { checks = JSON.parse(r.marks_detail || "[]"); } catch (e) {}
     body.innerHTML = (checks.length ? `<div class="checks">${checks.map(([l, g, o, d]) =>
@@ -376,19 +397,24 @@ async function drawChart(){
     vol.setData(bars.map(b => ({time: b.time, value: b.v, color: alpha(b.close >= b.open ? up : dn, .35)})));
   }
   const closes = bars.map(b => b.close), tfName = {D: "daily", W: "weekly", M: "monthly"}[curTf];
-  const lines = [];
-  if (bars.length >= 200) { const e = ema(closes, 200);
-    chartObj.addLineSeries({color: tok("--warn"), lineWidth: 2, priceLineVisible: false}).setData(bars.map((b, i) => ({time: b.time, value: e[i]}))); lines.push(["--warn", "200 EMA"]); }
-  if (bars.length >= 50) { const e = ema(closes, 50);
-    chartObj.addLineSeries({color: ink, lineWidth: 1, lineStyle: 2, priceLineVisible: false, lastValueVisible: false}).setData(bars.map((b, i) => ({time: b.time, value: e[i]}))); lines.push(["--muted", "50 EMA"]); }
-  document.getElementById("legend").innerHTML = (candles ? "" : `<span><i style="background:var(--accent)"></i>Close</span>`) +
-    lines.map(([c, l]) => `<span><i style="background:var(${c})"></i>${l}</span>`).join("");
+  // EMA lines: 10, 20, 50, 200 - each can be switched on/off with the chips above the chart
+  const EMAS = [[10, "--e10", 1.5, 0], [20, "--e20", 1.5, 0], [50, "--muted", 1, 2], [200, "--warn", 2, 0]];
+  const chips = [];
+  for (const [p, col, w, style] of EMAS) {
+    const ok = bars.length >= p, on = emaOn[p] !== false;
+    chips.push(`<button data-ema="${p}" aria-pressed="${on}" ${ok ? "" : "disabled title=\"Needs " + p + " candles\""}><i style="background:var(${col})"></i>EMA ${p}</button>`);
+    if (!ok || !on) continue;
+    const e = ema(closes, p);
+    chartObj.addLineSeries({color: tok(col), lineWidth: w, lineStyle: style, priceLineVisible: false, lastValueVisible: p === 200,
+      crosshairMarkerVisible: false}).setData(bars.map((b, i) => ({time: b.time, value: e[i]})));
+  }
+  document.getElementById("legend").innerHTML = (candles ? "" : `<span><i style="background:var(--accent)"></i>Close</span>`) + chips.join("");
   const first = h.t[0], lastT = h.t[h.t.length - 1];
   document.getElementById("chartsrc").textContent =
     `${candles ? "Candles" : "Closing prices"} from ${first} to ${lastT} (${tfName}). ` +
     (curTf === "D" ? "" : `EMA lines here are on ${tfName} candles; the robot's SP/DT rule uses the daily 200 EMA. `) +
     (candles ? "" : "Open/high/low prices are not available for this stock, so a line chart is shown. ") +
-    (bars.length < 200 ? "200 EMA appears once there are 200 candles." : "");
+    (bars.length < 200 ? "EMA 200 appears once there are 200 candles." : "");
   cur.bars = bars;
   setRange();
 }
@@ -401,6 +427,35 @@ function setRange(){
   const fromStr = from.toISOString().slice(0, 10), i = b.findIndex(x => x.end >= fromStr);
   chartObj.timeScale().setVisibleRange({from: b[Math.max(0, i)].time, to: b[n - 1].time});
 }
+const AL = D.alerts || {active: [], done: [], bot: ""};
+const botLink = AL.bot ? `<a class="btn pri" href="https://t.me/${esc(AL.bot)}" target="_blank" rel="noopener">Open Telegram bot ↗</a>` : "";
+function alertRows(list){
+  return list.map(a => `<div><div><b>${esc(a.name || a.symbol)}</b> <span class="sym mut">${esc(a.symbol)}</span></div>` +
+    `<span class="pill ${a.status === "triggered" ? "p-add" : "p-sp"}">${a.status === "triggered" ? "Hit ₹" + fmtN(a.hit_price) : "#" + a.id}</span>` +
+    `<div class="why">${a.op} ₹${fmtN(a.price)} · ${a.status === "triggered" ? "triggered " + esc(a.hit_at || "") : "set " + esc(a.created || "")}</div></div>`).join("");
+}
+function alertHTML(r){
+  const c = num(r.last_close), mine = (AL.active || []).filter(a => a.symbol === r.symbol);
+  return `<div class="aform"><label for="a-op">Alert me when the price is</label>
+      <select id="a-op"><option value="above">at or above</option><option value="below">at or below</option></select>
+      <span>₹</span><input id="a-price" type="number" inputmode="decimal" step="0.05" min="0" placeholder="${c ? Math.round(c) : "price"}" aria-label="Alert price"></div>
+    <div class="cmd"><code id="a-cmd"></code><button class="btn" id="a-copy" data-copy="a-cmd">Copy</button>${botLink}</div>
+    <ol class="steps"><li>Type your price above and tap <b>Copy</b>.</li><li>Open your Telegram bot and paste the message, then send it.</li>
+      <li>The bot replies "Alert set". During market hours you get a message and a voice note when the price is reached.</li></ol>` +
+    (mine.length ? `<h2>Active alerts for this stock<span class="cnt">${mine.length}</span></h2><div class="ev">${alertRows(mine)}</div>` : "") +
+    `<p class="src">Prices are checked every 15 minutes, Mon–Fri 9:15 AM–3:30 PM, and can be up to about 15 minutes late. Last close ${c ? fmtINR(c) : "—"}.</p>`;
+}
+function drawAlerts(){
+  const act = AL.active || [], done = AL.done || [];
+  document.getElementById("v-alerts").innerHTML =
+    `<div class="aform" style="display:block"><b>Set an alert:</b> open any stock → <b>🔔 Alert</b> tab, or send your bot a message like <code>/alert SAHANA above 950</code>.
+      Send <code>/alerts</code> for the live list, <code>/delete 3</code> to remove one, <code>/price SAHANA</code> for the current price.
+      <div class="cmd">${botLink}</div></div>` +
+    `<h2>Active alerts<span class="cnt">${act.length}</span></h2>` + (act.length ? `<div class="ev">${alertRows(act)}</div>` : `<div class="empty">No active alerts.</div>`) +
+    (done.length ? `<h2>Recently triggered<span class="cnt">${done.length}</span></h2><div class="ev">${alertRows(done)}</div>` : "") +
+    `<p class="src">This list is from the last daily update${AL.as_of ? " (" + esc(AL.as_of) + ")" : ""}. Telegram always has the latest: send /alerts.</p>`;
+}
+
 function fundHTML(f){
   if (!f) return `<div class="empty">Screener numbers appear after the next robot run (7 AM).</div>`;
   const pc = v => v == null ? "—" : fmtN(v, 1) + "%";
@@ -431,6 +486,12 @@ function fundHTML(f){
 document.addEventListener("click", e => {
   const o = e.target.closest("[data-open]"); if (o) { openPanel(o.dataset.open, o.dataset.tab); return; }
   const pt = e.target.closest("[data-p]"); if (pt && cur) { curTab = pt.dataset.p; drawPanel(); return; }
+  const cp = e.target.closest("[data-copy]"); if (cp) { const t = document.getElementById(cp.dataset.copy).textContent;
+    const done = () => { cp.textContent = "Copied"; setTimeout(() => cp.textContent = "Copy", 1500); };
+    try { navigator.clipboard.writeText(t).then(done, () => { getSelection().selectAllChildren(document.getElementById(cp.dataset.copy)); }); }
+    catch (x) { getSelection().selectAllChildren(document.getElementById(cp.dataset.copy)); } return; }
+  const em = e.target.closest("[data-ema]"); if (em) { const p = +em.dataset.ema; emaOn[p] = emaOn[p] === false;
+    try { localStorage.setItem("tf-ema", JSON.stringify(emaOn)); } catch (x) {} drawChart(); return; }
   const tf = e.target.closest("[data-tf]"); if (tf) { curTf = tf.dataset.tf;
     document.querySelectorAll("[data-tf]").forEach(b => b.setAttribute("aria-pressed", b === tf)); drawChart(); return; }
   const rg = e.target.closest("[data-range]"); if (rg) { curRange = +rg.dataset.range;
@@ -441,12 +502,13 @@ document.getElementById("scrim").addEventListener("click", closePanel);
 document.addEventListener("keydown", e => { if (e.key === "Escape" && cur) closePanel(); });
 
 function show(v){
-  if (!["sp", "dt", "today", "history"].includes(v)) v = "sp";
+  if (!["sp", "dt", "today", "history", "alerts"].includes(v)) v = "sp";
   view = v;
   document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.v === v));
   document.getElementById("v-list").hidden = !(v === "sp" || v === "dt");
   document.getElementById("v-today").hidden = v !== "today";
   document.getElementById("v-history").hidden = v !== "history";
+  document.getElementById("v-alerts").hidden = v !== "alerts";
   if (v === "sp" || v === "dt") drawList();
 }
 
@@ -467,7 +529,8 @@ function show(v){
   document.getElementById("note").textContent =
     `New stocks need ${D.cfg.pass_new} of ${FULL} marks to enter SP; SP and DT stocks need ${PASS} of ${FULL} on the monthly review (1st of each month). ` +
     `The black line on each marks bar is the pass mark. Marks shown are the automatic part of the TechnoFunda system, scaled to ${FULL}.` + (D.cfg.banner ? " " + D.cfg.banner : "");
-  drawToday(); drawHistory();
+  drawToday(); drawHistory(); drawAlerts();
+  document.getElementById("c-alerts").textContent = (AL.active || []).length;
   document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => { location.hash = t.dataset.v; show(t.dataset.v); }));
   document.getElementById("q").addEventListener("input", drawList);
   document.getElementById("sort").addEventListener("change", drawList);
@@ -491,13 +554,22 @@ def screener_url(symbol, consolidated="yes"):
     return f"https://www.screener.in/company/{symbol}/" + ("consolidated/" if consolidated != "no" else "")
 
 
-def page_data(sp, dt, run, history, rules_cfg, banner="", snaps=None, charts=None):
+def _alerts_view(store):
+    store = store or {}
+    items = store.get("alerts", [])
+    return {"bot": store.get("bot_username", ""), "as_of": store.get("as_of", ""),
+            "active": [a for a in items if a.get("status") == "active"],
+            "done": [a for a in items if a.get("status") == "triggered"][-10:][::-1]}
+
+
+def page_data(sp, dt, run, history, rules_cfg, banner="", snaps=None, charts=None, alerts=None):
     def rows(items):
         return [{**items[s], "symbol": s, "chart": chart_url(s),
                  "screener": screener_url(s, items[s].get("consolidated", "yes"))} for s in sorted(items)]
     return {
         "SP": rows(sp), "DT": rows(dt), "run": run or {}, "history": history or [],
         "fund": {k: v for k, v in (snaps or {}).items() if k in sp or k in dt},
+        "alerts": _alerts_view(alerts),
         "charts": charts,  # None on the live site: the page loads charts/SYMBOL.json instead
         "cfg": {"full": rules_cfg.get("full_marks", 11), "pass_new": rules_cfg.get("new_stock_pass", 7),
                 "pass_monthly": rules_cfg.get("monthly_pass", 7), "banner": banner},
@@ -509,11 +581,11 @@ def render_fragment(data):
     return FRAGMENT.replace("__DATA__", blob)
 
 
-def build(sp, dt, run, history, rules_cfg, out=None, snaps=None, charts=None):
+def build(sp, dt, run, history, rules_cfg, out=None, snaps=None, charts=None, alerts=None):
     """Write the dashboard page. charts (price history) goes to charts.json next to it, loaded when a chart opens."""
     out = out or OUT
     os.makedirs(os.path.dirname(out), exist_ok=True)
-    page = FULL_PAGE.replace("{fragment}", render_fragment(page_data(sp, dt, run, history, rules_cfg, snaps=snaps)))
+    page = FULL_PAGE.replace("{fragment}", render_fragment(page_data(sp, dt, run, history, rules_cfg, snaps=snaps, alerts=alerts)))
     with open(out, "w", encoding="utf-8") as f:
         f.write(page)
     if charts is not None:

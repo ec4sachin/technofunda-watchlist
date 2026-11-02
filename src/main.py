@@ -289,7 +289,9 @@ def main():
     summary.update(mode=mode, monthly_done=bool(report.get("monthly_done")),
                    run_at=now.strftime("%d %b %Y, %I:%M %p IST"))
     storage.save_json("last_run.json", summary)
-    web.build(sp, dt, summary, storage.load_history(), rules_cfg, snaps=snaps, charts=charts or None)
+    alert_store = storage.load_json("alerts.json", {})
+    alert_store["as_of"] = summary["run_at"]
+    web.build(sp, dt, summary, storage.load_history(), rules_cfg, snaps=snaps, charts=charts or None, alerts=alert_store)
 
     msg = build_message(report, sp, dt, now.strftime("%d %b %Y"), str(settings.get("dashboard_url") or "").strip())
     tg.send(os.getenv("TELEGRAM_BOT_TOKEN"), os.getenv("TELEGRAM_CHAT_ID"), msg)
