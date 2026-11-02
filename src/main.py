@@ -8,6 +8,7 @@ import json
 import os
 import sys
 from datetime import datetime, timedelta, timezone
+from datetime import datetime as _DT  # used for parsing dates
 
 import yaml
 
@@ -31,7 +32,15 @@ def cfg(name):
 def entry(symbol, name="", source="", today=""):
     return {"symbol": symbol, "name": name, "added_on": today, "source": source, "last_close": "",
             "ema200": "", "last_fund_check": "", "fund_result": "", "yahoo_override": "", "consolidated": "yes",
-            "marks_detail": ""}
+            "marks_detail": "", "screener_id": ""}
+
+
+def missing_count(row):
+    """How many marks checks had no data last time (n/a)."""
+    try:
+        return sum(1 for item in json.loads(row.get("marks_detail") or "[]") if item[3] == "n/a")
+    except (ValueError, IndexError, TypeError):
+        return 0
 
 
 def detail_json(items):
@@ -72,7 +81,8 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history):
         if fx.passes(got, out_of, need, rules_cfg):
             e = entry(code, s["name"] or m.get("_name", ""), ", ".join(s["sources"]), today)
             e.update(last_fund_check=today, fund_result=mk, marks_detail=detail_json(items),
-                     consolidated="yes" if "consolidated" in m.get("_path", "") else "no")
+                     consolidated="yes" if "consolidated" in m.get("_path", "") else "no",
+                     screener_id=m.get("_company_id", ""))
             sp[code] = e
             report["added"].append((code, e["name"], f"marks {mk} · " + ", ".join(s["sources"])))
             history.append({"date": today, "symbol": code, "name": e["name"], "action": "ADDED to SP",
@@ -80,18 +90,25 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history):
         else:
             report["rejected"].append((code, s["name"], mk))
 
-    # Stocks added by hand (never marked yet) get their marks once - nothing is removed here
+    # Marks (not removal) for: stocks added by hand that were never marked, and stocks whose
+    # last marks had 2+ checks without data (re-read, in case the other Screener page is complete)
     for list_name, items in (("SP", sp), ("DT", dt)):
         for sym, row in items.items():
-            if row.get("last_fund_check"):
+            if row.get("last_fund_check") == today:
+                continue
+            if row.get("last_fund_check") and missing_count(row) < 2:
                 continue
             m = fx.fetch_metrics(sym, row.get("consolidated", "yes") != "no")
             if not m:
                 continue
             got, out_of, marks = fx.score(m, rules_cfg)
+            was = row.get("fund_result", "")
             row.update(last_fund_check=today, fund_result=f"{fx.on_full_scale(got, out_of, rules_cfg):g}/{full:g}",
-                       marks_detail=detail_json(marks), name=row["name"] or m.get("_name", ""))
-            report["first_marked"].append((sym, row["name"], row["fund_result"]))
+                       marks_detail=detail_json(marks), name=row["name"] or m.get("_name", ""),
+                       consolidated="yes" if "consolidated" in m.get("_path", "") else "no",
+                       screener_id=m.get("_company_id", "") or row.get("screener_id", ""))
+            note = row["fund_result"] + (f" (was {was})" if was and was != row["fund_result"] else "")
+            report["first_marked"].append((sym, row["name"], note))
 
     # Step 4 - price vs 200 EMA
     period = int(settings.get("ema_period", 200))
@@ -101,10 +118,22 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history):
         px = prices.close_and_ema(sorted(set(tick.values())), period)
     except Exception as e:
         px = {}
-        report["warnings"].append(f"Price download failed: {e}")
+        report["warnings"].append(f"Yahoo price download failed: {e}")
+    res_by = {sym: px.get(t) for sym, t in tick.items()}
+
+    # Not on Yahoo (common for BSE / SME stocks) -> use Screener.in's own price chart
+    for sym, res in res_by.items():
+        if res:
+            continue
+        row = sp.get(sym) or dt.get(sym)
+        if not row.get("screener_id"):
+            m = fx.fetch_metrics(sym, row.get("consolidated", "yes") != "no")
+            if m and m.get("_company_id"):
+                row["screener_id"] = m["_company_id"]
+        res_by[sym] = prices.screener_close_and_ema(row.get("screener_id"), period)
 
     for sym in list(sp):
-        res = px.get(tick[sym])
+        res = res_by.get(sym)
         if not res:
             report["no_price"].append((sym, sp[sym]["name"]))
             continue
@@ -117,9 +146,9 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history):
                             "reason": f"close {close:g} below {period} EMA {ema:g}"})
 
     for sym in list(dt):
-        if sym not in tick:
+        if sym not in res_by:
             continue
-        res = px.get(tick[sym])
+        res = res_by.get(sym)
         if not res:
             report["no_price"].append((sym, dt[sym]["name"]))
             continue
@@ -130,7 +159,8 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history):
             report["to_sp"].append((sym, sp[sym]["name"], f"close {close:g} > EMA {ema:g}"))
             history.append({"date": today, "symbol": sym, "name": sp[sym]["name"], "action": "DT -> SP",
                             "reason": f"close {close:g} back above {period} EMA {ema:g}"})
-    report["price_date"] = next((v[2] for v in px.values() if v), "")
+    report["price_date"] = max((v[2] for v in res_by.values() if v),
+                               key=lambda d: _DT.strptime(d, "%d %b %Y"), default="")
 
 
 # ----------------------------------------------------------------- Step 5
@@ -153,7 +183,9 @@ def monthly(sp, dt, rules_cfg, today, report, history):
                 row["name"] = m["_name"]
             got, out_of, marks = fx.score(m, rules_cfg)
             mk = f"{fx.on_full_scale(got, out_of, rules_cfg):g}/{full:g}"
-            row.update(last_fund_check=today, fund_result=mk, marks_detail=detail_json(marks))
+            row.update(last_fund_check=today, fund_result=mk, marks_detail=detail_json(marks),
+                       consolidated="yes" if "consolidated" in m.get("_path", "") else "no",
+                       screener_id=m.get("_company_id", "") or row.get("screener_id", ""))
             if fx.passes(got, out_of, need, rules_cfg):
                 report["monthly_pass"] += 1
             else:
@@ -188,7 +220,7 @@ def build_message(r, sp, dt, today_label, dashboard_url=""):
     if r.get("monthly_done"):
         L += ["", f"🗓 <b>Monthly fundamental review</b>: {r['monthly_pass']} passed, {len(r['removed'])} removed"]
         block("❌ <b>Removed</b> (below monthly pass marks)", r["removed"])
-    block("🆕 <b>First marks</b> (stocks added by hand)", r["first_marked"])
+    block("🆕 <b>Marks updated</b> (added by hand, or data was missing before)", r["first_marked"])
     block("⚠️ <b>Could not check</b>", r["unchecked"])
     if r["no_price"]:
         L += ["", "⚠️ No price data (EMA not checked): " + ", ".join(s for s, _ in r["no_price"])]

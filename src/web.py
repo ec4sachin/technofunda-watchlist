@@ -197,7 +197,7 @@ function drawToday(){
     evBlock("Moved SP → DT", "Below EMA", "p-dt", r.to_dt),
     evBlock("Back to SP", "Above EMA", "p-sp", r.to_sp),
     evBlock("Removed in monthly review", "Removed", "p-rem", r.removed),
-    evBlock("First marks for stocks added by hand", "Marked", "p-sp", r.first_marked),
+    evBlock("Marks updated (added by hand, or data was missing before)", "Marked", "p-sp", r.first_marked),
     evBlock("Checked but below pass marks", "Not added", "p-warn", r.rejected),
     evBlock("Needs attention", "Check", "p-warn", warn),
   ].join("");

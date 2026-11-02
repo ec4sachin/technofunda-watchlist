@@ -26,6 +26,18 @@ RANGE_PERIODS = {"10 years": "10y", "5 years": "5y", "3 years": "3y", "1 year": 
                  "ttm": "ttm", "last year": "last_year"}
 
 
+# Screener's internal company id (used for its price chart), e.g. /company/source/quarter/1285561/6/2024/
+COMPANY_ID_RE = re.compile(r'data-company-id="(\d+)"|/(?:company/source/quarter|ai/company|api/company)/(\d+)/')
+
+# The numbers the marks system needs - used to pick the more complete page (consolidated / standalone)
+SCORE_INPUTS = ("sales_growth_qtr_yoy", "sales_growth_ttm", "eps_latest_qtr", "eps_prev_qtr", "opm_latest_qtr",
+                "opm_same_qtr_last_year", "fixed_assets_latest", "debtor_days", "fii_dii_latest", "shareholders_latest")
+
+
+def completeness(m):
+    return sum(1 for k in SCORE_INPUTS if m.get(k) is not None)
+
+
 # ---------------------------------------------------------------- helpers
 def _num(text):
     if text is None:
@@ -90,6 +102,9 @@ def parse_company_page(html):
     m = {}
     h1 = soup.find("h1")
     m["_name"] = h1.get_text(" ", strip=True) if h1 else None
+    cid = COMPANY_ID_RE.search(html)
+    if cid:
+        m["_company_id"] = cid.group(1) or cid.group(2)
 
     # Top ratios box
     for li in soup.select("#top-ratios li"):
@@ -215,34 +230,41 @@ def parse_company_page(html):
     return {k: v for k, v in m.items() if v is not None}
 
 
+def _get(s, url):
+    for attempt in range(3):
+        try:
+            r = s.get(url, headers=HEADERS, timeout=30)
+        except requests.RequestException:
+            time.sleep(5 * (attempt + 1))
+            continue
+        if r.status_code == 429:
+            time.sleep(20 * (attempt + 1))
+            continue
+        return r
+    return None
+
+
 def fetch_metrics(code, consolidated=True, session=None, pause=2.0):
-    """Download the Screener page for one company and return its metrics (or None)."""
+    """Download the Screener page for one company and return its metrics (or None).
+
+    Some companies have a consolidated page that is missing most numbers (e.g. Shanti Gold),
+    so when the first page is incomplete the other one is read too, and the more complete one is used.
+    """
     s = session or requests.Session()
     paths = [f"/company/{code}/consolidated/", f"/company/{code}/"] if consolidated else \
             [f"/company/{code}/", f"/company/{code}/consolidated/"]
     best = None
     for path in paths:
-        for attempt in range(3):
-            try:
-                r = s.get(BASE + path, headers=HEADERS, timeout=30)
-            except requests.RequestException:
-                time.sleep(5 * (attempt + 1))
-                continue
-            if r.status_code == 429:
-                time.sleep(20 * (attempt + 1))
-                continue
-            break
-        else:
-            continue
+        r = _get(s, BASE + path)
         time.sleep(pause)
-        if r.status_code != 200:
+        if r is None or r.status_code != 200:
             continue
         metrics = parse_company_page(r.text)
         metrics["_path"] = path
-        # consolidated page can be empty for companies without subsidiaries
-        if "net_profit_ttm" in metrics or "sales_growth_3y" in metrics:
-            return metrics
-        best = best or metrics
+        if best is None or completeness(metrics) > completeness(best):
+            best = metrics
+        if completeness(best) == len(SCORE_INPUTS):
+            break
     return best
 
 
