@@ -101,15 +101,27 @@ def test_page_choice_and_screener_prices():
     # Old company: 730 days comes back weekly, 500 days comes back daily -> daily used
     sess = FakeSession({base + "730": FakeResp(200, payload=weekly), base + "500": FakeResp(200, payload=daily)})
     close, ema, date, hist = prices.screener_close_and_ema("1285561", 200, session=sess, pause=0)
-    assert len(hist["t"]) == 250 and len(hist["e200"]) == 250 and hist["c"][-1] == 299.5
+    assert len(hist["t"]) == 250 and hist["c"][-1] == 299.5 and "o" not in hist  # Screener: closes only -> line chart
     assert close == 299.5 and ema is not None and ema < close and date == "30 Oct 2026", (close, ema, date)
     assert len(sess.calls) == 2
     # New listing: only 120 trading days -> price shown, EMA not possible
     short = {"datasets": [{"metric": "Price", "values": vals[-120:], "meta": {}}]}
     sess = FakeSession({base + "730": FakeResp(200, payload=short)})
     res = prices.screener_close_and_ema("1285561", 200, session=sess, pause=0)
-    assert res[:3] == (299.5, None, "30 Oct 2026") and res[3]["e200"] == [] and len(res[3]["e50"]) == 120
+    assert res[:3] == (299.5, None, "30 Oct 2026") and len(res[3]["c"]) == 120
     print("Page choice + Screener price fallback OK:", close, ema, date)
+
+
+def test_full_history_ohlc():
+    """Yahoo data -> full-history candles (open/high/low/close/volume) with EMA from all of it."""
+    import pandas as pd
+    idx = pd.bdate_range(end="2026-10-30", periods=3000)
+    df = pd.DataFrame({"Open": range(3000), "High": [x + 2 for x in range(3000)], "Low": [x - 1 for x in range(3000)],
+                       "Close": [x + 1.0 for x in range(3000)], "Volume": [1000] * 3000}, index=idx)
+    close, ema, date, hist = prices._ema_result(df, 200)
+    assert close == 3000.0 and len(hist["t"]) == 3000 and hist["o"][0] == 0 and hist["h"][-1] == 3001 and hist["v"][-1] == 1000
+    assert abs(ema - df["Close"].ewm(span=200, adjust=True).mean().iloc[-1]) < 0.01
+    print("Full-history candles OK:", len(hist["t"]), "days")
 
 
 def test():
@@ -142,8 +154,8 @@ def test():
     # Dashboard data: Screener snapshot saved per stock, chart history written to charts.json
     snaps = storage.load_json("fundamentals.json", {})
     assert "513472" in snaps and snaps["513472"]["roce"] == 41.3 and snaps["513472"]["quarters"]["t"][-1] == "Sep 2026"
-    charts = _j.load(open(os.path.join(tmp, "docs", "charts.json")))
-    assert charts["513472"]["c"] == [56, 55]
+    chart = _j.load(open(os.path.join(tmp, "docs", "charts", "513472.json")))
+    assert chart["c"] == [56, 55]
     page = open(web.OUT, encoding="utf-8").read()
     assert '"fund": {' in page and "Screener numbers" in page
 
@@ -181,4 +193,5 @@ if __name__ == "__main__":
     sys.path.insert(0, HERE)
     test_real_stocks()
     test_page_choice_and_screener_prices()
+    test_full_history_ohlc()
     test()

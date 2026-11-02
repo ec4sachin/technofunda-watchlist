@@ -129,7 +129,7 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
 .ph-stats b{color:var(--ink);font:600 14px var(--f-mono)}
 .ptabs{display:flex;gap:2px;margin-top:6px}
 .pb{flex:1;overflow-y:auto;padding:16px max(16px,env(safe-area-inset-right,0px)) 24px 16px}
-.ranges{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
+.ranges{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;align-items:center}
 .rg{appearance:none;font:600 12.5px var(--f-body);padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer}
 .rg[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
 .legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12.5px;color:var(--muted);margin-left:auto}
@@ -259,16 +259,18 @@ function drawHistory(){
 
 // ---------------- Stock panel (Chart · Screener numbers · Marks), all inside this page
 const LW_URL = "https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js";
-let lwLoad = null, chartsLoad = null, chartObj = null, cur = null, curTab = "chart", curRange = 260;
+let lwLoad = null, chartObj = null, cur = null, curTab = "chart", curRange = 260, curTf = "D";
+const chartCache = {};
 function loadLW(){
   if (window.LightweightCharts) return Promise.resolve();
   if (!lwLoad) lwLoad = new Promise((ok, fail) => { const sc = document.createElement("script"); sc.src = LW_URL; sc.onload = ok; sc.onerror = fail; document.head.appendChild(sc); });
   return lwLoad;
 }
-function loadCharts(){
-  if (!chartsLoad) chartsLoad = D.charts ? Promise.resolve(D.charts)
-    : fetch("charts.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : {}).catch(() => ({}));
-  return chartsLoad;
+function loadChart(sym){
+  if (D.charts) return Promise.resolve(D.charts[sym]);
+  if (!chartCache[sym]) chartCache[sym] = fetch("charts/" + encodeURIComponent(sym) + ".json", {cache: "no-cache"})
+    .then(r => r.ok ? r.json() : null).catch(() => null);
+  return chartCache[sym];
 }
 const findRow = sym => { for (const k of ["SP", "DT"]) { const r = D[k].find(x => x.symbol === sym); if (r) return [r, k]; } return [null, null]; };
 const tok = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
@@ -305,9 +307,11 @@ function drawPanel(){
   const body = document.getElementById("p-body"), r = cur.r;
   const links = `<div class="plinks"><a class="btn" href="${esc(r.chart)}" target="_blank" rel="noopener">Open in TradingView ↗</a><a class="btn" href="${esc(r.screener)}" target="_blank" rel="noopener">Open full Screener page ↗</a></div>`;
   if (curTab === "chart") {
-    body.innerHTML = `<div class="ranges">${[["3M", 63], ["6M", 126], ["1Y", 260]].map(([l, n]) =>
+    body.innerHTML = `<div class="ranges" role="group" aria-label="Candle size">${[["D", "Daily"], ["W", "Weekly"], ["M", "Monthly"]].map(([k, l]) =>
+        `<button class="rg" data-tf="${k}" aria-pressed="${k === curTf}">${l}</button>`).join("")}</div>
+      <div class="ranges" role="group" aria-label="Period">${[["3M", 63], ["6M", 126], ["1Y", 260], ["3Y", 780], ["5Y", 1300], ["All", 0]].map(([l, n]) =>
         `<button class="rg" data-range="${n}" aria-pressed="${n === curRange}">${l}</button>`).join("")}
-      <div class="legend"><span><i style="background:var(--accent)"></i>Close</span><span><i style="background:var(--warn)"></i>200 EMA</span><span><i style="background:var(--muted)"></i>50 EMA</span></div></div>
+      <div class="legend" id="legend"></div></div>
       <div class="chartbox" id="chartbox"><div class="empty" style="border:0">Loading chart…</div></div>
       <div class="src" id="chartsrc"></div>` + links;
     drawChart();
@@ -321,37 +325,81 @@ function drawPanel(){
       : `<div class="empty">Not marked yet. Marks appear after the next robot run.</div>`) + links;
   }
 }
+// Group daily candles into weekly or monthly ones
+function resample(h, tf){
+  const n = h.t.length, hasOHLC = !!(h.o && h.h && h.l), out = [];
+  const key = t => { if (tf === "M") return t.slice(0, 7);
+    const d = new Date(t + "T00:00:00Z"), day = (d.getUTCDay() + 6) % 7; d.setUTCDate(d.getUTCDate() - day); return d.toISOString().slice(0, 10); };
+  for (let i = 0; i < n; i++) {
+    const c = h.c[i]; if (c == null) continue;
+    const o = hasOHLC && h.o[i] != null ? h.o[i] : c, hi = hasOHLC && h.h[i] != null ? h.h[i] : c, lo = hasOHLC && h.l[i] != null ? h.l[i] : c;
+    const v = h.v ? (h.v[i] || 0) : 0, k = tf === "D" ? h.t[i] : key(h.t[i]), last = out[out.length - 1];
+    if (last && last.k === k) { last.high = Math.max(last.high, hi); last.low = Math.min(last.low, lo); last.close = c; last.v += v; last.end = h.t[i]; }
+    else out.push({k, time: tf === "D" ? h.t[i] : h.t[i], open: o, high: hi, low: lo, close: c, v, end: h.t[i]});
+  }
+  return out;
+}
+// Same EMA formula the robot uses (pandas ewm, adjust=True)
+function ema(vals, span){
+  const a = 2 / (span + 1); let num = 0, den = 0; return vals.map(v => { num = v + (1 - a) * num; den = 1 + (1 - a) * den; return num / den; });
+}
 async function drawChart(){
-  const box = document.getElementById("chartbox"), r = cur.r, sym = r.symbol;
+  const box = document.getElementById("chartbox"), sym = cur.r.symbol;
   let h;
-  try { const all = await loadCharts(); h = all[sym]; await loadLW(); }
+  try { h = await loadChart(sym); await loadLW(); }
   catch (e) { box.innerHTML = `<div class="empty" style="border:0">The chart library could not load. Check your internet connection, or use Open in TradingView below.</div>`; return; }
   if (!cur || cur.r.symbol !== sym || curTab !== "chart") return;
+  if (chartObj) { chartObj.remove(); chartObj = null; }
   if (!h || !h.t || !h.t.length) { box.innerHTML = `<div class="empty" style="border:0">Chart appears after the next robot run (7 AM).</div>`; return; }
   box.innerHTML = "";
-  const ink = tok("--muted"), line = tok("--line");
+  const candles = !!(h.o && h.h && h.l), bars = resample(h, curTf);
+  const ink = tok("--muted"), line = tok("--line"), up = tok("--up"), dn = tok("--down");
   chartObj = LightweightCharts.createChart(box, {
     autoSize: true,
     layout: {background: {type: "solid", color: tok("--surface")}, textColor: ink, fontFamily: tok("--f-body"), fontSize: 11},
     grid: {vertLines: {color: alpha(line, .6)}, horzLines: {color: alpha(line, .6)}},
-    rightPriceScale: {borderColor: line}, timeScale: {borderColor: line},
-    localization: {priceFormatter: p => "₹" + Number(p).toLocaleString("en-IN", {maximumFractionDigits: 2})},
+    rightPriceScale: {borderColor: line, scaleMargins: {top: .06, bottom: .24}}, timeScale: {borderColor: line},
+    localization: {priceFormatter: p => p < 0 ? "" : "₹" + Number(p).toLocaleString("en-IN", {maximumFractionDigits: 2})},
     handleScroll: {vertTouchDrag: false},
   });
-  const pts = arr => h.t.map((t, i) => ({time: t, value: arr[i]})).filter(p => p.value != null);
-  const area = chartObj.addAreaSeries({lineColor: tok("--accent"), topColor: alpha(tok("--accent"), .28), bottomColor: alpha(tok("--accent"), 0), lineWidth: 2, priceLineVisible: false});
-  area.setData(pts(h.c));
-  if (h.e200 && h.e200.length) chartObj.addLineSeries({color: tok("--warn"), lineWidth: 2, priceLineVisible: false, lastValueVisible: true}).setData(pts(h.e200));
-  if (h.e50 && h.e50.length) chartObj.addLineSeries({color: ink, lineWidth: 1, lineStyle: 2, priceLineVisible: false, lastValueVisible: false}).setData(pts(h.e50));
+  let main;
+  if (candles) {
+    main = chartObj.addCandlestickSeries({upColor: up, downColor: dn, borderVisible: false, wickUpColor: up, wickDownColor: dn, priceLineVisible: false});
+    main.setData(bars.map(b => ({time: b.time, open: b.open, high: b.high, low: b.low, close: b.close})));
+  } else {
+    main = chartObj.addAreaSeries({lineColor: tok("--accent"), topColor: alpha(tok("--accent"), .28), bottomColor: alpha(tok("--accent"), 0), lineWidth: 2, priceLineVisible: false});
+    main.setData(bars.map(b => ({time: b.time, value: b.close})));
+  }
+  if (h.v) {
+    const vol = chartObj.addHistogramSeries({priceFormat: {type: "volume"}, priceScaleId: "", lastValueVisible: false, priceLineVisible: false});
+    vol.priceScale().applyOptions({scaleMargins: {top: .8, bottom: 0}});
+    vol.setData(bars.map(b => ({time: b.time, value: b.v, color: alpha(b.close >= b.open ? up : dn, .35)})));
+  }
+  const closes = bars.map(b => b.close), tfName = {D: "daily", W: "weekly", M: "monthly"}[curTf];
+  const lines = [];
+  if (bars.length >= 200) { const e = ema(closes, 200);
+    chartObj.addLineSeries({color: tok("--warn"), lineWidth: 2, priceLineVisible: false}).setData(bars.map((b, i) => ({time: b.time, value: e[i]}))); lines.push(["--warn", "200 EMA"]); }
+  if (bars.length >= 50) { const e = ema(closes, 50);
+    chartObj.addLineSeries({color: ink, lineWidth: 1, lineStyle: 2, priceLineVisible: false, lastValueVisible: false}).setData(bars.map((b, i) => ({time: b.time, value: e[i]}))); lines.push(["--muted", "50 EMA"]); }
+  document.getElementById("legend").innerHTML = (candles ? "" : `<span><i style="background:var(--accent)"></i>Close</span>`) +
+    lines.map(([c, l]) => `<span><i style="background:var(${c})"></i>${l}</span>`).join("");
+  const first = h.t[0], lastT = h.t[h.t.length - 1];
+  document.getElementById("chartsrc").textContent =
+    `${candles ? "Candles" : "Closing prices"} from ${first} to ${lastT} (${tfName}). ` +
+    (curTf === "D" ? "" : `EMA lines here are on ${tfName} candles; the robot's SP/DT rule uses the daily 200 EMA. `) +
+    (candles ? "" : "Open/high/low prices are not available for this stock, so a line chart is shown. ") +
+    (bars.length < 200 ? "200 EMA appears once there are 200 candles." : "");
+  cur.bars = bars;
   setRange();
-  document.getElementById("chartsrc").textContent = `Daily closing prices, ${h.t[0]} to ${h.t[h.t.length - 1]}` +
-    (h.e200 && h.e200.length ? "" : " · 200 EMA appears once the stock has 200 trading days");
 }
 function setRange(){
-  if (!chartObj || !cur) return;
-  chartsLoad.then(c => { const h = c[cur.r.symbol]; if (!h || !chartObj) return;
-    const n = h.t.length, from = h.t[Math.max(0, n - curRange)];
-    chartObj.timeScale().setVisibleRange({from, to: h.t[n - 1]}); });
+  if (!chartObj || !cur || !cur.bars || !cur.bars.length) return;
+  const b = cur.bars, n = b.length;
+  if (!curRange) { chartObj.timeScale().fitContent(); return; }
+  const lastDay = new Date(b[n - 1].end + "T00:00:00Z"), from = new Date(lastDay);
+  from.setUTCDate(from.getUTCDate() - Math.round(curRange * 7 / 5));
+  const fromStr = from.toISOString().slice(0, 10), i = b.findIndex(x => x.end >= fromStr);
+  chartObj.timeScale().setVisibleRange({from: b[Math.max(0, i)].time, to: b[n - 1].time});
 }
 function fundHTML(f){
   if (!f) return `<div class="empty">Screener numbers appear after the next robot run (7 AM).</div>`;
@@ -383,6 +431,8 @@ function fundHTML(f){
 document.addEventListener("click", e => {
   const o = e.target.closest("[data-open]"); if (o) { openPanel(o.dataset.open, o.dataset.tab); return; }
   const pt = e.target.closest("[data-p]"); if (pt && cur) { curTab = pt.dataset.p; drawPanel(); return; }
+  const tf = e.target.closest("[data-tf]"); if (tf) { curTf = tf.dataset.tf;
+    document.querySelectorAll("[data-tf]").forEach(b => b.setAttribute("aria-pressed", b === tf)); drawChart(); return; }
   const rg = e.target.closest("[data-range]"); if (rg) { curRange = +rg.dataset.range;
     document.querySelectorAll("[data-range]").forEach(b => b.setAttribute("aria-pressed", b === rg)); setRange(); return; }
 });
@@ -448,7 +498,7 @@ def page_data(sp, dt, run, history, rules_cfg, banner="", snaps=None, charts=Non
     return {
         "SP": rows(sp), "DT": rows(dt), "run": run or {}, "history": history or [],
         "fund": {k: v for k, v in (snaps or {}).items() if k in sp or k in dt},
-        "charts": charts,  # None on the live site: the page loads charts.json instead
+        "charts": charts,  # None on the live site: the page loads charts/SYMBOL.json instead
         "cfg": {"full": rules_cfg.get("full_marks", 11), "pass_new": rules_cfg.get("new_stock_pass", 7),
                 "pass_monthly": rules_cfg.get("monthly_pass", 7), "banner": banner},
     }
@@ -467,6 +517,16 @@ def build(sp, dt, run, history, rules_cfg, out=None, snaps=None, charts=None):
     with open(out, "w", encoding="utf-8") as f:
         f.write(page)
     if charts is not None:
-        keep = {k: v for k, v in charts.items() if k in sp or k in dt}
-        with open(os.path.join(os.path.dirname(out), "charts.json"), "w", encoding="utf-8") as f:
-            json.dump(keep, f, separators=(",", ":"))
+        # one file per stock (docs/charts/SYMBOL.json), loaded only when that stock's chart is opened
+        folder = os.path.join(os.path.dirname(out), "charts")
+        os.makedirs(folder, exist_ok=True)
+        for sym, hist in charts.items():
+            if sym in sp or sym in dt:
+                with open(os.path.join(folder, f"{sym}.json"), "w", encoding="utf-8") as f:
+                    json.dump(hist, f, separators=(",", ":"))
+        for name in os.listdir(folder):  # remove charts of stocks no longer in SP or DT
+            if name.endswith(".json") and name[:-5] not in sp and name[:-5] not in dt:
+                os.remove(os.path.join(folder, name))
+        old = os.path.join(os.path.dirname(out), "charts.json")
+        if os.path.exists(old):
+            os.remove(old)

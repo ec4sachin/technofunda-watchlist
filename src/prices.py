@@ -27,27 +27,34 @@ def yahoo_ticker(code, override=""):
     return f"{code}.BO" if str(code).isdigit() else f"{code}.NS"
 
 
-CHART_DAYS = 260  # about one year of trading days kept for the dashboard chart
+def _r(v):
+    return None if v is None or pd.isna(v) else round(float(v), 2)
 
 
-def _history(close, period):
-    """Last ~1 year of closes with 200 EMA and 50 EMA lines, for the dashboard chart."""
-    e_long = close.ewm(span=period, adjust=True).mean() if len(close) >= period else None
-    e_50 = close.ewm(span=50, adjust=True).mean() if len(close) >= 50 else None
-    tail = close.iloc[-CHART_DAYS:]
-    pick = lambda s: [round(float(v), 2) for v in s.iloc[-CHART_DAYS:]] if s is not None else []  # noqa: E731
-    return {"t": [pd.Timestamp(d).strftime("%Y-%m-%d") for d in tail.index],
-            "c": [round(float(v), 2) for v in tail], "e200": pick(e_long), "e50": pick(e_50)}
+def _payload(df):
+    """Full daily history for the dashboard chart: dates + open/high/low/close/volume (o/h/l only when known)."""
+    out = {"t": [pd.Timestamp(d).strftime("%Y-%m-%d") for d in df.index], "c": [_r(v) for v in df["Close"]]}
+    if all(k in df for k in ("Open", "High", "Low")):
+        out.update(o=[_r(v) for v in df["Open"]], h=[_r(v) for v in df["High"]], l=[_r(v) for v in df["Low"]])
+    if "Volume" in df:
+        out["v"] = [None if pd.isna(v) else int(v) for v in df["Volume"]]
+    return out
 
 
-def _ema_result(close, period):
-    """(last close, EMA, date, chart history). EMA is None with fewer than `period` trading days (new listing)."""
-    close = close.dropna()
-    close = close[~close.index.duplicated(keep="last")]
-    if close.empty:
+def _ema_result(df, period):
+    """(last close, EMA, date, chart history). df has a Close column (Open/High/Low/Volume optional).
+
+    EMA is None with fewer than `period` trading days (new listing).
+    """
+    if isinstance(df, pd.Series):
+        df = df.to_frame("Close")
+    df = df[df["Close"].notna()]
+    df = df[~df.index.duplicated(keep="last")].sort_index()
+    if df.empty:
         return None
+    close = df["Close"].astype(float)
     last = (round(float(close.iloc[-1]), 2), pd.Timestamp(close.index[-1]).strftime("%d %b %Y"))
-    hist = _history(close, period)
+    hist = _payload(df)
     if len(close) < period:
         return (last[0], None, last[1], hist)
     ema = close.ewm(span=period, adjust=True).mean()
@@ -55,37 +62,49 @@ def _ema_result(close, period):
 
 
 def close_and_ema(tickers, period=200):
-    """Yahoo Finance. tickers: list of Yahoo tickers. Returns {ticker: (close, ema, date, history) or None}."""
+    """Yahoo Finance, whole history. Returns {ticker: (close, ema, date, history) or None}."""
     out = {t: None for t in tickers}
     if not tickers:
         return out
-    data = yf.download(tickers, period="2y", interval="1d", auto_adjust=False,
+    data = yf.download(tickers, period="max", interval="1d", auto_adjust=False,
                        group_by="ticker", progress=False, threads=True)
     for t in tickers:
         try:
             df = data[t] if isinstance(data.columns, pd.MultiIndex) else data
-            out[t] = _ema_result(df["Close"], period)
+            out[t] = _ema_result(df[[c for c in ("Open", "High", "Low", "Close", "Volume") if c in df]], period)
         except (KeyError, TypeError):
             continue
     return out
 
 
 def parse_screener_chart(payload):
-    """Screener chart JSON -> (pandas Series of closing prices, is_weekly) or (None, False)."""
+    """Screener chart JSON -> (DataFrame with Close and Volume, is_weekly) or (None, False)."""
+    price, vol, weekly = None, {}, False
     for ds in (payload or {}).get("datasets", []):
-        if str(ds.get("metric", "")).lower() != "price":
-            continue
-        weekly = bool((ds.get("meta") or {}).get("is_weekly"))
-        dates, vals = [], []
-        for point in ds.get("values", []):
-            try:
-                dates.append(pd.Timestamp(point[0]))
-                vals.append(float(point[1]))
-            except (TypeError, ValueError, IndexError):
-                continue
-        if vals:
-            return pd.Series(vals, index=dates).sort_index(), weekly
-    return None, False
+        metric = str(ds.get("metric", "")).lower()
+        if metric == "price":
+            weekly = bool((ds.get("meta") or {}).get("is_weekly"))
+            dates, vals = [], []
+            for point in ds.get("values", []):
+                try:
+                    dates.append(pd.Timestamp(point[0]))
+                    vals.append(float(point[1]))
+                except (TypeError, ValueError, IndexError):
+                    continue
+            if vals:
+                price = pd.Series(vals, index=dates)
+        elif metric == "volume":
+            for point in ds.get("values", []):
+                try:
+                    vol[pd.Timestamp(point[0])] = float(point[1])
+                except (TypeError, ValueError, IndexError):
+                    continue
+    if price is None:
+        return None, False
+    df = price.to_frame("Close").sort_index()
+    if vol:
+        df["Volume"] = pd.Series(vol).reindex(df.index)
+    return df, weekly
 
 
 def screener_close_and_ema(company_id, period=200, session=None, pause=1.5):
