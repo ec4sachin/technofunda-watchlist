@@ -16,7 +16,9 @@ on:
           - list       # just send me the full SP and DT list on Telegram
 
 permissions:
-  contents: write
+  contents: write   # save the updated watchlists
+  pages: write      # publish the dashboard
+  id-token: write   # needed by GitHub Pages publishing
 
 concurrency:
   group: watchlist
@@ -52,3 +54,19 @@ jobs:
           git add data docs
           git diff --cached --quiet || git commit -m "Watchlist update $(TZ=Asia/Kolkata date +'%d %b %Y')"
           git push
+
+      - name: Prepare dashboard for publishing
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  publish:
+    needs: run
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish dashboard
+        id: deployment
+        uses: actions/deploy-pages@v4
