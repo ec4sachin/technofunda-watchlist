@@ -1,0 +1,55 @@
+# ============================================================
+#  FUNDAMENTAL MARKS — Sacheen's TechnoFunda system
+# ============================================================
+#
+#  Full system = 11 marks:
+#     1. Business         2    (judgement — not automatic yet)
+#     2. P&L Statement    3    ✅ automatic
+#     3. Balance Sheet    1.5  ✅ automatic
+#     4. Management       1    (judgement — not automatic yet)
+#     5. Holding pattern  1.5  ✅ automatic
+#     6. Future           2    (judgement — not automatic yet)
+#
+#  The robot calculates the 6 automatic marks from Screener.in:
+#
+#   q_sales_growth  Latest quarter sales growth (vs same quarter last year)
+#                   >= 0.8 × TTM sales growth
+#   q_eps           Latest quarter EPS >= 0.8 × previous quarter EPS
+#   margin          Latest quarter OPM >= same quarter last year OPM
+#                   (a fall of up to "margin_tolerance_points" counts as stable)
+#   fixed_assets    Fixed assets + CWIP now >= previous balance sheet
+#                   (a fall of up to "stable_tolerance_pct" counts as stable)
+#   receivables     Receivables < 0.5 × Revenue  (Debtor days below 182.5)
+#   fii_dii         FII % + DII % increased vs previous shareholding period
+#   shareholders    Number of shareholders decreased or stable
+#                   (a rise of up to "stable_tolerance_pct" counts as stable)
+#
+#  SME companies that report half-yearly are handled automatically
+#  (they are compared with the same half of last year).
+#  A check with no data from Screener gets 0 marks.
+# ============================================================
+
+# Marks for each automatic check (put 0 to switch a check off)
+auto_marks:
+  q_sales_growth: 1
+  q_eps: 1
+  margin: 1
+  fixed_assets: 1
+  receivables: 0.5
+  fii_dii: 1
+  shareholders: 0.5
+
+# Pass marks — out of your full system of 11 marks.
+# While only the 6 automatic marks are used, the robot applies the same
+# percentage: 5 out of 11 (45%)  =  3 out of 6 automatic marks.
+full_marks: 11
+new_stock_pass: 5        # Step 2 — new stock from emails needs this to enter SP
+monthly_pass: 5          # Step 5 — stock in SP/DT needs this to stay
+
+# What counts as "stable"
+stable_tolerance_pct: 2      # fixed assets / shareholders may move 2% the wrong way
+margin_tolerance_points: 1   # OPM may fall up to 1 percentage point
+
+# If Screener page can't be opened at all during the monthly check:
+#   keep = keep the stock and tell me   |   remove = remove it
+page_missing_monthly: keep

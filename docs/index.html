@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+</head><body>
+<title>TechnoFunda Watchlist</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,600..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky ledger header -> summary strip -> 4 tabs (SP · DT · Today · History) -> stock rows */
+:root{
+  --bg:#F2F4F7; --surface:#FFFFFF; --ink:#152033; --muted:#5D6878; --line:#DDE2E9;
+  --accent:#2C47B8; --accent-soft:#E6EBFA;
+  --up:#16794A; --up-soft:#E3F3EA; --down:#BE3329; --down-soft:#FBE7E5; --warn:#9A6408; --warn-soft:#FBF0DA;
+  --f-display:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0D131B; --surface:#151D28; --ink:#E5EAF1; --muted:#93A0B1; --line:#253142;
+  --accent:#93A8FF; --accent-soft:#1E2A4D;
+  --up:#4FC48D; --up-soft:#15301F; --down:#F1786C; --down-soft:#3A1A17; --warn:#E5B456; --warn-soft:#352813;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D131B; --surface:#151D28; --ink:#E5EAF1; --muted:#93A0B1; --line:#253142;
+  --accent:#93A8FF; --accent-soft:#1E2A4D;
+  --up:#4FC48D; --up-soft:#15301F; --down:#F1786C; --down-soft:#3A1A17; --warn:#E5B456; --warn-soft:#352813;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--f-body);margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.hrow{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;justify-content:space-between;padding-block:14px 10px}
+h1{font:800 22px/1.1 var(--f-display);font-stretch:85%;letter-spacing:.01em;margin:0;text-transform:uppercase}
+h1 span{color:var(--accent)}
+.runline{color:var(--muted);font-size:12.5px;font-family:var(--f-mono)}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tab{appearance:none;border:0;background:none;color:var(--muted);font:600 14px var(--f-body);padding:10px 14px 12px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tab:focus-visible,button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tab b{font:500 12px var(--f-mono);margin-left:6px;padding:1px 7px;border-radius:999px;background:var(--bg);color:var(--ink)}
+main{padding-block:18px 56px}
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:18px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.stat .k{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.stat .v{font:700 26px/1.2 var(--f-display);font-variant-numeric:tabular-nums}
+.stat .v small{font:500 13px var(--f-body);color:var(--muted);margin-left:4px}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.tools input{flex:1 1 220px;min-width:0}
+input,select{font:15px var(--f-body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 11px}
+.list{display:flex;flex-direction:column;gap:8px}
+.row{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1.1fr) auto;gap:10px 18px;align-items:center}
+.row.dt{border-left:4px solid var(--down)}
+.nm{font-weight:600;line-height:1.3}
+.meta{color:var(--muted);font-size:12.5px;margin-top:2px}
+.sym{font-family:var(--f-mono);font-size:12.5px;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.chip{font-size:11.5px;padding:1px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.px{font:500 15px var(--f-mono)}
+.ema{font-size:12.5px;margin-top:2px}
+.up{color:var(--up)}.down{color:var(--down)}.warn{color:var(--warn)}.mut{color:var(--muted)}
+.mk{display:flex;flex-direction:column;gap:5px;min-width:0}
+.mk .top{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--muted)}
+.mk .top b{font:600 14px var(--f-mono);color:var(--ink)}
+.bar{position:relative;height:8px;border-radius:4px;background:var(--bg);border:1px solid var(--line);overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:3px}
+.bar.low i{background:var(--down)}
+.bar u{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--ink);opacity:.55}
+.acts{display:flex;gap:6px;justify-content:flex-end}
+.btn{display:inline-flex;align-items:center;gap:4px;font:600 13px var(--f-body);padding:7px 11px;border-radius:8px;text-decoration:none;border:1px solid var(--line);color:var(--ink);background:var(--surface);cursor:pointer;white-space:nowrap}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+details{grid-column:1/-1}
+summary{cursor:pointer;color:var(--muted);font-size:12.5px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▸ ";}
+details[open] summary::before{content:"▾ "}
+.checks{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px;margin-top:8px}
+.ck{display:flex;gap:8px;align-items:flex-start;font-size:13px;padding:7px 9px;border-radius:8px;background:var(--bg)}
+.ck .ic{font-weight:700;width:16px;flex:none;text-align:center}
+.ck .d{color:var(--muted);font-size:12px;font-family:var(--f-mono)}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:10px;padding:28px 16px;text-align:center;color:var(--muted)}
+h2{font:700 15px var(--f-display);text-transform:uppercase;letter-spacing:.05em;margin:22px 0 8px;display:flex;gap:8px;align-items:center}
+h2 .cnt{font:500 12px var(--f-mono);padding:1px 8px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+.ev{background:var(--surface);border:1px solid var(--line);border-radius:10px;display:flex;flex-direction:column}
+.ev>div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:10px 14px;border-top:1px solid var(--line);align-items:center}
+.ev>div:first-child{border-top:0}
+.ev .why{grid-column:1/2;color:var(--muted);font-size:12.5px;font-family:var(--f-mono);overflow-wrap:anywhere}
+.pill{font:600 11px var(--f-body);letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.p-add{background:var(--up-soft);color:var(--up)}.p-dt{background:var(--down-soft);color:var(--down)}
+.p-sp{background:var(--accent-soft);color:var(--accent)}.p-rem{background:var(--down-soft);color:var(--down)}
+.p-warn{background:var(--warn-soft);color:var(--warn)}
+.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:13.5px}
+th,td{text-align:left;padding:9px 12px;border-top:1px solid var(--line);vertical-align:top}
+th{border-top:0;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
+.note{color:var(--muted);font-size:12.5px;margin-top:22px;max-width:70ch}
+@media (max-width:720px){
+  .row{grid-template-columns:minmax(0,1fr) auto}
+  .row .mk{grid-column:1/-1;order:3}
+  .row .acts{grid-column:1/-1;order:4;justify-content:flex-start}
+  .row .pricecol{text-align:right}
+}
+@media (prefers-reduced-motion:no-preference){.bar i{transition:width .4s ease}}
+</style>
+
+<header><div class="wrap">
+  <div class="hrow"><h1>TechnoFunda <span>Watchlist</span></h1><div class="runline" id="runline"></div></div>
+  <nav class="tabs" role="tablist" aria-label="Lists">
+    <button class="tab" role="tab" data-v="sp" id="t-sp">SP<b id="c-sp">0</b></button>
+    <button class="tab" role="tab" data-v="dt" id="t-dt">DT<b id="c-dt">0</b></button>
+    <button class="tab" role="tab" data-v="today" id="t-today">Today<b id="c-today">0</b></button>
+    <button class="tab" role="tab" data-v="history" id="t-history">History</button>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <section class="strip" id="strip" aria-label="Summary"></section>
+  <section id="v-list">
+    <div class="tools">
+      <input id="q" type="search" placeholder="Search name or symbol" aria-label="Search name or symbol">
+      <select id="sort" aria-label="Sort by">
+        <option value="marks">Highest marks</option>
+        <option value="ema">Closest to 200 EMA</option>
+        <option value="new">Newest added</option>
+        <option value="name">Name A–Z</option>
+      </select>
+    </div>
+    <div class="list" id="list"></div>
+  </section>
+  <section id="v-today" hidden></section>
+  <section id="v-history" hidden><div class="tbl"><table><thead><tr><th>Date</th><th>Stock</th><th>Change</th><th>Reason</th></tr></thead><tbody id="hist"></tbody></table></div></section>
+  <p class="note" id="note"></p>
+</main>
+
+<script>
+const D = {"SP": [{"symbol": "EIMCOELECO", "name": "Eimco Elecon (India)", "added_on": "2026-11-02", "source": "Manual (starting list)", "last_close": "", "ema200": "", "last_fund_check": "", "fund_result": "", "yahoo_override": "", "consolidated": "yes", "marks_detail": "", "chart": "https://www.tradingview.com/chart/?symbol=NSE%3AEIMCOELECO", "screener": "https://www.screener.in/company/EIMCOELECO/consolidated/"}, {"symbol": "PATELRMART", "name": "Patel Retail", "added_on": "2026-11-02", "source": "Manual (starting list)", "last_close": "", "ema200": "", "last_fund_check": "", "fund_result": "", "yahoo_override": "", "consolidated": "yes", "marks_detail": "", "chart": "https://www.tradingview.com/chart/?symbol=NSE%3APATELRMART", "screener": "https://www.screener.in/company/PATELRMART/consolidated/"}, {"symbol": "RATNAVEER", "name": "Ratnaveer Precision Engineering", "added_on": "2026-11-02", "source": "Manual (starting list)", "last_close": "", "ema200": "", "last_fund_check": "", "fund_result": "", "yahoo_override": "", "consolidated": "yes", "marks_detail": "", "chart": "https://www.tradingview.com/chart/?symbol=NSE%3ARATNAVEER", "screener": "https://www.screener.in/company/RATNAVEER/consolidated/"}, {"symbol": "SAHANA", "name": "Sahana System", "added_on": "2026-11-02", "source": "Manual (starting list)", "last_close": "", "ema200": "", "last_fund_check": "", "fund_result": "", "yahoo_override": "", "consolidated": "yes", "marks_detail": "", "chart": "https://www.tradingview.com/chart/?symbol=NSE%3ASAHANA", "screener": "https://www.screener.in/company/SAHANA/consolidated/"}, {"symbol": "SHANTIGOLD", "name": "Shanti Gold International", "added_on": "2026-11-02", "source": "Manual (starting list)", "last_close": "", "ema200": "", "last_fund_check": "", "fund_result": "", "yahoo_override": "", "consolidated": "yes", "marks_detail": "", "chart": "https://www.tradingview.com/chart/?symbol=NSE%3ASHANTIGOLD", "screener": "https://www.screener.in/company/SHANTIGOLD/consolidated/"}, {"symbol": "SUPREMEPWR", "name": "Supreme Power Equipment", "added_on": "2026-11-02", "source": "Manual (starting list)", "last_close": "", "ema200": "", "last_fund_check": "", "fund_result": "", "yahoo_override": "", "consolidated": "yes", "marks_detail": "", "chart": "https://www.tradingview.com/chart/?symbol=NSE%3ASUPREMEPWR", "screener": "https://www.screener.in/company/SUPREMEPWR/consolidated/"}], "DT": [], "run": {}, "history": [], "cfg": {"full": 11, "pass_new": 5, "pass_monthly": 5, "banner": ""}};
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const num = v => { const n = parseFloat(v); return isFinite(n) ? n : null; };
+const FULL = D.cfg.full, PASS = D.cfg.pass_monthly;
+const fmtINR = n => "₹" + n.toLocaleString("en-IN", {maximumFractionDigits: 2});
+
+function marksOf(r){ const m = String(r.fund_result||"").match(/^([\d.]+)\s*\/\s*([\d.]+)/); return m ? +m[1] : null; }
+function emaGap(r){ const c = num(r.last_close), e = num(r.ema200); return (c && e) ? (c - e) / e * 100 : null; }
+
+function stockRow(r, list){
+  const mk = marksOf(r), gap = emaGap(r), c = num(r.last_close);
+  let checks = []; try { checks = JSON.parse(r.marks_detail || "[]"); } catch (e) {}
+  const pct = mk == null ? 0 : Math.min(100, mk / FULL * 100);
+  const srcs = String(r.source||"").split(",").map(s => s.trim()).filter(Boolean);
+  return `<article class="row ${list === "DT" ? "dt" : ""}">
+    <div><div class="nm">${esc(r.name || r.symbol)}</div>
+      <div class="meta"><span class="sym">${esc(r.symbol)}</span> · added ${esc(r.added_on || "—")}</div>
+      ${srcs.length ? `<div class="chips">${srcs.map(s => `<span class="chip">${esc(s)}</span>`).join("")}</div>` : ""}</div>
+    <div class="pricecol"><div class="px">${c ? fmtINR(c) : "—"}</div>
+      <div class="ema ${gap == null ? "mut" : gap >= 0 ? "up" : "down"}">${gap == null ? "200 EMA n/a" : (gap >= 0 ? "▲ " : "▼ ") + Math.abs(gap).toFixed(1) + "% " + (gap >= 0 ? "above" : "below") + " 200 EMA"}</div></div>
+    <div class="mk"><div class="top"><span>Marks${r.last_fund_check ? " · " + esc(r.last_fund_check) : ""}</span><b>${mk == null ? "not marked yet" : mk + " / " + FULL}</b></div>
+      <div class="bar ${mk != null && mk < PASS ? "low" : ""}" role="img" aria-label="${mk == null ? "No marks yet" : mk + " of " + FULL + " marks, pass mark " + PASS}"><i style="width:${pct}%"></i><u style="left:${PASS / FULL * 100}%"></u></div></div>
+    <div class="acts"><a class="btn pri" href="${esc(r.chart)}" target="_blank" rel="noopener">Chart</a><a class="btn" href="${esc(r.screener)}" target="_blank" rel="noopener">Screener</a></div>
+    ${checks.length ? `<details><summary>Marks breakdown</summary><div class="checks">${checks.map(([l, g, o, d]) =>
+      `<div class="ck"><span class="ic ${g > 0 ? "up" : "down"}">${g > 0 ? "✓" : "✕"}</span><div><div>${esc(l)} <span class="num mut">${g}/${o}</span></div>${d ? `<div class="d">${esc(d)}</div>` : ""}</div></div>`).join("")}</div></details>` : ""}
+  </article>`;
+}
+
+let view = "sp";
+function drawList(){
+  const key = view === "dt" ? "DT" : "SP", q = document.getElementById("q").value.trim().toLowerCase();
+  let rows = D[key].filter(r => (r.symbol + " " + r.name).toLowerCase().includes(q));
+  const s = document.getElementById("sort").value;
+  const by = {marks: r => -(marksOf(r) ?? -1), ema: r => Math.abs(emaGap(r) ?? 999), new: r => -Date.parse(r.added_on || 0), name: r => (r.name || r.symbol).toLowerCase()}[s];
+  rows.sort((a, b) => { const x = by(a), y = by(b); return x < y ? -1 : x > y ? 1 : 0; });
+  document.getElementById("list").innerHTML = rows.length ? rows.map(r => stockRow(r, key)).join("")
+    : `<div class="empty">${q ? "No stock matches “" + esc(q) + "”." : key === "DT" ? "No stock is below its 200 EMA right now." : "SP is empty. Stocks that pass your marks will appear here after the next run."}</div>`;
+}
+
+function evBlock(title, pill, cls, items){
+  if (!items || !items.length) return "";
+  return `<h2>${title}<span class="cnt">${items.length}</span></h2><div class="ev">${items.map(([s, n, why]) =>
+    `<div><div><b>${esc(n || s)}</b> <span class="sym mut">${esc(s)}</span></div><span class="pill ${cls}">${pill}</span>${why ? `<div class="why">${esc(why)}</div>` : ""}</div>`).join("")}</div>`;
+}
+function drawToday(){
+  const r = D.run || {};
+  const warn = [...(r.warnings || []).map(w => ["", "Robot", w]), ...(r.no_price || []).map(([s, n]) => [s, n, "No price data, 200 EMA not checked"]), ...(r.unchecked || [])];
+  const html = [
+    evBlock("Added to SP", "Added", "p-add", r.added),
+    evBlock("Moved SP → DT", "Below EMA", "p-dt", r.to_dt),
+    evBlock("Back to SP", "Above EMA", "p-sp", r.to_sp),
+    evBlock("Removed in monthly review", "Removed", "p-rem", r.removed),
+    evBlock("First marks for stocks added by hand", "Marked", "p-sp", r.first_marked),
+    evBlock("Checked but below pass marks", "Not added", "p-warn", r.rejected),
+    evBlock("Needs attention", "Check", "p-warn", warn),
+  ].join("");
+  document.getElementById("v-today").innerHTML = html || `<div class="empty">No changes in the last run.</div>`;
+}
+function drawHistory(){
+  document.getElementById("hist").innerHTML = D.history.length ? D.history.map(h =>
+    `<tr><td class="num">${esc(h.date)}</td><td><b>${esc(h.name || h.symbol)}</b><br><span class="sym mut">${esc(h.symbol)}</span></td><td>${esc(h.action)}</td><td class="r">${esc(h.reason)}</td></tr>`).join("")
+    : `<tr><td colspan="4" class="mut">No changes recorded yet.</td></tr>`;
+}
+
+function show(v){
+  if (!["sp", "dt", "today", "history"].includes(v)) v = "sp";
+  view = v;
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.v === v));
+  document.getElementById("v-list").hidden = !(v === "sp" || v === "dt");
+  document.getElementById("v-today").hidden = v !== "today";
+  document.getElementById("v-history").hidden = v !== "history";
+  if (v === "sp" || v === "dt") drawList();
+}
+
+(function init(){
+  const r = D.run || {};
+  const changes = ["added", "to_dt", "to_sp", "removed"].reduce((n, k) => n + ((r[k] || []).length), 0);
+  document.getElementById("c-sp").textContent = D.SP.length;
+  document.getElementById("c-dt").textContent = D.DT.length;
+  document.getElementById("c-today").textContent = changes;
+  document.getElementById("runline").textContent = r.run_at ? "Last run " + r.run_at + (r.price_date ? " · prices of " + r.price_date : "") : "Waiting for first run";
+  const stat = (k, v, sub, cls) => `<div class="stat"><div class="k">${k}</div><div class="v ${cls || ""}">${v}${sub ? `<small>${sub}</small>` : ""}</div></div>`;
+  const avg = l => { const m = l.map(marksOf).filter(x => x != null); return m.length ? (m.reduce((a, b) => a + b, 0) / m.length).toFixed(1) : "—"; };
+  document.getElementById("strip").innerHTML =
+    stat("SP · above 200 EMA", D.SP.length, "stocks") +
+    stat("DT · below 200 EMA", D.DT.length, "stocks", D.DT.length ? "down" : "") +
+    stat("Changes in last run", changes, (r.added || []).length ? `${r.added.length} added` : "") +
+    stat("Average marks (SP)", avg(D.SP), "/ " + FULL);
+  document.getElementById("note").textContent =
+    `New stocks need ${D.cfg.pass_new} of ${FULL} marks to enter SP; SP and DT stocks need ${PASS} of ${FULL} on the monthly review (1st of each month). ` +
+    `The black line on each marks bar is the pass mark. Marks shown are the automatic part of the TechnoFunda system, scaled to ${FULL}.` + (D.cfg.banner ? " " + D.cfg.banner : "");
+  drawToday(); drawHistory();
+  document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => { location.hash = t.dataset.v; show(t.dataset.v); }));
+  document.getElementById("q").addEventListener("input", drawList);
+  document.getElementById("sort").addEventListener("change", drawList);
+  window.addEventListener("hashchange", () => show(location.hash.slice(1)));
+  show(location.hash.slice(1));
+})();
+</script>
+
+</body></html>

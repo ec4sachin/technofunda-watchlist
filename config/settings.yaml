@@ -1,0 +1,29 @@
+# ------------------------------------------------------------
+#  GENERAL SETTINGS  (safe to edit)
+# ------------------------------------------------------------
+
+# Screener alert names to read from your email.
+# Write the name exactly as it appears in the email subject
+# "Screener.in Updates: <NAME> Alert"
+alerts:
+  - "TTM Profit > 30%"
+  - "52W High"
+  - "Daily Volume Scan"
+  - "Weekly Volume Scan"
+  - "Ready after 6 Months"
+
+# How many days back to look for emails (already-read emails are skipped automatically)
+email_days_back: 3
+
+# Moving average used for Step 4
+ema_period: 200
+
+# If a stock in DT closes back ABOVE the 200 EMA, move it back to SP?
+move_dt_back_to_sp: true
+
+# Day of month for the full fundamental review of SP and DT (Step 5)
+monthly_review_day: 1
+
+# Your dashboard link (from Settings -> Pages). Telegram messages will link to it.
+# Example: https://yourname.github.io/technofunda-watchlist/
+dashboard_url: ""
