@@ -20,7 +20,7 @@ FRAGMENT = r"""<title>TechnoFunda Watchlist</title>
 :root{
   --bg:#F2F4F7; --surface:#FFFFFF; --ink:#152033; --muted:#5D6878; --line:#DDE2E9;
   --accent:#2C47B8; --accent-soft:#E6EBFA;
-  --up:#16794A; --up-soft:#E3F3EA; --down:#BE3329; --down-soft:#FBE7E5; --warn:#9A6408; --warn-soft:#FBF0DA; --e10:#0E7490; --e20:#7C3AED;
+  --up:#16794A; --up-soft:#E3F3EA; --down:#BE3329; --down-soft:#FBE7E5; --warn:#9A6408; --warn-soft:#FBF0DA; --e10:#16A34A; --e20:#DC2626; --e50:#2563EB; --e200:#EA580C;
   --f-display:"Archivo","Arial Narrow",system-ui,sans-serif;
   --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
@@ -28,12 +28,12 @@ FRAGMENT = r"""<title>TechnoFunda Watchlist</title>
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0D131B; --surface:#151D28; --ink:#E5EAF1; --muted:#93A0B1; --line:#253142;
   --accent:#93A8FF; --accent-soft:#1E2A4D;
-  --up:#4FC48D; --up-soft:#15301F; --down:#F1786C; --down-soft:#3A1A17; --warn:#E5B456; --warn-soft:#352813; --e10:#22D3EE; --e20:#B39DFF;
+  --up:#4FC48D; --up-soft:#15301F; --down:#F1786C; --down-soft:#3A1A17; --warn:#E5B456; --warn-soft:#352813; --e10:#4ADE80; --e20:#F87171; --e50:#60A5FA; --e200:#FB923C;
   color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0D131B; --surface:#151D28; --ink:#E5EAF1; --muted:#93A0B1; --line:#253142;
   --accent:#93A8FF; --accent-soft:#1E2A4D;
-  --up:#4FC48D; --up-soft:#15301F; --down:#F1786C; --down-soft:#3A1A17; --warn:#E5B456; --warn-soft:#352813; --e10:#22D3EE; --e20:#B39DFF;
+  --up:#4FC48D; --up-soft:#15301F; --down:#F1786C; --down-soft:#3A1A17; --warn:#E5B456; --warn-soft:#352813; --e10:#4ADE80; --e20:#F87171; --e50:#60A5FA; --e200:#FB923C;
   color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -153,6 +153,15 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
 .aform input{width:130px}
 .cmd{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
 .cmd code{font:500 14px var(--f-mono);background:var(--surface);border:1px dashed var(--accent);color:var(--ink);padding:8px 10px;border-radius:8px;user-select:all;overflow-wrap:anywhere}
+.ctx{position:fixed;z-index:30;min-width:250px;max-width:calc(100vw - 24px);background:var(--surface);border:1px solid var(--line);border-radius:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,.22);padding:6px;display:flex;flex-direction:column}
+.ctx .hd{font:600 12px var(--f-mono);color:var(--muted);padding:6px 10px 4px}
+.ctx button{appearance:none;border:0;background:none;color:var(--ink);text-align:left;font:500 14px var(--f-body);padding:9px 10px;border-radius:7px;cursor:pointer}
+.ctx button:hover,.ctx button:focus-visible{background:var(--accent-soft);outline:none}
+.toast{position:fixed;z-index:31;left:50%;transform:translateX(-50%);bottom:max(20px,env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--surface);
+  border-radius:10px;padding:10px 12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;max-width:calc(100vw - 32px);font-size:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.toast code{font:600 13px var(--f-mono)}
+.toast a{color:var(--surface);font-weight:700}
 .steps{margin:12px 0 0;padding-left:20px;color:var(--muted);font-size:13.5px;display:flex;flex-direction:column;gap:4px}
 
 </style>
@@ -188,6 +197,8 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
   <p class="note" id="note"></p>
 </main>
 
+<div class="ctx" id="ctx" role="menu" hidden></div>
+<div class="toast" id="toast" role="status" hidden></div>
 <div class="scrim" id="scrim" hidden></div>
 <aside class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="p-name" hidden>
   <div class="ph">
@@ -307,6 +318,7 @@ function openPanel(sym, tab){
   document.getElementById("p-close").focus();
 }
 function closePanel(){
+  closeMenu();
   if (chartObj) { chartObj.remove(); chartObj = null; }
   document.getElementById("panel").hidden = true;
   document.getElementById("scrim").hidden = true;
@@ -325,7 +337,8 @@ function drawPanel(){
         `<button class="rg" data-range="${n}" aria-pressed="${n === curRange}">${l}</button>`).join("")}
       <div class="legend" id="legend"></div></div>
       <div class="chartbox" id="chartbox"><div class="empty" style="border:0">Loading chart…</div></div>
-      <div class="src" id="chartsrc"></div>` + links;
+      <div class="src" id="chartsrc"></div>
+      <div class="src"><b>Tip:</b> right-click on the chart (long-press on a phone) to set a price alert at that level.</div>` + links;
     drawChart();
   } else if (curTab === "fund") {
     body.innerHTML = fundHTML(D.fund[r.symbol]) + links;
@@ -398,7 +411,7 @@ async function drawChart(){
   }
   const closes = bars.map(b => b.close), tfName = {D: "daily", W: "weekly", M: "monthly"}[curTf];
   // EMA lines: 10, 20, 50, 200 - each can be switched on/off with the chips above the chart
-  const EMAS = [[10, "--e10", 1.5, 0], [20, "--e20", 1.5, 0], [50, "--muted", 1, 2], [200, "--warn", 2, 0]];
+  const EMAS = [[10, "--e10", 1.5, 0], [20, "--e20", 1.5, 0], [50, "--e50", 1.5, 0], [200, "--e200", 2.5, 0]];
   const chips = [];
   for (const [p, col, w, style] of EMAS) {
     const ok = bars.length >= p, on = emaOn[p] !== false;
@@ -415,7 +428,10 @@ async function drawChart(){
     (curTf === "D" ? "" : `EMA lines here are on ${tfName} candles; the robot's SP/DT rule uses the daily 200 EMA. `) +
     (candles ? "" : "Open/high/low prices are not available for this stock, so a line chart is shown. ") +
     (bars.length < 200 ? "EMA 200 appears once there are 200 candles." : "");
-  cur.bars = bars;
+  cur.bars = bars; cur.main = main;
+  for (const a of (AL.active || []).filter(x => x.symbol === sym))
+    main.createPriceLine({price: +a.price, color: tok("--accent"), lineWidth: 1, lineStyle: 2, axisLabelVisible: true, title: "🔔 " + a.op});
+  attachMenu(box);
   setRange();
 }
 function setRange(){
@@ -456,6 +472,45 @@ function drawAlerts(){
     `<p class="src">This list is from the last daily update${AL.as_of ? " (" + esc(AL.as_of) + ")" : ""}. Telegram always has the latest: send /alerts.</p>`;
 }
 
+// ---------------- Right-click (or long-press) on the chart -> set an alert at that price
+const tick = p => Math.round(p * 20) / 20;  // NSE tick size 0.05
+function attachMenu(box){
+  const priceAt = (x, y) => { const r = box.getBoundingClientRect(); const p = cur && cur.main ? cur.main.coordinateToPrice(y - r.top) : null;
+    return p != null && isFinite(p) && p > 0 ? tick(p) : null; };
+  box.addEventListener("contextmenu", e => { e.preventDefault(); const p = priceAt(e.clientX, e.clientY); if (p) openMenu(e.clientX, e.clientY, p); });
+  let timer = null, sx = 0, sy = 0;
+  box.addEventListener("touchstart", e => { const t = e.touches[0]; sx = t.clientX; sy = t.clientY;
+    timer = setTimeout(() => { const p = priceAt(sx, sy); if (p) openMenu(sx, sy, p); }, 550); }, {passive: true});
+  box.addEventListener("touchmove", e => { const t = e.touches[0]; if (Math.hypot(t.clientX - sx, t.clientY - sy) > 10) clearTimeout(timer); }, {passive: true});
+  box.addEventListener("touchend", () => clearTimeout(timer));
+}
+function openMenu(x, y, price){
+  const m = document.getElementById("ctx"), c = num(cur.r.last_close), up = !c || price >= c;
+  const item = (op, label) => `<button role="menuitem" data-alert-op="${op}" data-alert-price="${price}">🔔 ${label} ₹${fmtN(price)}</button>`;
+  m.innerHTML = `<div class="hd">${esc(cur.r.symbol)} · ₹${fmtN(price)}${c ? " · last close ₹" + fmtN(c) : ""}</div>` +
+    (up ? item("above", "Alert when price goes above") + item("below", "Alert when price falls below")
+        : item("below", "Alert when price falls below") + item("above", "Alert when price goes above")) +
+    `<button role="menuitem" data-alert-custom="${price}">✏️ Alert at a different price…</button>`;
+  m.hidden = false;
+  const w = m.offsetWidth, h = m.offsetHeight;
+  m.style.left = Math.max(8, Math.min(x, innerWidth - w - 8)) + "px";
+  m.style.top = Math.max(8, Math.min(y, innerHeight - h - 8)) + "px";
+  m.querySelector("button").focus();
+}
+function closeMenu(){ document.getElementById("ctx").hidden = true; }
+let toastTimer = null;
+function showToast(html){
+  const t = document.getElementById("toast"); t.innerHTML = html; t.hidden = false;
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.hidden = true, 9000);
+}
+function alertFromMenu(op, price){
+  const cmd = `/alert ${cur.r.symbol} ${op} ${price}`;
+  const tg = AL.bot ? ` <a href="https://t.me/${esc(AL.bot)}" target="_blank" rel="noopener">Open Telegram ↗</a>` : "";
+  const ok = () => showToast(`✅ Copied <code>${esc(cmd)}</code> — paste it in your Telegram bot and send.${tg}`);
+  const fail = () => showToast(`Send this to your Telegram bot: <code style="user-select:all">${esc(cmd)}</code>${tg}`);
+  try { navigator.clipboard.writeText(cmd).then(ok, fail); } catch (e) { fail(); }
+}
+
 function fundHTML(f){
   if (!f) return `<div class="empty">Screener numbers appear after the next robot run (7 AM).</div>`;
   const pc = v => v == null ? "—" : fmtN(v, 1) + "%";
@@ -486,6 +541,10 @@ function fundHTML(f){
 document.addEventListener("click", e => {
   const o = e.target.closest("[data-open]"); if (o) { openPanel(o.dataset.open, o.dataset.tab); return; }
   const pt = e.target.closest("[data-p]"); if (pt && cur) { curTab = pt.dataset.p; drawPanel(); return; }
+  const ai = e.target.closest("[data-alert-op]"); if (ai) { closeMenu(); alertFromMenu(ai.dataset.alertOp, +ai.dataset.alertPrice); return; }
+  const ac = e.target.closest("[data-alert-custom]"); if (ac) { closeMenu(); const pr = ac.dataset.alertCustom; curTab = "alert"; drawPanel();
+    const inp = document.getElementById("a-price"); inp.value = pr; inp.dispatchEvent(new Event("input")); inp.focus(); return; }
+  if (!e.target.closest("#ctx")) closeMenu();
   const cp = e.target.closest("[data-copy]"); if (cp) { const t = document.getElementById(cp.dataset.copy).textContent;
     const done = () => { cp.textContent = "Copied"; setTimeout(() => cp.textContent = "Copy", 1500); };
     try { navigator.clipboard.writeText(t).then(done, () => { getSelection().selectAllChildren(document.getElementById(cp.dataset.copy)); }); }
@@ -499,7 +558,8 @@ document.addEventListener("click", e => {
 });
 document.getElementById("p-close").addEventListener("click", closePanel);
 document.getElementById("scrim").addEventListener("click", closePanel);
-document.addEventListener("keydown", e => { if (e.key === "Escape" && cur) closePanel(); });
+document.addEventListener("keydown", e => { if (e.key !== "Escape") return; if (!document.getElementById("ctx").hidden) { closeMenu(); return; } if (cur) closePanel(); });
+document.addEventListener("scroll", closeMenu, true);
 
 function show(v){
   if (!["sp", "dt", "today", "history", "alerts"].includes(v)) v = "sp";
