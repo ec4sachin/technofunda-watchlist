@@ -156,6 +156,11 @@ def parse_company_page(html):
         m["opm_latest_qtr"] = q_opm[-1]
     if q_eps and len(q_eps) >= 2:
         m["eps_latest_qtr"], m["eps_prev_qtr"] = q_eps[-1], q_eps[-2]
+    if q_head and q_sales and len(q_sales) == len(q_head):
+        n = min(8, len(q_head))
+        cut = lambda r: list(r[-n:]) if r and len(r) == len(q_head) else []  # noqa: E731
+        m["_quarters"] = {"t": q_head[-n:], "sales": cut(q_sales), "profit": cut(q_profit),
+                          "opm": cut(q_opm), "eps": cut(q_eps)}
 
     # Annual P&L
     pl_head, pl = _table(soup, "profit-loss")
@@ -228,6 +233,25 @@ def parse_company_page(html):
             m["shareholders_latest"], m["shareholders_prev"] = holders[-1], holders[-2]
 
     return {k: v for k, v in m.items() if v is not None}
+
+
+SNAPSHOT_KEYS = ("market_cap", "price", "high_52w", "low_52w", "pe", "book_value", "dividend_yield",
+                 "roce", "roe", "roe_3y", "sales_growth_ttm", "sales_growth_3y", "sales_growth_5y",
+                 "profit_growth_ttm", "profit_growth_3y", "profit_growth_5y", "sales_growth_qtr_yoy",
+                 "profit_growth_qtr_yoy", "opm_latest_qtr", "opm_last_year", "net_profit_ttm",
+                 "debt_to_equity", "interest_coverage", "cfo_to_profit_5y", "debtor_days",
+                 "working_capital_days", "promoter_holding", "promoter_change_1y", "fii_dii_latest",
+                 "shareholders_latest", "result_period_months")
+
+
+def snapshot(m, today=""):
+    """The Screener numbers shown on the dashboard's Fundamentals tab."""
+    snap = {k: m[k] for k in SNAPSHOT_KEYS if m.get(k) is not None}
+    if m.get("_quarters"):
+        snap["quarters"] = m["_quarters"]
+    snap["basis"] = "Consolidated" if "consolidated" in m.get("_path", "") else "Standalone"
+    snap["as_of"] = today
+    return snap
 
 
 def _get(s, url):

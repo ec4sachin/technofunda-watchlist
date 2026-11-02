@@ -48,6 +48,17 @@ def save_json(name, obj):
         json.dump(obj, f, indent=1, ensure_ascii=False)
 
 
+def load_json(name, default):
+    p = _path(name)
+    if os.path.exists(p):
+        try:
+            with open(p, encoding="utf-8") as f:
+                return json.load(f)
+        except ValueError:
+            pass
+    return default
+
+
 def load_history(limit=300):
     p = _path("history.csv")
     if not os.path.exists(p):

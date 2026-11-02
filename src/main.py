@@ -49,7 +49,7 @@ def detail_json(items):
 
 
 # ----------------------------------------------------------------- Steps 1-4
-def daily(sp, dt, settings, rules_cfg, state, today, report, history):
+def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, charts):
     need = float(rules_cfg.get("new_stock_pass", 7))
     full = rules_cfg.get("full_marks", 11)
 
@@ -77,6 +77,7 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history):
             report["unchecked"].append((code, s["name"], "Screener page not found"))
             continue
         got, out_of, items = fx.score(m, rules_cfg)
+        snaps[code] = fx.snapshot(m, today)
         mk = f"{fx.on_full_scale(got, out_of, rules_cfg):g}/{full:g}"
         if fx.passes(got, out_of, need, rules_cfg):
             e = entry(code, s["name"] or m.get("_name", ""), ", ".join(s["sources"]), today)
@@ -94,12 +95,13 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history):
     # last marks had 2+ checks without data (re-read, in case the other Screener page is complete)
     for list_name, items in (("SP", sp), ("DT", dt)):
         for sym, row in items.items():
-            if row.get("last_fund_check") and missing_count(row) < 2:
+            if row.get("last_fund_check") and missing_count(row) < 2 and sym in snaps:
                 continue
             m = fx.fetch_metrics(sym, row.get("consolidated", "yes") != "no")
             if not m:
                 continue
             got, out_of, marks = fx.score(m, rules_cfg)
+            snaps[sym] = fx.snapshot(m, today)
             was = row.get("fund_result", "")
             row.update(last_fund_check=today, fund_result=f"{fx.on_full_scale(got, out_of, rules_cfg):g}/{full:g}",
                        marks_detail=detail_json(marks), name=row["name"] or m.get("_name", ""),
@@ -135,7 +137,9 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history):
         if not res:
             report["no_price"].append((sym, sp[sym]["name"]))
             continue
-        close, ema, _ = res
+        close, ema = res[0], res[1]
+        if len(res) > 3 and res[3]:
+            charts[sym] = res[3]
         sp[sym].update(last_close=close, ema200=ema if ema is not None else "")
         if ema is None:
             report["new_listing"].append((sym, sp[sym]["name"], f"close {close:g}"))
@@ -153,7 +157,9 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history):
         if not res:
             report["no_price"].append((sym, dt[sym]["name"]))
             continue
-        close, ema, _ = res
+        close, ema = res[0], res[1]
+        if len(res) > 3 and res[3]:
+            charts[sym] = res[3]
         dt[sym].update(last_close=close, ema200=ema if ema is not None else "")
         if ema is None:
             report["new_listing"].append((sym, dt[sym]["name"], f"close {close:g}"))
@@ -168,7 +174,7 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history):
 
 
 # ----------------------------------------------------------------- Step 5
-def monthly(sp, dt, rules_cfg, today, report, history):
+def monthly(sp, dt, rules_cfg, today, report, history, snaps):
     need = float(rules_cfg.get("monthly_pass", 7))
     full = rules_cfg.get("full_marks", 11)
     drop_missing = str(rules_cfg.get("page_missing_monthly", "keep")).lower() == "remove"
@@ -186,6 +192,7 @@ def monthly(sp, dt, rules_cfg, today, report, history):
             if not row["name"] and m.get("_name"):
                 row["name"] = m["_name"]
             got, out_of, marks = fx.score(m, rules_cfg)
+            snaps[sym] = fx.snapshot(m, today)
             mk = f"{fx.on_full_scale(got, out_of, rules_cfg):g}/{full:g}"
             row.update(last_fund_check=today, fund_result=mk, marks_detail=detail_json(marks),
                        consolidated="yes" if "consolidated" in m.get("_path", "") else "no",
@@ -254,20 +261,25 @@ def main():
     today = now.strftime("%Y-%m-%d")
     sp, dt = storage.load_list("SP"), storage.load_list("DT")
     state, history = storage.load_state(), []
+    snaps = storage.load_json("fundamentals.json", {})
+    charts = {}
     report = {k: [] for k in ("added", "rejected", "to_dt", "to_sp", "removed", "unchecked", "no_price",
                               "warnings", "first_marked", "new_listing")}
     report["monthly_pass"] = 0
     report["send_full_list"] = mode == "list"
 
     if mode in ("auto", "daily"):
-        daily(sp, dt, settings, rules_cfg, state, today, report, history)
+        daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, charts)
     is_review_day = now.day == int(settings.get("monthly_review_day", 1)) and state.get("last_monthly") != today
     if mode == "monthly" or (mode == "auto" and is_review_day):
-        monthly(sp, dt, rules_cfg, today, report, history)
+        monthly(sp, dt, rules_cfg, today, report, history, snaps)
         state["last_monthly"] = today
 
     storage.save_list("SP", sp)
     storage.save_list("DT", dt)
+    listed = set(sp) | set(dt)
+    snaps = {k: v for k, v in snaps.items() if k in listed}
+    storage.save_json("fundamentals.json", snaps)
     storage.log(history)
     state["last_run"] = now.isoformat(timespec="minutes")
     storage.save_state(state)
@@ -277,7 +289,7 @@ def main():
     summary.update(mode=mode, monthly_done=bool(report.get("monthly_done")),
                    run_at=now.strftime("%d %b %Y, %I:%M %p IST"))
     storage.save_json("last_run.json", summary)
-    web.build(sp, dt, summary, storage.load_history(), rules_cfg)
+    web.build(sp, dt, summary, storage.load_history(), rules_cfg, snaps=snaps, charts=charts or None)
 
     msg = build_message(report, sp, dt, now.strftime("%d %b %Y"), str(settings.get("dashboard_url") or "").strip())
     tg.send(os.getenv("TELEGRAM_BOT_TOKEN"), os.getenv("TELEGRAM_CHAT_ID"), msg)

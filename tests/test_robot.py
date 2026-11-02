@@ -29,7 +29,7 @@ def run(day, mode, metrics_by_code, price_by_ticker, email_stocks):
     emails.fetch_alert_stocks = lambda *a, **k: (email_stocks, ["<id>"], {"52W High": len(email_stocks)})
     fx.fetch_metrics = lambda code, *a, **k: metrics_by_code.get(code, GOOD)
     prices.close_and_ema = lambda tickers, period=200: {t: (None if t.endswith(".BO") else price_by_ticker.get(t, (110, 100, "01 Nov 2026"))) for t in tickers}
-    prices.screener_close_and_ema = lambda cid, period=200, **k: ((55.0, 60.0, "31 Oct 2026") if cid == "999"
+    prices.screener_close_and_ema = lambda cid, period=200, **k: ((55.0, 60.0, "31 Oct 2026", {"t": ["2026-10-30", "2026-10-31"], "c": [56, 55], "e200": [60, 60], "e50": [57, 56]}) if cid == "999"
                                                                    else (77.0, None, "31 Oct 2026") if cid == "888" else None)
     sent = []
     tg.send = lambda token, chat, text: sent.append(text)
@@ -100,13 +100,15 @@ def test_page_choice_and_screener_prices():
                           {"metric": "DMA50", "values": []}]}
     # Old company: 730 days comes back weekly, 500 days comes back daily -> daily used
     sess = FakeSession({base + "730": FakeResp(200, payload=weekly), base + "500": FakeResp(200, payload=daily)})
-    close, ema, date = prices.screener_close_and_ema("1285561", 200, session=sess, pause=0)
+    close, ema, date, hist = prices.screener_close_and_ema("1285561", 200, session=sess, pause=0)
+    assert len(hist["t"]) == 250 and len(hist["e200"]) == 250 and hist["c"][-1] == 299.5
     assert close == 299.5 and ema is not None and ema < close and date == "30 Oct 2026", (close, ema, date)
     assert len(sess.calls) == 2
     # New listing: only 120 trading days -> price shown, EMA not possible
     short = {"datasets": [{"metric": "Price", "values": vals[-120:], "meta": {}}]}
     sess = FakeSession({base + "730": FakeResp(200, payload=short)})
-    assert prices.screener_close_and_ema("1285561", 200, session=sess, pause=0) == (299.5, None, "30 Oct 2026")
+    res = prices.screener_close_and_ema("1285561", 200, session=sess, pause=0)
+    assert res[:3] == (299.5, None, "30 Oct 2026") and res[3]["e200"] == [] and len(res[3]["e50"]) == 120
     print("Page choice + Screener price fallback OK:", close, ema, date)
 
 
@@ -132,9 +134,18 @@ def test():
     assert "MEGAFLEX" in sp and "MIDCO" in sp and "544442" not in sp and "LOWCO" not in sp, sp.keys()
     assert "RATNAVEER" in dt and "RATNAVEER" not in sp
     assert "SAHANA" in sp
+    import json as _j
     # BSE stock: no Yahoo price -> Screener chart price used (55 < EMA 60) -> moved to DT
     assert "513472" in dt and dt["513472"]["last_close"] == "55.0" and dt["513472"]["screener_id"] == "999", dt.get("513472")
     print(msg, "\n" + "=" * 60)
+
+    # Dashboard data: Screener snapshot saved per stock, chart history written to charts.json
+    snaps = storage.load_json("fundamentals.json", {})
+    assert "513472" in snaps and snaps["513472"]["roce"] == 41.3 and snaps["513472"]["quarters"]["t"][-1] == "Sep 2026"
+    charts = _j.load(open(os.path.join(tmp, "docs", "charts.json")))
+    assert charts["513472"]["c"] == [56, 55]
+    page = open(web.OUT, encoding="utf-8").read()
+    assert '"fund": {' in page and "Screener numbers" in page
 
     # New listing: price from Screener, no 200 EMA yet -> stays in SP, reported as new listing
     assert "544999" in sp and sp["544999"]["last_close"] == "77.0" and sp["544999"]["ema200"] == ""

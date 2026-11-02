@@ -36,6 +36,7 @@ FRAGMENT = r"""<title>TechnoFunda Watchlist</title>
   --up:#4FC48D; --up-soft:#15301F; --down:#F1786C; --down-soft:#3A1A17; --warn:#E5B456; --warn-soft:#352813;
   color-scheme:dark}
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--f-body);margin:0}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
 .wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
@@ -62,6 +63,8 @@ input,select{font:15px var(--f-body);color:var(--ink);background:var(--surface);
 .row{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1.1fr) auto;gap:10px 18px;align-items:center}
 .row.dt{border-left:4px solid var(--down)}
 .nm{font-weight:600;line-height:1.3}
+.linkish{appearance:none;border:0;background:none;padding:0;color:var(--ink);font:inherit;font-weight:600;text-align:left;cursor:pointer}
+.linkish:hover{color:var(--accent)}
 .meta{color:var(--muted);font-size:12.5px;margin-top:2px}
 .sym{font-family:var(--f-mono);font-size:12.5px;color:var(--ink)}
 .chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
@@ -113,6 +116,38 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
   .row .pricecol{text-align:right}
 }
 @media (prefers-reduced-motion:no-preference){.bar i{transition:width .4s ease}}
+/* Stock panel: slides in from the right on desktop, full screen on phones */
+.scrim{position:fixed;inset:0;z-index:20;background:rgba(10,14,20,.45)}
+.panel{position:fixed;z-index:21;top:0;right:0;bottom:0;width:min(760px,100%);background:var(--bg);display:flex;flex-direction:column;
+  box-shadow:-12px 0 32px rgba(0,0,0,.18);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.ph{background:var(--surface);border-bottom:1px solid var(--line);padding:14px max(16px,env(safe-area-inset-right,0px)) 0 16px}
+.ph-top{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}
+.ph h3{font:700 19px/1.2 var(--f-display);margin:0}
+.ph .meta{margin-top:4px}
+.x{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;width:36px;height:36px;font-size:18px;cursor:pointer;flex:none}
+.ph-stats{display:flex;flex-wrap:wrap;gap:6px 16px;margin:10px 0 4px;font-size:13px;color:var(--muted)}
+.ph-stats b{color:var(--ink);font:600 14px var(--f-mono)}
+.ptabs{display:flex;gap:2px;margin-top:6px}
+.pb{flex:1;overflow-y:auto;padding:16px max(16px,env(safe-area-inset-right,0px)) 24px 16px}
+.ranges{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
+.rg{appearance:none;font:600 12.5px var(--f-body);padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer}
+.rg[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12.5px;color:var(--muted);margin-left:auto}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
+.chartbox{height:min(380px,52vh);background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.kgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.kv{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.kv .k{font-size:11.5px;color:var(--muted)}
+.kv .v{font:600 15px var(--f-mono);font-variant-numeric:tabular-nums}
+.grp{font:700 12px var(--f-display);text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:16px 0 6px}
+.grp:first-child{margin-top:0}
+.qt table{min-width:520px}
+.qt td,.qt th{text-align:right;font-family:var(--f-mono);font-size:12.5px;white-space:nowrap}
+.qt td:first-child,.qt th:first-child{text-align:left;font-family:var(--f-body)}
+.plinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.src{color:var(--muted);font-size:12px;margin-top:10px}
+@media (max-width:720px){.panel{width:100%;box-shadow:none}}
+
 </style>
 
 <header><div class="wrap">
@@ -144,6 +179,21 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
   <p class="note" id="note"></p>
 </main>
 
+<div class="scrim" id="scrim" hidden></div>
+<aside class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="p-name" hidden>
+  <div class="ph">
+    <div class="ph-top"><div style="min-width:0"><h3 id="p-name"></h3><div class="meta" id="p-meta"></div></div>
+      <button class="x" id="p-close" aria-label="Close">✕</button></div>
+    <div class="ph-stats" id="p-stats"></div>
+    <nav class="ptabs" role="tablist" aria-label="Stock details">
+      <button class="tab" role="tab" data-p="chart">Chart</button>
+      <button class="tab" role="tab" data-p="fund">Screener numbers</button>
+      <button class="tab" role="tab" data-p="marks">Marks</button>
+    </nav>
+  </div>
+  <div class="pb" id="p-body"></div>
+</aside>
+
 <script>
 const D = __DATA__;
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -156,20 +206,17 @@ function emaGap(r){ const c = num(r.last_close), e = num(r.ema200); return (c &&
 
 function stockRow(r, list){
   const mk = marksOf(r), gap = emaGap(r), c = num(r.last_close);
-  let checks = []; try { checks = JSON.parse(r.marks_detail || "[]"); } catch (e) {}
   const pct = mk == null ? 0 : Math.min(100, mk / FULL * 100);
   const srcs = String(r.source||"").split(",").map(s => s.trim()).filter(Boolean);
   return `<article class="row ${list === "DT" ? "dt" : ""}">
-    <div><div class="nm">${esc(r.name || r.symbol)}</div>
+    <div><button class="nm linkish" data-open="${esc(r.symbol)}" data-tab="chart">${esc(r.name || r.symbol)}</button>
       <div class="meta"><span class="sym">${esc(r.symbol)}</span> · added ${esc(r.added_on || "—")}</div>
       ${srcs.length ? `<div class="chips">${srcs.map(s => `<span class="chip">${esc(s)}</span>`).join("")}</div>` : ""}</div>
     <div class="pricecol"><div class="px">${c ? fmtINR(c) : "—"}</div>
       <div class="ema ${gap == null ? "mut" : gap >= 0 ? "up" : "down"}">${gap == null ? (c ? "New listing: under 200 days" : "200 EMA n/a") : (gap >= 0 ? "▲ " : "▼ ") + Math.abs(gap).toFixed(1) + "% " + (gap >= 0 ? "above" : "below") + " 200 EMA"}</div></div>
     <div class="mk"><div class="top"><span>Marks${r.last_fund_check ? " · " + esc(r.last_fund_check) : ""}</span><b>${mk == null ? "not marked yet" : mk + " / " + FULL}</b></div>
       <div class="bar ${mk != null && mk < PASS ? "low" : ""}" role="img" aria-label="${mk == null ? "No marks yet" : mk + " of " + FULL + " marks, pass mark " + PASS}"><i style="width:${pct}%"></i><u style="left:${PASS / FULL * 100}%"></u></div></div>
-    <div class="acts"><a class="btn pri" href="${esc(r.chart)}" target="_blank" rel="noopener">Chart</a><a class="btn" href="${esc(r.screener)}" target="_blank" rel="noopener">Screener</a></div>
-    ${checks.length ? `<details><summary>Marks breakdown</summary><div class="checks">${checks.map(([l, g, o, d]) =>
-      `<div class="ck"><span class="ic ${g > 0 ? "up" : "down"}">${g > 0 ? "✓" : "✕"}</span><div><div>${esc(l)} <span class="num mut">${g}/${o}</span></div>${d ? `<div class="d">${esc(d)}</div>` : ""}</div></div>`).join("")}</div></details>` : ""}
+    <div class="acts"><button class="btn pri" data-open="${esc(r.symbol)}" data-tab="chart">Chart</button><button class="btn" data-open="${esc(r.symbol)}" data-tab="fund">Screener</button></div>
   </article>`;
 }
 
@@ -198,6 +245,7 @@ function drawToday(){
     evBlock("Back to SP", "Above EMA", "p-sp", r.to_sp),
     evBlock("Removed in monthly review", "Removed", "p-rem", r.removed),
     evBlock("Marks updated (added by hand, or data was missing before)", "Marked", "p-sp", r.first_marked),
+    evBlock("New listings (under 200 trading days, 200 EMA not possible yet)", "New listing", "p-sp", r.new_listing),
     evBlock("Checked but below pass marks", "Not added", "p-warn", r.rejected),
     evBlock("Needs attention", "Check", "p-warn", warn),
   ].join("");
@@ -208,6 +256,139 @@ function drawHistory(){
     `<tr><td class="num">${esc(h.date)}</td><td><b>${esc(h.name || h.symbol)}</b><br><span class="sym mut">${esc(h.symbol)}</span></td><td>${esc(h.action)}</td><td class="r">${esc(h.reason)}</td></tr>`).join("")
     : `<tr><td colspan="4" class="mut">No changes recorded yet.</td></tr>`;
 }
+
+// ---------------- Stock panel (Chart · Screener numbers · Marks), all inside this page
+const LW_URL = "https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js";
+let lwLoad = null, chartsLoad = null, chartObj = null, cur = null, curTab = "chart", curRange = 260;
+function loadLW(){
+  if (window.LightweightCharts) return Promise.resolve();
+  if (!lwLoad) lwLoad = new Promise((ok, fail) => { const sc = document.createElement("script"); sc.src = LW_URL; sc.onload = ok; sc.onerror = fail; document.head.appendChild(sc); });
+  return lwLoad;
+}
+function loadCharts(){
+  if (!chartsLoad) chartsLoad = D.charts ? Promise.resolve(D.charts)
+    : fetch("charts.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : {}).catch(() => ({}));
+  return chartsLoad;
+}
+const findRow = sym => { for (const k of ["SP", "DT"]) { const r = D[k].find(x => x.symbol === sym); if (r) return [r, k]; } return [null, null]; };
+const tok = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const alpha = (hex, a) => /^#[0-9a-f]{6}$/i.test(hex) ? hex + Math.round(a * 255).toString(16).padStart(2, "0") : hex;
+const fmtN = (v, d = 2) => v == null || !isFinite(v) ? "—" : Number(v).toLocaleString("en-IN", {maximumFractionDigits: d});
+
+function openPanel(sym, tab){
+  const [r, list] = findRow(sym); if (!r) return;
+  cur = {r, list}; curTab = tab || "chart";
+  const gap = emaGap(r), c = num(r.last_close), mk = marksOf(r);
+  document.getElementById("p-name").textContent = r.name || r.symbol;
+  document.getElementById("p-meta").innerHTML = `<span class="sym">${esc(r.symbol)}</span> · in <b>${list}</b> · added ${esc(r.added_on || "—")}`;
+  document.getElementById("p-stats").innerHTML =
+    `<span>Close <b>${c ? fmtINR(c) : "—"}</b></span>` +
+    `<span>200 EMA <b>${num(r.ema200) ? fmtINR(num(r.ema200)) : "—"}</b></span>` +
+    `<span class="${gap == null ? "" : gap >= 0 ? "up" : "down"}">${gap == null ? (c ? "New listing" : "") : (gap >= 0 ? "▲ " : "▼ ") + Math.abs(gap).toFixed(1) + "% vs EMA"}</span>` +
+    `<span>Marks <b>${mk == null ? "—" : mk + " / " + FULL}</b></span>`;
+  document.getElementById("scrim").hidden = false;
+  document.getElementById("panel").hidden = false;
+  document.body.style.overflow = "hidden";
+  drawPanel();
+  document.getElementById("p-close").focus();
+}
+function closePanel(){
+  if (chartObj) { chartObj.remove(); chartObj = null; }
+  document.getElementById("panel").hidden = true;
+  document.getElementById("scrim").hidden = true;
+  document.body.style.overflow = "";
+  cur = null;
+}
+function drawPanel(){
+  document.querySelectorAll("[data-p]").forEach(t => t.setAttribute("aria-selected", t.dataset.p === curTab));
+  if (chartObj) { chartObj.remove(); chartObj = null; }
+  const body = document.getElementById("p-body"), r = cur.r;
+  const links = `<div class="plinks"><a class="btn" href="${esc(r.chart)}" target="_blank" rel="noopener">Open in TradingView ↗</a><a class="btn" href="${esc(r.screener)}" target="_blank" rel="noopener">Open full Screener page ↗</a></div>`;
+  if (curTab === "chart") {
+    body.innerHTML = `<div class="ranges">${[["3M", 63], ["6M", 126], ["1Y", 260]].map(([l, n]) =>
+        `<button class="rg" data-range="${n}" aria-pressed="${n === curRange}">${l}</button>`).join("")}
+      <div class="legend"><span><i style="background:var(--accent)"></i>Close</span><span><i style="background:var(--warn)"></i>200 EMA</span><span><i style="background:var(--muted)"></i>50 EMA</span></div></div>
+      <div class="chartbox" id="chartbox"><div class="empty" style="border:0">Loading chart…</div></div>
+      <div class="src" id="chartsrc"></div>` + links;
+    drawChart();
+  } else if (curTab === "fund") {
+    body.innerHTML = fundHTML(D.fund[r.symbol]) + links;
+  } else {
+    let checks = []; try { checks = JSON.parse(r.marks_detail || "[]"); } catch (e) {}
+    body.innerHTML = (checks.length ? `<div class="checks">${checks.map(([l, g, o, d]) =>
+      `<div class="ck"><span class="ic ${g > 0 ? "up" : "down"}">${g > 0 ? "✓" : "✕"}</span><div><div>${esc(l)} <span class="num mut">${g}/${o}</span></div>${d ? `<div class="d">${esc(d)}</div>` : ""}</div></div>`).join("")}</div>
+      <p class="src">Marks ${esc(r.fund_result || "")} · checked ${esc(r.last_fund_check || "—")} · pass mark ${PASS} / ${FULL}</p>`
+      : `<div class="empty">Not marked yet. Marks appear after the next robot run.</div>`) + links;
+  }
+}
+async function drawChart(){
+  const box = document.getElementById("chartbox"), r = cur.r, sym = r.symbol;
+  let h;
+  try { const all = await loadCharts(); h = all[sym]; await loadLW(); }
+  catch (e) { box.innerHTML = `<div class="empty" style="border:0">The chart library could not load. Check your internet connection, or use Open in TradingView below.</div>`; return; }
+  if (!cur || cur.r.symbol !== sym || curTab !== "chart") return;
+  if (!h || !h.t || !h.t.length) { box.innerHTML = `<div class="empty" style="border:0">Chart appears after the next robot run (7 AM).</div>`; return; }
+  box.innerHTML = "";
+  const ink = tok("--muted"), line = tok("--line");
+  chartObj = LightweightCharts.createChart(box, {
+    autoSize: true,
+    layout: {background: {type: "solid", color: tok("--surface")}, textColor: ink, fontFamily: tok("--f-body"), fontSize: 11},
+    grid: {vertLines: {color: alpha(line, .6)}, horzLines: {color: alpha(line, .6)}},
+    rightPriceScale: {borderColor: line}, timeScale: {borderColor: line},
+    localization: {priceFormatter: p => "₹" + Number(p).toLocaleString("en-IN", {maximumFractionDigits: 2})},
+    handleScroll: {vertTouchDrag: false},
+  });
+  const pts = arr => h.t.map((t, i) => ({time: t, value: arr[i]})).filter(p => p.value != null);
+  const area = chartObj.addAreaSeries({lineColor: tok("--accent"), topColor: alpha(tok("--accent"), .28), bottomColor: alpha(tok("--accent"), 0), lineWidth: 2, priceLineVisible: false});
+  area.setData(pts(h.c));
+  if (h.e200 && h.e200.length) chartObj.addLineSeries({color: tok("--warn"), lineWidth: 2, priceLineVisible: false, lastValueVisible: true}).setData(pts(h.e200));
+  if (h.e50 && h.e50.length) chartObj.addLineSeries({color: ink, lineWidth: 1, lineStyle: 2, priceLineVisible: false, lastValueVisible: false}).setData(pts(h.e50));
+  setRange();
+  document.getElementById("chartsrc").textContent = `Daily closing prices, ${h.t[0]} to ${h.t[h.t.length - 1]}` +
+    (h.e200 && h.e200.length ? "" : " · 200 EMA appears once the stock has 200 trading days");
+}
+function setRange(){
+  if (!chartObj || !cur) return;
+  chartsLoad.then(c => { const h = c[cur.r.symbol]; if (!h || !chartObj) return;
+    const n = h.t.length, from = h.t[Math.max(0, n - curRange)];
+    chartObj.timeScale().setVisibleRange({from, to: h.t[n - 1]}); });
+}
+function fundHTML(f){
+  if (!f) return `<div class="empty">Screener numbers appear after the next robot run (7 AM).</div>`;
+  const pc = v => v == null ? "—" : fmtN(v, 1) + "%";
+  const kv = (k, v) => `<div class="kv"><div class="k">${k}</div><div class="v">${v}</div></div>`;
+  const grp = (t, items) => `<div class="grp">${t}</div><div class="kgrid">${items.join("")}</div>`;
+  const half = f.result_period_months === 6;
+  let html =
+    grp("Price & valuation", [kv("Market cap", f.market_cap != null ? "₹" + fmtN(f.market_cap, 0) + " Cr" : "—"),
+      kv("Current price", f.price != null ? fmtINR(f.price) : "—"), kv("52W high / low", f.high_52w != null ? fmtN(f.high_52w, 0) + " / " + fmtN(f.low_52w, 0) : "—"),
+      kv("Stock P/E", fmtN(f.pe, 1)), kv("Book value", f.book_value != null ? fmtINR(f.book_value) : "—"), kv("Dividend yield", pc(f.dividend_yield))]) +
+    grp("Returns", [kv("ROCE", pc(f.roce)), kv("ROE", pc(f.roe)), kv("ROE 3 years", pc(f.roe_3y))]) +
+    grp("Growth", [kv("Sales TTM", pc(f.sales_growth_ttm)), kv("Sales 3 years", pc(f.sales_growth_3y)), kv("Sales 5 years", pc(f.sales_growth_5y)),
+      kv("Profit TTM", pc(f.profit_growth_ttm)), kv("Profit 3 years", pc(f.profit_growth_3y)), kv("Profit 5 years", pc(f.profit_growth_5y)),
+      kv(half ? "Sales, latest half vs LY" : "Sales, latest qtr vs LY", pc(f.sales_growth_qtr_yoy)), kv(half ? "Profit, latest half vs LY" : "Profit, latest qtr vs LY", pc(f.profit_growth_qtr_yoy))]) +
+    grp("Health", [kv("Debt / Equity", fmtN(f.debt_to_equity)), kv("Interest cover", f.interest_coverage == null ? "—" : f.interest_coverage >= 999 ? "No interest" : fmtN(f.interest_coverage, 1) + "×"),
+      kv("CFO / Profit 5Y", fmtN(f.cfo_to_profit_5y)), kv("Debtor days", fmtN(f.debtor_days, 0)), kv("Working cap. days", fmtN(f.working_capital_days, 0)),
+      kv("OPM latest " + (half ? "half" : "qtr"), pc(f.opm_latest_qtr)), kv("OPM last year", pc(f.opm_last_year)), kv("Net profit TTM", f.net_profit_ttm != null ? "₹" + fmtN(f.net_profit_ttm, 1) + " Cr" : "—")]) +
+    grp("Shareholding", [kv("Promoters", pc(f.promoter_holding)), kv("Promoter change 1Y", f.promoter_change_1y != null ? (f.promoter_change_1y > 0 ? "+" : "") + fmtN(f.promoter_change_1y) + " pts" : "—"),
+      kv("FII + DII", pc(f.fii_dii_latest)), kv("Shareholders", fmtN(f.shareholders_latest, 0))]);
+  const q = f.quarters;
+  if (q && q.t && q.t.length) {
+    const row = (lab, arr, suf = "") => `<tr><td>${lab}</td>${q.t.map((_, i) => `<td>${arr && arr[i] != null ? fmtN(arr[i], 2) + suf : "—"}</td>`).join("")}</tr>`;
+    html += `<div class="grp">${half ? "Half-yearly" : "Quarterly"} results (₹ Cr)</div><div class="tbl qt"><table><thead><tr><th></th>${q.t.map(t => `<th>${esc(t)}</th>`).join("")}</tr></thead><tbody>` +
+      row("Sales", q.sales) + row("Net profit", q.profit) + row("OPM", q.opm, "%") + row("EPS (₹)", q.eps) + `</tbody></table></div>`;
+  }
+  return html + `<p class="src">From Screener.in · ${esc(f.basis || "")} figures · updated ${esc(f.as_of || "—")}</p>`;
+}
+document.addEventListener("click", e => {
+  const o = e.target.closest("[data-open]"); if (o) { openPanel(o.dataset.open, o.dataset.tab); return; }
+  const pt = e.target.closest("[data-p]"); if (pt && cur) { curTab = pt.dataset.p; drawPanel(); return; }
+  const rg = e.target.closest("[data-range]"); if (rg) { curRange = +rg.dataset.range;
+    document.querySelectorAll("[data-range]").forEach(b => b.setAttribute("aria-pressed", b === rg)); setRange(); return; }
+});
+document.getElementById("p-close").addEventListener("click", closePanel);
+document.getElementById("scrim").addEventListener("click", closePanel);
+document.addEventListener("keydown", e => { if (e.key === "Escape" && cur) closePanel(); });
 
 function show(v){
   if (!["sp", "dt", "today", "history"].includes(v)) v = "sp";
@@ -260,12 +441,14 @@ def screener_url(symbol, consolidated="yes"):
     return f"https://www.screener.in/company/{symbol}/" + ("consolidated/" if consolidated != "no" else "")
 
 
-def page_data(sp, dt, run, history, rules_cfg, banner=""):
+def page_data(sp, dt, run, history, rules_cfg, banner="", snaps=None, charts=None):
     def rows(items):
         return [{**items[s], "symbol": s, "chart": chart_url(s),
                  "screener": screener_url(s, items[s].get("consolidated", "yes"))} for s in sorted(items)]
     return {
         "SP": rows(sp), "DT": rows(dt), "run": run or {}, "history": history or [],
+        "fund": {k: v for k, v in (snaps or {}).items() if k in sp or k in dt},
+        "charts": charts,  # None on the live site: the page loads charts.json instead
         "cfg": {"full": rules_cfg.get("full_marks", 11), "pass_new": rules_cfg.get("new_stock_pass", 7),
                 "pass_monthly": rules_cfg.get("monthly_pass", 7), "banner": banner},
     }
@@ -276,10 +459,14 @@ def render_fragment(data):
     return FRAGMENT.replace("__DATA__", blob)
 
 
-def build(sp, dt, run, history, rules_cfg, out=None):
+def build(sp, dt, run, history, rules_cfg, out=None, snaps=None, charts=None):
+    """Write the dashboard page. charts (price history) goes to charts.json next to it, loaded when a chart opens."""
     out = out or OUT
     os.makedirs(os.path.dirname(out), exist_ok=True)
-    page = FULL_PAGE.replace("{fragment}", render_fragment(page_data(sp, dt, run, history, rules_cfg)))
+    page = FULL_PAGE.replace("{fragment}", render_fragment(page_data(sp, dt, run, history, rules_cfg, snaps=snaps)))
     with open(out, "w", encoding="utf-8") as f:
         f.write(page)
-
+    if charts is not None:
+        keep = {k: v for k, v in charts.items() if k in sp or k in dt}
+        with open(os.path.join(os.path.dirname(out), "charts.json"), "w", encoding="utf-8") as f:
+            json.dump(keep, f, separators=(",", ":"))
