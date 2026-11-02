@@ -5,54 +5,42 @@
  "to_sp": [],
  "removed": [],
  "unchecked": [],
- "no_price": [
+ "no_price": [],
+ "warnings": [],
+ "first_marked": [
   [
-   "513472",
-   "Simplex Castings"
+   "ESCONET",
+   "Esconet",
+   "7.3/11"
   ],
   [
-   "513507",
-   "Guj. Containers"
-  ],
-  [
-   "524218",
-   "Resonance Speci."
-  ],
-  [
-   "530741",
-   "Ovobel Foods"
-  ],
-  [
-   "543963",
-   "Shelter Pharma"
-  ],
-  [
-   "544141",
-   "Pune e-Stock Broking"
-  ],
-  [
-   "544442",
-   "Chemkart India"
-  ],
+   "SHANTIGOLD",
+   "Shanti Gold International",
+   "8.3/11 (was 3.7/11)"
+  ]
+ ],
+ "new_listing": [
   [
    "544694",
-   "Accretion Nutraveda"
+   "Accretion Nutraveda",
+   "close 321.05"
   ],
   [
    "ACETEC",
-   "Acetech E-Commerce"
+   "Acetech E-Commerce",
+   "close 136"
   ],
   [
    "RAMBHAJO",
-   "Advit Jewels"
+   "Advit Jewels",
+   "close 330.9"
   ],
   [
    "TEAMTECH",
-   "Teamtech Formwork"
+   "Teamtech Formwork",
+   "close 168.55"
   ]
  ],
- "warnings": [],
- "first_marked": [],
  "per_alert": {
   "TTM Profit > 30%": 0,
   "52W High": 0,
@@ -66,5 +54,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "02 Nov 2026, 03:21 PM IST"
+ "run_at": "02 Nov 2026, 03:29 PM IST"
 }
