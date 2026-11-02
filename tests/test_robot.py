@@ -29,7 +29,8 @@ def run(day, mode, metrics_by_code, price_by_ticker, email_stocks):
     emails.fetch_alert_stocks = lambda *a, **k: (email_stocks, ["<id>"], {"52W High": len(email_stocks)})
     fx.fetch_metrics = lambda code, *a, **k: metrics_by_code.get(code, GOOD)
     prices.close_and_ema = lambda tickers, period=200: {t: (None if t.endswith(".BO") else price_by_ticker.get(t, (110, 100, "01 Nov 2026"))) for t in tickers}
-    prices.screener_close_and_ema = lambda cid, period=200, **k: (55.0, 60.0, "31 Oct 2026") if cid else None
+    prices.screener_close_and_ema = lambda cid, period=200, **k: ((55.0, 60.0, "31 Oct 2026") if cid == "999"
+                                                                   else (77.0, None, "31 Oct 2026") if cid == "888" else None)
     sent = []
     tg.send = lambda token, chat, text: sent.append(text)
     os.environ.update(GMAIL_ADDRESS="x", GMAIL_APP_PASSWORD="y")
@@ -91,14 +92,21 @@ def test_page_choice_and_screener_prices():
     assert fx.completeness(m) == len(fx.SCORE_INPUTS)
 
     import pandas as pd
+    base = "/api/company/1285561/chart/?q=Price-DMA50-DMA200-Volume&days="
     days = pd.bdate_range(end="2026-10-30", periods=400)
     vals = [[d.strftime("%Y-%m-%d"), str(100 + i * 0.5)] for i, d in enumerate(days)]
-    payload = {"datasets": [{"metric": "Price", "label": "Price on BSE", "values": vals, "meta": {}},
-                            {"metric": "DMA50", "values": []}]}
-    sess = FakeSession({"/api/company/1285561/chart/?q=Price-DMA50-DMA200-Volume&days=900": FakeResp(200, payload=payload)})
+    weekly = {"datasets": [{"metric": "Price", "values": vals[::5], "meta": {"is_weekly": True}}]}
+    daily = {"datasets": [{"metric": "Price", "label": "Price on BSE", "values": vals[-250:], "meta": {}},
+                          {"metric": "DMA50", "values": []}]}
+    # Old company: 730 days comes back weekly, 500 days comes back daily -> daily used
+    sess = FakeSession({base + "730": FakeResp(200, payload=weekly), base + "500": FakeResp(200, payload=daily)})
     close, ema, date = prices.screener_close_and_ema("1285561", 200, session=sess, pause=0)
-    assert close == 299.5 and ema < close and date == "30 Oct 2026", (close, ema, date)
-    assert prices.parse_screener_chart({"datasets": [{"metric": "Price", "values": vals, "meta": {"is_weekly": True}}]}) is None
+    assert close == 299.5 and ema is not None and ema < close and date == "30 Oct 2026", (close, ema, date)
+    assert len(sess.calls) == 2
+    # New listing: only 120 trading days -> price shown, EMA not possible
+    short = {"datasets": [{"metric": "Price", "values": vals[-120:], "meta": {}}]}
+    sess = FakeSession({base + "730": FakeResp(200, payload=short)})
+    assert prices.screener_close_and_ema("1285561", 200, session=sess, pause=0) == (299.5, None, "30 Oct 2026")
     print("Page choice + Screener price fallback OK:", close, ema, date)
 
 
@@ -115,10 +123,11 @@ def test():
         "MIDCO": {"code": "MIDCO", "name": "Mid Score Co", "consolidated": True, "sources": ["Weekly Volume Scan"]},
         "LOWCO": {"code": "LOWCO", "name": "Low Score Co", "consolidated": True, "sources": ["Weekly Volume Scan"]},
         "513472": {"code": "513472", "name": "Simplex Castings", "consolidated": False, "sources": ["Weekly Volume Scan"]},
+        "544999": {"code": "544999", "name": "New IPO Co", "consolidated": False, "sources": ["52W High"]},
     }
     # Day 2: Chemkart fails fundamentals, Megaflex passes; SAHANA already in SP.
     # RATNAVEER closes below EMA -> DT
-    msg = run(2, "auto", {"544442": WEAK, "MIDCO": MID, "LOWCO": LOW}, {"RATNAVEER.NS": (480, 520, "01 Nov 2026")}, em)
+    msg = run(2, "auto", {"544442": WEAK, "MIDCO": MID, "LOWCO": LOW, "544999": {**GOOD, "_company_id": "888"}}, {"RATNAVEER.NS": (480, 520, "01 Nov 2026")}, em)
     sp, dt = storage.load_list("SP"), storage.load_list("DT")
     assert "MEGAFLEX" in sp and "MIDCO" in sp and "544442" not in sp and "LOWCO" not in sp, sp.keys()
     assert "RATNAVEER" in dt and "RATNAVEER" not in sp
@@ -127,9 +136,13 @@ def test():
     assert "513472" in dt and dt["513472"]["last_close"] == "55.0" and dt["513472"]["screener_id"] == "999", dt.get("513472")
     print(msg, "\n" + "=" * 60)
 
+    # New listing: price from Screener, no 200 EMA yet -> stays in SP, reported as new listing
+    assert "544999" in sp and sp["544999"]["last_close"] == "77.0" and sp["544999"]["ema200"] == ""
+    assert "New listings" in msg and "New IPO Co" in msg
+
     # A stock whose last marks had 3 checks without data is re-marked automatically the next day
     import json as _j
-    sp["PATELRMART"].update(last_fund_check="2026-11-01",
+    sp["PATELRMART"].update(last_fund_check="2026-11-03",
                             marks_detail=_j.dumps([["a", 0, 1, "n/a"], ["b", 0, 1, "n/a"], ["c", 0, 1, "n/a"]]))
     storage.save_list("SP", sp)
 

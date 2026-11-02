@@ -94,8 +94,6 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history):
     # last marks had 2+ checks without data (re-read, in case the other Screener page is complete)
     for list_name, items in (("SP", sp), ("DT", dt)):
         for sym, row in items.items():
-            if row.get("last_fund_check") == today:
-                continue
             if row.get("last_fund_check") and missing_count(row) < 2:
                 continue
             m = fx.fetch_metrics(sym, row.get("consolidated", "yes") != "no")
@@ -138,7 +136,10 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history):
             report["no_price"].append((sym, sp[sym]["name"]))
             continue
         close, ema, _ = res
-        sp[sym].update(last_close=close, ema200=ema)
+        sp[sym].update(last_close=close, ema200=ema if ema is not None else "")
+        if ema is None:
+            report["new_listing"].append((sym, sp[sym]["name"], f"close {close:g}"))
+            continue
         if close < ema:
             dt[sym] = sp.pop(sym)
             report["to_dt"].append((sym, dt[sym]["name"], f"close {close:g} < EMA {ema:g}"))
@@ -153,7 +154,10 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history):
             report["no_price"].append((sym, dt[sym]["name"]))
             continue
         close, ema, _ = res
-        dt[sym].update(last_close=close, ema200=ema)
+        dt[sym].update(last_close=close, ema200=ema if ema is not None else "")
+        if ema is None:
+            report["new_listing"].append((sym, dt[sym]["name"], f"close {close:g}"))
+            continue
         if settings.get("move_dt_back_to_sp", True) and close > ema and not any(sym == x[0] for x in report["to_dt"]):
             sp[sym] = dt.pop(sym)
             report["to_sp"].append((sym, sp[sym]["name"], f"close {close:g} > EMA {ema:g}"))
@@ -222,6 +226,9 @@ def build_message(r, sp, dt, today_label, dashboard_url=""):
         block("❌ <b>Removed</b> (below monthly pass marks)", r["removed"])
     block("🆕 <b>Marks updated</b> (added by hand, or data was missing before)", r["first_marked"])
     block("⚠️ <b>Could not check</b>", r["unchecked"])
+    if r["new_listing"]:
+        L += ["", "🆕 New listings (under 200 trading days, 200 EMA not possible yet): " +
+              ", ".join(n or s for s, n, _ in r["new_listing"])]
     if r["no_price"]:
         L += ["", "⚠️ No price data (EMA not checked): " + ", ".join(s for s, _ in r["no_price"])]
     if r["rejected"] and len(r["rejected"]) <= 15:
@@ -248,7 +255,7 @@ def main():
     sp, dt = storage.load_list("SP"), storage.load_list("DT")
     state, history = storage.load_state(), []
     report = {k: [] for k in ("added", "rejected", "to_dt", "to_sp", "removed", "unchecked", "no_price",
-                              "warnings", "first_marked")}
+                              "warnings", "first_marked", "new_listing")}
     report["monthly_pass"] = 0
     report["send_full_list"] = mode == "list"
 
@@ -265,7 +272,7 @@ def main():
     state["last_run"] = now.isoformat(timespec="minutes")
     storage.save_state(state)
     summary = {k: report.get(k) for k in ("added", "rejected", "to_dt", "to_sp", "removed", "unchecked",
-                                          "no_price", "warnings", "first_marked", "per_alert", "email_total",
+                                          "no_price", "warnings", "first_marked", "new_listing", "per_alert", "email_total",
                                           "already_listed", "price_date", "monthly_pass")}
     summary.update(mode=mode, monthly_done=bool(report.get("monthly_done")),
                    run_at=now.strftime("%d %b %Y, %I:%M %p IST"))
