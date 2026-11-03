@@ -6,7 +6,7 @@ import os
 DATA = os.path.join(os.path.dirname(__file__), "..", "data")
 FIELDS = ["symbol", "name", "added_on", "source", "last_close", "ema200",
           "last_fund_check", "fund_result", "yahoo_override", "consolidated", "marks_detail",
-          "screener_id", "ema_basis"]
+          "screener_id", "ema_basis", "nse", "bse", "codes_checked"]
 HISTORY_FIELDS = ["date", "symbol", "name", "action", "reason"]
 
 

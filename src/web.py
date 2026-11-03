@@ -147,14 +147,16 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
 /* Stock viewer: opens inside the page (75% of a laptop screen), stock card on top, chart below */
 .scrim{position:fixed;inset:0;z-index:20;background:rgba(10,14,20,.45)}
 main.wide{max-width:max(1080px,80vw)}
-.vnav{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:10px}
-.pn{display:flex;gap:6px;align-items:center}
-.pn .cnt{font:500 13px var(--f-mono);color:var(--muted);min-width:96px;text-align:center}
-.pn .btn{min-width:92px;justify-content:center}
 .pcard{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-top:10px}
-.pcard .ptabs{margin-top:0;padding:0 8px;border-bottom:1px solid var(--line)}
-.vkeys{color:var(--muted);font-size:12px}
-@media (max-width:720px){.vkeys{display:none}.pn .btn{min-width:0}}
+.pbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;padding:0 8px;border-bottom:1px solid var(--line)}
+.pcard .ptabs{margin-top:0;flex:0 1 auto;min-width:0}
+.pn{display:flex;gap:6px;align-items:center;padding:6px 0;margin-left:auto}
+.pn .cnt{font:500 12.5px var(--f-mono);color:var(--muted);min-width:70px;text-align:center;white-space:nowrap}
+.pn .btn{padding:6px 10px;font-size:13px}
+.codes{display:inline-flex;flex-wrap:wrap;gap:4px;vertical-align:middle}
+.xc{font:600 11.5px var(--f-mono);padding:1px 6px;border-radius:5px;border:1px solid var(--line);color:var(--ink);background:var(--bg);white-space:nowrap}
+.xc em{font-style:normal;color:var(--muted);font-weight:500;margin-right:3px}
+@media (max-width:720px){.pn{width:100%;justify-content:space-between;border-top:1px solid var(--line)}.pcard .ptabs{width:100%}}
 .ph{background:var(--surface);border-bottom:1px solid var(--line);padding:14px max(16px,env(safe-area-inset-right,0px)) 0 16px}
 .ph-top{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}
 .ph h3{font:700 19px/1.2 var(--f-display);margin:0}
@@ -219,7 +221,7 @@ main.wide{max-width:max(1080px,80vw)}
   <section class="strip" id="strip" aria-label="Summary"></section>
   <section id="v-list">
     <div class="tools">
-      <input id="q" type="search" placeholder="Search name or symbol" aria-label="Search name or symbol">
+      <input id="q" type="search" placeholder="Search name, NSE or BSE code" aria-label="Search name or symbol">
       <select id="sort" aria-label="Sort by">
         <option value="marks">Highest marks</option>
         <option value="ema">Closest to 200 EMA</option>
@@ -232,13 +234,9 @@ main.wide{max-width:max(1080px,80vw)}
   <section id="v-today" hidden></section>
   <section id="v-alerts" hidden></section>
   <section class="viewer" id="panel" hidden aria-label="Stock chart and details">
-    <div class="vnav">
-      <button class="btn" id="p-close">← Back to <span id="p-back">list</span></button>
-      <span class="vkeys">Tip: ← → keys also work</span>
-      <div class="pn"><button class="btn" id="p-prev" aria-label="Previous stock">◀ Prev</button><span class="cnt" id="p-count" aria-live="polite"></span><button class="btn" id="p-next" aria-label="Next stock">Next ▶</button></div>
-    </div>
     <div class="list" id="p-row"></div>
     <div class="pcard">
+      <div class="pbar">
       <nav class="ptabs" role="tablist" aria-label="Stock details">
         <button class="tab" role="tab" data-p="chart">Chart</button>
         <button class="tab" role="tab" data-p="fund">Screener</button>
@@ -246,6 +244,9 @@ main.wide{max-width:max(1080px,80vw)}
         <button class="tab" role="tab" data-p="alert">🔔 Alert</button>
         <button class="tab" role="tab" data-p="pos">Position</button>
       </nav>
+      <div class="pn"><button class="btn" id="p-close" title="Back to the list (Esc)">← Back to <span id="p-back">list</span></button>
+        <button class="btn" id="p-prev" aria-label="Previous stock" title="Previous stock (← key)">◀ Prev</button><span class="cnt" id="p-count" aria-live="polite"></span><button class="btn" id="p-next" aria-label="Next stock" title="Next stock (→ key)">Next ▶</button></div>
+      </div>
       <div class="pb" id="p-body"></div>
     </div>
   </section>
@@ -267,6 +268,11 @@ const FULL = D.cfg.full, PASS = D.cfg.pass_monthly;
 const fmtINR = n => "₹" + n.toLocaleString("en-IN", {maximumFractionDigits: 2});
 
 function marksOf(r){ const m = String(r.fund_result||"").match(/^([\d.]+)\s*\/\s*([\d.]+)/); return m ? +m[1] : null; }
+// NSE symbol and BSE code (from the Screener page); before the robot reads them, the list symbol is shown
+function codesHTML(r){
+  const nse = r.nse || (/^\d+$/.test(r.symbol) ? "" : r.symbol), bse = r.bse || (/^\d+$/.test(r.symbol) ? r.symbol : "");
+  return `<span class="codes">${nse ? `<span class="xc"><em>NSE</em>${esc(nse)}</span>` : ""}${bse ? `<span class="xc"><em>BSE</em>${esc(bse)}</span>` : ""}</span>`;
+}
 const emaN = r => String(r.ema_basis) === "20" ? 20 : 200;
 function emaGap(r){ const c = num(r.last_close), e = num(r.ema200); return (c && e) ? (c - e) / e * 100 : null; }
 
@@ -276,7 +282,7 @@ function stockRow(r, list){
   const srcs = String(r.source||"").split(",").map(s => s.trim()).filter(Boolean);
   return `<article class="row ${list === "DT" ? "dt" : ""}">
     <div><button class="nm linkish" data-open="${esc(r.symbol)}" data-tab="chart">${esc(r.name || r.symbol)}</button>
-      <div class="meta"><span class="sym">${esc(r.symbol)}</span> · added ${esc(r.added_on || "—")}</div>
+      <div class="meta">${codesHTML(r)} · added ${esc(r.added_on || "—")}</div>
       ${srcs.length ? `<div class="chips">${srcs.map(s => `<span class="chip">${esc(s)}</span>`).join("")}</div>` : ""}</div>
     <div class="pricecol"><div class="px">${c ? fmtINR(c) : "—"}</div>
       <div class="ema ${gap == null ? "mut" : gap >= 0 ? "up" : "down"}">${gap == null ? (c ? "New listing: under 200 days" : "200 EMA n/a") : (gap >= 0 ? "▲ " : "▼ ") + Math.abs(gap).toFixed(1) + "% " + (gap >= 0 ? "above" : "below") + " " + emaN(r) + " EMA" + (emaN(r) === 20 ? " · new listing" : "")}</div></div>
@@ -292,7 +298,7 @@ let view = "sp";
 // The stocks of a list in the same order as on screen (search + sort), also used by Prev / Next
 function listRows(key){
   const q = document.getElementById("q").value.trim().toLowerCase();
-  let rows = D[key].filter(r => (r.symbol + " " + r.name).toLowerCase().includes(q));
+  let rows = D[key].filter(r => [r.symbol, r.name, r.nse, r.bse].join(" ").toLowerCase().includes(q));
   const s = document.getElementById("sort").value;
   const by = {marks: r => -(marksOf(r) ?? -1), ema: r => Math.abs(emaGap(r) ?? 999), new: r => -Date.parse(r.added_on || 0), name: r => (r.name || r.symbol).toLowerCase()}[s];
   rows.sort((a, b) => { const x = by(a), y = by(b); return x < y ? -1 : x > y ? 1 : 0; });

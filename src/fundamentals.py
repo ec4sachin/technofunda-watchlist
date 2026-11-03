@@ -102,6 +102,11 @@ def parse_company_page(html):
     m = {}
     h1 = soup.find("h1")
     m["_name"] = h1.get_text(" ", strip=True) if h1 else None
+    # Exchange codes from the BSE / NSE links at the top of the page
+    bse = re.search(r"bseindia\.com/stock-share-price/[^\"']*?/(\d{6})/?[\"']", html)
+    nse = re.search(r"nseindia\.com/get-quotes/equity\?symbol=([A-Za-z0-9&%\-_.]+)", html)
+    m["_bse"] = bse.group(1) if bse else ""
+    m["_nse"] = nse.group(1).replace("%26", "&").upper() if nse else ""
     cid = COMPANY_ID_RE.search(html)
     if cid:
         m["_company_id"] = cid.group(1) or cid.group(2)

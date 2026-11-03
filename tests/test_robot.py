@@ -229,3 +229,17 @@ def test_new_listing_ema20():
 
 if __name__ == "__main__":
     test_new_listing_ema20()
+
+
+def test_exchange_codes():
+    html = ("<h1>Ratnaveer</h1><a href='https://www.bseindia.com/stock-share-price/ratnaveer-precision-engineering-ltd/RATNAVEER/543978/'>"
+            "BSE: 543978</a><a href='https://www.nseindia.com/get-quotes/equity?symbol=RATNAVEER'>NSE: RATNAVEER</a>")
+    m = fx.parse_company_page(html)
+    row = {}
+    main.set_codes(row, m)
+    assert row == {"nse": "RATNAVEER", "bse": "543978"}, row
+    print("NSE/BSE codes OK:", row)
+
+
+if __name__ == "__main__":
+    test_exchange_codes()

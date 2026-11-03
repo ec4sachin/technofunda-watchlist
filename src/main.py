@@ -84,6 +84,7 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
             e.update(last_fund_check=today, fund_result=mk, marks_detail=detail_json(items),
                      consolidated="yes" if "consolidated" in m.get("_path", "") else "no",
                      screener_id=m.get("_company_id", ""))
+            set_codes(e, m)
             sp[code] = e
             report["added"].append((code, e["name"], f"marks {mk} · " + ", ".join(s["sources"])))
             history.append({"date": today, "symbol": code, "name": e["name"], "action": "ADDED to SP",
@@ -107,8 +108,21 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
                        marks_detail=detail_json(marks), name=row["name"] or m.get("_name", ""),
                        consolidated="yes" if "consolidated" in m.get("_path", "") else "no",
                        screener_id=m.get("_company_id", "") or row.get("screener_id", ""))
+            set_codes(row, m)
             note = row["fund_result"] + (f" (was {was})" if was and was != row["fund_result"] else "")
             report["first_marked"].append((sym, row["name"], note))
+
+    # NSE / BSE codes for stocks that do not have them yet (one time per stock)
+    for items in (sp, dt):
+        for sym, row in items.items():
+            if row.get("nse") or row.get("bse") or row.get("codes_checked"):
+                continue
+            m = fx.fetch_metrics(sym, row.get("consolidated", "yes") != "no")
+            set_codes(row, m)
+            if m and m.get("_company_id") and not row.get("screener_id"):
+                row["screener_id"] = m["_company_id"]
+            if not (row.get("nse") or row.get("bse")):
+                row["codes_checked"] = today  # page has no exchange links: do not try every day
 
     # Step 4 - price vs 200 EMA
     period = int(settings.get("ema_period", 200))
@@ -130,6 +144,7 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
             m = fx.fetch_metrics(sym, row.get("consolidated", "yes") != "no")
             if m and m.get("_company_id"):
                 row["screener_id"] = m["_company_id"]
+                set_codes(row, m)
         res_by[sym] = prices.screener_close_and_ema(row.get("screener_id"), period)
 
     short = int(settings.get("new_listing_ema", 20))
@@ -179,6 +194,13 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
                                key=lambda d: _DT.strptime(d, "%d %b %Y"), default="")
 
 
+def set_codes(row, m):
+    """NSE symbol and BSE code shown on the dashboard (read from the Screener page)."""
+    if m:
+        row["nse"] = m.get("_nse") or row.get("nse", "")
+        row["bse"] = m.get("_bse") or row.get("bse", "")
+
+
 def judge(res, period, short=20):
     """(close, ema, basis). Normal stocks: the 200 EMA. New listings with under 200 trading days:
     the 20 EMA from their own price history. Too new even for that: (close, None, None)."""
@@ -218,6 +240,7 @@ def monthly(sp, dt, rules_cfg, today, report, history, snaps):
             row.update(last_fund_check=today, fund_result=mk, marks_detail=detail_json(marks),
                        consolidated="yes" if "consolidated" in m.get("_path", "") else "no",
                        screener_id=m.get("_company_id", "") or row.get("screener_id", ""))
+            set_codes(row, m)
             if fx.passes(got, out_of, need, rules_cfg):
                 report["monthly_pass"] += 1
             else:
