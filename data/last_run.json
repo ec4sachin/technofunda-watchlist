@@ -1,40 +1,8 @@
 {
  "added": [],
  "rejected": [],
- "to_dt": [
-  [
-   "543542",
-   "Kesar India",
-   "close 1157.5 < 200 EMA 1175.93"
-  ],
-  [
-   "543619",
-   "Concord Control",
-   "close 2413.2 < 200 EMA 2452.62"
-  ]
- ],
- "to_sp": [
-  [
-   "513507",
-   "Guj. Containers",
-   "close 168 > 200 EMA 165.37"
-  ],
-  [
-   "544141",
-   "Pune e-Stock Broking",
-   "close 261.85 > 200 EMA 257.4"
-  ],
-  [
-   "544551",
-   "Bhavik Enterpris",
-   "close 151.3 > 20 EMA 149.5"
-  ],
-  [
-   "RSL",
-   "Rajputana Stain.",
-   "close 175.39 > 20 EMA 171.37"
-  ]
- ],
+ "to_dt": [],
+ "to_sp": [],
  "removed": [],
  "unchecked": [],
  "no_price": [],
@@ -45,6 +13,11 @@
    "544538",
    "Praruh Tech",
    "close 145.35 vs 20 EMA 139.22 → SP"
+  ],
+  [
+   "544551",
+   "Bhavik Enterpris",
+   "close 151.3 vs 20 EMA 149.5 → SP"
   ],
   [
    "544682",
@@ -82,24 +55,19 @@
    "close 217.84 vs 20 EMA 212.82 → SP"
   ],
   [
+   "RSL",
+   "Rajputana Stain.",
+   "close 175.39 vs 20 EMA 171.37 → SP"
+  ],
+  [
    "TEAMTECH",
    "Teamtech Formwork",
    "close 169 vs 20 EMA 145.17 → SP"
   ],
   [
-   "544551",
-   "Bhavik Enterpris",
-   "close 151.3 vs 20 EMA 149.5"
-  ],
-  [
    "RAMBHAJO",
    "Advit Jewels",
    "close 330.9 vs 20 EMA 347.7"
-  ],
-  [
-   "RSL",
-   "Rajputana Stain.",
-   "close 175.39 vs 20 EMA 171.37"
   ]
  ],
  "per_alert": {
@@ -115,5 +83,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "03 Nov 2026, 02:24 PM IST"
+ "run_at": "03 Nov 2026, 02:37 PM IST"
 }
