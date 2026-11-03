@@ -4,6 +4,7 @@
   python src/main.py daily      -> only Steps 1-4
   python src/main.py monthly    -> only Step 5 (full fundamental review of SP and DT)
 """
+import html
 import json
 import os
 import sys
@@ -15,6 +16,7 @@ import yaml
 sys.path.insert(0, os.path.dirname(__file__))
 import emails  # noqa: E402
 import fundamentals as fx  # noqa: E402
+import bhav  # noqa: E402
 import prices  # noqa: E402
 import storage  # noqa: E402
 import telegram as tg  # noqa: E402
@@ -71,11 +73,22 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
     # Step 2 + 3 - check fundamentals of stocks not already in SP/DT, add passers to SP
     fresh = {c: s for c, s in candidates.items() if c not in sp and c not in dt}
     report["already_listed"] = len(candidates) - len(fresh)
+    # stocks whose Screener page could not be read on an earlier run are tried again (for up to 5 days)
+    pending = state.setdefault("pending", {})
+    for code, s in list(pending.items()):
+        if code in sp or code in dt or _days_since(s.get("since", today), today) > 5:
+            pending.pop(code)
+        elif code not in fresh:
+            fresh[code] = s
     for code, s in fresh.items():
         m = fx.fetch_metrics(code, s.get("consolidated", True))
+        if m and fx.completeness(m) < 3:
+            m = None
         if not m:
-            report["unchecked"].append((code, s["name"], "Screener page not found"))
+            pending.setdefault(code, {**s, "since": today})
+            report["unchecked"].append((code, s["name"], "Screener page could not be read — will try again tomorrow"))
             continue
+        pending.pop(code, None)
         got, out_of, items = fx.score(m, rules_cfg)
         snaps[code] = fx.snapshot(m, today)
         mk = f"{fx.on_full_scale(got, out_of, rules_cfg):g}/{full:g}"
@@ -103,14 +116,15 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
                 continue
             got, out_of, marks = fx.score(m, rules_cfg)
             snaps[sym] = fx.snapshot(m, today)
-            was = row.get("fund_result", "")
+            was, was_missing = row.get("fund_result", ""), missing_count(row) >= 2 or not row.get("last_fund_check")
             row.update(last_fund_check=today, fund_result=f"{fx.on_full_scale(got, out_of, rules_cfg):g}/{full:g}",
                        marks_detail=detail_json(marks), name=row["name"] or m.get("_name", ""),
                        consolidated="yes" if "consolidated" in m.get("_path", "") else "no",
                        screener_id=m.get("_company_id", "") or row.get("screener_id", ""))
             set_codes(row, m)
-            note = row["fund_result"] + (f" (was {was})" if was and was != row["fund_result"] else "")
-            report["first_marked"].append((sym, row["name"], note))
+            if was != row["fund_result"] or (was_missing and missing_count(row) < 2):
+                note = row["fund_result"] + (f" (was {was})" if was else "")
+                report["first_marked"].append((sym, row["name"], note))
 
     # NSE / BSE codes for stocks that do not have them yet (one time per stock)
     for items in (sp, dt):
@@ -121,7 +135,7 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
             set_codes(row, m)
             if m and m.get("_company_id") and not row.get("screener_id"):
                 row["screener_id"] = m["_company_id"]
-            if not (row.get("nse") or row.get("bse")):
+            if m and not (row.get("nse") or row.get("bse")):
                 row["codes_checked"] = today  # page has no exchange links: do not try every day
 
     # Step 4 - price vs 200 EMA
@@ -146,6 +160,24 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
                 row["screener_id"] = m["_company_id"]
                 set_codes(row, m)
         res_by[sym] = prices.screener_close_and_ema(row.get("screener_id"), period)
+
+    # Real candles (open/high/low) for closes-only stocks, from the NSE / BSE daily price files
+    need = {}
+    for sym, res in res_by.items():
+        if res and len(res) > 3 and res[3] and "o" not in res[3]:
+            row = sp.get(sym) or dt.get(sym)
+            need[sym] = {"nse": row.get("nse", ""), "bse": row.get("bse", "")}
+    if need:
+        try:
+            days, warns = bhav.enrich(need, {s_: res_by[s_][3] for s_ in need})
+            report["warnings"].extend(warns)
+            print(f"Exchange price files: {days} day(s) downloaded for {len(need)} stock(s)")
+        except Exception as e:  # never stop the run for this
+            report["warnings"].append(f"Exchange price files failed: {e}")
+    try:
+        bhav.remove_unused(set(sp) | set(dt))
+    except OSError:
+        pass
 
     short = int(settings.get("new_listing_ema", 20))
     for sym in list(sp):
@@ -194,6 +226,13 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
                                key=lambda d: _DT.strptime(d, "%d %b %Y"), default="")
 
 
+def _days_since(a, b):
+    try:
+        return (_DT.strptime(b, "%Y-%m-%d") - _DT.strptime(a, "%Y-%m-%d")).days
+    except ValueError:
+        return 99
+
+
 def set_codes(row, m):
     """NSE symbol and BSE code shown on the dashboard (read from the Screener page)."""
     if m:
@@ -225,10 +264,14 @@ def monthly(sp, dt, rules_cfg, today, report, history, snaps):
         for sym in list(items):
             row = items[sym]
             m = fx.fetch_metrics(sym, row.get("consolidated", "yes") != "no")
+            if m and fx.completeness(m) < 3:
+                m = None  # page opened but has (almost) no numbers: blocked/changed page, never judge on it
             if not m:
                 if drop_missing:
                     items.pop(sym)
                     report["removed"].append((sym, row["name"], f"{list_name}: Screener page not found"))
+                    history.append({"date": today, "symbol": sym, "name": row["name"],
+                                    "action": f"REMOVED from {list_name}", "reason": "Screener page not found"})
                 else:
                     report["unchecked"].append((sym, row["name"], f"{list_name}: Screener page not found — kept"))
                 continue
@@ -281,11 +324,11 @@ def build_message(r, sp, dt, today_label, dashboard_url=""):
         L += ["", "🆕 <b>New listings</b> (under 200 trading days → judged on the 20 EMA instead)"] + \
              [tg.stock_line(s, n, why) for s, n, why in r["new_listing"]]
     if r["no_price"]:
-        L += ["", "⚠️ No price data (EMA not checked): " + ", ".join(s for s, _ in r["no_price"])]
+        L += ["", "⚠️ No price data (EMA not checked): " + html.escape(", ".join(s for s, _ in r["no_price"]))]
     if r["rejected"] and len(r["rejected"]) <= 15:
-        L += ["", "🚫 Below pass marks (not added): " + ", ".join(f"{n or s} {why}" for s, n, why in r["rejected"])]
+        L += ["", "🚫 Below pass marks (not added): " + html.escape(", ".join(f"{n or s} {why}" for s, n, why in r["rejected"]))]
     for w in r["warnings"]:
-        L.append(f"⚠️ {w}")
+        L.append(f"⚠️ {html.escape(str(w))}")
     if not any([r["added"], r["to_dt"], r["to_sp"], r["removed"]]):
         L += ["", "No changes today."]
     L += ["", f"📋 <b>SP: {len(sp)}</b> stocks | <b>DT: {len(dt)}</b> stocks"]
@@ -305,16 +348,24 @@ def main():
     today = now.strftime("%Y-%m-%d")
     sp, dt = storage.load_list("SP"), storage.load_list("DT")
     state, history = storage.load_state(), []
+    both = set(sp) & set(dt)
     snaps = storage.load_json("fundamentals.json", {})
     charts = {}
     report = {k: [] for k in ("added", "rejected", "to_dt", "to_sp", "removed", "unchecked", "no_price",
                               "warnings", "first_marked", "new_listing")}
     report["monthly_pass"] = 0
     report["send_full_list"] = mode == "list"
+    for sym in sorted(both):  # a stock can be in only one list
+        dt.pop(sym)
+        report["warnings"].append(f"{sym} was in both SP and DT — kept it in SP only")
 
     if mode in ("auto", "daily"):
         daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, charts)
-    is_review_day = now.day == int(settings.get("monthly_review_day", 1)) and state.get("last_monthly") != today
+    # Runs on the review day, or on the next run if that day was missed (crash, skipped run)
+    is_review_day = now.day >= int(settings.get("monthly_review_day", 1)) and str(state.get("last_monthly", ""))[:7] != today[:7]
+    if not state.get("last_monthly"):
+        state["last_monthly"] = today  # first run ever: the first review is on the next review day
+        is_review_day = False
     if mode == "monthly" or (mode == "auto" and is_review_day):
         monthly(sp, dt, rules_cfg, today, report, history, snaps)
         state["last_monthly"] = today

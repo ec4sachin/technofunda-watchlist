@@ -21,7 +21,7 @@ def fake_updates(texts, chat=CHAT, start=100):
 
 def test():
     sent, voices = [], []
-    tg.send = lambda token, chat, text: sent.append(text)
+    tg.send = lambda token, chat, text: sent.append(text) or True
     tg.send_voice = lambda token, chat, path, caption="": voices.append((path, caption)) or True
     now = datetime(2026, 11, 3, 10, 0, tzinfo=alerts.IST)
 
@@ -43,7 +43,7 @@ def test():
     assert [a["id"] for a in store["alerts"]] == [1, 2]
 
     # prices: Sahana crosses 950, Ratnaveer still above 340 -> only alert 1 fires, with voice note
-    alerts.live_prices = lambda syms, rows: {"SAHANA": 952.4, "RATNAVEER": 371.0}
+    alerts.live_prices = lambda syms, rows, **k: {"SAHANA": {"price": 952.4, "bars": []}, "RATNAVEER": {"price": 371.0, "bars": []}}
     alerts.make_voice = lambda text, lang="hi": voices.append(("text", text)) or "/tmp/x.ogg"
     sent.clear()
     fired = alerts.check_alerts(store, "t", CHAT, SP, DT, "hi", now)
@@ -69,7 +69,7 @@ def test_dashboard_requests():
     import json
     import tempfile
     sent = []
-    tg.send = lambda token, chat, text: sent.append(text)
+    tg.send = lambda token, chat, text: sent.append(text) or True
     folder = tempfile.mkdtemp()
     def put(name, obj):
         with open(os.path.join(folder, name), "w") as f:
@@ -112,3 +112,58 @@ if __name__ == "__main__":
     test_dashboard_requests()
     test_voice_file()
     print("ALL ALERT TESTS PASSED")
+
+
+def test_alert_safety():
+    """Stale prices never fire, a quick touch between checks fires, failed Telegram retries, bad files ignored."""
+    import json as _j
+    import tempfile as _tf
+    from datetime import datetime as _d
+    import pandas as pd
+    now = _d(2026, 11, 3, 11, 0, tzinfo=alerts.IST)
+    # 1. Yahoo returns yesterday's bars before the open -> no price at all
+    idx_old = pd.date_range("2026-11-02 15:00", periods=3, freq="1min", tz="Asia/Kolkata")
+    idx_new = pd.date_range("2026-11-03 10:30", periods=25, freq="1min", tz="Asia/Kolkata")
+    import yfinance as _yf
+    def fake_dl(tickers, **k):
+        idx = idx_new if "SAHANA.NS" in tickers else idx_old
+        hi = [950.0] * len(idx)
+        if len(idx) > 3:
+            hi[3] = 1001.0  # a quick spike at 10:33
+        return pd.DataFrame({"High": hi, "Low": [940.0] * len(idx), "Close": [945.0] * len(idx)}, index=idx)
+    alerts.yf.download = fake_dl
+    alerts.fx._get = lambda *a, **k: None
+    px = alerts.live_prices(["RATNAVEER"], {}, now=now)
+    assert px == {}, px
+    px = alerts.live_prices(["SAHANA"], {}, now=now)
+    assert px["SAHANA"]["price"] == 945.0 and len(px["SAHANA"]["bars"]) == 25
+    # 2. the spike at 10:33 (between two checks) fires an alert created at 10:00; not one created at 10:40
+    real_live = alerts.live_prices
+    store = {"next_id": 3, "offset": 0, "alerts": [
+        {"id": 1, "symbol": "SAHANA", "name": "Sahana", "op": "above", "price": 1000, "status": "active", "created_ts": "2026-11-03T10:00:00+05:30"},
+        {"id": 2, "symbol": "SAHANA", "name": "Sahana", "op": "above", "price": 1000, "status": "active", "created_ts": "2026-11-03T10:40:00+05:30"}]}
+    sent, saves = [], []
+    alerts.tg.send = lambda token, chat, text: sent.append(text) or True
+    alerts.tg.send_voice = lambda *a, **k: True
+    alerts.live_prices = real_live
+    fired = alerts.check_alerts(store, "t", "1", {}, {}, "en", now=now, save=lambda: saves.append(1))
+    assert [a["id"] for a in fired] == [1] and saves == [1] and "touched ₹1001" in sent[0], (fired, sent)
+    # 3. Telegram down -> alert stays active, fires next time
+    store["alerts"][1]["price"] = 944
+    store["alerts"][1]["op"] = "below"
+    store["alerts"][1]["created_ts"] = "2026-11-03T10:00:00+05:30"
+    alerts.tg.send = lambda token, chat, text: False
+    assert alerts.check_alerts(store, "t", "1", {}, {}, "en", now=now) == [] and store["alerts"][1]["status"] == "active"
+    # 4. a request file that is valid JSON but not a request is removed and does not crash
+    folder = _tf.mkdtemp()
+    open(os.path.join(folder, "a.json"), "w").write("[1]")
+    open(os.path.join(folder, "b.json"), "w").write(_j.dumps({"action": "add", "symbol": "SAHANA", "name": {"x": 1}, "op": "above", "price": 5}))
+    n = alerts.ingest_requests(store, folder, "t", "1", {"SAHANA": {"name": "Sahana"}}, {})
+    assert n == 1 and os.listdir(folder) == [] and isinstance(store["alerts"][-1]["name"], str)
+    # 5. typing ITC must not pick "Pitcher Ltd"
+    assert alerts.resolve("ITC", {"ABC": {"name": "Pitcher Ltd"}}, {}) == ("ITC", "ITC")
+    print("Alert safety OK")
+
+
+if __name__ == "__main__":
+    test_alert_safety()

@@ -49,7 +49,8 @@ def resolve(text, sp, dt):
     rows = {**dt, **sp}
     if q in rows:
         return q, rows[q].get("name") or q
-    hits = [(s, r.get("name") or s) for s, r in rows.items() if q.lower() in (r.get("name") or "").lower()]
+    word = re.compile(r"\b" + re.escape(q.lower()))
+    hits = [(s, r.get("name") or s) for s, r in rows.items() if word.search((r.get("name") or "").lower())]
     if len(hits) == 1:
         return hits[0]
     if len(hits) > 1:
@@ -66,34 +67,50 @@ def market_open(now=None):
     return now.weekday() < 5 and 9 * 60 + 15 <= t <= 15 * 60 + 35
 
 
-def live_prices(symbols, rows):
-    """{symbol: price}. Yahoo first (may be delayed), Screener page for stocks Yahoo does not have."""
+def live_prices(symbols, rows, tickers=None, now=None, budget_s=240):
+    """{symbol: {"price": last, "bars": [(time, high, low), ...] today}}. Only fresh prices are returned:
+    Yahoo 1-minute bars from today with the newest bar under 20 minutes old (so yesterday's close never
+    triggers an alert), then the Screener page price for stocks Yahoo does not have (no high/low)."""
+    import time as _t
+    now = now or datetime.now(IST)
     out = {}
     if not symbols:
         return out
-    tick = {s: prices.yahoo_ticker(s, (rows.get(s) or {}).get("yahoo_override", "")) for s in symbols}
+    tick = {s: (tickers or {}).get(s) or prices.yahoo_ticker(s, (rows.get(s) or {}).get("yahoo_override", "")) for s in symbols}
     try:
         data = yf.download(sorted(set(tick.values())), period="1d", interval="1m", auto_adjust=False,
                            group_by="ticker", progress=False, threads=True)
         for s, t in tick.items():
             try:
                 df = data[t] if isinstance(data.columns, pd.MultiIndex) else data
-                c = df["Close"].dropna()
-                if len(c):
-                    out[s] = round(float(c.iloc[-1]), 2)
-            except (KeyError, TypeError):
+                df = df.dropna(subset=["Close"])
+                if df.empty:
+                    continue
+                idx = pd.DatetimeIndex(df.index)
+                idx = idx.tz_localize("UTC") if idx.tz is None else idx
+                idx = idx.tz_convert(IST)
+                if idx[-1].date() != now.date() or now - idx[-1].to_pydatetime() > timedelta(minutes=20):
+                    continue  # stale price (before the open, holiday, or stuck feed)
+                out[s] = {"price": round(float(df["Close"].iloc[-1]), 2),
+                          "bars": [(ts.to_pydatetime(), float(h), float(l)) for ts, h, l in zip(idx, df["High"], df["Low"])]}
+            except (KeyError, TypeError, ValueError, AttributeError):
                 pass
     except Exception as e:  # keep going with Screener
         print("Yahoo live price failed:", e)
-    sess = requests.Session()
+    if now.hour * 60 + now.minute < 9 * 60 + 20:
+        return out  # Screener still shows yesterday's price at the open
+    sess, start = requests.Session(), _t.time()
     for s in symbols:
         if s in out:
             continue
+        if _t.time() - start > budget_s:
+            print("Screener price lookups stopped (time limit) — the rest are checked next run")
+            break
         r = fx._get(sess, f"{fx.BASE}/company/{s}/")
         if r is not None and r.status_code == 200:
             p = fx.parse_company_page(r.text).get("price")
             if p:
-                out[s] = p
+                out[s] = {"price": p, "bars": []}
     return out
 
 
@@ -171,9 +188,13 @@ def process_commands(store, token, chat_id, sp, dt, now=None):
                 tg.send(token, chat_id, html.escape(name))
                 continue
             op = "above" if m.group(2).lower() in ("above", ">", ">=") else "below"
+            if float(m.group(3).replace(",", "")) <= 0:
+                tg.send(token, chat_id, "The price must be more than 0.")
+                continue
             a = {"id": store["next_id"], "symbol": sym, "name": name, "op": op,
                  "price": float(m.group(3).replace(",", "")), "status": "active",
-                 "created": now.strftime("%d %b %Y %I:%M %p")}
+                 "created": now.strftime("%d %b %Y %I:%M %p"), "created_ts": now.isoformat(timespec="seconds"),
+                 "ticker": _ticker(sym, sp, dt)}
             store["next_id"] += 1
             store["alerts"].append(a)
             tg.send(token, chat_id, f"✅ Alert {a['id']} set: <b>{html.escape(name)}</b> ({sym}) {op} ₹{a['price']:g}\n"
@@ -194,8 +215,8 @@ def process_commands(store, token, chat_id, sp, dt, now=None):
             if not sym:
                 tg.send(token, chat_id, name if not arg else html.escape(name))
                 continue
-            p = live_prices([sym], {**dt, **sp}).get(sym)
-            tg.send(token, chat_id, f"💹 <b>{html.escape(name)}</b> ({sym}): " + (f"₹{p:g}" if p else "price not available right now"))
+            p = (live_prices([sym], {**dt, **sp}).get(sym) or {}).get("price")
+            tg.send(token, chat_id, f"💹 <b>{html.escape(name)}</b> ({sym}): " + (f"₹{p:g}" if p else "price not available right now (market closed?)"))
         elif low.startswith("/help") or low.startswith("/start"):
             tg.send(token, chat_id, HELP)
     return changed
@@ -224,6 +245,9 @@ def ingest_requests(store, folder, token, chat_id, sp, dt, now=None):
         except (OSError, ValueError):
             os.remove(path)
             continue
+        if not isinstance(req, dict):
+            os.remove(path)  # not a request: ignore it so it cannot block the alerts
+            continue
         action = str(req.get("action", "")).lower()
         if action == "add":
             sym, name = resolve(str(req.get("symbol", "")), sp, dt)
@@ -233,9 +257,10 @@ def ingest_requests(store, folder, token, chat_id, sp, dt, now=None):
             except (TypeError, ValueError):
                 price = 0.0
             if sym and price > 0:
-                name = req.get("name") or name
+                name = str(req.get("name") or name)[:80]
                 a = {"id": store["next_id"], "symbol": sym, "name": name, "op": op, "price": round(price, 2),
-                     "status": "active", "created": now.strftime("%d %b %Y %I:%M %p"), "source": "dashboard"}
+                     "status": "active", "created": now.strftime("%d %b %Y %I:%M %p"), "source": "dashboard",
+                     "created_ts": now.isoformat(timespec="seconds"), "ticker": _ticker(sym, sp, dt)}
                 store["next_id"] += 1
                 store["alerts"].append(a)
         elif action == "delete":
@@ -250,24 +275,51 @@ def ingest_requests(store, folder, token, chat_id, sp, dt, now=None):
 
 
 # ---------------------------------------------------------------- checking
-def check_alerts(store, token, chat_id, sp, dt, lang="hi", now=None):
-    """Check active alerts against live prices. Returns the alerts that fired."""
+def _ticker(sym, sp, dt):
+    row = sp.get(sym) or dt.get(sym) or {}
+    return prices.yahoo_ticker(sym, row.get("yahoo_override", ""))
+
+
+def _since(a):
+    """Price bars after the alert was created count (an active alert has never been hit since then)."""
+    try:
+        return datetime.fromisoformat(a.get("created_ts"))
+    except (TypeError, ValueError):
+        return None
+
+
+def check_alerts(store, token, chat_id, sp, dt, lang="hi", now=None, save=None):
+    """Check active alerts against live prices (including the high/low since the last check, so a quick
+    touch between two checks is not missed). Returns the alerts that fired.
+    An alert is marked done only when the Telegram message was delivered; `save` is called after each one."""
     now = now or datetime.now(IST)
     active = [a for a in store["alerts"] if a["status"] == "active"]
     if not active:
         return []
-    px = live_prices(sorted({a["symbol"] for a in active}), {**dt, **sp})
+    syms = sorted({a["symbol"] for a in active})
+    px = live_prices(syms, {**dt, **sp}, tickers={a["symbol"]: a.get("ticker") for a in active if a.get("ticker")}, now=now)
     fired = []
     for a in active:
-        p = px.get(a["symbol"])
-        if p is None:
+        info = px.get(a["symbol"])
+        if not info:
             continue
-        if (a["op"] == "above" and p >= a["price"]) or (a["op"] == "below" and p <= a["price"]):
-            a.update(status="triggered", hit_price=p, hit_at=now.strftime("%d %b %Y %I:%M %p"))
-            fired.append(a)
-            arrow = "🔺" if a["op"] == "above" else "🔻"
-            tg.send(token, chat_id,
-                    f"🔔 <b>PRICE ALERT</b> {arrow}\n<b>{html.escape(a['name'])}</b> ({a['symbol']}) is {a['op']} ₹{a['price']:g}\n"
-                    f"Price now: <b>₹{p:g}</b>  ·  <a href=\"{tg.chart_url(a['symbol'])}\">📈 Chart</a>")
-            tg.send_voice(token, chat_id, make_voice(voice_text(a, p, lang), lang), caption=f"Alert: {a['name']}")
+        p, since = info["price"], _since(a)
+        bars = [b for b in info["bars"] if b[0] > since] if since else info["bars"][-1:]
+        hi = max([b[1] for b in bars] + [p])
+        lo = min([b[2] for b in bars] + [p])
+        touched = hi if a["op"] == "above" else lo
+        if not ((a["op"] == "above" and touched >= a["price"]) or (a["op"] == "below" and touched <= a["price"])):
+            continue
+        arrow = "🔺" if a["op"] == "above" else "🔻"
+        extra = f" (touched ₹{touched:g})" if abs(touched - p) > 1e-9 else ""
+        ok = tg.send(token, chat_id,
+                     f"🔔 <b>PRICE ALERT</b> {arrow}\n<b>{html.escape(str(a['name']))}</b> ({a['symbol']}) is {a['op']} ₹{a['price']:g}{extra}\n"
+                     f"Price now: <b>₹{p:g}</b>  ·  <a href=\"{tg.chart_url(a['symbol'])}\">📈 Chart</a>")
+        if not ok:
+            continue  # Telegram did not get it: try again next run
+        a.update(status="triggered", hit_price=p, hit_at=now.strftime("%d %b %Y %I:%M %p"))
+        fired.append(a)
+        tg.send_voice(token, chat_id, make_voice(voice_text(a, p, lang), lang), caption=f"Alert: {a['name']}")
+        if save:
+            save()  # saved at once, so a later problem in this run cannot make it fire again
     return fired

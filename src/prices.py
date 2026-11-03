@@ -5,6 +5,7 @@ so for those the price history is taken from Screener.in's own price chart inste
 and the 200-day EMA is calculated from it.
 """
 import time
+from datetime import datetime, timedelta, timezone
 
 import pandas as pd
 import requests
@@ -41,6 +42,24 @@ def _payload(df):
     return out
 
 
+IST = timezone(timedelta(hours=5, minutes=30))
+
+
+def _now():
+    return datetime.now(IST)
+
+
+def _drop_unfinished_day(df):
+    """During market hours the newest row is today's unfinished candle: SP/DT must use real closes only."""
+    if df.empty:
+        return df
+    now = _now()
+    last = pd.Timestamp(df.index[-1])
+    if last.date() == now.date() and now.hour * 60 + now.minute < 15 * 60 + 45:
+        return df.iloc[:-1]
+    return df
+
+
 def _ema_result(df, period):
     """(last close, EMA, date, chart history). df has a Close column (Open/High/Low/Volume optional).
 
@@ -50,6 +69,7 @@ def _ema_result(df, period):
         df = df.to_frame("Close")
     df = df[df["Close"].notna()]
     df = df[~df.index.duplicated(keep="last")].sort_index()
+    df = _drop_unfinished_day(df)
     if df.empty:
         return None
     close = df["Close"].astype(float)

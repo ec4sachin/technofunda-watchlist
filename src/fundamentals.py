@@ -353,7 +353,7 @@ def score(m, cfg):
         f"{qs:g}% vs needed {0.8 * ts:.1f}%" if qs is not None and ts is not None else "")
     # P&L 2 - latest quarter EPS >= 0.8 x previous quarter EPS
     e1, e0 = g("eps_latest_qtr"), g("eps_prev_qtr")
-    add("q_eps", "Q-EPS", None if e1 is None or e0 is None else e1 >= 0.8 * e0,
+    add("q_eps", "Q-EPS", None if e1 is None or e0 is None else e1 >= e0 - 0.2 * abs(e0),
         f"EPS {e1:g} vs prev {e0:g}" if e1 is not None and e0 is not None else "")
     # P&L 3 - margin expansion or stable (vs same quarter last year)
     o1, o0 = g("opm_latest_qtr"), g("opm_same_qtr_last_year")

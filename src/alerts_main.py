@@ -32,7 +32,8 @@ def main():
         print(f"Applied {applied} request(s) from the dashboard.")
     alerts.process_commands(store, token, chat, sp, dt)
     if alerts.market_open() or "--force" in sys.argv:
-        fired = alerts.check_alerts(store, token, chat, sp, dt, lang)
+        fired = alerts.check_alerts(store, token, chat, sp, dt, lang,
+                                    save=lambda: storage.save_json("alerts.json", store))
         print(f"Checked alerts, {len(fired)} fired.")
     else:
         print("Market closed: commands answered, prices not checked.")

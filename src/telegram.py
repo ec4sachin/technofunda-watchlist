@@ -28,25 +28,44 @@ def _call(token, method, timeout=30, **kw):
             print(f"Telegram {method} error:", str(data)[:300])
         return data
     except (requests.RequestException, ValueError) as e:
-        print(f"Telegram {method} failed:", e)
+        print(f"Telegram {method} failed:", str(e).replace(str(token), "***"))  # never print the bot token
         return {"ok": False}
 
 
-def send(token, chat_id, text):
-    if not token or not chat_id:
-        print("Telegram not configured — message below:\n" + text)
-        return
-    chunks, cur = [], ""
+def _chunks(text, size=3800):
+    out, cur = [], ""
     for line in text.split("\n"):
-        if len(cur) + len(line) + 1 > 3800:
-            chunks.append(cur)
+        while len(line) > size:  # a single very long line is cut into pieces
+            if cur:
+                out.append(cur)
+                cur = ""
+            out.append(line[:size])
+            line = line[size:]
+        if len(cur) + len(line) + 1 > size and cur:
+            out.append(cur)
             cur = ""
         cur += line + "\n"
     if cur.strip():
-        chunks.append(cur)
-    for c in chunks:
-        _call(token, "sendMessage", data={"chat_id": chat_id, "text": c, "parse_mode": "HTML",
-                                          "disable_web_page_preview": "true"})
+        out.append(cur)
+    return [c for c in out if c.strip()]
+
+
+def send(token, chat_id, text):
+    """Send a message (split into parts if long). Returns True when every part was delivered."""
+    if not token or not chat_id:
+        print("Telegram not configured — message below:\n" + text)
+        return False
+    ok = True
+    for c in _chunks(text):
+        res = _call(token, "sendMessage", data={"chat_id": chat_id, "text": c, "parse_mode": "HTML",
+                                                "disable_web_page_preview": "true"})
+        if not res.get("ok") and "parse" in str(res.get("description", "")).lower():
+            # formatting problem: send the same text without formatting rather than lose it
+            import re
+            plain = re.sub(r"<[^>]+>", "", c).replace("&lt;", "<").replace("&gt;", ">").replace("&amp;", "&")
+            res = _call(token, "sendMessage", data={"chat_id": chat_id, "text": plain, "disable_web_page_preview": "true"})
+        ok = ok and bool(res.get("ok"))
+    return ok
 
 
 def send_voice(token, chat_id, path, caption=""):

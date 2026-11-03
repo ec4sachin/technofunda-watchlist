@@ -167,6 +167,7 @@ main.wide{max-width:max(1080px,80vw)}
 .ptabs{display:flex;gap:2px;margin-top:6px;overflow-x:auto;scrollbar-width:none}
 .ptabs::-webkit-scrollbar{display:none}
 .ptabs .tab{padding:10px 12px 12px}
+@media (max-width:420px){.tabs .tab{padding:10px 9px 12px}.tab b{margin-left:4px;padding:1px 5px}.ptabs .tab{padding:10px 8px 12px}}
 .pb{padding:14px 16px 20px}
 .ranges{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;align-items:center}
 .rg{appearance:none;font:600 12.5px var(--f-body);padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer}
@@ -253,7 +254,7 @@ main.wide{max-width:max(1080px,80vw)}
       <input id="q" type="search" placeholder="Search name, NSE or BSE code" aria-label="Search name or symbol">
       <select id="sort" aria-label="Sort by">
         <option value="marks">Highest marks</option>
-        <option value="ema">Closest to 200 EMA</option>
+        <option value="ema">Closest to EMA</option>
         <option value="new">Newest added</option>
         <option value="name">Name A–Z</option>
       </select>
@@ -372,13 +373,14 @@ try { emaOn = Object.assign(emaOn, JSON.parse(localStorage.getItem("tf-ema") || 
 const chartCache = {};
 function loadLW(){
   if (window.LightweightCharts) return Promise.resolve();
-  if (!lwLoad) lwLoad = new Promise((ok, fail) => { const sc = document.createElement("script"); sc.src = LW_URL; sc.onload = ok; sc.onerror = fail; document.head.appendChild(sc); });
+  if (!lwLoad) lwLoad = new Promise((ok, fail) => { const sc = document.createElement("script"); sc.src = LW_URL; sc.onload = ok;
+    sc.onerror = e => { lwLoad = null; sc.remove(); fail(e); }; document.head.appendChild(sc); });
   return lwLoad;
 }
 function loadChart(sym){
   if (D.charts) return Promise.resolve(D.charts[sym]);
   if (!chartCache[sym]) chartCache[sym] = fetch("charts/" + encodeURIComponent(sym) + ".json", {cache: "no-cache"})
-    .then(r => r.ok ? r.json() : null).catch(() => null);
+    .then(r => r.ok ? r.json() : null).catch(() => { delete chartCache[sym]; throw new Error("net"); });
   return chartCache[sym];
 }
 const findRow = sym => { for (const k of ["SP", "DT"]) { const r = D[k].find(x => x.symbol === sym); if (r) return [r, k]; } return [null, null]; };
@@ -403,8 +405,11 @@ function openPanel(sym, tab){
   document.querySelector("main").classList.add("wide"); document.body.classList.add("viewing");
   drawHead();
   drawPanel();
-  if (!wasOpen) window.scrollTo(0, 0);
+  if (!wasOpen) { window.scrollTo(0, 0); try { history.pushState({viewer: 1}, ""); } catch (e) {} }
 }
+// Back button (phone or browser) and Esc / "Back to SP" all return to the list the same way
+function requestClose(){ if (history.state && history.state.viewer) history.back(); else closePanel(); }
+window.addEventListener("popstate", () => { if (cur) closePanel(); });
 function drawHead(){
   if (!cur) return;
   const i = VSEQ.indexOf(cur.r.symbol), n = VSEQ.length;
@@ -462,7 +467,7 @@ function drawPanel(){
   } else {
     let checks = []; try { checks = JSON.parse(r.marks_detail || "[]"); } catch (e) {}
     body.innerHTML = (checks.length ? `<div class="checks">${checks.map(([l, g, o, d]) =>
-      `<div class="ck"><span class="ic ${g > 0 ? "up" : "down"}">${g > 0 ? "✓" : "✕"}</span><div><div>${esc(l)} <span class="num mut">${g}/${o}</span></div>${d ? `<div class="d">${esc(d)}</div>` : ""}</div></div>`).join("")}</div>
+      `<div class="ck"><span class="ic ${+g > 0 ? "up" : "down"}">${+g > 0 ? "✓" : "✕"}</span><div><div>${esc(l)} <span class="num mut">${esc(g)}/${esc(o)}</span></div>${d ? `<div class="d">${esc(d)}</div>` : ""}</div></div>`).join("")}</div>
       <p class="src">Marks ${esc(r.fund_result || "")} · checked ${esc(r.last_fund_check || "—")} · pass mark ${PASS} / ${FULL}</p>`
       : `<div class="empty">Not marked yet. Marks appear after the next robot run.</div>`) + links;
   }
@@ -478,10 +483,11 @@ function resample(h, tf){
     // No open/high/low (BSE/NSE SME stocks): each day's candle runs from the previous close to this close
     const o = hasOHLC && h.o[i] != null ? h.o[i] : (prev ?? c);
     const hi = hasOHLC && h.h[i] != null ? h.h[i] : Math.max(o, c), lo = hasOHLC && h.l[i] != null ? h.l[i] : Math.min(o, c);
+    const approx = !(hasOHLC && h.o[i] != null && h.h[i] != null && h.l[i] != null);
     prev = c;
     const v = h.v ? (h.v[i] || 0) : 0, k = tf === "D" ? h.t[i] : key(h.t[i]), last = out[out.length - 1];
-    if (last && last.k === k) { last.high = Math.max(last.high, hi); last.low = Math.min(last.low, lo); last.close = c; last.v += v; last.end = h.t[i]; }
-    else out.push({k, time: tf === "D" ? h.t[i] : h.t[i], open: o, high: hi, low: lo, close: c, v, end: h.t[i]});
+    if (last && last.k === k) { last.high = Math.max(last.high, hi); last.low = Math.min(last.low, lo); last.close = c; last.v += v; last.end = h.t[i]; last.approx = last.approx || approx; }
+    else out.push({k, time: h.t[i], open: o, high: hi, low: lo, close: c, v, end: h.t[i], approx});
   }
   return out;
 }
@@ -493,13 +499,13 @@ async function drawChart(){
   const box = document.getElementById("chartbox"), sym = cur.r.symbol;
   let h;
   try { h = await loadChart(sym); await loadLW(); }
-  catch (e) { box.innerHTML = `<div class="empty" style="border:0">The chart library could not load. Check your internet connection, or use Open in TradingView below.</div>`; return; }
+  catch (e) { box.innerHTML = `<div class="empty" style="border:0">The chart library could not load. Check your internet connection and tap Chart again, or use Open in TradingView.</div>`; return; }
   if (!cur || cur.r.symbol !== sym || curTab !== "chart") return;
   if (chartObj) { chartObj.remove(); chartObj = null; }
   if (!h || !h.t || !h.t.length) { box.innerHTML = `<div class="empty" style="border:0">Chart appears after the next robot run (7 AM).</div>`; return; }
   box.innerHTML = "";
   fitChart();
-  const candles = !!(h.o && h.h && h.l), bars = resample(h, curTf);
+  const bars = resample(h, curTf), nApprox = bars.filter(b => b.approx).length, candles = nApprox === 0;
   const ink = tok("--muted"), line = tok("--line"), up = tok("--up"), dn = tok("--down");
   chartObj = LightweightCharts.createChart(box, {
     autoSize: true,
@@ -534,11 +540,12 @@ async function drawChart(){
   document.getElementById("chartsrc").textContent =
     `Candles from ${first} to ${lastT} (${tfName}). ` +
     (curTf === "D" ? "" : `EMA lines here are on ${tfName} candles; the robot's SP/DT rule uses the daily ${emaN(cur.r)} EMA. `) +
-    (candles ? "" : "Only closing prices exist for this stock, so each candle runs from the previous close to the close (≈). ") +
+    (candles ? "" : nApprox === bars.length ? "High/low not available yet for this stock: each candle runs from the previous close to the close (≈) until the robot has downloaded the exchange price files. "
+                 : `${nApprox} older candle(s) are still approximate (≈); the robot fills in real high/low a few months at a time. `) +
     (bars.length < 200 ? "EMA 200 appears once there are 200 candles." : "");
   cur.bars = bars; cur.main = main;
   for (const a of [...activeAlerts(), ...AL.pending].filter(x => x.symbol === sym))
-    main.createPriceLine({price: +a.price, color: tok("--accent"), lineWidth: 1, lineStyle: 2, axisLabelVisible: true, title: "🔔 " + a.op});
+    main.createPriceLine({price: +a.price, color: tok("--accent"), lineWidth: 1, lineStyle: 2, axisLabelVisible: true, title: "🔔 " + String(a.op).slice(0, 6)});
   attachMenu(box);
   setRange();
 }
@@ -548,12 +555,12 @@ function drawOHLC(box, bars, main, real){
   const M = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const day = t => { const [y, m, d] = t.split("-"); return `${+d} ${M[+m - 1]} ${y}`; };
   const when = b => curTf === "M" ? `${M[+b.end.slice(5, 7) - 1]} ${b.end.slice(0, 4)}` : curTf === "W" ? `Week ${day(b.time)} – ${day(b.end)}` : day(b.time);
-  const unit = {D: "day", W: "week", M: "month"}[curTf], ap = real ? "" : "≈";
+  const unit = {D: "day", W: "week", M: "month"}[curTf];
   const f = v => Number(v).toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2});
   const show = (i, price) => {
     const b = bars[i]; if (!b) return;
     const pc = i > 0 ? bars[i - 1].close : b.open, ch = pc ? (b.close - pc) / pc * 100 : 0, abs = b.close - pc;
-    const cls = ch >= 0 ? "up" : "down";
+    const cls = ch >= 0 ? "up" : "down", ap = b.approx ? "≈" : "";
     ov.innerHTML = `<div class="t">${when(b)}${price != null ? ` · <span class="cp">₹${f(price)}</span>` : ""}</div>` +
       `<div><em>O</em>${ap}${f(b.open)} <em>H</em>${ap}${f(b.high)} <em>L</em>${ap}${f(b.low)} <em>C</em><span class="${cls}">${f(b.close)}</span> ` +
       `<span class="${cls}">${ch >= 0 ? "+" : ""}${f(abs)} (${ch >= 0 ? "+" : ""}${ch.toFixed(2)}%)</span> <span class="u">1 ${unit}</span></div>`;
@@ -596,12 +603,11 @@ async function gh(path, opts = {}){
   if (!r.ok) { const e = new Error("GitHub said " + r.status); e.status = r.status; throw e; }
   return r.status === 204 ? null : (opts.raw ? r.text() : r.json());
 }
-const b64 = t => btoa(unescape(encodeURIComponent(t)));
+// The alert is sent to the "Price Alerts" robot as a run request. The key only needs permission to start
+// that robot (Actions), so it can never change the files or code in the repository.
 async function sendRequest(obj){
-  const name = Date.now() + "-" + Math.random().toString(36).slice(2, 7) + ".json";
-  await gh(`/repos/${REPO}/contents/data/alert_requests/${name}`, {method: "PUT",
-    body: JSON.stringify({message: `Alert from dashboard: ${obj.action} ${obj.symbol || "#" + obj.id}`, content: b64(JSON.stringify(obj))})});
-  try { await gh(`/repos/${REPO}/actions/workflows/alerts.yml/dispatches`, {method: "POST", body: JSON.stringify({ref: "main"})}); } catch (e) {}
+  await gh(`/repos/${REPO}/actions/workflows/alerts.yml/dispatches`, {method: "POST",
+    body: JSON.stringify({ref: "main", inputs: {request: JSON.stringify(obj)}})});
 }
 function saveError(e){
   const why = e.status === 401 ? "the GitHub key is wrong or has expired" : e.status === 403 ? "the GitHub key is missing a permission"
@@ -632,13 +638,12 @@ async function deleteAlert(id, btn){
 function needConnect(){
   showToast(`🔔 To save alerts from the chart, connect this dashboard once (2 minutes). <a href="#alerts" data-goto-alerts>Connect now</a>`);
 }
-function laterRefresh(){ for (const ms of [60000, 120000, 240000]) setTimeout(refreshAlerts, ms); }
+function laterRefresh(){ for (const ms of [60000, 150000, 300000, 420000]) setTimeout(refreshAlerts, ms); }
 async function refreshAlerts(){
   if (!REPO) return;
   try {
-    const txt = connected()
-      ? await gh(`/repos/${REPO}/contents/data/alerts.json`, {raw: true, headers: {Accept: "application/vnd.github.raw+json"}})
-      : await fetch(`https://raw.githubusercontent.com/${REPO}/main/data/alerts.json`).then(r => r.ok ? r.text() : Promise.reject(r.status));
+    const txt = await fetch(`https://raw.githubusercontent.com/${REPO}/main/data/alerts.json?t=${Date.now()}`, {cache: "no-store"})
+      .then(r => r.ok ? r.text() : Promise.reject(r.status));
     const st = JSON.parse(txt), items = st.alerts || [];
     AL.active = items.filter(a => a.status === "active");
     AL.done = items.filter(a => a.status === "triggered").slice(-10).reverse();
@@ -657,8 +662,8 @@ const activeAlerts = () => (AL.active || []).filter(a => !AL.deleting.has(a.id))
 function alertRows(list, canDelete){
   return list.map(a => `<div><div><b>${esc(a.name || a.symbol)}</b> <span class="sym mut">${esc(a.symbol)}</span></div>` +
     `<span class="pill ${a.status === "triggered" ? "p-add" : a.pending ? "p-warn" : "p-sp"}">${a.status === "triggered" ? "Hit ₹" + fmtN(a.hit_price) : a.pending ? "Saving…" : "#" + a.id}</span>` +
-    `<div class="why">${a.op} ₹${fmtN(a.price)} · ${a.status === "triggered" ? "triggered " + esc(a.hit_at || "") : a.pending ? "sent from this dashboard" : "set " + esc(a.created || "")}</div>` +
-    (canDelete && a.status === "active" && !a.pending && connected() ? `<button class="btn" data-del-alert="${a.id}">Delete</button>` : "") + `</div>`).join("");
+    `<div class="why">${esc(a.op)} ₹${fmtN(a.price)} · ${a.status === "triggered" ? "triggered " + esc(a.hit_at || "") : a.pending ? "sent from this dashboard" : "set " + esc(a.created || "")}</div>` +
+    (canDelete && a.status === "active" && !a.pending && connected() ? `<button class="btn" data-del-alert="${esc(a.id)}">Delete</button>` : "") + `</div>`).join("");
 }
 function alertHTML(r){
   const c = num(r.last_close);
@@ -683,11 +688,11 @@ function connectBox(){
     <ol class="steps"><li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → new fine-grained token ↗</a></li>
       <li>Token name: <b>watchlist dashboard</b>. Expiration: <b>1 year</b>.</li>
       <li>Repository access: <b>Only select repositories</b> → <b>${esc(REPO.split("/")[1] || "technofunda-watchlist")}</b>.</li>
-      <li>Permissions → Repository: <b>Contents: Read and write</b> and <b>Actions: Read and write</b>.</li>
+      <li>Permissions → Repository: <b>Actions: Read and write</b> only (nothing else).</li>
       <li><b>Generate token</b>, copy it, paste it here and tap Connect.</li></ol>
     <div class="cmd"><input id="gh-key" type="password" autocomplete="off" placeholder="github_pat_…" aria-label="GitHub token" style="flex:1;min-width:0">
       <button class="btn pri" data-gh-connect>Connect</button></div>
-    <p class="src">The key is stored only in this browser and is sent only to GitHub. It can change files in this one repository only. Disconnect any time, or delete the token on GitHub.</p></div>`;
+    <p class="src">The key is stored only in this browser and is sent only to GitHub. It can only start the Price Alerts robot of this one repository — it cannot change any file. Disconnect any time, or delete the token on GitHub.</p></div>`;
 }
 function drawAlerts(){
   const act = [...activeAlerts(), ...AL.pending.map(a => Object.assign({pending: true, status: "active"}, a))], done = AL.done || [];
@@ -711,6 +716,7 @@ function ghDisconnect(){ GH = ""; try { localStorage.removeItem("tf-gh-token"); 
 // ---------------- Right-click (or long-press) on the chart -> set an alert at that price
 const tick = p => Math.round(p * 20) / 20;  // NSE tick size 0.05
 function attachMenu(box){
+  if (box.dataset.menu) return; box.dataset.menu = "1";
   const priceAt = (x, y) => { const r = box.getBoundingClientRect(); const p = cur && cur.main ? cur.main.coordinateToPrice(y - r.top) : null;
     return p != null && isFinite(p) && p > 0 ? tick(p) : null; };
   box.addEventListener("contextmenu", e => { e.preventDefault(); const p = priceAt(e.clientX, e.clientY); if (p) openMenu(e.clientX, e.clientY, p); });
@@ -771,7 +777,7 @@ function drawOrder(r){
       <p class="note">${BROKER_READY ? "The order goes to your broker immediately." : "🔒 No broker is connected yet, so no order can be placed from here. This button will work once Zerodha / Angel One is connected through your VPS. Your choices above are remembered."}</p>
     </div>`;
   const est = () => { const q = +document.getElementById("o-qty").value || 0, pi = document.getElementById("o-price");
-    const pr = ORD.type === "LIMIT" ? (+pi.value || 0) : (c || 0); ORD.qty = q; if (ORD.type === "LIMIT") ORD.price = pi.value;
+    const pr = ORD.type === "LIMIT" ? (+pi.value || 0) : (c || 0); ORD.qty = q > 0 ? q : ORD.qty; if (ORD.type === "LIMIT") ORD.price = pi.value;
     document.getElementById("o-est").textContent = q && pr ? fmtINR(Math.round(q * pr * 100) / 100) : "—";
     try { localStorage.setItem("tf-order", JSON.stringify({type: ORD.type, product: ORD.product, broker: ORD.broker, qty: ORD.qty})); } catch (e) {} };
   document.getElementById("o-qty").addEventListener("input", est);
@@ -877,14 +883,15 @@ document.addEventListener("click", e => {
   const rg = e.target.closest("[data-range]"); if (rg) { curRange = +rg.dataset.range;
     document.querySelectorAll("[data-range]").forEach(b => b.setAttribute("aria-pressed", b === rg)); setRange(); return; }
 });
-document.getElementById("p-close").addEventListener("click", closePanel);
+document.getElementById("p-close").addEventListener("click", requestClose);
 document.getElementById("p-prev").addEventListener("click", () => stepStock(-1));
 document.getElementById("p-next").addEventListener("click", () => stepStock(1));
 document.addEventListener("keydown", e => {
-  if ((e.key === "ArrowLeft" || e.key === "ArrowRight") && cur && document.getElementById("order").hidden && document.getElementById("ctx").hidden
+  if ((e.key === "ArrowLeft" || e.key === "ArrowRight") && !e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey && cur && document.getElementById("order").hidden && document.getElementById("ctx").hidden
       && !e.target.closest("input,select,textarea")) { e.preventDefault(); stepStock(e.key === "ArrowLeft" ? -1 : 1); return; }
   if (e.key !== "Escape") return; if (!document.getElementById("ctx").hidden) { closeMenu(); return; }
-  if (!document.getElementById("order").hidden) { closeOrder(); return; } if (cur) closePanel(); });
+  if (e.target.closest("input,select,textarea") && document.getElementById("order").hidden) { e.target.blur(); return; }
+  if (!document.getElementById("order").hidden) { closeOrder(); return; } if (cur) requestClose(); });
 document.addEventListener("scroll", closeMenu, true);
 
 function show(v){

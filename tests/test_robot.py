@@ -14,6 +14,8 @@ import prices  # noqa: E402
 import storage  # noqa: E402
 import telegram as tg  # noqa: E402
 import web  # noqa: E402
+import bhav  # noqa: E402
+bhav.enrich = lambda need, hists, **k: (0, [])  # no exchange downloads in tests
 
 GOOD = fx.parse_company_page(open(os.path.join(HERE, "fixtures", "company_page.html")).read())
 GOOD["_company_id"] = "999"
@@ -177,6 +179,7 @@ def test():
     assert "Marks updated" in msg and "Patel Retail" in msg
     print(msg, "\n" + "=" * 60)
 
+    st = storage.load_state(); st["last_monthly"] = "2026-10-01"; storage.save_state(st)  # last review was in October
     # 1st of month: PATELRMART (4.6/11) removed from SP, SHANTIGOLD (4.6/11) removed from DT, SAHANA (5.5/11) stays
     msg = run(1, "auto", {"PATELRMART": WEAK, "SHANTIGOLD": LOW, "SAHANA": MID}, {"SHANTIGOLD.NS": (90, 95, "31 Oct 2026")}, {})
     sp, dt = storage.load_list("SP"), storage.load_list("DT")

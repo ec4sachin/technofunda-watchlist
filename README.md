@@ -58,12 +58,12 @@ In your repository: **Settings** → **Secrets and variables** → **Actions** �
 After this, it runs by itself every day at 7 AM.
 
 ### Part F — Your one-page dashboard on GitHub (free, 2 minutes)
-The robot rebuilds the dashboard (`docs/index.html`) after every run, and GitHub Pages shows it as a website. It updates by itself every morning.
+The robot rebuilds the dashboard after every run and publishes it with GitHub Pages by itself.
 
 1. In your repository: **Settings** → **Pages** (left menu).
-2. Under **Build and deployment** → Source: **Deploy from a branch**.
-3. Branch: **main**, folder: **/docs** → **Save**.
-4. Wait 1–2 minutes and refresh the page. GitHub shows **"Your site is live at"** a link like
+2. Under **Build and deployment** → **Source**, choose **GitHub Actions**.
+3. Run the robot once: **Actions** → **Watchlist Robot** → **Run workflow**. It now has two parts, **run** and **publish**.
+4. When both show a green tick, open **Settings** → **Pages** again. GitHub shows **"Your site is live at"** a link like
    `https://YOUR-GITHUB-NAME.github.io/technofunda-watchlist/` — open it and bookmark it on your phone.
 5. In `config/settings.yaml`, paste that link after `dashboard_url:` → **Commit changes**.
    Now every Telegram message ends with an **Open dashboard** link.
@@ -95,6 +95,25 @@ The robot rebuilds the dashboard (`docs/index.html`) after every run, and GitHub
 You can do all of this from the **GitHub app** on your phone too.
 
 ---
+
+## Price alerts (Telegram + lady voice)
+Send these messages to your Telegram bot:
+
+| Message | What it does |
+|---|---|
+| `/alert SAHANA above 950` | Alert when Sahana is at or above ₹950 |
+| `/alert ratnaveer below 340` | Alert when Ratnaveer is at or below ₹340 (part of the name works for SP/DT stocks) |
+| `/alerts` | List your alerts |
+| `/delete 3` | Delete alert number 3 (or `/delete SAHANA` for all Sahana alerts) |
+| `/price SAHANA` | Current price |
+
+The **Price Alerts** robot runs every 15 minutes. It answers your messages any time and checks prices Mon–Fri 9:15 AM–3:30 PM.
+When an alert is reached you get a Telegram message **and a voice note in a female voice**. Each alert rings once.
+Voice language is in `config/settings.yaml` → `alert_voice_language: hi` (Hindi) or `en` (Indian English).
+Alerts can arrive up to about 15–30 minutes after the price is reached (GitHub's timer and Yahoo prices are not instant).
+**One-click alerts on the dashboard (optional, once per phone/computer):** open the dashboard → **Alerts** tab → follow the 5 steps to create a GitHub token (**Actions: Read and write** only, only this repository — it cannot change any file) → paste → **Connect**.
+After that, **right-click (long-press) on any chart** → "Alert when price goes above ₹…" saves it at once; Telegram confirms in about a minute. Delete alerts from the Alerts tab.
+Without connecting, the dashboard copies the Telegram command for you to paste.
 
 ## Good to know
 - **Marks:** the robot calculates the 6 automatic marks of your 11-mark system (P&L 3, Balance sheet 1.5, Holding 1.5). Business, Management and Future (5 marks) need your judgement and are not included yet, so the 5/11 bar is applied as the same percentage (45%) — in practice **3 out of 6 automatic marks**. Telegram shows the score on your 11-mark scale.
