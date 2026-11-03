@@ -3,43 +3,12 @@
  "rejected": [],
  "to_dt": [
   [
-   "513507",
-   "Guj. Containers",
-   "close 160.05 < 200 EMA 165.31"
-  ],
-  [
-   "544141",
-   "Pune e-Stock Broking",
-   "close 256.5 < 200 EMA 257.39"
-  ],
-  [
-   "544551",
-   "Bhavik Enterpris",
-   "close 145.75 < 20 EMA 149.14"
-  ],
-  [
-   "RAMBHAJO",
-   "Advit Jewels",
-   "close 314.4 < 20 EMA 346.13"
+   "RSL",
+   "Rajputana Stain.",
+   "close 170.62 < 20 EMA 171.3"
   ]
  ],
- "to_sp": [
-  [
-   "543542",
-   "Kesar India",
-   "close 1210 > 200 EMA 1176.31"
-  ],
-  [
-   "543619",
-   "Concord Control",
-   "close 2595 > 200 EMA 2454.16"
-  ],
-  [
-   "JAYBARMARU",
-   "Jay Bharat Maru.",
-   "close 122.84 > 200 EMA 120.45"
-  ]
- ],
+ "to_sp": [],
  "removed": [],
  "unchecked": [],
  "no_price": [],
@@ -63,11 +32,6 @@
    "close 152.6 vs 20 EMA 140.49 → SP"
   ],
   [
-   "544551",
-   "Bhavik Enterpris",
-   "close 145.75 vs 20 EMA 149.14 → DT"
-  ],
-  [
    "544682",
    "GRE Renew",
    "close 219.9 vs 20 EMA 219.52 → SP"
@@ -80,7 +44,7 @@
   [
    "544695",
    "Msafe Equipments",
-   "close 278 vs 20 EMA 273.58 → SP"
+   "close 282 vs 20 EMA 273.96 → SP"
   ],
   [
    "544809",
@@ -90,7 +54,7 @@
   [
    "544812",
    "Atharva Poly-Plast",
-   "close 130 vs 20 EMA 124.62 → SP"
+   "close 125.05 vs 20 EMA 124.15 → SP"
   ],
   [
    "ACETEC",
@@ -100,22 +64,27 @@
   [
    "AEROPLANE",
    "A C J K Exports",
-   "close 214.46 vs 20 EMA 212.97 → SP"
-  ],
-  [
-   "RAMBHAJO",
-   "Advit Jewels",
-   "close 314.4 vs 20 EMA 346.13 → DT"
+   "close 214.57 vs 20 EMA 212.98 → SP"
   ],
   [
    "RSL",
    "Rajputana Stain.",
-   "close 175.62 vs 20 EMA 171.78 → SP"
+   "close 170.62 vs 20 EMA 171.3 → DT"
   ],
   [
    "TEAMTECH",
    "Teamtech Formwork",
-   "close 175.1 vs 20 EMA 148.02 → SP"
+   "close 175 vs 20 EMA 148.01 → SP"
+  ],
+  [
+   "544551",
+   "Bhavik Enterpris",
+   "close 145.75 vs 20 EMA 149.14"
+  ],
+  [
+   "RAMBHAJO",
+   "Advit Jewels",
+   "close 314.4 vs 20 EMA 346.13"
   ]
  ],
  "per_alert": {
@@ -131,5 +100,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "03 Nov 2026, 12:13 PM IST"
+ "run_at": "03 Nov 2026, 12:41 PM IST"
 }
