@@ -1,29 +1,50 @@
 {
  "added": [],
  "rejected": [],
- "to_dt": [],
- "to_sp": [],
+ "to_dt": [
+  [
+   "543542",
+   "Kesar India",
+   "close 1157.5 < 200 EMA 1175.93"
+  ],
+  [
+   "543619",
+   "Concord Control",
+   "close 2413.2 < 200 EMA 2452.62"
+  ]
+ ],
+ "to_sp": [
+  [
+   "513507",
+   "Guj. Containers",
+   "close 168 > 200 EMA 165.37"
+  ],
+  [
+   "544141",
+   "Pune e-Stock Broking",
+   "close 261.85 > 200 EMA 257.4"
+  ],
+  [
+   "544551",
+   "Bhavik Enterpris",
+   "close 151.3 > 20 EMA 149.5"
+  ],
+  [
+   "RSL",
+   "Rajputana Stain.",
+   "close 175.39 > 20 EMA 171.37"
+  ]
+ ],
  "removed": [],
  "unchecked": [],
  "no_price": [],
  "warnings": [],
- "first_marked": [
-  [
-   "544809",
-   "Adon Agro",
-   "6.4/11"
-  ],
-  [
-   "ESCONET",
-   "Esconet",
-   "7.3/11"
-  ]
- ],
+ "first_marked": [],
  "new_listing": [
   [
    "544538",
    "Praruh Tech",
-   "close 152.6 vs 20 EMA 140.49 → SP"
+   "close 145.35 vs 20 EMA 139.22 → SP"
   ],
   [
    "544682",
@@ -33,22 +54,22 @@
   [
    "544694",
    "Accretion Nutraveda",
-   "close 325 vs 20 EMA 292.88 → SP"
+   "close 321.05 vs 20 EMA 289.49 → SP"
   ],
   [
    "544695",
    "Msafe Equipments",
-   "close 275 vs 20 EMA 273.3 → SP"
+   "close 284.05 vs 20 EMA 273.12 → SP"
   ],
   [
    "544809",
    "Adon Agro",
-   "close 104 vs 20 EMA 96.72 → SP"
+   "close 101.38 vs 20 EMA 95.95 → SP"
   ],
   [
    "544812",
    "Atharva Poly-Plast",
-   "close 125.05 vs 20 EMA 124.15 → SP"
+   "close 130 vs 20 EMA 124.05 → SP"
   ],
   [
    "ACETEC",
@@ -58,27 +79,27 @@
   [
    "AEROPLANE",
    "A C J K Exports",
-   "close 219.38 vs 20 EMA 213.44 → SP"
+   "close 217.84 vs 20 EMA 212.82 → SP"
   ],
   [
    "TEAMTECH",
    "Teamtech Formwork",
-   "close 171 vs 20 EMA 147.63 → SP"
+   "close 169 vs 20 EMA 145.17 → SP"
   ],
   [
    "544551",
    "Bhavik Enterpris",
-   "close 145.75 vs 20 EMA 149.14"
+   "close 151.3 vs 20 EMA 149.5"
   ],
   [
    "RAMBHAJO",
    "Advit Jewels",
-   "close 314.4 vs 20 EMA 346.13"
+   "close 330.9 vs 20 EMA 347.7"
   ],
   [
    "RSL",
    "Rajputana Stain.",
-   "close 168.27 vs 20 EMA 171.08"
+   "close 175.39 vs 20 EMA 171.37"
   ]
  ],
  "per_alert": {
@@ -90,9 +111,9 @@
  },
  "email_total": 0,
  "already_listed": 0,
- "price_date": "03 Nov 2026",
+ "price_date": "02 Nov 2026",
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "03 Nov 2026, 01:39 PM IST"
+ "run_at": "03 Nov 2026, 02:24 PM IST"
 }
