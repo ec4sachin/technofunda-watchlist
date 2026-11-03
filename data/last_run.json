@@ -58,7 +58,7 @@
   [
    "AEROPLANE",
    "A C J K Exports",
-   "close 218.13 vs 20 EMA 213.32 → SP"
+   "close 219.38 vs 20 EMA 213.44 → SP"
   ],
   [
    "TEAMTECH",
@@ -78,7 +78,7 @@
   [
    "RSL",
    "Rajputana Stain.",
-   "close 168.29 vs 20 EMA 171.08"
+   "close 168.27 vs 20 EMA 171.08"
   ]
  ],
  "per_alert": {
@@ -94,5 +94,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "03 Nov 2026, 01:20 PM IST"
+ "run_at": "03 Nov 2026, 01:39 PM IST"
 }
