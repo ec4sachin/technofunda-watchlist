@@ -1,0 +1,91 @@
+name: Price Alerts
+
+on:
+  schedule:
+    - cron: "7-59/15 3-10 * * 1-5"   # every 15 minutes, Mon-Fri 8:37 AM - 4:22 PM India time (UTC 03:07-10:52)
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Check prices now even if the market is closed"
+        type: boolean
+        default: false
+      request:
+        description: "Used by the dashboard (set / delete an alert). Leave empty."
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  # 1. A dashboard click is first saved as a small file, so it is never lost even if several clicks come together
+  queue:
+    if: ${{ github.event.inputs.request != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Save the dashboard request
+        env:
+          REQUEST: ${{ github.event.inputs.request }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          obj = json.loads(os.environ["REQUEST"])
+          assert isinstance(obj, dict) and obj.get("action") in ("add", "delete"), "not an alert request"
+          clean = {k: obj[k] for k in ("action", "symbol", "name", "op", "price", "id") if k in obj}
+          os.makedirs("data/alert_requests", exist_ok=True)
+          with open(f"data/alert_requests/dash-{os.environ['RUN_ID']}.json", "w", encoding="utf-8") as f:
+              json.dump(clean, f)
+          PY
+          git config user.name "watchlist-robot"
+          git config user.email "robot@users.noreply.github.com"
+          git add data/alert_requests
+          git commit -q -m "Alert request from dashboard"
+          for i in 1 2 3 4 5; do
+            git pull --rebase -q && git push -q && exit 0
+            git rebase --abort 2>/dev/null; sleep 8
+          done
+          exit 1
+
+  # 2. Apply requests, answer Telegram commands, check prices (one run at a time)
+  alerts:
+    needs: queue
+    if: ${{ !cancelled() && needs.queue.result != 'failure' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: alerts
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: |
+          pip install -r requirements.txt
+          which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+
+      - name: Answer Telegram commands and check alerts
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python src/alerts_main.py ${{ github.event.inputs.force == 'true' && '--force' || '' }}
+
+      - name: Save alerts
+        run: |
+          git config user.name "watchlist-robot"
+          git config user.email "robot@users.noreply.github.com"
+          git add -A data
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Price alerts update"
+          for i in 1 2 3; do
+            git pull --rebase -q && git push -q && exit 0
+            git rebase --abort 2>/dev/null; sleep 10
+          done
+          exit 1
