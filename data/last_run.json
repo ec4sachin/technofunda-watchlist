@@ -1,13 +1,7 @@
 {
  "added": [],
  "rejected": [],
- "to_dt": [
-  [
-   "RSL",
-   "Rajputana Stain.",
-   "close 170.62 < 20 EMA 171.3"
-  ]
- ],
+ "to_dt": [],
  "to_sp": [],
  "removed": [],
  "unchecked": [],
@@ -64,12 +58,7 @@
   [
    "AEROPLANE",
    "A C J K Exports",
-   "close 214.57 vs 20 EMA 212.98 → SP"
-  ],
-  [
-   "RSL",
-   "Rajputana Stain.",
-   "close 170.62 vs 20 EMA 171.3 → DT"
+   "close 215.32 vs 20 EMA 213.06 → SP"
   ],
   [
    "TEAMTECH",
@@ -85,6 +74,11 @@
    "RAMBHAJO",
    "Advit Jewels",
    "close 314.4 vs 20 EMA 346.13"
+  ],
+  [
+   "RSL",
+   "Rajputana Stain.",
+   "close 169.1 vs 20 EMA 171.16"
   ]
  ],
  "per_alert": {
@@ -100,5 +94,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "03 Nov 2026, 12:41 PM IST"
+ "run_at": "03 Nov 2026, 01:03 PM IST"
 }
