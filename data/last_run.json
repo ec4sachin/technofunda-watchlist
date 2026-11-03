@@ -1,316 +1,135 @@
 {
- "added": [
+ "added": [],
+ "rejected": [],
+ "to_dt": [
   [
-   "SAMBHV",
-   "Sambhv Steel",
-   "marks 9.2/11 · TTM Profit > 30%, 52W High"
+   "513507",
+   "Guj. Containers",
+   "close 160.05 < 200 EMA 165.31"
   ],
   [
-   "543619",
-   "Concord Control",
-   "marks 9.2/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "DOLPHIN",
-   "Dolphin Offshore",
-   "marks 8.3/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "AEROPLANE",
-   "A C J K Exports",
-   "marks 5.5/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "RSL",
-   "Rajputana Stain.",
-   "marks 9.2/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "JAYBARMARU",
-   "Jay Bharat Maru.",
-   "marks 7.3/11 · TTM Profit > 30%, Daily Volume Scan"
-  ],
-  [
-   "PASUPTAC",
-   "Pasupati Acrylon",
-   "marks 9.2/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "KANPRPLA",
-   "Kanpur Plastipa.",
-   "marks 10.1/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "544695",
-   "Msafe Equipments",
-   "marks 6.4/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "UYFINCORP",
-   "U. Y. Fincorp",
-   "marks 8.3/11 · TTM Profit > 30%, Weekly Volume Scan, 52W High"
-  ],
-  [
-   "GRCL",
-   "Gayatri Rubbers",
-   "marks 8.3/11 · TTM Profit > 30%, Daily Volume Scan, 52W High"
+   "544141",
+   "Pune e-Stock Broking",
+   "close 256.5 < 200 EMA 257.39"
   ],
   [
    "544551",
    "Bhavik Enterpris",
-   "marks 7.3/11 · TTM Profit > 30%, 52W High"
+   "close 145.75 < 20 EMA 149.14"
   ],
   [
-   "544538",
-   "Praruh Tech",
-   "marks 7.3/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "513502",
-   "Baroda Extrusion",
-   "marks 8.3/11 · TTM Profit > 30%"
-  ],
-  [
-   "BIKEWO",
-   "Bikewo Green",
-   "marks 7.3/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "526071",
-   "Stellant Secu.",
-   "marks 6.4/11 · Daily Volume Scan"
-  ],
-  [
-   "544627",
-   "Purple Wave Info",
-   "marks 5.5/11 · Daily Volume Scan"
-  ],
-  [
-   "OMFREIGHT",
-   "Om Freight Forwa",
-   "marks 9.2/11 · Daily Volume Scan, Weekly Volume Scan"
-  ],
-  [
-   "524336",
-   "Sh. Hari Chem.",
-   "marks 10.1/11 · Weekly Volume Scan"
-  ],
-  [
-   "MYMUDRA",
-   "My Mudra Fin.",
-   "marks 6.4/11 · Ready after 6 Months"
-  ],
-  [
-   "INDIAGLYCO",
-   "India Glycols",
-   "marks 6.4/11 · Ready after 6 Months"
-  ],
-  [
-   "544809",
-   "Adon Agro",
-   "marks 6.4/11 · 52W High"
-  ],
-  [
-   "544812",
-   "Atharva Poly-Plast",
-   "marks 6.4/11 · 52W High"
-  ],
-  [
-   "530477",
-   "Vikram Thermo",
-   "marks 11/11 · 52W High"
-  ],
-  [
-   "544682",
-   "GRE Renew",
-   "marks 8.3/11 · 52W High"
-  ],
-  [
-   "TAURIAN",
-   "Taurian MPS",
-   "marks 8.3/11 · 52W High"
-  ],
-  [
-   "543991",
-   "Techknowgreen",
-   "marks 10.1/11 · 52W High"
-  ],
-  [
-   "ANLON",
-   "Anlon Tech",
-   "marks 8.3/11 · 52W High"
-  ],
-  [
-   "538565",
-   "Vistar Amar",
-   "marks 5.5/11 · 52W High"
-  ],
-  [
-   "514280",
-   "Sanrhea Tech.",
-   "marks 7.3/11 · 52W High"
-  ],
+   "RAMBHAJO",
+   "Advit Jewels",
+   "close 314.4 < 20 EMA 346.13"
+  ]
+ ],
+ "to_sp": [
   [
    "543542",
    "Kesar India",
-   "marks 7.3/11 · 52W High"
+   "close 1210 > 200 EMA 1176.31"
   ],
-  [
-   "RAPIDFLEET",
-   "Rapid Fleet",
-   "marks 11/11 · 52W High"
-  ],
-  [
-   "AVTNPL",
-   "AVT Natural Prod",
-   "marks 11/11 · 52W High"
-  ],
-  [
-   "GUFICBIO",
-   "Gufic BioScience",
-   "marks 7.3/11 · 52W High"
-  ],
-  [
-   "522294",
-   "T & I Global",
-   "marks 5.5/11 · 52W High"
-  ]
- ],
- "rejected": [
-  [
-   "539527",
-   "Creative Casting",
-   "4.6/11"
-  ],
-  [
-   "544611",
-   "Mahamaya Lifesc.",
-   "2.8/11"
-  ],
-  [
-   "SAPPL",
-   "Sh. Ajit Pulp",
-   "4.6/11"
-  ]
- ],
- "to_dt": [
   [
    "543619",
    "Concord Control",
-   "close 2413.2 < EMA 2452.62"
+   "close 2595 > 200 EMA 2454.16"
   ],
   [
    "JAYBARMARU",
    "Jay Bharat Maru.",
-   "close 114.91 < EMA 120.33"
-  ],
-  [
-   "INDIAGLYCO",
-   "India Glycols",
-   "close 331.7 < EMA 774.79"
-  ],
-  [
-   "ANLON",
-   "Anlon Tech",
-   "close 474.82 < EMA 581.28"
-  ],
-  [
-   "543542",
-   "Kesar India",
-   "close 1157.5 < EMA 1175.93"
+   "close 122.84 > 200 EMA 120.45"
   ]
  ],
- "to_sp": [],
  "removed": [],
  "unchecked": [],
  "no_price": [],
  "warnings": [],
  "first_marked": [
   [
-   "ESCONET",
-   "Esconet",
-   "7.3/11"
-  ],
-  [
    "544809",
    "Adon Agro",
    "6.4/11"
+  ],
+  [
+   "ESCONET",
+   "Esconet",
+   "7.3/11"
   ]
  ],
  "new_listing": [
   [
-   "544694",
-   "Accretion Nutraveda",
-   "close 321.05"
-  ],
-  [
-   "ACETEC",
-   "Acetech E-Commerce",
-   "close 136"
-  ],
-  [
-   "RAMBHAJO",
-   "Advit Jewels",
-   "close 348.3"
-  ],
-  [
-   "TEAMTECH",
-   "Teamtech Formwork",
-   "close 169"
-  ],
-  [
-   "AEROPLANE",
-   "A C J K Exports",
-   "close 217.86"
-  ],
-  [
-   "RSL",
-   "Rajputana Stain.",
-   "close 168.25"
-  ],
-  [
-   "544695",
-   "Msafe Equipments",
-   "close 284.05"
+   "544538",
+   "Praruh Tech",
+   "close 152.6 vs 20 EMA 140.49 → SP"
   ],
   [
    "544551",
    "Bhavik Enterpris",
-   "close 151.3"
-  ],
-  [
-   "544538",
-   "Praruh Tech",
-   "close 145.35"
-  ],
-  [
-   "544809",
-   "Adon Agro",
-   "close 101.38"
-  ],
-  [
-   "544812",
-   "Atharva Poly-Plast",
-   "close 130"
+   "close 145.75 vs 20 EMA 149.14 → DT"
   ],
   [
    "544682",
    "GRE Renew",
-   "close 219.9"
+   "close 219.9 vs 20 EMA 219.52 → SP"
+  ],
+  [
+   "544694",
+   "Accretion Nutraveda",
+   "close 321.05 vs 20 EMA 289.49 → SP"
+  ],
+  [
+   "544695",
+   "Msafe Equipments",
+   "close 278 vs 20 EMA 273.58 → SP"
+  ],
+  [
+   "544809",
+   "Adon Agro",
+   "close 104 vs 20 EMA 96.72 → SP"
+  ],
+  [
+   "544812",
+   "Atharva Poly-Plast",
+   "close 130 vs 20 EMA 124.62 → SP"
+  ],
+  [
+   "ACETEC",
+   "Acetech E-Commerce",
+   "close 136 vs 20 EMA 135.25 → SP"
+  ],
+  [
+   "AEROPLANE",
+   "A C J K Exports",
+   "close 214.46 vs 20 EMA 212.97 → SP"
+  ],
+  [
+   "RAMBHAJO",
+   "Advit Jewels",
+   "close 314.4 vs 20 EMA 346.13 → DT"
+  ],
+  [
+   "RSL",
+   "Rajputana Stain.",
+   "close 175.62 vs 20 EMA 171.78 → SP"
+  ],
+  [
+   "TEAMTECH",
+   "Teamtech Formwork",
+   "close 175.1 vs 20 EMA 148.02 → SP"
   ]
  ],
  "per_alert": {
-  "TTM Profit > 30%": 16,
-  "52W High": 30,
-  "Daily Volume Scan": 6,
-  "Weekly Volume Scan": 7,
-  "Ready after 6 Months": 3
+  "TTM Profit > 30%": 0,
+  "52W High": 0,
+  "Daily Volume Scan": 0,
+  "Weekly Volume Scan": 0,
+  "Ready after 6 Months": 0
  },
- "email_total": 43,
- "already_listed": 5,
- "price_date": "02 Nov 2026",
+ "email_total": 0,
+ "already_listed": 0,
+ "price_date": "03 Nov 2026",
  "monthly_pass": 0,
- "mode": "auto",
+ "mode": "daily",
  "monthly_done": false,
- "run_at": "03 Nov 2026, 07:46 AM IST"
+ "run_at": "03 Nov 2026, 12:13 PM IST"
 }
