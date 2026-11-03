@@ -7,7 +7,9 @@ Each exchange publishes one file per trading day with the prices of every listed
        (or the new format .../content/cm/BhavCopy_NSE_CM_0_0_0_YYYYMMDD_F_0000.csv.zip)
 
 The robot keeps the candles it has found in data/ohlc/SYMBOL.csv, so each day is downloaded only once.
-History is filled in gradually: up to MAX_DAYS_PER_RUN days per robot run (newest first).
+The first run fills in about a year (newest first); after that only the new day is downloaded.
+A day on which an SME stock had no trades at all is not in that day's file: it is kept as a flat candle
+(open = high = low = close = that day's price, volume 0), which is how charting sites show a no-trade day.
 """
 import csv
 import io
@@ -20,7 +22,7 @@ import requests
 
 import storage
 
-MAX_DAYS_PER_RUN = 80
+MAX_DAYS_PER_RUN = 560   # enough to fill a whole year for both exchanges in one run (first time only)
 KEEP_DAYS = 400          # candles kept per stock
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36",
       "Accept": "text/csv,application/zip,application/octet-stream,*/*"}
@@ -172,12 +174,14 @@ def enrich(need, hists, session=None, max_days=MAX_DAYS_PER_RUN, exchanges=None)
             if d not in caches[sym]:
                 missing.setdefault((exch, d), set()).add(sym)
     days = sorted(missing, key=lambda k: k[1], reverse=True)[:max_days]
+    no_trade = {}
     fetched = 0
     for exch, d in days:
         rows = ex[exch].day(datetime.strptime(d, "%Y-%m-%d"))
         if rows is None:
             continue
         fetched += 1
+        found = set()
         if exch == "bse":
             by = {r["code"]: r for r in rows if r["code"]}
         else:
@@ -189,6 +193,19 @@ def enrich(need, hists, session=None, max_days=MAX_DAYS_PER_RUN, exchanges=None)
             r = by.get(where[sym][1])
             if r:
                 caches[sym][d] = (r["open"], r["high"], r["low"], r["close"], r["volume"])
+                found.add(sym)
+        for sym in missing[(exch, d)] - found:
+            no_trade.setdefault(sym, []).append(d)
+    # no-trade days: only for stocks the files do contain on other days (so a wrong code never makes flat candles)
+    for sym, ds in no_trade.items():
+        if not caches[sym]:
+            continue
+        h = hists.get(sym) or {}
+        pos = {t: i for i, t in enumerate(h.get("t") or [])}
+        for d in ds:
+            c = (h.get("c") or [None] * len(pos))[pos[d]] if d in pos else None
+            if c:
+                caches[sym][d] = (c, c, c, c, 0)
     for sym in where:
         if caches[sym]:
             save_cache(sym, caches[sym])
@@ -210,7 +227,7 @@ def merge(hist, cache):
         if row:
             o[i], h[i], l[i] = row[0], row[1], row[2]
             hist["c"][i] = row[3]
-            if row[4]:
+            if row[4] is not None:
                 v[i] = row[4]
     if any(x is not None for x in o):
         hist.update(o=o, h=h, l=l, v=v)
