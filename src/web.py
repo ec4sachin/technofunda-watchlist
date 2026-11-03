@@ -185,6 +185,9 @@ main.wide{max-width:max(1080px,80vw)}
 .qt table{min-width:520px}
 .qt td,.qt th{text-align:right;font-family:var(--f-mono);font-size:12.5px;white-space:nowrap}
 .qt td:first-child,.qt th:first-child{text-align:left;font-family:var(--f-body)}
+.tlinks{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
+.tlinks .btn{padding:5px 10px;font-size:12.5px}
+@media (max-width:720px){.tlinks{margin-left:0;width:100%}.tlinks .lg{display:none}}
 .plinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .src{color:var(--muted);font-size:12px;margin-top:10px}
 @media (max-width:720px){.chartbox{height:clamp(320px,58vh,560px)}.pb{padding:12px 10px 16px}}
@@ -279,11 +282,9 @@ function emaGap(r){ const c = num(r.last_close), e = num(r.ema200); return (c &&
 function stockRow(r, list){
   const mk = marksOf(r), gap = emaGap(r), c = num(r.last_close);
   const pct = mk == null ? 0 : Math.min(100, mk / FULL * 100);
-  const srcs = String(r.source||"").split(",").map(s => s.trim()).filter(Boolean);
   return `<article class="row ${list === "DT" ? "dt" : ""}">
     <div><button class="nm linkish" data-open="${esc(r.symbol)}" data-tab="chart">${esc(r.name || r.symbol)}</button>
-      <div class="meta">${codesHTML(r)} · added ${esc(r.added_on || "—")}</div>
-      ${srcs.length ? `<div class="chips">${srcs.map(s => `<span class="chip">${esc(s)}</span>`).join("")}</div>` : ""}</div>
+      <div class="meta">${codesHTML(r)}</div></div>
     <div class="pricecol"><div class="px">${c ? fmtINR(c) : "—"}</div>
       <div class="ema ${gap == null ? "mut" : gap >= 0 ? "up" : "down"}">${gap == null ? (c ? "New listing: under 200 days" : "200 EMA n/a") : (gap >= 0 ? "▲ " : "▼ ") + Math.abs(gap).toFixed(1) + "% " + (gap >= 0 ? "above" : "below") + " " + emaN(r) + " EMA" + (emaN(r) === 20 ? " · new listing" : "")}</div></div>
     <div class="mk"><div class="top"><span>Marks${r.last_fund_check ? " · " + esc(r.last_fund_check) : ""}</span><b>${mk == null ? "not marked yet" : mk + " / " + FULL}</b></div>
@@ -408,14 +409,15 @@ function drawPanel(){
   const body = document.getElementById("p-body"), r = cur.r;
   const links = `<div class="plinks"><a class="btn" href="${esc(r.chart)}" target="_blank" rel="noopener">Open in TradingView ↗</a><a class="btn" href="${esc(r.screener)}" target="_blank" rel="noopener">Open full Screener page ↗</a></div>`;
   if (curTab === "chart") {
+    const topLinks = `<span class="tlinks"><a class="btn" href="${esc(r.chart)}" target="_blank" rel="noopener"><span class="lg">Open in </span>TradingView ↗</a><a class="btn" href="${esc(r.screener)}" target="_blank" rel="noopener"><span class="lg">Open full </span>Screener<span class="lg"> page</span> ↗</a></span>`;
     body.innerHTML = `<div class="ranges" role="group" aria-label="Candle size">${[["D", "Daily"], ["W", "Weekly"], ["M", "Monthly"]].map(([k, l]) =>
-        `<button class="rg" data-tf="${k}" aria-pressed="${k === curTf}">${l}</button>`).join("")}</div>
+        `<button class="rg" data-tf="${k}" aria-pressed="${k === curTf}">${l}</button>`).join("")}${topLinks}</div>
       <div class="ranges" role="group" aria-label="Period">${[["3M", 63], ["6M", 126], ["1Y", 260], ["3Y", 780], ["5Y", 1300], ["All", 0]].map(([l, n]) =>
         `<button class="rg" data-range="${n}" aria-pressed="${n === curRange}">${l}</button>`).join("")}
       <div class="legend" id="legend"></div></div>
       <div class="chartbox" id="chartbox"><div class="empty" style="border:0">Loading chart…</div></div>
       <div class="src" id="chartsrc"></div>
-      <div class="src"><b>Tip:</b> right-click on the chart (long-press on a phone) to set a price alert at that level.</div>` + links;
+      <div class="src"><b>Tip:</b> right-click on the chart (long-press on a phone) to set a price alert at that level.</div>`;
     drawChart();
   } else if (curTab === "fund") {
     body.innerHTML = fundHTML(D.fund[r.symbol]) + links;
