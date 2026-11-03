@@ -175,7 +175,14 @@ main.wide{max-width:max(1080px,80vw)}
 .legend i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
 .legend button{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:3px 9px;font:500 12px var(--f-body);cursor:pointer}
 .legend button[aria-pressed="false"]{opacity:.45;text-decoration:line-through}
-.chartbox{height:clamp(360px,64vh,820px);background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.ohlc{position:absolute;left:8px;top:6px;z-index:3;pointer-events:none;font:500 12.5px/1.45 var(--f-mono);color:var(--ink);
+  background:color-mix(in srgb,var(--surface) 82%,transparent);padding:3px 8px;border-radius:6px;max-width:calc(100% - 90px)}
+.ohlc .t{color:var(--muted);font-family:var(--f-body)}
+.ohlc .t .cp{color:var(--ink);font:600 12.5px var(--f-mono)}
+.ohlc em{font-style:normal;color:var(--muted);margin:0 2px 0 6px}
+.ohlc em:first-child{margin-left:0}
+.ohlc .u{color:var(--muted);font-family:var(--f-body);font-size:11.5px}
+.chartbox{position:relative;height:clamp(360px,64vh,820px);background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
 .kgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 .kv{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
 .kv .k{font-size:11.5px;color:var(--muted)}
@@ -465,9 +472,13 @@ function resample(h, tf){
   const n = h.t.length, hasOHLC = !!(h.o && h.h && h.l), out = [];
   const key = t => { if (tf === "M") return t.slice(0, 7);
     const d = new Date(t + "T00:00:00Z"), day = (d.getUTCDay() + 6) % 7; d.setUTCDate(d.getUTCDate() - day); return d.toISOString().slice(0, 10); };
+  let prev = null;
   for (let i = 0; i < n; i++) {
     const c = h.c[i]; if (c == null) continue;
-    const o = hasOHLC && h.o[i] != null ? h.o[i] : c, hi = hasOHLC && h.h[i] != null ? h.h[i] : c, lo = hasOHLC && h.l[i] != null ? h.l[i] : c;
+    // No open/high/low (BSE/NSE SME stocks): each day's candle runs from the previous close to this close
+    const o = hasOHLC && h.o[i] != null ? h.o[i] : (prev ?? c);
+    const hi = hasOHLC && h.h[i] != null ? h.h[i] : Math.max(o, c), lo = hasOHLC && h.l[i] != null ? h.l[i] : Math.min(o, c);
+    prev = c;
     const v = h.v ? (h.v[i] || 0) : 0, k = tf === "D" ? h.t[i] : key(h.t[i]), last = out[out.length - 1];
     if (last && last.k === k) { last.high = Math.max(last.high, hi); last.low = Math.min(last.low, lo); last.close = c; last.v += v; last.end = h.t[i]; }
     else out.push({k, time: tf === "D" ? h.t[i] : h.t[i], open: o, high: hi, low: lo, close: c, v, end: h.t[i]});
@@ -494,18 +505,12 @@ async function drawChart(){
     autoSize: true,
     layout: {background: {type: "solid", color: tok("--surface")}, textColor: ink, fontFamily: tok("--f-body"), fontSize: 11},
     grid: {vertLines: {color: alpha(line, .6)}, horzLines: {color: alpha(line, .6)}},
-    rightPriceScale: {borderColor: line, scaleMargins: {top: .06, bottom: .24}}, timeScale: {borderColor: line},
+    rightPriceScale: {borderColor: line, scaleMargins: {top: .14, bottom: .24}}, timeScale: {borderColor: line},
     localization: {priceFormatter: p => p < 0 ? "" : "₹" + Number(p).toLocaleString("en-IN", {maximumFractionDigits: 2})},
     handleScroll: {vertTouchDrag: false},
   });
-  let main;
-  if (candles) {
-    main = chartObj.addCandlestickSeries({upColor: up, downColor: dn, borderVisible: false, wickUpColor: up, wickDownColor: dn, priceLineVisible: false});
-    main.setData(bars.map(b => ({time: b.time, open: b.open, high: b.high, low: b.low, close: b.close})));
-  } else {
-    main = chartObj.addAreaSeries({lineColor: tok("--accent"), topColor: alpha(tok("--accent"), .28), bottomColor: alpha(tok("--accent"), 0), lineWidth: 2, priceLineVisible: false});
-    main.setData(bars.map(b => ({time: b.time, value: b.close})));
-  }
+  const main = chartObj.addCandlestickSeries({upColor: up, downColor: dn, borderVisible: false, wickUpColor: up, wickDownColor: dn, priceLineVisible: false});
+  main.setData(bars.map(b => ({time: b.time, open: b.open, high: b.high, low: b.low, close: b.close})));
   if (h.v) {
     const vol = chartObj.addHistogramSeries({priceFormat: {type: "volume"}, priceScaleId: "", lastValueVisible: false, priceLineVisible: false});
     vol.priceScale().applyOptions({scaleMargins: {top: .8, bottom: 0}});
@@ -523,18 +528,42 @@ async function drawChart(){
     chartObj.addLineSeries({color: tok(col), lineWidth: w, lineStyle: style, priceLineVisible: false, lastValueVisible: p === 200,
       crosshairMarkerVisible: false}).setData(bars.map((b, i) => ({time: b.time, value: e[i]})));
   }
-  document.getElementById("legend").innerHTML = (candles ? "" : `<span><i style="background:var(--accent)"></i>Close</span>`) + chips.join("");
+  document.getElementById("legend").innerHTML = chips.join("");
+  drawOHLC(box, bars, main, candles);
   const first = h.t[0], lastT = h.t[h.t.length - 1];
   document.getElementById("chartsrc").textContent =
-    `${candles ? "Candles" : "Closing prices"} from ${first} to ${lastT} (${tfName}). ` +
+    `Candles from ${first} to ${lastT} (${tfName}). ` +
     (curTf === "D" ? "" : `EMA lines here are on ${tfName} candles; the robot's SP/DT rule uses the daily ${emaN(cur.r)} EMA. `) +
-    (candles ? "" : "Open/high/low prices are not available for this stock, so a line chart is shown. ") +
+    (candles ? "" : "Only closing prices exist for this stock, so each candle runs from the previous close to the close (≈). ") +
     (bars.length < 200 ? "EMA 200 appears once there are 200 candles." : "");
   cur.bars = bars; cur.main = main;
   for (const a of [...activeAlerts(), ...AL.pending].filter(x => x.symbol === sym))
     main.createPriceLine({price: +a.price, color: tok("--accent"), lineWidth: 1, lineStyle: 2, axisLabelVisible: true, title: "🔔 " + a.op});
   attachMenu(box);
   setRange();
+}
+// Top-left box: date, O H L C, % change for the candle under the mouse (latest candle otherwise), and the cursor price
+function drawOHLC(box, bars, main, real){
+  const ov = document.createElement("div"); ov.className = "ohlc"; box.appendChild(ov);
+  const M = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const day = t => { const [y, m, d] = t.split("-"); return `${+d} ${M[+m - 1]} ${y}`; };
+  const when = b => curTf === "M" ? `${M[+b.end.slice(5, 7) - 1]} ${b.end.slice(0, 4)}` : curTf === "W" ? `Week ${day(b.time)} – ${day(b.end)}` : day(b.time);
+  const unit = {D: "day", W: "week", M: "month"}[curTf], ap = real ? "" : "≈";
+  const f = v => Number(v).toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const show = (i, price) => {
+    const b = bars[i]; if (!b) return;
+    const pc = i > 0 ? bars[i - 1].close : b.open, ch = pc ? (b.close - pc) / pc * 100 : 0, abs = b.close - pc;
+    const cls = ch >= 0 ? "up" : "down";
+    ov.innerHTML = `<div class="t">${when(b)}${price != null ? ` · <span class="cp">₹${f(price)}</span>` : ""}</div>` +
+      `<div><em>O</em>${ap}${f(b.open)} <em>H</em>${ap}${f(b.high)} <em>L</em>${ap}${f(b.low)} <em>C</em><span class="${cls}">${f(b.close)}</span> ` +
+      `<span class="${cls}">${ch >= 0 ? "+" : ""}${f(abs)} (${ch >= 0 ? "+" : ""}${ch.toFixed(2)}%)</span> <span class="u">1 ${unit}</span></div>`;
+  };
+  show(bars.length - 1, null);
+  chartObj.subscribeCrosshairMove(p => {
+    if (!p || !p.point || p.logical == null) { show(bars.length - 1, null); return; }
+    const i = Math.max(0, Math.min(bars.length - 1, Math.round(p.logical)));
+    show(i, main.coordinateToPrice(p.point.y));
+  });
 }
 // Laptop: chart fills the rest of the screen, so header + stock card + chart are all visible without scrolling
 function fitChart(){
