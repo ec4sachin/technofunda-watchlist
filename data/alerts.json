@@ -1,0 +1,42 @@
+{
+ "offset": 237644549,
+ "next_id": 4,
+ "alerts": [
+  {
+   "id": 1,
+   "symbol": "PRIZOR",
+   "name": "Prizor Viztech",
+   "op": "above",
+   "price": 1378.55,
+   "status": "active",
+   "created": "03 Nov 2026 03:13 PM",
+   "source": "dashboard",
+   "created_ts": "2026-11-03T15:13:47+05:30",
+   "ticker": "PRIZOR.NS"
+  },
+  {
+   "id": 2,
+   "symbol": "KANPRPLA",
+   "name": "Kanpur Plastipa.",
+   "op": "above",
+   "price": 251.3,
+   "status": "active",
+   "created": "03 Nov 2026 03:13 PM",
+   "source": "dashboard",
+   "created_ts": "2026-11-03T15:13:47+05:30",
+   "ticker": "KANPRPLA.NS"
+  },
+  {
+   "id": 3,
+   "symbol": "PRIZOR",
+   "name": "Prizor Viztech",
+   "op": "above",
+   "price": 1384.8,
+   "status": "active",
+   "created": "03 Nov 2026 03:13 PM",
+   "created_ts": "2026-11-03T15:13:47+05:30",
+   "ticker": "PRIZOR.NS"
+  }
+ ],
+ "bot_username": "technofunda_watchlist_bot"
+}
