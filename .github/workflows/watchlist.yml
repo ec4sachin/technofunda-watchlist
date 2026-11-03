@@ -48,20 +48,33 @@ jobs:
         run: python src/main.py ${{ github.event.inputs.mode || 'auto' }}
 
       - name: Save updated watchlists
+        id: save
         run: |
           git config user.name "watchlist-robot"
           git config user.email "robot@users.noreply.github.com"
           git add data docs
-          git diff --cached --quiet || git commit -m "Watchlist update $(TZ=Asia/Kolkata date +'%d %b %Y')"
-          git push
+          git diff --cached --quiet && exit 0
+          git commit -m "Watchlist update $(TZ=Asia/Kolkata date +'%d %b %Y')"
+          for i in 1 2 3; do
+            git pull --rebase -q && git push -q && exit 0
+            git rebase --abort 2>/dev/null; sleep 10
+          done
+          echo "failed=1" >> "$GITHUB_OUTPUT"   # publish the dashboard anyway, then mark the run as failed
 
       - name: Prepare dashboard for publishing
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs
 
+      - name: Stop if saving failed
+        if: steps.save.outputs.failed == '1'
+        run: |
+          echo "::error::The updated watchlists could not be saved to GitHub. Press 'Run workflow' again."
+          exit 1
+
   publish:
     needs: run
+    if: ${{ !cancelled() }}   # publish even when only the saving step failed
     runs-on: ubuntu-latest
     environment:
       name: github-pages
