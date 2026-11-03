@@ -33,12 +33,12 @@
   [
    "544694",
    "Accretion Nutraveda",
-   "close 321.05 vs 20 EMA 289.49 → SP"
+   "close 325 vs 20 EMA 292.88 → SP"
   ],
   [
    "544695",
    "Msafe Equipments",
-   "close 282 vs 20 EMA 273.96 → SP"
+   "close 275 vs 20 EMA 273.3 → SP"
   ],
   [
    "544809",
@@ -58,12 +58,12 @@
   [
    "AEROPLANE",
    "A C J K Exports",
-   "close 215.32 vs 20 EMA 213.06 → SP"
+   "close 218.13 vs 20 EMA 213.32 → SP"
   ],
   [
    "TEAMTECH",
    "Teamtech Formwork",
-   "close 175 vs 20 EMA 148.01 → SP"
+   "close 171 vs 20 EMA 147.63 → SP"
   ],
   [
    "544551",
@@ -78,7 +78,7 @@
   [
    "RSL",
    "Rajputana Stain.",
-   "close 169.1 vs 20 EMA 171.16"
+   "close 168.29 vs 20 EMA 171.08"
   ]
  ],
  "per_alert": {
@@ -94,5 +94,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "03 Nov 2026, 01:03 PM IST"
+ "run_at": "03 Nov 2026, 01:20 PM IST"
 }
