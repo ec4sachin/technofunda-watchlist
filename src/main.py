@@ -132,23 +132,27 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
                 row["screener_id"] = m["_company_id"]
         res_by[sym] = prices.screener_close_and_ema(row.get("screener_id"), period)
 
+    short = int(settings.get("new_listing_ema", 20))
     for sym in list(sp):
         res = res_by.get(sym)
         if not res:
             report["no_price"].append((sym, sp[sym]["name"]))
             continue
-        close, ema = res[0], res[1]
         if len(res) > 3 and res[3]:
             charts[sym] = res[3]
-        sp[sym].update(last_close=close, ema200=ema if ema is not None else "")
+        close, ema, basis = judge(res, period, short)
+        sp[sym].update(last_close=close, ema200=ema if ema is not None else "", ema_basis=basis or "")
+        if basis != period:
+            report["new_listing"].append((sym, sp[sym]["name"], f"close {close:g}" +
+                                          (f" vs {short} EMA {ema:g} → SP" if ema is not None and close >= ema else
+                                           f" vs {short} EMA {ema:g} → DT" if ema is not None else " (too new for any EMA)")))
         if ema is None:
-            report["new_listing"].append((sym, sp[sym]["name"], f"close {close:g}"))
             continue
         if close < ema:
             dt[sym] = sp.pop(sym)
-            report["to_dt"].append((sym, dt[sym]["name"], f"close {close:g} < EMA {ema:g}"))
+            report["to_dt"].append((sym, dt[sym]["name"], f"close {close:g} < {basis} EMA {ema:g}"))
             history.append({"date": today, "symbol": sym, "name": dt[sym]["name"], "action": "SP -> DT",
-                            "reason": f"close {close:g} below {period} EMA {ema:g}"})
+                            "reason": f"close {close:g} below {basis} EMA {ema:g}" + (" (new listing)" if basis != period else "")})
 
     for sym in list(dt):
         if sym not in res_by:
@@ -157,20 +161,37 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
         if not res:
             report["no_price"].append((sym, dt[sym]["name"]))
             continue
-        close, ema = res[0], res[1]
         if len(res) > 3 and res[3]:
             charts[sym] = res[3]
-        dt[sym].update(last_close=close, ema200=ema if ema is not None else "")
+        close, ema, basis = judge(res, period, short)
+        dt[sym].update(last_close=close, ema200=ema if ema is not None else "", ema_basis=basis or "")
+        if basis != period and not any(sym == x[0] for x in report["to_dt"]):
+            report["new_listing"].append((sym, dt[sym]["name"], f"close {close:g}" +
+                                          (f" vs {short} EMA {ema:g}" if ema is not None else " (too new for any EMA)")))
         if ema is None:
-            report["new_listing"].append((sym, dt[sym]["name"], f"close {close:g}"))
             continue
         if settings.get("move_dt_back_to_sp", True) and close > ema and not any(sym == x[0] for x in report["to_dt"]):
             sp[sym] = dt.pop(sym)
-            report["to_sp"].append((sym, sp[sym]["name"], f"close {close:g} > EMA {ema:g}"))
+            report["to_sp"].append((sym, sp[sym]["name"], f"close {close:g} > {basis} EMA {ema:g}"))
             history.append({"date": today, "symbol": sym, "name": sp[sym]["name"], "action": "DT -> SP",
-                            "reason": f"close {close:g} back above {period} EMA {ema:g}"})
+                            "reason": f"close {close:g} back above {basis} EMA {ema:g}" + (" (new listing)" if basis != period else "")})
     report["price_date"] = max((v[2] for v in res_by.values() if v),
                                key=lambda d: _DT.strptime(d, "%d %b %Y"), default="")
+
+
+def judge(res, period, short=20):
+    """(close, ema, basis). Normal stocks: the 200 EMA. New listings with under 200 trading days:
+    the 20 EMA from their own price history. Too new even for that: (close, None, None)."""
+    close, ema = res[0], res[1]
+    if ema is not None:
+        return close, ema, period
+    hist = res[3] if len(res) > 3 and res[3] else {}
+    closes = [c for c in hist.get("c", []) if c is not None]
+    if len(closes) >= short:
+        import pandas as pd
+        e = pd.Series(closes, dtype=float).ewm(span=short, adjust=True).mean().iloc[-1]
+        return close, round(float(e), 2), short
+    return close, None, None
 
 
 # ----------------------------------------------------------------- Step 5
@@ -226,16 +247,16 @@ def build_message(r, sp, dt, today_label, dashboard_url=""):
             L.extend(["", title] + [tg.stock_line(s, n, why if show_reason else "") for s, n, why in items])
 
     block("➕ <b>Added to SP</b>", r["added"])
-    block("🔻 <b>Moved SP → DT</b> (closed below 200 EMA)", r["to_dt"])
-    block("🔼 <b>Moved DT → SP</b> (back above 200 EMA)", r["to_sp"])
+    block("🔻 <b>Moved SP → DT</b> (closed below 200 EMA, or 20 EMA for new listings)", r["to_dt"])
+    block("🔼 <b>Moved DT → SP</b> (back above 200 EMA / 20 EMA)", r["to_sp"])
     if r.get("monthly_done"):
         L += ["", f"🗓 <b>Monthly fundamental review</b>: {r['monthly_pass']} passed, {len(r['removed'])} removed"]
         block("❌ <b>Removed</b> (below monthly pass marks)", r["removed"])
     block("🆕 <b>Marks updated</b> (added by hand, or data was missing before)", r["first_marked"])
     block("⚠️ <b>Could not check</b>", r["unchecked"])
     if r["new_listing"]:
-        L += ["", "🆕 New listings (under 200 trading days, 200 EMA not possible yet): " +
-              ", ".join(n or s for s, n, _ in r["new_listing"])]
+        L += ["", "🆕 <b>New listings</b> (under 200 trading days → judged on the 20 EMA instead)"] + \
+             [tg.stock_line(s, n, why) for s, n, why in r["new_listing"]]
     if r["no_price"]:
         L += ["", "⚠️ No price data (EMA not checked): " + ", ".join(s for s, _ in r["no_price"])]
     if r["rejected"] and len(r["rejected"]) <= 15:

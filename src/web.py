@@ -144,10 +144,17 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
   .row .pricecol{text-align:right}
 }
 @media (prefers-reduced-motion:no-preference){.bar i{transition:width .4s ease}}
-/* Stock panel: slides in from the right on desktop, full screen on phones */
+/* Stock viewer: opens inside the page (75% of a laptop screen), stock card on top, chart below */
 .scrim{position:fixed;inset:0;z-index:20;background:rgba(10,14,20,.45)}
-.panel{position:fixed;z-index:21;top:0;right:0;bottom:0;width:min(760px,100%);background:var(--bg);display:flex;flex-direction:column;
-  box-shadow:-12px 0 32px rgba(0,0,0,.18);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+main.wide{max-width:max(1080px,80vw)}
+.vnav{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:10px}
+.pn{display:flex;gap:6px;align-items:center}
+.pn .cnt{font:500 13px var(--f-mono);color:var(--muted);min-width:96px;text-align:center}
+.pn .btn{min-width:92px;justify-content:center}
+.pcard{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-top:10px}
+.pcard .ptabs{margin-top:0;padding:0 8px;border-bottom:1px solid var(--line)}
+.vkeys{color:var(--muted);font-size:12px}
+@media (max-width:720px){.vkeys{display:none}.pn .btn{min-width:0}}
 .ph{background:var(--surface);border-bottom:1px solid var(--line);padding:14px max(16px,env(safe-area-inset-right,0px)) 0 16px}
 .ph-top{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}
 .ph h3{font:700 19px/1.2 var(--f-display);margin:0}
@@ -158,7 +165,7 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
 .ptabs{display:flex;gap:2px;margin-top:6px;overflow-x:auto;scrollbar-width:none}
 .ptabs::-webkit-scrollbar{display:none}
 .ptabs .tab{padding:10px 12px 12px}
-.pb{flex:1;overflow-y:auto;padding:16px max(16px,env(safe-area-inset-right,0px)) 24px 16px}
+.pb{padding:14px 16px 20px}
 .ranges{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;align-items:center}
 .rg{appearance:none;font:600 12.5px var(--f-body);padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer}
 .rg[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
@@ -166,7 +173,7 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
 .legend i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
 .legend button{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:3px 9px;font:500 12px var(--f-body);cursor:pointer}
 .legend button[aria-pressed="false"]{opacity:.45;text-decoration:line-through}
-.chartbox{height:min(380px,52vh);background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.chartbox{height:clamp(360px,64vh,820px);background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
 .kgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 .kv{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
 .kv .k{font-size:11.5px;color:var(--muted)}
@@ -178,7 +185,7 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
 .qt td:first-child,.qt th:first-child{text-align:left;font-family:var(--f-body)}
 .plinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .src{color:var(--muted);font-size:12px;margin-top:10px}
-@media (max-width:720px){.panel{width:100%;box-shadow:none}}
+@media (max-width:720px){.chartbox{height:clamp(320px,58vh,560px)}.pb{padding:12px 10px 16px}}
 .aform{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
 .aform input{width:130px}
 .cmd{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
@@ -224,6 +231,24 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
   </section>
   <section id="v-today" hidden></section>
   <section id="v-alerts" hidden></section>
+  <section class="viewer" id="panel" hidden aria-label="Stock chart and details">
+    <div class="vnav">
+      <button class="btn" id="p-close">← Back to <span id="p-back">list</span></button>
+      <span class="vkeys">Tip: ← → keys also work</span>
+      <div class="pn"><button class="btn" id="p-prev" aria-label="Previous stock">◀ Prev</button><span class="cnt" id="p-count" aria-live="polite"></span><button class="btn" id="p-next" aria-label="Next stock">Next ▶</button></div>
+    </div>
+    <div class="list" id="p-row"></div>
+    <div class="pcard">
+      <nav class="ptabs" role="tablist" aria-label="Stock details">
+        <button class="tab" role="tab" data-p="chart">Chart</button>
+        <button class="tab" role="tab" data-p="fund">Screener</button>
+        <button class="tab" role="tab" data-p="marks">Marks</button>
+        <button class="tab" role="tab" data-p="alert">🔔 Alert</button>
+        <button class="tab" role="tab" data-p="pos">Position</button>
+      </nav>
+      <div class="pb" id="p-body"></div>
+    </div>
+  </section>
   <section id="v-history" hidden><div class="tbl"><table><thead><tr><th>Date</th><th>Stock</th><th>Change</th><th>Reason</th></tr></thead><tbody id="hist"></tbody></table></div></section>
   <p class="note" id="note"></p>
 </main>
@@ -233,21 +258,6 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
 <div class="ctx" id="ctx" role="menu" hidden></div>
 <div class="toast" id="toast" role="status" hidden></div>
 <div class="scrim" id="scrim" hidden></div>
-<aside class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="p-name" hidden>
-  <div class="ph">
-    <div class="ph-top"><div style="min-width:0"><h3 id="p-name"></h3><div class="meta" id="p-meta"></div></div>
-      <button class="x" id="p-close" aria-label="Close">✕</button></div>
-    <div class="ph-stats" id="p-stats"></div>
-    <nav class="ptabs" role="tablist" aria-label="Stock details">
-      <button class="tab" role="tab" data-p="chart">Chart</button>
-      <button class="tab" role="tab" data-p="fund">Screener</button>
-      <button class="tab" role="tab" data-p="marks">Marks</button>
-      <button class="tab" role="tab" data-p="alert">🔔 Alert</button>
-      <button class="tab" role="tab" data-p="pos">Position</button>
-    </nav>
-  </div>
-  <div class="pb" id="p-body"></div>
-</aside>
 
 <script>
 const D = __DATA__;
@@ -257,6 +267,7 @@ const FULL = D.cfg.full, PASS = D.cfg.pass_monthly;
 const fmtINR = n => "₹" + n.toLocaleString("en-IN", {maximumFractionDigits: 2});
 
 function marksOf(r){ const m = String(r.fund_result||"").match(/^([\d.]+)\s*\/\s*([\d.]+)/); return m ? +m[1] : null; }
+const emaN = r => String(r.ema_basis) === "20" ? 20 : 200;
 function emaGap(r){ const c = num(r.last_close), e = num(r.ema200); return (c && e) ? (c - e) / e * 100 : null; }
 
 function stockRow(r, list){
@@ -268,7 +279,7 @@ function stockRow(r, list){
       <div class="meta"><span class="sym">${esc(r.symbol)}</span> · added ${esc(r.added_on || "—")}</div>
       ${srcs.length ? `<div class="chips">${srcs.map(s => `<span class="chip">${esc(s)}</span>`).join("")}</div>` : ""}</div>
     <div class="pricecol"><div class="px">${c ? fmtINR(c) : "—"}</div>
-      <div class="ema ${gap == null ? "mut" : gap >= 0 ? "up" : "down"}">${gap == null ? (c ? "New listing: under 200 days" : "200 EMA n/a") : (gap >= 0 ? "▲ " : "▼ ") + Math.abs(gap).toFixed(1) + "% " + (gap >= 0 ? "above" : "below") + " 200 EMA"}</div></div>
+      <div class="ema ${gap == null ? "mut" : gap >= 0 ? "up" : "down"}">${gap == null ? (c ? "New listing: under 200 days" : "200 EMA n/a") : (gap >= 0 ? "▲ " : "▼ ") + Math.abs(gap).toFixed(1) + "% " + (gap >= 0 ? "above" : "below") + " " + emaN(r) + " EMA" + (emaN(r) === 20 ? " · new listing" : "")}</div></div>
     <div class="mk"><div class="top"><span>Marks${r.last_fund_check ? " · " + esc(r.last_fund_check) : ""}</span><b>${mk == null ? "not marked yet" : mk + " / " + FULL}</b></div>
       <div class="bar ${mk != null && mk < PASS ? "low" : ""}" role="img" aria-label="${mk == null ? "No marks yet" : mk + " of " + FULL + " marks, pass mark " + PASS}"><i style="width:${pct}%"></i><u style="left:${PASS / FULL * 100}%"></u></div></div>
     <div class="acts"><div class="r1"><button class="btn pri" data-open="${esc(r.symbol)}" data-tab="chart">Chart</button><button class="btn" data-open="${esc(r.symbol)}" data-tab="fund">Screener</button></div>
@@ -278,12 +289,18 @@ function stockRow(r, list){
 }
 
 let view = "sp";
-function drawList(){
-  const key = view === "dt" ? "DT" : "SP", q = document.getElementById("q").value.trim().toLowerCase();
+// The stocks of a list in the same order as on screen (search + sort), also used by Prev / Next
+function listRows(key){
+  const q = document.getElementById("q").value.trim().toLowerCase();
   let rows = D[key].filter(r => (r.symbol + " " + r.name).toLowerCase().includes(q));
   const s = document.getElementById("sort").value;
   const by = {marks: r => -(marksOf(r) ?? -1), ema: r => Math.abs(emaGap(r) ?? 999), new: r => -Date.parse(r.added_on || 0), name: r => (r.name || r.symbol).toLowerCase()}[s];
   rows.sort((a, b) => { const x = by(a), y = by(b); return x < y ? -1 : x > y ? 1 : 0; });
+  return rows;
+}
+function drawList(){
+  const key = view === "dt" ? "DT" : "SP", q = document.getElementById("q").value.trim().toLowerCase();
+  const rows = listRows(key);
   document.getElementById("list").innerHTML = rows.length ? rows.map(r => stockRow(r, key)).join("")
     : `<div class="empty">${q ? "No stock matches “" + esc(q) + "”." : key === "DT" ? "No stock is below its 200 EMA right now." : "SP is empty. Stocks that pass your marks will appear here after the next run."}</div>`;
 }
@@ -302,7 +319,7 @@ function drawToday(){
     evBlock("Back to SP", "Above EMA", "p-sp", r.to_sp),
     evBlock("Removed in monthly review", "Removed", "p-rem", r.removed),
     evBlock("Marks updated (added by hand, or data was missing before)", "Marked", "p-sp", r.first_marked),
-    evBlock("New listings (under 200 trading days, 200 EMA not possible yet)", "New listing", "p-sp", r.new_listing),
+    evBlock("New listings (under 200 trading days → judged on the 20 EMA)", "New listing", "p-sp", r.new_listing),
     evBlock("Checked but below pass marks", "Not added", "p-warn", r.rejected),
     evBlock("Needs attention", "Check", "p-warn", warn),
   ].join("");
@@ -336,30 +353,47 @@ const tok = n => getComputedStyle(document.documentElement).getPropertyValue(n).
 const alpha = (hex, a) => /^#[0-9a-f]{6}$/i.test(hex) ? hex + Math.round(a * 255).toString(16).padStart(2, "0") : hex;
 const fmtN = (v, d = 2) => v == null || !isFinite(v) ? "—" : Number(v).toLocaleString("en-IN", {maximumFractionDigits: d});
 
+let VSEQ = [], VLIST = "SP", backY = 0;
 function openPanel(sym, tab){
   const [r, list] = findRow(sym); if (!r) return;
-  cur = {r, list}; curTab = tab || "chart";
-  const gap = emaGap(r), c = num(r.last_close), mk = marksOf(r);
-  document.getElementById("p-name").textContent = r.name || r.symbol;
-  document.getElementById("p-meta").innerHTML = `<span class="sym">${esc(r.symbol)}</span> · in <b>${list}</b> · added ${esc(r.added_on || "—")}`;
-  document.getElementById("p-stats").innerHTML =
-    `<span>Close <b>${c ? fmtINR(c) : "—"}</b></span>` +
-    `<span>200 EMA <b>${num(r.ema200) ? fmtINR(num(r.ema200)) : "—"}</b></span>` +
-    `<span class="${gap == null ? "" : gap >= 0 ? "up" : "down"}">${gap == null ? (c ? "New listing" : "") : (gap >= 0 ? "▲ " : "▼ ") + Math.abs(gap).toFixed(1) + "% vs EMA"}</span>` +
-    `<span>Marks <b>${mk == null ? "—" : mk + " / " + FULL}</b></span>`;
-  document.getElementById("scrim").hidden = false;
+  const wasOpen = !!cur;
+  if (!wasOpen || !VSEQ.includes(sym)) {
+    // Prev / Next walk through the list this stock is in, in the order shown on screen
+    VLIST = list; VSEQ = listRows(list).map(x => x.symbol);
+    if (!VSEQ.includes(sym)) VSEQ = D[list].map(x => x.symbol);
+  }
+  if (!wasOpen) backY = window.scrollY;
+  closeMenu();
+  cur = {r, list}; curTab = tab || curTab || "chart";
+  for (const id of ["v-list", "v-today", "v-history", "v-alerts", "strip"]) document.getElementById(id).hidden = true;
   document.getElementById("panel").hidden = false;
-  document.body.style.overflow = "hidden";
+  document.querySelector("main").classList.add("wide");
+  drawHead();
   drawPanel();
-  document.getElementById("p-close").focus();
+  if (!wasOpen) window.scrollTo(0, 0);
+}
+function drawHead(){
+  if (!cur) return;
+  const i = VSEQ.indexOf(cur.r.symbol), n = VSEQ.length;
+  document.getElementById("p-count").textContent = n ? `${i + 1} of ${n} · ${VLIST}` : "";
+  document.getElementById("p-back").textContent = {sp: "SP", dt: "DT", today: "Today", history: "History", alerts: "Alerts"}[view] || "list";
+  document.getElementById("p-prev").disabled = document.getElementById("p-next").disabled = n < 2;
+  document.getElementById("p-row").innerHTML = stockRow(cur.r, cur.list);
+}
+function stepStock(d){
+  if (!cur || VSEQ.length < 2) return;
+  const i = VSEQ.indexOf(cur.r.symbol);
+  openPanel(VSEQ[(i + d + VSEQ.length) % VSEQ.length], curTab);
 }
 function closePanel(){
   closeMenu();
   if (chartObj) { chartObj.remove(); chartObj = null; }
   document.getElementById("panel").hidden = true;
-  document.getElementById("scrim").hidden = true;
-  document.body.style.overflow = "";
+  document.getElementById("strip").hidden = false;
+  document.querySelector("main").classList.remove("wide");
   cur = null;
+  show(view);
+  window.scrollTo(0, backY);
 }
 function drawPanel(){
   document.querySelectorAll("[data-p]").forEach(t => { t.setAttribute("aria-selected", t.dataset.p === curTab);
@@ -466,7 +500,7 @@ async function drawChart(){
   const first = h.t[0], lastT = h.t[h.t.length - 1];
   document.getElementById("chartsrc").textContent =
     `${candles ? "Candles" : "Closing prices"} from ${first} to ${lastT} (${tfName}). ` +
-    (curTf === "D" ? "" : `EMA lines here are on ${tfName} candles; the robot's SP/DT rule uses the daily 200 EMA. `) +
+    (curTf === "D" ? "" : `EMA lines here are on ${tfName} candles; the robot's SP/DT rule uses the daily ${emaN(cur.r)} EMA. `) +
     (candles ? "" : "Open/high/low prices are not available for this stock, so a line chart is shown. ") +
     (bars.length < 200 ? "EMA 200 appears once there are 200 candles." : "");
   cur.bars = bars; cur.main = main;
@@ -719,7 +753,7 @@ function totalsStat(){
   const pl = val - inv, pct = pl / inv * 100;
   return `<div class="stat"><div class="k">My positions · ${n}</div><div class="v ${pl >= 0 ? "up" : "down"}">${signed(pl, 0)}<small>${(pct >= 0 ? "+" : "") + pct.toFixed(2)}% on ${fmtINR(Math.round(inv))}</small></div></div>`;
 }
-function posChanged(){ drawList(); drawStrip(); if (cur && curTab === "pos") drawPanel(); }
+function posChanged(){ drawList(); drawStrip(); if (cur) { drawHead(); if (curTab === "pos") drawPanel(); } }
 
 function fundHTML(f){
   if (!f) return `<div class="empty">Screener numbers appear after the next robot run (7 AM).</div>`;
@@ -780,15 +814,21 @@ document.addEventListener("click", e => {
     document.querySelectorAll("[data-range]").forEach(b => b.setAttribute("aria-pressed", b === rg)); setRange(); return; }
 });
 document.getElementById("p-close").addEventListener("click", closePanel);
-document.getElementById("scrim").addEventListener("click", closePanel);
-document.addEventListener("keydown", e => { if (e.key !== "Escape") return; if (!document.getElementById("ctx").hidden) { closeMenu(); return; }
+document.getElementById("p-prev").addEventListener("click", () => stepStock(-1));
+document.getElementById("p-next").addEventListener("click", () => stepStock(1));
+document.addEventListener("keydown", e => {
+  if ((e.key === "ArrowLeft" || e.key === "ArrowRight") && cur && document.getElementById("order").hidden && document.getElementById("ctx").hidden
+      && !e.target.closest("input,select,textarea")) { e.preventDefault(); stepStock(e.key === "ArrowLeft" ? -1 : 1); return; }
+  if (e.key !== "Escape") return; if (!document.getElementById("ctx").hidden) { closeMenu(); return; }
   if (!document.getElementById("order").hidden) { closeOrder(); return; } if (cur) closePanel(); });
 document.addEventListener("scroll", closeMenu, true);
 
 function show(v){
   if (!["sp", "dt", "today", "history", "alerts"].includes(v)) v = "sp";
   view = v;
-  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.v === v));
+  if (cur) { if (chartObj) { chartObj.remove(); chartObj = null; } cur = null; document.getElementById("panel").hidden = true;
+    document.getElementById("strip").hidden = false; document.querySelector("main").classList.remove("wide"); }
+  document.querySelectorAll(".tabs .tab").forEach(t => t.setAttribute("aria-selected", t.dataset.v === v));
   document.getElementById("v-list").hidden = !(v === "sp" || v === "dt");
   document.getElementById("v-today").hidden = v !== "today";
   document.getElementById("v-history").hidden = v !== "history";
@@ -818,7 +858,7 @@ let drawStrip = () => {};
   drawToday(); drawHistory(); drawAlerts();
   document.getElementById("c-alerts").textContent = (AL.active || []).length;
   refreshAlerts();
-  document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => { location.hash = t.dataset.v; show(t.dataset.v); }));
+  document.querySelectorAll(".tabs .tab").forEach(t => t.addEventListener("click", () => { location.hash = t.dataset.v; show(t.dataset.v); }));
   document.getElementById("q").addEventListener("input", drawList);
   document.getElementById("sort").addEventListener("change", drawList);
   window.addEventListener("hashchange", () => show(location.hash.slice(1)));

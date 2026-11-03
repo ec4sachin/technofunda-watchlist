@@ -195,3 +195,37 @@ if __name__ == "__main__":
     test_page_choice_and_screener_prices()
     test_full_history_ohlc()
     test()
+
+
+def test_new_listing_ema20():
+    """New listing (under 200 days): above 20 EMA -> SP, below 20 EMA -> DT. Too new for 20 EMA -> stays."""
+    up = list(range(100, 160))                 # 60 days rising -> close above 20 EMA
+    down = list(range(160, 100, -1))           # 60 days falling -> close below 20 EMA
+    assert main.judge((159.0, None, "d", {"c": up}), 200)[2] == 20
+    c, e, b = main.judge((101.0, None, "d", {"c": down}), 200)
+    assert b == 20 and c < e
+    assert main.judge((50.0, None, "d", {"c": [50] * 10}), 200) == (50.0, None, None)
+    assert main.judge((300.0, 250.0, "d", {"c": up}), 200) == (300.0, 250.0, 200)
+
+    def row(sym):
+        return {**main.entry(sym, sym, "test", "01 Nov 2026"), "last_fund_check": "01 Nov 2026", "fund_result": "6/11"}
+    sp = {"UPIPO": row("UPIPO"), "DOWNIPO": row("DOWNIPO")}
+    dt = {"BACKIPO": row("BACKIPO")}
+    hist = {"UPIPO.NS": (159.0, None, "02 Nov 2026", {"t": [], "c": up}),
+            "DOWNIPO.NS": (101.0, None, "02 Nov 2026", {"t": [], "c": down}),
+            "BACKIPO.NS": (159.0, None, "02 Nov 2026", {"t": [], "c": up})}
+    prices.close_and_ema = lambda tickers, period=200: {t: hist.get(t) for t in tickers}
+    os.environ.pop("GMAIL_ADDRESS", None)
+    report = {k: [] for k in ("added", "rejected", "to_dt", "to_sp", "removed", "unchecked", "no_price",
+                              "warnings", "first_marked", "new_listing")}
+    snaps = {s: {} for s in ("UPIPO", "DOWNIPO", "BACKIPO")}
+    history = []
+    main.daily(sp, dt, {"alerts": [], "ema_period": 200}, {"new_stock_pass": 5}, {"seen_email_ids": []},
+               "02 Nov 2026", report, history, snaps, {})
+    assert set(sp) == {"UPIPO", "BACKIPO"} and set(dt) == {"DOWNIPO"}, (sp.keys(), dt.keys())
+    assert sp["UPIPO"]["ema_basis"] == 20 and "20 EMA" in history[0]["reason"]
+    print("New listing 20 EMA rule OK:", [h["action"] + " " + h["symbol"] for h in history])
+
+
+if __name__ == "__main__":
+    test_new_listing_ema20()
