@@ -190,6 +190,25 @@ main.wide{max-width:max(1080px,80vw)}
 @media (max-width:720px){.tlinks{margin-left:0;width:100%}.tlinks .lg{display:none}}
 .plinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .src{color:var(--muted);font-size:12px;margin-top:10px}
+/* Compact layout while a chart is open (laptop): everything fits on one screen */
+@media (min-width:721px){
+  body.viewing #note{display:none}
+  body.viewing .hrow{padding-block:6px 2px}
+  body.viewing h1{font-size:18px}
+  body.viewing .tabs .tab{padding:5px 12px 7px}
+  body.viewing main.wide{padding-block:8px 6px}
+  body.viewing #p-row .row{padding:7px 12px;gap:6px 16px}
+  body.viewing #p-row .acts{flex-direction:row;align-items:center}
+  body.viewing .pcard{margin-top:6px}
+  body.viewing .pcard .ptabs .tab{padding:7px 10px 8px}
+  body.viewing .pn{padding:3px 0}
+  body.viewing .pn .btn{padding:4px 9px}
+  body.viewing .pb{padding:8px 12px 6px}
+  body.viewing .ranges{margin-bottom:5px}
+  body.viewing .rg,body.viewing .legend button{padding:3px 9px}
+  body.viewing .tlinks .btn{padding:3px 9px}
+  body.viewing .src{margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
 @media (max-width:720px){.chartbox{height:clamp(320px,58vh,560px)}.pb{padding:12px 10px 16px}}
 .aform{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
 .aform input{width:130px}
@@ -374,7 +393,7 @@ function openPanel(sym, tab){
   cur = {r, list}; curTab = tab || curTab || "chart";
   for (const id of ["v-list", "v-today", "v-history", "v-alerts", "strip"]) document.getElementById(id).hidden = true;
   document.getElementById("panel").hidden = false;
-  document.querySelector("main").classList.add("wide");
+  document.querySelector("main").classList.add("wide"); document.body.classList.add("viewing");
   drawHead();
   drawPanel();
   if (!wasOpen) window.scrollTo(0, 0);
@@ -397,7 +416,7 @@ function closePanel(){
   if (chartObj) { chartObj.remove(); chartObj = null; }
   document.getElementById("panel").hidden = true;
   document.getElementById("strip").hidden = false;
-  document.querySelector("main").classList.remove("wide");
+  document.querySelector("main").classList.remove("wide"); document.body.classList.remove("viewing");
   cur = null;
   show(view);
   window.scrollTo(0, backY);
@@ -416,8 +435,7 @@ function drawPanel(){
         `<button class="rg" data-range="${n}" aria-pressed="${n === curRange}">${l}</button>`).join("")}
       <div class="legend" id="legend"></div></div>
       <div class="chartbox" id="chartbox"><div class="empty" style="border:0">Loading chart…</div></div>
-      <div class="src" id="chartsrc"></div>
-      <div class="src"><b>Tip:</b> right-click on the chart (long-press on a phone) to set a price alert at that level.</div>`;
+      <div class="src"><span id="chartsrc"></span> <b>Tip:</b> right-click the chart (long-press on a phone) to set a price alert.</div>`;
     drawChart();
   } else if (curTab === "fund") {
     body.innerHTML = fundHTML(D.fund[r.symbol]) + links;
@@ -469,6 +487,7 @@ async function drawChart(){
   if (chartObj) { chartObj.remove(); chartObj = null; }
   if (!h || !h.t || !h.t.length) { box.innerHTML = `<div class="empty" style="border:0">Chart appears after the next robot run (7 AM).</div>`; return; }
   box.innerHTML = "";
+  fitChart();
   const candles = !!(h.o && h.h && h.l), bars = resample(h, curTf);
   const ink = tok("--muted"), line = tok("--line"), up = tok("--up"), dn = tok("--down");
   chartObj = LightweightCharts.createChart(box, {
@@ -516,6 +535,14 @@ async function drawChart(){
     main.createPriceLine({price: +a.price, color: tok("--accent"), lineWidth: 1, lineStyle: 2, axisLabelVisible: true, title: "🔔 " + a.op});
   attachMenu(box);
   setRange();
+}
+// Laptop: chart fills the rest of the screen, so header + stock card + chart are all visible without scrolling
+function fitChart(){
+  const box = document.getElementById("chartbox");
+  if (!box || !cur) return;
+  if (innerWidth <= 720) { box.style.height = ""; return; }
+  const top = box.getBoundingClientRect().top + window.scrollY;
+  box.style.height = Math.max(260, Math.floor(innerHeight - top - 40)) + "px";
 }
 function setRange(){
   if (!chartObj || !cur || !cur.bars || !cur.bars.length) return;
@@ -835,7 +862,7 @@ function show(v){
   if (!["sp", "dt", "today", "history", "alerts"].includes(v)) v = "sp";
   view = v;
   if (cur) { if (chartObj) { chartObj.remove(); chartObj = null; } cur = null; document.getElementById("panel").hidden = true;
-    document.getElementById("strip").hidden = false; document.querySelector("main").classList.remove("wide"); }
+    document.getElementById("strip").hidden = false; document.querySelector("main").classList.remove("wide"); document.body.classList.remove("viewing"); }
   document.querySelectorAll(".tabs .tab").forEach(t => t.setAttribute("aria-selected", t.dataset.v === v));
   document.getElementById("v-list").hidden = !(v === "sp" || v === "dt");
   document.getElementById("v-today").hidden = v !== "today";
@@ -870,6 +897,7 @@ let drawStrip = () => {};
   document.getElementById("q").addEventListener("input", drawList);
   document.getElementById("sort").addEventListener("change", drawList);
   window.addEventListener("hashchange", () => show(location.hash.slice(1)));
+  window.addEventListener("resize", fitChart);
   show(location.hash.slice(1));
 })();
 </script>
