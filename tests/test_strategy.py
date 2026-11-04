@@ -98,18 +98,47 @@ def test():
     assert t3["exits"][0]["reason"].startswith("Time stop") and t3["hold_days"] is not None, t3["exits"]
     print("Time stop OK:", t3["exits"][0]["reason"], t3["exits"][0]["price"])
 
+    # Positional Trading: same entry, 50% at +30%, the rest exits after 2 closes below EMA 50, no time stop
+    pos = {"strategies": [{"id": "positional", "name": "Positional Trading", "type": "positional", "list": "SP",
+                           "capital": 1000000, "pct": 10, "on": True}]}
+    bp = {}
+    stg.run(pos, bp, {"ABC": h}, sp, {})
+    stg.run(pos, bp, {"ABC": h1}, sp, {})
+    tp = bp["open"][0]
+    assert tp["target"] == round(trig * 1.3, 2) and tp["type"] == "positional"
+    stg.run(pos, bp, {"ABC": hist_from(c + [trig * 1.01] * 12, rng=0.002)}, sp, {})
+    assert bp["open"] and not bp["open"][0]["exits"]                       # flat for 12 days: no time stop
+    rally = c + [trig * 1.01] * 12 + [trig * (1 + 0.025 * k) for k in range(1, 15)]   # reaches +35%
+    stg.run(pos, bp, {"ABC": hist_from(rally)}, sp, {})
+    assert tp["booked"] and "Target +30%" in tp["exits"][0]["reason"]
+    fall = rally + [rally[-1] * f for f in (0.97, 0.94, 0.90, 0.86, 0.82, 0.80, 0.78)]
+    df_f = stg._frame(hist_from(fall))
+    stg.run(pos, bp, {"ABC": hist_from(fall)}, sp, {})
+    assert tp["status"] == "closed" and "EMA 50" in tp["exits"][-1]["reason"], tp["exits"]
+    k = df_f.index.index(tp["exits"][-1]["date"])
+    assert df_f.c[k] < df_f.e50[k] and df_f.c[k - 1] < df_f.e50[k - 1]   # sold on the 2nd close below EMA 50
+    print("Positional OK:", [(x["reason"], x["price"]) for x in tp["exits"]], "P&L", tp["pnl"])
+
     # OFF strategy does nothing; settings requests are validated
     off = {"strategies": [dict(settings["strategies"][0], on=False)]}
     assert stg.run(off, {}, {"ABC": h1}, sp, {})["entries"] == []
     data = stg.load_settings()
     assert data["strategies"][0]["id"] == "swing" and data["strategies"][0]["on"] is False
+    assert [x["id"] for x in data["strategies"]] == ["swing", "positional"]
+    # a strategies.json saved before Positional existed gets it added; a removed one stays removed
+    storage.save_json("strategies.json", {"strategies": [dict(data["strategies"][0], on=True)]})
+    assert [x["id"] for x in stg.load_settings()["strategies"]] == ["swing", "positional"]
+    d2 = stg.load_settings(); stg.apply_request(d2, {"action": "strategy_delete", "id": "positional"}); storage.save_json("strategies.json", d2)
+    assert [x["id"] for x in stg.load_settings()["strategies"]] == ["swing"]
+    os.remove(os.path.join(storage.DATA, "strategies.json"))
+    data = stg.load_settings()
     assert stg.apply_request(data, {"action": "strategy_save", "strategy": {"id": "swing", "name": "Swing Strategy", "on": True, "capital": "2000000", "pct": 5}}, "2026-11-05")
     assert data["strategies"][0]["on"] and data["strategies"][0]["capital"] == 2000000 and data["strategies"][0]["pct"] == 5 and data["strategies"][0]["on_since"] == "2026-11-05"
     assert stg.apply_request(data, {"action": "strategy_save", "strategy": {"id": "s1", "name": "<b>X</b>" * 20, "type": "evil", "list": "ALL"}})
-    s1 = data["strategies"][1]
+    s1 = next(x for x in data["strategies"] if x["id"] == "s1")
     assert len(s1["name"]) == 40 and s1["type"] == "none" and s1["list"] == "SP"
     assert not stg.apply_request(data, {"action": "strategy_save", "strategy": {"id": "../x", "name": "a"}})
-    assert stg.apply_request(data, {"action": "strategy_delete", "id": "s1"}) and len(data["strategies"]) == 1
+    assert stg.apply_request(data, {"action": "strategy_delete", "id": "s1"}) and len(data["strategies"]) == 2
     # portfolio: one money pot, 10% of current capital per trade, skip when no free cash
     tr = [{"status": "closed", "symbol": f"S{i}", "name": f"S{i}", "entry_date": f"2026-01-{i + 1:02d}", "closed_on": "2026-03-01",
            "entry": 100.0, "qty": 10, "pnl": 100.0} for i in range(12)]                       # 12 trades of +10% at once
