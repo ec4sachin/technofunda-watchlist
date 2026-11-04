@@ -201,3 +201,39 @@ def test_split_adjust():
 
 if __name__ == "__main__":
     test_split_adjust()
+
+
+def test_index_download():
+    """NSE daily index files: 3 years asked once, holidays remembered, nothing asked again next time."""
+    import tempfile as _t
+    from datetime import datetime as _d, timedelta as _td
+    import market
+    storage.DATA = _t.mkdtemp()
+
+    class R:
+        def __init__(s, code, text=""): s.status_code, s.text = code, text
+
+    class Sess:
+        def __init__(s): s.n = 0
+        def get(s, url, **k):
+            s.n += 1
+            dmy = url.split("_")[-1][:8]
+            d = _d.strptime(dmy, "%d%m%Y")
+            if d.day == 15:  # pretend the 15th is always a holiday
+                return R(404)
+            return R(200, "Index Name,Index Date,Open Index Value,High Index Value,Low Index Value,Closing Index Value\n"
+                          f"Nifty Smallcap 100,{d.strftime('%d-%m-%Y')},1,1,1,{10000 + d.toordinal() % 1000}\n")
+    market.time.sleep = lambda s: None
+    s1 = Sess()
+    h = market._from_nse(days=60, session=s1)
+    assert len(h["t"]) > 30 and s1.n >= len(h["t"])
+    s2 = Sess()
+    market._from_nse(days=60, session=s2)
+    assert s2.n <= 7, s2.n          # only the last week is asked again (in case a file was late)
+    m = market.Mood(h)
+    assert m.now() is None or len(m.now()) == 4
+    print("Index download OK:", len(h["t"]), "days, second run asked", s2.n)
+
+
+if __name__ == "__main__":
+    test_index_download()
