@@ -1,7 +1,13 @@
 {
  "added": [],
  "rejected": [],
- "to_dt": [],
+ "to_dt": [
+  [
+   "RSL",
+   "Rajputana Stain.",
+   "close 169.7 < 20 EMA 171.21"
+  ]
+ ],
  "to_sp": [],
  "removed": [],
  "unchecked": [],
@@ -47,12 +53,12 @@
   [
    "AEROPLANE",
    "A C J K Exports",
-   "close 217.84 vs 20 EMA 212.82 → SP"
+   "close 217.94 vs 20 EMA 213.31 → SP"
   ],
   [
    "RSL",
    "Rajputana Stain.",
-   "close 175.39 vs 20 EMA 171.37 → SP"
+   "close 169.7 vs 20 EMA 171.21 → DT"
   ],
   [
    "TEAMTECH",
@@ -62,7 +68,7 @@
   [
    "UDAYJEW",
    "Uday Jewellery",
-   "close 220.71 vs 20 EMA 208.47 → SP"
+   "close 210.11 vs 20 EMA 208.62 → SP"
   ],
   [
    "544551",
@@ -72,7 +78,7 @@
   [
    "RAMBHAJO",
    "Advit Jewels",
-   "close 330.9 vs 20 EMA 347.7"
+   "close 314.4 vs 20 EMA 344.53"
   ]
  ],
  "per_alert": {
@@ -88,5 +94,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "04 Nov 2026, 10:13 AM IST"
+ "run_at": "04 Nov 2026, 03:22 PM IST"
 }
