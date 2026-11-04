@@ -5,11 +5,34 @@
    "name": "Swing Strategy",
    "type": "swing",
    "list": "SP",
-   "amount": 25000.0,
    "on": true,
    "note": "EMA stack + tight 4-candle base breakout",
    "added": "2026-11-04",
-   "on_since": "2026-11-04"
+   "on_since": "2026-11-04",
+   "capital": 1000000.0,
+   "pct": 10.0
+  },
+  {
+   "id": "positional",
+   "name": "Positional Trading",
+   "type": "positional",
+   "list": "SP",
+   "capital": 1000000,
+   "pct": 10,
+   "on": false,
+   "note": "Same entry · 50% at +30% · rest exits on 2 closes below EMA 50",
+   "added": ""
+  },
+  {
+   "id": "switch",
+   "name": "Smart Switch",
+   "type": "switch",
+   "list": "SP",
+   "capital": 1000000,
+   "pct": 10,
+   "on": false,
+   "note": "Same entry · Smallcap 100 above EMA 50 → Positional exits, below → Swing exits",
+   "added": ""
   }
  ]
 }
