@@ -20,11 +20,13 @@
    "name": "Kanpur Plastipa.",
    "op": "above",
    "price": 251.3,
-   "status": "active",
+   "status": "triggered",
    "created": "03 Nov 2026 03:13 PM",
    "source": "dashboard",
    "created_ts": "2026-11-03T15:13:47+05:30",
-   "ticker": "KANPRPLA.NS"
+   "ticker": "KANPRPLA.NS",
+   "hit_price": 253.0,
+   "hit_at": "04 Nov 2026 09:20 AM"
   },
   {
    "id": 3,
