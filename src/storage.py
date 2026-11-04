@@ -80,3 +80,29 @@ def save_state(state):
     state["seen_email_ids"] = state["seen_email_ids"][-1000:]
     with open(_path("state.json"), "w", encoding="utf-8") as f:
         json.dump(state, f, indent=2)
+
+
+TRADE_LOG_FIELDS = ["date", "strategy", "mode", "action", "symbol", "name", "qty", "price", "value", "reason",
+                    "pnl", "pnl_pct", "hold_days", "trade_id"]
+
+
+def append_trade_log(rows):
+    """Permanent log of every paper / real trade action (never trimmed). Opens in Excel."""
+    if not rows:
+        return
+    p = _path("trade_log.csv")
+    new = not os.path.exists(p)
+    with open(p, "a", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=TRADE_LOG_FIELDS)
+        if new:
+            w.writeheader()
+        for r in rows:
+            w.writerow({k: r.get(k, "") for k in TRADE_LOG_FIELDS})
+
+
+def load_trade_log():
+    p = _path("trade_log.csv")
+    if not os.path.exists(p):
+        return []
+    with open(p, newline="", encoding="utf-8") as f:
+        return list(csv.DictReader(f))

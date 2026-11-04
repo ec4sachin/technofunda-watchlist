@@ -127,6 +127,22 @@ h2 .cnt{font:500 12px var(--f-mono);padding:1px 8px;border-radius:999px;backgrou
 .ev>div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:10px 14px;border-top:1px solid var(--line);align-items:center}
 .ev>div:first-child{border-top:0}
 .ev .why{grid-column:1/2;color:var(--muted);font-size:12.5px;font-family:var(--f-mono);overflow-wrap:anywhere}
+.perf{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pcol{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px;min-width:0}
+.ph2{font-weight:700;margin-bottom:8px}.ph2 .mut{font-weight:400;font-size:12.5px}
+.kv small{font-size:12px}
+.eq{width:100%;height:120px;margin-top:10px;display:block}
+.eq polyline{fill:none;stroke-width:2;vector-effect:non-scaling-stroke}.eqU{stroke:var(--up)}.eqD{stroke:var(--down)}
+.eq0{stroke:var(--line);stroke-width:1;vector-effect:non-scaling-stroke;stroke-dasharray:4 3}
+.eqlab{display:flex;justify-content:space-between;font:11.5px var(--f-mono);color:var(--muted)}
+.ready{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:4px;font-size:13.5px}
+#v-strategy td.num{white-space:nowrap}
+#v-strategy .ra{text-align:right}
+.yrs{display:flex;flex-wrap:wrap;gap:6px}
+.yrc{font:500 12.5px var(--f-mono);padding:3px 8px;border-radius:7px;border:1px solid var(--line)}
+.yrc.pos{background:var(--up-soft);color:var(--up)}.yrc.neg{background:var(--down-soft);color:var(--down)}
+details.bt{margin-top:10px}details.bt summary{cursor:pointer;font-weight:600;color:var(--accent)}
+@media (max-width:820px){.perf{grid-template-columns:1fr}}
 .st-head{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap;margin-bottom:10px}
 .st-note{background:var(--warn-soft);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13.5px;margin-bottom:12px}
 .st-form{display:flex !important;flex-direction:column;gap:10px;margin-bottom:12px}
@@ -888,10 +904,12 @@ document.addEventListener("click", e => {
   const sv = e.target.closest("[data-save-alert]"); if (sv && cur) { if (!connected()) { needConnect(); return; } saveAlert(cur.r.symbol, cur.r.name, document.getElementById("a-op").value, document.getElementById("a-price").value); return; }
   const da = e.target.closest("[data-del-alert]"); if (da) { deleteAlert(+da.dataset.delAlert, da); return; }
   if (e.target.closest("[data-gh-connect]")) { ghConnect(); return; }
-  if (e.target.closest("[data-st-new]")) { stForm = {}; drawStrategies(); document.getElementById("st-name").focus(); return; }
+  if (e.target.closest("[data-st-new]")) { if (!connected()) { needConnect(); return; } stForm = {}; drawStrategies(); document.getElementById("st-name").focus(); return; }
+  if (e.target.closest("[data-st-migrate]")) { migrateLocal(); return; }
+  if (e.target.closest("[data-st-forget]")) { LOCAL_ST = []; try { localStorage.removeItem("tf-strategies"); } catch (x) {} drawStrategies(); return; }
   if (e.target.closest("[data-st-cancel]")) { stForm = null; drawStrategies(); return; }
   if (e.target.closest("[data-st-save]")) { saveStrategy(); return; }
-  const se = e.target.closest("[data-st-edit]"); if (se) { const x = STRAT.find(t => t.id === se.dataset.stEdit); stForm = Object.assign({}, x); drawStrategies(); return; }
+  const se = e.target.closest("[data-st-edit]"); if (se) { if (!connected()) { needConnect(); return; } const x = STRAT.find(t => t.id === se.dataset.stEdit); stForm = Object.assign({}, x); drawStrategies(); return; }
   const sd = e.target.closest("[data-st-del]"); if (sd) { delStrategy(sd.dataset.stDel, sd); return; }
   if (e.target.closest("[data-gh-disconnect]")) { ghDisconnect(); return; }
   if (e.target.closest("[data-goto-alerts]")) { e.preventDefault(); closePanel(); location.hash = "alerts"; show("alerts"); return; }
@@ -920,62 +938,221 @@ document.addEventListener("keydown", e => {
   if (!document.getElementById("order").hidden) { closeOrder(); return; } if (cur) requestClose(); });
 document.addEventListener("scroll", closeMenu, true);
 
-// ---------------- Strategies: add / remove / ON-OFF. Rules and automatic trading are connected later.
-let STRAT = [], stForm = null;
-try { STRAT = JSON.parse(localStorage.getItem("tf-strategies") || "[]"); if (!Array.isArray(STRAT)) STRAT = []; } catch (e) { STRAT = []; }
-const saveStrat = () => { try { localStorage.setItem("tf-strategies", JSON.stringify(STRAT)); return true; } catch (e) { return false; } };
-const LISTS = {SP: "SP", DT: "DT", BOTH: "SP + DT"};
+// ---------------- Strategies: settings are saved in GitHub (data/strategies.json) through the Price Alerts robot,
+// so every device and the trading robot see the same list. Paper trading until a broker is connected.
+const SD = D.strat || {settings: [], setups: {}, open: [], closed: []};
+let STRAT = (SD.settings || []).map(x => Object.assign({}, x)), stForm = null, stPending = {};
+let LOCAL_ST = []; try { LOCAL_ST = JSON.parse(localStorage.getItem("tf-strategies") || "[]"); if (!Array.isArray(LOCAL_ST)) LOCAL_ST = []; } catch (e) {}
+LOCAL_ST = LOCAL_ST.filter(l => !STRAT.some(t => t.name.toLowerCase() === String(l.name || "").toLowerCase()));
+const LISTS = {SP: "SP", DT: "DT", BOTH: "SP + DT"}, TYPES = {swing: "Swing Strategy rules", none: "Rules not added yet"};
+const inr0 = v => v == null || !isFinite(v) ? "—" : "₹" + Number(v).toLocaleString("en-IN", {maximumFractionDigits: 0});
+const inr2 = v => v == null || !isFinite(v) ? "—" : "₹" + Number(v).toLocaleString("en-IN", {maximumFractionDigits: 2});
+const sgn0 = v => (v >= 0 ? "+" : "−") + inr0(Math.abs(v));
+async function sendStrategy(obj, okMsg){
+  if (!connected()) { needConnect(); return false; }
+  try { await sendRequest(obj); showToast(okMsg + " <span class='mut'>(saved to GitHub in about a minute)</span>"); laterRefreshStrat(); return true; }
+  catch (e) { saveError(e); return false; }
+}
+function laterRefreshStrat(){ for (const ms of [60000, 150000, 300000]) setTimeout(refreshStrat, ms); }
+async function refreshStrat(){
+  if (!REPO) return;
+  try {
+    const st = await fetch(`https://raw.githubusercontent.com/${REPO}/main/data/strategies.json?t=${Date.now()}`, {cache: "no-store"}).then(r => r.ok ? r.json() : Promise.reject(r.status));
+    if (Array.isArray(st.strategies)) { STRAT = st.strategies; stPending = {}; if (view === "strategy" && !stForm) drawStrategies(); else document.getElementById("c-strategy").textContent = STRAT.filter(t => t.on).length; }
+  } catch (e) {}
+}
+function tradeRows(list, open){
+  if (!list.length) return `<div class="empty">${open ? "No open trades." : "No closed trades yet."}</div>`;
+  return `<div class="tbl"><table><thead><tr><th>Stock</th><th>Entry</th><th class="ra">Qty</th><th class="ra">Entry ₹</th>${open
+      ? `<th class="ra">Stop</th><th class="ra">Target</th><th class="ra">Now</th><th class="ra">P&amp;L</th>` : `<th>Exit</th><th class="ra">P&amp;L</th>`}</tr></thead><tbody>` +
+    list.map(t => {
+      const ltp = num(t.ltp), unreal = open && ltp ? (ltp - t.entry) * t.remaining : 0, pl = (t.pnl || 0) + unreal;
+      const exits = (t.exits || []).map(x => `${esc(x.date)}: ${x.qty} @ ${inr2(x.price)} — ${esc(x.reason)}`).join("<br>");
+      return `<tr><td><b>${esc(t.name || t.symbol)}</b><br><span class="sym mut">${esc(t.symbol)}</span></td><td class="num">${esc(t.entry_date)}</td>
+        <td class="num ra">${open ? t.remaining + (t.remaining !== t.qty ? " / " + t.qty : "") : t.qty}</td><td class="num ra">${inr2(t.entry)}</td>` +
+        (open ? `<td class="num ra">${inr2(t.stop)}${t.signal_low ? `<br><span class="mut">trail ${inr2(t.signal_low)}</span>` : ""}</td>
+                 <td class="num ra">${t.booked ? "50% booked" : inr2(t.target)}</td><td class="num ra">${ltp ? inr2(ltp) : "—"}</td>`
+              : `<td class="why">${exits}</td>`) +
+        `<td class="num ra ${pl >= 0 ? "up" : "down"}"><b>${sgn0(pl)}</b></td></tr>`;
+    }).join("") + `</tbody></table></div>`;
+}
+// ---- performance report (paper trading and backtest) and the trade log
+function curveSVG(curve){
+  if (!curve || curve.length < 2) return "";
+  const W = 640, H = 140, P = 6, ys = [0, ...curve.map(c => c[1])], lo = Math.min(...ys), hi = Math.max(...ys), span = hi - lo || 1;
+  const x = i => P + i * (W - 2 * P) / (curve.length - 1), y = v => H - P - (v - lo) * (H - 2 * P) / span;
+  const pts = curve.map((c, i) => `${x(i).toFixed(1)},${y(c[1]).toFixed(1)}`).join(" ");
+  const end = curve[curve.length - 1][1];
+  return `<svg class="eq" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Profit growing trade by trade, ending at ${esc(sgn0(end))}">
+    <line x1="0" x2="${W}" y1="${y(0)}" y2="${y(0)}" class="eq0"/><polyline points="${pts}" class="${end >= 0 ? "eqU" : "eqD"}"/></svg>
+    <div class="eqlab"><span>${esc(curve[0][0])}</span><span>${esc(curve[curve.length - 1][0])}</span></div>`;
+}
+function perfTable(r, extra){
+  if (!r || !r.trades) return `<div class="empty">${extra || "No closed trades yet."}</div>`;
+  const row = (k, v, cls) => `<div class="kv"><div class="k">${k}</div><div class="v ${cls || ""}">${v}</div></div>`;
+  const pf = r.profit_factor, wr = r.win_rate;
+  return `<div class="kgrid">` +
+    row("Closed trades", r.trades + (r.open ? ` <small class="mut">+${r.open} open</small>` : "")) +
+    row("Win rate", wr == null ? "—" : wr + "%", "") +
+    row("Total P&amp;L", sgn0(r.total_pnl), r.total_pnl >= 0 ? "up" : "down") +
+    row("Avg win", r.avg_win == null ? "—" : sgn0(r.avg_win), "up") +
+    row("Avg loss", r.avg_loss == null ? "—" : sgn0(r.avg_loss), "down") +
+    row("Profit factor", pf == null ? "—" : pf, pf == null ? "" : pf >= 1.5 ? "up" : pf < 1 ? "down" : "") +
+    row("Avg P&amp;L per trade", r.expectancy == null ? "—" : sgn0(r.expectancy), r.expectancy >= 0 ? "up" : "down") +
+    row("Avg return per trade", r.avg_return_pct == null ? "—" : r.avg_return_pct + "%") +
+    row("Max drawdown", inr0(r.max_drawdown), "down") +
+    row("Avg holding", r.avg_hold_days == null ? "—" : r.avg_hold_days + " days") +
+    row("Best / worst", `${sgn0(r.best)} / ${sgn0(r.worst)}`) +
+    (r.open ? row("Open trades now", sgn0(r.open_pnl || 0), (r.open_pnl || 0) >= 0 ? "up" : "down") : "") +
+    (r.without_best != null ? row("Without the best trade", sgn0(r.without_best), r.without_best >= 0 ? "up" : "down") : "") +
+    `</div>` + curveSVG(r.curve);
+}
+function readiness(r){
+  const n = r ? r.trades : 0, pf = r && r.profit_factor, wr = r && r.win_rate;
+  const ck = (ok, txt) => `<li class="${ok ? "up" : "mut"}">${ok ? "✓" : "○"} ${txt}</li>`;
+  return `<ul class="ready">` +
+    ck(n >= 30, `At least 30 closed paper trades <b>(${n} of 30)</b> — enough trades to judge`) +
+    ck(pf != null && pf >= 1.5 && n >= 10, `Profit factor 1.5 or more <b>(${pf == null ? "—" : pf})</b> — winners clearly bigger than losers${n < 10 ? " · counts after 10 trades" : ""}`) +
+    ck(r && r.total_pnl > 0 && n >= 10, `Total paper P&amp;L positive <b>(${r ? sgn0(r.total_pnl || 0) : "—"})</b>${n < 10 ? " · counts after 10 trades" : ""}`) +
+    ck(r && r.max_drawdown != null && n >= 10 && r.max_drawdown <= Math.max(1, r.total_pnl), `Worst fall (drawdown) smaller than the total profit`) +
+    `</ul><p class="src">These are common checks before trading a system with real money; they are not a guarantee.
+    Paper results leave out brokerage, taxes and slippage (roughly 0.3–0.5% per round trip in small caps).</p>`;
+}
+function yearTable(months){
+  const ys = {}; for (const [m, v] of Object.entries(months || {})) ys[m.slice(0, 4)] = (ys[m.slice(0, 4)] || 0) + v;
+  const ks = Object.keys(ys).sort().reverse(); if (!ks.length) return "";
+  return `<div class="ph2" style="margin-top:12px">Profit by year</div><div class="yrs">${ks.map(k =>
+    `<span class="yrc ${ys[k] >= 0 ? "pos" : "neg"}"><b>${k}</b> ${sgn0(ys[k])}</span>`).join("")}</div>`;
+}
+function logTable(rows, sid){
+  const mine = rows.filter(r => !sid || r.strategy === sid || r.trade_id.startsWith(sid + "-"));
+  const csv = REPO ? `https://raw.githubusercontent.com/${REPO}/main/data/trade_log.csv` : "";
+  return (mine.length ? `<div class="tbl"><table><thead><tr><th>Date</th><th>Action</th><th>Stock</th><th class="ra">Qty</th><th class="ra">Price</th><th>Reason</th><th class="ra">P&amp;L</th><th class="ra">Days</th></tr></thead><tbody>` +
+    mine.slice(0, 200).map(r => `<tr><td class="num">${esc(r.date)}</td><td><span class="pill ${r.action === "BUY" ? "p-sp" : +r.pnl >= 0 ? "p-add" : "p-dt"}">${esc(r.action)}</span></td>
+      <td><b>${esc(r.name)}</b><br><span class="sym mut">${esc(r.symbol)}</span></td><td class="num ra">${esc(r.qty)}</td><td class="num ra">${inr2(+r.price)}</td>
+      <td class="why">${esc(r.reason)}</td><td class="num ra ${+r.pnl >= 0 ? "up" : "down"}">${r.pnl === "" ? "" : sgn0(+r.pnl) + (r.pnl_pct !== "" ? `<br><span class="mut">${esc(r.pnl_pct)}%</span>` : "")}</td>
+      <td class="num ra">${esc(r.hold_days)}</td></tr>`).join("") + `</tbody></table></div>`
+    : `<div class="empty">No trades yet. Every paper BUY and SELL will be written here with date, price, reason and P&amp;L.</div>`) +
+    (csv ? `<p class="src"><a href="${esc(csv)}" target="_blank" rel="noopener" download>⬇ Download the full trade log (opens in Excel)</a> — every trade is kept permanently in <span class="sym">data/trade_log.csv</span>.</p>` : "");
+}
+function btTrades(list){
+  if (!list || !list.length) return "";
+  return `<details class="bt"><summary>Show the ${list.length} backtest trades</summary><div class="tbl"><table><thead><tr><th>Stock</th><th>Entry</th><th class="ra">Entry ₹</th><th>Exits</th><th class="ra">P&amp;L</th><th class="ra">Days</th></tr></thead><tbody>` +
+    list.map(t => `<tr><td><b>${esc(t.name)}</b><br><span class="sym mut">${esc(t.symbol)}</span></td><td class="num">${esc(t.entry_date)}</td><td class="num ra">${inr2(t.entry)}</td>
+      <td class="why">${t.status === "closed" ? (t.exits || []).map(x => `${esc(x.date)}: ${esc(x.reason)} @ ${inr2(x.price)}`).join("<br>") : "still open"}</td>
+      <td class="num ra ${(t.status === "closed" ? t.pnl : t.open_pnl || 0) >= 0 ? "up" : "down"}">${sgn0(t.status === "closed" ? t.pnl : t.open_pnl || 0)}${t.pnl_pct != null ? `<br><span class="mut">${esc(t.pnl_pct)}%</span>` : ""}</td>
+      <td class="num ra">${esc(t.hold_days ?? "")}</td></tr>`).join("") + `</tbody></table></div></details>`;
+}
+function perfHTML(t){
+  const live = (SD.live || {})[t.id], bt = (SD.backtest || {})[t.id] || {};
+  return `<h2>${esc(t.name)} · is it working?</h2>
+    <div class="perf">
+      <div class="pcol"><div class="ph2">📝 Paper trading <span class="mut">(real days since you switched it ON)</span></div>
+        ${perfTable(live, t.on ? "No closed paper trades yet — they appear here as the strategy trades." : "Switch the strategy ON to start paper trading.")}
+        <div class="ph2" style="margin-top:12px">Ready for real money?</div>${readiness(live)}</div>
+      <div class="pcol"><div class="ph2">🧪 Backtest <span class="mut">(same rules on all past prices of ${esc(bt.stocks || 0)} stocks in ${LISTS[t.list] || "SP"}${bt.as_of ? ", " + esc(bt.as_of) : ""})</span></div>
+        ${perfTable(bt.report, "Backtest appears after the next robot run.")}${yearTable((bt.report || {}).months)}
+        <p class="src">Backtest uses the stocks in the list <b>today</b> (they are strong now), so it looks better than real trading would have. Use it to compare rule changes; trust the paper trading log for the real decision.</p>
+        ${btTrades(bt.trades)}</div>
+    </div>
+    <h2>${esc(t.name)} · trade log</h2>${logTable(SD.log || [], t.id)}`;
+}
+function setupRows(list){
+  if (!list || !list.length) return `<div class="empty">No setups today. When a stock meets all entry rules it appears here with its buy-stop price.</div>`;
+  return `<div class="tbl"><table><thead><tr><th>Stock</th><th class="ra">Buy above</th><th class="ra">Stop</th><th class="ra">Risk</th><th class="ra">Qty</th><th class="ra">Amount</th><th class="ra">4-day range</th></tr></thead><tbody>` +
+    list.map(x => `<tr><td><b>${esc(x.name)}</b><br><span class="sym mut">${esc(x.symbol)}</span></td><td class="num ra"><b>${inr2(x.buy_above)}</b></td>
+      <td class="num ra">${inr2(x.stop)}</td><td class="num ra">${esc(x.risk_pct)}%</td><td class="num ra">${esc(x.qty)}</td><td class="num ra">${inr0(x.amount)}</td><td class="num ra">${esc(x.range_pct)}%</td></tr>`).join("") +
+    `</tbody></table></div>`;
+}
 function drawStrategies(){
   const on = STRAT.filter(t => t.on).length;
   document.getElementById("c-strategy").textContent = on;
-  const form = stForm ? `<div class="aform st-form">
-      <b>${stForm.id ? "Edit strategy" : "New strategy"}</b>
-      <div class="fr"><label for="st-name">Name</label><input id="st-name" maxlength="40" placeholder="e.g. 52W High Breakout" value="${esc(stForm.name || "")}"></div>
+  const f = stForm;
+  const form = f ? `<div class="aform st-form">
+      <b>${f.id ? "Edit strategy" : "New strategy"}</b>
+      <div class="fr"><label for="st-name">Name</label><input id="st-name" maxlength="40" placeholder="e.g. 52W High Breakout" value="${esc(f.name || "")}"></div>
+      <div class="fr"><label for="st-type">Rules</label><select id="st-type">${Object.entries(TYPES).map(([k, l]) =>
+        `<option value="${k}" ${(f.type || "none") === k ? "selected" : ""}>${l}</option>`).join("")}</select></div>
       <div class="fr"><label for="st-list">Stocks to scan</label><select id="st-list">${Object.entries(LISTS).map(([k, l]) =>
-        `<option value="${k}" ${(stForm.list || "SP") === k ? "selected" : ""}>${l}</option>`).join("")}</select></div>
-      <div class="fr"><label for="st-note">Notes (optional)</label><input id="st-note" maxlength="120" placeholder="Entry / exit idea in your words" value="${esc(stForm.note || "")}"></div>
-      <div class="st-acts"><button class="btn pri" data-st-save>${stForm.id ? "Save changes" : "Add strategy"}</button><button class="btn" data-st-cancel>Cancel</button></div>
+        `<option value="${k}" ${(f.list || "SP") === k ? "selected" : ""}>${l}</option>`).join("")}</select></div>
+      <div class="fr"><label for="st-amt">Amount per trade (₹)</label><input id="st-amt" type="number" inputmode="numeric" min="1000" step="1000" value="${esc(f.amount || 25000)}"></div>
+      <div class="fr"><label for="st-note">Notes (optional)</label><input id="st-note" maxlength="120" placeholder="Entry / exit idea in your words" value="${esc(f.note || "")}"></div>
+      <div class="st-acts"><button class="btn pri" data-st-save>${f.id ? "Save changes" : "Add strategy"}</button><button class="btn" data-st-cancel>Cancel</button></div>
     </div>` : "";
-  const cards = STRAT.map(t => `<article class="st ${t.on ? "on" : ""}">
+  const cards = STRAT.map(t => {
+    const opens = (SD.open || []).filter(x => x.strategy === t.id), closed = (SD.closed || []).filter(x => x.strategy === t.id);
+    const realized = closed.reduce((a, x) => a + (x.pnl || 0), 0), wins = closed.filter(x => x.pnl > 0).length;
+    const pend = stPending[t.id];
+    const state = t.type !== "swing" ? `<span class="pill p-warn">${t.on ? "ON" : "OFF"}</span> Rules not added yet`
+      : t.on ? `<span class="pill p-add">ON</span> Paper trading · ${opens.length} open · ${closed.length} closed${closed.length ? ` · win ${Math.round(wins / closed.length * 100)}% · ${sgn0(realized)}` : ""}`
+      : `<span class="pill p-warn">OFF</span> Switch ON to start paper trading`;
+    return `<article class="st ${t.on ? "on" : ""}">
       <div class="st-main"><div class="st-name">${esc(t.name)}</div>
-        <div class="meta">Scans <b>${LISTS[t.list] || "SP"}</b> · added ${esc(t.added || "")}${t.note ? " · " + esc(t.note) : ""}</div>
-        <div class="st-state">${t.on ? `<span class="pill p-add">ON</span> Waiting for rules — no trades yet` : `<span class="pill p-warn">OFF</span> Rules not added yet`}</div></div>
+        <div class="meta">${esc(TYPES[t.type] || TYPES.none)} · scans <b>${LISTS[t.list] || "SP"}</b> · ${inr0(t.amount || 25000)} per trade${t.note ? " · " + esc(t.note) : ""}</div>
+        <div class="st-state">${pend ? `<span class="pill p-sp">Saving…</span> ` : ""}${state}</div></div>
       <label class="sw" title="${t.on ? "Switch OFF" : "Switch ON"}"><input type="checkbox" data-st-toggle="${esc(t.id)}" ${t.on ? "checked" : ""} aria-label="${esc(t.name)} ON / OFF"><span></span></label>
       <div class="st-btns"><button class="btn" data-st-edit="${esc(t.id)}">Edit</button><button class="btn" data-st-del="${esc(t.id)}">Remove</button></div>
-    </article>`).join("");
+    </article>`;
+  }).join("");
+  const swing = STRAT.filter(t => t.type === "swing");
+  const detail = swing.map(t => {
+    const opens = (SD.open || []).filter(x => x.strategy === t.id), closed = (SD.closed || []).filter(x => x.strategy === t.id);
+    return perfHTML(t) + `<h2>${esc(t.name)} · setups for today<span class="cnt">${((SD.setups || {})[t.id] || []).length}</span></h2>${setupRows((SD.setups || {})[t.id])}
+      <h2>${esc(t.name)} · open trades<span class="cnt">${opens.length}</span></h2>${tradeRows(opens, true)}
+      <h2>${esc(t.name)} · closed trades<span class="cnt">${closed.length}</span></h2>${tradeRows(closed, false)}`;
+  }).join("");
+  const local = LOCAL_ST.length ? `<div class="st-note">📱 ${LOCAL_ST.length} strateg${LOCAL_ST.length > 1 ? "ies were" : "y was"} saved only on this device earlier
+      (${LOCAL_ST.map(l => esc(l.name)).join(", ")}). <button class="btn" data-st-migrate>Save to GitHub</button> <button class="btn" data-st-forget>Forget</button></div>` : "";
   document.getElementById("v-strategy").innerHTML = `
     <div class="st-head"><div><h2 style="margin:0">Strategies<span class="cnt">${STRAT.length}</span></h2>
-      <div class="meta">${on} ON · switch a strategy ON to let it trade automatically</div></div>
-      ${stForm ? "" : `<button class="btn pri" data-st-new>+ Add strategy</button>`}</div>
-    <div class="st-note">🔒 <b>Automatic trading is not active yet.</b> Each strategy starts trading when (1) its entry / exit rules are added and
-      (2) your broker (Zerodha / Angel One) is connected through the VPS. Until then the switches only save your choice.</div>
-    ${form}
-    <div class="st-list">${cards || (stForm ? "" : `<div class="empty">No strategies yet. Tap <b>+ Add strategy</b> to create one.</div>`)}</div>
-    <p class="src">Strategies are saved on this device.</p>`;
+      <div class="meta">${on} ON · data of ${esc((D.run || {}).price_date || "—")}</div></div>
+      ${f ? "" : `<button class="btn pri" data-st-new>+ Add strategy</button>`}</div>
+    <div class="st-note">📝 <b>Paper trading.</b> Strategies that are ON record the trades they would take (as buy-stop orders at the
+      "buy above" price) and send them on Telegram each morning. Real orders start when your broker (Zerodha / Angel One) is connected through the VPS.</div>
+    ${local}${form}
+    <div class="st-list">${cards || (f ? "" : `<div class="empty">No strategies yet. Tap <b>+ Add strategy</b> to create one.</div>`)}</div>
+    ${detail}
+    <p class="src">ON / OFF and changes are saved to your GitHub (needs the dashboard connected, see the Alerts tab). Prices and paper trades update with the 7 AM robot run.</p>`;
 }
 function saveStrategy(){
   const name = document.getElementById("st-name").value.trim();
   if (!name) { showToast("Type a name for the strategy."); return; }
-  const list = document.getElementById("st-list").value, note = document.getElementById("st-note").value.trim();
   if (STRAT.some(t => t.name.toLowerCase() === name.toLowerCase() && t.id !== stForm.id)) { showToast("A strategy with this name already exists."); return; }
-  if (stForm.id) Object.assign(STRAT.find(t => t.id === stForm.id), {name, list, note});
-  else STRAT.push({id: "s" + Date.now().toString(36), name, list, note, on: false, added: new Date().toISOString().slice(0, 10)});
-  const ok = saveStrat(); stForm = null; drawStrategies();
-  showToast(ok ? `✅ Strategy saved: <b>${esc(name)}</b>` : "⚠️ This browser is blocking storage, so the strategy can't be saved.");
+  const s = {id: stForm.id || "s" + Date.now().toString(36), name, type: document.getElementById("st-type").value, list: document.getElementById("st-list").value,
+    amount: Math.max(1000, +document.getElementById("st-amt").value || 25000), note: document.getElementById("st-note").value.trim(), on: !!stForm.on};
+  sendStrategy({action: "strategy_save", strategy: s}, `✅ Strategy saved: <b>${esc(name)}</b>`).then(ok => {
+    if (!ok) return;
+    const i = STRAT.findIndex(t => t.id === s.id); if (i >= 0) STRAT[i] = Object.assign({}, STRAT[i], s); else STRAT.push(s);
+    stPending[s.id] = 1; stForm = null; drawStrategies();
+  });
 }
 function delStrategy(id, btn){
   if (btn.dataset.armed !== "1") { btn.dataset.armed = "1"; btn.textContent = "Tap again to remove";
     setTimeout(() => { if (btn.isConnected) { btn.dataset.armed = ""; btn.textContent = "Remove"; } }, 3000); return; }
-  const t = STRAT.find(x => x.id === id); STRAT = STRAT.filter(x => x.id !== id); saveStrat(); drawStrategies();
-  showToast(`🗑 Strategy removed: ${esc(t ? t.name : "")}`);
+  const t = STRAT.find(x => x.id === id);
+  sendStrategy({action: "strategy_delete", id}, `🗑 Strategy removed: ${esc(t ? t.name : "")}`).then(ok => {
+    if (ok) { STRAT = STRAT.filter(x => x.id !== id); drawStrategies(); } });
 }
 document.addEventListener("change", e => {
   const tg = e.target.closest("[data-st-toggle]"); if (!tg) return;
   const t = STRAT.find(x => x.id === tg.dataset.stToggle); if (!t) return;
-  t.on = tg.checked; saveStrat(); drawStrategies();
-  showToast(t.on ? `▶️ <b>${esc(t.name)}</b> is ON. It will start trading once its rules are added and the broker is connected.`
-                 : `⏸ <b>${esc(t.name)}</b> is OFF.`);
+  const want = tg.checked;
+  tg.checked = !want;  // stays as it was until GitHub accepts the change
+  sendStrategy({action: "strategy_save", strategy: Object.assign({}, t, {on: want})},
+    want ? (t.type === "swing" ? `▶️ <b>${esc(t.name)}</b> is ON — paper trading starts with the next 7 AM run.`
+                               : `▶️ <b>${esc(t.name)}</b> is ON. It will trade once its rules are added.`)
+         : `⏸ <b>${esc(t.name)}</b> is OFF.`).then(ok => { if (ok) { t.on = want; stPending[t.id] = 1; drawStrategies(); } });
 });
+async function migrateLocal(){
+  if (!connected()) { needConnect(); return; }
+  for (const l of LOCAL_ST) {
+    const s = {id: "s" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), name: String(l.name || "Strategy").slice(0, 40),
+      type: "none", list: LISTS[l.list] ? l.list : "SP", amount: 25000, note: String(l.note || "").slice(0, 120), on: false};
+    try { await sendRequest({action: "strategy_save", strategy: s}); STRAT.push(s); stPending[s.id] = 1; } catch (e) { saveError(e); return; }
+  }
+  LOCAL_ST = []; try { localStorage.removeItem("tf-strategies"); } catch (e) {}
+  showToast("✅ Saved to GitHub."); laterRefreshStrat(); drawStrategies();
+}
 
 function show(v){
   if (!["sp", "dt", "today", "history", "alerts", "strategy"].includes(v)) v = "sp";
@@ -1013,7 +1190,7 @@ let drawStrip = () => {};
     `The black line on each marks bar is the pass mark. Marks shown are the automatic part of the TechnoFunda system, scaled to ${FULL}.` + (D.cfg.banner ? " " + D.cfg.banner : "");
   drawToday(); drawHistory(); drawAlerts(); drawStrategies();
   document.getElementById("c-alerts").textContent = (AL.active || []).length;
-  refreshAlerts();
+  refreshAlerts(); refreshStrat();
   document.querySelectorAll(".tabs .tab").forEach(t => t.addEventListener("click", () => { location.hash = t.dataset.v; show(t.dataset.v); }));
   document.getElementById("q").addEventListener("input", drawList);
   document.getElementById("sort").addEventListener("change", drawList);
@@ -1046,7 +1223,25 @@ def _alerts_view(store):
             "done": [a for a in items if a.get("status") == "triggered"][-10:][::-1]}
 
 
-def page_data(sp, dt, run, history, rules_cfg, banner="", snaps=None, charts=None, alerts=None):
+def _strategy_view(strategies, sp, dt):
+    if not strategies:
+        return {"settings": [], "setups": {}, "open": [], "closed": []}
+    book = strategies.get("book") or {}
+    last = {s: (sp.get(s) or dt.get(s) or {}).get("last_close") for s in set(sp) | set(dt)}
+    opens = [{**t, "ltp": last.get(t["symbol"])} for t in book.get("open", [])]
+    import strategy as _stg
+    live = {}
+    for st in (strategies.get("settings") or {}).get("strategies", []):
+        mine = [t for t in book.get("open", []) + book.get("closed", []) if t.get("strategy") == st.get("id")]
+        rep = _stg.report([dict(t, open_pnl=round((float(last.get(t["symbol"]) or t["entry"]) - t["entry"]) * t["remaining"], 2))
+                           if t.get("status") != "closed" else t for t in mine])
+        live[st.get("id")] = rep
+    return {"settings": (strategies.get("settings") or {}).get("strategies", []), "setups": book.get("setups", {}),
+            "open": opens, "closed": book.get("closed", [])[-100:][::-1], "live": live,
+            "backtest": strategies.get("backtest") or {}, "log": (strategies.get("log") or [])[-400:][::-1]}
+
+
+def page_data(sp, dt, run, history, rules_cfg, banner="", snaps=None, charts=None, alerts=None, strategies=None):
     def rows(items):
         return [{**items[s], "symbol": s, "chart": chart_url(s),
                  "screener": screener_url(s, items[s].get("consolidated", "yes"))} for s in sorted(items)]
@@ -1054,6 +1249,7 @@ def page_data(sp, dt, run, history, rules_cfg, banner="", snaps=None, charts=Non
         "SP": rows(sp), "DT": rows(dt), "run": run or {}, "history": history or [],
         "fund": {k: v for k, v in (snaps or {}).items() if k in sp or k in dt},
         "alerts": _alerts_view(alerts),
+        "strat": _strategy_view(strategies, sp, dt),
         "charts": charts,  # None on the live site: the page loads charts/SYMBOL.json instead
         "cfg": {"full": rules_cfg.get("full_marks", 11), "pass_new": rules_cfg.get("new_stock_pass", 7),
                 "pass_monthly": rules_cfg.get("monthly_pass", 7), "banner": banner,
@@ -1066,11 +1262,11 @@ def render_fragment(data):
     return FRAGMENT.replace("__DATA__", blob)
 
 
-def build(sp, dt, run, history, rules_cfg, out=None, snaps=None, charts=None, alerts=None):
+def build(sp, dt, run, history, rules_cfg, out=None, snaps=None, charts=None, alerts=None, strategies=None):
     """Write the dashboard page. charts (price history) goes to charts.json next to it, loaded when a chart opens."""
     out = out or OUT
     os.makedirs(os.path.dirname(out), exist_ok=True)
-    page = FULL_PAGE.replace("{fragment}", render_fragment(page_data(sp, dt, run, history, rules_cfg, snaps=snaps, alerts=alerts)))
+    page = FULL_PAGE.replace("{fragment}", render_fragment(page_data(sp, dt, run, history, rules_cfg, snaps=snaps, alerts=alerts, strategies=strategies)))
     with open(out, "w", encoding="utf-8") as f:
         f.write(page)
     if charts is not None:

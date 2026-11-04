@@ -27,7 +27,13 @@ def main():
     if not store.get("bot_username"):
         store["bot_username"] = tg.bot_username(token)
         tg.set_commands(token)
-    applied = alerts.ingest_requests(store, os.path.join(storage.DATA, "alert_requests"), token, chat, sp, dt)
+    import strategy
+    strat = strategy.load_settings()
+    strat_before = repr(strat)
+    applied = alerts.ingest_requests(store, os.path.join(storage.DATA, "alert_requests"), token, chat, sp, dt,
+                                     strategies=strat)
+    if repr(strat) != strat_before:
+        storage.save_json("strategies.json", strat)
     if applied:
         print(f"Applied {applied} request(s) from the dashboard.")
     alerts.process_commands(store, token, chat, sp, dt)

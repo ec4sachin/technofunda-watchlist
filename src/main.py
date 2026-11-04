@@ -19,6 +19,7 @@ import fundamentals as fx  # noqa: E402
 import bhav  # noqa: E402
 import prices  # noqa: E402
 import storage  # noqa: E402
+import strategy  # noqa: E402
 import telegram as tg  # noqa: E402
 import web  # noqa: E402
 
@@ -296,6 +297,23 @@ def monthly(sp, dt, rules_cfg, today, report, history, snaps):
 
 
 # ----------------------------------------------------------------- report
+def strategy_lines(st):
+    L = ["", "🎯 <b>Swing Strategy</b> (paper trading)"]
+    for e in st.get("entries", []):
+        L.append(f"🟢 BUY {html.escape(e['name'])} ({e['symbol']}) {e['qty']} @ ₹{e['price']:g} · stop ₹{e['stop']:g} · target ₹{e['target']:g}")
+    for e in st.get("exits", []):
+        L.append(f"{'✅' if e['pnl'] >= 0 else '🔴'} SELL {html.escape(e['name'])} ({e['symbol']}) {e['qty']} @ ₹{e['price']:g} — "
+                 f"{html.escape(e['reason'])} · P&amp;L ₹{e['pnl']:+,.0f}")
+    for sid, items in st.get("setups", {}).items():
+        if items:
+            L.append(f"⏳ <b>Setups for today</b> (buy-stop orders):")
+            L += [f"• {html.escape(x['name'])} ({x['symbol']}) — buy above ₹{x['buy_above']:g}, stop ₹{x['stop']:g}, "
+                  f"qty {x['qty']} (risk {x['risk_pct']:g}%)" for x in items[:15]]
+    if len(L) == 2:
+        L.append("No entries, exits or setups today.")
+    return L
+
+
 def build_message(r, sp, dt, today_label, dashboard_url=""):
     L = [f"📊 <b>TechnoFunda Watchlist</b> — {today_label}"]
     if r.get("price_date"):
@@ -331,6 +349,9 @@ def build_message(r, sp, dt, today_label, dashboard_url=""):
         L.append(f"⚠️ {html.escape(str(w))}")
     if not any([r["added"], r["to_dt"], r["to_sp"], r["removed"]]):
         L += ["", "No changes today."]
+    st = r.get("strategy")
+    if st:
+        L += strategy_lines(st)
     L += ["", f"📋 <b>SP: {len(sp)}</b> stocks | <b>DT: {len(dt)}</b> stocks"]
     if r.get("monthly_done") or r.get("send_full_list"):
         for name, items in (("SP", sp), ("DT", dt)):
@@ -361,6 +382,38 @@ def main():
 
     if mode in ("auto", "daily"):
         daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, charts)
+    # Strategies (paper trading until a broker is connected)
+    strat_cfg, book = strategy.load_settings(), storage.load_json("strategy_trades.json", {})
+    if mode in ("auto", "daily") and charts:
+        try:
+            report["strategy"] = strategy.run(strat_cfg, book, charts, sp, dt)
+            storage.save_json("strategy_trades.json", book)
+            storage.append_trade_log(report["strategy"].get("log"))
+        except Exception as e:  # never stop the watchlist for a strategy problem
+            report["warnings"].append(f"Strategy check failed: {e}")
+        # Backtest: the same rules on all past candles of the stocks each strategy scans
+        try:
+            names = {k: (sp.get(k) or dt.get(k) or {}).get("name") or k for k in charts}
+            bt = {}
+            for st_ in strat_cfg.get("strategies", []):
+                if st_.get("type") != "swing":
+                    continue
+                lst = st_.get("list", "SP")
+                syms = sorted(sp) if lst == "SP" else sorted(dt) if lst == "DT" else sorted(set(sp) | set(dt))
+                trades = strategy.backtest(st_, charts, names, syms)
+                rep = strategy.report(trades)
+                closed = [t for t in trades if t["status"] == "closed"]
+                if len(closed) > 1:  # honest view: result without the single best trade
+                    best = max(closed, key=lambda t: t["pnl"])
+                    rep["without_best"] = round(rep["total_pnl"] - best["pnl"], 2)
+                    rep["best_trade"] = f"{best['name']} {best['entry_date']}"
+                keep = sorted(trades, key=lambda t: t["entry_date"], reverse=True)[:300]
+                bt[st_["id"]] = {"report": rep, "trades": [{k: t.get(k) for k in ("symbol", "name", "entry_date", "entry", "qty",
+                                 "status", "pnl", "pnl_pct", "hold_days", "closed_on", "exits", "open_pnl")} for t in keep],
+                                 "as_of": today, "stocks": len(syms)}
+            storage.save_json("strategy_backtest.json", bt)
+        except Exception as e:
+            report["warnings"].append(f"Strategy backtest failed: {e}")
     # Runs on the review day, or on the next run if that day was missed (crash, skipped run)
     is_review_day = now.day >= int(settings.get("monthly_review_day", 1)) and str(state.get("last_monthly", ""))[:7] != today[:7]
     if not state.get("last_monthly"):
@@ -387,7 +440,9 @@ def main():
     alert_store = storage.load_json("alerts.json", {})
     alert_store["as_of"] = summary["run_at"]
     rules_cfg = {**rules_cfg, "_repo": os.getenv("GITHUB_REPOSITORY", "")}
-    web.build(sp, dt, summary, storage.load_history(), rules_cfg, snaps=snaps, charts=charts or None, alerts=alert_store)
+    web.build(sp, dt, summary, storage.load_history(), rules_cfg, snaps=snaps, charts=charts or None, alerts=alert_store,
+              strategies={"settings": strat_cfg, "book": book, "backtest": storage.load_json("strategy_backtest.json", {}),
+                          "log": storage.load_trade_log()})
 
     msg = build_message(report, sp, dt, now.strftime("%d %b %Y"), str(settings.get("dashboard_url") or "").strip())
     tg.send(os.getenv("TELEGRAM_BOT_TOKEN"), os.getenv("TELEGRAM_CHAT_ID"), msg)

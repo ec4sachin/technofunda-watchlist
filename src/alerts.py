@@ -223,7 +223,7 @@ def process_commands(store, token, chat_id, sp, dt, now=None):
 
 
 # ---------------------------------------------------------------- requests from the dashboard
-def ingest_requests(store, folder, token, chat_id, sp, dt, now=None):
+def ingest_requests(store, folder, token, chat_id, sp, dt, now=None, strategies=None):
     """The dashboard saves one small file per click in data/alert_requests/. Apply them, then remove them.
 
     File content: {"action": "add", "symbol": "SAHANA", "name": "...", "op": "above", "price": 950}
@@ -249,6 +249,13 @@ def ingest_requests(store, folder, token, chat_id, sp, dt, now=None):
             os.remove(path)  # not a request: ignore it so it cannot block the alerts
             continue
         action = str(req.get("action", "")).lower()
+        if action.startswith("strategy_"):
+            if strategies is not None:
+                import strategy
+                strategy.apply_request(strategies, req, now.strftime("%Y-%m-%d"))
+            os.remove(path)
+            done += 1
+            continue
         if action == "add":
             sym, name = resolve(str(req.get("symbol", "")), sp, dt)
             op = "below" if str(req.get("op", "")).lower() == "below" else "above"
