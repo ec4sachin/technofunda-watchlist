@@ -79,43 +79,7 @@
    "VMARCIND": "2026-11-03"
   }
  },
- "setups": {
-  "swing": [
-   {
-    "symbol": "INTEGRITY",
-    "name": "Integrity Infra.",
-    "buy_above": 202.5,
-    "stop": 190.35,
-    "qty": 493,
-    "amount": 99832.5,
-    "range_pct": 5.2,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-04"
-   },
-   {
-    "symbol": "PATELRMART",
-    "name": "Patel Retail",
-    "buy_above": 250.48,
-    "stop": 235.45,
-    "qty": 399,
-    "amount": 99941.52,
-    "range_pct": 4.9,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-04"
-   },
-   {
-    "symbol": "SAAKSHI",
-    "name": "Saakshi Medtech",
-    "buy_above": 375.72,
-    "stop": 353.18,
-    "qty": 266,
-    "amount": 99941.52,
-    "range_pct": 5.1,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-03"
-   }
-  ]
- },
+ "setups": {},
  "capital": {
   "swing": {
    "start": 1000000.0,

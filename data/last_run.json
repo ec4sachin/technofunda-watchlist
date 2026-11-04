@@ -1,14 +1,14 @@
 {
  "added": [],
  "rejected": [],
- "to_dt": [
+ "to_dt": [],
+ "to_sp": [
   [
    "JAYBARMARU",
    "Jay Bharat Maru.",
-   "close 120.52 < 200 EMA 123.55"
+   "close 120.52 > 200 EMA 120.43"
   ]
  ],
- "to_sp": [],
  "removed": [],
  "unchecked": [],
  "no_price": [],
@@ -94,5 +94,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "04 Nov 2026, 06:14 PM IST"
+ "run_at": "04 Nov 2026, 06:29 PM IST"
 }
