@@ -37,12 +37,15 @@ def test():
     # rule 3: stretched far above EMA 10 -> no setup
     hs = hist_from(closes[:-1] + [closes[-1] * 1.2])
     assert stg.swing_setup(stg._frame(hs), len(hs["t"]) - 1) is None
-    # rule 4: an old high only 5% above entry -> skip
+    # version 5: the 42-candle room rule is off -> an old high 5% above entry no longer blocks the trade
     c4 = list(closes); c4[len(c4) - 20] = plan["trigger"] * 1.05 / 1.004
-    assert stg.swing_setup(stg._frame(hist_from(c4)), len(c4) - 1) is None
-    # rule 6: an old high within 1% of the entry -> take it (breakout through the old resistance)
-    c6 = list(closes); c6[len(c6) - 20] = plan["trigger"] * 1.005 / 1.004
-    assert stg.swing_setup(stg._frame(hist_from(c6)), len(c6) - 1) is not None
+    assert stg.swing_setup(stg._frame(hist_from(c4)), len(c4) - 1) is not None
+    # stop = 1% below the base low, but never more than 6% below the buy price
+    assert plan["stop"] == round(max(min(h["l"][-4:]) * 0.99, plan["trigger"] * 0.94), 2), plan
+    wide = list(closes[:-4]) + [closes[-5] * x for x in (0.95, 1.0, 0.96, 1.0)]   # ~5.5% deep base
+    pw = stg.swing_setup(stg._frame(hist_from(wide)), len(wide) - 1)
+    if pw:
+        assert (pw["trigger"] - pw["stop"]) / pw["trigger"] <= 0.0601, pw
 
     settings = {"strategies": [{"id": "swing", "name": "Swing Strategy", "type": "swing", "list": "SP", "amount": 25000, "on": True}]}
     sp = {"ABC": {"name": "ABC Ltd"}}
@@ -81,6 +84,16 @@ def test():
     assert tr["exits"][0]["reason"].startswith("Stop") and tr["exits"][0]["price"] == stop and tr["pnl"] < 0
     print("Stop loss OK:", tr["exits"][0])
 
+    # time stop: breakout, then 10 flat days under +3% -> sold at the close
+    book3 = {}
+    stg.run(settings, book3, {"ABC": h}, sp, {})
+    stg.run(settings, book3, {"ABC": h1}, sp, {})
+    flat = c + [trig * 1.01] * 10
+    stg.run(settings, book3, {"ABC": hist_from(flat, rng=0.002)}, sp, {})
+    t3 = book3["closed"][0]
+    assert t3["exits"][0]["reason"].startswith("Time stop") and t3["hold_days"] is not None, t3["exits"]
+    print("Time stop OK:", t3["exits"][0]["reason"], t3["exits"][0]["price"])
+
     # OFF strategy does nothing; settings requests are validated
     off = {"strategies": [dict(settings["strategies"][0], on=False)]}
     assert stg.run(off, {}, {"ABC": h1}, sp, {})["entries"] == []
@@ -98,3 +111,28 @@ def test():
 
 if __name__ == "__main__":
     test()
+
+
+def test_split_adjust():
+    """Unadjusted split / bonus (V-Marc 1:6, Simplex 1:5) and a single bad price day are fixed."""
+    import prices
+    idx = pd.bdate_range("2026-01-01", periods=8)
+    df = pd.DataFrame({"Open": [100, 101, 102, 103, 17.3, 17.5, 17.6, 17.7], "High": [101, 102, 103, 104, 17.6, 17.8, 17.9, 18],
+                       "Low": [99, 100, 101, 102, 17.0, 17.2, 17.3, 17.4], "Close": [100, 101, 102, 103.8, 17.4, 17.6, 17.7, 17.8]}, index=idx)
+    adj, notes = prices.adjust_corporate_actions(df)
+    assert "1:6" in notes[0] and abs(adj["Close"].iloc[3] - 103.8 / 6) < 0.01 and adj["Close"].iloc[-1] == 17.8, notes
+    # Simplex Castings case: opened 4.2x lower and closed 5.07x lower -> 1:5
+    df2 = pd.DataFrame({"Open": [534.7, 124.6, 102.0], "High": [534.7, 124.6, 103.95], "Low": [510.05, 102.0, 95.95],
+                        "Close": [519.25, 102.45, 100.25]}, index=idx[:3])
+    assert "1:5 " in prices.adjust_corporate_actions(df2)[1][0] + " "
+    # one bad day that comes straight back is ignored
+    df3 = pd.DataFrame({"Close": [10.0, 10.2, 2.0, 10.3, 10.4]}, index=idx[:5])
+    a3, n3 = prices.adjust_corporate_actions(df3)
+    assert "bad price day" in n3[0] and a3["Close"].iloc[2] == 10.2 and a3["Close"].iloc[0] == 10.0
+    # a normal 20% move is left alone
+    assert prices.adjust_corporate_actions(pd.DataFrame({"Close": [10.0, 12.0, 12.5]}, index=idx[:3]))[1] == []
+    print("Split / bonus adjustment OK")
+
+
+if __name__ == "__main__":
+    test_split_adjust()
