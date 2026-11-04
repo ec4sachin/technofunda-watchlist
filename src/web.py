@@ -127,6 +127,25 @@ h2 .cnt{font:500 12px var(--f-mono);padding:1px 8px;border-radius:999px;backgrou
 .ev>div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:10px 14px;border-top:1px solid var(--line);align-items:center}
 .ev>div:first-child{border-top:0}
 .ev .why{grid-column:1/2;color:var(--muted);font-size:12.5px;font-family:var(--f-mono);overflow-wrap:anywhere}
+.st-head{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.st-note{background:var(--warn-soft);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13.5px;margin-bottom:12px}
+.st-form{display:flex !important;flex-direction:column;gap:10px;margin-bottom:12px}
+.st-form .fr{display:flex;flex-direction:column;gap:4px}.st-form label{font-size:12.5px;color:var(--muted)}
+.st-form input,.st-form select{width:100%;max-width:420px}
+.st-acts{display:flex;gap:8px;flex-wrap:wrap}
+.st-list{display:flex;flex-direction:column;gap:8px}
+.st{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px 16px;align-items:center}
+.st.on{border-left:4px solid var(--up)}
+.st-name{font-weight:700;font-size:15.5px}
+.st-state{margin-top:6px;font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:center}
+.st-btns{display:flex;gap:6px}
+.sw{position:relative;width:52px;height:30px;flex:none;cursor:pointer}
+.sw input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+.sw span{position:absolute;inset:0;border-radius:999px;background:var(--line);transition:background .2s}
+.sw span::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .2s}
+.sw input:checked+span{background:var(--up)}.sw input:checked+span::after{transform:translateX(22px)}
+.sw input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:720px){.st{grid-template-columns:minmax(0,1fr) auto}.st-btns{grid-column:1/-1}}
 .pill{font:600 11px var(--f-body);letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap}
 .p-add{background:var(--up-soft);color:var(--up)}.p-dt{background:var(--down-soft);color:var(--down)}
 .p-sp{background:var(--accent-soft);color:var(--accent)}.p-rem{background:var(--down-soft);color:var(--down)}
@@ -244,6 +263,7 @@ main.wide{max-width:max(1080px,80vw)}
     <button class="tab" role="tab" data-v="today" id="t-today">Today<b id="c-today">0</b></button>
     <button class="tab" role="tab" data-v="history" id="t-history">History</button>
     <button class="tab" role="tab" data-v="alerts" id="t-alerts">Alerts<b id="c-alerts">0</b></button>
+    <button class="tab" role="tab" data-v="strategy" id="t-strategy">Strategy<b id="c-strategy">0</b></button>
   </nav>
 </div></header>
 
@@ -263,6 +283,7 @@ main.wide{max-width:max(1080px,80vw)}
   </section>
   <section id="v-today" hidden></section>
   <section id="v-alerts" hidden></section>
+  <section id="v-strategy" hidden></section>
   <section class="viewer" id="panel" hidden aria-label="Stock chart and details">
     <div class="list" id="p-row"></div>
     <div class="pcard">
@@ -400,7 +421,7 @@ function openPanel(sym, tab){
   if (!wasOpen) backY = window.scrollY;
   closeMenu();
   cur = {r, list}; curTab = tab || curTab || "chart";
-  for (const id of ["v-list", "v-today", "v-history", "v-alerts", "strip"]) document.getElementById(id).hidden = true;
+  for (const id of ["v-list", "v-today", "v-history", "v-alerts", "v-strategy", "strip"]) document.getElementById(id).hidden = true;
   document.getElementById("panel").hidden = false;
   document.querySelector("main").classList.add("wide"); document.body.classList.add("viewing");
   drawHead();
@@ -414,7 +435,7 @@ function drawHead(){
   if (!cur) return;
   const i = VSEQ.indexOf(cur.r.symbol), n = VSEQ.length;
   document.getElementById("p-count").textContent = n ? `${i + 1} of ${n} · ${VLIST}` : "";
-  document.getElementById("p-back").textContent = {sp: "SP", dt: "DT", today: "Today", history: "History", alerts: "Alerts"}[view] || "list";
+  document.getElementById("p-back").textContent = {sp: "SP", dt: "DT", today: "Today", history: "History", alerts: "Alerts", strategy: "Strategy"}[view] || "list";
   document.getElementById("p-prev").disabled = document.getElementById("p-next").disabled = n < 2;
   document.getElementById("p-row").innerHTML = stockRow(cur.r, cur.list);
 }
@@ -867,6 +888,11 @@ document.addEventListener("click", e => {
   const sv = e.target.closest("[data-save-alert]"); if (sv && cur) { if (!connected()) { needConnect(); return; } saveAlert(cur.r.symbol, cur.r.name, document.getElementById("a-op").value, document.getElementById("a-price").value); return; }
   const da = e.target.closest("[data-del-alert]"); if (da) { deleteAlert(+da.dataset.delAlert, da); return; }
   if (e.target.closest("[data-gh-connect]")) { ghConnect(); return; }
+  if (e.target.closest("[data-st-new]")) { stForm = {}; drawStrategies(); document.getElementById("st-name").focus(); return; }
+  if (e.target.closest("[data-st-cancel]")) { stForm = null; drawStrategies(); return; }
+  if (e.target.closest("[data-st-save]")) { saveStrategy(); return; }
+  const se = e.target.closest("[data-st-edit]"); if (se) { const x = STRAT.find(t => t.id === se.dataset.stEdit); stForm = Object.assign({}, x); drawStrategies(); return; }
+  const sd = e.target.closest("[data-st-del]"); if (sd) { delStrategy(sd.dataset.stDel, sd); return; }
   if (e.target.closest("[data-gh-disconnect]")) { ghDisconnect(); return; }
   if (e.target.closest("[data-goto-alerts]")) { e.preventDefault(); closePanel(); location.hash = "alerts"; show("alerts"); return; }
   const ac = e.target.closest("[data-alert-custom]"); if (ac) { closeMenu(); const pr = ac.dataset.alertCustom; curTab = "alert"; drawPanel();
@@ -894,8 +920,65 @@ document.addEventListener("keydown", e => {
   if (!document.getElementById("order").hidden) { closeOrder(); return; } if (cur) requestClose(); });
 document.addEventListener("scroll", closeMenu, true);
 
+// ---------------- Strategies: add / remove / ON-OFF. Rules and automatic trading are connected later.
+let STRAT = [], stForm = null;
+try { STRAT = JSON.parse(localStorage.getItem("tf-strategies") || "[]"); if (!Array.isArray(STRAT)) STRAT = []; } catch (e) { STRAT = []; }
+const saveStrat = () => { try { localStorage.setItem("tf-strategies", JSON.stringify(STRAT)); return true; } catch (e) { return false; } };
+const LISTS = {SP: "SP", DT: "DT", BOTH: "SP + DT"};
+function drawStrategies(){
+  const on = STRAT.filter(t => t.on).length;
+  document.getElementById("c-strategy").textContent = on;
+  const form = stForm ? `<div class="aform st-form">
+      <b>${stForm.id ? "Edit strategy" : "New strategy"}</b>
+      <div class="fr"><label for="st-name">Name</label><input id="st-name" maxlength="40" placeholder="e.g. 52W High Breakout" value="${esc(stForm.name || "")}"></div>
+      <div class="fr"><label for="st-list">Stocks to scan</label><select id="st-list">${Object.entries(LISTS).map(([k, l]) =>
+        `<option value="${k}" ${(stForm.list || "SP") === k ? "selected" : ""}>${l}</option>`).join("")}</select></div>
+      <div class="fr"><label for="st-note">Notes (optional)</label><input id="st-note" maxlength="120" placeholder="Entry / exit idea in your words" value="${esc(stForm.note || "")}"></div>
+      <div class="st-acts"><button class="btn pri" data-st-save>${stForm.id ? "Save changes" : "Add strategy"}</button><button class="btn" data-st-cancel>Cancel</button></div>
+    </div>` : "";
+  const cards = STRAT.map(t => `<article class="st ${t.on ? "on" : ""}">
+      <div class="st-main"><div class="st-name">${esc(t.name)}</div>
+        <div class="meta">Scans <b>${LISTS[t.list] || "SP"}</b> · added ${esc(t.added || "")}${t.note ? " · " + esc(t.note) : ""}</div>
+        <div class="st-state">${t.on ? `<span class="pill p-add">ON</span> Waiting for rules — no trades yet` : `<span class="pill p-warn">OFF</span> Rules not added yet`}</div></div>
+      <label class="sw" title="${t.on ? "Switch OFF" : "Switch ON"}"><input type="checkbox" data-st-toggle="${esc(t.id)}" ${t.on ? "checked" : ""} aria-label="${esc(t.name)} ON / OFF"><span></span></label>
+      <div class="st-btns"><button class="btn" data-st-edit="${esc(t.id)}">Edit</button><button class="btn" data-st-del="${esc(t.id)}">Remove</button></div>
+    </article>`).join("");
+  document.getElementById("v-strategy").innerHTML = `
+    <div class="st-head"><div><h2 style="margin:0">Strategies<span class="cnt">${STRAT.length}</span></h2>
+      <div class="meta">${on} ON · switch a strategy ON to let it trade automatically</div></div>
+      ${stForm ? "" : `<button class="btn pri" data-st-new>+ Add strategy</button>`}</div>
+    <div class="st-note">🔒 <b>Automatic trading is not active yet.</b> Each strategy starts trading when (1) its entry / exit rules are added and
+      (2) your broker (Zerodha / Angel One) is connected through the VPS. Until then the switches only save your choice.</div>
+    ${form}
+    <div class="st-list">${cards || (stForm ? "" : `<div class="empty">No strategies yet. Tap <b>+ Add strategy</b> to create one.</div>`)}</div>
+    <p class="src">Strategies are saved on this device.</p>`;
+}
+function saveStrategy(){
+  const name = document.getElementById("st-name").value.trim();
+  if (!name) { showToast("Type a name for the strategy."); return; }
+  const list = document.getElementById("st-list").value, note = document.getElementById("st-note").value.trim();
+  if (STRAT.some(t => t.name.toLowerCase() === name.toLowerCase() && t.id !== stForm.id)) { showToast("A strategy with this name already exists."); return; }
+  if (stForm.id) Object.assign(STRAT.find(t => t.id === stForm.id), {name, list, note});
+  else STRAT.push({id: "s" + Date.now().toString(36), name, list, note, on: false, added: new Date().toISOString().slice(0, 10)});
+  const ok = saveStrat(); stForm = null; drawStrategies();
+  showToast(ok ? `✅ Strategy saved: <b>${esc(name)}</b>` : "⚠️ This browser is blocking storage, so the strategy can't be saved.");
+}
+function delStrategy(id, btn){
+  if (btn.dataset.armed !== "1") { btn.dataset.armed = "1"; btn.textContent = "Tap again to remove";
+    setTimeout(() => { if (btn.isConnected) { btn.dataset.armed = ""; btn.textContent = "Remove"; } }, 3000); return; }
+  const t = STRAT.find(x => x.id === id); STRAT = STRAT.filter(x => x.id !== id); saveStrat(); drawStrategies();
+  showToast(`🗑 Strategy removed: ${esc(t ? t.name : "")}`);
+}
+document.addEventListener("change", e => {
+  const tg = e.target.closest("[data-st-toggle]"); if (!tg) return;
+  const t = STRAT.find(x => x.id === tg.dataset.stToggle); if (!t) return;
+  t.on = tg.checked; saveStrat(); drawStrategies();
+  showToast(t.on ? `▶️ <b>${esc(t.name)}</b> is ON. It will start trading once its rules are added and the broker is connected.`
+                 : `⏸ <b>${esc(t.name)}</b> is OFF.`);
+});
+
 function show(v){
-  if (!["sp", "dt", "today", "history", "alerts"].includes(v)) v = "sp";
+  if (!["sp", "dt", "today", "history", "alerts", "strategy"].includes(v)) v = "sp";
   view = v;
   if (cur) { if (chartObj) { chartObj.remove(); chartObj = null; } cur = null; document.getElementById("panel").hidden = true;
     document.getElementById("strip").hidden = false; document.querySelector("main").classList.remove("wide"); document.body.classList.remove("viewing"); }
@@ -904,7 +987,9 @@ function show(v){
   document.getElementById("v-today").hidden = v !== "today";
   document.getElementById("v-history").hidden = v !== "history";
   document.getElementById("v-alerts").hidden = v !== "alerts";
+  document.getElementById("v-strategy").hidden = v !== "strategy";
   if (v === "sp" || v === "dt") drawList();
+  if (v === "strategy") drawStrategies();
 }
 
 let drawStrip = () => {};
@@ -926,7 +1011,7 @@ let drawStrip = () => {};
   document.getElementById("note").textContent =
     `New stocks need ${D.cfg.pass_new} of ${FULL} marks to enter SP; SP and DT stocks need ${PASS} of ${FULL} on the monthly review (1st of each month). ` +
     `The black line on each marks bar is the pass mark. Marks shown are the automatic part of the TechnoFunda system, scaled to ${FULL}.` + (D.cfg.banner ? " " + D.cfg.banner : "");
-  drawToday(); drawHistory(); drawAlerts();
+  drawToday(); drawHistory(); drawAlerts(); drawStrategies();
   document.getElementById("c-alerts").textContent = (AL.active || []).length;
   refreshAlerts();
   document.querySelectorAll(".tabs .tab").forEach(t => t.addEventListener("click", () => { location.hash = t.dataset.v; show(t.dataset.v); }));
