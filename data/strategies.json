@@ -5,7 +5,7 @@
    "name": "Swing Strategy",
    "type": "swing",
    "list": "SP",
-   "on": true,
+   "on": false,
    "note": "EMA stack + tight 4-candle base breakout",
    "added": "2026-11-04",
    "on_since": "2026-11-04",
