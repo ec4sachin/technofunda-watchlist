@@ -1,0 +1,1 @@
+{"action": "strategy_save", "strategy": {"id": "swing", "name": "Swing Strategy", "type": "swing", "list": "SP", "amount": 25000, "on": false, "note": "EMA stack + tight 4-candle base breakout", "added": "2026-11-04", "on_since": "2026-11-04"}}
