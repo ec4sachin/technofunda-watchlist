@@ -129,6 +129,9 @@ h2 .cnt{font:500 12px var(--f-mono);padding:1px 8px;border-radius:999px;backgrou
 .ev .why{grid-column:1/2;color:var(--muted);font-size:12.5px;font-family:var(--f-mono);overflow-wrap:anywhere}
 .perf{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .l2{margin-top:12px}
+.yrsplit{margin-bottom:8px;grid-template-columns:repeat(2,minmax(0,1fr))}.yrsplit .v{font-size:22px}
+@media (max-width:520px){.yrsplit{grid-template-columns:1fr}}
+tr.best td{background:var(--up-soft)}
 .st-note.mood.pos{background:var(--up-soft)}.st-note.mood.neg{background:var(--down-soft)}
 .capc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:10px;background:var(--accent-soft);border-radius:8px;padding:10px}
 .capc .k{font-size:11.5px;color:var(--muted)}.capc .v{font:700 17px var(--f-mono)}.capc .mut{font-size:11.5px}
@@ -1065,6 +1068,26 @@ function monthChips(months){
   const M = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   return `<div class="yrs">${ks.map(k => `<span class="yrc ${months[k] >= 0 ? "pos" : "neg"}"><b>${M[+k.slice(5) - 1]} ${k.slice(2, 4)}</b> ${sgn0(months[k])}</span>`).join("")}</div>`;
 }
+function yearSplit(bt){
+  const y2 = bt.year2, y1 = bt.year1; if (!y2 && !y1) return "";
+  const cell = (lab, y) => !y ? "" : `<div class="kv"><div class="k">${lab}</div><div class="v ${y.profit >= 0 ? "up" : "down"}">${y.return_pct >= 0 ? "+" : ""}${esc(y.return_pct)}%</div>
+    <div class="mut" style="font-size:12px">${inr0(y.capital)} → ${inr0(y.final)} · ${esc(y.trades)} trades · ${esc(y.win_rate ?? "—")}% in profit · worst fall ${esc(y.max_drawdown_pct)}%</div></div>`;
+  return `<div class="kgrid yrsplit">${cell("2nd last year (" + esc(y2 && y2.start) + " →)", y2)}${cell("Last year (" + esc(y1 && y1.start) + " →)", y1)}</div>`;
+}
+function compareHTML(){
+  const rows = STRAT.filter(RULED).map(t => ({t, b: (SD.backtest || {})[t.id] || {}})).filter(x => x.b.last2y);
+  if (rows.length < 2) return "";
+  const best = rows.reduce((a, x) => (x.b.last2y.return_pct > a.b.last2y.return_pct ? x : a), rows[0]);
+  const pc = y => !y ? "—" : `<span class="${y.return_pct >= 0 ? "up" : "down"}">${y.return_pct >= 0 ? "+" : ""}${esc(y.return_pct)}%</span>`;
+  return `<h2>Which strategy did best? · last 2 years</h2><div class="tbl"><table><thead><tr><th>Strategy</th><th class="ra">2nd last year</th><th class="ra">Last year</th>
+    <th class="ra">2 years</th><th class="ra">₹10 lakh became</th><th class="ra">Trades</th><th class="ra">In profit</th><th class="ra">Worst fall</th></tr></thead><tbody>` +
+    rows.map(({t, b}) => `<tr${t.id === best.t.id ? ' class="best"' : ""}><td><b>${esc(t.name)}</b>${t.id === best.t.id ? ' <span class="pill p-add">best</span>' : ""}</td>
+      <td class="num ra">${pc(b.year2)}</td><td class="num ra">${pc(b.year1)}</td><td class="num ra"><b>${pc(b.last2y)}</b></td>
+      <td class="num ra">${inr0(b.last2y.final * 1000000 / b.last2y.capital)}</td><td class="num ra">${esc(b.last2y.trades)}</td>
+      <td class="num ra">${esc(b.last2y.win_rate ?? "—")}%</td><td class="num ra down">${esc(b.last2y.max_drawdown_pct)}%</td></tr>`).join("") +
+    `</tbody></table></div><p class="src">Each strategy: ₹10,00,000 paper capital, every trade 10% of the capital at that moment, costs included, open trades valued at today's price.
+    Uses the stocks in the list today, so real results would likely be lower.</p>`;
+}
 function last2HTML(p){
   if (!p || !p.trades) return "";
   const curve = (p.curve || []).map(([m, v]) => [m, v - p.capital]);
@@ -1093,12 +1116,12 @@ function perfHTML(t){
         ${capitalCard((SD.capital || {})[t.id])}
         ${perfTable(live, t.on ? "No closed paper trades yet — they appear here as the strategy trades." : "Switch the strategy ON to start paper trading.")}
         <div class="ph2" style="margin-top:12px">Ready for real money?</div>${readiness(live)}</div>
-      <div class="pcol"><div class="ph2">🧪 Backtest <span class="mut">(same rules on all past prices of ${esc(bt.stocks || 0)} stocks in ${LISTS[t.list] || "SP"}, ₹1,00,000 per trade, costs included${bt.as_of ? ", " + esc(bt.as_of) : ""})</span></div>
-        ${perfTable(bt.report, "Backtest appears after the next robot run.")}${yearTable((bt.report || {}).months)}
+      <div class="pcol"><div class="ph2">🧪 Backtest · last 2 years <span class="mut">(same rules on the past prices of ${esc(bt.stocks || 0)} stocks in ${LISTS[t.list] || "SP"}, ₹1,00,000 per trade, costs included${bt.as_of ? ", " + esc(bt.as_of) : ""})</span></div>
+        ${perfTable(bt.report, "Backtest appears after the next robot run.")}
         <p class="src">Backtest uses the stocks in the list <b>today</b> (they are strong now), so it looks better than real trading would have. Use it to compare rule changes; trust the paper trading log for the real decision.</p>
         ${btTrades(bt.trades)}</div>
     </div>
-    ${last2HTML(bt.last2y)}
+    ${last2HTML(bt.last2y).replace('<div class="kgrid">', yearSplit(bt) + '<div class="kgrid">')}
     <h2>${esc(t.name)} · trade log</h2>${logTable(SD.log || [], t.id)}`;
 }
 function setupRows(list){
@@ -1156,6 +1179,7 @@ function drawStrategies(){
       "buy above" price) and send them on Telegram each morning. Real orders start when your broker (Zerodha / Angel One) is connected through the VPS.</div>
     ${local}${form}
     <div class="st-list">${cards || (f ? "" : `<div class="empty">No strategies yet. Tap <b>+ Add strategy</b> to create one.</div>`)}</div>
+    ${compareHTML()}
     ${detail}
     <p class="src">ON / OFF and changes are saved to your GitHub (needs the dashboard connected, see the Alerts tab). Prices and paper trades update with the 7 AM robot run.</p>`;
 }

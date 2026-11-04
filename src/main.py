@@ -428,19 +428,25 @@ def main():
                 lst = st_.get("list", "SP")
                 syms = sorted(sp) if lst == "SP" else sorted(dt) if lst == "DT" else sorted(set(sp) | set(dt))
                 trades = strategy.backtest(st_, charts, names, syms, mood=mood)
-                rep = strategy.report(trades)
-                two_years_ago = (now - timedelta(days=730)).strftime("%Y-%m-%d")
-                pf = strategy.portfolio(trades, two_years_ago, capital=float(st_.get("capital", strategy.DEF_CAPITAL)),
-                                        pct=float(st_.get("pct", strategy.DEF_PCT)))
-                closed = [t for t in trades if t["status"] == "closed"]
+                # only the last 2 years are shown: split into the 2nd last year and the last year
+                d2 = (now - timedelta(days=730)).strftime("%Y-%m-%d")
+                d1 = (now - timedelta(days=365)).strftime("%Y-%m-%d")
+                cap, pct = float(st_.get("capital", strategy.DEF_CAPITAL)), float(st_.get("pct", strategy.DEF_PCT))
+                recent = [t for t in trades if t["entry_date"] >= d2]
+                rep = strategy.report(recent)
+                closed = [t for t in recent if t["status"] == "closed"]
                 if len(closed) > 1:  # honest view: result without the single best trade
                     best = max(closed, key=lambda t: t["pnl"])
                     rep["without_best"] = round(rep["total_pnl"] - best["pnl"], 2)
                     rep["best_trade"] = f"{best['name']} {best['entry_date']}"
-                keep = sorted(trades, key=lambda t: t["entry_date"], reverse=True)[:300]
+                keep = sorted(recent, key=lambda t: t["entry_date"], reverse=True)[:300]
                 bt[st_["id"]] = {"report": rep, "trades": [{k: t.get(k) for k in ("symbol", "name", "entry_date", "entry", "qty",
-                                 "status", "pnl", "pnl_pct", "hold_days", "closed_on", "exits", "open_pnl")} for t in keep],
-                                 "as_of": today, "stocks": len(syms), "last2y": pf}
+                                 "status", "pnl", "pnl_pct", "hold_days", "closed_on", "exits", "open_pnl", "type", "regime")} for t in keep],
+                                 "as_of": today, "stocks": len(syms),
+                                 "last2y": strategy.portfolio(trades, d2, capital=cap, pct=pct),
+                                 "year2": strategy.portfolio(trades, d2, d1, capital=cap, pct=pct),
+                                 "year1": strategy.portfolio(trades, d1, capital=cap, pct=pct),
+                                 "index_from": mood.t[0] if mood and mood.t else None}
             storage.save_json("strategy_backtest.json", bt)
         except Exception as e:
             report["warnings"].append(f"Strategy backtest failed: {e}")

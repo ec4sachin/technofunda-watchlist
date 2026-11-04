@@ -18,7 +18,7 @@ import requests
 
 import storage
 
-YAHOO = "^CNXSC"
+YAHOO = ("^CNXSC", "NIFTY_SMLCAP_100.NS", "^CNXSMCAP")  # names Yahoo has used for the index
 NAME = "Nifty Smallcap 100"
 NSE_URL = "https://nsearchives.nseindia.com/content/indices/ind_close_all_{dmy}.csv"
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36"}
@@ -27,8 +27,15 @@ CACHE = "index_smallcap100.csv"
 
 def _from_yahoo():
     import yfinance as yf
-    df = yf.download(YAHOO, period="max", interval="1d", auto_adjust=False, progress=False)
-    if df is None or df.empty:
+    df = None
+    for name in YAHOO:
+        try:
+            df = yf.download(name, period="max", interval="1d", auto_adjust=False, progress=False)
+        except Exception:
+            df = None
+        if df is not None and len(df) > 300:
+            break
+    if df is None or df.empty or len(df) <= 300:
         return None
     if isinstance(df.columns, pd.MultiIndex):
         df.columns = [c[0] for c in df.columns]
@@ -55,19 +62,28 @@ def parse_nse(text):
     return None
 
 
-def _from_nse(days=120, session=None):
-    """Fill the local cache with NSE daily index files (newest first, `days` calendar days back)."""
+def _from_nse(days=1100, session=None, max_downloads=700):
+    """Fill the local cache with NSE daily index files (newest first, `days` calendar days back = 3 years).
+    Days already in the cache are not downloaded again, so only the first run is long (about 10 minutes)."""
     s = session or requests.Session()
     p = os.path.join(storage.DATA, CACHE)
     have = {}
     if os.path.exists(p):
         with open(p, newline="", encoding="utf-8") as f:
             have = {r["date"]: float(r["close"]) for r in csv.DictReader(f)}
-    today, fails = datetime.now(), 0
+    today, fails, tried = datetime.now(), 0, 0
+    tried_before = set()
+    pt = os.path.join(storage.DATA, "index_smallcap100_holidays.txt")
+    if os.path.exists(pt):
+        tried_before = set(open(pt).read().split())
+    missing_days = []
     for k in range(days):
         d = today - timedelta(days=k)
-        if d.weekday() >= 5 or d.strftime("%Y-%m-%d") in have:
+        if d.weekday() >= 5 or d.strftime("%Y-%m-%d") in have or (d.strftime("%Y-%m-%d") in tried_before and k > 7):
             continue
+        if tried >= max_downloads:
+            break
+        tried += 1
         try:
             r = s.get(NSE_URL.format(dmy=d.strftime("%d%m%Y")), headers=UA, timeout=30)
             got = parse_nse(r.text) if r.status_code == 200 else None
@@ -79,8 +95,12 @@ def _from_nse(days=120, session=None):
             fails = 0
         else:
             fails += 1
+            missing_days.append(d.strftime("%Y-%m-%d"))  # holiday (or no file): not asked again
             if fails >= 15 and not have:
                 break
+    if missing_days and have:
+        with open(pt, "w") as f:
+            f.write("\n".join(sorted(tried_before | set(missing_days))))
     if have:
         with open(p, "w", newline="", encoding="utf-8") as f:
             w = csv.writer(f)
@@ -100,7 +120,10 @@ def history():
     except Exception as e:
         print("Smallcap 100 from Yahoo failed:", e)
     try:
-        return _from_nse()
+        h = _from_nse()
+        if h:
+            print(f"Smallcap 100 from NSE files: {len(h['t'])} days, {h['t'][0]} to {h['t'][-1]}")
+        return h
     except Exception as e:
         print("Smallcap 100 from NSE failed:", e)
         return None
