@@ -299,6 +299,10 @@ def monthly(sp, dt, rules_cfg, today, report, history, snaps):
 # ----------------------------------------------------------------- report
 def strategy_lines(st):
     L = ["", "🎯 <b>Swing Strategy</b> (paper trading)"]
+    for sid, c in (st.get("capital") or {}).items():
+        gain = c["equity"] - c["start"]
+        L.append(f"💰 Capital ₹{c['equity']:,.0f} ({gain / c['start'] * 100:+.1f}%) · in trades ₹{c['invested']:,.0f} · "
+                 f"free ₹{c['cash']:,.0f} · next trade ₹{c['equity'] * c['pct'] / 100:,.0f} ({c['pct']:g}%)")
     for e in st.get("entries", []):
         L.append(f"🟢 BUY {html.escape(e['name'])} ({e['symbol']}) {e['qty']} @ ₹{e['price']:g} · stop ₹{e['stop']:g} · target ₹{e['target']:g}")
     for e in st.get("exits", []):
@@ -309,7 +313,9 @@ def strategy_lines(st):
             L.append(f"⏳ <b>Setups for today</b> (buy-stop orders):")
             L += [f"• {html.escape(x['name'])} ({x['symbol']}) — buy above ₹{x['buy_above']:g}, stop ₹{x['stop']:g}, "
                   f"qty {x['qty']} (risk {x['risk_pct']:g}%)" for x in items[:15]]
-    if len(L) == 2:
+    for x in st.get("skipped", []):
+        L.append(f"⏭ Skipped {html.escape(x['name'])} ({x['symbol']}) — breakout, but no free capital")
+    if len(L) <= 3 and not any(st.get(k) for k in ("entries", "exits")) and not any(st.get("setups", {}).values()):
         L.append("No entries, exits or setups today.")
     return L
 
@@ -402,6 +408,9 @@ def main():
                 syms = sorted(sp) if lst == "SP" else sorted(dt) if lst == "DT" else sorted(set(sp) | set(dt))
                 trades = strategy.backtest(st_, charts, names, syms)
                 rep = strategy.report(trades)
+                two_years_ago = (now - timedelta(days=730)).strftime("%Y-%m-%d")
+                pf = strategy.portfolio(trades, two_years_ago, capital=float(st_.get("capital", strategy.DEF_CAPITAL)),
+                                        pct=float(st_.get("pct", strategy.DEF_PCT)))
                 closed = [t for t in trades if t["status"] == "closed"]
                 if len(closed) > 1:  # honest view: result without the single best trade
                     best = max(closed, key=lambda t: t["pnl"])
@@ -410,7 +419,7 @@ def main():
                 keep = sorted(trades, key=lambda t: t["entry_date"], reverse=True)[:300]
                 bt[st_["id"]] = {"report": rep, "trades": [{k: t.get(k) for k in ("symbol", "name", "entry_date", "entry", "qty",
                                  "status", "pnl", "pnl_pct", "hold_days", "closed_on", "exits", "open_pnl")} for t in keep],
-                                 "as_of": today, "stocks": len(syms)}
+                                 "as_of": today, "stocks": len(syms), "last2y": pf}
             storage.save_json("strategy_backtest.json", bt)
         except Exception as e:
             report["warnings"].append(f"Strategy backtest failed: {e}")

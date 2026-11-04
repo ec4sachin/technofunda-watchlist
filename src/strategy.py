@@ -1,6 +1,6 @@
 """Trading strategies (paper trading until a broker is connected).
 
-Settings (which strategies exist, ON/OFF, amount per trade) live in data/strategies.json and are changed
+Settings (which strategies exist, ON/OFF, paper capital and % per trade) live in data/strategies.json and are changed
 from the dashboard (through the Price Alerts robot). Trades live in data/strategy_trades.json and are
 written only by the daily robot, so the two robots never edit the same file.
 
@@ -28,7 +28,7 @@ import storage
 
 TYPES = {"swing": "Swing Strategy rules", "none": "Rules not added yet"}
 LISTS = ("SP", "DT", "BOTH")
-DEFAULT = [{"id": "swing", "name": "Swing Strategy", "type": "swing", "list": "SP", "amount": 25000,
+DEFAULT = [{"id": "swing", "name": "Swing Strategy", "type": "swing", "list": "SP", "capital": 1000000, "pct": 10,
             "on": False, "note": "EMA stack + tight 4-candle base breakout", "added": ""}]
 MAX_CATCHUP_DAYS = 10
 ROOM_RULE = False          # rule 4 / 6 (room to the 42-candle resistance) - off in version 5
@@ -36,6 +36,8 @@ STOP_BELOW_BASE = 0.01     # stop 1% below the base low
 MAX_RISK = 0.06            # ... but never more than 6% below the buy price
 TIME_STOP_DAYS, TIME_STOP_GAIN = 10, 0.03
 TARGET, BOOK_FRACTION = 0.20, 0.5
+COST_PER_SIDE = 0.002      # brokerage + taxes + slippage, about 0.2% on each buy and each sell
+DEF_CAPITAL, DEF_PCT = 1_000_000.0, 10.0   # paper capital, and % of the CURRENT capital per trade
 
 
 # ------------------------------------------------------------------ settings
@@ -62,10 +64,16 @@ def _clean(s, old=None):
     out["list"] = s.get("list", old.get("list", "SP")) if s.get("list", old.get("list", "SP")) in LISTS else "SP"
     out["note"] = str(s.get("note", old.get("note", "")))[:120]
     try:
-        amt = float(s.get("amount", old.get("amount", 25000)))
+        cap = float(s.get("capital", old.get("capital", DEF_CAPITAL)))
     except (TypeError, ValueError):
-        amt = 25000.0
-    out["amount"] = min(max(amt, 1000.0), 10_000_000.0)
+        cap = DEF_CAPITAL
+    try:
+        pct = float(s.get("pct", old.get("pct", DEF_PCT)))
+    except (TypeError, ValueError):
+        pct = DEF_PCT
+    out["capital"] = min(max(cap, 10_000.0), 1_000_000_000.0)
+    out["pct"] = min(max(pct, 1.0), 100.0)
+    out.pop("amount", None)
     out["on"] = bool(s.get("on", old.get("on", False)))
     out["added"] = str(old.get("added") or s.get("added") or "")[:10]
     return out
@@ -167,8 +175,9 @@ def _sell(t, day, qty, price, reason):
     if qty <= 0:
         return None
     t["remaining"] -= qty
-    pnl = round(qty * (price - t["entry"]), 2)
-    t["exits"].append({"date": day, "qty": qty, "price": round(price, 2), "reason": reason, "pnl": pnl})
+    charges = round(COST_PER_SIDE * qty * (t["entry"] + price), 2)
+    pnl = round(qty * (price - t["entry"]) - charges, 2)
+    t["exits"].append({"date": day, "qty": qty, "price": round(price, 2), "reason": reason, "pnl": pnl, "charges": charges})
     t["pnl"] = round(sum(x["pnl"] for x in t["exits"]), 2)
     if t["remaining"] == 0:
         t["status"] = "closed"
@@ -217,21 +226,44 @@ def manage(t, df, j):
     return done
 
 
-def try_entry(st, sym, name, df, j, mode="paper"):
+def capital_of(st, book):
+    """Paper capital now = starting capital + all profits/losses so far; free cash = capital - money in open trades."""
+    sid = st.get("id")
+    start = float(st.get("capital", DEF_CAPITAL))
+    done = (book.get("realized") or {}).get(sid)
+    if done is None:  # older trade files: add up the closed trades once
+        done = sum(t["pnl"] for t in book.get("closed", []) if t["strategy"] == sid)
+    part = sum(t["pnl"] for t in book.get("open", []) if t["strategy"] == sid)
+    invested = sum(t["entry"] * t["remaining"] for t in book.get("open", []) if t["strategy"] == sid)
+    equity = start + done + part
+    return {"start": start, "equity": round(equity, 2), "invested": round(invested, 2), "cash": round(equity - invested, 2),
+            "pct": float(st.get("pct", DEF_PCT))}
+
+
+def trade_size(st, cap):
+    """Money for one new trade: pct% of the current capital (needs that much free cash)."""
+    size = cap["equity"] * cap["pct"] / 100
+    return size if cap["cash"] >= size * 0.999 and size > 0 else 0.0
+
+
+def try_entry(st, sym, name, df, j, mode="paper", money=None):
     """Entry on candle j if the setup on the candle before is triggered. Returns (trade, sells on the same day) or (None, [])."""
     plan = swing_setup(df, j - 1)
     if not plan or df.h[j] < plan["trigger"]:
         return None, []
     sid = st.get("id")
     entry = max(plan["trigger"], float(df.o[j]))  # gap up above the trigger: filled at the open
-    qty = max(1, math.floor(float(st.get("amount", 25000)) / entry))
+    money = float(money if money is not None else st.get("capital", DEF_CAPITAL) * st.get("pct", DEF_PCT) / 100)
+    qty = math.floor(money / entry)
+    if qty < 1:
+        return None, []
     stop = round(max(plan["base_low"] * (1 - STOP_BELOW_BASE), entry * (1 - MAX_RISK)), 2)
     why = "Stop loss (1% below 4-candle base)" if stop == round(plan["base_low"] * (1 - STOP_BELOW_BASE), 2) else "Stop loss (6% max risk)"
     t = {"id": f"{sid}-{sym}-{df.index[j]}", "strategy": sid, "strategy_name": st.get("name", sid),
          "symbol": sym, "name": name, "entry_date": df.index[j], "entry": round(entry, 2),
          "qty": qty, "remaining": qty, "stop": stop, "stop_reason": why, "days": 0, "target": round(entry * (1 + TARGET), 2),
          "booked": False, "signal_low": None, "signal_date": None, "exits": [], "pnl": 0.0,
-         "status": "open", "mode": mode, "plan": {k: plan[k] for k in ("resistance", "range_pct", "r42", "room")}}
+         "status": "open", "mode": mode, "money": round(money, 2), "plan": {k: plan[k] for k in ("resistance", "range_pct", "r42", "room")}}
     sells = []
     if df.l[j] <= t["stop"]:  # fell back to the stop on the same day
         s = _sell(t, df.index[j], t["remaining"], t["stop"], why + " — same day")
@@ -276,6 +308,10 @@ def run(settings, book, charts, sp, dt, today=""):
         mine = {t["symbol"]: t for t in book["open"] if t["strategy"] == sid}
 
         def close(t):
+            real = book.setdefault("realized", {})
+            if sid not in real:
+                real[sid] = sum(x["pnl"] for x in book["closed"] if x["strategy"] == sid)
+            real[sid] = round(real[sid] + t["pnl"], 2)
             book["open"].remove(t)
             book["closed"].append(t)
             mine.pop(t["symbol"], None)
@@ -297,7 +333,13 @@ def run(settings, book, charts, sp, dt, today=""):
                     continue
                 if t or sym not in scan:
                     continue
-                t, sells = try_entry(st, sym, names.get(sym, sym), df, j)
+                if not swing_setup(df, j - 1) or df.h[j] < swing_setup(df, j - 1)["trigger"]:
+                    continue
+                money = trade_size(st, capital_of(st, book))
+                if not money:
+                    events.setdefault("skipped", []).append({"symbol": sym, "name": names.get(sym, sym), "date": df.index[j]})
+                    continue  # no free capital (all money in open trades)
+                t, sells = try_entry(st, sym, names.get(sym, sym), df, j, money=money)
                 if not t:
                     continue
                 book["open"].append(t)
@@ -320,19 +362,22 @@ def run(settings, book, charts, sp, dt, today=""):
                 continue
             plan = swing_setup(df, len(df) - 1)
             if plan:
-                qty = max(1, math.floor(float(st.get("amount", 25000)) / plan["trigger"]))
+                cap = capital_of(st, book)
+                qty = max(1, math.floor(cap["equity"] * cap["pct"] / 100 / plan["trigger"]))
                 ready.append({"symbol": sym, "name": names.get(sym, sym), "buy_above": plan["trigger"], "stop": plan["stop"],
                               "qty": qty, "amount": round(qty * plan["trigger"], 2), "range_pct": plan["range_pct"],
                               "risk_pct": round((plan["trigger"] - plan["stop"]) / plan["trigger"] * 100, 1),
                               "as_of": df.index[-1]})
         book["setups"][sid] = ready
         events["setups"][sid] = ready
+        book.setdefault("capital", {})[sid] = capital_of(st, book)
+        events.setdefault("capital", {})[sid] = book["capital"][sid]
     book["closed"] = book["closed"][-500:]
     return events
 
 
 # ------------------------------------------------------------------ backtest
-def backtest(st, charts, names, symbols):
+def backtest(st, charts, names, symbols, money=100000.0):
     """The same rules on all past candles of `symbols` (one trade per stock at a time).
     Note: these are stocks in the list TODAY, so the result is more optimistic than real life."""
     trades = []
@@ -348,7 +393,7 @@ def backtest(st, charts, names, symbols):
                     trades.append(t)
                     t = None
                 continue
-            t, _ = try_entry(st, sym, names.get(sym, sym), df, j, mode="backtest")
+            t, _ = try_entry(st, sym, names.get(sym, sym), df, j, mode="backtest", money=money)
             if t and t["status"] == "closed":
                 trades.append(t)
                 t = None
@@ -358,6 +403,54 @@ def backtest(st, charts, names, symbols):
             t["open_pnl"] = round((last - t["entry"]) * t["remaining"], 2)
             trades.append(t)
     return trades
+
+
+def portfolio(trades, start, end="9999", capital=DEF_CAPITAL, pct=DEF_PCT):
+    """The backtest trades taken in date order with one money pot: each trade gets pct% of the capital at that
+    moment (profits grow the size), a trade is skipped when there is not enough free cash.
+    Trade results already include costs."""
+    todo = sorted([t for t in trades if t["status"] == "closed" and start <= t["entry_date"] < end],
+                  key=lambda t: (t["entry_date"], t["symbol"]))
+    cash, opn, taken, skipped, wins, months, rows = float(capital), [], 0, 0, 0, {}, []
+
+    def settle(upto):
+        nonlocal cash, opn, wins
+        keep = []
+        for x in sorted(opn, key=lambda x: x["end"]):
+            if x["end"] <= upto:
+                gain = x["money"] * x["ret"]
+                cash += x["money"] + gain
+                months[x["end"][:7]] = round(months.get(x["end"][:7], 0) + gain, 2)
+                wins += gain > 0
+                rows.append({"name": x["name"], "symbol": x["symbol"], "entry_date": x["d"], "closed_on": x["end"],
+                             "money": round(x["money"]), "pnl": round(gain, 2), "pnl_pct": round(x["ret"] * 100, 2)})
+            else:
+                keep.append(x)
+        opn = keep
+
+    for t in todo:
+        settle(t["entry_date"])
+        equity = cash + sum(x["money"] for x in opn)
+        size = equity * pct / 100
+        if cash < size * 0.999:
+            skipped += 1
+            continue
+        cash -= size
+        opn.append({"end": t["closed_on"], "money": size, "ret": t["pnl"] / (t["entry"] * t["qty"]),
+                    "name": t["name"], "symbol": t["symbol"], "d": t["entry_date"]})
+        taken += 1
+    settle("9999")
+    eq, peak, dd, curve = float(capital), float(capital), 0.0, []
+    for m in sorted(months):
+        eq += months[m]
+        peak = max(peak, eq)
+        dd = max(dd, (peak - eq) / peak)
+        curve.append([m, round(eq, 2)])
+    first = todo[0]["entry_date"] if todo else start
+    return {"start": start, "capital": capital, "pct": pct, "final": round(cash, 2), "profit": round(cash - capital, 2),
+            "return_pct": round((cash / capital - 1) * 100, 1), "trades": taken, "skipped": skipped, "wins": wins,
+            "win_rate": round(wins / taken * 100, 1) if taken else None, "max_drawdown_pct": round(dd * 100, 1),
+            "months": months, "curve": curve, "first_trade": first, "trades_list": rows[-200:][::-1]}
 
 
 # ------------------------------------------------------------------ performance
