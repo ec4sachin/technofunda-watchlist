@@ -16,6 +16,8 @@ import telegram as tg  # noqa: E402
 import web  # noqa: E402
 import bhav  # noqa: E402
 bhav.enrich = lambda need, hists, **k: (0, [])  # no exchange downloads in tests
+import market  # noqa: E402
+market.history = lambda: None  # no index download in tests
 
 GOOD = fx.parse_company_page(open(os.path.join(HERE, "fixtures", "company_page.html")).read())
 GOOD["_company_id"] = "999"

@@ -119,17 +119,41 @@ def test():
     assert df_f.c[k] < df_f.e50[k] and df_f.c[k - 1] < df_f.e50[k - 1]   # sold on the 2nd close below EMA 50
     print("Positional OK:", [(x["reason"], x["price"]) for x in tp["exits"]], "P&L", tp["pnl"])
 
+    # Smart Switch: Smallcap 100 above EMA 50 on the day before the buy -> Positional exits, below -> Swing exits
+    import market
+    sw = {"strategies": [{"id": "switch", "name": "Smart Switch", "type": "switch", "list": "SP", "capital": 1000000, "pct": 10, "on": True}]}
+    for trend, want, tgt in ((1.003, "positional", 1.3), (0.997, "swing", 1.2)):
+        idx = {"t": h1["t"], "c": [10000 * trend ** k for k in range(len(h1["t"]))]}
+        mood = market.Mood(idx)
+        bs = {}
+        stg.run(sw, bs, {"ABC": h}, sp, {}, mood=mood)
+        ev = stg.run(sw, bs, {"ABC": h1}, sp, {}, mood=mood)
+        ts = bs["open"][0]
+        assert ts["type"] == want and ts["target"] == round(trig * tgt, 2) and "Smallcap 100" in ts["regime"], (ts["type"], ts["regime"])
+        assert bs["mood"]["switch"]["rules"] == ("Positional" if want == "positional" else "Swing")
+        assert ev["log"][0]["reason"].endswith(("Positional exits", "Swing exits"))
+    # no index data -> Swing exits (the safer, faster rules)
+    bs = {}
+    stg.run(sw, bs, {"ABC": h}, sp, {}, mood=None)
+    stg.run(sw, bs, {"ABC": h1}, sp, {}, mood=None)
+    assert bs["open"][0]["type"] == "swing" and "unknown" in bs["open"][0]["regime"]
+    # NSE daily index file
+    nse = ("Index Name,Index Date,Open Index Value,High Index Value,Low Index Value,Closing Index Value,Points Change,Change(%),Volume,Turnover (Rs. Cr.),P/E,P/B,Div Yield\n"
+           "Nifty 50,03-11-2026,1,2,0.5,25000.10,1,1,1,1,1,1,1\nNifty Smallcap 100,03-11-2026,18000,18200,17900,18123.45,1,1,1,1,1,1,1\n")
+    assert market.parse_nse(nse) == ("2026-11-03", 18123.45)
+    print("Smart Switch OK")
+
     # OFF strategy does nothing; settings requests are validated
     off = {"strategies": [dict(settings["strategies"][0], on=False)]}
     assert stg.run(off, {}, {"ABC": h1}, sp, {})["entries"] == []
     data = stg.load_settings()
     assert data["strategies"][0]["id"] == "swing" and data["strategies"][0]["on"] is False
-    assert [x["id"] for x in data["strategies"]] == ["swing", "positional"]
+    assert [x["id"] for x in data["strategies"]] == ["swing", "positional", "switch"]
     # a strategies.json saved before Positional existed gets it added; a removed one stays removed
     storage.save_json("strategies.json", {"strategies": [dict(data["strategies"][0], on=True)]})
-    assert [x["id"] for x in stg.load_settings()["strategies"]] == ["swing", "positional"]
+    assert [x["id"] for x in stg.load_settings()["strategies"]] == ["swing", "positional", "switch"]
     d2 = stg.load_settings(); stg.apply_request(d2, {"action": "strategy_delete", "id": "positional"}); storage.save_json("strategies.json", d2)
-    assert [x["id"] for x in stg.load_settings()["strategies"]] == ["swing"]
+    assert [x["id"] for x in stg.load_settings()["strategies"]] == ["swing", "switch"]
     os.remove(os.path.join(storage.DATA, "strategies.json"))
     data = stg.load_settings()
     assert stg.apply_request(data, {"action": "strategy_save", "strategy": {"id": "swing", "name": "Swing Strategy", "on": True, "capital": "2000000", "pct": 5}}, "2026-11-05")
@@ -138,7 +162,7 @@ def test():
     s1 = next(x for x in data["strategies"] if x["id"] == "s1")
     assert len(s1["name"]) == 40 and s1["type"] == "none" and s1["list"] == "SP"
     assert not stg.apply_request(data, {"action": "strategy_save", "strategy": {"id": "../x", "name": "a"}})
-    assert stg.apply_request(data, {"action": "strategy_delete", "id": "s1"}) and len(data["strategies"]) == 2
+    assert stg.apply_request(data, {"action": "strategy_delete", "id": "s1"}) and len(data["strategies"]) == 3
     # portfolio: one money pot, 10% of current capital per trade, skip when no free cash
     tr = [{"status": "closed", "symbol": f"S{i}", "name": f"S{i}", "entry_date": f"2026-01-{i + 1:02d}", "closed_on": "2026-03-01",
            "entry": 100.0, "qty": 10, "pnl": 100.0} for i in range(12)]                       # 12 trades of +10% at once
