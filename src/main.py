@@ -20,6 +20,7 @@ import bhav  # noqa: E402
 import prices  # noqa: E402
 import storage  # noqa: E402
 import strategy  # noqa: E402
+import market  # noqa: E402
 import telegram as tg  # noqa: E402
 import web  # noqa: E402
 
@@ -304,6 +305,10 @@ def strategy_lines(st):
     L = []
     for sid in [x for x in sids if x]:
         L += ["", f"🎯 <b>{html.escape(str(names.get(sid, sid)))}</b> (paper trading)"]
+        md = (st.get("mood") or {}).get(sid)
+        if md:
+            L.append(f"🧭 Smallcap 100 {md['close']:,.0f} {'above' if md['above'] else 'below'} EMA 50 {md['ema50']:,.0f} → "
+                     f"new trades use <b>{md['rules']}</b> exits")
         c = (st.get("capital") or {}).get(sid)
         if c:
             gain = c["equity"] - c["start"]
@@ -311,7 +316,8 @@ def strategy_lines(st):
                      f"free ₹{c['cash']:,.0f} · next trade ₹{c['equity'] * c['pct'] / 100:,.0f} ({c['pct']:g}%)")
         n0 = len(L)
         for e in [x for x in st.get("entries", []) if x.get("strategy") == sid]:
-            L.append(f"🟢 BUY {html.escape(e['name'])} ({e['symbol']}) {e['qty']} @ ₹{e['price']:g} · stop ₹{e['stop']:g} · target ₹{e['target']:g}")
+            L.append(f"🟢 BUY {html.escape(e['name'])} ({e['symbol']}) {e['qty']} @ ₹{e['price']:g} · stop ₹{e['stop']:g} · target ₹{e['target']:g}"
+                     + (f" · {html.escape(e['regime'].split(' → ')[-1])}" if e.get("regime") else ""))
         for e in [x for x in st.get("exits", []) if x.get("strategy") == sid]:
             L.append(f"{'✅' if e['pnl'] >= 0 else '🔴'} SELL {html.escape(e['name'])} ({e['symbol']}) {e['qty']} @ ₹{e['price']:g} — "
                      f"{html.escape(e['reason'])} · P&amp;L ₹{e['pnl']:+,.0f}")
@@ -397,9 +403,17 @@ def main():
         daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, charts)
     # Strategies (paper trading until a broker is connected)
     strat_cfg, book = strategy.load_settings(), storage.load_json("strategy_trades.json", {})
+    mood = None
+    if mode in ("auto", "daily") and charts and any(x.get("type") == "switch" for x in strat_cfg.get("strategies", [])):
+        try:
+            mood = market.Mood(market.history())  # Nifty Smallcap 100 vs EMA 50 (for Smart Switch)
+            if not mood.t:
+                report["warnings"].append("Nifty Smallcap 100 prices not available — Smart Switch uses Swing exits today")
+        except Exception as e:
+            report["warnings"].append(f"Nifty Smallcap 100 check failed: {e}")
     if mode in ("auto", "daily") and charts:
         try:
-            report["strategy"] = strategy.run(strat_cfg, book, charts, sp, dt)
+            report["strategy"] = strategy.run(strat_cfg, book, charts, sp, dt, mood=mood)
             storage.save_json("strategy_trades.json", book)
             storage.append_trade_log(report["strategy"].get("log"))
         except Exception as e:  # never stop the watchlist for a strategy problem
@@ -409,11 +423,11 @@ def main():
             names = {k: (sp.get(k) or dt.get(k) or {}).get("name") or k for k in charts}
             bt = {}
             for st_ in strat_cfg.get("strategies", []):
-                if st_.get("type") not in strategy.RULES:
+                if st_.get("type") not in strategy.TRADING_TYPES:
                     continue
                 lst = st_.get("list", "SP")
                 syms = sorted(sp) if lst == "SP" else sorted(dt) if lst == "DT" else sorted(set(sp) | set(dt))
-                trades = strategy.backtest(st_, charts, names, syms)
+                trades = strategy.backtest(st_, charts, names, syms, mood=mood)
                 rep = strategy.report(trades)
                 two_years_ago = (now - timedelta(days=730)).strftime("%Y-%m-%d")
                 pf = strategy.portfolio(trades, two_years_ago, capital=float(st_.get("capital", strategy.DEF_CAPITAL)),

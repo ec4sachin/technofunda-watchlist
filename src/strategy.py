@@ -26,12 +26,16 @@ import pandas as pd
 
 import storage
 
-TYPES = {"swing": "Swing Strategy rules", "positional": "Positional Trading rules", "none": "Rules not added yet"}
+TYPES = {"swing": "Swing Strategy rules", "positional": "Positional Trading rules",
+         "switch": "Smart Switch (Smallcap 100 decides the exits)", "none": "Rules not added yet"}
+TRADING_TYPES = ("swing", "positional", "switch")
 LISTS = ("SP", "DT", "BOTH")
 DEFAULT = [{"id": "swing", "name": "Swing Strategy", "type": "swing", "list": "SP", "capital": 1000000, "pct": 10,
             "on": False, "note": "EMA stack + tight 4-candle base breakout", "added": ""},
            {"id": "positional", "name": "Positional Trading", "type": "positional", "list": "SP", "capital": 1000000, "pct": 10,
-            "on": False, "note": "Same entry · 50% at +30% · rest exits on 2 closes below EMA 50", "added": ""}]
+            "on": False, "note": "Same entry · 50% at +30% · rest exits on 2 closes below EMA 50", "added": ""},
+           {"id": "switch", "name": "Smart Switch", "type": "switch", "list": "SP", "capital": 1000000, "pct": 10,
+            "on": False, "note": "Same entry · Smallcap 100 above EMA 50 → Positional exits, below → Swing exits", "added": ""}]
 MAX_CATCHUP_DAYS = 10
 ROOM_RULE = False          # rule 4 / 6 (room to the 42-candle resistance) - off in version 5
 STOP_BELOW_BASE = 0.01     # stop 1% below the base low
@@ -274,7 +278,18 @@ def trade_size(st, cap):
     return size if cap["cash"] >= size * 0.999 and size > 0 else 0.0
 
 
-def try_entry(st, sym, name, df, j, mode="paper", money=None):
+def exit_type(st, day, mood):
+    """Which exit rules a new trade gets. Smart Switch: Smallcap 100 above its EMA 50 -> positional, else swing."""
+    if st.get("type") != "switch":
+        return st.get("type", "swing"), ""
+    m = mood.on(day) if mood else None
+    if m is None:
+        return "swing", "Smallcap 100 unknown → Swing exits"
+    return ("positional", f"Smallcap 100 {m[1]:,.0f} above EMA 50 {m[2]:,.0f} → Positional exits") if m[0] else \
+           ("swing", f"Smallcap 100 {m[1]:,.0f} below EMA 50 {m[2]:,.0f} → Swing exits")
+
+
+def try_entry(st, sym, name, df, j, mode="paper", money=None, mood=None):
     """Entry on candle j if the setup on the candle before is triggered. Returns (trade, sells on the same day) or (None, [])."""
     plan = swing_setup(df, j - 1)
     if not plan or df.h[j] < plan["trigger"]:
@@ -282,6 +297,7 @@ def try_entry(st, sym, name, df, j, mode="paper", money=None):
     sid = st.get("id")
     entry = max(plan["trigger"], float(df.o[j]))  # gap up above the trigger: filled at the open
     money = float(money if money is not None else st.get("capital", DEF_CAPITAL) * st.get("pct", DEF_PCT) / 100)
+    ttype, regime = exit_type(st, df.index[j - 1], mood)
     qty = math.floor(money / entry)
     if qty < 1:
         return None, []
@@ -289,9 +305,9 @@ def try_entry(st, sym, name, df, j, mode="paper", money=None):
     why = "Stop loss (1% below 4-candle base)" if stop == round(plan["base_low"] * (1 - STOP_BELOW_BASE), 2) else "Stop loss (6% max risk)"
     t = {"id": f"{sid}-{sym}-{df.index[j]}", "strategy": sid, "strategy_name": st.get("name", sid),
          "symbol": sym, "name": name, "entry_date": df.index[j], "entry": round(entry, 2),
-         "type": st.get("type", "swing"),
+         "type": ttype, "regime": regime,
          "qty": qty, "remaining": qty, "stop": stop, "stop_reason": why, "days": 0,
-         "target": round(entry * (1 + RULES.get(st.get("type"), RULES["swing"])["target"]), 2),
+         "target": round(entry * (1 + RULES[ttype]["target"]), 2),
          "booked": False, "signal_low": None, "signal_date": None, "exits": [], "pnl": 0.0,
          "status": "open", "mode": mode, "money": round(money, 2), "plan": {k: plan[k] for k in ("resistance", "range_pct", "r42", "room")}}
     sells = []
@@ -305,7 +321,8 @@ def try_entry(st, sym, name, df, j, mode="paper", money=None):
 def _log_buy(t):
     return {"date": t["entry_date"], "strategy": t["strategy_name"], "mode": t["mode"], "action": "BUY", "symbol": t["symbol"],
             "name": t["name"], "qty": t["qty"], "price": t["entry"], "value": round(t["qty"] * t["entry"], 2),
-            "reason": f"Breakout above ₹{t['plan']['resistance']:g} + 1% (stop ₹{t['stop']:g}, target ₹{t['target']:g})",
+            "reason": f"Breakout above ₹{t['plan']['resistance']:g} + 1% (stop ₹{t['stop']:g}, target ₹{t['target']:g})"
+                      + (f" · {t['regime']}" if t.get("regime") else ""),
             "pnl": "", "pnl_pct": "", "hold_days": "", "trade_id": t["id"]}
 
 
@@ -316,7 +333,7 @@ def _log_sell(s, t):
             "hold_days": _days(t["entry_date"], s["date"]), "trade_id": t["id"]}
 
 
-def run(settings, book, charts, sp, dt, today=""):
+def run(settings, book, charts, sp, dt, today="", mood=None):
     """Process new daily candles for every ON strategy. Changes `book` (trades file) in place.
     Returns events for the Telegram message and the dashboard; events["log"] = rows for the trade log."""
     book.setdefault("open", [])
@@ -330,7 +347,7 @@ def run(settings, book, charts, sp, dt, today=""):
     names = {s: (sp.get(s) or dt.get(s) or {}).get("name") or s for s in frames}
     for st in settings.get("strategies", []):
         sid = st.get("id")
-        if not st.get("on") or st.get("type") not in RULES:
+        if not st.get("on") or st.get("type") not in TRADING_TYPES:
             continue
         scan = set(sp) if st.get("list", "SP") == "SP" else set(dt) if st.get("list") == "DT" else set(sp) | set(dt)
         seen = book["last_day"].get(sid)
@@ -370,13 +387,13 @@ def run(settings, book, charts, sp, dt, today=""):
                 if not money:
                     events.setdefault("skipped", []).append({"symbol": sym, "name": names.get(sym, sym), "date": df.index[j], "strategy": sid})
                     continue  # no free capital (all money in open trades)
-                t, sells = try_entry(st, sym, names.get(sym, sym), df, j, money=money)
+                t, sells = try_entry(st, sym, names.get(sym, sym), df, j, money=money, mood=mood)
                 if not t:
                     continue
                 book["open"].append(t)
                 mine[sym] = t
                 events["entries"].append({"symbol": sym, "name": t["name"], "qty": t["qty"], "price": t["entry"],
-                                          "stop": t["stop"], "target": t["target"], "strategy": sid})
+                                          "stop": t["stop"], "target": t["target"], "strategy": sid, "regime": t.get("regime", "")})
                 events["log"].append(_log_buy(t))
                 for s in sells:
                     events["exits"].append(s)
@@ -401,6 +418,10 @@ def run(settings, book, charts, sp, dt, today=""):
                               "as_of": df.index[-1]})
         book["setups"][sid] = ready
         events["setups"][sid] = ready
+        if st.get("type") == "switch":
+            m = mood.now() if mood else None
+            book.setdefault("mood", {})[sid] = events.setdefault("mood", {})[sid] = (
+                {"above": m[0], "close": m[1], "ema50": m[2], "date": m[3], "rules": "Positional" if m[0] else "Swing"} if m else None)
         book.setdefault("capital", {})[sid] = capital_of(st, book)
         events.setdefault("capital", {})[sid] = book["capital"][sid]
     book["closed"] = book["closed"][-500:]
@@ -408,7 +429,7 @@ def run(settings, book, charts, sp, dt, today=""):
 
 
 # ------------------------------------------------------------------ backtest
-def backtest(st, charts, names, symbols, money=100000.0):
+def backtest(st, charts, names, symbols, money=100000.0, mood=None):
     """The same rules on all past candles of `symbols` (one trade per stock at a time).
     Note: these are stocks in the list TODAY, so the result is more optimistic than real life."""
     trades = []
@@ -424,7 +445,7 @@ def backtest(st, charts, names, symbols, money=100000.0):
                     trades.append(t)
                     t = None
                 continue
-            t, _ = try_entry(st, sym, names.get(sym, sym), df, j, mode="backtest", money=money)
+            t, _ = try_entry(st, sym, names.get(sym, sym), df, j, mode="backtest", money=money, mood=mood)
             if t and t["status"] == "closed":
                 trades.append(t)
                 t = None

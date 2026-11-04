@@ -129,6 +129,7 @@ h2 .cnt{font:500 12px var(--f-mono);padding:1px 8px;border-radius:999px;backgrou
 .ev .why{grid-column:1/2;color:var(--muted);font-size:12.5px;font-family:var(--f-mono);overflow-wrap:anywhere}
 .perf{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .l2{margin-top:12px}
+.st-note.mood.pos{background:var(--up-soft)}.st-note.mood.neg{background:var(--down-soft)}
 .capc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:10px;background:var(--accent-soft);border-radius:8px;padding:10px}
 .capc .k{font-size:11.5px;color:var(--muted)}.capc .v{font:700 17px var(--f-mono)}.capc .mut{font-size:11.5px}
 @media (max-width:520px){.capc{grid-template-columns:1fr}}
@@ -948,8 +949,8 @@ const SD = D.strat || {settings: [], setups: {}, open: [], closed: []};
 let STRAT = (SD.settings || []).map(x => Object.assign({}, x)), stForm = null, stPending = {};
 let LOCAL_ST = []; try { LOCAL_ST = JSON.parse(localStorage.getItem("tf-strategies") || "[]"); if (!Array.isArray(LOCAL_ST)) LOCAL_ST = []; } catch (e) {}
 LOCAL_ST = LOCAL_ST.filter(l => !STRAT.some(t => t.name.toLowerCase() === String(l.name || "").toLowerCase()));
-const LISTS = {SP: "SP", DT: "DT", BOTH: "SP + DT"}, TYPES = {swing: "Swing Strategy rules", positional: "Positional Trading rules", none: "Rules not added yet"};
-const RULED = t => t.type === "swing" || t.type === "positional";
+const LISTS = {SP: "SP", DT: "DT", BOTH: "SP + DT"}, TYPES = {swing: "Swing Strategy rules", positional: "Positional Trading rules", switch: "Smart Switch (Smallcap 100 decides the exits)", none: "Rules not added yet"};
+const RULED = t => t.type === "swing" || t.type === "positional" || t.type === "switch";
 const inr0 = v => v == null || !isFinite(v) ? "—" : "₹" + Number(v).toLocaleString("en-IN", {maximumFractionDigits: 0});
 const inr2 = v => v == null || !isFinite(v) ? "—" : "₹" + Number(v).toLocaleString("en-IN", {maximumFractionDigits: 2});
 const sgn0 = v => (v >= 0 ? "+" : "−") + inr0(Math.abs(v));
@@ -1073,9 +1074,17 @@ function last2HTML(p){
       <div class="kv"><div class="k">Worst fall</div><div class="v down">${esc(p.max_drawdown_pct)}%</div></div>
     </div>${curveSVG(curve)}<div class="ph2" style="margin-top:12px">Profit by month</div>${monthChips(p.months)}</div>`;
 }
+function moodHTML(t){
+  if (t.type !== "switch") return "";
+  const m = (SD.mood || {})[t.id];
+  if (!m) return `<div class="st-note">🧭 Nifty Smallcap 100 not checked yet — it appears after the next robot run.</div>`;
+  return `<div class="st-note mood ${m.above ? "pos" : "neg"}">🧭 <b>Nifty Smallcap 100 ${inr0(m.close).slice(1)}</b> is <b>${m.above ? "above" : "below"}</b> its EMA 50 (${inr0(m.ema50).slice(1)}) on ${esc(m.date)}
+    → new trades use the <b>${esc(m.rules)}</b> exit rules (${m.rules === "Positional" ? "50% at +30%, rest on 2 closes below EMA 50" : "50% at +20%, EMA 10 trail, 10-day time stop"}).
+    A trade keeps the rules it got on its buy day.</div>`;
+}
 function perfHTML(t){
   const live = (SD.live || {})[t.id], bt = (SD.backtest || {})[t.id] || {};
-  return `<h2>${esc(t.name)} · is it working?</h2>
+  return moodHTML(t) + `<h2>${esc(t.name)} · is it working?</h2>
     <div class="perf">
       <div class="pcol"><div class="ph2">📝 Paper trading <span class="mut">(real days since you switched it ON)</span></div>
         ${capitalCard((SD.capital || {})[t.id])}
@@ -1272,7 +1281,8 @@ def _strategy_view(strategies, sp, dt):
     return {"settings": (strategies.get("settings") or {}).get("strategies", []), "setups": book.get("setups", {}),
             "open": opens, "closed": book.get("closed", [])[-100:][::-1], "live": live,
             "backtest": strategies.get("backtest") or {}, "log": (strategies.get("log") or [])[-400:][::-1],
-            "capital": {st.get("id"): _stg.capital_of(st, book) for st in (strategies.get("settings") or {}).get("strategies", [])}}
+            "capital": {st.get("id"): _stg.capital_of(st, book) for st in (strategies.get("settings") or {}).get("strategies", [])},
+            "mood": book.get("mood", {})}
 
 
 def page_data(sp, dt, run, history, rules_cfg, banner="", snaps=None, charts=None, alerts=None, strategies=None):
