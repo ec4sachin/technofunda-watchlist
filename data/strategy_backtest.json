@@ -1,0 +1,2095 @@
+{
+ "swing": {
+  "report": {
+   "trades": 70,
+   "open": 1,
+   "wins": 25,
+   "losses": 45,
+   "win_rate": 35.7,
+   "total_pnl": 136248.57,
+   "open_pnl": 976.62,
+   "avg_win": 8375.3,
+   "avg_loss": -1625.2,
+   "profit_factor": 2.86,
+   "expectancy": 1946.41,
+   "avg_return_pct": 7.8,
+   "best": 85092.83,
+   "worst": -3583.58,
+   "max_drawdown": 10036.79,
+   "avg_hold_days": 28.5,
+   "first": "2003-06-16",
+   "last": "2026-10-30",
+   "curve": [
+    [
+     "2003-07-15",
+     4449.06
+    ],
+    [
+     "2004-01-05",
+     12098.02
+    ],
+    [
+     "2004-10-12",
+     17416.15
+    ],
+    [
+     "2004-12-28",
+     21496.38
+    ],
+    [
+     "2005-08-23",
+     19921.68
+    ],
+    [
+     "2006-04-12",
+     17601.68
+    ],
+    [
+     "2007-12-20",
+     21650.06
+    ],
+    [
+     "2010-01-21",
+     20194.56
+    ],
+    [
+     "2010-01-27",
+     18752.76
+    ],
+    [
+     "2010-02-22",
+     16894.08
+    ],
+    [
+     "2010-07-27",
+     15408.12
+    ],
+    [
+     "2010-07-30",
+     14473.32
+    ],
+    [
+     "2010-11-15",
+     19733.39
+    ],
+    [
+     "2012-10-23",
+     18230.3
+    ],
+    [
+     "2013-01-23",
+     15585.3
+    ],
+    [
+     "2013-01-23",
+     14075.35
+    ],
+    [
+     "2013-12-04",
+     20638.32
+    ],
+    [
+     "2014-01-13",
+     17054.74
+    ],
+    [
+     "2014-04-09",
+     21448.44
+    ],
+    [
+     "2014-04-17",
+     20210.75
+    ],
+    [
+     "2014-09-26",
+     18596.51
+    ],
+    [
+     "2015-12-07",
+     17398.11
+    ],
+    [
+     "2016-01-13",
+     20293.24
+    ],
+    [
+     "2016-01-13",
+     19149.79
+    ],
+    [
+     "2016-09-29",
+     17656.21
+    ],
+    [
+     "2016-11-15",
+     24528.14
+    ],
+    [
+     "2017-02-14",
+     22896.19
+    ],
+    [
+     "2017-04-26",
+     25904.06
+    ],
+    [
+     "2017-05-03",
+     24280.26
+    ],
+    [
+     "2017-05-16",
+     30634.51
+    ],
+    [
+     "2017-05-19",
+     39043.81
+    ],
+    [
+     "2017-06-23",
+     37381.89
+    ],
+    [
+     "2017-08-03",
+     34784.54
+    ],
+    [
+     "2018-01-05",
+     39670.11
+    ],
+    [
+     "2020-12-22",
+     38040.66
+    ],
+    [
+     "2020-12-22",
+     36379.03
+    ],
+    [
+     "2021-01-25",
+     34867.03
+    ],
+    [
+     "2021-06-21",
+     41232.03
+    ],
+    [
+     "2021-07-20",
+     39882.12
+    ],
+    [
+     "2022-09-19",
+     38736.32
+    ],
+    [
+     "2022-09-26",
+     37180.08
+    ],
+    [
+     "2023-01-16",
+     35788.83
+    ],
+    [
+     "2023-05-23",
+     34143.87
+    ],
+    [
+     "2023-06-08",
+     32754.49
+    ],
+    [
+     "2024-02-06",
+     31195.24
+    ],
+    [
+     "2024-03-19",
+     116288.07
+    ],
+    [
+     "2024-04-18",
+     121805.52
+    ],
+    [
+     "2024-05-28",
+     126161.77
+    ],
+    [
+     "2024-08-01",
+     124836.97
+    ],
+    [
+     "2024-10-16",
+     124147.97
+    ],
+    [
+     "2025-01-13",
+     123102.65
+    ],
+    [
+     "2025-05-27",
+     121387.65
+    ],
+    [
+     "2025-07-15",
+     127469.35
+    ],
+    [
+     "2025-07-30",
+     125500.75
+    ],
+    [
+     "2025-09-18",
+     130089.95
+    ],
+    [
+     "2026-01-08",
+     135460.35
+    ],
+    [
+     "2026-03-05",
+     133614.5
+    ],
+    [
+     "2026-05-12",
+     131480.34
+    ],
+    [
+     "2026-05-15",
+     136215.04
+    ],
+    [
+     "2026-05-27",
+     134353.44
+    ],
+    [
+     "2026-06-01",
+     132980.76
+    ],
+    [
+     "2026-07-02",
+     130989.51
+    ],
+    [
+     "2026-07-20",
+     128823.89
+    ],
+    [
+     "2026-07-27",
+     127703.09
+    ],
+    [
+     "2026-09-11",
+     132913.37
+    ],
+    [
+     "2026-09-16",
+     131417.37
+    ],
+    [
+     "2026-10-13",
+     130054.77
+    ],
+    [
+     "2026-10-19",
+     134960.22
+    ],
+    [
+     "2026-10-21",
+     137933.82
+    ],
+    [
+     "2026-10-30",
+     136248.57
+    ]
+   ],
+   "months": {
+    "2003-07": 4449.06,
+    "2004-01": 7648.96,
+    "2004-10": 5318.13,
+    "2004-12": 4080.23,
+    "2005-08": -1574.7,
+    "2006-04": -2320.0,
+    "2007-12": 4048.38,
+    "2010-01": -2897.3,
+    "2010-02": -1858.68,
+    "2010-07": -2420.76,
+    "2010-11": 5260.07,
+    "2012-10": -1503.09,
+    "2013-01": -4154.95,
+    "2013-12": 6562.97,
+    "2014-01": -3583.58,
+    "2014-04": 3156.01,
+    "2014-09": -1614.24,
+    "2015-12": -1198.4,
+    "2016-01": 1751.68,
+    "2016-09": -1493.58,
+    "2016-11": 6871.93,
+    "2017-02": -1631.95,
+    "2017-04": 3007.87,
+    "2017-05": 13139.75,
+    "2017-06": -1661.92,
+    "2017-08": -2597.35,
+    "2018-01": 4885.57,
+    "2020-12": -3291.08,
+    "2021-01": -1512.0,
+    "2021-06": 6365.0,
+    "2021-07": -1349.91,
+    "2022-09": -2702.04,
+    "2023-01": -1391.25,
+    "2023-05": -1644.96,
+    "2023-06": -1389.38,
+    "2024-02": -1559.25,
+    "2024-03": 85092.83,
+    "2024-04": 5517.45,
+    "2024-05": 4356.25,
+    "2024-08": -1324.8,
+    "2024-10": -689.0,
+    "2025-01": -1045.32,
+    "2025-05": -1715.0,
+    "2025-07": 4113.1,
+    "2025-09": 4589.2,
+    "2026-01": 5370.4,
+    "2026-03": -1845.85,
+    "2026-05": 738.94,
+    "2026-06": -1372.68,
+    "2026-07": -5277.67,
+    "2026-09": 3714.28,
+    "2026-10": 4831.2
+   },
+   "without_best": 51155.74,
+   "best_trade": "Dolphin Offshore 2023-10-05"
+  },
+  "trades": [
+   {
+    "symbol": "GRCL",
+    "name": "Gayatri Rubbers",
+    "entry_date": "2026-11-02",
+    "entry": 609.03,
+    "qty": 41,
+    "status": "open",
+    "pnl": 0.0,
+    "pnl_pct": null,
+    "hold_days": null,
+    "closed_on": null,
+    "exits": [],
+    "open_pnl": 976.62
+   },
+   {
+    "symbol": "OMFREIGHT",
+    "name": "Om Freight Forwa",
+    "entry_date": "2026-10-19",
+    "entry": 111.0,
+    "qty": 225,
+    "status": "closed",
+    "pnl": -1685.25,
+    "pnl_pct": -6.75,
+    "hold_days": 11,
+    "closed_on": "2026-10-30",
+    "exits": [
+     {
+      "date": "2026-10-30",
+      "qty": 225,
+      "price": 103.51,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1685.25
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "PASUPTAC",
+    "name": "Pasupati Acrylon",
+    "entry_date": "2026-09-15",
+    "entry": 70.5,
+    "qty": 354,
+    "status": "closed",
+    "pnl": 2973.6,
+    "pnl_pct": 11.91,
+    "hold_days": 36,
+    "closed_on": "2026-10-21",
+    "exits": [
+     {
+      "date": "2026-10-14",
+      "qty": 177,
+      "price": 84.6,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2495.7
+     },
+     {
+      "date": "2026-10-21",
+      "qty": 177,
+      "price": 73.2,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 477.9
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "SAMBHV",
+    "name": "Sambhv Steel",
+    "entry_date": "2026-09-07",
+    "entry": 133.12,
+    "qty": 187,
+    "status": "closed",
+    "pnl": -1496.0,
+    "pnl_pct": -6.01,
+    "hold_days": 9,
+    "closed_on": "2026-09-16",
+    "exits": [
+     {
+      "date": "2026-09-16",
+      "qty": 187,
+      "price": 125.12,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1496.0
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "EIMCOELECO",
+    "name": "Eimco Elecon (India)",
+    "entry_date": "2026-09-03",
+    "entry": 2288.46,
+    "qty": 10,
+    "status": "closed",
+    "pnl": -1362.6,
+    "pnl_pct": -5.95,
+    "hold_days": 40,
+    "closed_on": "2026-10-13",
+    "exits": [
+     {
+      "date": "2026-10-13",
+      "qty": 10,
+      "price": 2152.2,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1362.6
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "PRIZOR",
+    "name": "Prizor Viztech",
+    "entry_date": "2026-08-31",
+    "entry": 1109.1,
+    "qty": 22,
+    "status": "closed",
+    "pnl": 4905.45,
+    "pnl_pct": 20.1,
+    "hold_days": 49,
+    "closed_on": "2026-10-19",
+    "exits": [
+     {
+      "date": "2026-10-07",
+      "qty": 11,
+      "price": 1382.15,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 3003.55
+     },
+     {
+      "date": "2026-10-19",
+      "qty": 11,
+      "price": 1282.0,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 1901.9
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "HOACFOODS",
+    "name": "Hoac Foods",
+    "entry_date": "2026-08-06",
+    "entry": 747.4,
+    "qty": 33,
+    "status": "closed",
+    "pnl": 5210.28,
+    "pnl_pct": 21.12,
+    "hold_days": 36,
+    "closed_on": "2026-09-11",
+    "exits": [
+     {
+      "date": "2026-09-01",
+      "qty": 16,
+      "price": 896.88,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2391.68
+     },
+     {
+      "date": "2026-09-11",
+      "qty": 17,
+      "price": 913.2,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 2818.6
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "GRCL",
+    "name": "Gayatri Rubbers",
+    "entry_date": "2026-07-09",
+    "entry": 613.02,
+    "qty": 40,
+    "status": "closed",
+    "pnl": -1120.8,
+    "pnl_pct": -4.57,
+    "hold_days": 18,
+    "closed_on": "2026-07-27",
+    "exits": [
+     {
+      "date": "2026-07-27",
+      "qty": 40,
+      "price": 585.0,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1120.8
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "JAYBARMARU",
+    "name": "Jay Bharat Maru.",
+    "entry_date": "2026-07-06",
+    "entry": 179.58,
+    "qty": 139,
+    "status": "closed",
+    "pnl": -2165.62,
+    "pnl_pct": -8.68,
+    "hold_days": 14,
+    "closed_on": "2026-07-20",
+    "exits": [
+     {
+      "date": "2026-07-20",
+      "qty": 139,
+      "price": 164.0,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -2165.62
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "PRIZOR",
+    "name": "Prizor Viztech",
+    "entry_date": "2026-06-24",
+    "entry": 909.95,
+    "qty": 27,
+    "status": "closed",
+    "pnl": -1991.25,
+    "pnl_pct": -8.1,
+    "hold_days": 8,
+    "closed_on": "2026-07-02",
+    "exits": [
+     {
+      "date": "2026-07-02",
+      "qty": 27,
+      "price": 836.2,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1991.25
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "SAAKSHI",
+    "name": "Saakshi Medtech",
+    "entry_date": "2026-05-22",
+    "entry": 240.0,
+    "qty": 104,
+    "status": "closed",
+    "pnl": -1861.6,
+    "pnl_pct": -7.46,
+    "hold_days": 5,
+    "closed_on": "2026-05-27",
+    "exits": [
+     {
+      "date": "2026-05-27",
+      "qty": 104,
+      "price": 222.1,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1861.6
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "JAYBARMARU",
+    "name": "Jay Bharat Maru.",
+    "entry_date": "2026-05-04",
+    "entry": 96.24,
+    "qty": 259,
+    "status": "closed",
+    "pnl": -2134.16,
+    "pnl_pct": -8.56,
+    "hold_days": 8,
+    "closed_on": "2026-05-12",
+    "exits": [
+     {
+      "date": "2026-05-12",
+      "qty": 259,
+      "price": 88.0,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -2134.16
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "SAAKSHI",
+    "name": "Saakshi Medtech",
+    "entry_date": "2026-04-15",
+    "entry": 200.0,
+    "qty": 125,
+    "status": "closed",
+    "pnl": 4734.7,
+    "pnl_pct": 18.94,
+    "hold_days": 30,
+    "closed_on": "2026-05-15",
+    "exits": [
+     {
+      "date": "2026-05-04",
+      "qty": 62,
+      "price": 243.85,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2718.7
+     },
+     {
+      "date": "2026-05-15",
+      "qty": 63,
+      "price": 232.0,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 2016.0
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "MEGAFLEX",
+    "name": "Mega Flex Plast.",
+    "entry_date": "2026-02-26",
+    "entry": 134.33,
+    "qty": 186,
+    "status": "closed",
+    "pnl": -1372.68,
+    "pnl_pct": -5.49,
+    "hold_days": 95,
+    "closed_on": "2026-06-01",
+    "exits": [
+     {
+      "date": "2026-06-01",
+      "qty": 186,
+      "price": 126.95,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1372.68
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "HOACFOODS",
+    "name": "Hoac Foods",
+    "entry_date": "2026-02-11",
+    "entry": 369.6,
+    "qty": 67,
+    "status": "closed",
+    "pnl": -1845.85,
+    "pnl_pct": -7.45,
+    "hold_days": 22,
+    "closed_on": "2026-03-05",
+    "exits": [
+     {
+      "date": "2026-03-05",
+      "qty": 67,
+      "price": 342.05,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1845.85
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "MEGAFLEX",
+    "name": "Mega Flex Plast.",
+    "entry_date": "2025-11-20",
+    "entry": 91.0,
+    "qty": 274,
+    "status": "closed",
+    "pnl": 5370.4,
+    "pnl_pct": 21.54,
+    "hold_days": 49,
+    "closed_on": "2026-01-08",
+    "exits": [
+     {
+      "date": "2025-12-03",
+      "qty": 137,
+      "price": 110.2,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2630.4
+     },
+     {
+      "date": "2026-01-08",
+      "qty": 137,
+      "price": 111.0,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 2740.0
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "PRIZOR",
+    "name": "Prizor Viztech",
+    "entry_date": "2025-08-07",
+    "entry": 272.3,
+    "qty": 91,
+    "status": "closed",
+    "pnl": 4589.2,
+    "pnl_pct": 18.52,
+    "hold_days": 42,
+    "closed_on": "2025-09-18",
+    "exits": [
+     {
+      "date": "2025-09-04",
+      "qty": 45,
+      "price": 338.3,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2970.0
+     },
+     {
+      "date": "2025-09-18",
+      "qty": 46,
+      "price": 307.5,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 1619.2
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "MEGAFLEX",
+    "name": "Mega Flex Plast.",
+    "entry_date": "2025-07-25",
+    "entry": 64.65,
+    "qty": 386,
+    "status": "closed",
+    "pnl": -1968.6,
+    "pnl_pct": -7.89,
+    "hold_days": 5,
+    "closed_on": "2025-07-30",
+    "exits": [
+     {
+      "date": "2025-07-30",
+      "qty": 386,
+      "price": 59.55,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1968.6
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "HOACFOODS",
+    "name": "Hoac Foods",
+    "entry_date": "2025-06-17",
+    "entry": 204.0,
+    "qty": 122,
+    "status": "closed",
+    "pnl": 6081.7,
+    "pnl_pct": 24.44,
+    "hold_days": 28,
+    "closed_on": "2025-07-15",
+    "exits": [
+     {
+      "date": "2025-07-02",
+      "qty": 61,
+      "price": 256.65,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 3211.65
+     },
+     {
+      "date": "2025-07-15",
+      "qty": 61,
+      "price": 251.05,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 2870.05
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "GRCL",
+    "name": "Gayatri Rubbers",
+    "entry_date": "2025-05-23",
+    "entry": 510.0,
+    "qty": 49,
+    "status": "closed",
+    "pnl": -1715.0,
+    "pnl_pct": -6.86,
+    "hold_days": 4,
+    "closed_on": "2025-05-27",
+    "exits": [
+     {
+      "date": "2025-05-27",
+      "qty": 49,
+      "price": 475.0,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1715.0
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "KRISHNADEF",
+    "name": "Krishna Defence",
+    "entry_date": "2025-01-06",
+    "entry": 789.82,
+    "qty": 31,
+    "status": "closed",
+    "pnl": -1045.32,
+    "pnl_pct": -4.27,
+    "hold_days": 7,
+    "closed_on": "2025-01-13",
+    "exits": [
+     {
+      "date": "2025-01-13",
+      "qty": 31,
+      "price": 756.1,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1045.32
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "GRCL",
+    "name": "Gayatri Rubbers",
+    "entry_date": "2024-10-16",
+    "entry": 470.0,
+    "qty": 53,
+    "status": "closed",
+    "pnl": -689.0,
+    "pnl_pct": -2.77,
+    "hold_days": 0,
+    "closed_on": "2024-10-16",
+    "exits": [
+     {
+      "date": "2024-10-16",
+      "qty": 53,
+      "price": 457.0,
+      "reason": "Stop loss (same day)",
+      "pnl": -689.0
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "GRCL",
+    "name": "Gayatri Rubbers",
+    "entry_date": "2024-08-01",
+    "entry": 412.08,
+    "qty": 60,
+    "status": "closed",
+    "pnl": -1324.8,
+    "pnl_pct": -5.36,
+    "hold_days": 0,
+    "closed_on": "2024-08-01",
+    "exits": [
+     {
+      "date": "2024-08-01",
+      "qty": 60,
+      "price": 390.0,
+      "reason": "Stop loss (same day)",
+      "pnl": -1324.8
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "OMAXAUTO",
+    "name": "Omax Autos",
+    "entry_date": "2024-04-23",
+    "entry": 117.0,
+    "qty": 213,
+    "status": "closed",
+    "pnl": 4356.25,
+    "pnl_pct": 17.48,
+    "hold_days": 35,
+    "closed_on": "2024-05-28",
+    "exits": [
+     {
+      "date": "2024-05-17",
+      "qty": 106,
+      "price": 142.4,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2692.4
+     },
+     {
+      "date": "2024-05-28",
+      "qty": 107,
+      "price": 132.55,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 1663.85
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "GRCL",
+    "name": "Gayatri Rubbers",
+    "entry_date": "2024-02-20",
+    "entry": 204.75,
+    "qty": 122,
+    "status": "closed",
+    "pnl": 5517.45,
+    "pnl_pct": 22.09,
+    "hold_days": 58,
+    "closed_on": "2024-04-18",
+    "exits": [
+     {
+      "date": "2024-03-11",
+      "qty": 61,
+      "price": 248.7,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2680.95
+     },
+     {
+      "date": "2024-04-18",
+      "qty": 61,
+      "price": 251.25,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 2836.5
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "JAYBARMARU",
+    "name": "Jay Bharat Maru.",
+    "entry_date": "2024-02-02",
+    "entry": 142.41,
+    "qty": 175,
+    "status": "closed",
+    "pnl": -1559.25,
+    "pnl_pct": -6.26,
+    "hold_days": 4,
+    "closed_on": "2024-02-06",
+    "exits": [
+     {
+      "date": "2024-02-06",
+      "qty": 175,
+      "price": 133.5,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1559.25
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "DOLPHIN",
+    "name": "Dolphin Offshore",
+    "entry_date": "2023-10-05",
+    "entry": 40.87,
+    "qty": 611,
+    "status": "closed",
+    "pnl": 85092.83,
+    "pnl_pct": 340.76,
+    "hold_days": 166,
+    "closed_on": "2024-03-19",
+    "exits": [
+     {
+      "date": "2023-10-19",
+      "qty": 305,
+      "price": 49.7,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2693.15
+     },
+     {
+      "date": "2024-03-19",
+      "qty": 306,
+      "price": 310.15,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 82399.68
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "KRISHNADEF",
+    "name": "Krishna Defence",
+    "entry_date": "2023-05-29",
+    "entry": 195.94,
+    "qty": 127,
+    "status": "closed",
+    "pnl": -1389.38,
+    "pnl_pct": -5.58,
+    "hold_days": 10,
+    "closed_on": "2023-06-08",
+    "exits": [
+     {
+      "date": "2023-06-08",
+      "qty": 127,
+      "price": 185.0,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1389.38
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "MAYURUNIQ",
+    "name": "Mayur Uniquoters",
+    "entry_date": "2023-04-25",
+    "entry": 512.07,
+    "qty": 48,
+    "status": "closed",
+    "pnl": -1644.96,
+    "pnl_pct": -6.69,
+    "hold_days": 28,
+    "closed_on": "2023-05-23",
+    "exits": [
+     {
+      "date": "2023-05-23",
+      "qty": 48,
+      "price": 477.8,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1644.96
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "GUFICBIO",
+    "name": "Gufic BioScience",
+    "entry_date": "2023-01-13",
+    "entry": 237.35,
+    "qty": 105,
+    "status": "closed",
+    "pnl": -1391.25,
+    "pnl_pct": -5.58,
+    "hold_days": 3,
+    "closed_on": "2023-01-16",
+    "exits": [
+     {
+      "date": "2023-01-16",
+      "qty": 105,
+      "price": 224.1,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1391.25
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "JAYBARMARU",
+    "name": "Jay Bharat Maru.",
+    "entry_date": "2022-09-15",
+    "entry": 73.45,
+    "qty": 340,
+    "status": "closed",
+    "pnl": -1145.8,
+    "pnl_pct": -4.59,
+    "hold_days": 4,
+    "closed_on": "2022-09-19",
+    "exits": [
+     {
+      "date": "2022-09-19",
+      "qty": 340,
+      "price": 70.08,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1145.8
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "MAYURUNIQ",
+    "name": "Mayur Uniquoters",
+    "entry_date": "2022-09-12",
+    "entry": 500.66,
+    "qty": 49,
+    "status": "closed",
+    "pnl": -1556.24,
+    "pnl_pct": -6.34,
+    "hold_days": 14,
+    "closed_on": "2022-09-26",
+    "exits": [
+     {
+      "date": "2022-09-26",
+      "qty": 49,
+      "price": 468.9,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1556.24
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "JAYBARMARU",
+    "name": "Jay Bharat Maru.",
+    "entry_date": "2021-07-13",
+    "entry": 88.07,
+    "qty": 283,
+    "status": "closed",
+    "pnl": -1349.91,
+    "pnl_pct": -5.42,
+    "hold_days": 7,
+    "closed_on": "2021-07-20",
+    "exits": [
+     {
+      "date": "2021-07-20",
+      "qty": 283,
+      "price": 83.3,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1349.91
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "JAYBARMARU",
+    "name": "Jay Bharat Maru.",
+    "entry_date": "2021-05-24",
+    "entry": 65.68,
+    "qty": 380,
+    "status": "closed",
+    "pnl": 6365.0,
+    "pnl_pct": 25.5,
+    "hold_days": 28,
+    "closed_on": "2021-06-21",
+    "exits": [
+     {
+      "date": "2021-06-07",
+      "qty": 190,
+      "price": 81.68,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 3040.0
+     },
+     {
+      "date": "2021-06-21",
+      "qty": 190,
+      "price": 83.18,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 3325.0
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "EIMCOELECO",
+    "name": "Eimco Elecon (India)",
+    "entry_date": "2021-01-05",
+    "entry": 353.05,
+    "qty": 70,
+    "status": "closed",
+    "pnl": -1512.0,
+    "pnl_pct": -6.12,
+    "hold_days": 20,
+    "closed_on": "2021-01-25",
+    "exits": [
+     {
+      "date": "2021-01-25",
+      "qty": 70,
+      "price": 331.45,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1512.0
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "EIMCOELECO",
+    "name": "Eimco Elecon (India)",
+    "entry_date": "2020-12-07",
+    "entry": 348.45,
+    "qty": 71,
+    "status": "closed",
+    "pnl": -1629.45,
+    "pnl_pct": -6.59,
+    "hold_days": 15,
+    "closed_on": "2020-12-22",
+    "exits": [
+     {
+      "date": "2020-12-22",
+      "qty": 71,
+      "price": 325.5,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1629.45
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "MAYURUNIQ",
+    "name": "Mayur Uniquoters",
+    "entry_date": "2020-12-03",
+    "entry": 279.77,
+    "qty": 89,
+    "status": "closed",
+    "pnl": -1661.63,
+    "pnl_pct": -6.67,
+    "hold_days": 19,
+    "closed_on": "2020-12-22",
+    "exits": [
+     {
+      "date": "2020-12-22",
+      "qty": 89,
+      "price": 261.1,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1661.63
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "MAYURUNIQ",
+    "name": "Mayur Uniquoters",
+    "entry_date": "2017-10-23",
+    "entry": 421.17,
+    "qty": 59,
+    "status": "closed",
+    "pnl": 4885.57,
+    "pnl_pct": 19.66,
+    "hold_days": 74,
+    "closed_on": "2018-01-05",
+    "exits": [
+     {
+      "date": "2017-12-08",
+      "qty": 29,
+      "price": 505.4,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2442.67
+     },
+     {
+      "date": "2018-01-05",
+      "qty": 30,
+      "price": 502.6,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 2442.9
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "JAYBARMARU",
+    "name": "Jay Bharat Maru.",
+    "entry_date": "2017-06-16",
+    "entry": 132.29,
+    "qty": 188,
+    "status": "closed",
+    "pnl": -1661.92,
+    "pnl_pct": -6.68,
+    "hold_days": 7,
+    "closed_on": "2017-06-23",
+    "exits": [
+     {
+      "date": "2017-06-23",
+      "qty": 188,
+      "price": 123.45,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1661.92
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "EIMCOELECO",
+    "name": "Eimco Elecon (India)",
+    "entry_date": "2017-05-22",
+    "entry": 609.45,
+    "qty": 41,
+    "status": "closed",
+    "pnl": -2597.35,
+    "pnl_pct": -10.39,
+    "hold_days": 73,
+    "closed_on": "2017-08-03",
+    "exits": [
+     {
+      "date": "2017-08-03",
+      "qty": 41,
+      "price": 546.1,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -2597.35
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "EIMCOELECO",
+    "name": "Eimco Elecon (India)",
+    "entry_date": "2017-04-24",
+    "entry": 535.3,
+    "qty": 46,
+    "status": "closed",
+    "pnl": -1623.8,
+    "pnl_pct": -6.59,
+    "hold_days": 9,
+    "closed_on": "2017-05-03",
+    "exits": [
+     {
+      "date": "2017-05-03",
+      "qty": 46,
+      "price": 500.0,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1623.8
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "JAYBARMARU",
+    "name": "Jay Bharat Maru.",
+    "entry_date": "2017-04-03",
+    "entry": 87.42,
+    "qty": 285,
+    "status": "closed",
+    "pnl": 8409.3,
+    "pnl_pct": 33.75,
+    "hold_days": 46,
+    "closed_on": "2017-05-19",
+    "exits": [
+     {
+      "date": "2017-04-21",
+      "qty": 142,
+      "price": 109.4,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 3121.16
+     },
+     {
+      "date": "2017-05-19",
+      "qty": 143,
+      "price": 124.4,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 5288.14
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "OMAXAUTO",
+    "name": "Omax Autos",
+    "entry_date": "2017-03-31",
+    "entry": 79.74,
+    "qty": 313,
+    "status": "closed",
+    "pnl": 3007.87,
+    "pnl_pct": 12.05,
+    "hold_days": 26,
+    "closed_on": "2017-04-26",
+    "exits": [
+     {
+      "date": "2017-04-17",
+      "qty": 156,
+      "price": 95.69,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2488.2
+     },
+     {
+      "date": "2017-04-26",
+      "qty": 157,
+      "price": 83.05,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 519.67
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "AVTNPL",
+    "name": "AVT Natural Prod",
+    "entry_date": "2017-02-06",
+    "entry": 35.96,
+    "qty": 695,
+    "status": "closed",
+    "pnl": 6354.25,
+    "pnl_pct": 25.42,
+    "hold_days": 99,
+    "closed_on": "2017-05-16",
+    "exits": [
+     {
+      "date": "2017-04-05",
+      "qty": 347,
+      "price": 43.15,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2494.93
+     },
+     {
+      "date": "2017-05-16",
+      "qty": 348,
+      "price": 47.05,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 3859.32
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "SHREEPUSHK",
+    "name": "Sh.Pushkar Chem.",
+    "entry_date": "2017-01-20",
+    "entry": 196.7,
+    "qty": 127,
+    "status": "closed",
+    "pnl": -1631.95,
+    "pnl_pct": -6.53,
+    "hold_days": 25,
+    "closed_on": "2017-02-14",
+    "exits": [
+     {
+      "date": "2017-02-14",
+      "qty": 127,
+      "price": 183.85,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1631.95
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "JAYBARMARU",
+    "name": "Jay Bharat Maru.",
+    "entry_date": "2016-10-13",
+    "entry": 44.34,
+    "qty": 563,
+    "status": "closed",
+    "pnl": 6871.93,
+    "pnl_pct": 27.53,
+    "hold_days": 33,
+    "closed_on": "2016-11-15",
+    "exits": [
+     {
+      "date": "2016-10-14",
+      "qty": 281,
+      "price": 53.21,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2492.47
+     },
+     {
+      "date": "2016-11-15",
+      "qty": 282,
+      "price": 59.87,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 4379.46
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "SHREEPUSHK",
+    "name": "Sh.Pushkar Chem.",
+    "entry_date": "2016-09-28",
+    "entry": 134.03,
+    "qty": 186,
+    "status": "closed",
+    "pnl": -1493.58,
+    "pnl_pct": -5.99,
+    "hold_days": 1,
+    "closed_on": "2016-09-29",
+    "exits": [
+     {
+      "date": "2016-09-29",
+      "qty": 186,
+      "price": 126.0,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1493.58
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "JAYBARMARU",
+    "name": "Jay Bharat Maru.",
+    "entry_date": "2015-12-30",
+    "entry": 30.26,
+    "qty": 826,
+    "status": "closed",
+    "pnl": 2895.13,
+    "pnl_pct": 11.58,
+    "hold_days": 14,
+    "closed_on": "2016-01-13",
+    "exits": [
+     {
+      "date": "2016-01-04",
+      "qty": 413,
+      "price": 36.31,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2498.65
+     },
+     {
+      "date": "2016-01-13",
+      "qty": 413,
+      "price": 31.22,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 396.48
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "MAYURUNIQ",
+    "name": "Mayur Uniquoters",
+    "entry_date": "2015-12-21",
+    "entry": 453.79,
+    "qty": 55,
+    "status": "closed",
+    "pnl": -1143.45,
+    "pnl_pct": -4.58,
+    "hold_days": 23,
+    "closed_on": "2016-01-13",
+    "exits": [
+     {
+      "date": "2016-01-13",
+      "qty": 55,
+      "price": 433.0,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1143.45
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "MAYURUNIQ",
+    "name": "Mayur Uniquoters",
+    "entry_date": "2015-11-20",
+    "entry": 444.4,
+    "qty": 56,
+    "status": "closed",
+    "pnl": -1198.4,
+    "pnl_pct": -4.82,
+    "hold_days": 17,
+    "closed_on": "2015-12-07",
+    "exits": [
+     {
+      "date": "2015-12-07",
+      "qty": 56,
+      "price": 423.0,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1198.4
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "JAYBARMARU",
+    "name": "Jay Bharat Maru.",
+    "entry_date": "2014-09-08",
+    "entry": 23.53,
+    "qty": 1062,
+    "status": "closed",
+    "pnl": -1614.24,
+    "pnl_pct": -6.46,
+    "hold_days": 18,
+    "closed_on": "2014-09-26",
+    "exits": [
+     {
+      "date": "2014-09-26",
+      "qty": 1062,
+      "price": 22.01,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1614.24
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "JAYBARMARU",
+    "name": "Jay Bharat Maru.",
+    "entry_date": "2014-03-28",
+    "entry": 12.32,
+    "qty": 2029,
+    "status": "closed",
+    "pnl": -1237.69,
+    "pnl_pct": -4.95,
+    "hold_days": 20,
+    "closed_on": "2014-04-17",
+    "exits": [
+     {
+      "date": "2014-04-17",
+      "qty": 2029,
+      "price": 11.71,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1237.69
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "EIMCOELECO",
+    "name": "Eimco Elecon (India)",
+    "entry_date": "2014-03-20",
+    "entry": 176.4,
+    "qty": 141,
+    "status": "closed",
+    "pnl": 4393.7,
+    "pnl_pct": 17.66,
+    "hold_days": 20,
+    "closed_on": "2014-04-09",
+    "exits": [
+     {
+      "date": "2014-03-25",
+      "qty": 70,
+      "price": 211.68,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2469.6
+     },
+     {
+      "date": "2014-04-09",
+      "qty": 71,
+      "price": 203.5,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 1924.1
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "JAYBARMARU",
+    "name": "Jay Bharat Maru.",
+    "entry_date": "2014-01-07",
+    "entry": 10.74,
+    "qty": 2327,
+    "status": "closed",
+    "pnl": -3583.58,
+    "pnl_pct": -14.34,
+    "hold_days": 6,
+    "closed_on": "2014-01-13",
+    "exits": [
+     {
+      "date": "2014-01-13",
+      "qty": 2327,
+      "price": 9.2,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -3583.58
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "MAYURUNIQ",
+    "name": "Mayur Uniquoters",
+    "entry_date": "2013-10-10",
+    "entry": 125.17,
+    "qty": 199,
+    "status": "closed",
+    "pnl": 6562.97,
+    "pnl_pct": 26.35,
+    "hold_days": 55,
+    "closed_on": "2013-12-04",
+    "exits": [
+     {
+      "date": "2013-11-05",
+      "qty": 99,
+      "price": 150.2,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2477.97
+     },
+     {
+      "date": "2013-12-04",
+      "qty": 100,
+      "price": 166.02,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 4085.0
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "OMAXAUTO",
+    "name": "Omax Autos",
+    "entry_date": "2012-11-26",
+    "entry": 49.49,
+    "qty": 505,
+    "status": "closed",
+    "pnl": -1509.95,
+    "pnl_pct": -6.04,
+    "hold_days": 58,
+    "closed_on": "2013-01-23",
+    "exits": [
+     {
+      "date": "2013-01-23",
+      "qty": 505,
+      "price": 46.5,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1509.95
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "EIMCOELECO",
+    "name": "Eimco Elecon (India)",
+    "entry_date": "2012-11-15",
+    "entry": 215.9,
+    "qty": 115,
+    "status": "closed",
+    "pnl": -2645.0,
+    "pnl_pct": -10.65,
+    "hold_days": 69,
+    "closed_on": "2013-01-23",
+    "exits": [
+     {
+      "date": "2013-01-23",
+      "qty": 115,
+      "price": 192.9,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -2645.0
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "OMAXAUTO",
+    "name": "Omax Autos",
+    "entry_date": "2012-10-03",
+    "entry": 48.68,
+    "qty": 513,
+    "status": "closed",
+    "pnl": -1503.09,
+    "pnl_pct": -6.02,
+    "hold_days": 20,
+    "closed_on": "2012-10-23",
+    "exits": [
+     {
+      "date": "2012-10-23",
+      "qty": 513,
+      "price": 45.75,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1503.09
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "EIMCOELECO",
+    "name": "Eimco Elecon (India)",
+    "entry_date": "2010-08-16",
+    "entry": 278.9,
+    "qty": 89,
+    "status": "closed",
+    "pnl": 5260.07,
+    "pnl_pct": 21.19,
+    "hold_days": 91,
+    "closed_on": "2010-11-15",
+    "exits": [
+     {
+      "date": "2010-11-02",
+      "qty": 44,
+      "price": 334.68,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2454.32
+     },
+     {
+      "date": "2010-11-15",
+      "qty": 45,
+      "price": 341.25,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 2805.75
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "OMAXAUTO",
+    "name": "Omax Autos",
+    "entry_date": "2010-07-13",
+    "entry": 58.48,
+    "qty": 427,
+    "status": "closed",
+    "pnl": -1485.96,
+    "pnl_pct": -5.95,
+    "hold_days": 14,
+    "closed_on": "2010-07-27",
+    "exits": [
+     {
+      "date": "2010-07-27",
+      "qty": 427,
+      "price": 55.0,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1485.96
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "JAYBARMARU",
+    "name": "Jay Bharat Maru.",
+    "entry_date": "2010-07-08",
+    "entry": 15.24,
+    "qty": 1640,
+    "status": "closed",
+    "pnl": -934.8,
+    "pnl_pct": -3.74,
+    "hold_days": 22,
+    "closed_on": "2010-07-30",
+    "exits": [
+     {
+      "date": "2010-07-30",
+      "qty": 1640,
+      "price": 14.67,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -934.8
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "JAYBARMARU",
+    "name": "Jay Bharat Maru.",
+    "entry_date": "2010-02-16",
+    "entry": 14.52,
+    "qty": 1721,
+    "status": "closed",
+    "pnl": -1858.68,
+    "pnl_pct": -7.44,
+    "hold_days": 6,
+    "closed_on": "2010-02-22",
+    "exits": [
+     {
+      "date": "2010-02-22",
+      "qty": 1721,
+      "price": 13.44,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1858.68
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "EIMCOELECO",
+    "name": "Eimco Elecon (India)",
+    "entry_date": "2010-01-21",
+    "entry": 302.75,
+    "qty": 82,
+    "status": "closed",
+    "pnl": -1455.5,
+    "pnl_pct": -5.86,
+    "hold_days": 0,
+    "closed_on": "2010-01-21",
+    "exits": [
+     {
+      "date": "2010-01-21",
+      "qty": 82,
+      "price": 285.0,
+      "reason": "Stop loss (same day)",
+      "pnl": -1455.5
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "OMAXAUTO",
+    "name": "Omax Autos",
+    "entry_date": "2010-01-07",
+    "entry": 61.61,
+    "qty": 405,
+    "status": "closed",
+    "pnl": -1441.8,
+    "pnl_pct": -5.78,
+    "hold_days": 20,
+    "closed_on": "2010-01-27",
+    "exits": [
+     {
+      "date": "2010-01-27",
+      "qty": 405,
+      "price": 58.05,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1441.8
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "EIMCOELECO",
+    "name": "Eimco Elecon (India)",
+    "entry_date": "2007-11-28",
+    "entry": 582.77,
+    "qty": 42,
+    "status": "closed",
+    "pnl": 4048.38,
+    "pnl_pct": 16.54,
+    "hold_days": 22,
+    "closed_on": "2007-12-20",
+    "exits": [
+     {
+      "date": "2007-12-03",
+      "qty": 21,
+      "price": 699.32,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2447.55
+     },
+     {
+      "date": "2007-12-20",
+      "qty": 21,
+      "price": 659.0,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 1600.83
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "EIMCOELECO",
+    "name": "Eimco Elecon (India)",
+    "entry_date": "2006-04-07",
+    "entry": 430.0,
+    "qty": 58,
+    "status": "closed",
+    "pnl": -2320.0,
+    "pnl_pct": -9.3,
+    "hold_days": 5,
+    "closed_on": "2006-04-12",
+    "exits": [
+     {
+      "date": "2006-04-12",
+      "qty": 58,
+      "price": 390.0,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -2320.0
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "EIMCOELECO",
+    "name": "Eimco Elecon (India)",
+    "entry_date": "2005-08-11",
+    "entry": 287.35,
+    "qty": 87,
+    "status": "closed",
+    "pnl": -1574.7,
+    "pnl_pct": -6.3,
+    "hold_days": 12,
+    "closed_on": "2005-08-23",
+    "exits": [
+     {
+      "date": "2005-08-23",
+      "qty": 87,
+      "price": 269.25,
+      "reason": "Stop loss (below 4-candle base)",
+      "pnl": -1574.7
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "OMAXAUTO",
+    "name": "Omax Autos",
+    "entry_date": "2004-12-08",
+    "entry": 96.96,
+    "qty": 257,
+    "status": "closed",
+    "pnl": 4080.23,
+    "pnl_pct": 16.37,
+    "hold_days": 20,
+    "closed_on": "2004-12-28",
+    "exits": [
+     {
+      "date": "2004-12-17",
+      "qty": 128,
+      "price": 116.35,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2481.92
+     },
+     {
+      "date": "2004-12-28",
+      "qty": 129,
+      "price": 109.35,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 1598.31
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "EIMCOELECO",
+    "name": "Eimco Elecon (India)",
+    "entry_date": "2004-09-16",
+    "entry": 144.43,
+    "qty": 173,
+    "status": "closed",
+    "pnl": 5318.13,
+    "pnl_pct": 21.28,
+    "hold_days": 26,
+    "closed_on": "2004-10-12",
+    "exits": [
+     {
+      "date": "2004-09-20",
+      "qty": 86,
+      "price": 173.32,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2484.54
+     },
+     {
+      "date": "2004-10-12",
+      "qty": 87,
+      "price": 177.0,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 2833.59
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "JAYBARMARU",
+    "name": "Jay Bharat Maru.",
+    "entry_date": "2003-10-06",
+    "entry": 2.68,
+    "qty": 9328,
+    "status": "closed",
+    "pnl": 7648.96,
+    "pnl_pct": 30.6,
+    "hold_days": 91,
+    "closed_on": "2004-01-05",
+    "exits": [
+     {
+      "date": "2003-11-03",
+      "qty": 4664,
+      "price": 3.25,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2658.48
+     },
+     {
+      "date": "2004-01-05",
+      "qty": 4664,
+      "price": 3.75,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 4990.48
+     }
+    ],
+    "open_pnl": null
+   },
+   {
+    "symbol": "JAYBARMARU",
+    "name": "Jay Bharat Maru.",
+    "entry_date": "2003-06-16",
+    "entry": 1.77,
+    "qty": 14124,
+    "status": "closed",
+    "pnl": 4449.06,
+    "pnl_pct": 17.8,
+    "hold_days": 29,
+    "closed_on": "2003-07-15",
+    "exits": [
+     {
+      "date": "2003-07-02",
+      "qty": 7062,
+      "price": 2.12,
+      "reason": "Target +20% (50% booked)",
+      "pnl": 2471.7
+     },
+     {
+      "date": "2003-07-15",
+      "qty": 7062,
+      "price": 2.05,
+      "reason": "Trailing EMA 10 exit",
+      "pnl": 1977.36
+     }
+    ],
+    "open_pnl": null
+   }
+  ],
+  "as_of": "2026-11-04",
+  "stocks": 64
+ }
+}

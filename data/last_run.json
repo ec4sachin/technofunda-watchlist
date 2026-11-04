@@ -3,9 +3,9 @@
  "rejected": [],
  "to_dt": [
   [
-   "RSL",
-   "Rajputana Stain.",
-   "close 169.7 < 20 EMA 171.21"
+   "544809",
+   "Adon Agro",
+   "close 95 < 20 EMA 96.68"
   ]
  ],
  "to_sp": [],
@@ -18,32 +18,32 @@
   [
    "544538",
    "Praruh Tech",
-   "close 152.6 vs 20 EMA 140.49 → SP"
+   "close 150 vs 20 EMA 141.4 → SP"
   ],
   [
    "544682",
    "GRE Renew",
-   "close 219.9 vs 20 EMA 219.52 → SP"
+   "close 220 vs 20 EMA 219.57 → SP"
   ],
   [
    "544694",
    "Accretion Nutraveda",
-   "close 325 vs 20 EMA 292.88 → SP"
+   "close 311 vs 20 EMA 294.6 → SP"
   ],
   [
    "544695",
    "Msafe Equipments",
-   "close 277.2 vs 20 EMA 273.51 → SP"
+   "close 283.4 vs 20 EMA 274.54 → SP"
   ],
   [
    "544809",
    "Adon Agro",
-   "close 105.39 vs 20 EMA 96.85 → SP"
+   "close 95 vs 20 EMA 96.68 → DT"
   ],
   [
    "544812",
    "Atharva Poly-Plast",
-   "close 129.9 vs 20 EMA 124.61 → SP"
+   "close 126 vs 20 EMA 124.74 → SP"
   ],
   [
    "ACETEC",
@@ -53,22 +53,17 @@
   [
    "AEROPLANE",
    "A C J K Exports",
-   "close 217.94 vs 20 EMA 213.31 → SP"
-  ],
-  [
-   "RSL",
-   "Rajputana Stain.",
-   "close 169.7 vs 20 EMA 171.21 → DT"
+   "close 222.57 vs 20 EMA 214.19 → SP"
   ],
   [
    "TEAMTECH",
    "Teamtech Formwork",
-   "close 164.25 vs 20 EMA 146.99 → SP"
+   "close 160.2 vs 20 EMA 148.25 → SP"
   ],
   [
    "UDAYJEW",
    "Uday Jewellery",
-   "close 210.11 vs 20 EMA 208.62 → SP"
+   "close 213.1 vs 20 EMA 209.05 → SP"
   ],
   [
    "544551",
@@ -78,7 +73,12 @@
   [
    "RAMBHAJO",
    "Advit Jewels",
-   "close 314.4 vs 20 EMA 344.53"
+   "close 298.7 vs 20 EMA 340.16"
+  ],
+  [
+   "RSL",
+   "Rajputana Stain.",
+   "close 169.27 vs 20 EMA 171.03"
   ]
  ],
  "per_alert": {
@@ -90,9 +90,9 @@
  },
  "email_total": 0,
  "already_listed": 0,
- "price_date": "03 Nov 2026",
+ "price_date": "04 Nov 2026",
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "04 Nov 2026, 03:22 PM IST"
+ "run_at": "04 Nov 2026, 04:32 PM IST"
 }
