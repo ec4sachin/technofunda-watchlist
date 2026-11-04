@@ -76,3 +76,20 @@ date,symbol,name,action,reason
 2026-11-03,544141,Pune e-Stock Broking,DT -> SP,close 261.85 back above 200 EMA 257.4
 2026-11-03,544551,Bhavik Enterpris,DT -> SP,close 151.3 back above 20 EMA 149.5 (new listing)
 2026-11-03,RSL,Rajputana Stain.,DT -> SP,close 175.39 back above 20 EMA 171.37 (new listing)
+2026-11-04,504240,Delton Cables,ADDED to SP,"marks 11/11; from TTM Profit > 30%, 52W High"
+2026-11-04,512399,Sera Investments,ADDED to SP,"marks 5.5/11; from TTM Profit > 30%, 52W High"
+2026-11-04,543787,Macfos,ADDED to SP,"marks 9.2/11; from Daily Volume Scan, Weekly Volume Scan"
+2026-11-04,SHREEPUSHK,Sh.Pushkar Chem.,ADDED to SP,"marks 11/11; from Daily Volume Scan, Weekly Volume Scan, 52W High"
+2026-11-04,UDAYJEW,Uday Jewellery,ADDED to SP,marks 7.3/11; from Ready after 6 Months
+2026-11-04,VMARCIND,V-Marc India,ADDED to SP,marks 6.4/11; from 52W High
+2026-11-04,SSFL,Srivari Spices &,ADDED to SP,marks 6.4/11; from 52W High
+2026-11-04,MAYURUNIQ,Mayur Uniquoters,ADDED to SP,marks 8.3/11; from 52W High
+2026-11-04,DANISH,Danish Power,ADDED to SP,marks 9.2/11; from 52W High
+2026-11-04,OBSCP,OBSC Perfection,ADDED to SP,marks 10.1/11; from 52W High
+2026-11-04,538565,Vistar Amar,SP -> DT,close 184.15 below 200 EMA 186.98
+2026-11-04,543991,Techknowgreen,SP -> DT,close 121.65 below 200 EMA 129.55
+2026-11-04,544141,Pune e-Stock Broking,SP -> DT,close 255.75 below 200 EMA 257.42
+2026-11-04,544551,Bhavik Enterpris,SP -> DT,close 145.75 below 20 EMA 149.14 (new listing)
+2026-11-04,VMARCIND,V-Marc India,SP -> DT,close 296.65 below 200 EMA 535.76
+2026-11-04,543542,Kesar India,DT -> SP,close 1201 back above 200 EMA 1176.52
+2026-11-04,543619,Concord Control,DT -> SP,close 2628.75 back above 200 EMA 2455.01

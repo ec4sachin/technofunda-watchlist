@@ -1,23 +1,123 @@
 {
- "added": [],
- "rejected": [],
- "to_dt": [],
- "to_sp": [],
- "removed": [],
- "unchecked": [],
- "no_price": [],
- "warnings": [],
- "first_marked": [],
- "new_listing": [
+ "added": [
   [
-   "544538",
-   "Praruh Tech",
-   "close 145.35 vs 20 EMA 139.22 → SP"
+   "504240",
+   "Delton Cables",
+   "marks 11/11 · TTM Profit > 30%, 52W High"
+  ],
+  [
+   "512399",
+   "Sera Investments",
+   "marks 5.5/11 · TTM Profit > 30%, 52W High"
+  ],
+  [
+   "543787",
+   "Macfos",
+   "marks 9.2/11 · Daily Volume Scan, Weekly Volume Scan"
+  ],
+  [
+   "SHREEPUSHK",
+   "Sh.Pushkar Chem.",
+   "marks 11/11 · Daily Volume Scan, Weekly Volume Scan, 52W High"
+  ],
+  [
+   "UDAYJEW",
+   "Uday Jewellery",
+   "marks 7.3/11 · Ready after 6 Months"
+  ],
+  [
+   "VMARCIND",
+   "V-Marc India",
+   "marks 6.4/11 · 52W High"
+  ],
+  [
+   "SSFL",
+   "Srivari Spices &",
+   "marks 6.4/11 · 52W High"
+  ],
+  [
+   "MAYURUNIQ",
+   "Mayur Uniquoters",
+   "marks 8.3/11 · 52W High"
+  ],
+  [
+   "DANISH",
+   "Danish Power",
+   "marks 9.2/11 · 52W High"
+  ],
+  [
+   "OBSCP",
+   "OBSC Perfection",
+   "marks 10.1/11 · 52W High"
+  ]
+ ],
+ "rejected": [
+  [
+   "TECHNOCRAF",
+   "Technocraft Ven.",
+   "2.8/11"
+  ]
+ ],
+ "to_dt": [
+  [
+   "538565",
+   "Vistar Amar",
+   "close 184.15 < 200 EMA 186.98"
+  ],
+  [
+   "543991",
+   "Techknowgreen",
+   "close 121.65 < 200 EMA 129.55"
+  ],
+  [
+   "544141",
+   "Pune e-Stock Broking",
+   "close 255.75 < 200 EMA 257.42"
   ],
   [
    "544551",
    "Bhavik Enterpris",
-   "close 151.3 vs 20 EMA 149.5 → SP"
+   "close 145.75 < 20 EMA 149.14"
+  ],
+  [
+   "VMARCIND",
+   "V-Marc India",
+   "close 296.65 < 200 EMA 535.76"
+  ]
+ ],
+ "to_sp": [
+  [
+   "543542",
+   "Kesar India",
+   "close 1201 > 200 EMA 1176.52"
+  ],
+  [
+   "543619",
+   "Concord Control",
+   "close 2628.75 > 200 EMA 2455.01"
+  ]
+ ],
+ "removed": [],
+ "unchecked": [],
+ "no_price": [],
+ "warnings": [],
+ "first_marked": [
+  [
+   "544809",
+   "Adon Agro",
+   "4.6/11 (was 6.4/11)"
+  ]
+ ],
+ "new_listing": [
+  [
+   "544538",
+   "Praruh Tech",
+   "close 152.6 vs 20 EMA 140.49 → SP"
+  ],
+  [
+   "544551",
+   "Bhavik Enterpris",
+   "close 145.75 vs 20 EMA 149.14 → DT"
   ],
   [
    "544682",
@@ -27,27 +127,27 @@
   [
    "544694",
    "Accretion Nutraveda",
-   "close 321.05 vs 20 EMA 289.49 → SP"
+   "close 325 vs 20 EMA 292.88 → SP"
   ],
   [
    "544695",
    "Msafe Equipments",
-   "close 284.05 vs 20 EMA 273.12 → SP"
+   "close 277.2 vs 20 EMA 273.51 → SP"
   ],
   [
    "544809",
    "Adon Agro",
-   "close 101.38 vs 20 EMA 95.95 → SP"
+   "close 105.39 vs 20 EMA 96.85 → SP"
   ],
   [
    "544812",
    "Atharva Poly-Plast",
-   "close 130 vs 20 EMA 124.05 → SP"
+   "close 129.9 vs 20 EMA 124.61 → SP"
   ],
   [
    "ACETEC",
    "Acetech E-Commerce",
-   "close 136 vs 20 EMA 135.25 → SP"
+   "close 138 vs 20 EMA 135.52 → SP"
   ],
   [
    "AEROPLANE",
@@ -62,7 +162,12 @@
   [
    "TEAMTECH",
    "Teamtech Formwork",
-   "close 169 vs 20 EMA 145.17 → SP"
+   "close 164.25 vs 20 EMA 146.99 → SP"
+  ],
+  [
+   "UDAYJEW",
+   "Uday Jewellery",
+   "close 220.71 vs 20 EMA 208.47 → SP"
   ],
   [
    "RAMBHAJO",
@@ -71,17 +176,17 @@
   ]
  ],
  "per_alert": {
-  "TTM Profit > 30%": 0,
-  "52W High": 0,
-  "Daily Volume Scan": 0,
-  "Weekly Volume Scan": 0,
-  "Ready after 6 Months": 0
+  "TTM Profit > 30%": 5,
+  "52W High": 13,
+  "Daily Volume Scan": 6,
+  "Weekly Volume Scan": 3,
+  "Ready after 6 Months": 2
  },
- "email_total": 0,
- "already_listed": 0,
- "price_date": "02 Nov 2026",
+ "email_total": 20,
+ "already_listed": 9,
+ "price_date": "03 Nov 2026",
  "monthly_pass": 0,
- "mode": "daily",
+ "mode": "auto",
  "monthly_done": false,
- "run_at": "03 Nov 2026, 02:37 PM IST"
+ "run_at": "04 Nov 2026, 07:45 AM IST"
 }
