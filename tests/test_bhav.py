@@ -64,3 +64,30 @@ def test():
 
 if __name__ == "__main__":
     test()
+
+
+def test_no_trade_day():
+    """A stock missing from a downloaded day's file (no trades) gets a flat candle, if the file has it on other days."""
+    storage.DATA = tempfile.mkdtemp()
+
+    class Ex(FakeEx):
+        def day(self, d):
+            self.asked.append(d.strftime("%Y-%m-%d"))
+            self.ok += 1
+            return bhav.parse(BSE if d.strftime("%Y-%m-%d") == "2026-11-03" else BSE.replace("530477", "999999"))
+    hists = {"530477": {"t": ["2026-10-30", "2026-11-03"], "c": [387.35, 383.0]},
+             "111111": {"t": ["2026-10-30", "2026-11-03"], "c": [5.0, 6.0]}}   # code never in any file
+    ex = {"bse": Ex("BSE", ""), "nse": Ex("NSE", "")}
+    bhav.enrich({"530477": {"bse": "530477"}, "111111": {"bse": "111111"}}, hists, exchanges=ex)
+    h = hists["530477"]
+    assert h["o"] == [387.35, 385.0] and h["h"][0] == h["l"][0] == 387.35 and h["v"][0] == 0, h
+    assert "o" not in hists["111111"]  # wrong / unknown code: no made-up candles
+    # next run asks nothing again
+    ex2 = {"bse": Ex("BSE", ""), "nse": Ex("NSE", "")}
+    bhav.enrich({"530477": {"bse": "530477"}}, {"530477": {"t": ["2026-10-30", "2026-11-03"], "c": [387.35, 383.0]}}, exchanges=ex2)
+    assert ex2["bse"].asked == [], ex2["bse"].asked
+    print("No-trade days OK")
+
+
+if __name__ == "__main__":
+    test_no_trade_day()
