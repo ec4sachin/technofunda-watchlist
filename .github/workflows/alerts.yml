@@ -10,7 +10,7 @@ on:
         type: boolean
         default: false
       request:
-        description: "Used by the dashboard (set / delete an alert). Leave empty."
+        description: "Used by the dashboard (alerts and strategies). Leave empty."
         type: string
         default: ""
 
@@ -33,8 +33,8 @@ jobs:
           python3 - <<'PY'
           import json, os
           obj = json.loads(os.environ["REQUEST"])
-          assert isinstance(obj, dict) and obj.get("action") in ("add", "delete"), "not an alert request"
-          clean = {k: obj[k] for k in ("action", "symbol", "name", "op", "price", "id") if k in obj}
+          assert isinstance(obj, dict) and obj.get("action") in ("add", "delete", "strategy_save", "strategy_delete"), "not a dashboard request"
+          clean = {k: obj[k] for k in ("action", "symbol", "name", "op", "price", "id", "strategy") if k in obj}
           os.makedirs("data/alert_requests", exist_ok=True)
           with open(f"data/alert_requests/dash-{os.environ['RUN_ID']}.json", "w", encoding="utf-8") as f:
               json.dump(clean, f)
