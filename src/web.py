@@ -964,7 +964,10 @@ async function refreshStrat(){
   if (!REPO) return;
   try {
     const st = await fetch(`https://raw.githubusercontent.com/${REPO}/main/data/strategies.json?t=${Date.now()}`, {cache: "no-store"}).then(r => r.ok ? r.json() : Promise.reject(r.status));
-    if (Array.isArray(st.strategies)) { STRAT = st.strategies; stPending = {}; if (view === "strategy" && !stForm) drawStrategies(); else document.getElementById("c-strategy").textContent = STRAT.filter(t => t.on).length; }
+    if (Array.isArray(st.strategies)) {
+      // built-in strategies added in an update (e.g. Positional Trading) stay visible until removed
+      const gone = new Set(st.deleted || []), have = new Set(st.strategies.map(x => x.id));
+      STRAT = [...st.strategies, ...(SD.settings || []).filter(x => !have.has(x.id) && !gone.has(x.id))]; stPending = {}; if (view === "strategy" && !stForm) drawStrategies(); else document.getElementById("c-strategy").textContent = STRAT.filter(t => t.on).length; }
   } catch (e) {}
 }
 function tradeRows(list, open){
