@@ -225,9 +225,12 @@ def merge(hist, cache):
     for i, d in enumerate(hist["t"]):
         row = cache.get(d)
         if row:
-            o[i], h[i], l[i] = row[0], row[1], row[2]
-            hist["c"][i] = row[3]
+            # the exchange file has the price of that day; the chart's close may be adjusted for a later
+            # split / bonus, so open/high/low are scaled to the chart's close
+            c = hist["c"][i]
+            f = c / row[3] if c and row[3] else 1.0
+            o[i], h[i], l[i] = round(row[0] * f, 2), round(row[1] * f, 2), round(row[2] * f, 2)
             if row[4] is not None:
-                v[i] = row[4]
+                v[i] = round(row[4] / f) if f else row[4]
     if any(x is not None for x in o):
         hist.update(o=o, h=h, l=l, v=v)

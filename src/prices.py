@@ -60,6 +60,67 @@ def _drop_unfinished_day(df):
     return df
 
 
+# Split / bonus ratios (old price / new price): 2 = 1:1 bonus or 1:2 split, 5 = 1:5 split, 2.5 = 3:2 bonus ...
+_FACTORS = sorted({round(p / q, 4) for q in range(1, 6) for p in range(q + 1, 101) if p / q >= 1.6})
+
+
+def _snap(r1, r2=None, tol=0.03):
+    """The simplest split ratio between the open-based and close-based jump (whole numbers first, then halves ...)."""
+    lo, hi = min(r1, r2 or r1) * (1 - tol), max(r1, r2 or r1) * (1 + tol)
+    mid = (lo * hi) ** 0.5
+    for q in range(1, 6):
+        hits = [p / q for p in range(q + 1, 101 * q) if lo <= p / q <= hi and p / q >= 1.6]
+        if hits:
+            return round(min(hits, key=lambda f: abs(f - mid)), 4)
+    return None
+
+
+def adjust_corporate_actions(df):
+    """Fix prices that were not adjusted for a split / bonus (one big overnight jump that matches a split ratio:
+    all older prices are divided by that ratio) and single bad price days (a jump that comes straight back).
+    Returns (df, notes)."""
+    df = df.copy()
+    has_o = "Open" in df and df["Open"].notna().any()
+    notes = []
+    c = df["Close"].to_numpy(dtype=float).copy()
+    i = 1
+    while i < len(df):
+        prev, cur = c[i - 1], c[i]
+        if not (prev > 0 and cur > 0) or 1 / 1.6 < cur / prev < 1.6:
+            i += 1
+            continue
+        # one bad day: the next close is back near the old price
+        if i + 1 < len(df) and c[i + 1] > 0 and abs(c[i + 1] / prev - 1) < 0.25:
+            for col in ("Open", "High", "Low", "Close"):
+                if col in df:
+                    df.iloc[i, df.columns.get_loc(col)] = prev
+            c[i] = prev
+            notes.append(f"{df.index[i]}: bad price day ignored")
+            i += 1
+            continue
+        o = float(df["Open"].iloc[i]) if has_o and pd.notna(df["Open"].iloc[i]) and df["Open"].iloc[i] > 0 else cur
+        f = _snap(prev / o, prev / cur) if prev > o and prev > cur else None
+        g = _snap(o / prev, cur / prev) if o > prev and cur > prev else None
+        if f:      # split / bonus: older prices divided by f
+            for col in ("Open", "High", "Low", "Close"):
+                if col in df:
+                    df.iloc[:i, df.columns.get_loc(col)] = df.iloc[:i, df.columns.get_loc(col)] / f
+            if "Volume" in df:
+                df.iloc[:i, df.columns.get_loc("Volume")] = df.iloc[:i, df.columns.get_loc("Volume")] * f
+            c[:i] = c[:i] / f
+            notes.append(f"{df.index[i]}: split/bonus 1:{f:g} adjusted")
+        elif g:    # share consolidation (reverse split): older prices multiplied
+            for col in ("Open", "High", "Low", "Close"):
+                if col in df:
+                    df.iloc[:i, df.columns.get_loc(col)] = df.iloc[:i, df.columns.get_loc(col)] * g
+            if "Volume" in df:
+                df.iloc[:i, df.columns.get_loc("Volume")] = df.iloc[:i, df.columns.get_loc("Volume")] / g
+            c[:i] = c[:i] * g
+            notes.append(f"{df.index[i]}: consolidation {g:g}:1 adjusted")
+        i += 1
+    return df, notes
+
+
 def _ema_result(df, period):
     """(last close, EMA, date, chart history). df has a Close column (Open/High/Low/Volume optional).
 
@@ -70,6 +131,9 @@ def _ema_result(df, period):
     df = df[df["Close"].notna()]
     df = df[~df.index.duplicated(keep="last")].sort_index()
     df = _drop_unfinished_day(df)
+    if df.empty:
+        return None
+    df, _ = adjust_corporate_actions(df)
     if df.empty:
         return None
     close = df["Close"].astype(float)

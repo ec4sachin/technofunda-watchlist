@@ -4,17 +4,17 @@ Settings (which strategies exist, ON/OFF, amount per trade) live in data/strateg
 from the dashboard (through the Price Alerts robot). Trades live in data/strategy_trades.json and are
 written only by the daily robot, so the two robots never edit the same file.
 
-Swing Strategy rules (given by the user):
+Swing Strategy rules (given by the user) - "version 5", chosen 4 Nov 2026 after comparing backtests:
   Entry (all must be true; checked on the candles before the entry day)
     1. Daily EMA 10 > EMA 20 > EMA 50 > EMA 200
     2. The last 4 daily candles are in a tight range: highest high - lowest low <= 6% of the current price.
        Resistance = highest high of those 4 candles. Buy when price goes 1% above it (a buy-stop order).
     3. The last candle's high is not more than 10% above EMA 10.
-    4. Resistance of the 42 candles before the base: if it is above the entry price but less than 15%
-       (of the current price) away, skip. No resistance above the entry = OK.
-    6. Exception to rule 4: if that resistance is within 1% of the entry price, take the trade
-       (buying there is a breakout through the old resistance too).
-  Stop loss: below the lowest low of the 4-candle base (whole quantity).
+    (The old 42-candle "room to resistance" rule is switched off: ROOM_RULE = False.)
+  Stop loss (whole quantity): 1% below the lowest low of the 4-candle base, but never more than 6% below
+    the actual buy price (the higher of the two is used).
+  Time stop: if after 10 trading days the 50% target is not reached and the close is below +3%,
+    sell everything at the close (frees the money for the next setup).
   Target: sell 50% at +20%.
   Trailing (remaining 50%): when a daily candle closes below EMA 10, its low becomes the exit line;
     if price later breaks below that low, sell the rest. A close back above EMA 10 clears the line.
@@ -31,6 +31,11 @@ LISTS = ("SP", "DT", "BOTH")
 DEFAULT = [{"id": "swing", "name": "Swing Strategy", "type": "swing", "list": "SP", "amount": 25000,
             "on": False, "note": "EMA stack + tight 4-candle base breakout", "added": ""}]
 MAX_CATCHUP_DAYS = 10
+ROOM_RULE = False          # rule 4 / 6 (room to the 42-candle resistance) - off in version 5
+STOP_BELOW_BASE = 0.01     # stop 1% below the base low
+MAX_RISK = 0.06            # ... but never more than 6% below the buy price
+TIME_STOP_DAYS, TIME_STOP_GAIN = 10, 0.03
+TARGET, BOOK_FRACTION = 0.20, 0.5
 
 
 # ------------------------------------------------------------------ settings
@@ -140,9 +145,10 @@ def swing_setup(df, i):
     entry = round(res * 1.01, 2)
     r42 = float(df.h[i - 45:i - 3].max())                                    # rule 4
     room = (r42 - entry) / price * 100
-    if r42 > entry and 1 < room < 15:   # rule 4 + rule 6 (within 1% = breakout through the old resistance)
+    if ROOM_RULE and r42 > entry and 1 < room < 15:   # rule 4 + rule 6 (switched off in version 5)
         return None
-    return {"trigger": entry, "stop": round(low, 2), "resistance": round(res, 2), "r42": round(r42, 2),
+    stop = max(low * (1 - STOP_BELOW_BASE), entry * (1 - MAX_RISK))
+    return {"trigger": entry, "stop": round(stop, 2), "base_low": round(low, 2), "resistance": round(res, 2), "r42": round(r42, 2),
             "room": round(room, 1) if r42 > entry else None, "range_pct": round((res - low) / price * 100, 1),
             "base_from": df.index[i - 3], "base_to": df.index[i]}
 
@@ -179,19 +185,24 @@ def manage(t, df, j):
     day = df.index[j]
     o, h, l, c, e10 = float(df.o[j]), float(df.h[j]), float(df.l[j]), float(df.c[j]), float(df.e10[j])
     done = []
-    # stop loss below the base (whole remaining quantity). Gap down: sold at the open.
+    t["days"] = t.get("days", 0) + 1
+    # stop loss (whole remaining quantity). Gap down: sold at the open.
     if l <= t["stop"]:
-        s = _sell(t, day, t["remaining"], min(o, t["stop"]), "Stop loss (below 4-candle base)")
+        s = _sell(t, day, t["remaining"], min(o, t["stop"]), t.get("stop_reason", "Stop loss"))
         return [s] if s else []
     # 50% at +20%
     if not t["booked"] and h >= t["target"]:
-        half = t["qty"] // 2 or t["qty"]
+        half = int(t["qty"] * BOOK_FRACTION) or t["qty"]
         s = _sell(t, day, half, max(o, t["target"]), "Target +20% (50% booked)")
         t["booked"] = True
         if s:
             done.append(s)
         if t["status"] == "closed":
             return done
+    # time stop: not moving -> free the money
+    if not t["booked"] and t["days"] >= TIME_STOP_DAYS and c < t["entry"] * (1 + TIME_STOP_GAIN):
+        s = _sell(t, day, t["remaining"], c, f"Time stop ({TIME_STOP_DAYS} days, under +{TIME_STOP_GAIN * 100:g}%)")
+        return done + ([s] if s else [])
     # trailing EMA 10 for the rest
     if t["booked"]:
         if t.get("signal_low") is not None and t.get("signal_date") != day and l < t["signal_low"]:
@@ -214,14 +225,16 @@ def try_entry(st, sym, name, df, j, mode="paper"):
     sid = st.get("id")
     entry = max(plan["trigger"], float(df.o[j]))  # gap up above the trigger: filled at the open
     qty = max(1, math.floor(float(st.get("amount", 25000)) / entry))
+    stop = round(max(plan["base_low"] * (1 - STOP_BELOW_BASE), entry * (1 - MAX_RISK)), 2)
+    why = "Stop loss (1% below 4-candle base)" if stop == round(plan["base_low"] * (1 - STOP_BELOW_BASE), 2) else "Stop loss (6% max risk)"
     t = {"id": f"{sid}-{sym}-{df.index[j]}", "strategy": sid, "strategy_name": st.get("name", sid),
          "symbol": sym, "name": name, "entry_date": df.index[j], "entry": round(entry, 2),
-         "qty": qty, "remaining": qty, "stop": plan["stop"], "target": round(entry * 1.20, 2),
+         "qty": qty, "remaining": qty, "stop": stop, "stop_reason": why, "days": 0, "target": round(entry * (1 + TARGET), 2),
          "booked": False, "signal_low": None, "signal_date": None, "exits": [], "pnl": 0.0,
          "status": "open", "mode": mode, "plan": {k: plan[k] for k in ("resistance", "range_pct", "r42", "room")}}
     sells = []
     if df.l[j] <= t["stop"]:  # fell back to the stop on the same day
-        s = _sell(t, df.index[j], t["remaining"], t["stop"], "Stop loss (same day)")
+        s = _sell(t, df.index[j], t["remaining"], t["stop"], why + " — same day")
         if s:
             sells.append(s)
     return t, sells
