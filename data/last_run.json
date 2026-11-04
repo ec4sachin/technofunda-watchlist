@@ -2,18 +2,7 @@
  "added": [],
  "rejected": [],
  "to_dt": [],
- "to_sp": [
-  [
-   "INDIAGLYCO",
-   "India Glycols",
-   "close 309.2 > 200 EMA 237.57"
-  ],
-  [
-   "VMARCIND",
-   "V-Marc India",
-   "close 318.65 > 200 EMA 245.15"
-  ]
- ],
+ "to_sp": [],
  "removed": [],
  "unchecked": [],
  "no_price": [],
@@ -99,5 +88,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "04 Nov 2026, 05:04 PM IST"
+ "run_at": "04 Nov 2026, 05:31 PM IST"
 }
