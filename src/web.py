@@ -948,7 +948,8 @@ const SD = D.strat || {settings: [], setups: {}, open: [], closed: []};
 let STRAT = (SD.settings || []).map(x => Object.assign({}, x)), stForm = null, stPending = {};
 let LOCAL_ST = []; try { LOCAL_ST = JSON.parse(localStorage.getItem("tf-strategies") || "[]"); if (!Array.isArray(LOCAL_ST)) LOCAL_ST = []; } catch (e) {}
 LOCAL_ST = LOCAL_ST.filter(l => !STRAT.some(t => t.name.toLowerCase() === String(l.name || "").toLowerCase()));
-const LISTS = {SP: "SP", DT: "DT", BOTH: "SP + DT"}, TYPES = {swing: "Swing Strategy rules", none: "Rules not added yet"};
+const LISTS = {SP: "SP", DT: "DT", BOTH: "SP + DT"}, TYPES = {swing: "Swing Strategy rules", positional: "Positional Trading rules", none: "Rules not added yet"};
+const RULED = t => t.type === "swing" || t.type === "positional";
 const inr0 = v => v == null || !isFinite(v) ? "—" : "₹" + Number(v).toLocaleString("en-IN", {maximumFractionDigits: 0});
 const inr2 = v => v == null || !isFinite(v) ? "—" : "₹" + Number(v).toLocaleString("en-IN", {maximumFractionDigits: 2});
 const sgn0 = v => (v >= 0 ? "+" : "−") + inr0(Math.abs(v));
@@ -1067,7 +1068,7 @@ function last2HTML(p){
     <div class="kgrid">
       <div class="kv"><div class="k">Capital now</div><div class="v ${p.profit >= 0 ? "up" : "down"}">${inr0(p.final)}</div></div>
       <div class="kv"><div class="k">Profit</div><div class="v ${p.profit >= 0 ? "up" : "down"}">${sgn0(p.profit)} <small>(${p.return_pct >= 0 ? "+" : ""}${esc(p.return_pct)}%)</small></div></div>
-      <div class="kv"><div class="k">Trades taken</div><div class="v">${esc(p.trades)}${p.skipped ? ` <small class="mut">${esc(p.skipped)} skipped (no free cash)</small>` : ""}</div></div>
+      <div class="kv"><div class="k">Trades taken</div><div class="v">${esc(p.trades)}${p.open_trades ? ` <small class="mut">${esc(p.open_trades)} still open, valued at today's price</small>` : ""}${p.skipped ? ` <small class="mut">${esc(p.skipped)} skipped (no free cash)</small>` : ""}</div></div>
       <div class="kv"><div class="k">Ended in profit</div><div class="v">${esc(p.win_rate ?? "—")}%</div></div>
       <div class="kv"><div class="k">Worst fall</div><div class="v down">${esc(p.max_drawdown_pct)}%</div></div>
     </div>${curveSVG(curve)}<div class="ph2" style="margin-top:12px">Profit by month</div>${monthChips(p.months)}</div>`;
@@ -1115,7 +1116,7 @@ function drawStrategies(){
     const opens = (SD.open || []).filter(x => x.strategy === t.id), closed = (SD.closed || []).filter(x => x.strategy === t.id);
     const realized = closed.reduce((a, x) => a + (x.pnl || 0), 0), wins = closed.filter(x => x.pnl > 0).length;
     const pend = stPending[t.id];
-    const state = t.type !== "swing" ? `<span class="pill p-warn">${t.on ? "ON" : "OFF"}</span> Rules not added yet`
+    const state = !RULED(t) ? `<span class="pill p-warn">${t.on ? "ON" : "OFF"}</span> Rules not added yet`
       : t.on ? `<span class="pill p-add">ON</span> Paper trading · ${opens.length} open · ${closed.length} closed${closed.length ? ` · win ${Math.round(wins / closed.length * 100)}% · ${sgn0(realized)}` : ""}`
       : `<span class="pill p-warn">OFF</span> Switch ON to start paper trading`;
     return `<article class="st ${t.on ? "on" : ""}">
@@ -1126,7 +1127,7 @@ function drawStrategies(){
       <div class="st-btns"><button class="btn" data-st-edit="${esc(t.id)}">Edit</button><button class="btn" data-st-del="${esc(t.id)}">Remove</button></div>
     </article>`;
   }).join("");
-  const swing = STRAT.filter(t => t.type === "swing");
+  const swing = STRAT.filter(RULED);
   const detail = swing.map(t => {
     const opens = (SD.open || []).filter(x => x.strategy === t.id), closed = (SD.closed || []).filter(x => x.strategy === t.id);
     return perfHTML(t) + `<h2>${esc(t.name)} · setups for today<span class="cnt">${((SD.setups || {})[t.id] || []).length}</span></h2>${setupRows((SD.setups || {})[t.id])}
@@ -1171,7 +1172,7 @@ document.addEventListener("change", e => {
   const want = tg.checked;
   tg.checked = !want;  // stays as it was until GitHub accepts the change
   sendStrategy({action: "strategy_save", strategy: Object.assign({}, t, {on: want})},
-    want ? (t.type === "swing" ? `▶️ <b>${esc(t.name)}</b> is ON — paper trading starts with the next 7 AM run.`
+    want ? (RULED(t) ? `▶️ <b>${esc(t.name)}</b> is ON — paper trading starts with the next 7 AM run.`
                                : `▶️ <b>${esc(t.name)}</b> is ON. It will trade once its rules are added.`)
          : `⏸ <b>${esc(t.name)}</b> is OFF.`).then(ok => { if (ok) { t.on = want; stPending[t.id] = 1; drawStrategies(); } });
 });

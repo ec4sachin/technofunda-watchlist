@@ -26,16 +26,25 @@ import pandas as pd
 
 import storage
 
-TYPES = {"swing": "Swing Strategy rules", "none": "Rules not added yet"}
+TYPES = {"swing": "Swing Strategy rules", "positional": "Positional Trading rules", "none": "Rules not added yet"}
 LISTS = ("SP", "DT", "BOTH")
 DEFAULT = [{"id": "swing", "name": "Swing Strategy", "type": "swing", "list": "SP", "capital": 1000000, "pct": 10,
-            "on": False, "note": "EMA stack + tight 4-candle base breakout", "added": ""}]
+            "on": False, "note": "EMA stack + tight 4-candle base breakout", "added": ""},
+           {"id": "positional", "name": "Positional Trading", "type": "positional", "list": "SP", "capital": 1000000, "pct": 10,
+            "on": False, "note": "Same entry · 50% at +30% · rest exits on 2 closes below EMA 50", "added": ""}]
 MAX_CATCHUP_DAYS = 10
 ROOM_RULE = False          # rule 4 / 6 (room to the 42-candle resistance) - off in version 5
 STOP_BELOW_BASE = 0.01     # stop 1% below the base low
 MAX_RISK = 0.06            # ... but never more than 6% below the buy price
 TIME_STOP_DAYS, TIME_STOP_GAIN = 10, 0.03
 TARGET, BOOK_FRACTION = 0.20, 0.5
+# Exit rules of each strategy type (entry rules are the same for both)
+RULES = {
+    "swing": {"target": 0.20, "trail": "ema10_low", "time_stop": (TIME_STOP_DAYS, TIME_STOP_GAIN)},
+    # Positional Trading (given 4 Nov 2026): 50% at +30%; the rest exits after 2 daily closes below EMA 50;
+    # before the target the stop is 1% below the 4-candle base low (and never more than 6% below the buy price)
+    "positional": {"target": 0.30, "trail": "ema50_2close", "time_stop": None},
+}
 COST_PER_SIDE = 0.002      # brokerage + taxes + slippage, about 0.2% on each buy and each sell
 DEF_CAPITAL, DEF_PCT = 1_000_000.0, 10.0   # paper capital, and % of the CURRENT capital per trade
 
@@ -45,6 +54,11 @@ def load_settings():
     data = storage.load_json("strategies.json", None)
     if not isinstance(data, dict) or not isinstance(data.get("strategies"), list):
         data = {"strategies": [dict(s) for s in DEFAULT]}
+    # a built-in strategy that is new (e.g. Positional Trading) appears automatically, unless it was removed
+    ids, gone = {x.get("id") for x in data["strategies"]}, set(data.get("deleted", []))
+    for d in DEFAULT:
+        if d["id"] not in ids and d["id"] not in gone:
+            data["strategies"].append(dict(d))
     return data
 
 
@@ -102,6 +116,8 @@ def apply_request(data, req, today=""):
             items.append(new)
         return True
     if action == "strategy_delete":
+        if str(req.get("id")) in {d["id"] for d in DEFAULT}:
+            data.setdefault("deleted", []).append(str(req.get("id")))  # do not bring a removed built-in back
         before = len(items)
         data["strategies"] = [x for x in items if x.get("id") != str(req.get("id"))]
         return len(data["strategies"]) != before
@@ -193,6 +209,8 @@ def manage(t, df, j):
     """Apply the exit rules to an open trade on candle j. Returns the sells made."""
     day = df.index[j]
     o, h, l, c, e10 = float(df.o[j]), float(df.h[j]), float(df.l[j]), float(df.c[j]), float(df.e10[j])
+    rules = RULES.get(t.get("type", "swing"), RULES["swing"])
+    tgt_txt = f"Target +{rules['target'] * 100:g}% (50% booked)"
     done = []
     t["days"] = t.get("days", 0) + 1
     # stop loss (whole remaining quantity). Gap down: sold at the open.
@@ -202,17 +220,27 @@ def manage(t, df, j):
     # 50% at +20%
     if not t["booked"] and h >= t["target"]:
         half = int(t["qty"] * BOOK_FRACTION) or t["qty"]
-        s = _sell(t, day, half, max(o, t["target"]), "Target +20% (50% booked)")
+        s = _sell(t, day, half, max(o, t["target"]), tgt_txt)
         t["booked"] = True
         if s:
             done.append(s)
         if t["status"] == "closed":
             return done
-    # time stop: not moving -> free the money
-    if not t["booked"] and t["days"] >= TIME_STOP_DAYS and c < t["entry"] * (1 + TIME_STOP_GAIN):
-        s = _sell(t, day, t["remaining"], c, f"Time stop ({TIME_STOP_DAYS} days, under +{TIME_STOP_GAIN * 100:g}%)")
+    # time stop: not moving -> free the money (Swing only)
+    ts = rules["time_stop"]
+    if ts and not t["booked"] and t["days"] >= ts[0] and c < t["entry"] * (1 + ts[1]):
+        s = _sell(t, day, t["remaining"], c, f"Time stop ({ts[0]} days, under +{ts[1] * 100:g}%)")
         return done + ([s] if s else [])
-    # trailing EMA 10 for the rest
+    # Positional: the rest exits at the close of the 2nd daily close below EMA 50 in a row
+    if rules["trail"] == "ema50_2close":
+        if t["booked"]:
+            t["below50"] = t.get("below50", 0) + 1 if c < float(df.e50[j]) else 0
+            if t["below50"] >= 2:
+                s = _sell(t, day, t["remaining"], c, "Trailing EMA 50 exit (2 closes below)")
+                if s:
+                    done.append(s)
+        return done
+    # Swing: trailing EMA 10 for the rest
     if t["booked"]:
         if t.get("signal_low") is not None and t.get("signal_date") != day and l < t["signal_low"]:
             s = _sell(t, day, t["remaining"], min(o, t["signal_low"]), "Trailing EMA 10 exit")
@@ -261,7 +289,9 @@ def try_entry(st, sym, name, df, j, mode="paper", money=None):
     why = "Stop loss (1% below 4-candle base)" if stop == round(plan["base_low"] * (1 - STOP_BELOW_BASE), 2) else "Stop loss (6% max risk)"
     t = {"id": f"{sid}-{sym}-{df.index[j]}", "strategy": sid, "strategy_name": st.get("name", sid),
          "symbol": sym, "name": name, "entry_date": df.index[j], "entry": round(entry, 2),
-         "qty": qty, "remaining": qty, "stop": stop, "stop_reason": why, "days": 0, "target": round(entry * (1 + TARGET), 2),
+         "type": st.get("type", "swing"),
+         "qty": qty, "remaining": qty, "stop": stop, "stop_reason": why, "days": 0,
+         "target": round(entry * (1 + RULES.get(st.get("type"), RULES["swing"])["target"]), 2),
          "booked": False, "signal_low": None, "signal_date": None, "exits": [], "pnl": 0.0,
          "status": "open", "mode": mode, "money": round(money, 2), "plan": {k: plan[k] for k in ("resistance", "range_pct", "r42", "room")}}
     sells = []
@@ -293,13 +323,14 @@ def run(settings, book, charts, sp, dt, today=""):
     book.setdefault("closed", [])
     book.setdefault("last_day", {})
     book["setups"] = {}
-    events = {"entries": [], "exits": [], "setups": {}, "log": []}
+    events = {"entries": [], "exits": [], "setups": {}, "log": [],
+              "names": {x.get("id"): x.get("name") for x in settings.get("strategies", [])}}
     frames = {s: _frame(h) for s, h in charts.items()}
     frames = {s: f for s, f in frames.items() if f is not None}
     names = {s: (sp.get(s) or dt.get(s) or {}).get("name") or s for s in frames}
     for st in settings.get("strategies", []):
         sid = st.get("id")
-        if not st.get("on") or st.get("type") != "swing":
+        if not st.get("on") or st.get("type") not in RULES:
             continue
         scan = set(sp) if st.get("list", "SP") == "SP" else set(dt) if st.get("list") == "DT" else set(sp) | set(dt)
         seen = book["last_day"].get(sid)
@@ -337,7 +368,7 @@ def run(settings, book, charts, sp, dt, today=""):
                     continue
                 money = trade_size(st, capital_of(st, book))
                 if not money:
-                    events.setdefault("skipped", []).append({"symbol": sym, "name": names.get(sym, sym), "date": df.index[j]})
+                    events.setdefault("skipped", []).append({"symbol": sym, "name": names.get(sym, sym), "date": df.index[j], "strategy": sid})
                     continue  # no free capital (all money in open trades)
                 t, sells = try_entry(st, sym, names.get(sym, sym), df, j, money=money)
                 if not t:
@@ -400,7 +431,8 @@ def backtest(st, charts, names, symbols, money=100000.0):
         if t:
             last = float(df.c[-1])
             t["ltp"] = last
-            t["open_pnl"] = round((last - t["entry"]) * t["remaining"], 2)
+            t["last_date"] = df.index[-1]
+            t["open_pnl"] = round((last - t["entry"]) * t["remaining"] - COST_PER_SIDE * t["remaining"] * (t["entry"] + last), 2)
             trades.append(t)
     return trades
 
@@ -409,7 +441,8 @@ def portfolio(trades, start, end="9999", capital=DEF_CAPITAL, pct=DEF_PCT):
     """The backtest trades taken in date order with one money pot: each trade gets pct% of the capital at that
     moment (profits grow the size), a trade is skipped when there is not enough free cash.
     Trade results already include costs."""
-    todo = sorted([t for t in trades if t["status"] == "closed" and start <= t["entry_date"] < end],
+    # open trades count at today's price (their booked part + the rest at the last close)
+    todo = sorted([t for t in trades if start <= t["entry_date"] < end and (t["status"] == "closed" or "open_pnl" in t)],
                   key=lambda t: (t["entry_date"], t["symbol"]))
     cash, opn, taken, skipped, wins, months, rows = float(capital), [], 0, 0, 0, {}, []
 
@@ -422,7 +455,7 @@ def portfolio(trades, start, end="9999", capital=DEF_CAPITAL, pct=DEF_PCT):
                 cash += x["money"] + gain
                 months[x["end"][:7]] = round(months.get(x["end"][:7], 0) + gain, 2)
                 wins += gain > 0
-                rows.append({"name": x["name"], "symbol": x["symbol"], "entry_date": x["d"], "closed_on": x["end"],
+                rows.append({"name": x["name"], "symbol": x["symbol"], "entry_date": x["d"], "closed_on": x["end"], "open": x["open"],
                              "money": round(x["money"]), "pnl": round(gain, 2), "pnl_pct": round(x["ret"] * 100, 2)})
             else:
                 keep.append(x)
@@ -436,8 +469,10 @@ def portfolio(trades, start, end="9999", capital=DEF_CAPITAL, pct=DEF_PCT):
             skipped += 1
             continue
         cash -= size
-        opn.append({"end": t["closed_on"], "money": size, "ret": t["pnl"] / (t["entry"] * t["qty"]),
-                    "name": t["name"], "symbol": t["symbol"], "d": t["entry_date"]})
+        still = t["status"] != "closed"
+        total = t["pnl"] + (t.get("open_pnl", 0) if still else 0)
+        opn.append({"end": t.get("last_date", "9999-12") if still else t["closed_on"], "money": size, "ret": total / (t["entry"] * t["qty"]),
+                    "name": t["name"], "symbol": t["symbol"], "d": t["entry_date"], "open": still})
         taken += 1
     settle("9999")
     eq, peak, dd, curve = float(capital), float(capital), 0.0, []
@@ -447,7 +482,8 @@ def portfolio(trades, start, end="9999", capital=DEF_CAPITAL, pct=DEF_PCT):
         dd = max(dd, (peak - eq) / peak)
         curve.append([m, round(eq, 2)])
     first = todo[0]["entry_date"] if todo else start
-    return {"start": start, "capital": capital, "pct": pct, "final": round(cash, 2), "profit": round(cash - capital, 2),
+    n_open = sum(1 for r in rows if r.get("open"))
+    return {"start": start, "capital": capital, "pct": pct, "final": round(cash, 2), "profit": round(cash - capital, 2), "open_trades": n_open,
             "return_pct": round((cash / capital - 1) * 100, 1), "trades": taken, "skipped": skipped, "wins": wins,
             "win_rate": round(wins / taken * 100, 1) if taken else None, "max_drawdown_pct": round(dd * 100, 1),
             "months": months, "curve": curve, "first_trade": first, "trades_list": rows[-200:][::-1]}

@@ -298,25 +298,32 @@ def monthly(sp, dt, rules_cfg, today, report, history, snaps):
 
 # ----------------------------------------------------------------- report
 def strategy_lines(st):
-    L = ["", "🎯 <b>Swing Strategy</b> (paper trading)"]
-    for sid, c in (st.get("capital") or {}).items():
-        gain = c["equity"] - c["start"]
-        L.append(f"💰 Capital ₹{c['equity']:,.0f} ({gain / c['start'] * 100:+.1f}%) · in trades ₹{c['invested']:,.0f} · "
-                 f"free ₹{c['cash']:,.0f} · next trade ₹{c['equity'] * c['pct'] / 100:,.0f} ({c['pct']:g}%)")
-    for e in st.get("entries", []):
-        L.append(f"🟢 BUY {html.escape(e['name'])} ({e['symbol']}) {e['qty']} @ ₹{e['price']:g} · stop ₹{e['stop']:g} · target ₹{e['target']:g}")
-    for e in st.get("exits", []):
-        L.append(f"{'✅' if e['pnl'] >= 0 else '🔴'} SELL {html.escape(e['name'])} ({e['symbol']}) {e['qty']} @ ₹{e['price']:g} — "
-                 f"{html.escape(e['reason'])} · P&amp;L ₹{e['pnl']:+,.0f}")
-    for sid, items in st.get("setups", {}).items():
+    """One block per strategy that is ON: capital, buys, sells, skipped breakouts, setups for today."""
+    names = st.get("names") or {}
+    sids = list(dict.fromkeys(list((st.get("capital") or {}).keys()) + [e.get("strategy") for e in st.get("entries", []) + st.get("exits", [])]))
+    L = []
+    for sid in [x for x in sids if x]:
+        L += ["", f"🎯 <b>{html.escape(str(names.get(sid, sid)))}</b> (paper trading)"]
+        c = (st.get("capital") or {}).get(sid)
+        if c:
+            gain = c["equity"] - c["start"]
+            L.append(f"💰 Capital ₹{c['equity']:,.0f} ({gain / c['start'] * 100:+.1f}%) · in trades ₹{c['invested']:,.0f} · "
+                     f"free ₹{c['cash']:,.0f} · next trade ₹{c['equity'] * c['pct'] / 100:,.0f} ({c['pct']:g}%)")
+        n0 = len(L)
+        for e in [x for x in st.get("entries", []) if x.get("strategy") == sid]:
+            L.append(f"🟢 BUY {html.escape(e['name'])} ({e['symbol']}) {e['qty']} @ ₹{e['price']:g} · stop ₹{e['stop']:g} · target ₹{e['target']:g}")
+        for e in [x for x in st.get("exits", []) if x.get("strategy") == sid]:
+            L.append(f"{'✅' if e['pnl'] >= 0 else '🔴'} SELL {html.escape(e['name'])} ({e['symbol']}) {e['qty']} @ ₹{e['price']:g} — "
+                     f"{html.escape(e['reason'])} · P&amp;L ₹{e['pnl']:+,.0f}")
+        for x in [x for x in st.get("skipped", []) if x.get("strategy", sid) == sid]:
+            L.append(f"⏭ Skipped {html.escape(x['name'])} ({x['symbol']}) — breakout, but no free capital")
+        items = (st.get("setups") or {}).get(sid) or []
         if items:
-            L.append(f"⏳ <b>Setups for today</b> (buy-stop orders):")
+            L.append("⏳ <b>Setups for today</b> (buy-stop orders):")
             L += [f"• {html.escape(x['name'])} ({x['symbol']}) — buy above ₹{x['buy_above']:g}, stop ₹{x['stop']:g}, "
                   f"qty {x['qty']} (risk {x['risk_pct']:g}%)" for x in items[:15]]
-    for x in st.get("skipped", []):
-        L.append(f"⏭ Skipped {html.escape(x['name'])} ({x['symbol']}) — breakout, but no free capital")
-    if len(L) <= 3 and not any(st.get(k) for k in ("entries", "exits")) and not any(st.get("setups", {}).values()):
-        L.append("No entries, exits or setups today.")
+        if len(L) == n0:
+            L.append("No entries, exits or setups today.")
     return L
 
 
@@ -402,7 +409,7 @@ def main():
             names = {k: (sp.get(k) or dt.get(k) or {}).get("name") or k for k in charts}
             bt = {}
             for st_ in strat_cfg.get("strategies", []):
-                if st_.get("type") != "swing":
+                if st_.get("type") not in strategy.RULES:
                     continue
                 lst = st_.get("list", "SP")
                 syms = sorted(sp) if lst == "SP" else sorted(dt) if lst == "DT" else sorted(set(sp) | set(dt))
