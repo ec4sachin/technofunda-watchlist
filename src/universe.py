@@ -27,6 +27,7 @@ OUT = "universe_backtest.json"
 CODE_COLS = {"nse": ("nse code", "nse symbol", "nse", "symbol", "nse_code"),
              "bse": ("bse code", "bse", "bse_code", "scrip code", "security code")}
 NAME_COLS = ("name", "company", "company name", "stock")
+VERSION = "2"             # change to run the backtest again with new rules
 MAX_MCAP_CR = 25000        # only companies below ₹25,000 crore market cap (when the file has a market-cap column)
 
 
@@ -157,7 +158,7 @@ def load_list(resolve=True):
 
 
 def _signature():
-    h = hashlib.sha1()
+    h = hashlib.sha1(VERSION.encode())
     for p in _files():
         h.update(open(p, "rb").read())
     return h.hexdigest()[:16]
@@ -174,6 +175,17 @@ def due(today):
         return (datetime.strptime(today, "%Y-%m-%d") - datetime.strptime(old.get("as_of", "2000-01-01"), "%Y-%m-%d")).days >= 7
     except ValueError:
         return True
+
+
+def _rank_row(trades, since, d2, cap, pct, rk, first_year, now_year):
+    p = strategy.portfolio(trades, since, capital=cap, pct=pct, rank=rk)
+    l2 = strategy.portfolio(trades, d2, capital=cap, pct=pct, rank=rk)
+    yrs = [strategy.portfolio(trades, f"{y}-01-01", f"{y + 1}-01-01", capital=cap, pct=pct, rank=rk)["return_pct"]
+           for y in range(first_year, now_year + 1)]
+    return {"return_pct": p["return_pct"], "final": p["final"], "capital": cap, "max_drawdown_pct": p["max_drawdown_pct"],
+            "trades": p["trades"], "skipped": p["skipped"], "win_rate": p["win_rate"],
+            "last2y": l2["return_pct"], "last2y_dd": l2["max_drawdown_pct"],
+            "loss_years": sum(1 for r in yrs if r < 0), "worst_year": min(yrs) if yrs else None}
 
 
 def run(settings, mood, today, now_year):
@@ -203,7 +215,7 @@ def run(settings, mood, today, now_year):
     syms = sorted(charts)
     d2 = f"{int(today[:4]) - 2}{today[4:]}"
     out = {"as_of": today, "signature": _signature(), "stocks": len(stocks), "with_prices": len(syms),
-           "missing": missing[:300], "strategies": {}}
+           "missing": missing[:300], "strategies": {}, "rank_names": strategy.RANKS}
     for st in settings.get("strategies", []):
         if st.get("type") not in strategy.TRADING_TYPES:
             continue
@@ -221,6 +233,10 @@ def run(settings, mood, today, now_year):
                                  if k in ("return_pct", "trades", "win_rate", "max_drawdown_pct", "skipped")}
                         for y in range(first_year, now_year + 1)},
             "report": {k: v for k, v in strategy.report(trades).items() if k not in ("curve", "months")},
+            "rank": st.get("rank") or strategy.RANK,
+            # when money is short: which of the same-day buy signals to take first
+            "rank_test": {rk: _rank_row(trades, f"{first_year}-01-01", d2, cap, pct, rk, first_year, now_year)
+                          for rk in strategy.RANKS},
         }
     out["stocks_with_history"] = {str(y): sum(1 for h in charts.values() if h.get("t") and h["t"][0] <= f"{y - 1}-02-01")
                                   for y in range(now_year - 9, now_year + 1)}

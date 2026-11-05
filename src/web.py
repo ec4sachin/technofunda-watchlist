@@ -1142,7 +1142,19 @@ function universeHTML(){
     years.map(yr => { const m = mk[yr]; return `<tr><td class="num">${esc(yr)}</td><td>${m ? `${tag[m.phase]} <span class="num">${m.change >= 0 ? "+" : ""}${esc(m.change)}%</span>` : '<span class="mut">—</span>'}</td>` +
       ids.map(id => { const y = u.strategies[id].by_year[yr]; return `<td class="num ra">${pc(y)} <span class="mut">(${esc((y || {}).trades || 0)})</span></td>`; }).join("") +
       `<td class="num ra mut">${esc((u.stocks_with_history || {})[yr] ?? "")}</td></tr>`; }).join("") + `</tbody></table></div>`;
-  return `<h2>Backtest on your own stock list · ${esc(u.with_prices)} of ${esc(u.stocks)} stocks</h2>${main}${yt}
+  // which buy signal first when money is short
+  const rn = u.rank_names || {}, rks = Object.keys(rn).filter(k => ids.some(id => (u.strategies[id].rank_test || {})[k]));
+  let rt = "";
+  if (rks.length) {
+    const top = {}; ids.forEach(id => { const r = u.strategies[id].rank_test || {}; top[id] = rks.reduce((a, k) => (r[k] && (!r[a] || r[k].final > r[a].final) ? k : a), rks[0]); });
+    rt = `<h2>When money is short: which buy signal is taken first?</h2><div class="st-note">Many signals were skipped because all the money was already in trades.
+      This shows the result if, on a day with several signals, the robot takes them in a different order. <b>Now used:</b> ${ids.map(id => `${esc(u.strategies[id].name)} → ${esc(rn[u.strategies[id].rank] || u.strategies[id].rank || "")}`).join(" · ")}</div>
+      <div class="tbl"><table><thead><tr><th>Take first</th>${ids.map(id => `<th class="ra">${esc(u.strategies[id].name)}<br><span class="mut">since ${esc(u.strategies[id].since.slice(0, 4))} · last 2 yrs · worst fall · loss years</span></th>`).join("")}</tr></thead><tbody>` +
+      rks.map(k => `<tr><td>${esc(rn[k])}</td>` + ids.map(id => { const r = (u.strategies[id].rank_test || {})[k]; if (!r) return '<td class="mut">—</td>';
+        return `<td class="num ra"${top[id] === k ? ' style="font-weight:700"' : ""}>${pc(r)}${top[id] === k ? ' <span class="pill p-add">best</span>' : ""} · ${pc({trades: 1, return_pct: r.last2y})} · <span class="down">${esc(r.max_drawdown_pct)}%</span> · ${esc(r.loss_years)}</td>`; }).join("") + `</tr>`).join("") +
+      `</tbody></table></div>`;
+  }
+  return `<h2>Backtest on your own stock list · ${esc(u.with_prices)} of ${esc(u.stocks)} stocks</h2>${main}${yt}${rt}
     <p class="src">Updated ${esc(u.as_of)}. Each strategy: ₹10,00,000 and its own % per trade, costs included. A list made with today's 5-year growth numbers already
     knows which companies grew, so these results are more optimistic than real trading would have been.${(u.missing || []).length ? ` No prices found for: ${esc(u.missing.slice(0, 20).join(", "))}${u.missing.length > 20 ? " …" : ""}.` : ""}</p>
     <details class="bt"><summary>How to change the list</summary>${how}</details>`;

@@ -291,5 +291,20 @@ def test_join_bse_history():
     print("BSE history join OK:", len(joined), "days")
 
 
+def test_rank_same_day():
+    """When money is short, the chosen rank decides which same-day signal is bought."""
+    def tr(sym, tight, ret):
+        return {"symbol": sym, "name": sym, "entry_date": "2024-01-02", "status": "closed", "closed_on": "2024-02-01",
+                "pnl": ret * 1000, "entry": 100.0, "qty": 10, "plan": {"score": {"tight": tight, "strength": 5.0}}}
+    trades = [tr("AAA", 5.5, -0.1), tr("ZZZ", 2.0, 0.3)]
+    a = stg.portfolio(trades, "2024-01-01", capital=1000, pct=100, rank="alpha")
+    t = stg.portfolio(trades, "2024-01-01", capital=1000, pct=100, rank="tight")
+    assert a["trades"] == 1 and a["final"] < 1000 and t["final"] > 1000, (a["final"], t["final"])
+    assert stg.rank_value({"score": {"strength": 9}}, "strength") < stg.rank_value({"score": {"strength": 2}}, "strength")
+    assert stg.rank_value({"score": {}}, "tight") == 1e9
+    print("Rank of same-day signals OK")
+
+
 if __name__ == "__main__":
+    test_rank_same_day()
     test_join_bse_history()

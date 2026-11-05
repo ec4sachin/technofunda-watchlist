@@ -55,6 +55,18 @@ RULES = {
     "positional": {"target": 0.30, "trail": "ema50_2close", "time_stop": None, "climax": ("e50", 1.48, 1.40)},
 }
 COST_PER_SIDE = 0.002      # brokerage + taxes + slippage, about 0.2% on each buy and each sell
+# When several stocks give a buy signal on the same day and there is not enough free money for all,
+# which one is taken first:
+RANKS = {
+    "alpha": "A to Z (stock name order)",
+    "tight": "Tightest base first",
+    "strength": "Strongest 6-month rise first",
+    "near_high": "Closest to its 52-week high first",
+    "trend": "Furthest above EMA 50 first",
+    "low_risk": "Smallest stop-loss distance first",
+    "volume": "Volume rising most first",
+}
+RANK = "alpha"
 DEF_CAPITAL, DEF_PCT = 1_000_000.0, 10.0   # paper capital, and % of the CURRENT capital per trade
 
 
@@ -97,6 +109,9 @@ def _clean(s, old=None):
     out["capital"] = min(max(cap, 10_000.0), 1_000_000_000.0)
     out["pct"] = min(max(pct, 1.0), 100.0)
     out.pop("amount", None)
+    rk = s.get("rank", old.get("rank"))
+    if rk in RANKS:
+        out["rank"] = rk
     out["on"] = bool(s.get("on", old.get("on", False)))
     out["added"] = str(old.get("added") or s.get("added") or "")[:10]
     return out
@@ -137,10 +152,11 @@ def apply_request(data, req, today=""):
 class Candles:
     """Daily candles as plain number arrays (fast for a candle-by-candle simulation)."""
 
-    def __init__(self, idx, o, h, l, c):
+    def __init__(self, idx, o, h, l, c, v=None):
         import numpy as np
         self.index = idx
         self.o, self.h, self.l, self.c = (np.asarray(x, dtype=float) for x in (o, h, l, c))
+        self.v = np.asarray([np.nan if x is None else x for x in v], dtype=float) if v is not None else np.full(len(idx), np.nan)
         cs = pd.Series(self.c)
         for p in (10, 20, 50, 200):
             setattr(self, f"e{p}", cs.ewm(span=p, adjust=True).mean().to_numpy())
@@ -161,7 +177,9 @@ def _frame(hist):
     if not keep:
         return None
     pick = lambda arr: [arr[i] if arr[i] is not None else c[i] for i in keep]
-    return Candles([t[i] for i in keep], pick(o), pick(h), pick(l), [c[i] for i in keep])
+    v = hist.get("v")
+    vol = [v[i] for i in keep] if v and len(v) == n else None
+    return Candles([t[i] for i in keep], pick(o), pick(h), pick(l), [c[i] for i in keep], vol)
 
 
 def swing_setup(df, i):
@@ -185,9 +203,40 @@ def swing_setup(df, i):
     if ROOM_RULE and r42 > entry and 1 < room < 15:   # rule 4 + rule 6 (switched off in version 5)
         return None
     stop = max(low * (1 - STOP_BELOW_BASE), entry * (1 - MAX_RISK))
-    return {"trigger": entry, "stop": round(stop, 2), "base_low": round(low, 2), "resistance": round(res, 2), "r42": round(r42, 2),
+    score = _scores(df, i, entry, stop, (res - low) / price * 100)
+    return {"score": score, "trigger": entry, "stop": round(stop, 2), "base_low": round(low, 2), "resistance": round(res, 2), "r42": round(r42, 2),
             "room": round(room, 1) if r42 > entry else None, "range_pct": round((res - low) / price * 100, 1),
             "base_from": df.index[i - n + 1], "base_to": df.index[i]}
+
+
+def _scores(df, i, entry, stop, range_pct):
+    """Numbers for choosing between setups (all known before the buy day)."""
+    import numpy as np
+    c = float(df.c[i])
+    hi52 = float(df.h[max(0, i - 249):i + 1].max())
+    def avg(x):
+        x = x[~np.isnan(x)]
+        return float(x.mean()) if len(x) else None
+    v20, v100 = avg(df.v[max(0, i - 19):i + 1]), avg(df.v[max(0, i - 99):i + 1])
+    r = lambda x: None if x is None or x != x else round(float(x), 2)
+    return {"tight": r(range_pct),
+            "strength": r((c / float(df.c[i - 126]) - 1) * 100) if i >= 126 else None,
+            "near_high": r((1 - c / hi52) * 100),
+            "trend": r((c / float(df.e50[i]) - 1) * 100),
+            "low_risk": r((entry - stop) / entry * 100),
+            "volume": r(v20 / v100) if v20 is not None and v100 else None}
+
+
+def rank_value(x, how=None):
+    """Sort value of a setup or trade for the chosen rank (smaller = taken first)."""
+    how = how or RANK
+    sc = (x.get("plan") or x).get("score") or {}
+    v = sc.get(how)
+    if how == "alpha" or how not in RANKS:
+        return 0.0
+    if v is None:
+        return 1e9          # unknown: last
+    return -v if how in ("strength", "trend", "volume") else v
 
 
 # ------------------------------------------------------------------ trades
@@ -353,7 +402,7 @@ def try_entry(st, sym, name, df, j, mode="paper", money=None, mood=None):
          "qty": qty, "remaining": qty, "stop": stop, "stop_reason": why, "days": 0,
          "target": round(entry * (1 + RULES[ttype]["target"]), 2),
          "booked": False, "signal_low": None, "signal_date": None, "exits": [], "pnl": 0.0,
-         "status": "open", "mode": mode, "money": round(money, 2), "plan": {k: plan[k] for k in ("resistance", "range_pct", "r42", "room")}}
+         "status": "open", "mode": mode, "money": round(money, 2), "plan": {k: plan[k] for k in ("resistance", "range_pct", "r42", "room", "score")}}
     sells = []
     if df.l[j] <= t["stop"]:  # fell back to the stop on the same day
         s = _sell(t, df.index[j], t["remaining"], t["stop"], why + " — same day")
@@ -408,7 +457,12 @@ def run(settings, book, charts, sp, dt, today="", mood=None):
             book["closed"].append(t)
             mine.pop(t["symbol"], None)
 
-        for sym, df in frames.items():
+        def first(item):  # stocks whose setup is best (RANK) get the free money first
+            sym, df = item
+            plan = swing_setup(df, len(df) - 2) if len(df) > 2 and sym not in mine else None
+            return (0 if plan else 1, rank_value(plan, st.get("rank")) if plan else 0, sym)
+
+        for sym, df in sorted(frames.items(), key=first):
             # each stock remembers its own last checked candle; a stock seen for the first time
             # (strategy just switched ON, or newly added to the list) starts from its next new candle
             since = seen.get(sym) or df.index[-1]
@@ -464,7 +518,8 @@ def run(settings, book, charts, sp, dt, today="", mood=None):
                 ready.append({"symbol": sym, "name": names.get(sym, sym), "buy_above": plan["trigger"], "stop": plan["stop"],
                               "qty": qty, "amount": round(qty * plan["trigger"], 2), "range_pct": plan["range_pct"],
                               "risk_pct": round((plan["trigger"] - plan["stop"]) / plan["trigger"] * 100, 1),
-                              "as_of": df.index[-1]})
+                              "as_of": df.index[-1], "score": plan["score"], "_r": rank_value(plan, st.get("rank"))})
+        ready.sort(key=lambda x: (x.pop("_r"), x["symbol"]))
         book["setups"][sid] = ready
         events["setups"][sid] = ready
         if st.get("type") == "switch":
@@ -507,13 +562,13 @@ def backtest(st, charts, names, symbols, money=100000.0, mood=None):
     return trades
 
 
-def portfolio(trades, start, end="9999", capital=DEF_CAPITAL, pct=DEF_PCT):
+def portfolio(trades, start, end="9999", capital=DEF_CAPITAL, pct=DEF_PCT, rank=None):
     """The backtest trades taken in date order with one money pot: each trade gets pct% of the capital at that
     moment (profits grow the size), a trade is skipped when there is not enough free cash.
     Trade results already include costs."""
     # open trades count at today's price (their booked part + the rest at the last close)
     todo = sorted([t for t in trades if start <= t["entry_date"] < end and (t["status"] == "closed" or "open_pnl" in t)],
-                  key=lambda t: (t["entry_date"], t["symbol"]))
+                  key=lambda t: (t["entry_date"], rank_value(t, rank), t["symbol"]))
     cash, opn, taken, skipped, wins, months, rows = float(capital), [], 0, 0, 0, {}, []
 
     def settle(upto):
