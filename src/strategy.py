@@ -7,11 +7,11 @@ written only by the daily robot, so the two robots never edit the same file.
 Swing Strategy rules (given by the user) - "version 5", chosen 4 Nov 2026 after comparing backtests:
   Entry (all must be true; checked on the candles before the entry day)
     1. Daily EMA 10 > EMA 20 > EMA 50 > EMA 200
-    2. The last 4 daily candles are in a tight range: highest high - lowest low <= 6% of the current price.
-       Resistance = highest high of those 4 candles. Buy when price goes 1% above it (a buy-stop order).
+    2. The last 5 daily candles (BASE_CANDLES; 4 until 5 Nov 2026) are in a tight range: highest high - lowest low
+       <= 6% of the current price. Resistance = highest high of those candles. Buy when price goes 1% above it (a buy-stop order).
     3. The last candle's high is not more than 10% above EMA 10.
     (The old 42-candle "room to resistance" rule is switched off: ROOM_RULE = False.)
-  Stop loss (whole quantity): 1% below the lowest low of the 4-candle base, but never more than 6% below
+  Stop loss (whole quantity): 1% below the lowest low of the base, but never more than 6% below
     the actual buy price (the higher of the two is used).
   Time stop: if after 10 trading days the 50% target is not reached and the close is below +3%,
     sell everything at the close (frees the money for the next setup).
@@ -31,12 +31,15 @@ TYPES = {"swing": "Swing Strategy rules", "positional": "Positional Trading rule
 TRADING_TYPES = ("swing", "positional", "switch")
 LISTS = ("SP", "DT", "BOTH")
 DEFAULT = [{"id": "swing", "name": "Swing Strategy", "type": "swing", "list": "SP", "capital": 1000000, "pct": 10,
-            "on": False, "note": "EMA stack + tight 4-candle base breakout", "added": ""},
+            "on": False, "note": "EMA stack + tight 5-candle base breakout", "added": ""},
            {"id": "positional", "name": "Positional Trading", "type": "positional", "list": "SP", "capital": 1000000, "pct": 10,
             "on": False, "note": "Same entry · 50% at +30% · rest exits on 2 closes below EMA 50", "added": ""},
            {"id": "switch", "name": "Smart Switch", "type": "switch", "list": "SP", "capital": 1000000, "pct": 10,
-            "on": False, "note": "Same entry · Smallcap 100 above EMA 50 → Positional exits, below → Swing exits", "added": ""}]
+            "on": False, "note": "Same entry · exits follow Smallcap 100 daily: above EMA 50 → Positional, below → Swing", "added": ""}]
 MAX_CATCHUP_DAYS = 10
+BASE_CANDLES = 5           # rule 2: number of candles in the tight base (5 chosen 5 Nov 2026 after backtest; was 4)
+BASE_RANGE = 0.06          # ... and the most their range may be (share of the current price)
+BASE_MEASURE = "hl"        # "hl" = highest high / lowest low (wicks count), "close" = closing prices only
 ROOM_RULE = False          # rule 4 / 6 (room to the 42-candle resistance) - off in version 5
 STOP_BELOW_BASE = 0.01     # stop 1% below the base low
 MAX_RISK = 0.06            # ... but never more than 6% below the buy price
@@ -44,10 +47,12 @@ TIME_STOP_DAYS, TIME_STOP_GAIN = 10, 0.03
 TARGET, BOOK_FRACTION = 0.20, 0.5
 # Exit rules of each strategy type (entry rules are the same for both)
 RULES = {
-    "swing": {"target": 0.20, "trail": "ema10_low", "time_stop": (TIME_STOP_DAYS, TIME_STOP_GAIN)},
+    # climax: after the 50% booking, sell the rest when price runs far above its EMA (rule added 5 Nov 2026).
+    # (ema, level when Smallcap 100 is above its EMA 50, level when below / unknown) - "middle path" chosen 5 Nov 2026
+    "swing": {"target": 0.20, "trail": "ema10_low", "time_stop": (TIME_STOP_DAYS, TIME_STOP_GAIN), "climax": ("e10", 1.24, 1.20)},
     # Positional Trading (given 4 Nov 2026): 50% at +30%; the rest exits after 2 daily closes below EMA 50;
-    # before the target the stop is 1% below the 4-candle base low (and never more than 6% below the buy price)
-    "positional": {"target": 0.30, "trail": "ema50_2close", "time_stop": None},
+    # before the target the stop is 1% below the base low (and never more than 6% below the buy price)
+    "positional": {"target": 0.30, "trail": "ema50_2close", "time_stop": None, "climax": ("e50", 1.48, 1.40)},
 }
 COST_PER_SIDE = 0.002      # brokerage + taxes + slippage, about 0.2% on each buy and each sell
 DEF_CAPITAL, DEF_PCT = 1_000_000.0, 10.0   # paper capital, and % of the CURRENT capital per trade
@@ -161,24 +166,28 @@ def _frame(hist):
 
 def swing_setup(df, i):
     """Setup using candles up to row i (the last base candle). Returns the buy-stop plan or None."""
-    if i < 200 or i - 46 < 0:  # EMA 200 + 42 + 4 candles of history needed
+    if i < 200 or i - 46 < 0:  # EMA 200 + 42 + base candles of history needed
         return None
     if not (df.e10[i] > df.e20[i] > df.e50[i] > df.e200[i]):                  # rule 1
         return None
-    res, low, price = float(df.h[i - 3:i + 1].max()), float(df.l[i - 3:i + 1].min()), float(df.c[i])
-    if (res - low) > 0.06 * price:                                           # rule 2
+    n, price = BASE_CANDLES, float(df.c[i])
+    if BASE_MEASURE == "close":
+        res, low = float(df.c[i - n + 1:i + 1].max()), float(df.c[i - n + 1:i + 1].min())
+    else:
+        res, low = float(df.h[i - n + 1:i + 1].max()), float(df.l[i - n + 1:i + 1].min())
+    if (res - low) > BASE_RANGE * price:                                     # rule 2
         return None
     if df.h[i] > df.e10[i] * 1.10:                                           # rule 3
         return None
     entry = round(res * 1.01, 2)
-    r42 = float(df.h[i - 45:i - 3].max())                                    # rule 4
+    r42 = float(df.h[i - 41 - n:i - n + 1].max())                                    # rule 4
     room = (r42 - entry) / price * 100
     if ROOM_RULE and r42 > entry and 1 < room < 15:   # rule 4 + rule 6 (switched off in version 5)
         return None
     stop = max(low * (1 - STOP_BELOW_BASE), entry * (1 - MAX_RISK))
     return {"trigger": entry, "stop": round(stop, 2), "base_low": round(low, 2), "resistance": round(res, 2), "r42": round(r42, 2),
             "room": round(room, 1) if r42 > entry else None, "range_pct": round((res - low) / price * 100, 1),
-            "base_from": df.index[i - 3], "base_to": df.index[i]}
+            "base_from": df.index[i - n + 1], "base_to": df.index[i]}
 
 
 # ------------------------------------------------------------------ trades
@@ -209,8 +218,30 @@ def _sell(t, day, qty, price, reason):
             "trade_pnl": t["pnl"], "entry": t["entry"], "entry_date": t["entry_date"]}
 
 
-def manage(t, df, j):
+SWITCH_MODE = "daily"   # chosen 4 Nov 2026 (best in both backtest years). Smart Switch: "entry" = rules fixed on the buy day, "up" = upgrade to Positional
+                        # when small caps turn strong, "daily" = follow the index every day
+
+
+def _apply_switch(t, df, j, mood):
+    """Smart Switch during the trade: change the exit rules when the Nifty Smallcap 100 crosses its EMA 50."""
+    if not t.get("switch") or mood is None or j < 1 or SWITCH_MODE == "entry":
+        return
+    m = mood.on(df.index[j - 1])   # the index as known before this day's trading
+    if m is None:
+        return
+    want = "positional" if m[0] else "swing"
+    if SWITCH_MODE == "up" and (want != "positional" or t["type"] == "positional" or t["booked"]):
+        return
+    if want != t["type"]:
+        t["type"] = want
+        if not t["booked"]:
+            t["target"] = round(t["entry"] * (1 + RULES[want]["target"]), 2)
+        t.setdefault("switches", []).append(f"{df.index[j]}: → {want}")
+
+
+def manage(t, df, j, mood=None):
     """Apply the exit rules to an open trade on candle j. Returns the sells made."""
+    _apply_switch(t, df, j, mood)
     day = df.index[j]
     o, h, l, c, e10 = float(df.o[j]), float(df.h[j]), float(df.l[j]), float(df.c[j]), float(df.e10[j])
     rules = RULES.get(t.get("type", "swing"), RULES["swing"])
@@ -235,6 +266,19 @@ def manage(t, df, j):
     if ts and not t["booked"] and t["days"] >= ts[0] and c < t["entry"] * (1 + ts[1]):
         s = _sell(t, day, t["remaining"], c, f"Time stop ({ts[0]} days, under +{ts[1] * 100:g}%)")
         return done + ([s] if s else [])
+    # climax exit for the rest: price far above its EMA (level from the day before = a waiting sell order)
+    cx = rules.get("climax")
+    if cx and t["booked"] and t["remaining"] and j > 0:
+        ema_name, strong, weak = cx
+        m = mood.on(df.index[j - 1]) if mood else None
+        mult = strong if (m and m[0]) else weak
+        level = float(getattr(df, ema_name)[j - 1]) * mult
+        if h >= level:
+            s = _sell(t, day, t["remaining"], max(o, level),
+                      f"Climax exit ({mult:g}× EMA {ema_name[1:]} = ₹{level:,.2f})")
+            if s:
+                done.append(s)
+            return done
     # Positional: the rest exits at the close of the 2nd daily close below EMA 50 in a row
     if rules["trail"] == "ema50_2close":
         if t["booked"]:
@@ -302,10 +346,10 @@ def try_entry(st, sym, name, df, j, mode="paper", money=None, mood=None):
     if qty < 1:
         return None, []
     stop = round(max(plan["base_low"] * (1 - STOP_BELOW_BASE), entry * (1 - MAX_RISK)), 2)
-    why = "Stop loss (1% below 4-candle base)" if stop == round(plan["base_low"] * (1 - STOP_BELOW_BASE), 2) else "Stop loss (6% max risk)"
+    why = f"Stop loss (1% below {BASE_CANDLES}-candle base)" if stop == round(plan["base_low"] * (1 - STOP_BELOW_BASE), 2) else "Stop loss (6% max risk)"
     t = {"id": f"{sid}-{sym}-{df.index[j]}", "strategy": sid, "strategy_name": st.get("name", sid),
          "symbol": sym, "name": name, "entry_date": df.index[j], "entry": round(entry, 2),
-         "type": ttype, "regime": regime,
+         "type": ttype, "regime": regime, "switch": st.get("type") == "switch",
          "qty": qty, "remaining": qty, "stop": stop, "stop_reason": why, "days": 0,
          "target": round(entry * (1 + RULES[ttype]["target"]), 2),
          "booked": False, "signal_low": None, "signal_date": None, "exits": [], "pnl": 0.0,
@@ -373,7 +417,12 @@ def run(settings, book, charts, sp, dt, today="", mood=None):
             for j in idx:
                 t = mine.get(sym)
                 if t and t["entry_date"] < df.index[j]:
-                    for s in manage(t, df, j):
+                    before = t["type"]
+                    sells = manage(t, df, j, mood)
+                    if t["type"] != before:
+                        events.setdefault("switched", []).append({"symbol": sym, "name": t["name"], "strategy": sid, "to": t["type"],
+                                                                  "target": None if t["booked"] else t["target"], "date": df.index[j]})
+                    for s in sells:
                         events["exits"].append(s)
                         events["log"].append(_log_sell(s, t))
                     if t["status"] == "closed":
@@ -440,7 +489,7 @@ def backtest(st, charts, names, symbols, money=100000.0, mood=None):
         t = None
         for j in range(247, len(df)):
             if t:
-                manage(t, df, j)
+                manage(t, df, j, mood)
                 if t["status"] == "closed":
                     trades.append(t)
                     t = None

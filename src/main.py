@@ -144,8 +144,11 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
     period = int(settings.get("ema_period", 200))
     tick = {sym: prices.yahoo_ticker(sym, row.get("yahoo_override", ""))
             for sym, row in list(sp.items()) + list(dt.items())}
+    # older BSE history for stocks that also have a BSE code (joined in front of the NSE prices)
+    older = {tick[sym]: f"{row['bse']}.BO" for sym, row in list(sp.items()) + list(dt.items())
+             if row.get("bse") and tick.get(sym, "").endswith(".NS")}
     try:
-        px = prices.close_and_ema(sorted(set(tick.values())), period)
+        px = prices.close_and_ema(sorted(set(tick.values())), period, older=older)
     except Exception as e:
         px = {}
         report["warnings"].append(f"Yahoo price download failed: {e}")
@@ -298,6 +301,23 @@ def monthly(sp, dt, rules_cfg, today, report, history, snaps):
 
 
 # ----------------------------------------------------------------- report
+def market_years(mood, this_year):
+    """Nifty Smallcap 100 change per calendar year -> bull (>= +15%), bear (<= -10%) or sideways."""
+    out = {}
+    if not mood or not mood.t:
+        return {"years": out}
+    for y in range(this_year - 9, this_year + 1):
+        pts = [(d, c) for d, c in zip(mood.t, mood.c) if d[:4] == str(y)]
+        prev = [c for d, c in zip(mood.t, mood.c) if d < f"{y}-01-01"]
+        if len(pts) < 20 or not prev:
+            continue
+        chg = (pts[-1][1] / prev[-1] - 1) * 100
+        above = sum(1 for d, _ in pts if (mood.on(d) or (False,))[0]) / len(pts) * 100
+        out[str(y)] = {"change": round(chg, 1), "above_ema50_days_pct": round(above),
+                       "phase": "bull" if chg >= 15 else "bear" if chg <= -10 else "sideways", "partial": y == this_year}
+    return {"years": out, "index_from": mood.t[0]}
+
+
 def strategy_lines(st):
     """One block per strategy that is ON: capital, buys, sells, skipped breakouts, setups for today."""
     names = st.get("names") or {}
@@ -308,7 +328,7 @@ def strategy_lines(st):
         md = (st.get("mood") or {}).get(sid)
         if md:
             L.append(f"🧭 Smallcap 100 {md['close']:,.0f} {'above' if md['above'] else 'below'} EMA 50 {md['ema50']:,.0f} → "
-                     f"new trades use <b>{md['rules']}</b> exits")
+                     f"open trades follow <b>{md['rules']}</b> exits today")
         c = (st.get("capital") or {}).get(sid)
         if c:
             gain = c["equity"] - c["start"]
@@ -318,6 +338,9 @@ def strategy_lines(st):
         for e in [x for x in st.get("entries", []) if x.get("strategy") == sid]:
             L.append(f"🟢 BUY {html.escape(e['name'])} ({e['symbol']}) {e['qty']} @ ₹{e['price']:g} · stop ₹{e['stop']:g} · target ₹{e['target']:g}"
                      + (f" · {html.escape(e['regime'].split(' → ')[-1])}" if e.get("regime") else ""))
+        for e in [x for x in st.get("switched", []) if x.get("strategy") == sid]:
+            L.append(f"🔁 {html.escape(e['name'])} ({e['symbol']}) now follows <b>{e['to'].capitalize()}</b> exits"
+                     + (f" · new target ₹{e['target']:g}" if e.get("target") else ""))
         for e in [x for x in st.get("exits", []) if x.get("strategy") == sid]:
             L.append(f"{'✅' if e['pnl'] >= 0 else '🔴'} SELL {html.escape(e['name'])} ({e['symbol']}) {e['qty']} @ ₹{e['price']:g} — "
                      f"{html.escape(e['reason'])} · P&amp;L ₹{e['pnl']:+,.0f}")
@@ -404,11 +427,11 @@ def main():
     # Strategies (paper trading until a broker is connected)
     strat_cfg, book = strategy.load_settings(), storage.load_json("strategy_trades.json", {})
     mood = None
-    if mode in ("auto", "daily") and charts and any(x.get("type") == "switch" for x in strat_cfg.get("strategies", [])):
+    if mode in ("auto", "daily") and charts and any(x.get("type") in strategy.TRADING_TYPES for x in strat_cfg.get("strategies", [])):
         try:
-            mood = market.Mood(market.history())  # Nifty Smallcap 100 vs EMA 50 (for Smart Switch)
+            mood = market.Mood(market.history())  # Nifty Smallcap 100 vs EMA 50 (Smart Switch + climax exit levels)
             if not mood.t:
-                report["warnings"].append("Nifty Smallcap 100 prices not available — Smart Switch uses Swing exits today")
+                report["warnings"].append("Nifty Smallcap 100 prices not available — Smart Switch uses Swing exits and climax exits use the lower levels today")
         except Exception as e:
             report["warnings"].append(f"Nifty Smallcap 100 check failed: {e}")
     if mode in ("auto", "daily") and charts:
@@ -446,7 +469,14 @@ def main():
                                  "last2y": strategy.portfolio(trades, d2, capital=cap, pct=pct),
                                  "year2": strategy.portfolio(trades, d2, d1, capital=cap, pct=pct),
                                  "year1": strategy.portfolio(trades, d1, capital=cap, pct=pct),
-                                 "index_from": mood.t[0] if mood and mood.t else None}
+                                 "index_from": mood.t[0] if mood and mood.t else None,
+                                 # 10 years, calendar year by year (a fresh ₹10 lakh each year) - for bull / bear comparison
+                                 "by_year": {str(y): {k: v for k, v in strategy.portfolio(trades, f"{y}-01-01", f"{y + 1}-01-01",
+                                             capital=cap, pct=pct).items() if k in ("return_pct", "trades", "win_rate", "max_drawdown_pct",
+                                             "open_trades", "final")} for y in range(now.year - 9, now.year + 1)},
+                                 "stocks_with_history": {str(y): sum(1 for s_ in syms if charts.get(s_) and charts[s_]["t"]
+                                                         and charts[s_]["t"][0] <= f"{y - 1}-02-01") for y in range(now.year - 9, now.year + 1)}}
+            bt["_market"] = market_years(mood, now.year)
             storage.save_json("strategy_backtest.json", bt)
         except Exception as e:
             report["warnings"].append(f"Strategy backtest failed: {e}")

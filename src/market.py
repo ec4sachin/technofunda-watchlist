@@ -1,8 +1,8 @@
 """Market mood from the Nifty Smallcap 100 index: is it above or below its daily EMA 50?
 
-Used by the "Smart Switch" strategy: when a trade is bought,
-  index close > EMA 50  -> the trade uses the Positional Trading exit rules
-  index close < EMA 50  -> the trade uses the Swing Strategy exit rules
+Used by the "Smart Switch" strategy: every day of an open trade (from the buy day on),
+  index close > EMA 50  -> the trade follows the Positional Trading exit rules
+  index close < EMA 50  -> the trade follows the Swing Strategy exit rules
 
 Prices: Yahoo Finance (^CNXSC, whole history in one download). If Yahoo fails, NSE's official daily
 index file (ind_close_all_DDMMYYYY.csv) is used, kept in data/index_smallcap100.csv.
@@ -62,9 +62,10 @@ def parse_nse(text):
     return None
 
 
-def _from_nse(days=1100, session=None, max_downloads=700):
-    """Fill the local cache with NSE daily index files (newest first, `days` calendar days back = 3 years).
-    Days already in the cache are not downloaded again, so only the first run is long (about 10 minutes)."""
+def _from_nse(days=3700, session=None, max_downloads=800):
+    """Fill the local cache with NSE daily index files (newest first, `days` calendar days back = 10 years).
+    Days already in the cache are not downloaded again. 10 years is filled over about 3 runs (800 files each,
+    about 10 minutes); after that only the new day is downloaded."""
     s = session or requests.Session()
     p = os.path.join(storage.DATA, CACHE)
     have = {}

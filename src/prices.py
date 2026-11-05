@@ -145,17 +145,57 @@ def _ema_result(df, period):
     return (last[0], round(float(ema.iloc[-1]), 2), last[1], hist)
 
 
-def close_and_ema(tickers, period=200):
-    """Yahoo Finance, whole history. Returns {ticker: (close, ema, date, history) or None}."""
+def join_older(df_new, df_old):
+    """Put the older part of a second price history (e.g. BSE, before the stock moved to NSE) in front of df_new.
+    The older prices are scaled so both join smoothly on the first common day."""
+    if df_old is None or df_old.empty or df_new is None or df_new.empty:
+        return df_new
+    first = df_new.index[0]
+    older = df_old[df_old.index < first]
+    if len(older) < 20:
+        return df_new
+    common = df_old.index.intersection(df_new.index)
+    f = 1.0
+    if len(common):
+        a, b = float(df_new.loc[common[0], "Close"]), float(df_old.loc[common[0], "Close"])
+        if a > 0 and b > 0:
+            f = a / b
+    older = older.copy()
+    for col in ("Open", "High", "Low", "Close"):
+        if col in older:
+            older[col] = older[col] * f
+    return pd.concat([older[[c for c in df_new.columns if c in older]], df_new])
+
+
+def close_and_ema(tickers, period=200, older=None):
+    """Yahoo Finance, whole history. Returns {ticker: (close, ema, date, history) or None}.
+    older: {nse_ticker: bse_ticker} - the BSE history is joined in front when it goes back further
+    (stocks that moved from BSE to NSE, or SME stocks that moved to the main board)."""
     out = {t: None for t in tickers}
     if not tickers:
         return out
-    data = yf.download(tickers, period="max", interval="1d", auto_adjust=False,
+    extra = sorted({b for t, b in (older or {}).items() if t in tickers and b not in tickers})
+    data = yf.download(sorted(set(tickers) | set(extra)), period="max", interval="1d", auto_adjust=False,
                        group_by="ticker", progress=False, threads=True)
+    cols = ("Open", "High", "Low", "Close", "Volume")
+
+    def frame(t):
+        df = data[t] if isinstance(data.columns, pd.MultiIndex) else data
+        df = df[[c for c in cols if c in df]]
+        return df[df["Close"].notna()] if "Close" in df else None
+
     for t in tickers:
         try:
-            df = data[t] if isinstance(data.columns, pd.MultiIndex) else data
-            out[t] = _ema_result(df[[c for c in ("Open", "High", "Low", "Close", "Volume") if c in df]], period)
+            df = frame(t)
+            if df is None or df.empty:
+                continue
+            b = (older or {}).get(t)
+            if b:
+                try:
+                    df = join_older(df, frame(b))
+                except (KeyError, TypeError):
+                    pass
+            out[t] = _ema_result(df, period)
         except (KeyError, TypeError):
             continue
     return out

@@ -132,6 +132,7 @@ h2 .cnt{font:500 12px var(--f-mono);padding:1px 8px;border-radius:999px;backgrou
 .yrsplit{margin-bottom:8px;grid-template-columns:repeat(2,minmax(0,1fr))}.yrsplit .v{font-size:22px}
 @media (max-width:520px){.yrsplit{grid-template-columns:1fr}}
 tr.best td{background:var(--up-soft)}
+tr.avg td{background:var(--bg)}
 .st-note.mood.pos{background:var(--up-soft)}.st-note.mood.neg{background:var(--down-soft)}
 .capc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:10px;background:var(--accent-soft);border-radius:8px;padding:10px}
 .capc .k{font-size:11.5px;color:var(--muted)}.capc .v{font:700 17px var(--f-mono)}.capc .mut{font-size:11.5px}
@@ -1088,6 +1089,33 @@ function compareHTML(){
     `</tbody></table></div><p class="src">Each strategy: ₹10,00,000 paper capital, every trade 10% of the capital at that moment, costs included, open trades valued at today's price.
     Uses the stocks in the list today, so real results would likely be lower.</p>`;
 }
+function yearsHTML(){
+  const bt = SD.backtest || {}, mk = ((bt._market || {}).years) || {};
+  const strats = STRAT.filter(RULED).filter(t => (bt[t.id] || {}).by_year);
+  if (!strats.length) return "";
+  const years = Object.keys(bt[strats[0].id].by_year).sort().reverse();
+  const tag = {bull: '<span class="pill p-add">bull</span>', bear: '<span class="pill p-dt">bear</span>', sideways: '<span class="pill p-warn">sideways</span>'};
+  const cell = y => !y || !y.trades ? '<span class="mut">no trades</span>' :
+    `<span class="${y.return_pct >= 0 ? "up" : "down"}">${y.return_pct >= 0 ? "+" : ""}${esc(y.return_pct)}%</span> <span class="mut">(${esc(y.trades)})</span>`;
+  const sum = {bull: {}, bear: {}, sideways: {}};
+  for (const yr of years) { const m = mk[yr]; if (!m || m.partial) continue;
+    for (const t of strats) { const y = bt[t.id].by_year[yr]; if (!y || !y.trades) continue;
+      const g = (sum[m.phase][t.id] = sum[m.phase][t.id] || {n: 0, f: 1}); g.n++; g.f *= 1 + y.return_pct / 100; } }
+  const avgRow = ph => `<tr class="avg"><td colspan="2"><b>Average ${ph} year</b></td>` + strats.map(t => { const g = sum[ph][t.id];
+    if (!g) return '<td class="num ra mut">—</td>'; const a = (Math.pow(g.f, 1 / g.n) - 1) * 100;
+    return `<td class="num ra"><b class="${a >= 0 ? "up" : "down"}">${a >= 0 ? "+" : ""}${a.toFixed(1)}%</b> <span class="mut">${g.n} yr</span></td>`; }).join("") + `</tr>`;
+  const hist = bt[strats[0].id].stocks_with_history || {};
+  return `<h2>Bull vs bear markets · last 10 years</h2><div class="tbl"><table><thead><tr><th>Year</th><th>Smallcap 100</th>${strats.map(t =>
+      `<th class="ra">${esc(t.name)}</th>`).join("")}<th class="ra">Stocks with history</th></tr></thead><tbody>` +
+    years.map(yr => { const m = mk[yr];
+      return `<tr><td class="num">${esc(yr)}${m && m.partial ? " <span class='mut'>(so far)</span>" : ""}</td>
+        <td>${m ? `${tag[m.phase]} <span class="num ${m.change >= 0 ? "up" : "down"}">${m.change >= 0 ? "+" : ""}${esc(m.change)}%</span>` : '<span class="mut">index not loaded yet</span>'}</td>` +
+        strats.map(t => `<td class="num ra">${cell(bt[t.id].by_year[yr])}</td>`).join("") + `<td class="num ra mut">${esc(hist[yr] ?? "")}</td></tr>`; }).join("") +
+    ["bull", "sideways", "bear"].map(avgRow).join("") +
+    `</tbody></table></div><p class="src">Each year starts again with ₹10,00,000 (10% per trade, costs included); number of trades in brackets.
+    Bull = Smallcap 100 up 15% or more in the year, bear = down 10% or more. Only stocks in your list today are tested, and many listed recently
+    (see "Stocks with history"), so older years have few trades. The 10-year index history fills in over the next 2–3 robot runs.</p>`;
+}
 function last2HTML(p){
   if (!p || !p.trades) return "";
   const curve = (p.curve || []).map(([m, v]) => [m, v - p.capital]);
@@ -1105,8 +1133,8 @@ function moodHTML(t){
   const m = (SD.mood || {})[t.id];
   if (!m) return `<div class="st-note">🧭 Nifty Smallcap 100 not checked yet — it appears after the next robot run.</div>`;
   return `<div class="st-note mood ${m.above ? "pos" : "neg"}">🧭 <b>Nifty Smallcap 100 ${inr0(m.close).slice(1)}</b> is <b>${m.above ? "above" : "below"}</b> its EMA 50 (${inr0(m.ema50).slice(1)}) on ${esc(m.date)}
-    → new trades use the <b>${esc(m.rules)}</b> exit rules (${m.rules === "Positional" ? "50% at +30%, rest on 2 closes below EMA 50" : "50% at +20%, EMA 10 trail, 10-day time stop"}).
-    A trade keeps the rules it got on its buy day.</div>`;
+    → open trades follow the <b>${esc(m.rules)}</b> exit rules today (${m.rules === "Positional" ? "50% at +30%, rest on 2 closes below EMA 50" : "50% at +20%, EMA 10 trail, 10-day time stop"}).
+    The robot checks the index every day, so a trade switches rules when small caps turn strong or weak.</div>`;
 }
 function perfHTML(t){
   const live = (SD.live || {})[t.id], bt = (SD.backtest || {})[t.id] || {};
@@ -1126,7 +1154,7 @@ function perfHTML(t){
 }
 function setupRows(list){
   if (!list || !list.length) return `<div class="empty">No setups today. When a stock meets all entry rules it appears here with its buy-stop price.</div>`;
-  return `<div class="tbl"><table><thead><tr><th>Stock</th><th class="ra">Buy above</th><th class="ra">Stop</th><th class="ra">Risk</th><th class="ra">Qty</th><th class="ra">Amount</th><th class="ra">4-day range</th></tr></thead><tbody>` +
+  return `<div class="tbl"><table><thead><tr><th>Stock</th><th class="ra">Buy above</th><th class="ra">Stop</th><th class="ra">Risk</th><th class="ra">Qty</th><th class="ra">Amount</th><th class="ra">Base range</th></tr></thead><tbody>` +
     list.map(x => `<tr><td><b>${esc(x.name)}</b><br><span class="sym mut">${esc(x.symbol)}</span></td><td class="num ra"><b>${inr2(x.buy_above)}</b></td>
       <td class="num ra">${inr2(x.stop)}</td><td class="num ra">${esc(x.risk_pct)}%</td><td class="num ra">${esc(x.qty)}</td><td class="num ra">${inr0(x.amount)}</td><td class="num ra">${esc(x.range_pct)}%</td></tr>`).join("") +
     `</tbody></table></div>`;
@@ -1180,6 +1208,7 @@ function drawStrategies(){
     ${local}${form}
     <div class="st-list">${cards || (f ? "" : `<div class="empty">No strategies yet. Tap <b>+ Add strategy</b> to create one.</div>`)}</div>
     ${compareHTML()}
+    ${yearsHTML()}
     ${detail}
     <p class="src">ON / OFF and changes are saved to your GitHub (needs the dashboard connected, see the Alerts tab). Prices and paper trades update with the 7 AM robot run.</p>`;
 }
