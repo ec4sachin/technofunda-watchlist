@@ -7,7 +7,7 @@
    "losses": 29,
    "win_rate": 51.7,
    "total_pnl": 238692.25,
-   "open_pnl": -631.08,
+   "open_pnl": 837.48,
    "avg_win": 12439.68,
    "avg_loss": -5066.82,
    "profit_factor": 2.62,
@@ -299,7 +299,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": -631.08,
+    "open_pnl": 837.48,
     "type": "swing",
     "regime": ""
    },
@@ -1962,14 +1962,14 @@
    "start": "2024-11-05",
    "capital": 1000000.0,
    "pct": 13.0,
-   "final": 1356216.71,
-   "profit": 356216.71,
+   "final": 1358812.31,
+   "profit": 358812.31,
    "open_trades": 1,
-   "return_pct": 35.6,
+   "return_pct": 35.9,
    "trades": 60,
    "skipped": 1,
-   "wins": 31,
-   "win_rate": 51.7,
+   "wins": 32,
+   "win_rate": 53.3,
    "max_drawdown_pct": 2.9,
    "months": {
     "2025-01": -8304.27,
@@ -1991,7 +1991,7 @@
     "2026-08": 25378.07,
     "2026-09": 101893.52,
     "2026-10": -1855.6,
-    "2026-11": -9972.28
+    "2026-11": -7376.68
    },
    "curve": [
     [
@@ -2072,7 +2072,7 @@
     ],
     [
      "2026-11",
-     1356216.68
+     1358812.28
     ]
    ],
    "first_trade": "2025-01-06",
@@ -2081,11 +2081,11 @@
      "name": "Saakshi Medtech",
      "symbol": "SAAKSHI",
      "entry_date": "2026-11-02",
-     "closed_on": "2026-11-03",
+     "closed_on": "2026-11-04",
      "open": true,
      "money": 176453,
-     "pnl": -1115.4,
-     "pnl_pct": -0.63
+     "pnl": 1480.2,
+     "pnl_pct": 0.84
     },
     {
      "name": "Zelio E-Mobility",
@@ -2934,14 +2934,14 @@
    "start": "2025-11-05",
    "capital": 1000000.0,
    "pct": 13.0,
-   "final": 1304882.03,
-   "profit": 304882.03,
+   "final": 1307379.38,
+   "profit": 307379.38,
    "open_trades": 1,
-   "return_pct": 30.5,
+   "return_pct": 30.7,
    "trades": 42,
    "skipped": 1,
-   "wins": 24,
-   "win_rate": 57.1,
+   "wins": 25,
+   "win_rate": 59.5,
    "max_drawdown_pct": 0.9,
    "months": {
     "2026-01": 27423.99,
@@ -2953,7 +2953,7 @@
     "2026-08": 24417.47,
     "2026-09": 98036.7,
     "2026-10": -1785.35,
-    "2026-11": -9594.81
+    "2026-11": -7097.46
    },
    "curve": [
     [
@@ -2994,7 +2994,7 @@
     ],
     [
      "2026-11",
-     1304882.04
+     1307379.39
     ]
    ],
    "first_trade": "2025-11-20",
@@ -3003,11 +3003,11 @@
      "name": "Saakshi Medtech",
      "symbol": "SAAKSHI",
      "entry_date": "2026-11-02",
-     "closed_on": "2026-11-03",
+     "closed_on": "2026-11-04",
      "open": true,
      "money": 169774,
-     "pnl": -1073.18,
-     "pnl_pct": -0.63
+     "pnl": 1424.17,
+     "pnl_pct": 0.84
     },
     {
      "name": "Zelio E-Mobility",
@@ -3496,11 +3496,11 @@
     "max_drawdown_pct": 2.9
    },
    "2026": {
-    "final": 1270052.13,
+    "final": 1272482.82,
     "open_trades": 1,
-    "return_pct": 27.0,
+    "return_pct": 27.2,
     "trades": 41,
-    "win_rate": 56.1,
+    "win_rate": 58.5,
     "max_drawdown_pct": 0.9
    }
   },
@@ -3519,24 +3519,24 @@
  },
  "positional": {
   "report": {
-   "trades": 40,
-   "open": 5,
-   "wins": 15,
+   "trades": 41,
+   "open": 4,
+   "wins": 16,
    "losses": 25,
-   "win_rate": 37.5,
-   "total_pnl": 255053.91,
-   "open_pnl": 100137.84,
-   "avg_win": 27875.96,
+   "win_rate": 39.0,
+   "total_pnl": 337582.5,
+   "open_pnl": 35361.88,
+   "avg_win": 31291.74,
    "avg_loss": -6523.42,
-   "profit_factor": 2.56,
-   "expectancy": 6376.35,
-   "avg_return_pct": 6.38,
-   "best": 47316.39,
+   "profit_factor": 3.07,
+   "expectancy": 8233.72,
+   "avg_return_pct": 8.24,
+   "best": 82528.59,
    "worst": -8944.21,
    "max_drawdown": 25416.98,
-   "avg_hold_days": 41.5,
+   "avg_hold_days": 46.0,
    "first": "2025-01-06",
-   "last": "2026-11-02",
+   "last": "2026-11-04",
    "curve": [
     [
      "2025-01-13",
@@ -3697,6 +3697,10 @@
     [
      "2026-11-02",
      255053.91
+    ],
+    [
+     "2026-11-04",
+     337582.5
     ]
    ],
    "months": {
@@ -3713,10 +3717,10 @@
     "2026-08": 26850.3,
     "2026-09": 15283.46,
     "2026-10": 122764.92,
-    "2026-11": -6369.99
+    "2026-11": 76158.6
    },
-   "without_best": 207737.52,
-   "best_trade": "Shanti Gold International 2026-08-07"
+   "without_best": 255053.91,
+   "best_trade": "Hoac Foods 2026-03-24"
   },
   "trades": [
    {
@@ -3756,7 +3760,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": 6451.25,
+    "open_pnl": 9008.13,
     "type": "positional",
     "regime": ""
    },
@@ -3772,7 +3776,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": -696.01,
+    "open_pnl": 772.55,
     "type": "positional",
     "regime": ""
    },
@@ -4079,7 +4083,7 @@
       "charges": 229.51
      }
     ],
-    "open_pnl": 16460.02,
+    "open_pnl": 18182.9,
     "type": "positional",
     "regime": ""
    },
@@ -4452,7 +4456,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": 3956.84,
+    "open_pnl": 7398.3,
     "type": "positional",
     "regime": ""
    },
@@ -4495,11 +4499,11 @@
     "entry_date": "2026-03-24",
     "entry": 364.81,
     "qty": 274,
-    "status": "open",
-    "pnl": 14763.38,
-    "pnl_pct": null,
-    "hold_days": null,
-    "closed_on": null,
+    "status": "closed",
+    "pnl": 82528.59,
+    "pnl_pct": 82.56,
+    "hold_days": 225,
+    "closed_on": "2026-11-04",
     "exits": [
      {
       "date": "2026-05-07",
@@ -4508,9 +4512,17 @@
       "reason": "Target +30% (50% booked)",
       "pnl": 14763.38,
       "charges": 229.9
+     },
+     {
+      "date": "2026-11-04",
+      "qty": 137,
+      "price": 861.9,
+      "reason": "Trailing EMA 50 exit (2 closes below)",
+      "pnl": 67765.21,
+      "charges": 336.12
      }
     ],
-    "open_pnl": 73965.74,
+    "open_pnl": null,
     "type": "positional",
     "regime": ""
    },
@@ -4944,14 +4956,14 @@
    "start": "2024-11-05",
    "capital": 1000000.0,
    "pct": 12.0,
-   "final": 1503912.99,
-   "profit": 503912.99,
-   "open_trades": 4,
-   "return_pct": 50.4,
+   "final": 1506520.76,
+   "profit": 506520.76,
+   "open_trades": 3,
+   "return_pct": 50.7,
    "trades": 39,
    "skipped": 6,
-   "wins": 18,
-   "win_rate": 46.2,
+   "wins": 19,
+   "win_rate": 48.7,
    "max_drawdown_pct": 0.8,
    "months": {
     "2025-01": -7665.48,
@@ -4967,7 +4979,7 @@
     "2026-08": 34313.4,
     "2026-09": 37490.7,
     "2026-10": 178196.04,
-    "2026-11": 118011.68
+    "2026-11": 120619.46
    },
    "curve": [
     [
@@ -5024,7 +5036,7 @@
     ],
     [
      "2026-11",
-     1503912.97
+     1506520.75
     ]
    ],
    "first_trade": "2025-01-06",
@@ -5033,41 +5045,41 @@
      "name": "Gayatri Rubbers",
      "symbol": "GRCL",
      "entry_date": "2026-10-16",
-     "closed_on": "2026-11-03",
+     "closed_on": "2026-11-04",
      "open": true,
      "money": 152669,
-     "pnl": 9902.93,
-     "pnl_pct": 6.49
+     "pnl": 13827.85,
+     "pnl_pct": 9.06
     },
     {
      "name": "Saakshi Medtech",
      "symbol": "SAAKSHI",
      "entry_date": "2026-10-13",
-     "closed_on": "2026-11-03",
+     "closed_on": "2026-11-04",
      "open": true,
      "money": 152669,
-     "pnl": -1063.66,
-     "pnl_pct": -0.7
+     "pnl": 1180.63,
+     "pnl_pct": 0.77
     },
     {
      "name": "Ashiana Housing",
      "symbol": "ASHIANA",
      "entry_date": "2026-04-22",
-     "closed_on": "2026-11-03",
+     "closed_on": "2026-11-04",
      "open": true,
      "money": 129190,
-     "pnl": 5119.18,
-     "pnl_pct": 3.96
+     "pnl": 9571.58,
+     "pnl_pct": 7.41
     },
     {
      "name": "Hoac Foods",
      "symbol": "HOACFOODS",
      "entry_date": "2026-03-24",
-     "closed_on": "2026-11-03",
-     "open": true,
+     "closed_on": "2026-11-04",
+     "open": false,
      "money": 129190,
-     "pnl": 114677.3,
-     "pnl_pct": 88.77
+     "pnl": 106663.47,
+     "pnl_pct": 82.56
     },
     {
      "name": "Zelio E-Mobility",
@@ -5596,14 +5608,14 @@
    "start": "2025-11-05",
    "capital": 1000000.0,
    "pct": 12.0,
-   "final": 1419107.65,
-   "profit": 419107.65,
-   "open_trades": 4,
-   "return_pct": 41.9,
+   "final": 1421568.37,
+   "profit": 421568.37,
+   "open_trades": 3,
+   "return_pct": 42.2,
    "trades": 27,
    "skipped": 6,
-   "wins": 14,
-   "win_rate": 51.9,
+   "wins": 15,
+   "win_rate": 55.6,
    "max_drawdown_pct": 0.8,
    "months": {
     "2026-01": 24064.22,
@@ -5614,7 +5626,7 @@
     "2026-08": 32378.47,
     "2026-09": 35376.61,
     "2026-10": 168147.6,
-    "2026-11": 111357.03
+    "2026-11": 113817.75
    },
    "curve": [
     [
@@ -5651,7 +5663,7 @@
     ],
     [
      "2026-11",
-     1419107.64
+     1421568.36
     ]
    ],
    "first_trade": "2025-11-20",
@@ -5660,41 +5672,41 @@
      "name": "Gayatri Rubbers",
      "symbol": "GRCL",
      "entry_date": "2026-10-16",
-     "closed_on": "2026-11-03",
+     "closed_on": "2026-11-04",
      "open": true,
      "money": 144060,
-     "pnl": 9344.51,
-     "pnl_pct": 6.49
+     "pnl": 13048.1,
+     "pnl_pct": 9.06
     },
     {
      "name": "Saakshi Medtech",
      "symbol": "SAAKSHI",
      "entry_date": "2026-10-13",
-     "closed_on": "2026-11-03",
+     "closed_on": "2026-11-04",
      "open": true,
      "money": 144060,
-     "pnl": -1003.68,
-     "pnl_pct": -0.7
+     "pnl": 1114.05,
+     "pnl_pct": 0.77
     },
     {
      "name": "Ashiana Housing",
      "symbol": "ASHIANA",
      "entry_date": "2026-04-22",
-     "closed_on": "2026-11-03",
+     "closed_on": "2026-11-04",
      "open": true,
      "money": 121905,
-     "pnl": 4830.51,
-     "pnl_pct": 3.96
+     "pnl": 9031.84,
+     "pnl_pct": 7.41
     },
     {
      "name": "Hoac Foods",
      "symbol": "HOACFOODS",
      "entry_date": "2026-03-24",
-     "closed_on": "2026-11-03",
-     "open": true,
+     "closed_on": "2026-11-04",
+     "open": false,
      "money": 121905,
-     "pnl": 108210.67,
-     "pnl_pct": 88.77
+     "pnl": 100648.74,
+     "pnl_pct": 82.56
     },
     {
      "name": "Zelio E-Mobility",
@@ -6003,11 +6015,11 @@
     "max_drawdown_pct": 0.8
    },
    "2026": {
-    "final": 1385760.41,
-    "open_trades": 4,
-    "return_pct": 38.6,
+    "final": 1388163.31,
+    "open_trades": 3,
+    "return_pct": 38.8,
     "trades": 26,
-    "win_rate": 50.0,
+    "win_rate": 53.8,
     "max_drawdown_pct": 0.8
    }
   },
@@ -6032,7 +6044,7 @@
    "losses": 30,
    "win_rate": 42.3,
    "total_pnl": 374729.99,
-   "open_pnl": -631.08,
+   "open_pnl": 837.48,
    "avg_win": 24779.61,
    "avg_loss": -5680.71,
    "profit_factor": 3.2,
@@ -6289,7 +6301,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": -631.08,
+    "open_pnl": 837.48,
     "type": "swing",
     "regime": "Smallcap 100 18,464 below EMA 50 19,152 → Swing exits"
    },
@@ -7752,14 +7764,14 @@
    "start": "2024-11-05",
    "capital": 1000000.0,
    "pct": 12.0,
-   "final": 1481973.73,
-   "profit": 481973.73,
+   "final": 1484591.67,
+   "profit": 484591.67,
    "open_trades": 1,
-   "return_pct": 48.2,
+   "return_pct": 48.5,
    "trades": 48,
    "skipped": 5,
-   "wins": 21,
-   "win_rate": 43.8,
+   "wins": 22,
+   "win_rate": 45.8,
    "max_drawdown_pct": 2.7,
    "months": {
     "2025-01": -7665.48,
@@ -7778,7 +7790,7 @@
     "2026-08": 34347.36,
     "2026-09": 197941.58,
     "2026-10": 132167.03,
-    "2026-11": -10088.47
+    "2026-11": -7470.53
    },
    "curve": [
     [
@@ -7847,7 +7859,7 @@
     ],
     [
      "2026-11",
-     1481973.73
+     1484591.67
     ]
    ],
    "first_trade": "2025-01-06",
@@ -7856,11 +7868,11 @@
      "name": "Saakshi Medtech",
      "symbol": "SAAKSHI",
      "entry_date": "2026-11-02",
-     "closed_on": "2026-11-03",
+     "closed_on": "2026-11-04",
      "open": true,
      "money": 177972,
-     "pnl": -1125.0,
-     "pnl_pct": -0.63
+     "pnl": 1492.94,
+     "pnl_pct": 0.84
     },
     {
      "name": "Zelio E-Mobility",
@@ -8559,14 +8571,14 @@
    "start": "2025-11-05",
    "capital": 1000000.0,
    "pct": 12.0,
-   "final": 1398648.95,
-   "profit": 398648.95,
+   "final": 1401119.69,
+   "profit": 401119.69,
    "open_trades": 1,
-   "return_pct": 39.9,
+   "return_pct": 40.1,
    "trades": 32,
    "skipped": 5,
-   "wins": 15,
-   "win_rate": 46.9,
+   "wins": 16,
+   "win_rate": 50.0,
    "max_drawdown_pct": 0.8,
    "months": {
     "2026-01": 23504.89,
@@ -8577,7 +8589,7 @@
     "2026-08": 32416.15,
     "2026-09": 186812.2,
     "2026-10": 124735.85,
-    "2026-11": -9521.24
+    "2026-11": -7050.49
    },
    "curve": [
     [
@@ -8614,7 +8626,7 @@
     ],
     [
      "2026-11",
-     1398648.92
+     1401119.67
     ]
    ],
    "first_trade": "2025-11-20",
@@ -8623,11 +8635,11 @@
      "name": "Saakshi Medtech",
      "symbol": "SAAKSHI",
      "entry_date": "2026-11-02",
-     "closed_on": "2026-11-03",
+     "closed_on": "2026-11-04",
      "open": true,
      "money": 167965,
-     "pnl": -1061.75,
-     "pnl_pct": -0.63
+     "pnl": 1409.0,
+     "pnl_pct": 0.84
     },
     {
      "name": "Zelio E-Mobility",
@@ -9016,11 +9028,11 @@
     "max_drawdown_pct": 2.7
    },
    "2026": {
-    "final": 1366528.83,
+    "final": 1368942.83,
     "open_trades": 1,
-    "return_pct": 36.7,
+    "return_pct": 36.9,
     "trades": 31,
-    "win_rate": 45.2,
+    "win_rate": 48.4,
     "max_drawdown_pct": 0.8
    }
   },

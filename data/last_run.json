@@ -42,7 +42,7 @@
   [
    "AEROPLANE",
    "A C J K Exports",
-   "close 217.94 vs 20 EMA 213.31 → SP"
+   "close 222.57 vs 20 EMA 214.19 → SP"
   ],
   [
    "TEAMTECH",
@@ -52,7 +52,7 @@
   [
    "UDAYJEW",
    "Uday Jewellery",
-   "close 210.11 vs 20 EMA 208.62 → SP"
+   "close 213.1 vs 20 EMA 209.05 → SP"
   ],
   [
    "544551",
@@ -67,12 +67,12 @@
   [
    "RAMBHAJO",
    "Advit Jewels",
-   "close 314.4 vs 20 EMA 344.53"
+   "close 298.7 vs 20 EMA 340.16"
   ],
   [
    "RSL",
    "Rajputana Stain.",
-   "close 169.7 vs 20 EMA 171.21"
+   "close 169.27 vs 20 EMA 171.03"
   ],
   [
    "XTRANET",
@@ -93,5 +93,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "05 Nov 2026, 02:05 PM IST"
+ "run_at": "05 Nov 2026, 02:22 PM IST"
 }
