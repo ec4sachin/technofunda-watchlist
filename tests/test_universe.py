@@ -41,7 +41,7 @@ def test():
     h = hist_from(uptrend_then_base() + [130.0] * 3)
     prices.close_and_ema = lambda tickers, period=200, **k: {t: (1, 1, "d", h) for t in tickers}
     out = universe.run({"strategies": [dict(s, on=False) for s in strategy.DEFAULT]}, None, "2026-11-05", 2026)
-    assert out["stocks"] == 5 and out["with_prices"] == 5 and set(out["strategies"]) == {"swing", "positional", "switch"}
+    assert out["stocks"] == 5 and out["with_prices"] == 5 and set(out["strategies"]) == {"swing", "positional", "switch", "growth_switch"}
     assert "by_year" in out["strategies"]["swing"] and not universe.due("2026-11-05")
     print("Stock-list backtest OK:", syms)
 

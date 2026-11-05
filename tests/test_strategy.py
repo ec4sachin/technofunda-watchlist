@@ -186,13 +186,13 @@ def test():
     assert stg.run(off, {}, {"ABC": h1}, sp, {})["entries"] == []
     data = stg.load_settings()
     assert data["strategies"][0]["id"] == "swing" and data["strategies"][0]["on"] is False
-    assert [x["id"] for x in data["strategies"]] == ["swing", "positional", "switch"]
-    assert [x["pct"] for x in data["strategies"]] == [13, 12, 12]
+    assert [x["id"] for x in data["strategies"]] == ["swing", "positional", "switch", "growth_switch"]
+    assert [x["pct"] for x in data["strategies"]] == [13, 12, 12, 8]
     # a strategies.json saved before Positional existed gets it added; a removed one stays removed
     storage.save_json("strategies.json", {"strategies": [dict(data["strategies"][0], on=True)]})
-    assert [x["id"] for x in stg.load_settings()["strategies"]] == ["swing", "positional", "switch"]
+    assert [x["id"] for x in stg.load_settings()["strategies"]] == ["swing", "positional", "switch", "growth_switch"]
     d2 = stg.load_settings(); stg.apply_request(d2, {"action": "strategy_delete", "id": "positional"}); storage.save_json("strategies.json", d2)
-    assert [x["id"] for x in stg.load_settings()["strategies"]] == ["swing", "switch"]
+    assert [x["id"] for x in stg.load_settings()["strategies"]] == ["swing", "switch", "growth_switch"]
     os.remove(os.path.join(storage.DATA, "strategies.json"))
     data = stg.load_settings()
     assert stg.apply_request(data, {"action": "strategy_save", "strategy": {"id": "swing", "name": "Swing Strategy", "on": True, "capital": "2000000", "pct": 5}}, "2026-11-05")
@@ -201,7 +201,7 @@ def test():
     s1 = next(x for x in data["strategies"] if x["id"] == "s1")
     assert len(s1["name"]) == 40 and s1["type"] == "none" and s1["list"] == "SP"
     assert not stg.apply_request(data, {"action": "strategy_save", "strategy": {"id": "../x", "name": "a"}})
-    assert stg.apply_request(data, {"action": "strategy_delete", "id": "s1"}) and len(data["strategies"]) == 3
+    assert stg.apply_request(data, {"action": "strategy_delete", "id": "s1"}) and len(data["strategies"]) == 4
     # portfolio: one money pot, 10% of current capital per trade, skip when no free cash
     tr = [{"status": "closed", "symbol": f"S{i}", "name": f"S{i}", "entry_date": f"2026-01-{i + 1:02d}", "closed_on": "2026-03-01",
            "entry": 100.0, "qty": 10, "pnl": 100.0} for i in range(12)]                       # 12 trades of +10% at once

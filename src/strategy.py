@@ -29,13 +29,15 @@ import storage
 TYPES = {"swing": "Swing Strategy rules", "positional": "Positional Trading rules",
          "switch": "Smart Switch (Smallcap 100 decides the exits)", "none": "Rules not added yet"}
 TRADING_TYPES = ("swing", "positional", "switch")
-LISTS = ("SP", "DT", "BOTH")
+LISTS = ("SP", "DT", "BOTH", "GROWTH")   # GROWTH = your own stock list in data/universe/
 DEFAULT = [{"id": "swing", "name": "Swing Strategy", "type": "swing", "list": "SP", "capital": 1000000, "pct": 13, "rank": "low_risk",
             "on": False, "note": "EMA stack + tight 5-candle base breakout", "added": ""},
            {"id": "positional", "name": "Positional Trading", "type": "positional", "list": "SP", "capital": 1000000, "pct": 12, "rank": "low_risk",
             "on": False, "note": "Same entry · 50% at +30% · rest exits on 2 closes below EMA 50", "added": ""},
            {"id": "switch", "name": "Smart Switch", "type": "switch", "list": "SP", "capital": 1000000, "pct": 12, "rank": "low_risk",
-            "on": False, "note": "Same entry · exits follow Smallcap 100 daily: above EMA 50 → Positional, below → Swing", "added": ""}]
+            "on": False, "note": "Same entry · exits follow Smallcap 100 daily: above EMA 50 → Positional, below → Swing", "added": ""},
+           {"id": "growth_switch", "name": "Smart Switch · Growth list", "type": "switch", "list": "GROWTH", "capital": 1000000, "pct": 8,
+            "rank": "low_risk", "on": False, "note": "Smart Switch on your growth stock list (data/universe) · 8% per trade", "added": ""}]
 MAX_CATCHUP_DAYS = 10
 BASE_CANDLES = 5           # rule 2: number of candles in the tight base (5 chosen 5 Nov 2026 after backtest; was 4)
 BASE_RANGE = 0.06          # ... and the most their range may be (share of the current price)
@@ -152,11 +154,12 @@ def apply_request(data, req, today=""):
 class Candles:
     """Daily candles as plain number arrays (fast for a candle-by-candle simulation)."""
 
-    def __init__(self, idx, o, h, l, c, v=None):
+    def __init__(self, idx, o, h, l, c, v=None, real=None):
         import numpy as np
         self.index = idx
         self.o, self.h, self.l, self.c = (np.asarray(x, dtype=float) for x in (o, h, l, c))
         self.v = np.asarray([np.nan if x is None else x for x in v], dtype=float) if v is not None else np.full(len(idx), np.nan)
+        self.real = np.asarray(real, dtype=bool) if real is not None else np.ones(len(idx), dtype=bool)
         cs = pd.Series(self.c)
         for p in (10, 20, 50, 200):
             setattr(self, f"e{p}", cs.ewm(span=p, adjust=True).mean().to_numpy())
@@ -179,7 +182,10 @@ def _frame(hist):
     pick = lambda arr: [arr[i] if arr[i] is not None else c[i] for i in keep]
     v = hist.get("v")
     vol = [v[i] for i in keep] if v and len(v) == n else None
-    return Candles([t[i] for i in keep], pick(o), pick(h), pick(l), [c[i] for i in keep], vol)
+    # a candle is "real" when open/high/low are known; a chart with no open/high/low at all (old style) counts as real
+    has = hist.get("h") is not None
+    real = [(h[i] is not None and l[i] is not None) for i in keep] if has else None
+    return Candles([t[i] for i in keep], pick(o), pick(h), pick(l), [c[i] for i in keep], vol, real)
 
 
 def swing_setup(df, i):
@@ -189,6 +195,8 @@ def swing_setup(df, i):
     if not (df.e10[i] > df.e20[i] > df.e50[i] > df.e200[i]):                  # rule 1
         return None
     n, price = BASE_CANDLES, float(df.c[i])
+    if not df.real[i - n + 1:i + 2 if i + 1 < len(df) else i + 1].all():
+        return None   # base (or the buy day) is only an approximate candle (close only): no trade
     if BASE_MEASURE == "close":
         res, low = float(df.c[i - n + 1:i + 1].max()), float(df.c[i - n + 1:i + 1].min())
     else:
@@ -426,9 +434,10 @@ def _log_sell(s, t):
             "hold_days": _days(t["entry_date"], s["date"]), "trade_id": t["id"]}
 
 
-def run(settings, book, charts, sp, dt, today="", mood=None):
+def run(settings, book, charts, sp, dt, today="", mood=None, growth=None):
     """Process new daily candles for every ON strategy. Changes `book` (trades file) in place.
-    Returns events for the Telegram message and the dashboard; events["log"] = rows for the trade log."""
+    Returns events for the Telegram message and the dashboard; events["log"] = rows for the trade log.
+    growth: {symbol: name} of your own stock list (strategies with list "GROWTH"); None when not loaded today."""
     book.setdefault("open", [])
     book.setdefault("closed", [])
     book.setdefault("last_day", {})
@@ -437,12 +446,14 @@ def run(settings, book, charts, sp, dt, today="", mood=None):
               "names": {x.get("id"): x.get("name") for x in settings.get("strategies", [])}}
     frames = {s: _frame(h) for s, h in charts.items()}
     frames = {s: f for s, f in frames.items() if f is not None}
-    names = {s: (sp.get(s) or dt.get(s) or {}).get("name") or s for s in frames}
+    growth = growth or {}
+    names = {s: (sp.get(s) or dt.get(s) or {}).get("name") or growth.get(s) or s for s in frames}
     for st in settings.get("strategies", []):
         sid = st.get("id")
         if not st.get("on") or st.get("type") not in TRADING_TYPES:
             continue
-        scan = set(sp) if st.get("list", "SP") == "SP" else set(dt) if st.get("list") == "DT" else set(sp) | set(dt)
+        lst = st.get("list", "SP")
+        scan = set(sp) if lst == "SP" else set(dt) if lst == "DT" else set(growth) if lst == "GROWTH" else set(sp) | set(dt)
         seen = book["last_day"].get(sid)
         if not isinstance(seen, dict):
             seen = book["last_day"][sid] = {}
@@ -462,7 +473,7 @@ def run(settings, book, charts, sp, dt, today="", mood=None):
             plan = swing_setup(df, len(df) - 2) if len(df) > 2 and sym not in mine else None
             return (0 if plan else 1, rank_value(plan, st.get("rank")) if plan else 0, sym)
 
-        for sym, df in sorted(frames.items(), key=first):
+        for sym, df in sorted(((k, f) for k, f in frames.items() if k in scan or k in mine), key=first):
             # each stock remembers its own last checked candle; a stock seen for the first time
             # (strategy just switched ON, or newly added to the list) starts from its next new candle
             since = seen.get(sym) or df.index[-1]
@@ -503,8 +514,12 @@ def run(settings, book, charts, sp, dt, today="", mood=None):
                     events["log"].append(_log_sell(s, t))
                 if t["status"] == "closed":
                     close(t)
-        for sym in [x for x in seen if x not in frames and x not in mine]:
+        for sym in [x for x in seen if (x not in frames or x not in scan) and x not in mine]:
             seen.pop(sym)  # stock left the lists
+        for sym, t in mine.items():  # last price of open trades (for stocks not in SP / DT, e.g. the growth list)
+            df = frames.get(sym)
+            if df is not None:
+                t["ltp"], t["ltp_date"] = round(float(df.c[-1]), 2), df.index[-1]
         # setups for the next session: a buy-stop to place today
         ready = []
         for sym in sorted(scan):

@@ -319,6 +319,50 @@ def market_years(mood, this_year):
     return {"years": out, "index_from": mood.t[0]}
 
 
+def _per_year(final, capital, years):
+    try:
+        return ((final / capital) ** (1 / max(years, 0.5)) - 1) * 100
+    except (TypeError, ZeroDivisionError, ValueError):
+        return None
+
+
+def strategy_check(strat_cfg, book, bt, ub, today):
+    """Telegram lines: each ON strategy since it was switched on, next to what its backtest expected."""
+    L = []
+    for st in strat_cfg.get("strategies", []):
+        sid = st.get("id")
+        if not st.get("on") or st.get("type") not in strategy.TRADING_TYPES or not st.get("on_since"):
+            continue
+        days = _days_since(st["on_since"], today) or 0
+        if days < 20:
+            continue  # too early to say anything
+        cap = (book.get("capital") or {}).get(sid) or {}
+        start, eq = cap.get("start") or st.get("capital", strategy.DEF_CAPITAL), cap.get("equity")
+        closed = [t for t in book.get("closed", []) if t.get("strategy") == sid]
+        wins = sum(1 for t in closed if t.get("pnl", 0) > 0)
+        n_open = sum(1 for t in book.get("open", []) if t.get("strategy") == sid)
+        if st.get("list") == "GROWTH":
+            x = (ub.get("strategies") or {}).get(sid) or {}
+            p, since = x.get("period") or {}, x.get("since")
+            yrs = (_days_since(since, ub.get("as_of", today)) or 365) / 365.25 if since else 1
+            exp = _per_year(p.get("final"), p.get("capital"), yrs)
+        else:
+            p = (bt.get(sid) or {}).get("last2y") or {}
+            exp = _per_year(p.get("final"), p.get("capital"), 2)
+        months = days / 30.4
+        live = (eq / start - 1) * 100 if eq and start else 0.0
+        L.append(f"• <b>{html.escape(st.get('name', sid))}</b> — {months:.1f} months: <b>{live:+.1f}%</b> "
+                 f"(₹{eq or start:,.0f}) · {len(closed)} closed, win {wins / len(closed) * 100:.0f}%" if closed else
+                 f"• <b>{html.escape(st.get('name', sid))}</b> — {months:.1f} months: <b>{live:+.1f}%</b> (₹{eq or start:,.0f}) · no closed trade yet")
+        L[-1] += f" · {n_open} open"
+        if exp is not None:
+            so_far = ((1 + exp / 100) ** (months / 12) - 1) * 100
+            gap = live - so_far
+            verdict = "✅ on track" if gap >= -5 else "⚠️ behind the backtest" if gap >= -12 else "🔴 well behind the backtest"
+            L[-1] += f"\n   backtest: about {exp:+.0f}% a year → {so_far:+.1f}% expected so far · {verdict}"
+    return L
+
+
 def strategy_lines(st):
     """One block per strategy that is ON: capital, buys, sells, skipped breakouts, setups for today."""
     names = st.get("names") or {}
@@ -392,6 +436,8 @@ def build_message(r, sp, dt, today_label, dashboard_url=""):
         L.append(f"⚠️ {html.escape(str(w))}")
     if not any([r["added"], r["to_dt"], r["to_sp"], r["removed"]]):
         L += ["", "No changes today."]
+    if r.get("strategy_check"):
+        L += ["", "📅 <b>Monthly paper-trading check</b> (live result vs backtest)"] + r["strategy_check"]
     st = r.get("strategy")
     if st:
         L += strategy_lines(st)
@@ -435,9 +481,26 @@ def main():
                 report["warnings"].append("Nifty Smallcap 100 prices not available — Smart Switch uses Swing exits and climax exits use the lower levels today")
         except Exception as e:
             report["warnings"].append(f"Nifty Smallcap 100 check failed: {e}")
+    # Your own growth stock list (data/universe): prices when a strategy trades it, or when its backtest is due
+    growth, g_stocks, g_charts, g_missing = None, None, {}, []
+    trade_growth = any(x.get("on") and x.get("list") == "GROWTH" and x.get("type") in strategy.TRADING_TYPES
+                       for x in strat_cfg.get("strategies", []))
+    u_due = False
     if mode in ("auto", "daily") and charts:
         try:
-            report["strategy"] = strategy.run(strat_cfg, book, charts, sp, dt, mood=mood)
+            u_due = universe.due(today)
+            if trade_growth or u_due:
+                g_stocks = universe.load_list()
+                g_charts, g_missing = universe.get_charts(g_stocks, span="max" if u_due else "2y")
+                growth = {s_: n_ for s_, n_, _, _ in g_stocks} if g_charts else None
+                print(f"Growth list: prices for {len(g_charts)} of {len(g_stocks)} stocks")
+                if trade_growth and len(g_charts) < len(g_stocks) * 0.5:
+                    report["warnings"].append(f"Growth list: prices for only {len(g_charts)} of {len(g_stocks)} stocks today")
+        except Exception as e:
+            report["warnings"].append(f"Growth list prices failed: {e}")
+    if mode in ("auto", "daily") and charts:
+        try:
+            report["strategy"] = strategy.run(strat_cfg, book, {**g_charts, **charts}, sp, dt, mood=mood, growth=growth)
             storage.save_json("strategy_trades.json", book)
             storage.append_trade_log(report["strategy"].get("log"))
         except Exception as e:  # never stop the watchlist for a strategy problem
@@ -450,6 +513,8 @@ def main():
                 if st_.get("type") not in strategy.TRADING_TYPES:
                     continue
                 lst = st_.get("list", "SP")
+                if lst == "GROWTH":
+                    continue  # tested in the stock-list backtest below
                 syms = sorted(sp) if lst == "SP" else sorted(dt) if lst == "DT" else sorted(set(sp) | set(dt))
                 trades = strategy.backtest(st_, charts, names, syms, mood=mood)
                 # only the last 2 years are shown: split into the 2nd last year and the last year
@@ -483,12 +548,22 @@ def main():
             report["warnings"].append(f"Strategy backtest failed: {e}")
         # Backtest on your own stock list in data/universe/ (when it changed, or weekly)
         try:
-            if universe.due(today):
-                u = universe.run(strat_cfg, mood, today, now.year)
+            if u_due:
+                u = universe.run(strat_cfg, mood, today, now.year, stocks=g_stocks, charts=g_charts or None, missing=g_missing)
                 if u:
                     print(f"Stock-list backtest: {u['with_prices']} of {u['stocks']} stocks with prices")
         except Exception as e:
             report["warnings"].append(f"Stock-list backtest failed: {e}")
+    # Monthly paper-trading check (first run of each month): live result vs what the backtest expected
+    if mode in ("auto", "daily") and str(state.get("last_strategy_check", ""))[:7] != today[:7]:
+        try:
+            lines = strategy_check(strat_cfg, book, storage.load_json("strategy_backtest.json", {}),
+                                   storage.load_json("universe_backtest.json", {}), today)
+            if lines:
+                report["strategy_check"] = lines
+            state["last_strategy_check"] = today
+        except Exception as e:
+            report["warnings"].append(f"Monthly strategy check failed: {e}")
     # Runs on the review day, or on the next run if that day was missed (crash, skipped run)
     is_review_day = now.day >= int(settings.get("monthly_review_day", 1)) and str(state.get("last_monthly", ""))[:7] != today[:7]
     if not state.get("last_monthly"):

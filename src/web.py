@@ -953,7 +953,7 @@ const SD = D.strat || {settings: [], setups: {}, open: [], closed: []};
 let STRAT = (SD.settings || []).map(x => Object.assign({}, x)), stForm = null, stPending = {};
 let LOCAL_ST = []; try { LOCAL_ST = JSON.parse(localStorage.getItem("tf-strategies") || "[]"); if (!Array.isArray(LOCAL_ST)) LOCAL_ST = []; } catch (e) {}
 LOCAL_ST = LOCAL_ST.filter(l => !STRAT.some(t => t.name.toLowerCase() === String(l.name || "").toLowerCase()));
-const LISTS = {SP: "SP", DT: "DT", BOTH: "SP + DT"}, TYPES = {swing: "Swing Strategy rules", positional: "Positional Trading rules", switch: "Smart Switch (Smallcap 100 decides the exits)", none: "Rules not added yet"};
+const LISTS = {SP: "SP", DT: "DT", BOTH: "SP + DT", GROWTH: "Growth list"}, TYPES = {swing: "Swing Strategy rules", positional: "Positional Trading rules", switch: "Smart Switch (Smallcap 100 decides the exits)", none: "Rules not added yet"};
 const RULED = t => t.type === "swing" || t.type === "positional" || t.type === "switch";
 const inr0 = v => v == null || !isFinite(v) ? "—" : "₹" + Number(v).toLocaleString("en-IN", {maximumFractionDigits: 0});
 const inr2 = v => v == null || !isFinite(v) ? "—" : "₹" + Number(v).toLocaleString("en-IN", {maximumFractionDigits: 2});
@@ -1200,13 +1200,25 @@ function perfHTML(t){
         ${capitalCard((SD.capital || {})[t.id])}
         ${perfTable(live, t.on ? "No closed paper trades yet — they appear here as the strategy trades." : "Switch the strategy ON to start paper trading.")}
         <div class="ph2" style="margin-top:12px">Ready for real money?</div>${readiness(live)}</div>
-      <div class="pcol"><div class="ph2">🧪 Backtest · last 2 years <span class="mut">(same rules on the past prices of ${esc(bt.stocks || 0)} stocks in ${LISTS[t.list] || "SP"}, ₹1,00,000 per trade, costs included${bt.as_of ? ", " + esc(bt.as_of) : ""})</span></div>
+      ${t.list === "GROWTH" ? growthBt(t) : `<div class="pcol"><div class="ph2">🧪 Backtest · last 2 years <span class="mut">(same rules on the past prices of ${esc(bt.stocks || 0)} stocks in ${LISTS[t.list] || "SP"}, ₹1,00,000 per trade, costs included${bt.as_of ? ", " + esc(bt.as_of) : ""})</span></div>
         ${perfTable(bt.report, "Backtest appears after the next robot run.")}
         <p class="src">Backtest uses the stocks in the list <b>today</b> (they are strong now), so it looks better than real trading would have. Use it to compare rule changes; trust the paper trading log for the real decision.</p>
-        ${btTrades(bt.trades)}</div>
+        ${btTrades(bt.trades)}</div>`}
     </div>
-    ${last2HTML(bt.last2y).replace('<div class="kgrid">', yearSplit(bt) + '<div class="kgrid">')}
+    ${t.list === "GROWTH" ? "" : last2HTML(bt.last2y).replace('<div class="kgrid">', yearSplit(bt) + '<div class="kgrid">')}
     <h2>${esc(t.name)} · trade log</h2>${logTable(SD.log || [], t.id)}`;
+}
+function growthBt(t){
+  const u = SD.universe || {}, x = (u.strategies || {})[t.id];
+  if (!x) return `<div class="pcol"><div class="ph2">🧪 Backtest on the growth list</div><div class="empty">Appears after the next weekly stock-list backtest.</div></div>`;
+  const p = x.period || {}, l2 = x.last2y || {};
+  const yrs = Math.max(0.5, (new Date(u.as_of) - new Date(x.since)) / 3.156e10), py = p.final ? ((Math.pow(p.final / p.capital, 1 / yrs) - 1) * 100).toFixed(1) : "—";
+  return `<div class="pcol"><div class="ph2">🧪 Backtest on the growth list <span class="mut">(${esc(u.with_prices)} of ${esc(u.stocks)} stocks, ${esc(x.pct)}% per trade, costs included, ${esc(u.as_of)})</span></div>
+    <div class="tbl"><table><tbody>
+      <tr><td>Since ${esc(String(x.since).slice(0, 4))}</td><td class="num ra"><b>${p.return_pct >= 0 ? "+" : ""}${esc(p.return_pct)}%</b> · about ${esc(py)}% a year · worst fall <span class="down">${esc(p.max_drawdown_pct)}%</span></td></tr>
+      <tr><td>Last 2 years</td><td class="num ra">${l2.return_pct >= 0 ? "+" : ""}${esc(l2.return_pct)}% · worst fall <span class="down">${esc(l2.max_drawdown_pct)}%</span></td></tr>
+      <tr><td>Trades / skipped</td><td class="num ra">${esc(p.trades)} / ${esc(p.skipped)}</td></tr></tbody></table></div>
+    <p class="src">Full details: "Backtest on your own stock list" at the bottom of this tab. The list uses today's 5-year growth, so the backtest is more optimistic than real trading.</p></div>`;
 }
 function setupRows(list){
   if (!list || !list.length) return `<div class="empty">No setups today. When a stock meets all entry rules it appears here with its buy-stop price.</div>`;
@@ -1383,12 +1395,12 @@ def _strategy_view(strategies, sp, dt):
         return {"settings": [], "setups": {}, "open": [], "closed": []}
     book = strategies.get("book") or {}
     last = {s: (sp.get(s) or dt.get(s) or {}).get("last_close") for s in set(sp) | set(dt)}
-    opens = [{**t, "ltp": last.get(t["symbol"])} for t in book.get("open", [])]
+    opens = [{**t, "ltp": last.get(t["symbol"]) or t.get("ltp")} for t in book.get("open", [])]
     import strategy as _stg
     live = {}
     for st in (strategies.get("settings") or {}).get("strategies", []):
         mine = [t for t in book.get("open", []) + book.get("closed", []) if t.get("strategy") == st.get("id")]
-        rep = _stg.report([dict(t, open_pnl=round((float(last.get(t["symbol"]) or t["entry"]) - t["entry"]) * t["remaining"], 2))
+        rep = _stg.report([dict(t, open_pnl=round((float(last.get(t["symbol"]) or t.get("ltp") or t["entry"]) - t["entry"]) * t["remaining"], 2))
                            if t.get("status") != "closed" else t for t in mine])
         live[st.get("id")] = rep
     return {"settings": (strategies.get("settings") or {}).get("strategies", []), "setups": book.get("setups", {}),

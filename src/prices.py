@@ -167,7 +167,7 @@ def join_older(df_new, df_old):
     return pd.concat([older[[c for c in df_new.columns if c in older]], df_new])
 
 
-def close_and_ema(tickers, period=200, older=None):
+def close_and_ema(tickers, period=200, older=None, span="max"):
     """Yahoo Finance, whole history. Returns {ticker: (close, ema, date, history) or None}.
     older: {nse_ticker: bse_ticker} - the BSE history is joined in front when it goes back further
     (stocks that moved from BSE to NSE, or SME stocks that moved to the main board)."""
@@ -175,7 +175,7 @@ def close_and_ema(tickers, period=200, older=None):
     if not tickers:
         return out
     extra = sorted({b for t, b in (older or {}).items() if t in tickers and b not in tickers})
-    data = yf.download(sorted(set(tickers) | set(extra)), period="max", interval="1d", auto_adjust=False,
+    data = yf.download(sorted(set(tickers) | set(extra)), period=span, interval="1d", auto_adjust=False,
                        group_by="ticker", progress=False, threads=True)
     cols = ("Open", "High", "Low", "Close", "Volume")
 
