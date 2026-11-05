@@ -1116,6 +1116,37 @@ function yearsHTML(){
     Bull = Smallcap 100 up 15% or more in the year, bear = down 10% or more. Only stocks in your list today are tested, and many listed recently
     (see "Stocks with history"), so older years have few trades. The 10-year index history fills in over the next 2–3 robot runs.</p>`;
 }
+function universeHTML(){
+  const u = SD.universe;
+  const how = `<ol class="steps"><li>Log in to <a href="https://www.screener.in/screen/new/" target="_blank" rel="noopener">screener.in → Create new screen ↗</a></li>
+      <li>Query: <code>Sales growth 5Years &gt; 20 AND Profit growth 5Years &gt; 25</code> (or any screen you like) → <b>Run this query</b></li>
+      <li>Click <b>Export</b> above the results and save the Excel / CSV file</li>
+      <li>Upload it to the <b>data/universe</b> folder of your GitHub (<a href="https://github.com/${esc(REPO || "")}/upload/main/data/universe" target="_blank" rel="noopener">upload here ↗</a>) and run the robot</li></ol>`;
+  if (!u || !u.strategies) return `<h2>Backtest on your own stock list</h2><div class="st-note">🧪 Test the strategies on a bigger list of stocks, for example
+    all companies with 5-year sales growth over 20% and profit growth over 25%.${how}</div>`;
+  const mk = (((SD.backtest || {})._market || {}).years) || {};
+  const ids = STRAT.filter(RULED).map(t => t.id).filter(id => u.strategies[id]);
+  const pc = y => !y || !y.trades ? '<span class="mut">—</span>' : `<span class="${y.return_pct >= 0 ? "up" : "down"}">${y.return_pct >= 0 ? "+" : ""}${esc(y.return_pct)}%</span>`;
+  const yrsN = p => { const a = new Date(u.strategies[ids[0]].since), b = new Date(u.as_of); return Math.max(0.5, (b - a) / 3.156e10); };
+  const cagr = p => p && p.final ? ((Math.pow(p.final / p.capital, 1 / yrsN()) - 1) * 100).toFixed(1) : "—";
+  const best = ids.reduce((a, id) => (u.strategies[id].period.return_pct > (u.strategies[a] || {period: {return_pct: -1e9}}).period.return_pct ? id : a), ids[0]);
+  const main = `<div class="tbl"><table><thead><tr><th>Strategy</th><th class="ra">Per trade</th><th class="ra">Last 2 years</th><th class="ra">Since ${esc((u.strategies[ids[0]] || {}).since || "").slice(0, 4)}</th>
+      <th class="ra">₹10 lakh became</th><th class="ra">Per year</th><th class="ra">Trades</th><th class="ra">Skipped</th><th class="ra">Worst fall</th></tr></thead><tbody>` +
+    ids.map(id => { const x = u.strategies[id], p = x.period;
+      return `<tr${id === best ? ' class="best"' : ""}><td><b>${esc(x.name)}</b>${id === best ? ' <span class="pill p-add">best</span>' : ""}</td><td class="num ra">${esc(x.pct)}%</td>
+        <td class="num ra">${pc(x.last2y)}</td><td class="num ra"><b>${pc(p)}</b></td><td class="num ra">${inr0(p.final * 1000000 / p.capital)}</td><td class="num ra">${cagr(p)}%</td>
+        <td class="num ra">${esc(p.trades)}</td><td class="num ra">${esc(p.skipped)}</td><td class="num ra down">${esc(p.max_drawdown_pct)}%</td></tr>`; }).join("") + `</tbody></table></div>`;
+  const years = Object.keys(u.strategies[ids[0]].by_year).sort().reverse();
+  const tag = {bull: '<span class="pill p-add">bull</span>', bear: '<span class="pill p-dt">bear</span>', sideways: '<span class="pill p-warn">sideways</span>'};
+  const yt = `<div class="tbl"><table><thead><tr><th>Year</th><th>Smallcap 100</th>${ids.map(id => `<th class="ra">${esc(u.strategies[id].name)}</th>`).join("")}<th class="ra">Stocks with history</th></tr></thead><tbody>` +
+    years.map(yr => { const m = mk[yr]; return `<tr><td class="num">${esc(yr)}</td><td>${m ? `${tag[m.phase]} <span class="num">${m.change >= 0 ? "+" : ""}${esc(m.change)}%</span>` : '<span class="mut">—</span>'}</td>` +
+      ids.map(id => { const y = u.strategies[id].by_year[yr]; return `<td class="num ra">${pc(y)} <span class="mut">(${esc((y || {}).trades || 0)})</span></td>`; }).join("") +
+      `<td class="num ra mut">${esc((u.stocks_with_history || {})[yr] ?? "")}</td></tr>`; }).join("") + `</tbody></table></div>`;
+  return `<h2>Backtest on your own stock list · ${esc(u.with_prices)} of ${esc(u.stocks)} stocks</h2>${main}${yt}
+    <p class="src">Updated ${esc(u.as_of)}. Each strategy: ₹10,00,000 and its own % per trade, costs included. A list made with today's 5-year growth numbers already
+    knows which companies grew, so these results are more optimistic than real trading would have been.${(u.missing || []).length ? ` No prices found for: ${esc(u.missing.slice(0, 20).join(", "))}${u.missing.length > 20 ? " …" : ""}.` : ""}</p>
+    <details class="bt"><summary>How to change the list</summary>${how}</details>`;
+}
 function last2HTML(p){
   if (!p || !p.trades) return "";
   const curve = (p.curve || []).map(([m, v]) => [m, v - p.capital]);
@@ -1209,6 +1240,7 @@ function drawStrategies(){
     <div class="st-list">${cards || (f ? "" : `<div class="empty">No strategies yet. Tap <b>+ Add strategy</b> to create one.</div>`)}</div>
     ${compareHTML()}
     ${yearsHTML()}
+    ${universeHTML()}
     ${detail}
     <p class="src">ON / OFF and changes are saved to your GitHub (needs the dashboard connected, see the Alerts tab). Prices and paper trades update with the 7 AM robot run.</p>`;
 }
@@ -1338,7 +1370,7 @@ def _strategy_view(strategies, sp, dt):
             "open": opens, "closed": book.get("closed", [])[-100:][::-1], "live": live,
             "backtest": strategies.get("backtest") or {}, "log": (strategies.get("log") or [])[-400:][::-1],
             "capital": {st.get("id"): _stg.capital_of(st, book) for st in (strategies.get("settings") or {}).get("strategies", [])},
-            "mood": book.get("mood", {})}
+            "mood": book.get("mood", {}), "universe": strategies.get("universe")}
 
 
 def page_data(sp, dt, run, history, rules_cfg, banner="", snaps=None, charts=None, alerts=None, strategies=None):

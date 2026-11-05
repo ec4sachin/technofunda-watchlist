@@ -21,6 +21,7 @@ import prices  # noqa: E402
 import storage  # noqa: E402
 import strategy  # noqa: E402
 import market  # noqa: E402
+import universe  # noqa: E402
 import telegram as tg  # noqa: E402
 import web  # noqa: E402
 
@@ -480,6 +481,14 @@ def main():
             storage.save_json("strategy_backtest.json", bt)
         except Exception as e:
             report["warnings"].append(f"Strategy backtest failed: {e}")
+        # Backtest on your own stock list in data/universe/ (when it changed, or weekly)
+        try:
+            if universe.due(today):
+                u = universe.run(strat_cfg, mood, today, now.year)
+                if u:
+                    print(f"Stock-list backtest: {u['with_prices']} of {u['stocks']} stocks with prices")
+        except Exception as e:
+            report["warnings"].append(f"Stock-list backtest failed: {e}")
     # Runs on the review day, or on the next run if that day was missed (crash, skipped run)
     is_review_day = now.day >= int(settings.get("monthly_review_day", 1)) and str(state.get("last_monthly", ""))[:7] != today[:7]
     if not state.get("last_monthly"):
@@ -508,6 +517,7 @@ def main():
     rules_cfg = {**rules_cfg, "_repo": os.getenv("GITHUB_REPOSITORY", "")}
     web.build(sp, dt, summary, storage.load_history(), rules_cfg, snaps=snaps, charts=charts or None, alerts=alert_store,
               strategies={"settings": strat_cfg, "book": book, "backtest": storage.load_json("strategy_backtest.json", {}),
+                          "universe": storage.load_json("universe_backtest.json", None),
                           "log": storage.load_trade_log()})
 
     msg = build_message(report, sp, dt, now.strftime("%d %b %Y"), str(settings.get("dashboard_url") or "").strip())
