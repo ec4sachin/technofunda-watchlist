@@ -10,7 +10,8 @@
    "added": "2026-11-04",
    "on_since": "2026-11-04",
    "capital": 1000000.0,
-   "pct": 13
+   "pct": 13,
+   "rank": "low_risk"
   },
   {
    "id": "positional",
@@ -21,7 +22,8 @@
    "pct": 12,
    "on": false,
    "note": "Same entry · 50% at +30% · rest exits on 2 closes below EMA 50",
-   "added": ""
+   "added": "",
+   "rank": "low_risk"
   },
   {
    "id": "switch",
@@ -32,7 +34,8 @@
    "pct": 12,
    "on": false,
    "note": "Same entry · Smallcap 100 above EMA 50 → Positional exits, below → Swing exits",
-   "added": ""
+   "added": "",
+   "rank": "low_risk"
   }
  ]
 }

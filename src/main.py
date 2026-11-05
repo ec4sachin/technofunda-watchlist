@@ -467,13 +467,13 @@ def main():
                 bt[st_["id"]] = {"report": rep, "trades": [{k: t.get(k) for k in ("symbol", "name", "entry_date", "entry", "qty",
                                  "status", "pnl", "pnl_pct", "hold_days", "closed_on", "exits", "open_pnl", "type", "regime")} for t in keep],
                                  "as_of": today, "stocks": len(syms),
-                                 "last2y": strategy.portfolio(trades, d2, capital=cap, pct=pct),
-                                 "year2": strategy.portfolio(trades, d2, d1, capital=cap, pct=pct),
-                                 "year1": strategy.portfolio(trades, d1, capital=cap, pct=pct),
+                                 "last2y": strategy.portfolio(trades, d2, capital=cap, pct=pct, rank=st_.get("rank")),
+                                 "year2": strategy.portfolio(trades, d2, d1, capital=cap, pct=pct, rank=st_.get("rank")),
+                                 "year1": strategy.portfolio(trades, d1, capital=cap, pct=pct, rank=st_.get("rank")),
                                  "index_from": mood.t[0] if mood and mood.t else None,
                                  # 10 years, calendar year by year (a fresh ₹10 lakh each year) - for bull / bear comparison
                                  "by_year": {str(y): {k: v for k, v in strategy.portfolio(trades, f"{y}-01-01", f"{y + 1}-01-01",
-                                             capital=cap, pct=pct).items() if k in ("return_pct", "trades", "win_rate", "max_drawdown_pct",
+                                             capital=cap, pct=pct, rank=st_.get("rank")).items() if k in ("return_pct", "trades", "win_rate", "max_drawdown_pct",
                                              "open_trades", "final")} for y in range(now.year - 9, now.year + 1)},
                                  "stocks_with_history": {str(y): sum(1 for s_ in syms if charts.get(s_) and charts[s_]["t"]
                                                          and charts[s_]["t"][0] <= f"{y - 1}-02-01") for y in range(now.year - 9, now.year + 1)}}

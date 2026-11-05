@@ -27,7 +27,8 @@ OUT = "universe_backtest.json"
 CODE_COLS = {"nse": ("nse code", "nse symbol", "nse", "symbol", "nse_code"),
              "bse": ("bse code", "bse", "bse_code", "scrip code", "security code")}
 NAME_COLS = ("name", "company", "company name", "stock")
-VERSION = "2"             # change to run the backtest again with new rules
+VERSION = "3"             # change to run the backtest again with new rules
+PCT_TEST = (6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
 MAX_MCAP_CR = 25000        # only companies below ₹25,000 crore market cap (when the file has a market-cap column)
 
 
@@ -225,11 +226,11 @@ def run(settings, mood, today, now_year):
         first_year = max(int(start[:4]) + 1, now_year - 9)
         out["strategies"][st["id"]] = {
             "name": st.get("name"), "pct": pct,
-            "last2y": {k: v for k, v in strategy.portfolio(trades, d2, capital=cap, pct=pct).items() if k != "trades_list"},
+            "last2y": {k: v for k, v in strategy.portfolio(trades, d2, capital=cap, pct=pct, rank=st.get("rank")).items() if k != "trades_list"},
             "since": f"{first_year}-01-01",
-            "period": {k: v for k, v in strategy.portfolio(trades, f"{first_year}-01-01", capital=cap, pct=pct).items()
+            "period": {k: v for k, v in strategy.portfolio(trades, f"{first_year}-01-01", capital=cap, pct=pct, rank=st.get("rank")).items()
                        if k != "trades_list"},
-            "by_year": {str(y): {k: v for k, v in strategy.portfolio(trades, f"{y}-01-01", f"{y + 1}-01-01", capital=cap, pct=pct).items()
+            "by_year": {str(y): {k: v for k, v in strategy.portfolio(trades, f"{y}-01-01", f"{y + 1}-01-01", capital=cap, pct=pct, rank=st.get("rank")).items()
                                  if k in ("return_pct", "trades", "win_rate", "max_drawdown_pct", "skipped")}
                         for y in range(first_year, now_year + 1)},
             "report": {k: v for k, v in strategy.report(trades).items() if k not in ("curve", "months")},
@@ -237,6 +238,9 @@ def run(settings, mood, today, now_year):
             # when money is short: which of the same-day buy signals to take first
             "rank_test": {rk: _rank_row(trades, f"{first_year}-01-01", d2, cap, pct, rk, first_year, now_year)
                           for rk in strategy.RANKS},
+            # smaller or bigger % per trade (with the strategy's own choice of which signal first)
+            "pct_test": {str(pc): _rank_row(trades, f"{first_year}-01-01", d2, cap, pc, st.get("rank") or strategy.RANK, first_year, now_year)
+                         for pc in PCT_TEST},
         }
     out["stocks_with_history"] = {str(y): sum(1 for h in charts.values() if h.get("t") and h["t"][0] <= f"{y - 1}-02-01")
                                   for y in range(now_year - 9, now_year + 1)}

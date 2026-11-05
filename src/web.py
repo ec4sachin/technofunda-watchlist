@@ -1154,7 +1154,20 @@ function universeHTML(){
         return `<td class="num ra"${top[id] === k ? ' style="font-weight:700"' : ""}>${pc(r)}${top[id] === k ? ' <span class="pill p-add">best</span>' : ""} · ${pc({trades: 1, return_pct: r.last2y})} · <span class="down">${esc(r.max_drawdown_pct)}%</span> · ${esc(r.loss_years)}</td>`; }).join("") + `</tr>`).join("") +
       `</tbody></table></div>`;
   }
-  return `<h2>Backtest on your own stock list · ${esc(u.with_prices)} of ${esc(u.stocks)} stocks</h2>${main}${yt}${rt}
+  // smaller / bigger % of capital per trade
+  const pcs = [...new Set(ids.flatMap(id => Object.keys(u.strategies[id].pct_test || {})))].sort((a, b) => a - b);
+  let ptt = "";
+  if (pcs.length) {
+    const top = {}; ids.forEach(id => { const r = u.strategies[id].pct_test || {}; top[id] = pcs.reduce((a, k) => (r[k] && (!r[a] || r[k].final > r[a].final) ? k : a), pcs[0]); });
+    ptt = `<h2>How much per trade? · ${esc(u.with_prices)} stocks</h2><div class="st-note">Same trades, a different % of the current capital in each one.
+      A smaller % leaves money for more signals (fewer skipped), a bigger % puts more in each winner.</div>
+      <div class="tbl"><table><thead><tr><th>Per trade</th>${ids.map(id => `<th class="ra">${esc(u.strategies[id].name)}<br><span class="mut">since ${esc(u.strategies[id].since.slice(0, 4))} · last 2 yrs · worst fall · skipped</span></th>`).join("")}</tr></thead><tbody>` +
+      pcs.map(k => `<tr><td class="num">${esc(k)}%</td>` + ids.map(id => { const r = (u.strategies[id].pct_test || {})[k]; if (!r) return '<td class="mut">—</td>';
+        const now = Number(u.strategies[id].pct) === Number(k);
+        return `<td class="num ra"${top[id] === k ? ' style="font-weight:700"' : ""}>${pc(r)}${top[id] === k ? ' <span class="pill p-add">best</span>' : ""}${now ? ' <span class="pill p-warn">now</span>' : ""} · ${pc({trades: 1, return_pct: r.last2y})} · <span class="down">${esc(r.max_drawdown_pct)}%</span> · ${esc(r.skipped)}</td>`; }).join("") + `</tr>`).join("") +
+      `</tbody></table></div>`;
+  }
+  return `<h2>Backtest on your own stock list · ${esc(u.with_prices)} of ${esc(u.stocks)} stocks</h2>${main}${yt}${rt}${ptt}
     <p class="src">Updated ${esc(u.as_of)}. Each strategy: ₹10,00,000 and its own % per trade, costs included. A list made with today's 5-year growth numbers already
     knows which companies grew, so these results are more optimistic than real trading would have been.${(u.missing || []).length ? ` No prices found for: ${esc(u.missing.slice(0, 20).join(", "))}${u.missing.length > 20 ? " …" : ""}.` : ""}</p>
     <details class="bt"><summary>How to change the list</summary>${how}</details>`;
