@@ -32,7 +32,7 @@ def test():
     h = hist_from(closes)
     df = stg._frame(h)
     plan = stg.swing_setup(df, len(df) - 1)
-    assert plan, "setup expected after a steady uptrend + tight 4-candle base"
+    assert plan, "setup expected after a steady uptrend + tight base"
     assert plan["range_pct"] <= 6 and plan["trigger"] == round(max(h["h"][-4:]) * 1.01, 2)
     # rule 3: stretched far above EMA 10 -> no setup
     hs = hist_from(closes[:-1] + [closes[-1] * 1.2])
@@ -132,6 +132,22 @@ def test():
         assert ts["type"] == want and ts["target"] == round(trig * tgt, 2) and "Smallcap 100" in ts["regime"], (ts["type"], ts["regime"])
         assert bs["mood"]["switch"]["rules"] == ("Positional" if want == "positional" else "Swing")
         assert ev["log"][0]["reason"].endswith(("Positional exits", "Swing exits"))
+    # daily switching: bought as Swing (index weak), index turns strong -> Positional (target +30%)
+    n = len(h1["t"])
+    weak_then_strong = {"t": h1["t"] + [f"2027-01-{k:02d}" for k in range(1, 29)],
+                        "c": [10000 * 0.997 ** k for k in range(n)] + [10000 * 0.997 ** n * 1.02 ** k for k in range(1, 29)]}
+    mood = market.Mood(weak_then_strong)
+    bs = {}
+    stg.run(sw, bs, {"ABC": h}, sp, {}, mood=mood)
+    stg.run(sw, bs, {"ABC": h1}, sp, {}, mood=mood)
+    ts = bs["open"][0]
+    assert ts["type"] == "swing" and ts["switch"]
+    hx = hist_from(c + [trig * 1.01] * 3, rng=0.002)
+    hx["t"] = h1["t"] + ["2027-01-05", "2027-01-06", "2027-01-07"]
+    ev = stg.run(sw, bs, {"ABC": hx}, sp, {}, mood=mood)
+    assert ts["type"] == "positional" and ts["target"] == round(ts["entry"] * 1.3, 2), (ts["type"], ts.get("switches"))
+    assert ev.get("switched") and ev["switched"][0]["to"] == "positional"
+    print("Daily switch OK:", ts["switches"])
     # no index data -> Swing exits (the safer, faster rules)
     bs = {}
     stg.run(sw, bs, {"ABC": h}, sp, {}, mood=None)
@@ -142,6 +158,28 @@ def test():
            "Nifty 50,03-11-2026,1,2,0.5,25000.10,1,1,1,1,1,1,1\nNifty Smallcap 100,03-11-2026,18000,18200,17900,18123.45,1,1,1,1,1,1,1\n")
     assert market.parse_nse(nse) == ("2026-11-03", 18123.45)
     print("Smart Switch OK")
+
+    # climax exit: after the 50% booking, the rest is sold when price reaches 1.24x EMA 10 (Swing)
+    bc = {}
+    stg.run(settings, bc, {"ABC": h}, sp, {})
+    stg.run(settings, bc, {"ABC": h1}, sp, {})
+    tc = bc["open"][0]
+    spike = c + [trig * 1.12 ** k for k in range(1, 8)]               # +12% a day: books +20%, then runs far above EMA 10
+    hs = hist_from(spike)
+    stg.run(settings, bc, {"ABC": hs}, sp, {})
+    assert tc["status"] == "closed" and tc["exits"][-1]["reason"].startswith("Climax exit (1.2× EMA 10"), tc["exits"]   # no index: lower level
+    dfs = stg._frame(hs); k = dfs.index.index(tc["exits"][-1]["date"])
+    assert tc["exits"][-1]["price"] >= round(dfs.e10[k - 1] * 1.20, 2) - 0.01
+    # Smallcap 100 above its EMA 50 -> the higher level (1.24x EMA 10) lets the winner run further
+    import market
+    strong = market.Mood({"t": hs["t"], "c": [10000 * 1.003 ** k for k in range(len(hs["t"]))]})
+    bc2 = {}
+    stg.run(settings, bc2, {"ABC": h}, sp, {}, mood=strong)
+    stg.run(settings, bc2, {"ABC": h1}, sp, {}, mood=strong)
+    stg.run(settings, bc2, {"ABC": hs}, sp, {}, mood=strong)
+    t2 = bc2["closed"][0]
+    assert t2["exits"][-1]["reason"].startswith("Climax exit (1.24× EMA 10"), t2["exits"]
+    print("Climax exit OK:", tc["exits"][-1]["reason"], tc["exits"][-1]["price"])
 
     # OFF strategy does nothing; settings requests are validated
     off = {"strategies": [dict(settings["strategies"][0], on=False)]}
@@ -237,3 +275,20 @@ def test_index_download():
 
 if __name__ == "__main__":
     test_index_download()
+
+
+def test_join_bse_history():
+    """BSE prices before the NSE listing are joined in front (scaled to meet on the first common day)."""
+    import prices
+    bse_idx = pd.bdate_range("2020-01-01", periods=400)
+    bse = pd.DataFrame({"Open": 100.0, "High": 101.0, "Low": 99.0, "Close": [100.0 + i * 0.1 for i in range(400)]}, index=bse_idx)
+    nse = bse.iloc[300:].copy() * 1.002               # NSE starts later, tiny price difference
+    joined = prices.join_older(nse, bse)
+    assert len(joined) == 400 and joined.index[0] == bse_idx[0] and joined.index.is_monotonic_increasing
+    assert abs(joined["Close"].iloc[299] / joined["Close"].iloc[300] - bse["Close"].iloc[299] / bse["Close"].iloc[300]) < 1e-9
+    assert prices.join_older(nse, None) is nse and len(prices.join_older(nse, bse.iloc[290:])) == 100  # under 20 older days: not joined
+    print("BSE history join OK:", len(joined), "days")
+
+
+if __name__ == "__main__":
+    test_join_bse_history()

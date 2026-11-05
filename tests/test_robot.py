@@ -32,7 +32,7 @@ def run(day, mode, metrics_by_code, price_by_ticker, email_stocks):
     main.datetime = type("D", (), {"now": staticmethod(lambda tz=None: datetime(2026, 11, day, 7, 0, tzinfo=tz))})
     emails.fetch_alert_stocks = lambda *a, **k: (email_stocks, ["<id>"], {"52W High": len(email_stocks)})
     fx.fetch_metrics = lambda code, *a, **k: metrics_by_code.get(code, GOOD)
-    prices.close_and_ema = lambda tickers, period=200: {t: (None if t.endswith(".BO") else price_by_ticker.get(t, (110, 100, "01 Nov 2026"))) for t in tickers}
+    prices.close_and_ema = lambda tickers, period=200, **k: {t: (None if t.endswith(".BO") else price_by_ticker.get(t, (110, 100, "01 Nov 2026"))) for t in tickers}
     prices.screener_close_and_ema = lambda cid, period=200, **k: ((55.0, 60.0, "31 Oct 2026", {"t": ["2026-10-30", "2026-10-31"], "c": [56, 55], "e200": [60, 60], "e50": [57, 56]}) if cid == "999"
                                                                    else (77.0, None, "31 Oct 2026") if cid == "888" else None)
     sent = []
@@ -219,7 +219,7 @@ def test_new_listing_ema20():
     hist = {"UPIPO.NS": (159.0, None, "02 Nov 2026", {"t": [], "c": up}),
             "DOWNIPO.NS": (101.0, None, "02 Nov 2026", {"t": [], "c": down}),
             "BACKIPO.NS": (159.0, None, "02 Nov 2026", {"t": [], "c": up})}
-    prices.close_and_ema = lambda tickers, period=200: {t: hist.get(t) for t in tickers}
+    prices.close_and_ema = lambda tickers, period=200, **k: {t: hist.get(t) for t in tickers}
     os.environ.pop("GMAIL_ADDRESS", None)
     report = {k: [] for k in ("added", "rejected", "to_dt", "to_sp", "removed", "unchecked", "no_price",
                               "warnings", "first_marked", "new_listing")}
