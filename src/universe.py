@@ -27,6 +27,7 @@ OUT = "universe_backtest.json"
 CODE_COLS = {"nse": ("nse code", "nse symbol", "nse", "symbol", "nse_code"),
              "bse": ("bse code", "bse", "bse_code", "scrip code", "security code")}
 NAME_COLS = ("name", "company", "company name", "stock")
+MAX_MCAP_CR = 25000        # only companies below ₹25,000 crore market cap (when the file has a market-cap column)
 
 
 def _files():
@@ -113,7 +114,14 @@ def load_list(resolve=True):
             cols = {str(c).strip().lower(): c for c in df.columns}
             pick = lambda names: next((cols[n] for n in names if n in cols), None)
             c_nse, c_bse, c_name = pick(CODE_COLS["nse"]), pick(CODE_COLS["bse"]), pick(NAME_COLS)
+            c_mcap = next((cols[k] for k in cols if re.search(r"mar(ket)?\.?\s*cap", k)), None)
             for _, r in df.iterrows():
+                if c_mcap is not None and MAX_MCAP_CR:
+                    try:
+                        if float(str(r[c_mcap]).replace(",", "")) > MAX_MCAP_CR:
+                            continue  # too big
+                    except (TypeError, ValueError):
+                        pass
                 link = str(r.get("_link") or "") if "_link" in df else ""
                 nse = str(r[c_nse]).strip().upper() if c_nse is not None and pd.notna(r[c_nse]) else ""
                 bse = str(r[c_bse]).strip() if c_bse is not None and pd.notna(r[c_bse]) else ""
