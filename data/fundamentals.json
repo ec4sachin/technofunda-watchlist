@@ -916,11 +916,11 @@
   "as_of": "2026-11-02"
  },
  "ESCONET": {
-  "market_cap": 492.0,
-  "price": 373.0,
+  "market_cap": 496.0,
+  "price": 376.0,
   "high_52w": 406.0,
   "low_52w": 91.2,
-  "pe": 19.2,
+  "pe": 19.4,
   "book_value": 75.0,
   "dividend_yield": 0.0,
   "roce": 11.8,
@@ -6005,11 +6005,11 @@
   "as_of": "2026-11-05"
  },
  "XTRANET": {
-  "market_cap": 1451.0,
-  "price": 278.0,
+  "market_cap": 1471.0,
+  "price": 281.0,
   "high_52w": 359.0,
   "low_52w": 120.0,
-  "pe": 30.1,
+  "pe": 30.5,
   "book_value": 58.1,
   "dividend_yield": 0.0,
   "roce": 32.8,
