@@ -187,6 +187,7 @@ def test():
     data = stg.load_settings()
     assert data["strategies"][0]["id"] == "swing" and data["strategies"][0]["on"] is False
     assert [x["id"] for x in data["strategies"]] == ["swing", "positional", "switch"]
+    assert [x["pct"] for x in data["strategies"]] == [13, 12, 12]
     # a strategies.json saved before Positional existed gets it added; a removed one stays removed
     storage.save_json("strategies.json", {"strategies": [dict(data["strategies"][0], on=True)]})
     assert [x["id"] for x in stg.load_settings()["strategies"]] == ["swing", "positional", "switch"]
