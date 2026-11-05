@@ -30,11 +30,11 @@ TYPES = {"swing": "Swing Strategy rules", "positional": "Positional Trading rule
          "switch": "Smart Switch (Smallcap 100 decides the exits)", "none": "Rules not added yet"}
 TRADING_TYPES = ("swing", "positional", "switch")
 LISTS = ("SP", "DT", "BOTH")
-DEFAULT = [{"id": "swing", "name": "Swing Strategy", "type": "swing", "list": "SP", "capital": 1000000, "pct": 10,
+DEFAULT = [{"id": "swing", "name": "Swing Strategy", "type": "swing", "list": "SP", "capital": 1000000, "pct": 13,
             "on": False, "note": "EMA stack + tight 5-candle base breakout", "added": ""},
-           {"id": "positional", "name": "Positional Trading", "type": "positional", "list": "SP", "capital": 1000000, "pct": 10,
+           {"id": "positional", "name": "Positional Trading", "type": "positional", "list": "SP", "capital": 1000000, "pct": 12,
             "on": False, "note": "Same entry · 50% at +30% · rest exits on 2 closes below EMA 50", "added": ""},
-           {"id": "switch", "name": "Smart Switch", "type": "switch", "list": "SP", "capital": 1000000, "pct": 10,
+           {"id": "switch", "name": "Smart Switch", "type": "switch", "list": "SP", "capital": 1000000, "pct": 12,
             "on": False, "note": "Same entry · exits follow Smallcap 100 daily: above EMA 50 → Positional, below → Swing", "added": ""}]
 MAX_CATCHUP_DAYS = 10
 BASE_CANDLES = 5           # rule 2: number of candles in the tight base (5 chosen 5 Nov 2026 after backtest; was 4)
