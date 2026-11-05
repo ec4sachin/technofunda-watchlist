@@ -8,11 +8,13 @@
    "name": "Prizor Viztech",
    "op": "above",
    "price": 1378.55,
-   "status": "active",
+   "status": "triggered",
    "created": "03 Nov 2026 03:13 PM",
    "source": "dashboard",
    "created_ts": "2026-11-03T15:13:47+05:30",
-   "ticker": "PRIZOR.NS"
+   "ticker": "PRIZOR.NS",
+   "hit_price": 1395.0,
+   "hit_at": "05 Nov 2026 10:27 AM"
   },
   {
    "id": 2,
@@ -34,10 +36,12 @@
    "name": "Prizor Viztech",
    "op": "above",
    "price": 1384.8,
-   "status": "active",
+   "status": "triggered",
    "created": "03 Nov 2026 03:13 PM",
    "created_ts": "2026-11-03T15:13:47+05:30",
-   "ticker": "PRIZOR.NS"
+   "ticker": "PRIZOR.NS",
+   "hit_price": 1395.0,
+   "hit_at": "05 Nov 2026 10:27 AM"
   },
   {
    "id": 4,
@@ -45,11 +49,13 @@
    "name": "AVT Natural Prod",
    "op": "above",
    "price": 101.2,
-   "status": "active",
+   "status": "triggered",
    "created": "03 Nov 2026 03:24 PM",
    "source": "dashboard",
    "created_ts": "2026-11-03T15:24:50+05:30",
-   "ticker": "AVTNPL.NS"
+   "ticker": "AVTNPL.NS",
+   "hit_price": 100.91,
+   "hit_at": "05 Nov 2026 10:27 AM"
   },
   {
    "id": 5,
@@ -57,11 +63,13 @@
    "name": "Prizor Viztech",
    "op": "above",
    "price": 1372.5,
-   "status": "active",
+   "status": "triggered",
    "created": "03 Nov 2026 03:24 PM",
    "source": "dashboard",
    "created_ts": "2026-11-03T15:24:50+05:30",
-   "ticker": "PRIZOR.NS"
+   "ticker": "PRIZOR.NS",
+   "hit_price": 1395.0,
+   "hit_at": "05 Nov 2026 10:27 AM"
   },
   {
    "id": 6,
@@ -69,11 +77,13 @@
    "name": "Prizor Viztech",
    "op": "above",
    "price": 1377.2,
-   "status": "active",
+   "status": "triggered",
    "created": "03 Nov 2026 03:24 PM",
    "source": "dashboard",
    "created_ts": "2026-11-03T15:24:50+05:30",
-   "ticker": "PRIZOR.NS"
+   "ticker": "PRIZOR.NS",
+   "hit_price": 1395.0,
+   "hit_at": "05 Nov 2026 10:27 AM"
   },
   {
    "id": 7,
@@ -81,11 +91,13 @@
    "name": "Prizor Viztech",
    "op": "above",
    "price": 1372.5,
-   "status": "active",
+   "status": "triggered",
    "created": "03 Nov 2026 03:24 PM",
    "source": "dashboard",
    "created_ts": "2026-11-03T15:24:50+05:30",
-   "ticker": "PRIZOR.NS"
+   "ticker": "PRIZOR.NS",
+   "hit_price": 1395.0,
+   "hit_at": "05 Nov 2026 10:27 AM"
   }
  ],
  "bot_username": "technofunda_watchlist_bot"
