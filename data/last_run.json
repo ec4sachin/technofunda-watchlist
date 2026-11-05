@@ -1,14 +1,75 @@
 {
- "added": [],
- "rejected": [],
- "to_dt": [],
- "to_sp": [
+ "added": [
   [
-   "JAYBARMARU",
-   "Jay Bharat Maru.",
-   "close 120.52 > 200 EMA 120.43"
+   "ASHIANA",
+   "Ashiana Housing",
+   "marks 5.5/11 · TTM Profit > 30%, 52W High"
+  ],
+  [
+   "DIFFNKG",
+   "Diffusion Eng",
+   "marks 8.3/11 · TTM Profit > 30%, 52W High"
+  ],
+  [
+   "XTRANET",
+   "Xtranet Techno.",
+   "marks 8.3/11 · TTM Profit > 30%, 52W High"
+  ],
+  [
+   "AEROENTER",
+   "Aeroflex Enter.",
+   "marks 5.5/11 · TTM Profit > 30%, 52W High"
+  ],
+  [
+   "544406",
+   "Unified Data",
+   "marks 11/11 · TTM Profit > 30%, 52W High"
+  ],
+  [
+   "ROLEXRINGS",
+   "Rolex Rings",
+   "marks 9.2/11 · Daily Volume Scan, 52W High"
+  ],
+  [
+   "CNL",
+   "Creative Newtech",
+   "marks 8.3/11 · Daily Volume Scan"
+  ],
+  [
+   "CONNPLEX",
+   "Connplex Cinemas",
+   "marks 7.3/11 · 52W High"
+  ],
+  [
+   "544563",
+   "Zelio E-Mobility",
+   "marks 8.3/11 · 52W High"
+  ],
+  [
+   "ARIES",
+   "Aries Agro",
+   "marks 11/11 · 52W High"
+  ],
+  [
+   "NPST",
+   "Network People",
+   "marks 7.3/11 · 52W High"
+  ],
+  [
+   "515008",
+   "Modern Insulator",
+   "marks 7.3/11 · 52W High"
   ]
  ],
+ "rejected": [],
+ "to_dt": [
+  [
+   "XTRANET",
+   "Xtranet Techno.",
+   "close 280.65 < 20 EMA 282.77"
+  ]
+ ],
+ "to_sp": [],
  "removed": [],
  "unchecked": [],
  "no_price": [],
@@ -48,7 +109,7 @@
   [
    "AEROPLANE",
    "A C J K Exports",
-   "close 222.57 vs 20 EMA 214.19 → SP"
+   "close 217.94 vs 20 EMA 213.31 → SP"
   ],
   [
    "TEAMTECH",
@@ -58,7 +119,12 @@
   [
    "UDAYJEW",
    "Uday Jewellery",
-   "close 213.1 vs 20 EMA 209.05 → SP"
+   "close 210.11 vs 20 EMA 208.62 → SP"
+  ],
+  [
+   "XTRANET",
+   "Xtranet Techno.",
+   "close 280.65 vs 20 EMA 282.77 → DT"
   ],
   [
    "544551",
@@ -73,26 +139,26 @@
   [
    "RAMBHAJO",
    "Advit Jewels",
-   "close 298.7 vs 20 EMA 340.16"
+   "close 314.4 vs 20 EMA 344.53"
   ],
   [
    "RSL",
    "Rajputana Stain.",
-   "close 169.27 vs 20 EMA 171.03"
+   "close 169.7 vs 20 EMA 171.21"
   ]
  ],
  "per_alert": {
-  "TTM Profit > 30%": 0,
-  "52W High": 0,
-  "Daily Volume Scan": 0,
-  "Weekly Volume Scan": 0,
-  "Ready after 6 Months": 0
+  "TTM Profit > 30%": 9,
+  "52W High": 15,
+  "Daily Volume Scan": 4,
+  "Weekly Volume Scan": 1,
+  "Ready after 6 Months": 1
  },
- "email_total": 0,
- "already_listed": 0,
+ "email_total": 19,
+ "already_listed": 7,
  "price_date": "04 Nov 2026",
  "monthly_pass": 0,
- "mode": "daily",
+ "mode": "auto",
  "monthly_done": false,
- "run_at": "04 Nov 2026, 06:29 PM IST"
+ "run_at": "05 Nov 2026, 07:56 AM IST"
 }

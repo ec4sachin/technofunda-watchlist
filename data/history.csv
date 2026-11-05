@@ -99,3 +99,16 @@ date,symbol,name,action,reason
 2026-11-04,VMARCIND,V-Marc India,DT -> SP,close 318.65 back above 200 EMA 245.15
 2026-11-04,JAYBARMARU,Jay Bharat Maru.,SP -> DT,close 120.52 below 200 EMA 123.55
 2026-11-04,JAYBARMARU,Jay Bharat Maru.,DT -> SP,close 120.52 back above 200 EMA 120.43
+2026-11-05,ASHIANA,Ashiana Housing,ADDED to SP,"marks 5.5/11; from TTM Profit > 30%, 52W High"
+2026-11-05,DIFFNKG,Diffusion Eng,ADDED to SP,"marks 8.3/11; from TTM Profit > 30%, 52W High"
+2026-11-05,XTRANET,Xtranet Techno.,ADDED to SP,"marks 8.3/11; from TTM Profit > 30%, 52W High"
+2026-11-05,AEROENTER,Aeroflex Enter.,ADDED to SP,"marks 5.5/11; from TTM Profit > 30%, 52W High"
+2026-11-05,544406,Unified Data,ADDED to SP,"marks 11/11; from TTM Profit > 30%, 52W High"
+2026-11-05,ROLEXRINGS,Rolex Rings,ADDED to SP,"marks 9.2/11; from Daily Volume Scan, 52W High"
+2026-11-05,CNL,Creative Newtech,ADDED to SP,marks 8.3/11; from Daily Volume Scan
+2026-11-05,CONNPLEX,Connplex Cinemas,ADDED to SP,marks 7.3/11; from 52W High
+2026-11-05,544563,Zelio E-Mobility,ADDED to SP,marks 8.3/11; from 52W High
+2026-11-05,ARIES,Aries Agro,ADDED to SP,marks 11/11; from 52W High
+2026-11-05,NPST,Network People,ADDED to SP,marks 7.3/11; from 52W High
+2026-11-05,515008,Modern Insulator,ADDED to SP,marks 7.3/11; from 52W High
+2026-11-05,XTRANET,Xtranet Techno.,SP -> DT,close 280.65 below 20 EMA 282.77 (new listing)
