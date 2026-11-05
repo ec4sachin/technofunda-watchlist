@@ -1,74 +1,7 @@
 {
- "added": [
-  [
-   "ASHIANA",
-   "Ashiana Housing",
-   "marks 5.5/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "DIFFNKG",
-   "Diffusion Eng",
-   "marks 8.3/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "XTRANET",
-   "Xtranet Techno.",
-   "marks 8.3/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "AEROENTER",
-   "Aeroflex Enter.",
-   "marks 5.5/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "544406",
-   "Unified Data",
-   "marks 11/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "ROLEXRINGS",
-   "Rolex Rings",
-   "marks 9.2/11 · Daily Volume Scan, 52W High"
-  ],
-  [
-   "CNL",
-   "Creative Newtech",
-   "marks 8.3/11 · Daily Volume Scan"
-  ],
-  [
-   "CONNPLEX",
-   "Connplex Cinemas",
-   "marks 7.3/11 · 52W High"
-  ],
-  [
-   "544563",
-   "Zelio E-Mobility",
-   "marks 8.3/11 · 52W High"
-  ],
-  [
-   "ARIES",
-   "Aries Agro",
-   "marks 11/11 · 52W High"
-  ],
-  [
-   "NPST",
-   "Network People",
-   "marks 7.3/11 · 52W High"
-  ],
-  [
-   "515008",
-   "Modern Insulator",
-   "marks 7.3/11 · 52W High"
-  ]
- ],
+ "added": [],
  "rejected": [],
- "to_dt": [
-  [
-   "XTRANET",
-   "Xtranet Techno.",
-   "close 280.65 < 20 EMA 282.77"
-  ]
- ],
+ "to_dt": [],
  "to_sp": [],
  "removed": [],
  "unchecked": [],
@@ -122,11 +55,6 @@
    "close 210.11 vs 20 EMA 208.62 → SP"
   ],
   [
-   "XTRANET",
-   "Xtranet Techno.",
-   "close 280.65 vs 20 EMA 282.77 → DT"
-  ],
-  [
    "544551",
    "Bhavik Enterpris",
    "close 145.75 vs 20 EMA 149.14"
@@ -145,20 +73,25 @@
    "RSL",
    "Rajputana Stain.",
    "close 169.7 vs 20 EMA 171.21"
+  ],
+  [
+   "XTRANET",
+   "Xtranet Techno.",
+   "close 280.65 vs 20 EMA 282.77"
   ]
  ],
  "per_alert": {
-  "TTM Profit > 30%": 9,
-  "52W High": 15,
-  "Daily Volume Scan": 4,
-  "Weekly Volume Scan": 1,
-  "Ready after 6 Months": 1
+  "TTM Profit > 30%": 0,
+  "52W High": 0,
+  "Daily Volume Scan": 0,
+  "Weekly Volume Scan": 0,
+  "Ready after 6 Months": 0
  },
- "email_total": 19,
- "already_listed": 7,
+ "email_total": 0,
+ "already_listed": 0,
  "price_date": "04 Nov 2026",
  "monthly_pass": 0,
- "mode": "auto",
+ "mode": "daily",
  "monthly_done": false,
- "run_at": "05 Nov 2026, 07:56 AM IST"
+ "run_at": "05 Nov 2026, 12:06 PM IST"
 }
