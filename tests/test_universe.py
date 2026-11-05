@@ -26,12 +26,14 @@ def test():
     ws.append(["", "Median: 2 Co.", "", ""])
     wb.save(os.path.join(folder, "screen.xlsx"))
     # 2. CSV with codes + a name-only row
-    open(os.path.join(folder, "extra.csv"), "w").write("Name,NSE Code,BSE Code\nSahana System,SAHANA,\nOld Co,,500001\nMystery Ltd,,\nRatnaveer Precision,RATNAVEER,543978\n")
+    open(os.path.join(folder, "extra.csv"), "w").write("Name,NSE Code,BSE Code,Mar Cap Rs.Cr.\nSahana System,SAHANA,,1200\nOld Co,,500001,800\n"
+                                                      "Mystery Ltd,,,\nRatnaveer Precision,RATNAVEER,543978,900\nGiant Corp,GIANT,,\"1,20,000\"\n")
     universe.resolve_names = lambda names, **k: {"Mystery Ltd": "MYSTERY"} if "Mystery Ltd" in names else {}
     lst = universe.load_list()
     syms = [x[0] for x in lst]
     assert {"RATNAVEER", "530477"} <= set(syms) and "SAHANA" in syms and "500001" in syms and "MYSTERY" in syms, lst
     assert syms.count("RATNAVEER") == 1
+    assert "GIANT" not in syms   # above ₹25,000 crore market cap: left out
     assert universe.due("2026-11-05")
     # 3. backtest runs on downloaded prices (faked here)
     sys.path.insert(0, HERE)
