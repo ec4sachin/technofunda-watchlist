@@ -80,6 +80,9 @@ def adjust_corporate_actions(df):
     all older prices are divided by that ratio) and single bad price days (a jump that comes straight back).
     Returns (df, notes)."""
     df = df.copy()
+    for col in ("Open", "High", "Low", "Close", "Volume"):
+        if col in df:
+            df[col] = df[col].astype(float)   # whole-number volumes would break the split correction
     has_o = "Open" in df and df["Open"].notna().any()
     notes = []
     c = df["Close"].to_numpy(dtype=float).copy()

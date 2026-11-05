@@ -53,6 +53,27 @@ def test_bse_files_and_chart():
     print("BSE daily files + Screener closes OK:", len(h["t"]), "days,", sum(df.real), "real candles")
 
 
+def test_bse_bonus_and_screener_scaling():
+    import datetime as D
+    days, d = {}, D.date(2025, 6, 2)
+    while len(days) < 200:
+        if d.weekday() < 5:
+            p = 300.0 if len(days) < 100 else 200.0      # 1:2 bonus (price / 1.5) on day 100, raw BSE prices
+            days[d.isoformat()] = (p, p * 1.01, p * 0.99, p, 1000)
+        d += D.timedelta(days=1)
+    h = universe.bse_chart({}, days)
+    assert max(h["c"]) == 200.0 and h["v"][0] == 1500, (max(h["c"]), h["v"][0])   # bonus 1.5 found, older prices / 1.5
+    # Screener's (adjusted) closes for the last 50 days, 1% different: every BSE candle follows them
+    sc = {t: 202.0 for t in sorted(days)[-50:]}
+    h2 = universe.bse_chart(sc, days)
+    assert abs(h2["c"][0] - 202.0) < 0.01 and abs(h2["c"][-1] - 202.0) < 0.01
+    # a real 15% fall is NOT treated as a split
+    days2 = {k: ((v[0] * 0.85,) * 4 + (1000,) if k > sorted(days)[150] else v) for k, v in days.items()}
+    h3 = universe.bse_chart({}, days2)
+    assert h3["c"][-1] == 170.0 and h3["c"][120] == 200.0
+    print("BSE bonus correction + Screener scaling OK")
+
+
 def test_no_trade_on_approximate_candles():
     from test_strategy import hist_from, uptrend_then_base
     h = hist_from(uptrend_then_base() + [130.0] * 3)
@@ -105,6 +126,7 @@ def test_monthly_check():
 
 if __name__ == "__main__":
     test_bse_files_and_chart()
+    test_bse_bonus_and_screener_scaling()
     test_no_trade_on_approximate_candles()
     test_growth_strategy_trades_its_list()
     test_monthly_check()

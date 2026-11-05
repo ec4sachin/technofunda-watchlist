@@ -485,7 +485,7 @@ def main():
     growth, g_stocks, g_charts, g_missing = None, None, {}, []
     trade_growth = any(x.get("on") and x.get("list") == "GROWTH" and x.get("type") in strategy.TRADING_TYPES
                        for x in strat_cfg.get("strategies", []))
-    u_due = False
+    u_due, g_failed = False, False
     if mode in ("auto", "daily") and charts:
         try:
             u_due = universe.due(today)
@@ -497,6 +497,7 @@ def main():
                 if trade_growth and len(g_charts) < len(g_stocks) * 0.5:
                     report["warnings"].append(f"Growth list: prices for only {len(g_charts)} of {len(g_stocks)} stocks today")
         except Exception as e:
+            g_failed = True   # do not download everything again for the backtest today
             report["warnings"].append(f"Growth list prices failed: {e}")
     if mode in ("auto", "daily") and charts:
         try:
@@ -548,7 +549,7 @@ def main():
             report["warnings"].append(f"Strategy backtest failed: {e}")
         # Backtest on your own stock list in data/universe/ (when it changed, or weekly)
         try:
-            if u_due:
+            if u_due and not g_failed:
                 u = universe.run(strat_cfg, mood, today, now.year, stocks=g_stocks, charts=g_charts or None, missing=g_missing)
                 if u:
                     print(f"Stock-list backtest: {u['with_prices']} of {u['stocks']} stocks with prices")

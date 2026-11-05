@@ -224,24 +224,43 @@ def _screener_closes(codes, session, limit=MAX_SCREENER_PER_RUN):
     folder = os.path.join(storage.DATA, PX_DIR)
     os.makedirs(folder, exist_ok=True)
     ids = storage.load_json("universe_ids.json", {})
+    got = storage.load_json("universe_px_dates.json", {})
+    old = (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d")
+    today = datetime.now().strftime("%Y-%m-%d")
+    path = lambda c: os.path.join(folder, f"{c}.csv")
+
+    def saved(code):
+        if not os.path.exists(path(code)):
+            return None
+        with open(path(code), newline="", encoding="utf-8") as f:
+            return {r["date"]: float(r["close"]) for r in csv.DictReader(f) if r.get("close")}
+
+    for code in codes:  # saved before the dates were kept
+        if os.path.exists(path(code)) and code not in got:
+            got[code] = today
+    # stocks never fetched first, then the oldest (refreshed monthly, so a new split / bonus is picked up)
+    order = sorted(codes, key=lambda c: (os.path.exists(path(c)), got.get(c, "")))
     out, asked = {}, 0
-    for code in codes:
-        p = os.path.join(folder, f"{code}.csv")
-        if os.path.exists(p):
-            with open(p, newline="", encoding="utf-8") as f:
-                out[code] = {r["date"]: float(r["close"]) for r in csv.DictReader(f) if r.get("close")}
+    for code in order:
+        p = path(code)
+        if os.path.exists(p) and (got.get(code, "") >= old or asked >= limit):
+            out[code] = saved(code)
             continue
         if asked >= limit or ids.get(code) == "":
             continue  # later run / not on Screener
         asked += 1
         cid = ids.get(code) or _company_id(code, session)
         time.sleep(1.0)
-        if cid is None:
-            continue
-        ids[code] = cid
-        res = prices.screener_close_and_ema(cid, 200, session=session) if cid else None
+        res = None
+        if cid:
+            ids[code] = cid
+            res = prices.screener_close_and_ema(cid, 200, session=session)
+        elif cid == "":
+            ids[code] = ""
         hist = res[3] if res and len(res) > 3 else None
         if not hist or not hist.get("t"):
+            if os.path.exists(p):  # keep the saved prices
+                out[code] = saved(code)
             continue
         rows = {d: c for d, c in zip(hist["t"], hist["c"]) if c}
         with open(p, "w", newline="", encoding="utf-8") as f:
@@ -250,7 +269,9 @@ def _screener_closes(codes, session, limit=MAX_SCREENER_PER_RUN):
             for d in sorted(rows):
                 w.writerow([d, rows[d]])
         out[code] = rows
+        got[code] = datetime.now().strftime("%Y-%m-%d")
     storage.save_json("universe_ids.json", ids)
+    storage.save_json("universe_px_dates.json", got)
     return out
 
 
@@ -308,6 +329,34 @@ def _bse_days(codes, session, today=None, limit=MAX_BSE_FILES_PER_RUN, exchange=
     return out
 
 
+def _ratio(r, tol=0.03):
+    """Nearest simple ratio p/q (q up to 5) to r, e.g. 1.5 for a 1:2 bonus, else r itself."""
+    best = min(((p / q, abs(p / q - r) / r) for q in range(1, 6) for p in range(q + 1, 100 * q + 1)), key=lambda x: x[1])
+    return best[0] if best[1] <= tol else r
+
+
+def _raw_adjust(days):
+    """BSE files are not adjusted for splits / bonuses. Small BSE stocks have price bands of 20% or less, so an
+    overnight gap of more than 22% (open AND close) is a split / bonus: older candles are divided by that ratio."""
+    ds = sorted(days)
+    rows = {d: list(days[d]) for d in ds}
+    for k in range(1, len(ds)):
+        prev, cur = rows[ds[k - 1]], rows[ds[k]]
+        if prev[3] <= 0 or cur[0] <= 0 or cur[3] <= 0:
+            continue
+        ro, rc = prev[3] / cur[0], prev[3] / cur[3]
+        for up in (False, True):
+            a, b = (1 / ro, 1 / rc) if up else (ro, rc)
+            if a > 1.22 and b > 1.22 and abs(a / b - 1) < 0.08:
+                f = _ratio((a * b) ** 0.5)
+                f = 1 / f if up else f
+                for d in ds[:k]:
+                    o, h, l, c, v = rows[d]
+                    rows[d] = [o / f, h / f, l / f, c / f, v * f]
+                break
+    return {d: tuple(rows[d]) for d in ds}
+
+
 def bse_chart(closes, days):
     """Screener closes (older part, close only) + BSE daily candles (real) -> chart history like Yahoo's."""
     dates = sorted(set(closes) | set(days))
@@ -315,13 +364,20 @@ def bse_chart(closes, days):
         return None
     nan = float("nan")
     rows = []
+    # BSE files have raw prices; Screener's closes are adjusted for splits / bonuses. On days with both,
+    # the candle is scaled to Screener's close; after Screener's last day the last factor is used.
+    days = _raw_adjust(days)
+    both = [d for d in dates if d in days and d in closes and days[d][3] > 0 and closes[d] > 0]
+    f = closes[both[0]] / days[both[0]][3] if both else 1.0   # before Screener's first day: its first factor
     for d in dates:
         if d in days:
             o, h, l, c, v = days[d]
-            rows.append((o, h, l, c, v))
+            if d in closes and c > 0 and closes[d] > 0:
+                f = closes[d] / c
+            rows.append((o * f, h * f, l * f, c * f, v / f if f else v))
         else:
             rows.append((nan, nan, nan, closes[d], nan))
-    df = pd.DataFrame(rows, columns=["Open", "High", "Low", "Close", "Volume"], index=pd.to_datetime(dates))
+    df = pd.DataFrame(rows, columns=["Open", "High", "Low", "Close", "Volume"], index=pd.to_datetime(dates), dtype=float)
     res = prices._ema_result(df, 200)
     return res[3] if res else None
 
