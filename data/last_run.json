@@ -1,180 +1,33 @@
 {
- "added": [
-  [
-   "GNA",
-   "GNA Axles",
-   "marks 8.3/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "DEEPA",
-   "Deepa Jewellers",
-   "marks 6.4/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "BHARATSE",
-   "Bharat Seats",
-   "marks 8.3/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "ARROWGREEN",
-   "Arrow Greentech",
-   "marks 7.3/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "542669",
-   "BMW Industries",
-   "marks 6.4/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "544504",
-   "Goel Construct.",
-   "marks 9.2/11 · TTM Profit > 30%, Daily Volume Scan, Weekly Volume Scan, 52W High"
-  ],
-  [
-   "PARTH",
-   "Parth Electrical",
-   "marks 8.3/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "ADISOFT",
-   "Adisoft Technol.",
-   "marks 6.4/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "544669",
-   "Admach Systems",
-   "marks 8.3/11 · TTM Profit > 30%, 52W High"
-  ],
-  [
-   "MODIS",
-   "Modi's Navnirman",
-   "marks 10.1/11 · Daily Volume Scan, Weekly Volume Scan"
-  ],
-  [
-   "COMSYN",
-   "Commerl. Synbags",
-   "marks 10.1/11 · Weekly Volume Scan, 52W High"
-  ],
-  [
-   "DPABHUSHAN",
-   "D.P. Abhushan",
-   "marks 11/11 · 52W High"
-  ],
-  [
-   "544980",
-   "SJP Ultrasonics",
-   "marks 10.1/11 · 52W High"
-  ],
-  [
-   "UNIVASTU",
-   "Univastu India",
-   "marks 8.3/11 · 52W High"
-  ],
-  [
-   "532329",
-   "Danlaw Tech.",
-   "marks 9.2/11 · 52W High"
-  ],
-  [
-   "MONARCH",
-   "Monarch Networth",
-   "marks 6.4/11 · 52W High"
-  ],
-  [
-   "GOLDIAM",
-   "Goldiam Intl.",
-   "marks 8.3/11 · 52W High"
-  ],
-  [
-   "DHABRIYA",
-   "Dhabriya Poly.",
-   "marks 8.3/11 · 52W High"
-  ],
-  [
-   "543920",
-   "CFF Fluid",
-   "marks 9.2/11 · 52W High"
-  ],
-  [
-   "DCI",
-   "DC Infotech",
-   "marks 6.4/11 · 52W High"
-  ],
-  [
-   "CORDSCABLE",
-   "Cords Cable",
-   "marks 6.4/11 · 52W High"
-  ],
-  [
-   "KRYSTAL",
-   "Krystal Integrat",
-   "marks 9.2/11 · 52W High"
-  ],
-  [
-   "VENKEYS",
-   "Venky's (India)",
-   "marks 9.2/11 · 52W High"
-  ],
-  [
-   "DEEDEV",
-   "DEE Development",
-   "marks 7.3/11 · 52W High"
-  ]
- ],
- "rejected": [
-  [
-   "544687",
-   "Hannah Joseph",
-   "4.6/11"
-  ],
-  [
-   "544895",
-   "Kwick Forensic",
-   "2.8/11"
-  ],
-  [
-   "544773",
-   "Merritronix",
-   "2.8/11"
-  ]
- ],
+ "added": [],
+ "rejected": [],
  "to_dt": [
   [
-   "543991",
-   "Techknowgreen",
-   "close 117.4 < 200 EMA 129.26"
-  ],
-  [
-   "DEEPA",
-   "Deepa Jewellers",
-   "close 214.11 < 20 EMA 218.05"
-  ],
-  [
-   "544980",
-   "SJP Ultrasonics",
-   "close 97.7 < 20 EMA 98.6"
-  ],
-  [
-   "GOLDIAM",
-   "Goldiam Intl.",
-   "close 308.8 < 200 EMA 311.57"
-  ],
-  [
-   "DHABRIYA",
-   "Dhabriya Poly.",
-   "close 455.25 < 20 EMA 462.4"
-  ],
-  [
-   "KRYSTAL",
-   "Krystal Integrat",
-   "close 579.85 < 200 EMA 605.99"
+   "ASHIANA",
+   "Ashiana Housing",
+   "close 348.05 < 200 EMA 352.32"
   ]
  ],
  "to_sp": [
   [
-   "ASHIANA",
-   "Ashiana Housing",
-   "close 370 > 200 EMA 352.37"
+   "DEEPA",
+   "Deepa Jewellers",
+   "close 219.18 > 20 EMA 218.16"
+  ],
+  [
+   "DHABRIYA",
+   "Dhabriya Poly.",
+   "close 472.95 > 20 EMA 463.4"
+  ],
+  [
+   "GOLDIAM",
+   "Goldiam Intl.",
+   "close 322.25 > 200 EMA 311.68"
+  ],
+  [
+   "KRYSTAL",
+   "Krystal Integrat",
+   "close 616.15 > 200 EMA 606.09"
   ]
  ],
  "removed": [],
@@ -224,9 +77,14 @@
    "close 138 vs 20 EMA 135.52 → SP"
   ],
   [
+   "ADISOFT",
+   "Adisoft Technol.",
+   "close 270.7 vs 20 EMA 264.96 → SP"
+  ],
+  [
    "AEROPLANE",
    "A C J K Exports",
-   "close 222.57 vs 20 EMA 214.19 → SP"
+   "close 242.5 vs 20 EMA 216.88 → SP"
   ],
   [
    "TEAMTECH",
@@ -236,56 +94,51 @@
   [
    "UDAYJEW",
    "Uday Jewellery",
-   "close 213.1 vs 20 EMA 209.05 → SP"
-  ],
-  [
-   "DEEPA",
-   "Deepa Jewellers",
-   "close 214.11 vs 20 EMA 218.05 → DT"
-  ],
-  [
-   "ADISOFT",
-   "Adisoft Technol.",
-   "close 270.7 vs 20 EMA 264.96 → SP"
+   "close 210.48 vs 20 EMA 209.19 → SP"
   ],
   [
    "544980",
    "SJP Ultrasonics",
-   "close 97.7 vs 20 EMA 98.6 → DT"
+   "close 97.7 vs 20 EMA 98.6"
+  ],
+  [
+   "DEEPA",
+   "Deepa Jewellers",
+   "close 219.18 vs 20 EMA 218.16"
   ],
   [
    "DHABRIYA",
    "Dhabriya Poly.",
-   "close 455.25 vs 20 EMA 462.4 → DT"
+   "close 472.95 vs 20 EMA 463.4"
   ],
   [
    "RAMBHAJO",
    "Advit Jewels",
-   "close 298.7 vs 20 EMA 340.16"
+   "close 312.8 vs 20 EMA 337.55"
   ],
   [
    "RSL",
    "Rajputana Stain.",
-   "close 169.27 vs 20 EMA 171.03"
+   "close 167.83 vs 20 EMA 170.72"
   ],
   [
    "XTRANET",
    "Xtranet Techno.",
-   "close 280.65 vs 20 EMA 282.77"
+   "close 275.95 vs 20 EMA 282.12"
   ]
  ],
  "per_alert": {
-  "TTM Profit > 30%": 15,
-  "52W High": 33,
-  "Daily Volume Scan": 2,
-  "Weekly Volume Scan": 6,
+  "TTM Profit > 30%": 0,
+  "52W High": 0,
+  "Daily Volume Scan": 0,
+  "Weekly Volume Scan": 0,
   "Ready after 6 Months": 0
  },
- "email_total": 36,
- "already_listed": 9,
+ "email_total": 0,
+ "already_listed": 0,
  "price_date": "05 Nov 2026",
  "monthly_pass": 0,
- "mode": "auto",
+ "mode": "daily",
  "monthly_done": false,
- "run_at": "06 Nov 2026, 07:57 AM IST"
+ "run_at": "06 Nov 2026, 02:30 PM IST"
 }

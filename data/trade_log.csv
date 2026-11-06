@@ -1,0 +1,12 @@
+date,strategy,mode,action,symbol,name,qty,price,value,reason,pnl,pnl_pct,hold_days,trade_id
+2026-11-05,Swing Strategy,paper,BUY,DCI,DC Infotech,382,339.87,129830.34,"Breakout above ₹336.5 + 1% (stop ₹319.48, target ₹407.84)",,,,swing-DCI-2026-11-05
+2026-11-05,Swing Strategy,paper,BUY,MODIS,Modi's Navnirman,317,409.45,129795.65,"Breakout above ₹405.4 + 1% (stop ₹384.88, target ₹491.34)",,,,swing-MODIS-2026-11-05
+2026-11-05,Positional Trading,paper,BUY,DCI,DC Infotech,353,339.87,119974.11,"Breakout above ₹336.5 + 1% (stop ₹319.48, target ₹441.83)",,,,positional-DCI-2026-11-05
+2026-11-05,Positional Trading,paper,BUY,MODIS,Modi's Navnirman,293,409.45,119968.85,"Breakout above ₹405.4 + 1% (stop ₹384.88, target ₹532.28)",,,,positional-MODIS-2026-11-05
+2026-11-05,Smart Switch,paper,BUY,DCI,DC Infotech,353,339.87,119974.11,"Breakout above ₹336.5 + 1% (stop ₹319.48, target ₹407.84) · Smallcap 100 19,026 below EMA 50 19,108 → Swing exits",,,,switch-DCI-2026-11-05
+2026-11-05,Smart Switch,paper,BUY,MODIS,Modi's Navnirman,293,409.45,119968.85,"Breakout above ₹405.4 + 1% (stop ₹384.88, target ₹491.34) · Smallcap 100 19,026 below EMA 50 19,108 → Swing exits",,,,switch-MODIS-2026-11-05
+2026-11-05,Smart Switch · Growth list,paper,BUY,PANACHE,Panache Digilife,118,672.6,79366.8,"Breakout above ₹659.45 + 1% (stop ₹632.24, target ₹807.12) · Smallcap 100 19,026 below EMA 50 19,108 → Swing exits",,,,growth_switch-PANACHE-2026-11-05
+2026-11-05,Smart Switch · Growth list,paper,BUY,DCI,DC Infotech,235,339.87,79869.45,"Breakout above ₹336.5 + 1% (stop ₹319.48, target ₹407.84) · Smallcap 100 19,026 below EMA 50 19,108 → Swing exits",,,,growth_switch-DCI-2026-11-05
+2026-11-05,Smart Switch · Growth list,paper,BUY,GCSL,Gretex Corporate,100,796.44,79644.0,"Breakout above ₹788.55 + 1% (stop ₹748.65, target ₹955.73) · Smallcap 100 19,026 below EMA 50 19,108 → Swing exits",,,,growth_switch-GCSL-2026-11-05
+2026-11-05,Smart Switch · Growth list,paper,BUY,GLOBAL,Global Education,538,148.62,79957.56,"Breakout above ₹147.15 + 1% (stop ₹139.7, target ₹178.34) · Smallcap 100 19,026 below EMA 50 19,108 → Swing exits",,,,growth_switch-GLOBAL-2026-11-05
+2026-11-05,Smart Switch · Growth list,paper,BUY,MODIS,Modi's Navnirman,195,409.45,79842.75,"Breakout above ₹405.4 + 1% (stop ₹384.88, target ₹491.34) · Smallcap 100 19,026 below EMA 50 19,108 → Swing exits",,,,growth_switch-MODIS-2026-11-05

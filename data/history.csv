@@ -148,3 +148,8 @@ date,symbol,name,action,reason
 2026-11-06,DHABRIYA,Dhabriya Poly.,SP -> DT,close 455.25 below 20 EMA 462.4 (new listing)
 2026-11-06,KRYSTAL,Krystal Integrat,SP -> DT,close 579.85 below 200 EMA 605.99
 2026-11-06,ASHIANA,Ashiana Housing,DT -> SP,close 370 back above 200 EMA 352.37
+2026-11-06,ASHIANA,Ashiana Housing,SP -> DT,close 348.05 below 200 EMA 352.32
+2026-11-06,DEEPA,Deepa Jewellers,DT -> SP,close 219.18 back above 20 EMA 218.16 (new listing)
+2026-11-06,DHABRIYA,Dhabriya Poly.,DT -> SP,close 472.95 back above 20 EMA 463.4 (new listing)
+2026-11-06,GOLDIAM,Goldiam Intl.,DT -> SP,close 322.25 back above 200 EMA 311.68
+2026-11-06,KRYSTAL,Krystal Integrat,DT -> SP,close 616.15 back above 200 EMA 606.09
