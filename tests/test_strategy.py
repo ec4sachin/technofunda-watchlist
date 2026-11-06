@@ -98,7 +98,7 @@ def test():
     assert t3["exits"][0]["reason"].startswith("Time stop") and t3["hold_days"] is not None, t3["exits"]
     print("Time stop OK:", t3["exits"][0]["reason"], t3["exits"][0]["price"])
 
-    # Positional Trading: same entry, 50% at +30%, the rest exits after 2 closes below EMA 50, no time stop
+    # Positional Trading: same entry, 50% at +30%, the rest exits after 5 closes below EMA 50 in a row, no time stop
     pos = {"strategies": [{"id": "positional", "name": "Positional Trading", "type": "positional", "list": "SP",
                            "capital": 1000000, "pct": 10, "on": True}]}
     bp = {}
@@ -111,12 +111,12 @@ def test():
     rally = c + [trig * 1.01] * 12 + [trig * (1 + 0.025 * k) for k in range(1, 15)]   # reaches +35%
     stg.run(pos, bp, {"ABC": hist_from(rally)}, sp, {})
     assert tp["booked"] and "Target +30%" in tp["exits"][0]["reason"]
-    fall = rally + [rally[-1] * f for f in (0.97, 0.94, 0.90, 0.86, 0.82, 0.80, 0.78)]
+    fall = rally + [rally[-1] * f for f in (0.97, 0.94, 0.90, 0.86, 0.82, 0.80, 0.78, 0.77, 0.76, 0.75, 0.74, 0.73)]
     df_f = stg._frame(hist_from(fall))
     stg.run(pos, bp, {"ABC": hist_from(fall)}, sp, {})
     assert tp["status"] == "closed" and "EMA 50" in tp["exits"][-1]["reason"], tp["exits"]
     k = df_f.index.index(tp["exits"][-1]["date"])
-    assert df_f.c[k] < df_f.e50[k] and df_f.c[k - 1] < df_f.e50[k - 1]   # sold on the 2nd close below EMA 50
+    assert all(df_f.c[k - x] < df_f.e50[k - x] for x in range(5)) and df_f.c[k - 5] >= df_f.e50[k - 5]   # sold on the 5th close below
     print("Positional OK:", [(x["reason"], x["price"]) for x in tp["exits"]], "P&L", tp["pnl"])
 
     # Smart Switch: Smallcap 100 above EMA 50 on the day before the buy -> Positional exits, below -> Swing exits

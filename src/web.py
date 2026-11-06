@@ -1167,7 +1167,11 @@ function universeHTML(){
         return `<td class="num ra"${top[id] === k ? ' style="font-weight:700"' : ""}>${pc(r)}${top[id] === k ? ' <span class="pill p-add">best</span>' : ""}${now ? ' <span class="pill p-warn">now</span>' : ""} · ${pc({trades: 1, return_pct: r.last2y})} · <span class="down">${esc(r.max_drawdown_pct)}%</span> · ${esc(r.skipped)}</td>`; }).join("") + `</tr>`).join("") +
       `</tbody></table></div>`;
   }
-  return `<h2>Backtest on your own stock list · ${esc(u.with_prices)} of ${esc(u.stocks)} stocks</h2>${main}${yt}${rt}${ptt}
+  const lq = ids.filter(id => u.strategies[id].nofilter).map(id => { const x = u.strategies[id], f = x.filter || {}, n = x.nofilter, p = x.period;
+    return `<li><b>${esc(x.name)}</b> (only stocks trading ₹${esc(((f.min_turnover || 0) / 1e5).toFixed(0))} lakh+ a day, price ₹${esc(f.min_price || 0)}+):
+      with filter ${pc(p)} · worst fall <span class="down">${esc(p.max_drawdown_pct)}%</span> · last 2 yrs ${pc(x.last2y)} — without filter ${pc(n)} · worst fall <span class="down">${esc(n.max_drawdown_pct)}%</span> · last 2 yrs ${pc({trades: 1, return_pct: n.last2y})}</li>`; }).join("");
+  const lqt = lq ? `<div class="st-note">💧 <b>Liquidity filter</b> (real orders must be able to buy and sell): <ul>${lq}</ul></div>` : "";
+  return `<h2>Backtest on your own stock list · ${esc(u.with_prices)} of ${esc(u.stocks)} stocks</h2>${main}${lqt}${yt}${rt}${ptt}
     <p class="src">Updated ${esc(u.as_of)}. Each strategy: ₹10,00,000 and its own % per trade, costs included. A list made with today's 5-year growth numbers already
     knows which companies grew, so these results are more optimistic than real trading would have been.${(u.missing || []).length ? ` No prices found for: ${esc(u.missing.slice(0, 20).join(", "))}${u.missing.length > 20 ? " …" : ""}.` : ""}</p>
     <details class="bt"><summary>How to change the list</summary>${how}</details>`;
@@ -1189,7 +1193,7 @@ function moodHTML(t){
   const m = (SD.mood || {})[t.id];
   if (!m) return `<div class="st-note">🧭 Nifty Smallcap 100 not checked yet — it appears after the next robot run.</div>`;
   return `<div class="st-note mood ${m.above ? "pos" : "neg"}">🧭 <b>Nifty Smallcap 100 ${inr0(m.close).slice(1)}</b> is <b>${m.above ? "above" : "below"}</b> its EMA 50 (${inr0(m.ema50).slice(1)}) on ${esc(m.date)}
-    → open trades follow the <b>${esc(m.rules)}</b> exit rules today (${m.rules === "Positional" ? "50% at +30%, rest on 2 closes below EMA 50" : "50% at +20%, EMA 10 trail, 10-day time stop"}).
+    → open trades follow the <b>${esc(m.rules)}</b> exit rules today (${m.rules === "Positional" ? "5 closes below EMA 50 sell all before +30%, 50% at +30%, rest on 5 closes below EMA 50" : "50% at +20%, EMA 10 trail, 10-day time stop"}).
     The robot checks the index every day, so a trade switches rules when small caps turn strong or weak.</div>`;
 }
 function perfHTML(t){

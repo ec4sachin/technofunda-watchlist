@@ -33,11 +33,12 @@ LISTS = ("SP", "DT", "BOTH", "GROWTH")   # GROWTH = your own stock list in data/
 DEFAULT = [{"id": "swing", "name": "Swing Strategy", "type": "swing", "list": "SP", "capital": 1000000, "pct": 13, "rank": "low_risk",
             "on": False, "note": "EMA stack + tight 5-candle base breakout", "added": ""},
            {"id": "positional", "name": "Positional Trading", "type": "positional", "list": "SP", "capital": 1000000, "pct": 12, "rank": "low_risk",
-            "on": False, "note": "Same entry · 50% at +30% · rest exits on 2 closes below EMA 50", "added": ""},
+            "on": False, "note": "Same entry · 50% at +30% · before the target 5 closes below EMA 50 sell 100% · after it the rest exits on 5 closes below EMA 50", "added": ""},
            {"id": "switch", "name": "Smart Switch", "type": "switch", "list": "SP", "capital": 1000000, "pct": 12, "rank": "low_risk",
             "on": False, "note": "Same entry · exits follow Smallcap 100 daily: above EMA 50 → Positional, below → Swing", "added": ""},
            {"id": "growth_switch", "name": "Smart Switch · Growth list", "type": "switch", "list": "GROWTH", "capital": 1000000, "pct": 8,
-            "rank": "low_risk", "on": False, "note": "Smart Switch on your growth stock list (data/universe) · 8% per trade", "added": ""}]
+            "rank": "low_risk", "min_turnover": 5000000, "min_price": 20,
+            "on": False, "note": "Smart Switch on your growth stock list (data/universe) · 8% per trade · only liquid stocks", "added": ""}]
 MAX_CATCHUP_DAYS = 10
 BASE_CANDLES = 5           # rule 2: number of candles in the tight base (5 chosen 5 Nov 2026 after backtest; was 4)
 BASE_RANGE = 0.06          # ... and the most their range may be (share of the current price)
@@ -52,9 +53,13 @@ RULES = {
     # climax: after the 50% booking, sell the rest when price runs far above its EMA (rule added 5 Nov 2026).
     # (ema, level when Smallcap 100 is above its EMA 50, level when below / unknown) - "middle path" chosen 5 Nov 2026
     "swing": {"target": 0.20, "trail": "ema10_low", "time_stop": (TIME_STOP_DAYS, TIME_STOP_GAIN), "climax": ("e10", 1.24, 1.20)},
-    # Positional Trading (given 4 Nov 2026): 50% at +30%; the rest exits after 2 daily closes below EMA 50;
+    # Positional Trading (given 4 Nov 2026): 50% at +30%; the rest exits after 5 daily closes below EMA 50 in a row (2 until 6 Nov 2026);
     # before the target the stop is 1% below the base low (and never more than 6% below the buy price)
-    "positional": {"target": 0.30, "trail": "ema50_2close", "time_stop": None, "climax": ("e50", 1.48, 1.40)},
+    # ema50_after_gain: e.g. 0.20 = once +20% above the buy price, 2 closes below EMA 50 exit 100% before the target
+    # (tested 6 Nov 2026, not used - kept OFF on request)
+    # ema50_before_target (6 Nov 2026, ON): until the +30% target is reached, 5 closes below EMA 50 sell 100%
+    "positional": {"target": 0.30, "trail": "ema50_2close", "time_stop": None, "climax": ("e50", 1.48, 1.40), "ema50_after_gain": None,
+                   "ema50_before_target": True, "ema50_closes": 5},
 }
 COST_PER_SIDE = 0.002      # brokerage + taxes + slippage, about 0.2% on each buy and each sell
 # When several stocks give a buy signal on the same day and there is not enough free money for all,
@@ -305,6 +310,7 @@ def manage(t, df, j, mood=None):
     tgt_txt = f"Target +{rules['target'] * 100:g}% (50% booked)"
     done = []
     t["days"] = t.get("days", 0) + 1
+    t["peak"] = round(max(float(t.get("peak") or 0), h), 2)   # highest price since the buy
     # stop loss (whole remaining quantity). Gap down: sold at the open.
     if l <= t["stop"]:
         s = _sell(t, day, t["remaining"], min(o, t["stop"]), t.get("stop_reason", "Stop loss"))
@@ -338,10 +344,14 @@ def manage(t, df, j, mood=None):
             return done
     # Positional: the rest exits at the close of the 2nd daily close below EMA 50 in a row
     if rules["trail"] == "ema50_2close":
-        if t["booked"]:
+        gain = rules.get("ema50_after_gain")
+        gained = bool(gain) and float(t.get("peak") or 0) >= t["entry"] * (1 + gain)
+        if t["booked"] or gained or rules.get("ema50_before_target"):
             t["below50"] = t.get("below50", 0) + 1 if c < float(df.e50[j]) else 0
-            if t["below50"] >= 2:
-                s = _sell(t, day, t["remaining"], c, "Trailing EMA 50 exit (2 closes below)")
+            if t["below50"] >= rules.get("ema50_closes", 2):
+                s = _sell(t, day, t["remaining"], c, f"Trailing EMA 50 exit ({rules.get('ema50_closes', 2)} closes below)" if t["booked"]
+                          else f"EMA 50 exit after +{gain * 100:g}% gain ({rules.get('ema50_closes', 2)} closes below)" if gained
+                          else f"EMA 50 exit before target ({rules.get('ema50_closes', 2)} closes below)")
                 if s:
                     done.append(s)
         return done
@@ -390,9 +400,38 @@ def exit_type(st, day, mood):
            ("swing", f"Smallcap 100 {m[1]:,.0f} below EMA 50 {m[2]:,.0f} → Swing exits")
 
 
+LIQ_DAYS = 20   # liquidity: average traded value (close x volume) over the last 20 daily candles
+
+
+def liquid(st, df, i):
+    """Liquidity filter of the strategy (min_turnover in ₹ a day, min_price in ₹), on candles up to i.
+    A stock without volume data does not pass when a turnover minimum is set."""
+    import numpy as np
+    mp, mt = float(st.get("min_price") or 0), float(st.get("min_turnover") or 0)
+    if mp and float(df.c[i]) < mp:
+        return False
+    if mt:
+        a = max(0, i - LIQ_DAYS + 1)
+        val = df.c[a:i + 1] * df.v[a:i + 1]
+        val = val[~np.isnan(val)]
+        if len(val) < LIQ_DAYS // 2 or float(val.mean()) < mt:
+            return False
+    return True
+
+
+def turnover(df, i):
+    import numpy as np
+    a = max(0, i - LIQ_DAYS + 1)
+    val = df.c[a:i + 1] * df.v[a:i + 1]
+    val = val[~np.isnan(val)]
+    return round(float(val.mean())) if len(val) else None
+
+
 def try_entry(st, sym, name, df, j, mode="paper", money=None, mood=None):
     """Entry on candle j if the setup on the candle before is triggered. Returns (trade, sells on the same day) or (None, [])."""
     plan = swing_setup(df, j - 1)
+    if plan and not liquid(st, df, j - 1):
+        return None, []
     if not plan or df.h[j] < plan["trigger"]:
         return None, []
     sid = st.get("id")
@@ -410,7 +449,7 @@ def try_entry(st, sym, name, df, j, mode="paper", money=None, mood=None):
          "qty": qty, "remaining": qty, "stop": stop, "stop_reason": why, "days": 0,
          "target": round(entry * (1 + RULES[ttype]["target"]), 2),
          "booked": False, "signal_low": None, "signal_date": None, "exits": [], "pnl": 0.0,
-         "status": "open", "mode": mode, "money": round(money, 2), "plan": {k: plan[k] for k in ("resistance", "range_pct", "r42", "room", "score")}}
+         "status": "open", "mode": mode, "money": round(money, 2), "peak": round(float(df.h[j]), 2), "plan": {k: plan[k] for k in ("resistance", "range_pct", "r42", "room", "score")}}
     sells = []
     if df.l[j] <= t["stop"]:  # fell back to the stop on the same day
         s = _sell(t, df.index[j], t["remaining"], t["stop"], why + " — same day")
@@ -495,7 +534,7 @@ def run(settings, book, charts, sp, dt, today="", mood=None, growth=None):
                     continue
                 if t or sym not in scan:
                     continue
-                if not swing_setup(df, j - 1) or df.h[j] < swing_setup(df, j - 1)["trigger"]:
+                if not swing_setup(df, j - 1) or df.h[j] < swing_setup(df, j - 1)["trigger"] or not liquid(st, df, j - 1):
                     continue
                 money = trade_size(st, capital_of(st, book))
                 if not money:
@@ -527,13 +566,13 @@ def run(settings, book, charts, sp, dt, today="", mood=None, growth=None):
             if df is None or sym in mine:
                 continue
             plan = swing_setup(df, len(df) - 1)
-            if plan:
+            if plan and liquid(st, df, len(df) - 1):
                 cap = capital_of(st, book)
                 qty = max(1, math.floor(cap["equity"] * cap["pct"] / 100 / plan["trigger"]))
                 ready.append({"symbol": sym, "name": names.get(sym, sym), "buy_above": plan["trigger"], "stop": plan["stop"],
                               "qty": qty, "amount": round(qty * plan["trigger"], 2), "range_pct": plan["range_pct"],
                               "risk_pct": round((plan["trigger"] - plan["stop"]) / plan["trigger"] * 100, 1),
-                              "as_of": df.index[-1], "score": plan["score"], "_r": rank_value(plan, st.get("rank"))})
+                              "as_of": df.index[-1], "score": plan["score"], "turnover": turnover(df, len(df) - 1), "_r": rank_value(plan, st.get("rank"))})
         ready.sort(key=lambda x: (x.pop("_r"), x["symbol"]))
         book["setups"][sid] = ready
         events["setups"][sid] = ready

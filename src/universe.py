@@ -33,7 +33,7 @@ OUT = "universe_backtest.json"
 CODE_COLS = {"nse": ("nse code", "nse symbol", "nse", "symbol", "nse_code"),
              "bse": ("bse code", "bse", "bse_code", "scrip code", "security code")}
 NAME_COLS = ("name", "company", "company name", "stock")
-VERSION = "4"             # change to run the backtest again with new rules
+VERSION = "6"             # change to run the backtest again with new rules
 PCT_TEST = (6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
 MAX_MCAP_CR = 25000        # only companies below ₹25,000 crore market cap (when the file has a market-cap column)
 
@@ -465,6 +465,11 @@ def run(settings, mood, today, now_year, stocks=None, charts=None, missing=None)
         trades = strategy.backtest(st, charts, names, syms, mood=mood)
         start = min((h["t"][0] for h in charts.values() if h.get("t")), default=today)
         first_year = max(int(start[:4]) + 1, now_year - 9)
+        # the same strategy without its liquidity filter, to see what the filter changes
+        nofilter = None
+        if st.get("min_turnover") or st.get("min_price"):
+            raw = strategy.backtest(dict(st, min_turnover=0, min_price=0), charts, names, syms, mood=mood)
+            nofilter = _rank_row(raw, f"{first_year}-01-01", d2, cap, pct, st.get("rank") or strategy.RANK, first_year, now_year)
         out["strategies"][st["id"]] = {
             "name": st.get("name"), "pct": pct,
             "last2y": {k: v for k, v in strategy.portfolio(trades, d2, capital=cap, pct=pct, rank=st.get("rank")).items() if k != "trades_list"},
@@ -476,6 +481,8 @@ def run(settings, mood, today, now_year, stocks=None, charts=None, missing=None)
                         for y in range(first_year, now_year + 1)},
             "report": {k: v for k, v in strategy.report(trades).items() if k not in ("curve", "months")},
             "rank": st.get("rank") or strategy.RANK,
+            "nofilter": nofilter,
+            "filter": {"min_turnover": st.get("min_turnover"), "min_price": st.get("min_price")} if nofilter else None,
             # when money is short: which of the same-day buy signals to take first
             "rank_test": {rk: _rank_row(trades, f"{first_year}-01-01", d2, cap, pct, rk, first_year, now_year)
                           for rk in strategy.RANKS},

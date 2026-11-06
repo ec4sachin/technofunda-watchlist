@@ -21,7 +21,7 @@
    "capital": 1000000,
    "pct": 12,
    "on": true,
-   "note": "Same entry · 50% at +30% · rest exits on 2 closes below EMA 50",
+   "note": "Same entry · before the target 5 closes below EMA 50 sell 100% · 50% at +30% · rest exits on 5 closes below EMA 50",
    "added": "",
    "rank": "low_risk",
    "on_since": "2026-11-05"
@@ -48,9 +48,11 @@
    "pct": 8,
    "rank": "low_risk",
    "on": true,
-   "note": "Smart Switch on your growth stock list (data/universe) · 8% per trade",
+   "note": "Smart Switch on your growth stock list (data/universe) · 8% per trade · only liquid stocks",
    "added": "2026-11-05",
-   "on_since": "2026-11-05"
+   "on_since": "2026-11-05",
+   "min_turnover": 5000000,
+   "min_price": 20
   }
  ]
 }
