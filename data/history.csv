@@ -117,3 +117,34 @@ date,symbol,name,action,reason
 2026-11-05,544141,Pune e-Stock Broking,DT -> SP,close 265 back above 200 EMA 257.54
 2026-11-05,544551,Bhavik Enterpris,DT -> SP,close 155 back above 20 EMA 149.7 (new listing)
 2026-11-05,544809,Adon Agro,DT -> SP,close 98.97 back above 20 EMA 96.89 (new listing)
+2026-11-06,GNA,GNA Axles,ADDED to SP,"marks 8.3/11; from TTM Profit > 30%, 52W High"
+2026-11-06,DEEPA,Deepa Jewellers,ADDED to SP,"marks 6.4/11; from TTM Profit > 30%, 52W High"
+2026-11-06,BHARATSE,Bharat Seats,ADDED to SP,"marks 8.3/11; from TTM Profit > 30%, 52W High"
+2026-11-06,ARROWGREEN,Arrow Greentech,ADDED to SP,"marks 7.3/11; from TTM Profit > 30%, 52W High"
+2026-11-06,542669,BMW Industries,ADDED to SP,"marks 6.4/11; from TTM Profit > 30%, 52W High"
+2026-11-06,544504,Goel Construct.,ADDED to SP,"marks 9.2/11; from TTM Profit > 30%, Daily Volume Scan, Weekly Volume Scan, 52W High"
+2026-11-06,PARTH,Parth Electrical,ADDED to SP,"marks 8.3/11; from TTM Profit > 30%, 52W High"
+2026-11-06,ADISOFT,Adisoft Technol.,ADDED to SP,"marks 6.4/11; from TTM Profit > 30%, 52W High"
+2026-11-06,544669,Admach Systems,ADDED to SP,"marks 8.3/11; from TTM Profit > 30%, 52W High"
+2026-11-06,MODIS,Modi's Navnirman,ADDED to SP,"marks 10.1/11; from Daily Volume Scan, Weekly Volume Scan"
+2026-11-06,COMSYN,Commerl. Synbags,ADDED to SP,"marks 10.1/11; from Weekly Volume Scan, 52W High"
+2026-11-06,DPABHUSHAN,D.P. Abhushan,ADDED to SP,marks 11/11; from 52W High
+2026-11-06,544980,SJP Ultrasonics,ADDED to SP,marks 10.1/11; from 52W High
+2026-11-06,UNIVASTU,Univastu India,ADDED to SP,marks 8.3/11; from 52W High
+2026-11-06,532329,Danlaw Tech.,ADDED to SP,marks 9.2/11; from 52W High
+2026-11-06,MONARCH,Monarch Networth,ADDED to SP,marks 6.4/11; from 52W High
+2026-11-06,GOLDIAM,Goldiam Intl.,ADDED to SP,marks 8.3/11; from 52W High
+2026-11-06,DHABRIYA,Dhabriya Poly.,ADDED to SP,marks 8.3/11; from 52W High
+2026-11-06,543920,CFF Fluid,ADDED to SP,marks 9.2/11; from 52W High
+2026-11-06,DCI,DC Infotech,ADDED to SP,marks 6.4/11; from 52W High
+2026-11-06,CORDSCABLE,Cords Cable,ADDED to SP,marks 6.4/11; from 52W High
+2026-11-06,KRYSTAL,Krystal Integrat,ADDED to SP,marks 9.2/11; from 52W High
+2026-11-06,VENKEYS,Venky's (India),ADDED to SP,marks 9.2/11; from 52W High
+2026-11-06,DEEDEV,DEE Development,ADDED to SP,marks 7.3/11; from 52W High
+2026-11-06,543991,Techknowgreen,SP -> DT,close 117.4 below 200 EMA 129.26
+2026-11-06,DEEPA,Deepa Jewellers,SP -> DT,close 214.11 below 20 EMA 218.05 (new listing)
+2026-11-06,544980,SJP Ultrasonics,SP -> DT,close 97.7 below 20 EMA 98.6 (new listing)
+2026-11-06,GOLDIAM,Goldiam Intl.,SP -> DT,close 308.8 below 200 EMA 311.57
+2026-11-06,DHABRIYA,Dhabriya Poly.,SP -> DT,close 455.25 below 20 EMA 462.4 (new listing)
+2026-11-06,KRYSTAL,Krystal Integrat,SP -> DT,close 579.85 below 200 EMA 605.99
+2026-11-06,ASHIANA,Ashiana Housing,DT -> SP,close 370 back above 200 EMA 352.37
