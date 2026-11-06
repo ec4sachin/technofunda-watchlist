@@ -153,3 +153,7 @@ date,symbol,name,action,reason
 2026-11-06,DHABRIYA,Dhabriya Poly.,DT -> SP,close 472.95 back above 20 EMA 463.4 (new listing)
 2026-11-06,GOLDIAM,Goldiam Intl.,DT -> SP,close 322.25 back above 200 EMA 311.68
 2026-11-06,KRYSTAL,Krystal Integrat,DT -> SP,close 616.15 back above 200 EMA 606.09
+2026-11-06,544538,Praruh Tech,SP -> DT,close 135.7 below 20 EMA 140.95 (new listing)
+2026-11-06,544695,Msafe Equipments,SP -> DT,close 268 below 20 EMA 274.28 (new listing)
+2026-11-06,CONNPLEX,Connplex Cinemas,SP -> DT,close 231.5 below 200 EMA 233.76
+2026-11-06,DEEPA,Deepa Jewellers,SP -> DT,close 214.62 below 20 EMA 217.81 (new listing)

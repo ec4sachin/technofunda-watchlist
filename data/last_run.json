@@ -1,7 +1,28 @@
 {
  "added": [],
  "rejected": [],
- "to_dt": [],
+ "to_dt": [
+  [
+   "544538",
+   "Praruh Tech",
+   "close 135.7 < 20 EMA 140.95"
+  ],
+  [
+   "544695",
+   "Msafe Equipments",
+   "close 268 < 20 EMA 274.28"
+  ],
+  [
+   "CONNPLEX",
+   "Connplex Cinemas",
+   "close 231.5 < 200 EMA 233.76"
+  ],
+  [
+   "DEEPA",
+   "Deepa Jewellers",
+   "close 214.62 < 20 EMA 217.81"
+  ]
+ ],
  "to_sp": [],
  "removed": [],
  "unchecked": [],
@@ -12,37 +33,37 @@
   [
    "544538",
    "Praruh Tech",
-   "close 142.5 vs 20 EMA 141.5 → SP"
+   "close 135.7 vs 20 EMA 140.95 → DT"
   ],
   [
    "544551",
    "Bhavik Enterpris",
-   "close 155 vs 20 EMA 149.7 → SP"
+   "close 152 vs 20 EMA 149.92 → SP"
   ],
   [
    "544682",
    "GRE Renew",
-   "close 229.5 vs 20 EMA 220.51 → SP"
+   "close 236.8 vs 20 EMA 222.07 → SP"
   ],
   [
    "544694",
    "Accretion Nutraveda",
-   "close 311 vs 20 EMA 294.6 → SP"
+   "close 333 vs 20 EMA 298.26 → SP"
   ],
   [
    "544695",
    "Msafe Equipments",
-   "close 278.75 vs 20 EMA 274.94 → SP"
+   "close 268 vs 20 EMA 274.28 → DT"
   ],
   [
    "544809",
    "Adon Agro",
-   "close 98.97 vs 20 EMA 96.89 → SP"
+   "close 99.95 vs 20 EMA 97.19 → SP"
   ],
   [
    "544812",
    "Atharva Poly-Plast",
-   "close 132.3 vs 20 EMA 125.46 → SP"
+   "close 138.5 vs 20 EMA 126.7 → SP"
   ],
   [
    "ACETEC",
@@ -52,52 +73,52 @@
   [
    "ADISOFT",
    "Adisoft Technol.",
-   "close 270.7 vs 20 EMA 264.96 → SP"
+   "close 278.55 vs 20 EMA 266.26 → SP"
   ],
   [
    "AEROPLANE",
    "A C J K Exports",
-   "close 242.5 vs 20 EMA 216.88 → SP"
+   "close 238.71 vs 20 EMA 218.96 → SP"
   ],
   [
    "DEEPA",
    "Deepa Jewellers",
-   "close 219.18 vs 20 EMA 218.16 → SP"
+   "close 214.62 vs 20 EMA 217.81 → DT"
   ],
   [
    "DHABRIYA",
    "Dhabriya Poly.",
-   "close 472.95 vs 20 EMA 463.4 → SP"
+   "close 475.15 vs 20 EMA 464.53 → SP"
   ],
   [
    "TEAMTECH",
    "Teamtech Formwork",
-   "close 160.25 vs 20 EMA 149.39 → SP"
+   "close 169.45 vs 20 EMA 151.3 → SP"
   ],
   [
    "UDAYJEW",
    "Uday Jewellery",
-   "close 210.48 vs 20 EMA 209.19 → SP"
+   "close 219.07 vs 20 EMA 210.13 → SP"
   ],
   [
    "544980",
    "SJP Ultrasonics",
-   "close 97.7 vs 20 EMA 98.6"
+   "close 92.95 vs 20 EMA 97.99"
   ],
   [
    "RAMBHAJO",
    "Advit Jewels",
-   "close 312.8 vs 20 EMA 337.55"
+   "close 323.5 vs 20 EMA 336.22"
   ],
   [
    "RSL",
    "Rajputana Stain.",
-   "close 167.83 vs 20 EMA 170.72"
+   "close 166.85 vs 20 EMA 170.35"
   ],
   [
    "XTRANET",
    "Xtranet Techno.",
-   "close 275.95 vs 20 EMA 282.12"
+   "close 264.75 vs 20 EMA 280.47"
   ]
  ],
  "per_alert": {
@@ -109,9 +130,9 @@
  },
  "email_total": 0,
  "already_listed": 0,
- "price_date": "05 Nov 2026",
+ "price_date": "06 Nov 2026",
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "06 Nov 2026, 02:51 PM IST"
+ "run_at": "06 Nov 2026, 03:55 PM IST"
 }

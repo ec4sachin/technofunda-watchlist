@@ -917,7 +917,7 @@
  },
  "ESCONET": {
   "market_cap": 474.0,
-  "price": 359.0,
+  "price": 360.0,
   "high_52w": 407.0,
   "low_52w": 91.2,
   "pe": 18.5,
@@ -3949,11 +3949,11 @@
   "as_of": "2026-11-03"
  },
  "544809": {
-  "market_cap": 228.0,
-  "price": 99.0,
+  "market_cap": 230.0,
+  "price": 100.0,
   "high_52w": 113.0,
   "low_52w": 75.2,
-  "pe": 6.18,
+  "pe": 6.24,
   "book_value": 40.5,
   "dividend_yield": 0.0,
   "roce": 84.0,
@@ -6005,11 +6005,11 @@
   "as_of": "2026-11-05"
  },
  "XTRANET": {
-  "market_cap": 1404.0,
-  "price": 269.0,
+  "market_cap": 1383.0,
+  "price": 265.0,
   "high_52w": 359.0,
   "low_52w": 120.0,
-  "pe": 29.1,
+  "pe": 28.7,
   "book_value": 58.1,
   "dividend_yield": 0.0,
   "roce": 32.8,
@@ -6878,7 +6878,7 @@
   "as_of": "2026-11-06"
  },
  "DEEPA": {
-  "market_cap": 2062.0,
+  "market_cap": 2057.0,
   "price": 214.0,
   "high_52w": 277.0,
   "low_52w": 165.0,
