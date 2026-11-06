@@ -16,7 +16,7 @@ import io
 import os
 import time
 import zipfile
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import requests
 
@@ -80,16 +80,24 @@ def parse(text):
     return out
 
 
+class FileMissing(Exception):
+    """The exchange answered, but there is no file for that day (holiday / not published)."""
+
+
 def _download(session, url):
     r = session.get(url, headers=UA, timeout=40)
-    if r.status_code != 200 or len(r.content) < 200:
-        return None
+    if r.status_code == 404 or (r.status_code == 200 and len(r.content) < 200):
+        raise FileMissing(url)
+    if r.status_code != 200:
+        raise requests.HTTPError(f"HTTP {r.status_code}")
     if url.endswith(".zip") or r.content[:2] == b"PK":
         with zipfile.ZipFile(io.BytesIO(r.content)) as z:
             name = next((n for n in z.namelist() if n.lower().endswith(".csv")), None)
             return z.read(name).decode("utf-8", "replace") if name else None
     text = r.content.decode("utf-8", "replace")
-    return None if text.lstrip().startswith("<") else text  # an HTML error page is not a price file
+    if text.lstrip().startswith("<"):   # an HTML page instead of a price file
+        raise FileMissing(url)
+    return text
 
 
 class Exchange:
@@ -97,21 +105,27 @@ class Exchange:
 
     def __init__(self, name, urls, session):
         self.name, self.urls, self.s, self.fails, self.ok = name, urls, session, 0, 0
+        self.last = ""   # "ok", "missing" (exchange says: no file that day) or "error" (could not ask)
 
     def day(self, d):
-        if self.fails >= 4:
+        if self.fails >= 4 or storage.out_of_time():
+            self.last = "error"
             return None
+        missing = 0
         for u in self.urls:
             try:
                 text = _download(self.s, u.format(ymd=d.strftime("%Y%m%d"), dmy=d.strftime("%d%m%Y")))
+            except FileMissing:
+                text, missing = None, missing + 1
             except (requests.RequestException, zipfile.BadZipFile, OSError):
                 text = None
             time.sleep(0.4)
             rows = parse(text) if text else []
             if rows:
-                self.fails, self.ok = 0, self.ok + 1
+                self.fails, self.ok, self.last = 0, self.ok + 1, "ok"
                 return rows
         self.fails += 1
+        self.last = "missing" if missing == len(self.urls) else "error"
         return None
 
 
@@ -158,6 +172,13 @@ def enrich(need, hists, session=None, max_days=MAX_DAYS_PER_RUN, exchanges=None)
     Returns (number of days downloaded, list of warnings)."""
     s = session or requests.Session()
     ex = exchanges or {"bse": Exchange("BSE", BSE_URLS, s), "nse": Exchange("NSE", NSE_URLS, s)}
+    # stocks whose code was in none of 20+ downloaded files: not asked again for 30 days (wrong / old code)
+    nf_name = os.path.join("ohlc", "_not_found.json")
+    not_found = storage.load_json(nf_name, {})
+    today = datetime.now().strftime("%Y-%m-%d")
+    old = (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d")
+    not_found = {k: v for k, v in not_found.items() if v >= old}
+    need = {k: v for k, v in need.items() if k not in not_found}
     caches = {sym: load_cache(sym) for sym in need}
     # which exchange file has each stock: NSE symbol when there is one, otherwise the BSE code
     where = {}
@@ -206,6 +227,12 @@ def enrich(need, hists, session=None, max_days=MAX_DAYS_PER_RUN, exchanges=None)
             c = (h.get("c") or [None] * len(pos))[pos[d]] if d in pos else None
             if c:
                 caches[sym][d] = (c, c, c, c, 0)
+    for sym, ds in no_trade.items():
+        if not caches[sym] and len(ds) >= 20:
+            not_found[sym] = today   # in none of 20+ real files: the code is wrong or old
+    if not_found or os.path.exists(storage._path(nf_name)):
+        os.makedirs(os.path.join(storage.DATA, "ohlc"), exist_ok=True)
+        storage.save_json(nf_name, not_found)
     for sym in where:
         if caches[sym]:
             save_cache(sym, caches[sym])

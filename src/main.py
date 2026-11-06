@@ -273,7 +273,7 @@ def monthly(sp, dt, rules_cfg, today, report, history, snaps):
             if m and fx.completeness(m) < 3:
                 m = None  # page opened but has (almost) no numbers: blocked/changed page, never judge on it
             if not m:
-                if drop_missing:
+                if drop_missing and not storage.screener_blocked():  # never remove because Screener blocked us
                     items.pop(sym)
                     report["removed"].append((sym, row["name"], f"{list_name}: Screener page not found"))
                     history.append({"date": today, "symbol": sym, "name": row["name"],
@@ -549,7 +549,9 @@ def main():
             report["warnings"].append(f"Strategy backtest failed: {e}")
         # Backtest on your own stock list in data/universe/ (when it changed, or weekly)
         try:
-            if u_due and not g_failed:
+            if u_due and g_stocks and len(g_charts) < 0.7 * len(g_stocks):
+                report["warnings"].append(f"Stock-list backtest postponed: prices for only {len(g_charts)} of {len(g_stocks)} stocks today")
+            elif u_due and not g_failed:
                 u = universe.run(strat_cfg, mood, today, now.year, stocks=g_stocks, charts=g_charts or None, missing=g_missing)
                 if u:
                     print(f"Stock-list backtest: {u['with_prices']} of {u['stocks']} stocks with prices")
@@ -572,7 +574,10 @@ def main():
         is_review_day = False
     if mode == "monthly" or (mode == "auto" and is_review_day):
         monthly(sp, dt, rules_cfg, today, report, history, snaps)
-        state["last_monthly"] = today
+        if storage.screener_blocked():   # Screener blocked us (or out of time): the review runs again tomorrow
+            report["warnings"].append("Screener blocked the monthly review part-way — it will run again on the next run")
+        else:
+            state["last_monthly"] = today
 
     storage.save_list("SP", sp)
     storage.save_list("DT", dt)
@@ -591,12 +596,19 @@ def main():
     alert_store = storage.load_json("alerts.json", {})
     alert_store["as_of"] = summary["run_at"]
     rules_cfg = {**rules_cfg, "_repo": os.getenv("GITHUB_REPOSITORY", "")}
-    web.build(sp, dt, summary, storage.load_history(), rules_cfg, snaps=snaps, charts=charts or None, alerts=alert_store,
-              strategies={"settings": strat_cfg, "book": book, "backtest": storage.load_json("strategy_backtest.json", {}),
-                          "universe": storage.load_json("universe_backtest.json", None),
-                          "log": storage.load_trade_log()})
-
-    msg = build_message(report, sp, dt, now.strftime("%d %b %Y"), str(settings.get("dashboard_url") or "").strip())
+    # the lists and data above are already saved: a problem in the page or the message must not lose them
+    try:
+        web.build(sp, dt, summary, storage.load_history(), rules_cfg, snaps=snaps, charts=charts or None, alerts=alert_store,
+                  strategies={"settings": strat_cfg, "book": book, "backtest": storage.load_json("strategy_backtest.json", {}),
+                              "universe": storage.load_json("universe_backtest.json", None),
+                              "log": storage.load_trade_log()})
+    except Exception as e:
+        print("Dashboard build failed:", e)
+        report["warnings"].append(f"Dashboard could not be updated today: {e}")
+    try:
+        msg = build_message(report, sp, dt, now.strftime("%d %b %Y"), str(settings.get("dashboard_url") or "").strip())
+    except Exception as e:
+        msg = f"📊 TechnoFunda Watchlist — {now.strftime('%d %b %Y')}\nThe daily message could not be built ({html.escape(str(e))}). Lists are saved; see the dashboard."
     tg.send(os.getenv("TELEGRAM_BOT_TOKEN"), os.getenv("TELEGRAM_CHAT_ID"), msg)
 
 

@@ -53,7 +53,7 @@ def _html_of(msg):
 def fetch_alert_stocks(gmail_user, app_password, alert_names, days_back, already_seen_ids):
     """Read recent alert emails. Returns (stocks_by_code, new_message_ids, per_alert_counts)."""
     wanted = {a.lower(): a for a in alert_names}
-    imap = imaplib.IMAP4_SSL("imap.gmail.com")
+    imap = imaplib.IMAP4_SSL("imap.gmail.com", timeout=60)
     imap.login(gmail_user, app_password)
     imap.select('"[Gmail]/All Mail"', readonly=True)
 

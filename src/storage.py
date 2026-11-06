@@ -2,6 +2,27 @@
 import csv
 import json
 import os
+import time
+
+START = time.time()
+TIME_BUDGET_MIN = 45   # GitHub stops the job at 60 minutes: no new slow downloads after this
+
+
+def out_of_time():
+    """True when the run has used its time budget (then slow downloads are left for the next run)."""
+    return (time.time() - START) / 60 > TIME_BUDGET_MIN
+
+
+# Screener answered "too many requests" (HTTP 429) several times in a row: stop asking it for this run
+SCREENER = {"blocked_in_a_row": 0}
+
+
+def screener_blocked():
+    return SCREENER["blocked_in_a_row"] >= 3 or out_of_time()
+
+
+def screener_answer(status):
+    SCREENER["blocked_in_a_row"] = SCREENER["blocked_in_a_row"] + 1 if status == 429 else 0
 
 DATA = os.path.join(os.path.dirname(__file__), "..", "data")
 FIELDS = ["symbol", "name", "added_on", "source", "last_close", "ema200",

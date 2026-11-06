@@ -35,12 +35,14 @@ def _call(token, method, timeout=30, **kw):
 def _chunks(text, size=3800):
     out, cur = [], ""
     for line in text.split("\n"):
-        while len(line) > size:  # a single very long line is cut into pieces
+        while len(line) > size:  # a single very long line is cut into pieces, at a ", " so no tag or &amp; is split
             if cur:
                 out.append(cur)
                 cur = ""
-            out.append(line[:size])
-            line = line[size:]
+            cut = line.rfind(", ", 0, size)
+            cut = cut + 2 if cut > size // 2 else size
+            out.append(line[:cut])
+            line = line[cut:]
         if len(cur) + len(line) + 1 > size and cur:
             out.append(cur)
             cur = ""

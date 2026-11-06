@@ -6,6 +6,8 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
+import storage
+
 BASE = "https://www.screener.in"
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -261,11 +263,14 @@ def snapshot(m, today=""):
 
 def _get(s, url):
     for attempt in range(3):
+        if storage.screener_blocked():
+            return None   # Screener is blocking us (or the run is out of time): try again on the next run
         try:
             r = s.get(url, headers=HEADERS, timeout=30)
         except requests.RequestException:
             time.sleep(5 * (attempt + 1))
             continue
+        storage.screener_answer(r.status_code)
         if r.status_code == 429:
             time.sleep(20 * (attempt + 1))
             continue

@@ -10,6 +10,7 @@ Commands you can send to your bot:
   /help                       this list
 """
 import html
+import math
 import os
 import re
 import subprocess
@@ -191,6 +192,12 @@ def process_commands(store, token, chat_id, sp, dt, now=None):
             if float(m.group(3).replace(",", "")) <= 0:
                 tg.send(token, chat_id, "The price must be more than 0.")
                 continue
+            px = round(float(m.group(3).replace(",", "")), 2)
+            same = next((x for x in store["alerts"] if x.get("status") == "active" and x.get("symbol") == sym and x.get("op") == op
+                         and abs(float(x.get("price") or 0) - px) < 0.005), None)
+            if same:
+                tg.send(token, chat_id, f"This alert is already set (alert {same['id']}).")
+                continue
             a = {"id": store["next_id"], "symbol": sym, "name": name, "op": op,
                  "price": float(m.group(3).replace(",", "")), "status": "active",
                  "created": now.strftime("%d %b %Y %I:%M %p"), "created_ts": now.isoformat(timespec="seconds"),
@@ -263,7 +270,9 @@ def ingest_requests(store, folder, token, chat_id, sp, dt, now=None, strategies=
                 price = float(req.get("price"))
             except (TypeError, ValueError):
                 price = 0.0
-            if sym and price > 0:
+            dup = any(x.get("status") == "active" and x.get("symbol") == sym and x.get("op") == op
+                      and abs(float(x.get("price") or 0) - round(price, 2)) < 0.005 for x in store["alerts"])
+            if sym and math.isfinite(price) and price > 0 and not dup:   # (the same alert twice: added once)
                 name = str(req.get("name") or name)[:80]
                 a = {"id": store["next_id"], "symbol": sym, "name": name, "op": op, "price": round(price, 2),
                      "status": "active", "created": now.strftime("%d %b %Y %I:%M %p"), "source": "dashboard",

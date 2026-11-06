@@ -11,6 +11,8 @@ import pandas as pd
 import requests
 import yfinance as yf
 
+import storage
+
 SCREENER_CHART = "https://www.screener.in/api/company/{cid}/chart/?q=Price-DMA50-DMA200-Volume&days={days}"
 # Screener sends weekly prices for long periods, so shorter periods are tried until daily prices come back
 SCREENER_DAYS = (730, 500, 365)
@@ -101,6 +103,8 @@ def adjust_corporate_actions(df):
             notes.append(f"{df.index[i]}: bad price day ignored")
             i += 1
             continue
+        if i == len(df) - 1 and not (has_o and pd.notna(df["Open"].iloc[i]) and df["Open"].iloc[i] > 0):
+            break   # newest day, close only: one price can't prove a split (it may be a bad tick)
         o = float(df["Open"].iloc[i]) if has_o and pd.notna(df["Open"].iloc[i]) and df["Open"].iloc[i] > 0 else cur
         f = _snap(prev / o, prev / cur) if prev > o and prev > cur else None
         g = _snap(o / prev, cur / prev) if o > prev and cur > prev else None
@@ -240,9 +244,12 @@ def screener_close_and_ema(company_id, period=200, session=None, pause=1.5):
         return None
     s = session or requests.Session()
     for days in SCREENER_DAYS:
+        if storage.screener_blocked():
+            return None
         try:
             r = s.get(SCREENER_CHART.format(cid=company_id, days=days), headers=HEADERS, timeout=30)
             time.sleep(pause)
+            storage.screener_answer(r.status_code)
             if r.status_code == 429:
                 time.sleep(15)
                 continue

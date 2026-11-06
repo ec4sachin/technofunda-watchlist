@@ -33,7 +33,7 @@ OUT = "universe_backtest.json"
 CODE_COLS = {"nse": ("nse code", "nse symbol", "nse", "symbol", "nse_code"),
              "bse": ("bse code", "bse", "bse_code", "scrip code", "security code")}
 NAME_COLS = ("name", "company", "company name", "stock")
-VERSION = "6"             # change to run the backtest again with new rules
+VERSION = "7"             # change to run the backtest again with new rules
 PCT_TEST = (6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
 MAX_MCAP_CR = 25000        # only companies below ₹25,000 crore market cap (when the file has a market-cap column)
 
@@ -182,7 +182,7 @@ def symbols():
 def _yahoo(stocks, span):
     """{symbol: chart} from Yahoo: batches of 80, then the misses again in batches of 20 (Yahoo often drops some)."""
     tick = {s: (f"{nse}.NS" if nse else f"{bse}.BO") for s, _, nse, bse in stocks}
-    older = {f"{nse}.NS": f"{bse}.BO" for s, _, nse, bse in stocks if nse and bse}
+    older = {f"{nse}.NS": f"{bse}.BO" for s, _, nse, bse in stocks if nse and bse} if span == "max" else {}
     charts = {}
     todo = sorted(set(tick.values()))
     for size in (80, 20):
@@ -208,13 +208,19 @@ def _yahoo(stocks, span):
 
 def _company_id(code, session):
     import fundamentals as fx
+    if storage.screener_blocked():
+        return None
     try:
         r = session.get(f"https://www.screener.in/company/{code}/", headers={"User-Agent": prices.HEADERS["User-Agent"]}, timeout=30)
-        if r.status_code == 429:
-            time.sleep(20)
-            return None
-        m = fx.COMPANY_ID_RE.search(r.text) if r.status_code == 200 else None
-        return (m.group(1) or m.group(2)) if m else ""
+        storage.screener_answer(r.status_code)
+        if r.status_code == 404:
+            return ""             # Screener has no page for this code
+        if r.status_code != 200:
+            if r.status_code == 429:
+                time.sleep(20)
+            return None           # blocked / server problem: ask again on a later run
+        m = fx.COMPANY_ID_RE.search(r.text)
+        return (m.group(1) or m.group(2)) if m else None
     except Exception:
         return None
 
@@ -246,8 +252,8 @@ def _screener_closes(codes, session, limit=MAX_SCREENER_PER_RUN):
         if os.path.exists(p) and (got.get(code, "") >= old or asked >= limit):
             out[code] = saved(code)
             continue
-        if asked >= limit or ids.get(code) == "":
-            continue  # later run / not on Screener
+        if asked >= limit or ids.get(code) == "" or storage.screener_blocked():
+            continue  # later run / not on Screener / Screener blocking us today
         asked += 1
         cid = ids.get(code) or _company_id(code, session)
         time.sleep(1.0)
@@ -275,39 +281,90 @@ def _screener_closes(codes, session, limit=MAX_SCREENER_PER_RUN):
     return out
 
 
+def _save_day(folder, ds, rows, want, keep=None):
+    """Write one day file with the rows of `want` (plus rows already saved for other codes in `keep`)."""
+    with open(os.path.join(folder, f"{ds}.csv"), "w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        w.writerow(["code", "open", "high", "low", "close", "volume"])
+        done = set()
+        for r in rows:
+            if r["code"] in want and r["code"] not in done:
+                done.add(r["code"])
+                w.writerow([r["code"], round(r["open"], 2), round(r["high"], 2), round(r["low"], 2), round(r["close"], 2), r["volume"]])
+        for code, row in (keep or {}).items():
+            if code not in done:
+                w.writerow([code, *row])
+
+
 def _bse_days(codes, session, today=None, limit=MAX_BSE_FILES_PER_RUN, exchange=None):
     """BSE daily price files -> data/bse_days/YYYY-MM-DD.csv with only the rows of `codes`.
+    Codes added to the list later get the days already saved filled in too (a few hundred files per run).
     Returns {code: {date: (o, h, l, c, v)}}."""
     folder = os.path.join(storage.DATA, DAY_DIR)
     os.makedirs(folder, exist_ok=True)
     pt = os.path.join(folder, "no_file.txt")
     no_file = set(open(pt).read().split()) if os.path.exists(pt) else set()
-    have = {os.path.basename(f)[:10] for f in glob.glob(os.path.join(folder, "????-??-??.csv"))}
+    files = {os.path.basename(f)[:10] for f in glob.glob(os.path.join(folder, "????-??-??.csv"))}
     ex = exchange or bhav.Exchange("BSE", bhav.BSE_URLS, session)
-    now = today or datetime.now()
+    now = today or datetime.now(prices.IST).replace(tzinfo=None)
     want = set(codes)
+    # which codes the saved day files cover. Files saved before this note existed: the codes found in them.
+    cov_name = os.path.join(DAY_DIR, "covered.json")
+    cov = storage.load_json(cov_name, None)
+    if not isinstance(cov, dict):
+        found = set()
+        for f in glob.glob(os.path.join(folder, "????-??-??.csv")):
+            with open(f, newline="", encoding="utf-8") as fh:
+                found |= {r["code"] for r in csv.DictReader(fh)}
+        cov = {"codes": sorted(found), "refill": {}}
+    covered = set(cov.get("codes", []))
+    refill = cov.get("refill") or {}
+    if not files:
+        covered, refill = set(want), {}          # nothing saved yet: every new file has all codes
+    new_codes = want - covered - set(refill.get("codes", []))
+    if new_codes:   # codes that joined the list: the days already saved get their rows too
+        refill = {"codes": sorted(set(refill.get("codes", [])) | new_codes), "done": []}
     tried, new_missing = 0, []
     for k in range(BSE_DAYS_BACK):
         d = now - timedelta(days=k)
         ds = d.strftime("%Y-%m-%d")
-        if d.weekday() >= 5 or ds in have or (ds in no_file and k > 5):
+        if d.weekday() >= 5 or ds in files or (ds in no_file and k > 5):
             continue
-        if tried >= limit or ex.fails >= 4:
+        if tried >= limit or ex.fails >= 4 or storage.out_of_time():
             break
-        if k == 0 and (now.hour * 60 + now.minute) < 18 * 60 and today is None:
-            continue  # today's file comes out in the evening
+        if k == 0 and (now.hour * 60 + now.minute) < 18 * 60:
+            continue  # today's file comes out in the evening (India time)
         tried += 1
         rows = ex.day(d)
         if not rows:
-            new_missing.append(ds)
+            if getattr(ex, "last", "missing") == "missing":
+                new_missing.append(ds)   # the exchange says there is no file: holiday
             continue
-        with open(os.path.join(folder, f"{ds}.csv"), "w", newline="", encoding="utf-8") as f:
-            w = csv.writer(f)
-            w.writerow(["code", "open", "high", "low", "close", "volume"])
-            for r in rows:
-                if r["code"] in want:
-                    w.writerow([r["code"], round(r["open"], 2), round(r["high"], 2), round(r["low"], 2), round(r["close"], 2), r["volume"]])
-        have.add(ds)
+        _save_day(folder, ds, rows, want)
+        files.add(ds)
+        if refill:
+            refill.setdefault("done", []).append(ds)   # a new file already has every code
+    # fill in older saved days for codes that joined the list later
+    if refill.get("codes"):
+        add, done = set(refill["codes"]), set(refill.get("done", []))
+        for ds in sorted(files - done, reverse=True):
+            if tried >= limit or ex.fails >= 4 or storage.out_of_time():
+                break
+            tried += 1
+            rows = ex.day(datetime.strptime(ds, "%Y-%m-%d"))
+            if rows is None and getattr(ex, "last", "") == "error":
+                continue
+            keep = {}
+            with open(os.path.join(folder, f"{ds}.csv"), newline="", encoding="utf-8") as fh:
+                for r in csv.DictReader(fh):
+                    keep[r["code"]] = [r["open"], r["high"], r["low"], r["close"], r["volume"]]
+            _save_day(folder, ds, rows or [], add, keep)
+            done.add(ds)
+        if files <= done:
+            covered |= add
+            refill = {}
+        else:
+            refill["done"] = sorted(done)
     if new_missing:
         with open(pt, "w") as f:
             f.write("\n".join(sorted(no_file | set(new_missing))))
@@ -326,6 +383,7 @@ def _bse_days(codes, session, today=None, limit=MAX_BSE_FILES_PER_RUN, exchange=
                                                              float(r["close"]), int(float(r["volume"] or 0)))
                     except ValueError:
                         continue
+    storage.save_json(cov_name, {"codes": sorted(covered), "refill": refill})
     return out
 
 
@@ -335,48 +393,57 @@ def _ratio(r, tol=0.03):
     return best[0] if best[1] <= tol else r
 
 
-def _raw_adjust(days):
-    """BSE files are not adjusted for splits / bonuses. Small BSE stocks have price bands of 20% or less, so an
-    overnight gap of more than 22% (open AND close) is a split / bonus: older candles are divided by that ratio."""
-    ds = sorted(days)
-    rows = {d: list(days[d]) for d in ds}
-    for k in range(1, len(ds)):
-        prev, cur = rows[ds[k - 1]], rows[ds[k]]
-        if prev[3] <= 0 or cur[0] <= 0 or cur[3] <= 0:
+def _raw_adjust(rows, known=None):
+    """rows: list of [o, h, l, c, v] in date order (o is NaN for close-only days). Small BSE stocks have price
+    bands of 20% or less: a 20% fall is a ratio of 1.25 (100 -> 80), a 20% rise 1.20. So an overnight gap
+    beyond the band - a fall of more than 22% (ratio over 1.28) or a rise of more than 24% - at the open AND
+    the close of a real candle is a split / bonus: all older rows (close-only ones too) are divided by that
+    ratio. Changes rows in place.
+    known[k] True = Screener's adjusted close exists for that day: a gap between two such days is real (Screener
+    already shows any split there), so it is never treated as a split."""
+    for k in range(1, len(rows)):
+        if known and known[k] and known[k - 1]:
             continue
+        prev, cur = rows[k - 1], rows[k]
+        if not (prev[3] > 0) or not (cur[0] > 0) or not (cur[3] > 0):
+            continue   # (NaN compares False: close-only day)
         ro, rc = prev[3] / cur[0], prev[3] / cur[3]
         for up in (False, True):
             a, b = (1 / ro, 1 / rc) if up else (ro, rc)
-            if a > 1.22 and b > 1.22 and abs(a / b - 1) < 0.08:
+            lim = 1.24 if up else 1.28
+            if a > lim and b > lim and abs(a / b - 1) < 0.08:
                 f = _ratio((a * b) ** 0.5)
                 f = 1 / f if up else f
-                for d in ds[:k]:
-                    o, h, l, c, v = rows[d]
-                    rows[d] = [o / f, h / f, l / f, c / f, v * f]
+                for r in rows[:k]:
+                    r[0], r[1], r[2], r[3] = r[0] / f, r[1] / f, r[2] / f, r[3] / f
+                    r[4] = r[4] * f
                 break
-    return {d: tuple(rows[d]) for d in ds}
+    return rows
 
 
 def bse_chart(closes, days):
-    """Screener closes (older part, close only) + BSE daily candles (real) -> chart history like Yahoo's."""
+    """Screener closes (older part, close only) + BSE daily candles (real) -> chart history like Yahoo's.
+    1) BSE files have raw prices, Screener's closes are adjusted for splits / bonuses: on days with both, the
+       raw candle is scaled to Screener's close (before Screener's first day its first factor is used, after
+       its last day the last factor).
+    2) Then a split / bonus that Screener does not cover yet (before or after its days) is found from the
+       overnight gap and all older prices are divided by it."""
     dates = sorted(set(closes) | set(days))
     if not dates:
         return None
     nan = float("nan")
-    rows = []
-    # BSE files have raw prices; Screener's closes are adjusted for splits / bonuses. On days with both,
-    # the candle is scaled to Screener's close; after Screener's last day the last factor is used.
-    days = _raw_adjust(days)
     both = [d for d in dates if d in days and d in closes and days[d][3] > 0 and closes[d] > 0]
-    f = closes[both[0]] / days[both[0]][3] if both else 1.0   # before Screener's first day: its first factor
+    f = closes[both[0]] / days[both[0]][3] if both else 1.0
+    rows = []
     for d in dates:
         if d in days:
             o, h, l, c, v = days[d]
             if d in closes and c > 0 and closes[d] > 0:
                 f = closes[d] / c
-            rows.append((o * f, h * f, l * f, c * f, v / f if f else v))
+            rows.append([o * f, h * f, l * f, c * f, v / f if f else v])
         else:
-            rows.append((nan, nan, nan, closes[d], nan))
+            rows.append([nan, nan, nan, closes[d], nan])
+    _raw_adjust(rows, [d in closes for d in dates])
     df = pd.DataFrame(rows, columns=["Open", "High", "Low", "Close", "Volume"], index=pd.to_datetime(dates), dtype=float)
     res = prices._ema_result(df, 200)
     return res[3] if res else None

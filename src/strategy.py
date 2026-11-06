@@ -114,6 +114,10 @@ def _clean(s, old=None):
         pct = float(s.get("pct", old.get("pct", DEF_PCT)))
     except (TypeError, ValueError):
         pct = DEF_PCT
+    if not math.isfinite(cap):
+        cap = float(old.get("capital", DEF_CAPITAL))   # "nan" / "inf" are not numbers
+    if not math.isfinite(pct):
+        pct = float(old.get("pct", DEF_PCT))
     out["capital"] = min(max(cap, 10_000.0), 1_000_000_000.0)
     out["pct"] = min(max(pct, 1.0), 100.0)
     out.pop("amount", None)
@@ -297,6 +301,8 @@ def _apply_switch(t, df, j, mood):
         return
     if want != t["type"]:
         t["type"] = want
+        # exit memory of the other mode is not carried over (EMA 10 signal candle, closes below EMA 50)
+        t["below50"], t["signal_low"], t["signal_date"] = 0, None, None
         if not t["booked"]:
             t["target"] = round(t["entry"] * (1 + RULES[want]["target"]), 2)
         t.setdefault("switches", []).append(f"{df.index[j]}: → {want}")
@@ -317,7 +323,9 @@ def manage(t, df, j, mood=None):
         s = _sell(t, day, t["remaining"], min(o, t["stop"]), t.get("stop_reason", "Stop loss"))
         return [s] if s else []
     # 50% at +20%
+    booked_today = False
     if not t["booked"] and h >= t["target"]:
+        booked_today = True
         half = int(t["qty"] * BOOK_FRACTION) or t["qty"]
         s = _sell(t, day, half, max(o, t["target"]), tgt_txt)
         t["booked"] = True
@@ -338,7 +346,9 @@ def manage(t, df, j, mood=None):
         mult = strong if (m and m[0]) else weak
         level = float(getattr(df, ema_name)[j - 1]) * mult
         if h >= level:
-            s = _sell(t, day, t["remaining"], max(o, level),
+            # on the booking day the climax order only starts after the target fill: never below the target
+            px = max(o, level, t["target"]) if booked_today else max(o, level)
+            s = _sell(t, day, t["remaining"], px,
                       f"Climax exit ({mult:g}× EMA {ema_name[1:]} = ₹{level:,.2f})")
             if s:
                 done.append(s)
@@ -489,58 +499,86 @@ def run(settings, book, charts, sp, dt, today="", mood=None, growth=None):
     frames = {s: f for s, f in frames.items() if f is not None}
     growth = growth or {}
     names = {s: (sp.get(s) or dt.get(s) or {}).get("name") or growth.get(s) or s for s in frames}
+    growth_loaded = growth is not None
     for st in settings.get("strategies", []):
         sid = st.get("id")
-        if not st.get("on") or st.get("type") not in TRADING_TYPES:
+        if st.get("type") not in TRADING_TYPES:
             continue
         lst = st.get("list", "SP")
+        mine = {t["symbol"]: t for t in book["open"] if t["strategy"] == sid}
+        on = bool(st.get("on"))
+        if not on and not mine:
+            continue  # OFF and nothing open. (OFF with open trades: they are still managed until they close)
         scan = set(sp) if lst == "SP" else set(dt) if lst == "DT" else set(growth) if lst == "GROWTH" else set(sp) | set(dt)
+        if not on:
+            scan = set()
         seen = book["last_day"].get(sid)
         if not isinstance(seen, dict):
             seen = book["last_day"][sid] = {}
-        mine = {t["symbol"]: t for t in book["open"] if t["strategy"] == sid}
 
         def close(t):
             real = book.setdefault("realized", {})
             if sid not in real:
                 real[sid] = sum(x["pnl"] for x in book["closed"] if x["strategy"] == sid)
             real[sid] = round(real[sid] + t["pnl"], 2)
+            # exact counts per strategy (the closed list itself is shortened)
+            stats = book.setdefault("stats", {})
+            if sid not in stats:
+                old = [x for x in book["closed"] if x["strategy"] == sid]
+                stats[sid] = {"closed": len(old), "wins": sum(1 for x in old if x["pnl"] > 0)}
+            stats[sid]["closed"] += 1
+            stats[sid]["wins"] += t["pnl"] > 0
             book["open"].remove(t)
             book["closed"].append(t)
             mine.pop(t["symbol"], None)
 
-        def first(item):  # stocks whose setup is best (RANK) get the free money first
-            sym, df = item
-            plan = swing_setup(df, len(df) - 2) if len(df) > 2 and sym not in mine else None
-            return (0 if plan else 1, rank_value(plan, st.get("rank")) if plan else 0, sym)
-
-        for sym, df in sorted(((k, f) for k, f in frames.items() if k in scan or k in mine), key=first):
-            # each stock remembers its own last checked candle; a stock seen for the first time
-            # (strategy just switched ON, or newly added to the list) starts from its next new candle
+        # new candles of each stock since its last checked one. A stock seen for the first time (strategy just
+        # switched ON, or newly added to the list) starts from its next new candle. Open trades get every missed
+        # candle (so no stop loss is missed); other stocks at most the last MAX_CATCHUP_DAYS.
+        todo = {}
+        for sym, df in frames.items():
+            if sym not in scan and sym not in mine:
+                continue
             since = seen.get(sym) or df.index[-1]
-            seen[sym] = df.index[-1]
-            idx = [k for k, d in enumerate(df.index) if d > since][-MAX_CATCHUP_DAYS:]
-            for j in idx:
-                t = mine.get(sym)
-                if t and t["entry_date"] < df.index[j]:
-                    before = t["type"]
-                    sells = manage(t, df, j, mood)
-                    if t["type"] != before:
-                        events.setdefault("switched", []).append({"symbol": sym, "name": t["name"], "strategy": sid, "to": t["type"],
-                                                                  "target": None if t["booked"] else t["target"], "date": df.index[j]})
-                    for s in sells:
-                        events["exits"].append(s)
-                        events["log"].append(_log_sell(s, t))
-                    if t["status"] == "closed":
-                        close(t)
+            seen[sym] = max(since, df.index[-1])   # never backwards (a chart one day short must not repeat a day)
+            js = [k for k, d in enumerate(df.index) if d > since]
+            if sym not in mine:
+                js = js[-MAX_CATCHUP_DAYS:]
+            if js:
+                todo[sym] = {df.index[k]: k for k in js}
+        # day by day (all stocks), exits first, then the buy signals in rank order - like real trading
+        for day in sorted({d for x in todo.values() for d in x}):
+            exited = set()
+            for sym in sorted(todo):
+                j, t = todo[sym].get(day), mine.get(sym)
+                if j is None or not t or t["entry_date"] >= day:
                     continue
-                if t or sym not in scan:
+                df = frames[sym]
+                before = t["type"]
+                sells = manage(t, df, j, mood)
+                if t["type"] != before:
+                    events.setdefault("switched", []).append({"symbol": sym, "name": t["name"], "strategy": sid, "to": t["type"],
+                                                              "target": None if t["booked"] else t["target"], "date": day})
+                for s_ in sells:
+                    events["exits"].append(s_)
+                    events["log"].append(_log_sell(s_, t))
+                if t["status"] == "closed":
+                    close(t)
+                    exited.add(sym)
+            signals = []
+            for sym in sorted(todo):
+                j = todo[sym].get(day)
+                if j is None or j < 1 or sym in mine or sym in exited or sym not in scan:
                     continue
-                if not swing_setup(df, j - 1) or df.h[j] < swing_setup(df, j - 1)["trigger"] or not liquid(st, df, j - 1):
-                    continue
+                df = frames[sym]
+                plan = swing_setup(df, j - 1)
+                if plan and df.h[j] >= plan["trigger"] and liquid(st, df, j - 1):
+                    signals.append((rank_value(plan, st.get("rank")), sym, j))
+            for _, sym, j in sorted(signals):
+                df = frames[sym]
                 money = trade_size(st, capital_of(st, book))
                 if not money:
-                    events.setdefault("skipped", []).append({"symbol": sym, "name": names.get(sym, sym), "date": df.index[j], "strategy": sid})
+                    events.setdefault("skipped", []).append({"symbol": sym, "name": names.get(sym, sym), "date": day, "strategy": sid})
                     continue  # no free capital (all money in open trades)
                 t, sells = try_entry(st, sym, names.get(sym, sym), df, j, money=money, mood=mood)
                 if not t:
@@ -550,20 +588,21 @@ def run(settings, book, charts, sp, dt, today="", mood=None, growth=None):
                 events["entries"].append({"symbol": sym, "name": t["name"], "qty": t["qty"], "price": t["entry"],
                                           "stop": t["stop"], "target": t["target"], "strategy": sid, "regime": t.get("regime", "")})
                 events["log"].append(_log_buy(t))
-                for s in sells:
-                    events["exits"].append(s)
-                    events["log"].append(_log_sell(s, t))
+                for s_ in sells:
+                    events["exits"].append(s_)
+                    events["log"].append(_log_sell(s_, t))
                 if t["status"] == "closed":
                     close(t)
-        for sym in [x for x in seen if (x not in frames or x not in scan) and x not in mine]:
-            seen.pop(sym)  # stock left the lists
+        if lst != "GROWTH" or growth_loaded:   # (growth prices missing today: keep its stocks' last checked days)
+            for sym in [x for x in seen if (x not in frames or x not in scan) and x not in mine]:
+                seen.pop(sym)  # stock left the lists
         for sym, t in mine.items():  # last price of open trades (for stocks not in SP / DT, e.g. the growth list)
             df = frames.get(sym)
             if df is not None:
                 t["ltp"], t["ltp_date"] = round(float(df.c[-1]), 2), df.index[-1]
         # setups for the next session: a buy-stop to place today
         ready = []
-        for sym in sorted(scan):
+        for sym in sorted(scan if on else ()):
             df = frames.get(sym)
             if df is None or sym in mine:
                 continue
@@ -584,7 +623,13 @@ def run(settings, book, charts, sp, dt, today="", mood=None, growth=None):
                 {"above": m[0], "close": m[1], "ema50": m[2], "date": m[3], "rules": "Positional" if m[0] else "Swing"} if m else None)
         book.setdefault("capital", {})[sid] = capital_of(st, book)
         events.setdefault("capital", {})[sid] = book["capital"][sid]
-    book["closed"] = book["closed"][-500:]
+    # keep the last 300 closed trades of each strategy (one busy strategy must not push out the others)
+    keep, n = [], {}
+    for t in reversed(book["closed"]):
+        n[t["strategy"]] = n.get(t["strategy"], 0) + 1
+        if n[t["strategy"]] <= 300:
+            keep.append(t)
+    book["closed"] = keep[::-1]
     return events
 
 
@@ -628,31 +673,41 @@ def portfolio(trades, start, end="9999", capital=DEF_CAPITAL, pct=DEF_PCT, rank=
     cash, opn, taken, skipped, wins, months, rows = float(capital), [], 0, 0, 0, {}, []
 
     def settle(upto):
+        """Money comes back on each sell day (the 50% booking frees its part at once, as in paper trading)."""
         nonlocal cash, opn, wins
         keep = []
-        for x in sorted(opn, key=lambda x: x["end"]):
-            if x["end"] <= upto:
-                gain = x["money"] * x["ret"]
-                cash += x["money"] + gain
-                months[x["end"][:7]] = round(months.get(x["end"][:7], 0) + gain, 2)
-                wins += gain > 0
-                rows.append({"name": x["name"], "symbol": x["symbol"], "entry_date": x["d"], "closed_on": x["end"], "open": x["open"],
-                             "money": round(x["money"]), "pnl": round(gain, 2), "pnl_pct": round(x["ret"] * 100, 2)})
-            else:
+        for x in opn:
+            while x["parts"] and x["parts"][0][0] <= upto:
+                d, frac, ret = x["parts"].pop(0)
+                back, gain = x["money"] * frac, x["money"] * ret
+                cash += back + gain
+                x["out"] -= back
+                x["gain"] += gain
+                months[d[:7]] = round(months.get(d[:7], 0) + gain, 2)
+            if x["parts"]:
                 keep.append(x)
+                continue
+            wins += x["gain"] > 0
+            rows.append({"name": x["name"], "symbol": x["symbol"], "entry_date": x["d"], "closed_on": x["end"], "open": x["open"],
+                         "money": round(x["money"]), "pnl": round(x["gain"], 2), "pnl_pct": round(x["gain"] / x["money"] * 100, 2)})
         opn = keep
 
     for t in todo:
         settle(t["entry_date"])
-        equity = cash + sum(x["money"] for x in opn)
+        equity = cash + sum(x["out"] for x in opn)
         size = equity * pct / 100
         if cash < size * 0.999:
             skipped += 1
             continue
         cash -= size
         still = t["status"] != "closed"
-        total = t["pnl"] + (t.get("open_pnl", 0) if still else 0)
-        opn.append({"end": t.get("last_date", "9999-12") if still else t["closed_on"], "money": size, "ret": total / (t["entry"] * t["qty"]),
+        base = t["entry"] * t["qty"]
+        parts = sorted((x["date"], x["qty"] / t["qty"], x["pnl"] / base) for x in t.get("exits", []))
+        if still:   # the rest at the last price
+            parts.append((t.get("last_date", "9999-12"), t["remaining"] / t["qty"], t.get("open_pnl", 0) / base))
+        if not parts:
+            parts = [(t.get("closed_on") or "9999-12", 1.0, t["pnl"] / base)]
+        opn.append({"end": parts[-1][0], "money": size, "out": size, "gain": 0.0, "parts": parts,
                     "name": t["name"], "symbol": t["symbol"], "d": t["entry_date"], "open": still})
         taken += 1
     settle("9999")
