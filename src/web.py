@@ -1193,7 +1193,7 @@ function moodHTML(t){
   const m = (SD.mood || {})[t.id];
   if (!m) return `<div class="st-note">🧭 Nifty Smallcap 100 not checked yet — it appears after the next robot run.</div>`;
   return `<div class="st-note mood ${m.above ? "pos" : "neg"}">🧭 <b>Nifty Smallcap 100 ${inr0(m.close).slice(1)}</b> is <b>${m.above ? "above" : "below"}</b> its EMA 50 (${inr0(m.ema50).slice(1)}) on ${esc(m.date)}
-    → open trades follow the <b>${esc(m.rules)}</b> exit rules today (${m.rules === "Positional" ? "5 closes below EMA 50 sell all before +30%, 50% at +30%, rest on 5 closes below EMA 50" : "50% at +20%, EMA 10 trail, 10-day time stop"}).
+    → open trades follow the <b>${esc(m.rules)}</b> exit rules today (${m.rules === "Positional" ? "50% at +30%, rest on 2 closes below EMA 50" : "50% at +20%, EMA 10 trail, 10-day time stop"}).
     The robot checks the index every day, so a trade switches rules when small caps turn strong or weak.</div>`;
 }
 function perfHTML(t){

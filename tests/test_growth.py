@@ -131,7 +131,9 @@ def test_positional_exit_after_20pct_gain():
     df = strategy._frame(hist_from(path, rng=0.001))
     j0 = len(closes)
     st = dict(next(d for d in strategy.DEFAULT if d["id"] == "positional"))
-    assert strategy.RULES["positional"]["ema50_after_gain"] is None   # rule is OFF; tested here switched on
+    P = strategy.RULES["positional"]
+    assert P["ema50_after_gain"] is None and P["ema50_before_target"] is False and P["ema50_closes"] == 2   # original rule
+    P.update(ema50_closes=5)                                                           # options tested here, then restored
     strategy.RULES["positional"]["ema50_after_gain"] = 0.20
     t, _ = strategy.try_entry(st, "ABC", "ABC", df, j0, mode="backtest", money=100000)
     assert t["stop"] < low, (t["stop"], low)
@@ -141,10 +143,8 @@ def test_positional_exit_after_20pct_gain():
             break
     assert not t["booked"] and t["status"] == "closed" and len(t["exits"]) == 1, t["exits"]
     assert "after +20% gain" in t["exits"][0]["reason"] and t["exits"][0]["qty"] == t["qty"], t["exits"]
-    # rule now ON: before the +30% target, 5 closes below EMA 50 sell 100% (no +20% needed)
-    assert strategy.RULES["positional"]["ema50_closes"] == 5
-    strategy.RULES["positional"]["ema50_after_gain"] = None
-    assert strategy.RULES["positional"]["ema50_before_target"] is True
+    # option: before the +30% target, 5 closes below EMA 50 sell 100% (no +20% needed)
+    P.update(ema50_after_gain=None, ema50_before_target=True)
     flat = closes + [trig * 1.01] + [trig * 1.05] * 40
     low2 = float(strategy._frame(hist_from(flat)).e50[-1]) * 0.99
     df2 = strategy._frame(hist_from(flat + [low2] * 5, rng=0.001))
@@ -159,8 +159,13 @@ def test_positional_exit_after_20pct_gain():
     for j in range(j0 + 1, len(df3)):
         strategy.manage(t3, df3, j)
     assert t3["status"] == "open", t3["exits"]
-    strategy.RULES["positional"]["ema50_after_gain"] = None
-    print("Positional exit after +20% gain (switched off) OK:", t["exits"][0]["reason"], t["exits"][0]["price"])
+    P.update(ema50_after_gain=None, ema50_before_target=False, ema50_closes=2)
+    t4, _ = strategy.try_entry(st, "ABC", "ABC", df2, j0, mode="backtest", money=100000)   # original rule: kept
+    for j in range(j0 + 1, len(df2)):
+        strategy.manage(t4, df2, j)
+    assert t4["status"] == "open", t4["exits"]
+    P.update(ema50_after_gain=None, ema50_before_target=False, ema50_closes=2)
+    print("Positional exit options (all switched off) OK:", t["exits"][0]["reason"], t["exits"][0]["price"])
 
 
 def test_monthly_check():

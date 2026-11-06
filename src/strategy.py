@@ -33,7 +33,7 @@ LISTS = ("SP", "DT", "BOTH", "GROWTH")   # GROWTH = your own stock list in data/
 DEFAULT = [{"id": "swing", "name": "Swing Strategy", "type": "swing", "list": "SP", "capital": 1000000, "pct": 13, "rank": "low_risk",
             "on": False, "note": "EMA stack + tight 5-candle base breakout", "added": ""},
            {"id": "positional", "name": "Positional Trading", "type": "positional", "list": "SP", "capital": 1000000, "pct": 12, "rank": "low_risk",
-            "on": False, "note": "Same entry · 50% at +30% · before the target 5 closes below EMA 50 sell 100% · after it the rest exits on 5 closes below EMA 50", "added": ""},
+            "on": False, "note": "Same entry · 50% at +30% · rest exits on 2 closes below EMA 50", "added": ""},
            {"id": "switch", "name": "Smart Switch", "type": "switch", "list": "SP", "capital": 1000000, "pct": 12, "rank": "low_risk",
             "on": False, "note": "Same entry · exits follow Smallcap 100 daily: above EMA 50 → Positional, below → Swing", "added": ""},
            {"id": "growth_switch", "name": "Smart Switch · Growth list", "type": "switch", "list": "GROWTH", "capital": 1000000, "pct": 8,
@@ -53,13 +53,14 @@ RULES = {
     # climax: after the 50% booking, sell the rest when price runs far above its EMA (rule added 5 Nov 2026).
     # (ema, level when Smallcap 100 is above its EMA 50, level when below / unknown) - "middle path" chosen 5 Nov 2026
     "swing": {"target": 0.20, "trail": "ema10_low", "time_stop": (TIME_STOP_DAYS, TIME_STOP_GAIN), "climax": ("e10", 1.24, 1.20)},
-    # Positional Trading (given 4 Nov 2026): 50% at +30%; the rest exits after 5 daily closes below EMA 50 in a row (2 until 6 Nov 2026);
+    # Positional Trading (given 4 Nov 2026): 50% at +30%; the rest exits after 2 daily closes below EMA 50 in a row;
     # before the target the stop is 1% below the base low (and never more than 6% below the buy price)
     # ema50_after_gain: e.g. 0.20 = once +20% above the buy price, 2 closes below EMA 50 exit 100% before the target
     # (tested 6 Nov 2026, not used - kept OFF on request)
-    # ema50_before_target (6 Nov 2026, ON): until the +30% target is reached, 5 closes below EMA 50 sell 100%
+    # ema50_before_target / ema50_closes_before: e.g. True / 5 = until the +30% target, 5 closes below EMA 50 sell 100%
+    # (tested 6 Nov 2026: original rule had the best results, so OFF). ema50_closes = closes below EMA 50 after booking
     "positional": {"target": 0.30, "trail": "ema50_2close", "time_stop": None, "climax": ("e50", 1.48, 1.40), "ema50_after_gain": None,
-                   "ema50_before_target": True, "ema50_closes": 5},
+                   "ema50_before_target": False, "ema50_closes": 2},
 }
 COST_PER_SIDE = 0.002      # brokerage + taxes + slippage, about 0.2% on each buy and each sell
 # When several stocks give a buy signal on the same day and there is not enough free money for all,
@@ -348,10 +349,11 @@ def manage(t, df, j, mood=None):
         gained = bool(gain) and float(t.get("peak") or 0) >= t["entry"] * (1 + gain)
         if t["booked"] or gained or rules.get("ema50_before_target"):
             t["below50"] = t.get("below50", 0) + 1 if c < float(df.e50[j]) else 0
-            if t["below50"] >= rules.get("ema50_closes", 2):
+            need = rules.get("ema50_closes", 2) if t["booked"] else rules.get("ema50_closes_before", rules.get("ema50_closes", 2))
+            if t["below50"] >= need:
                 s = _sell(t, day, t["remaining"], c, f"Trailing EMA 50 exit ({rules.get('ema50_closes', 2)} closes below)" if t["booked"]
-                          else f"EMA 50 exit after +{gain * 100:g}% gain ({rules.get('ema50_closes', 2)} closes below)" if gained
-                          else f"EMA 50 exit before target ({rules.get('ema50_closes', 2)} closes below)")
+                          else f"EMA 50 exit after +{gain * 100:g}% gain ({need} closes below)" if gained
+                          else f"EMA 50 exit before target ({need} closes below)")
                 if s:
                     done.append(s)
         return done
