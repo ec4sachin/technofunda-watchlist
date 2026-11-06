@@ -1,35 +1,8 @@
 {
  "added": [],
  "rejected": [],
- "to_dt": [
-  [
-   "ASHIANA",
-   "Ashiana Housing",
-   "close 348.05 < 200 EMA 352.32"
-  ]
- ],
- "to_sp": [
-  [
-   "DEEPA",
-   "Deepa Jewellers",
-   "close 219.18 > 20 EMA 218.16"
-  ],
-  [
-   "DHABRIYA",
-   "Dhabriya Poly.",
-   "close 472.95 > 20 EMA 463.4"
-  ],
-  [
-   "GOLDIAM",
-   "Goldiam Intl.",
-   "close 322.25 > 200 EMA 311.68"
-  ],
-  [
-   "KRYSTAL",
-   "Krystal Integrat",
-   "close 616.15 > 200 EMA 606.09"
-  ]
- ],
+ "to_dt": [],
+ "to_sp": [],
  "removed": [],
  "unchecked": [],
  "no_price": [],
@@ -87,6 +60,16 @@
    "close 242.5 vs 20 EMA 216.88 → SP"
   ],
   [
+   "DEEPA",
+   "Deepa Jewellers",
+   "close 219.18 vs 20 EMA 218.16 → SP"
+  ],
+  [
+   "DHABRIYA",
+   "Dhabriya Poly.",
+   "close 472.95 vs 20 EMA 463.4 → SP"
+  ],
+  [
    "TEAMTECH",
    "Teamtech Formwork",
    "close 160.25 vs 20 EMA 149.39 → SP"
@@ -100,16 +83,6 @@
    "544980",
    "SJP Ultrasonics",
    "close 97.7 vs 20 EMA 98.6"
-  ],
-  [
-   "DEEPA",
-   "Deepa Jewellers",
-   "close 219.18 vs 20 EMA 218.16"
-  ],
-  [
-   "DHABRIYA",
-   "Dhabriya Poly.",
-   "close 472.95 vs 20 EMA 463.4"
   ],
   [
    "RAMBHAJO",
@@ -140,5 +113,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "06 Nov 2026, 02:30 PM IST"
+ "run_at": "06 Nov 2026, 02:51 PM IST"
 }
