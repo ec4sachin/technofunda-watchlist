@@ -1,0 +1,170 @@
+{
+ "MODIS": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "H1 FY27 revenue +53%, operating profit +63%; several Mumbai redevelopment projects under construction (Signature/Square handover in FY27), new Khar projects at ₹45-50k/sq ft, ~2.4 lakh sq ft unsold stock, debt-free; management expects margins to recover"
+ },
+ "PANACHE": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q2 FY27 revenue +232%, PAT +451%, margins up to 9.6%; new laptop supply orders (Nov 2026); management points to electronics design/manufacturing demand (AI, IoT, networking). No numeric guidance and a low base, so growth will be lumpy"
+ },
+ "DCI": {
+  "ok": false,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q2 FY27 revenue +38% but PAT only +23% and margins falling; finance cost up 2.7x; ~₹35 cr operating cash outflow in H1 (working capital); no growth guidance - services pivot still early"
+ },
+ "GCSL": {
+  "ok": false,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q2 FY27 consolidated profit down ~45% YoY with margin pressure; merchant banking depends on the IPO market; recent SEBI adjudication order and ASM surveillance"
+ },
+ "GLOBAL": {
+  "ok": false,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q1 FY27 revenue -5% and profit -11% YoY (flat business); no growth outlook from management"
+ },
+ "RAPIDFLEET": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q1 FY27 revenue +63%; ~₹230 cr new orders for FY27 (₹53 cr renewable-energy logistics); fleet expanded past 300 vehicles (₹12 cr capex)"
+ },
+ "PTCIL": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q1 FY27 revenue +97%, PAT +466%, EBITDA margin ~25%; Airbus titanium castings supply deal (Aug 2026), BrahMos ₹110 cr order, artillery orders; ₹1,800 cr QIP for capacity"
+ },
+ "544383": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Management guides FY27 revenue ~₹546 cr (about +30% on FY26 guidance ₹420 cr), order book rising, EBITDA margin up to ~16%, new ports (Haldia, Vizag) - latest half-year numbers not yet verified"
+ },
+ "544529": {
+  "ok": false,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "FY26 revenue +90%, PAT +49%, BUT auditors flagged uncertainty about the company continuing as a going concern - too risky to count on"
+ },
+ "SAAKSHI": {
+  "ok": false,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Uneven: FY25 revenue -24%, FY26 +25%, H2 FY26 revenue -6%; no clear growth guidance found"
+ },
+ "SHANTIGOLD": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q2 FY27 revenue ₹750 cr vs ₹430 cr (+74%), Q1 FY27 PAT +47%; strong demand from organised jewellery retail; capacity expansion planned"
+ },
+ "DEEPA": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q2 FY27 revenue +25%, PAT +37%; management guides 40-45% CAGR for FY27-FY29; new Hyderabad plant (Sep 2026), Chennai office by Dec"
+ },
+ "540652": {
+  "ok": false,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "H1 FY27 sales -3.5%, profit -19%, operating cash flow negative"
+ },
+ "530741": {
+  "ok": false,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q2 FY27 profit fell sharply; margins very volatile and FY26 profit leaned on other income (~39% of PBT)"
+ },
+ "SHREEOSFM": {
+  "ok": false,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q4 FY26 profit -50%; management's own base case is only ~11-12% growth (revenue ~₹160 cr vs ₹153 cr TTM)"
+ },
+ "TANFACIND": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q2 FY27 revenue +37% (record ₹230 cr) but PAT only +11% and EBITDA margin down to 13.3%; new HFC-32 refrigerant plant (20,000 t, ₹360 cr) starts Q3 FY27 and management expects a stronger H2"
+ },
+ "SUDEEPPHRM": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q2 FY27 revenue +21%, EBITDA +32% (37% margin); FDA-approved Nandesari plant starts supplies in H2 FY27, Dahej phase 1 by Mar 2027, battery-material expansion being studied"
+ },
+ "SEAMECLTD": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q2 FY27 revenue +103%, PAT ₹50 cr vs a loss last year; ₹411 cr ONGC contract, strong offshore capex cycle. Risk: vessels going off-hire (Swordfish from 24 Oct 2026)"
+ },
+ "KILITCH": {
+  "ok": false,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q1 FY27 revenue +4% and PAT -13% YoY; no growth outlook found"
+ },
+ "AEROENTER": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q2 FY27 revenue +45%, PAT +87%; subsidiary Aeroflex Industries guides 30-35% growth for FY27 and is adding capacity (₹202 cr) incl. AI data-centre cooling skids"
+ },
+ "544755": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "FY26 revenue +67%, PAT +261%; management targets ~50% growth in 2027 and similar CAGR for 3 years, margins kept near 20% (extra profit reinvested in brand)"
+ },
+ "544335": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "FY26 revenue +60%, PAT +78%; order book ₹1,721 cr (31 Aug 2026), up 40% since March with ₹926 cr new wins - about 2 years of revenue"
+ },
+ "543963": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "FY26 revenue +44%, PAT +25%; 'Vision 2030' target ₹200 cr revenue (~2.7x), second Gujarat plant planned. Caution: margins fell and shares were diluted"
+ },
+ "AEROPLANE": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q2 FY27 revenue +17%, profit +26%; H1 profit ₹78 cr vs ₹49 cr (+60%); loans reduced. Caution: receivables and inventory rising fast (working-capital heavy rice business)"
+ },
+ "500220": {
+  "ok": false,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q2 FY27 revenue +64% but PAT -72% (₹0.58 cr) and operating profit halved - profit momentum broken"
+ },
+ "HIRECT": {
+  "ok": false,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q1 FY27 revenue +24% but net profit -26% and margin down to 3.5%; no clear guidance"
+ },
+ "ASHWINI": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "FY26 revenue +37%, PAT +22%; fleet growing (266 -> ~400 vehicles), new 4-year ₹60 cr JNPT port-terminal contract"
+ },
+ "530615": {
+  "ok": false,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Slow growth: FY26 revenue only +11%; June 2026 quarter revenue ~₹59 cr and profit ~₹2 cr, below Sep 2025 levels"
+ }
+}
