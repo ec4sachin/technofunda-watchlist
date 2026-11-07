@@ -1,40 +1,72 @@
 {
- "added": [],
- "rejected": [],
- "to_dt": [
+ "added": [
   [
-   "544538",
-   "Praruh Tech",
-   "close 135.7 < 20 EMA 140.95"
+   "NGLFINE",
+   "NGL Fine Chem",
+   "marks 7.3/11 · TTM Profit > 30%, 52W High"
   ],
   [
-   "544695",
-   "Msafe Equipments",
-   "close 268 < 20 EMA 274.28"
+   "544330",
+   "Parmeshwar Metal",
+   "marks 8.3/11 · TTM Profit > 30%, 52W High"
   ],
   [
-   "CONNPLEX",
-   "Connplex Cinemas",
-   "close 231.5 < 200 EMA 233.76"
+   "544675",
+   "Gabion Technol.",
+   "marks 8.3/11 · TTM Profit > 30%, 52W High"
   ],
+  [
+   "EPWINDIA",
+   "EPW India",
+   "marks 8.3/11 · Daily Volume Scan"
+  ],
+  [
+   "544755",
+   "Recode Studios",
+   "marks 7.3/11 · 52W High"
+  ],
+  [
+   "544623",
+   "Mother Nutri",
+   "marks 8.3/11 · 52W High"
+  ],
+  [
+   "SCPL",
+   "Sheetal Cool",
+   "marks 9.2/11 · 52W High"
+  ]
+ ],
+ "rejected": [
+  [
+   "544741",
+   "Highness Microelectronics",
+   "1.8/11"
+  ],
+  [
+   "AGARWALTUF",
+   "Agarwal Toughene",
+   "3.7/11"
+  ],
+  [
+   "544943",
+   "Himalaya Nutravedics",
+   "0.9/11"
+  ]
+ ],
+ "to_dt": [],
+ "to_sp": [
   [
    "DEEPA",
    "Deepa Jewellers",
-   "close 214.62 < 20 EMA 217.81"
+   "close 219.18 > 20 EMA 218.16"
   ]
  ],
- "to_sp": [],
  "removed": [],
  "unchecked": [],
  "no_price": [],
  "warnings": [],
  "first_marked": [],
  "new_listing": [
-  [
-   "544538",
-   "Praruh Tech",
-   "close 135.7 vs 20 EMA 140.95 → DT"
-  ],
   [
    "544551",
    "Bhavik Enterpris",
@@ -48,12 +80,7 @@
   [
    "544694",
    "Accretion Nutraveda",
-   "close 333 vs 20 EMA 298.26 → SP"
-  ],
-  [
-   "544695",
-   "Msafe Equipments",
-   "close 268 vs 20 EMA 274.28 → DT"
+   "close 329 vs 20 EMA 297.88 → SP"
   ],
   [
    "544809",
@@ -78,17 +105,12 @@
   [
    "AEROPLANE",
    "A C J K Exports",
-   "close 238.71 vs 20 EMA 218.96 → SP"
-  ],
-  [
-   "DEEPA",
-   "Deepa Jewellers",
-   "close 214.62 vs 20 EMA 217.81 → DT"
+   "close 242.5 vs 20 EMA 216.88 → SP"
   ],
   [
    "DHABRIYA",
    "Dhabriya Poly.",
-   "close 475.15 vs 20 EMA 464.53 → SP"
+   "close 472.95 vs 20 EMA 463.4 → SP"
   ],
   [
    "TEAMTECH",
@@ -98,41 +120,76 @@
   [
    "UDAYJEW",
    "Uday Jewellery",
-   "close 219.07 vs 20 EMA 210.13 → SP"
+   "close 210.48 vs 20 EMA 209.19 → SP"
+  ],
+  [
+   "544675",
+   "Gabion Technol.",
+   "close 124.55 vs 20 EMA 120.67 → SP"
+  ],
+  [
+   "EPWINDIA",
+   "EPW India",
+   "close 248.35 vs 20 EMA 241.65 → SP"
+  ],
+  [
+   "544755",
+   "Recode Studios",
+   "close 407.4 vs 20 EMA 402.83 → SP"
+  ],
+  [
+   "544623",
+   "Mother Nutri",
+   "close 159.35 vs 20 EMA 156.05 → SP"
+  ],
+  [
+   "544538",
+   "Praruh Tech",
+   "close 135.7 vs 20 EMA 140.95"
+  ],
+  [
+   "544695",
+   "Msafe Equipments",
+   "close 268.65 vs 20 EMA 274.34"
   ],
   [
    "544980",
    "SJP Ultrasonics",
-   "close 92.95 vs 20 EMA 97.99"
+   "close 92 vs 20 EMA 97.89"
+  ],
+  [
+   "DEEPA",
+   "Deepa Jewellers",
+   "close 219.18 vs 20 EMA 218.16"
   ],
   [
    "RAMBHAJO",
    "Advit Jewels",
-   "close 323.5 vs 20 EMA 336.22"
+   "close 312.8 vs 20 EMA 337.55"
   ],
   [
    "RSL",
    "Rajputana Stain.",
-   "close 166.85 vs 20 EMA 170.35"
+   "close 167.83 vs 20 EMA 170.72"
   ],
   [
    "XTRANET",
    "Xtranet Techno.",
-   "close 264.75 vs 20 EMA 280.47"
+   "close 275.95 vs 20 EMA 282.12"
   ]
  ],
  "per_alert": {
-  "TTM Profit > 30%": 0,
-  "52W High": 0,
-  "Daily Volume Scan": 0,
-  "Weekly Volume Scan": 0,
-  "Ready after 6 Months": 0
+  "TTM Profit > 30%": 8,
+  "52W High": 13,
+  "Daily Volume Scan": 3,
+  "Weekly Volume Scan": 1,
+  "Ready after 6 Months": 1
  },
- "email_total": 0,
- "already_listed": 0,
+ "email_total": 16,
+ "already_listed": 6,
  "price_date": "06 Nov 2026",
  "monthly_pass": 0,
- "mode": "daily",
+ "mode": "auto",
  "monthly_done": false,
- "run_at": "06 Nov 2026, 03:55 PM IST"
+ "run_at": "07 Nov 2026, 07:44 AM IST"
 }
