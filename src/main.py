@@ -58,20 +58,27 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
     need = float(rules_cfg.get("new_stock_pass", 7))
     full = rules_cfg.get("full_marks", 11)
 
-    # Step 1 - collect stocks from the 5 email alerts
+    # Step 1 - collect stocks from the 5 email alerts + the investors you follow (Mukul Agrawal, Ashish Kacholia)
     gmail, pwd = os.getenv("GMAIL_ADDRESS"), os.getenv("GMAIL_APP_PASSWORD")
     candidates, per_alert = {}, {}
     if gmail and pwd:
         try:
             candidates, new_ids, per_alert = emails.fetch_alert_stocks(
-                gmail, pwd, settings["alerts"], settings.get("email_days_back", 3), set(state["seen_email_ids"]))
+                gmail, pwd, settings["alerts"], settings.get("email_days_back", 3), set(state["seen_email_ids"]),
+                investors=settings.get("investors"),
+                investor_days_back=None if state.get("investors_since") else 45)   # first time: their last 45 days
             state["seen_email_ids"].extend(new_ids)
+            state.setdefault("investors_since", today)
         except Exception as e:  # keep going with the rest of the run
             report["warnings"].append(f"Could not read Gmail: {e}")
     else:
         report["warnings"].append("Gmail not set up (GMAIL_ADDRESS / GMAIL_APP_PASSWORD missing)")
     report["per_alert"] = per_alert
     report["email_total"] = len(candidates)
+    # what the investors did in stocks that are already in your lists (a "holds" line is not news)
+    report["investor_moves"] = [(c, (sp.get(c) or dt.get(c))["name"] or s["name"], f"{'SP' if c in sp else 'DT'} · " + "; ".join(
+        n for n in s.get("notes", []) if ": holds" not in n)) for c, s in candidates.items()
+        if (c in sp or c in dt) and any(": holds" not in n for n in s.get("notes", []))]
 
     # Step 2 + 3 - check fundamentals of stocks not already in SP/DT, add passers to SP
     fresh = {c: s for c, s in candidates.items() if c not in sp and c not in dt}
@@ -102,11 +109,12 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
                      screener_id=m.get("_company_id", ""))
             set_codes(e, m)
             sp[code] = e
-            report["added"].append((code, e["name"], f"marks {mk} · " + ", ".join(s["sources"])))
+            why = "; ".join(s.get("notes") or []) or ", ".join(s["sources"])
+            report["added"].append((code, e["name"], f"marks {mk} · " + why))
             history.append({"date": today, "symbol": code, "name": e["name"], "action": "ADDED to SP",
-                            "reason": f"marks {mk}; from " + ", ".join(s["sources"])})
+                            "reason": f"marks {mk}; from " + why})
         else:
-            report["rejected"].append((code, s["name"], mk))
+            report["rejected"].append((code, s["name"], mk + (f" ({s['sources'][0]})" if s.get("notes") else "")))
 
     # Marks (not removal) for: stocks added by hand that were never marked, and stocks whose
     # last marks had 2+ checks without data (re-read, in case the other Screener page is complete)
@@ -418,6 +426,7 @@ def build_message(r, sp, dt, today_label, dashboard_url=""):
             L.extend(["", title] + [tg.stock_line(s, n, why if show_reason else "") for s, n, why in items])
 
     block("➕ <b>Added to SP</b>", r["added"])
+    block("👤 <b>Investor moves in your SP / DT stocks</b>", r.get("investor_moves") or [])
     block("🔻 <b>Moved SP → DT</b> (closed below 200 EMA, or 20 EMA for new listings)", r["to_dt"])
     block("🔼 <b>Moved DT → SP</b> (back above 200 EMA / 20 EMA)", r["to_sp"])
     if r.get("monthly_done"):
@@ -587,7 +596,7 @@ def main():
     storage.log(history)
     state["last_run"] = now.isoformat(timespec="minutes")
     storage.save_state(state)
-    summary = {k: report.get(k) for k in ("added", "rejected", "to_dt", "to_sp", "removed", "unchecked",
+    summary = {k: report.get(k) for k in ("added", "rejected", "to_dt", "to_sp", "removed", "unchecked", "investor_moves",
                                           "no_price", "warnings", "first_marked", "new_listing", "per_alert", "email_total",
                                           "already_listed", "price_date", "monthly_pass")}
     summary.update(mode=mode, monthly_done=bool(report.get("monthly_done")),
