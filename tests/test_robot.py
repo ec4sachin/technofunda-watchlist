@@ -21,10 +21,10 @@ market.history = lambda: None  # no index download in tests
 
 GOOD = fx.parse_company_page(open(os.path.join(HERE, "fixtures", "company_page.html")).read())
 GOOD["_company_id"] = "999"
-# 2.5/6 marks = 4.6/11: below the 5/11 bar (sales growth, EPS, FII/DII and shareholders fail)
+# 2.5/6 marks = 4.6/11: below the 50% bar (sales growth, EPS, FII/DII and shareholders fail)
 WEAK = {**GOOD, "sales_growth_qtr_yoy": 10.0, "eps_latest_qtr": 5.0, "fii_dii_latest": 3.0, "shareholders_latest": 6000.0}
 LOW = WEAK
-# exactly 3/6 marks = 5.5/11: passes the 5/11 bar
+# exactly 3/6 marks = 5.5/11 = 50%: passes (pass mark 5.5/11 from 7 Nov 2026 = 5 of 10 with the new marks)
 MID = {**GOOD, "sales_growth_qtr_yoy": 10.0, "eps_latest_qtr": 5.0, "fii_dii_latest": 3.0}
 
 
@@ -48,12 +48,25 @@ def test_real_stocks():
     import yaml
     import real_stocks
     cfg = yaml.safe_load(open(os.path.join(HERE, "..", "config", "rules.yaml")))
-    expected = {"RATNAVEER": 4.5, "SHANTIGOLD": 4.5, "PATELRMART": 4.0,
-                "SUPREMEPWR": 5.5, "EIMCOELECO": 4.0, "SAHANA": 4.0}
+    # (7 Nov 2026: margin = latest quarter OPM at least 85% of the average of the 4 quarters before it,
+    #  margin_tolerance_pct 15 -> SHANTIGOLD 4.5 -> 5.5, PATELRMART 4.0 -> 5.0, SAHANA 4.0 -> 5.0)
+    assert cfg["margin_tolerance_pct"] == 15
+    expected = {"RATNAVEER": 4.5, "SHANTIGOLD": 5.5, "PATELRMART": 5.0,
+                "SUPREMEPWR": 5.5, "EIMCOELECO": 4.0, "SAHANA": 5.0}
     for sym, d in real_stocks.STOCKS.items():
         m = fx.parse_company_page(real_stocks.to_html(d))
         got, out_of, _ = fx.score(m, cfg)
         assert (got, out_of) == (expected[sym], 6.0), (sym, got)
+    m = fx.parse_company_page(real_stocks.to_html(real_stocks.STOCKS["RATNAVEER"]))
+    assert m["opm_latest_qtr"] == 9.0 and m["opm_avg_prev"] == 10.5   # (10 + 11 + 11 + 10) / 4
+    # 15% tolerance: needs 8.925% (85% of 10.5%); 9.0% passes, 8.9% fails; the old 1-point rule still works if set
+    for opm, ok in ((9.0, 1.0), (8.9, 0.0)):
+        mm = dict(m, opm_latest_qtr=opm)
+        assert [i[1] for i in fx.score(mm, cfg)[2] if i[0].startswith("Margin")] == [ok], opm
+    pts = {k: v for k, v in cfg.items() if k != "margin_tolerance_pct"}
+    assert [i[1] for i in fx.score(dict(m, opm_latest_qtr=9.5), dict(pts, margin_tolerance_points=1))[2] if i[0].startswith("Margin")] == [1.0]
+    m = fx.parse_company_page(real_stocks.to_html(real_stocks.STOCKS["SAHANA"]))
+    assert m["opm_avg_prev"] == 32.5 and m["opm_avg_periods"] == 2      # half-yearly: (32 + 33) / 2
     # Supreme Power's table mixes quarters and half-years: Jun 2026 must be compared with Jun 2025
     m = fx.parse_company_page(real_stocks.to_html(real_stocks.STOCKS["SUPREMEPWR"]))
     assert m["sales_growth_qtr_yoy"] == round((51.06 - 38.23) / 38.23 * 100, 2)

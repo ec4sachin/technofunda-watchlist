@@ -33,7 +33,7 @@ COMPANY_ID_RE = re.compile(r'data-company-id="(\d+)"|/(?:company/source/quarter|
 
 # The numbers the marks system needs - used to pick the more complete page (consolidated / standalone)
 SCORE_INPUTS = ("sales_growth_qtr_yoy", "sales_growth_ttm", "eps_latest_qtr", "eps_prev_qtr", "opm_latest_qtr",
-                "opm_same_qtr_last_year", "fixed_assets_latest", "debtor_days", "fii_dii_latest", "shareholders_latest")
+                "opm_avg_prev", "fixed_assets_latest", "debtor_days", "fii_dii_latest", "shareholders_latest")
 
 
 def completeness(m):
@@ -152,6 +152,7 @@ def parse_company_page(html):
     q_profit = _row(q, "net profit")
     q_opm = _row(q, "opm %", "financing margin %")
     q_eps = _row(q, "eps in rs", "eps")
+    q_pbt, q_int = _row(q, "profit before tax"), _row(q, "interest")
     if ly is not None:
         if q_sales and len(q_sales) == len(q_head):
             m["sales_growth_qtr_yoy"] = _pct(q_sales[-1], q_sales[ly])
@@ -161,6 +162,12 @@ def parse_company_page(html):
             m["opm_same_qtr_last_year"] = q_opm[ly]
     if q_opm:
         m["opm_latest_qtr"] = q_opm[-1]
+        # average OPM of the 4 quarters before the latest one (half-yearly results: the 2 halves before it = 1 year)
+        k = 2 if m["result_period_months"] == 6 else 4
+        prev = [x for x in q_opm[-1 - k:-1] if x is not None]
+        if len(prev) == k:
+            m["opm_avg_prev"] = round(sum(prev) / k, 2)
+            m["opm_avg_periods"] = k
     if q_eps and len(q_eps) >= 2:
         m["eps_latest_qtr"], m["eps_prev_qtr"] = q_eps[-1], q_eps[-2]
     if q_head and q_sales and len(q_sales) == len(q_head):
@@ -182,7 +189,7 @@ def parse_company_page(html):
         m["interest_coverage"] = 999.0 if int_ly == 0 else round((pbt_ly + int_ly) / int_ly, 2)
 
     # Balance sheet -> debt to equity
-    _, bs = _table(soup, "balance-sheet")
+    bs_head, bs = _table(soup, "balance-sheet")
     eq, res, borrow = _last(_row(bs, "equity capital")), _last(_row(bs, "reserves")), _last(_row(bs, "borrowings"))
     if eq is not None and res is not None and (eq + res) > 0:
         m["debt_to_equity"] = round((borrow or 0) / (eq + res), 2)
@@ -205,6 +212,20 @@ def parse_company_page(html):
             last5 = pairs[-5:]
             sp = sum(p for _, p in last5)
             m["cfo_to_profit_5y"] = round(sum(c for c, _ in last5) / sp, 2) if sp > 0 else None
+
+            last3 = pairs[-3:]
+            s3 = sum(p for _, p in last3)
+            if len(last3) == 3:
+                m["cfo_to_profit_3y"] = round(sum(c for c, _ in last3) / s3, 2) if s3 > 0 else -1.0
+
+    # Quarterly ROE / ROCE (Screener shows only yearly ones): each quarter's profit x 4 (half-year x 2) divided by
+    # the equity / capital employed of the latest balance sheet on or before that quarter
+    _quarterly_returns(m, q_head, q_profit, q_pbt, q_int, bs_head, bs)
+
+    # TTM PEG = P/E / TTM profit growth
+    pe, g_ttm = m.get("pe"), m.get("profit_growth_ttm")
+    if pe is not None and g_ttm is not None:
+        m["peg_ttm"] = round(pe / g_ttm, 2) if g_ttm > 0 and pe > 0 else 99.0
 
     # Ratios
     _, r = _table(soup, "ratios")
@@ -299,7 +320,24 @@ def fetch_metrics(code, consolidated=True, session=None, pause=2.0):
             best = metrics
         if completeness(best) == len(SCORE_INPUTS):
             break
+    if best is not None:
+        add_outlook(best, code)
     return best
+
+
+OUTLOOK_FILE = "outlook.json"   # written by Claude after reading concalls / PPTs / announcements (on your request)
+
+
+def add_outlook(m, code, today=None):
+    """Management outlook mark from data/outlook.json: {"CODE": {"ok": true, "note": "...", "date": "2026-11-07",
+    "until": "2027-02-05"}}. Used until its "until" date (about 90 days = until the next results)."""
+    from datetime import date
+    entry = (storage.load_json(OUTLOOK_FILE, {}) or {}).get(str(code).upper())
+    today = today or date.today().isoformat()
+    if isinstance(entry, dict) and isinstance(entry.get("ok"), bool) and str(entry.get("until", "")) >= today:
+        m["outlook_ok"] = entry["ok"]
+        m["outlook_note"] = f"{entry.get('note', '')} (checked {entry.get('date', '')})".strip()
+    return m
 
 
 # ---------------------------------------------------------------- scoring (your marks system)
@@ -323,6 +361,44 @@ def _same_period_last_year(head):
     return idx.index(target) if target in idx else None
 
 
+def _quarterly_returns(m, q_head, q_np, q_pbt, q_int, bs_head, bs):
+    n = len(q_head or [])
+    if not n or not bs_head:
+        return
+    eq_cap, reserves, borrow = _row(bs, "equity capital"), _row(bs, "reserves"), _row(bs, "borrowings")
+    if not eq_cap or not reserves or len(eq_cap) != len(bs_head):
+        return
+    q_idx, b_idx = [_month_index(h) for h in q_head], [_month_index(h) for h in bs_head]
+
+    def bal(i):  # balance sheet column for result column i
+        cols = [k for k, x in enumerate(b_idx) if x is not None and q_idx[i] is not None and x <= q_idx[i]]
+        k = cols[-1] if cols else next((k for k, x in enumerate(b_idx) if x is not None), None)
+        if k is None or eq_cap[k] is None or reserves[k] is None:
+            return None, None
+        equity = eq_cap[k] + reserves[k]
+        return equity, equity + ((borrow[k] or 0) if borrow and len(borrow) == len(bs_head) else 0)
+
+    def per_year(i):  # 4 for a quarter, 2 for a half-year
+        a, b = (q_idx[i - 1], q_idx[i]) if i > 0 else (q_idx[0], q_idx[1] if n > 1 else None)
+        return 12 / (b - a) if a is not None and b is not None and b > a else 4
+
+    roe, roce = [None] * n, [None] * n
+    for i in range(n):
+        equity, cap = bal(i)
+        if not equity or equity <= 0:
+            continue
+        k = per_year(i)
+        if q_np and len(q_np) == n and q_np[i] is not None:
+            roe[i] = q_np[i] * k / equity * 100
+        if q_pbt and q_int and len(q_pbt) == n and len(q_int) == n and q_pbt[i] is not None and cap > 0:
+            roce[i] = (q_pbt[i] + (q_int[i] or 0)) * k / cap * 100
+    prev = 2 if m.get("result_period_months") == 6 else 4
+    for name, vals in (("roe_q", roe), ("roce_q", roce)):
+        if n > prev and vals[-1] is not None and all(v is not None for v in vals[-1 - prev:-1]):
+            m[f"{name}_latest"] = round(vals[-1], 2)
+            m[f"{name}_avg"] = round(sum(vals[-1 - prev:-1]) / prev, 2)
+
+
 def _period_months(head):
     """Months between the last two result columns: 3 = quarterly, 6 = half-yearly."""
     idx = []
@@ -335,15 +411,21 @@ def _period_months(head):
     return 3
 
 
-def score(m, cfg):
+def score(m, cfg, extra=None):
     """Automatic part of your fundamental marks.
 
     Returns (marks, max_marks, items). Each item: (label, got, out_of, detail).
     A check with missing data gets 0 marks and detail 'n/a'.
+    extra: also the Business / Management / Future checks (default: when rules.yaml says extra_marks: on).
     """
     w = cfg.get("auto_marks", {})
+    if extra is None:
+        extra = str(cfg.get("extra_marks", "off")).lower() == "on"
     tol = float(cfg.get("stable_tolerance_pct", 2)) / 100
     mtol = float(cfg.get("margin_tolerance_points", 1))
+    # margin_tolerance_pct (7 Nov 2026): OPM may be this % below the average (10 = at least 90% of it);
+    # when it is set, it is used instead of margin_tolerance_points
+    mpct = cfg.get("margin_tolerance_pct")
     items = []
 
     def add(key, label, ok, detail):
@@ -360,10 +442,15 @@ def score(m, cfg):
     e1, e0 = g("eps_latest_qtr"), g("eps_prev_qtr")
     add("q_eps", "Q-EPS", None if e1 is None or e0 is None else e1 >= e0 - 0.2 * abs(e0),
         f"EPS {e1:g} vs prev {e0:g}" if e1 is not None and e0 is not None else "")
-    # P&L 3 - margin expansion or stable (vs same quarter last year)
-    o1, o0 = g("opm_latest_qtr"), g("opm_same_qtr_last_year")
-    add("margin", "Margin stable/up", None if o1 is None or o0 is None else o1 >= o0 - mtol,
-        f"OPM {o1:g}% vs {o0:g}% last year" if o1 is not None and o0 is not None else "")
+    # P&L 3 - latest quarter OPM at least the average OPM of the 4 quarters before it (changed 7 Nov 2026;
+    # was: vs the same quarter last year). Half-yearly results: average of the 2 halves before it.
+    o1, o0 = g("opm_latest_qtr"), g("opm_avg_prev")
+    per = "2 half-years" if g("opm_avg_periods") == 2 else "4 quarters"
+    need_m = None
+    if o1 is not None and o0 is not None:
+        need_m = o0 - abs(o0) * float(mpct) / 100 if mpct is not None else o0 - mtol
+    add("margin", "Margin vs 4Q average", None if need_m is None else o1 >= need_m - 1e-9,
+        f"OPM {o1:g}% vs {o0:g}% avg of previous {per} (needs {need_m:.2f}%)" if need_m is not None else "")
     # Balance sheet 1 - fixed assets increased or stable
     f1, f0 = g("fixed_assets_latest"), g("fixed_assets_prev")
     add("fixed_assets", "Fixed assets stable/up", None if f1 is None or f0 is None else f1 >= f0 * (1 - tol),
@@ -381,9 +468,45 @@ def score(m, cfg):
     add("shareholders", "Shareholders stable/down", None if h1 is None or h0 is None else h1 <= h0 * (1 + tol),
         f"{h1:,.0f} vs {h0:,.0f}" if h1 is not None and h0 is not None else "")
 
+    if extra:
+        _extra_checks(m, cfg, add)
     got = sum(i[1] for i in items)
     out_of = sum(i[2] for i in items)
     return round(got, 2), round(out_of, 2), items
+
+
+def _extra_checks(m, cfg, add):
+    """Business (2), Management (1) and Future (2) - rules given 7 Nov 2026."""
+    g = m.get
+    x = cfg.get("extra_rules", {}) or {}
+    keep = 1 - float(x.get("return_tolerance_pct", 15)) / 100
+
+    def at_least(latest, avg):
+        return latest >= avg - abs(avg) * (1 - keep) - 1e-9
+
+    # Business: latest quarter ROE AND ROCE both at least 85% of their previous 4-quarter average (2 marks only if both)
+    r1, r0, c1, c0 = g("roe_q_latest"), g("roe_q_avg"), g("roce_q_latest"), g("roce_q_avg")
+    ok = None if None in (r1, r0, c1, c0) else (at_least(r1, r0) and at_least(c1, c0))
+    add("business_roe_roce", "ROE & ROCE vs 4Q average", ok,
+        f"ROE {r1:g}% vs avg {r0:g}%, ROCE {c1:g}% vs avg {c0:g}% (need {keep * 100:g}% of avg)" if ok is not None else "")
+    # Management
+    pm, pmin = g("promoter_holding"), float(x.get("promoter_min", 45))
+    add("promoter", f"Promoter ≥ {pmin:g}%", None if pm is None else pm >= pmin, f"promoter {pm:g}%" if pm is not None else "")
+    cr, cmin = g("cfo_to_profit_3y"), float(x.get("cfo_profit_min_pct", 50))
+    add("cfo_3y", f"Cash from ops ≥ {cmin:g}% of profit (3y)", None if cr is None else cr * 100 >= cmin,
+        (f"{cr * 100:.0f}% of net profit" if cr >= 0 else "3-year profit not positive") if cr is not None else "")
+    # Future
+    pg, gmin = g("profit_growth_ttm"), float(x.get("ttm_profit_growth_min", 25))
+    add("ttm_profit_growth", f"TTM profit growth ≥ {gmin:g}%", None if pg is None else pg >= gmin,
+        f"TTM profit growth {pg:g}%" if pg is not None else "")
+    peg, pmax = g("peg_ttm"), float(x.get("peg_max", 1))
+    add("ttm_peg", f"TTM PEG ≤ {pmax:g}", None if peg is None else peg <= pmax,
+        (f"PEG {peg:g} (P/E {g('pe'):g} ÷ growth {pg:g}%)" if peg != 99.0 else "no TTM profit growth") if peg is not None else "")
+    # Future outlook from investor PPT / concall / announcements (1 mark): only for stocks that have been checked
+    # (data/outlook.json); a stock not checked yet is not marked down - the mark is simply left out
+    o = g("outlook_ok")
+    if o is not None:
+        add("outlook", "Management outlook (1 year)", o, str(g("outlook_note") or ""))
 
 
 def on_full_scale(got, out_of, cfg):

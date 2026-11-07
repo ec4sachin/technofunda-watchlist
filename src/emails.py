@@ -152,11 +152,16 @@ def fetch_alert_stocks(gmail_user, app_password, alert_names, days_back, already
             alert = person
             found = parse_investor_html(_html_of(msg))
         elif alert and alert.lower() in wanted:
-            try:
-                if look > int(days_back) and parsedate_to_datetime(msg.get("Date")) < screen_from:
+            if look > int(days_back):
+                try:
+                    sent = parsedate_to_datetime(msg.get("Date"))
+                    if sent.tzinfo is None:          # "-0000" in the Date line: a time without zone = UTC
+                        sent = sent.replace(tzinfo=timezone.utc)
+                    old = sent < screen_from
+                except (TypeError, ValueError):
+                    old = True                       # date unreadable: when reading far back, skip it
+                if old:
                     continue   # an older screen email: only investor emails are read that far back
-            except (TypeError, ValueError):
-                pass
             alert = wanted[alert.lower()]
             found = parse_alert_html(_html_of(msg))
         else:

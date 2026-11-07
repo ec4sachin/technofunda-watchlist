@@ -89,7 +89,7 @@ def test_fetch_mixes_both_kinds():
     # first run: investor emails 45 days back, but an old screen email is still skipped
     from email.utils import format_datetime
     from datetime import datetime, timedelta, timezone
-    old = format_datetime(datetime.now(timezone.utc) - timedelta(days=20))
+    old = format_datetime(datetime.now(timezone.utc) - timedelta(days=20)).replace("+0000", "-0000")   # as Screener sends it
 
     def dated(subject, html, mid):
         m = email.message.EmailMessage()

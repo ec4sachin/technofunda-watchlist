@@ -310,6 +310,57 @@ def monthly(sp, dt, rules_cfg, today, report, history, snaps):
 
 
 # ----------------------------------------------------------------- report
+def marks_preview(sp, dt, rules_cfg, state, today, report):
+    """rules.yaml extra_marks: preview -> every SP / DT stock is checked once with the Business / Management / Future
+    marks and the result is reported (nothing is removed). Unfinished stocks continue on the next run."""
+    if str(rules_cfg.get("extra_marks", "off")).lower() != "preview":
+        return
+    sig = json.dumps([rules_cfg.get("extra_rules"), rules_cfg.get("auto_marks"), rules_cfg.get("monthly_pass")], sort_keys=True)
+    old = storage.load_json("marks_preview.json", {})
+    if old.get("signature") == sig and old.get("complete"):
+        return   # already done for these rules
+    rows = old.get("stocks", {}) if old.get("signature") == sig else {}
+    need = float(rules_cfg.get("monthly_pass", 5))
+    full = rules_cfg.get("full_marks", 11)
+    for lst, items in (("SP", sp), ("DT", dt)):
+        for sym, row in items.items():
+            if sym in rows:
+                continue
+            if storage.screener_blocked():
+                break
+            m = fx.fetch_metrics(sym, row.get("consolidated", "yes") != "no")
+            if not m or fx.completeness(m) < 3:
+                continue
+            g0, o0, items0 = fx.score(m, rules_cfg, extra=False)
+            g1, o1, items1 = fx.score(m, rules_cfg, extra=True)
+            new_items = items1[len(items0):]   # the Business / Management / Future checks
+            rows[sym] = {"name": row.get("name") or sym, "list": lst,
+                         "now": f"{fx.on_full_scale(g0, o0, rules_cfg):g}/{full:g}", "now_pass": fx.passes(g0, o0, need, rules_cfg),
+                         "new": f"{fx.on_full_scale(g1, o1, rules_cfg):g}/{full:g}", "new_pass": fx.passes(g1, o1, need, rules_cfg),
+                         "checks": {lab: [got, out, det] for lab, got, out, det in new_items}}
+    total = len(sp) + len(dt)
+    done = len(rows)
+    storage.save_json("marks_preview.json", {"signature": sig, "as_of": today, "complete": done >= total,
+                                             "stocks": rows, "total": total})
+    if done < total:
+        report["warnings"].append(f"New marks preview: {done} of {total} stocks checked so far — the rest on the next run")
+        return
+    now_ok = sum(1 for r in rows.values() if r["now_pass"])
+    new_ok = sum(1 for r in rows.values() if r["new_pass"])
+    lose = sorted([(s, r) for s, r in rows.items() if r["now_pass"] and not r["new_pass"]], key=lambda x: x[0])
+    gain = sum(1 for r in rows.values() if r["new_pass"] and not r["now_pass"])
+    per = {}
+    for r in rows.values():
+        for lab, (got, out, _) in r["checks"].items():
+            if out:
+                per.setdefault(lab, [0, 0])
+                per[lab][0] += got >= out
+                per[lab][1] += 1
+    report["marks_preview"] = {"total": total, "now_ok": now_ok, "new_ok": new_ok, "gain": gain,
+                               "lose": [(s, r["name"], f"{r['list']} · now {r['now']} → new {r['new']}") for s, r in lose],
+                               "per_check": {k: f"{a} of {b}" for k, (a, b) in per.items()}}
+
+
 def market_years(mood, this_year):
     """Nifty Smallcap 100 change per calendar year -> bull (>= +15%), bear (<= -10%) or sideways."""
     out = {}
@@ -445,6 +496,15 @@ def build_message(r, sp, dt, today_label, dashboard_url=""):
         L.append(f"⚠️ {html.escape(str(w))}")
     if not any([r["added"], r["to_dt"], r["to_sp"], r["removed"]]):
         L += ["", "No changes today."]
+    mp = r.get("marks_preview")
+    if mp:
+        L += ["", "🧪 <b>New marks preview</b> (Business / Management / Future — nothing changed yet)",
+              f"Your {mp['total']} SP + DT stocks: pass now <b>{mp['now_ok']}</b> → with the new marks <b>{mp['new_ok']}</b>"
+              f" ({len(mp['lose'])} would drop out, {mp['gain']} would newly pass)",
+              "Stocks passing each new check: " + html.escape(" · ".join(f"{k}: {v}" for k, v in mp["per_check"].items()))]
+        if mp["lose"]:
+            L += ["Would be removed at the monthly review:"] + [tg.stock_line(s, n, why) for s, n, why in mp["lose"][:40]]
+        L.append("To use them: set <code>extra_marks: on</code> in config/rules.yaml (or tell Claude).")
     if r.get("strategy_check"):
         L += ["", "📅 <b>Monthly paper-trading check</b> (live result vs backtest)"] + r["strategy_check"]
     st = r.get("strategy")
@@ -576,6 +636,12 @@ def main():
             state["last_strategy_check"] = today
         except Exception as e:
             report["warnings"].append(f"Monthly strategy check failed: {e}")
+    # One-time check of all SP / DT stocks with the new Business / Management / Future marks (extra_marks: preview)
+    if mode in ("auto", "daily"):
+        try:
+            marks_preview(sp, dt, rules_cfg, state, today, report)
+        except Exception as e:
+            report["warnings"].append(f"New marks preview failed: {e}")
     # Runs on the review day, or on the next run if that day was missed (crash, skipped run)
     is_review_day = now.day >= int(settings.get("monthly_review_day", 1)) and str(state.get("last_monthly", ""))[:7] != today[:7]
     if not state.get("last_monthly"):

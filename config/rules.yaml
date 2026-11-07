@@ -3,20 +3,22 @@
 # ============================================================
 #
 #  Full system = 11 marks:
-#     1. Business         2    (judgement — not automatic yet)
+#     1. Business         2    ✅ automatic when extra_marks: on  (ROE & ROCE vs 4-quarter average)
 #     2. P&L Statement    3    ✅ automatic
 #     3. Balance Sheet    1.5  ✅ automatic
-#     4. Management       1    (judgement — not automatic yet)
+#     4. Management       1    ✅ automatic when extra_marks: on  (promoter, cash from operations)
 #     5. Holding pattern  1.5  ✅ automatic
-#     6. Future           2    (judgement — not automatic yet)
+#     6. Future           2    ✅ automatic when extra_marks: on  (TTM profit growth, TTM PEG)
+#                              + 1 mark management outlook (1 year) from PPT / concall: checked by Claude on request
 #
 #  The robot calculates the 6 automatic marks from Screener.in:
 #
 #   q_sales_growth  Latest quarter sales growth (vs same quarter last year)
 #                   >= 0.8 × TTM sales growth
 #   q_eps           Latest quarter EPS >= 0.8 × previous quarter EPS
-#   margin          Latest quarter OPM >= same quarter last year OPM
-#                   (a fall of up to "margin_tolerance_points" counts as stable)
+#   margin          Latest quarter OPM >= average OPM of the 4 quarters before it
+#                   (half-yearly SME results: the 2 half-years before it)
+#                   (up to "margin_tolerance_pct" % below the average counts as stable)
 #   fixed_assets    Fixed assets + CWIP now >= previous balance sheet
 #                   (a fall of up to "stable_tolerance_pct" counts as stable)
 #   receivables     Receivables < 0.5 × Revenue  (Debtor days below 182.5)
@@ -38,17 +40,39 @@ auto_marks:
   receivables: 0.5
   fii_dii: 1
   shareholders: 0.5
+  # Business / Management / Future (used when extra_marks: on)
+  business_roe_roce: 2      # latest quarter ROE AND ROCE both >= 85% of their previous 4-quarter average
+  promoter: 0.5             # promoter holding >= promoter_min
+  cfo_3y: 0.5               # cash from operations (3 years) >= cfo_profit_min_pct of net profit (3 years)
+  ttm_profit_growth: 0.5    # TTM profit growth >= ttm_profit_growth_min
+  ttm_peg: 0.5              # P/E / TTM profit growth <= peg_max
+  outlook: 1                # management outlook (1 year) from PPT / concall / announcements, checked by Claude on request
+                            # (data/outlook.json, valid ~90 days); a stock not checked yet: this mark is left out
+
+# Business / Management / Future checks:
+#   preview = the next run checks every SP / DT stock with them once and sends you the result (nothing removed)
+#   on      = they count in the marks (new stocks and the monthly review)
+#   off     = not used
+extra_marks: preview
+extra_rules:
+  return_tolerance_pct: 15      # ROE / ROCE may be up to 15% below the 4-quarter average
+  promoter_min: 45              # %
+  cfo_profit_min_pct: 50        # % of net profit, over the last 3 years
+  ttm_profit_growth_min: 25     # %
+  peg_max: 1
 
 # Pass marks — out of your full system of 11 marks.
-# While only the 6 automatic marks are used, the robot applies the same
-# percentage: 5 out of 11 (45%)  =  3 out of 6 automatic marks.
+# The robot applies the same percentage to the marks it can check:
+#   5.5 out of 11 (50%) = 3 out of the 6 basic marks (extra_marks: off / preview)
+#                       = 5 out of 10 when extra_marks: on (stock without an outlook check)
+#                       = 5.5 out of 11 when the stock has an outlook check
 full_marks: 11
-new_stock_pass: 5        # Step 2 — new stock from emails needs this to enter SP
-monthly_pass: 5          # Step 5 — stock in SP/DT needs this to stay
+new_stock_pass: 5.5      # Step 2 — new stock from emails needs this to enter SP (50%; was 5 until 7 Nov 2026)
+monthly_pass: 5.5        # Step 5 — stock in SP/DT needs this to stay (50%; was 5 until 7 Nov 2026)
 
 # What counts as "stable"
 stable_tolerance_pct: 2      # fixed assets / shareholders may move 2% the wrong way
-margin_tolerance_points: 1   # OPM may fall up to 1 percentage point
+margin_tolerance_pct: 15     # OPM may be up to 15% below the 4-quarter average (avg 10.5% -> needs 8.93%)
 
 # If Screener page can't be opened at all during the monthly check:
 #   keep = keep the stock and tell me   |   remove = remove it

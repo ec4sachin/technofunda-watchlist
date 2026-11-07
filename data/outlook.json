@@ -1,0 +1,32 @@
+{
+ "MODIS": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "H1 FY27 revenue +53%, operating profit +63%; several Mumbai redevelopment projects under construction (Signature/Square handover in FY27), new Khar projects at ₹45-50k/sq ft, ~2.4 lakh sq ft unsold stock, debt-free; management expects margins to recover"
+ },
+ "PANACHE": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q2 FY27 revenue +232%, PAT +451%, margins up to 9.6%; new laptop supply orders (Nov 2026); management points to electronics design/manufacturing demand (AI, IoT, networking). No numeric guidance and a low base, so growth will be lumpy"
+ },
+ "DCI": {
+  "ok": false,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q2 FY27 revenue +38% but PAT only +23% and margins falling; finance cost up 2.7x; ~₹35 cr operating cash outflow in H1 (working capital); no growth guidance - services pivot still early"
+ },
+ "GCSL": {
+  "ok": false,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q2 FY27 consolidated profit down ~45% YoY with margin pressure; merchant banking depends on the IPO market; recent SEBI adjudication order and ASM surveillance"
+ },
+ "GLOBAL": {
+  "ok": false,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "Q1 FY27 revenue -5% and profit -11% YoY (flat business); no growth outlook from management"
+ }
+}
