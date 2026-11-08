@@ -1,65 +1,8 @@
 {
  "added": [],
  "rejected": [],
- "to_dt": [
-  [
-   "ALLCARGO",
-   "Allcargo Logistics Ltd",
-   "close 9.85 < 200 EMA 10.07"
-  ],
-  [
-   "BALUFORGE",
-   "Balu Forge Industries Ltd",
-   "close 501.7 < 200 EMA 503.78"
-  ],
-  [
-   "DEEPA",
-   "Deepa Jewellers",
-   "close 214.62 < 20 EMA 217.81"
-  ],
-  [
-   "INDOAMIN",
-   "Indo Amines",
-   "close 122.4 < 200 EMA 128.5"
-  ],
-  [
-   "MEGATHERM",
-   "Megatherm Induction Ltd",
-   "close 232.95 < 200 EMA 235.31"
-  ],
-  [
-   "MPSLTD",
-   "MPS Ltd",
-   "close 2232.9 < 200 EMA 2262.71"
-  ],
-  [
-   "MVGJL",
-   "Manoj Vaibhav",
-   "close 173.96 < 200 EMA 180.31"
-  ],
-  [
-   "TAMBOLIIN",
-   "Tamboli Industri",
-   "close 308.45 < 20 EMA 312.21"
-  ],
-  [
-   "THEJO",
-   "Thejo Engineering Ltd",
-   "close 1914.2 < 200 EMA 1918.88"
-  ]
- ],
- "to_sp": [
-  [
-   "BPLPHARMA",
-   "Bharat Parenterals Ltd",
-   "close 1881.9 > 20 EMA 1842.76"
-  ],
-  [
-   "DENTALKART",
-   "Vasa Denticity Ltd",
-   "close 447 > 200 EMA 446.78"
-  ]
- ],
+ "to_dt": [],
+ "to_sp": [],
  "removed": [],
  "unchecked": [
   [
@@ -164,9 +107,9 @@
    "close 238.71 vs 20 EMA 218.96 → SP"
   ],
   [
-   "DEEPA",
-   "Deepa Jewellers",
-   "close 214.62 vs 20 EMA 217.81 → DT"
+   "BPLPHARMA",
+   "Bharat Parenterals Ltd",
+   "close 1881.9 vs 20 EMA 1842.76 → SP"
   ],
   [
    "DHABRIYA",
@@ -202,11 +145,6 @@
    "SMT",
    "Sahajanand Medical Technologies Ltd",
    "close 525.95 (too new for any EMA)"
-  ],
-  [
-   "TAMBOLIIN",
-   "Tamboli Industri",
-   "close 308.45 vs 20 EMA 312.21 → DT"
   ],
   [
    "TEAMTECH",
@@ -264,14 +202,14 @@
    "close 468 vs 20 EMA 528.92"
   ],
   [
-   "BPLPHARMA",
-   "Bharat Parenterals Ltd",
-   "close 1881.9 vs 20 EMA 1842.76"
-  ],
-  [
    "BRANDMAN",
    "Brandman Retail Ltd",
    "close 142.35 vs 20 EMA 152.71"
+  ],
+  [
+   "DEEPA",
+   "Deepa Jewellers",
+   "close 214.62 vs 20 EMA 217.81"
   ],
   [
    "ESDS",
@@ -319,6 +257,11 @@
    "close 912.6 vs 20 EMA 925.19"
   ],
   [
+   "TAMBOLIIN",
+   "Tamboli Industri",
+   "close 308.45 vs 20 EMA 312.21"
+  ],
+  [
    "TRANSPEK",
    "Transpek Industry Ltd",
    "close 1280.8 vs 20 EMA 1290.33"
@@ -330,19 +273,19 @@
   ]
  ],
  "per_alert": {
-  "TTM Profit > 30%": 0,
-  "52W High": 0,
+  "TTM Profit > 30%": 2,
+  "52W High": 2,
   "Daily Volume Scan": 0,
   "Weekly Volume Scan": 0,
   "Ready after 6 Months": 0,
   "Mukul Mahavir Agrawal": 0,
   "Ashish Kacholia": 0
  },
- "email_total": 0,
- "already_listed": 0,
+ "email_total": 2,
+ "already_listed": 2,
  "price_date": "06 Nov 2026",
  "monthly_pass": 0,
- "mode": "daily",
+ "mode": "auto",
  "monthly_done": false,
- "run_at": "07 Nov 2026, 07:36 PM IST"
+ "run_at": "08 Nov 2026, 07:49 AM IST"
 }
