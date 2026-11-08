@@ -56,11 +56,42 @@ def test():
     # 2 months of prices: too new to rate
     assert rs.rating(chart(0.3, months_listed=2), mk)[0] is None
 
+    # 3-month RS: only the last 3 months count. Strong for a year, weak lately: 12-month RS 85, 3-month RS low
+    def two_speed(fast, slow, recent_days=92):
+        days = [datetime(2026, 11, 6) - timedelta(days=k) for k in range(730)][::-1]
+        c, v = [], 100.0
+        for i, d in enumerate(days):
+            age = (datetime(2026, 11, 6) - d).days
+            g = slow if age < recent_days else fast
+            if i:
+                v *= (1 + g) ** ((d - days[i - 1]).days / 30.44)
+            c.append(v)
+        return {"t": [d.strftime("%Y-%m-%d") for d in days], "c": c}
+    ch = two_speed(0.16, 0.02)
+    r12, _ = rs.rating(ch, mk)
+    r3, note3 = rs.rating(ch, mk, upto=3)
+    assert r3 == 20 and note3 == "3-month RS 20" and r12 > 80, (r12, r3)
+    assert rs.rating(chart(0.09), mk, upto=3)[0] == 90       # steady stock: same both ways
+
     real = rs.chart_for
     try:
         for g, want in ((0.09, "pass"), (0.08, "fail"), (0.081, "pass")):   # 80 is not "above 80"
             rs.chart_for = lambda code, m, g=g: chart(g)
             assert rs.check("X", {}, 80)[0] == want, (g, rs.check("X", {}, 80))
+        rs.chart_for = lambda code, m: ch                     # 12-month fine, 3-month weak
+        st, worst, why = rs.check("X", {}, 80, min_rs3=80)
+        assert st == "fail" and worst == 20 and why == "3-month RS 20 (need above 80)", (st, worst, why)
+        assert rs.check("X", {}, 80)[0] == "pass"             # 3-month check off
+        assert rs.check("X", {}, 0, min_rs3=80)[0] == "fail"   # only the 3-month check (your setting)
+        rs.chart_for = lambda code, m: chart(0.09)
+        assert rs.check("X", {}, 0, min_rs3=80) == ("pass", 90, "3-month RS 90 (vs 1000 BSE stocks)"), rs.check("X", {}, 0, min_rs3=80)
+        rs.chart_for = lambda code, m: two_speed(0.0, 0.10)        # flat for a year, strong lately: 3-month RS passes alone
+        assert rs.check("X", {}, 0, min_rs3=80)[0] == "pass" and rs.check("X", {}, 80, min_rs3=80)[0] == "fail"
+        rs.chart_for = lambda code, m: chart(0.09)
+        st, worst, why = rs.check("X", {}, 80, min_rs3=80)
+        assert st == "pass" and why.endswith("3-month RS 90"), why
+        rs.chart_for = lambda code, m: chart(0.05)
+        assert rs.check("X", {}, 80, min_rs3=80)[2] == "RS 50 (need above 80) and 3-month RS 50 (need above 80)"
         rs.chart_for = lambda code, m: chart(0.3, months_listed=1)
         assert rs.check("X", {}, 80)[0] == "pass"           # too new: let in, noted
         rs.chart_for = lambda code, m: None
@@ -94,8 +125,8 @@ def test_daily_gate():
     fx.score = lambda m, cfg, **k: (6, 10, [])
     fx.passes = lambda *a: True
     emails.fetch_alert_stocks = lambda *a, **k: (dict(cands), [], {"52W High": 3})
-    rs.check = lambda code, m, mn: {"STRONG": ("pass", 92, "RS 92 (12 months, vs 4000 BSE stocks)"),
-                                    "WEAK": ("fail", 61, "RS 61 (12 months, vs 4000 BSE stocks)"),
+    rs.check = lambda code, m, mn, min_rs3=0: {"STRONG": ("pass", 92, "RS 92 (12 months, vs 4000 BSE stocks), 3-month RS 88"),
+                                    "WEAK": ("fail", 61, "3-month RS 61 (need above 80)"),
                                     "NODATA": ("retry", None, "BSE price files could not be downloaded")}[code]
     os.environ.update(GMAIL_ADDRESS="x", GMAIL_APP_PASSWORD="y")
     main.prices.close_and_ema = lambda *a, **k: {}
@@ -103,18 +134,18 @@ def test_daily_gate():
     try:
         import yaml
         cfg = dict(yaml.safe_load(open(os.path.join(HERE, "..", "config", "rules.yaml"))))
-        assert cfg["new_stock_min_rs"] == 80
+        assert cfg["new_stock_min_rs"] == 0 and cfg["new_stock_min_rs3"] == 80
         sp, dt, state, rep = {}, {}, {"seen_email_ids": []}, {k: [] for k in ("added", "rejected", "to_dt", "to_sp", "removed",
                                                                               "unchecked", "no_price", "warnings", "first_marked", "new_listing")}
         main.daily(sp, dt, {"alerts": ["52W High"]}, cfg, state, "2026-11-09", rep, [], {}, {})
         assert "STRONG" in sp and "WEAK" not in sp and "NODATA" not in sp, sp.keys()
         assert "RS 92" in rep["added"][0][2]
-        assert rep["rejected"][0][0] == "WEAK" and "need above 80" in rep["rejected"][0][2], rep["rejected"]
+        assert rep["rejected"][0][0] == "WEAK" and "3-month RS 61 (need above 80)" in rep["rejected"][0][2], rep["rejected"]
         assert rep["unchecked"][0][0] == "NODATA" and "NODATA" in state["pending"]
         # RS gate off (0): weak stock gets in
         sp, rep2 = {}, {k: [] for k in rep}
         state = {"seen_email_ids": []}
-        main.daily(sp, dt, {"alerts": ["52W High"]}, dict(cfg, new_stock_min_rs=0), state, "2026-11-09", rep2, [], {}, {})
+        main.daily(sp, dt, {"alerts": ["52W High"]}, dict(cfg, new_stock_min_rs=0, new_stock_min_rs3=0), state, "2026-11-09", rep2, [], {}, {})
         assert {"STRONG", "WEAK", "NODATA"} <= set(sp)
     finally:
         (fx.fetch_metrics, fx.score, fx.passes, emails.fetch_alert_stocks, rs.check, fx.completeness,
@@ -134,18 +165,21 @@ def test_monthly_and_preview():
     import yaml
     storage.DATA = tempfile.mkdtemp()
     cfg = dict(yaml.safe_load(open(os.path.join(HERE, "..", "config", "rules.yaml"))))
-    assert cfg["monthly_min_rs"] == 80 and cfg["monthly_rs_lists"] == ["SP"]   # DT not checked (8 Nov 2026)
+    # 8 Nov 2026: only the 3-month RS is used
+    assert cfg["monthly_min_rs"] == 0 and cfg["monthly_min_rs3"] == 80 and cfg["new_stock_min_rs"] == 0 and cfg["new_stock_min_rs3"] == 80
+    cfg.update(monthly_min_rs=80)          # both checks tested below
+    assert cfg["monthly_rs_lists"] == ["SP"]   # DT not checked (8 Nov 2026)
     cfg["monthly_rs_lists"] = ["SP", "DT"]     # both lists tested here
     real = (fx.fetch_metrics, fx.score, fx.passes, fx.completeness, rs.check)
     ratings = {"S_STRONG": ("pass", 90, "RS 90 (12 months, vs 4000 BSE stocks)"),
-               "S_WEAK": ("fail", 80, "RS 80 (12 months, vs 4000 BSE stocks)"),
-               "D_WEAK": ("fail", 35, "RS 35 (12 months, vs 4000 BSE stocks)"),
+               "S_WEAK": ("fail", 80, "RS 80 (need above 80)"),
+               "D_WEAK": ("fail", 35, "RS 35 (need above 80) and 3-month RS 40 (need above 80)"),
                "D_NEW": ("pass", None, "RS: too new (under 3 months of prices)"),
                "S_NODATA": ("retry", None, "RS: no price history"),
                "S_LOWMARKS": ("pass", 95, "RS 95")}
     used_chart = {}
 
-    def fake_check(code, m, mn, today=None, chart=None):
+    def fake_check(code, m, mn, today=None, chart=None, min_rs3=0):
         used_chart[code] = chart
         return ratings[code]
     fx.fetch_metrics = lambda code, *a, **k: {"_name": code, "_path": "/x/consolidated/"}
@@ -170,6 +204,9 @@ def test_monthly_and_preview():
         rep2 = {"warnings": []}
         main.rs_preview(sp, dt, cfg, state, "2026-11-10", rep2, charts)
         assert "rs_preview" not in rep2                                    # once only
+        rep3 = {"warnings": []}
+        main.rs_preview(sp, dt, dict(cfg, monthly_min_rs3=70), state, "2026-11-11", rep3, charts)
+        assert "rs_preview" in rep3                                        # rules changed: shown once more
         msg = main.build_message({**{k: [] for k in ("added", "rejected", "to_dt", "to_sp", "removed", "unchecked", "no_price",
                                                      "warnings", "first_marked", "new_listing")}, "rs_preview": p}, sp, dt, "x")
         assert "Relative Strength preview" in msg and "D_WEAK" in msg
@@ -183,7 +220,7 @@ def test_monthly_and_preview():
         main.monthly(sp, dt, cfg, "2026-12-01", rep, hist, {}, charts=charts)
         assert set(sp) == {"S_STRONG", "S_NODATA"} and set(dt) == {"D_NEW"}, (sp.keys(), dt.keys())
         why = {s_: w for s_, _, w in rep["removed"]}
-        assert "need above 80" in why["S_WEAK"] and "RS 35" in why["D_WEAK"] and "marks" in why["S_LOWMARKS"]
+        assert "need above 80" in why["S_WEAK"] and "3-month RS 40" in why["D_WEAK"] and "marks" in why["S_LOWMARKS"]
         assert used_chart["S_STRONG"] is charts["S_STRONG"]                # today's prices reused, not downloaded again
         assert rep["unchecked"][0][0] == "S_NODATA" and rep["monthly_pass"] == 3
         # DT left out of the RS check
@@ -194,7 +231,7 @@ def test_monthly_and_preview():
         # RS check off
         sp, dt = lists()
         rep = {"removed": [], "unchecked": [], "monthly_pass": 0}
-        main.monthly(sp, dt, dict(cfg, monthly_min_rs=0), "2026-12-01", rep, [], {}, charts=charts)
+        main.monthly(sp, dt, dict(cfg, monthly_min_rs=0, monthly_min_rs3=0), "2026-12-01", rep, [], {}, charts=charts)
         assert set(sp) == {"S_STRONG", "S_WEAK", "S_NODATA"} and len(dt) == 2
     finally:
         fx.fetch_metrics, fx.score, fx.passes, fx.completeness, rs.check = real

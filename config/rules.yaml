@@ -69,10 +69,12 @@ extra_rules:
 #           = 5 out of 11 when the stock has an outlook check
 full_marks: 11
 new_stock_pass: 5        # Step 2 — new stock from emails needs this shown score to enter SP
-new_stock_min_rs: 80     # Step 2 — and its Relative Strength rating (1-99, vs all BSE stocks) must be above this
-                         #   (0 = no RS check). Stocks already in SP / DT: monthly_min_rs below.
+# Relative Strength (RS) rating 1-99 vs all BSE stocks. Only the 3-month RS is used (8 Nov 2026); 0 = that check is off.
+new_stock_min_rs: 0      # Step 2 — 12-month RS (3/6/9/12 months, last 3 counted double): off
+new_stock_min_rs3: 80    # Step 2 — new stock's 3-month RS (last 3 months only) must be above this
 monthly_pass: 5          # Step 5 — stock in SP/DT needs this shown score to stay
-monthly_min_rs: 80       # Step 5 — and its Relative Strength rating must be above this to stay (0 = no RS check)
+monthly_min_rs: 0        # Step 5 — 12-month RS: off
+monthly_min_rs3: 80      # Step 5 — 3-month RS must be above this to stay
 monthly_rs_lists: [SP]   # which lists the monthly RS check removes from (DT not checked: its stocks are below the 200 EMA)
 
 # What counts as "stable"

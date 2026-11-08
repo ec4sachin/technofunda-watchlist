@@ -133,7 +133,7 @@ h2 .cnt{font:500 12px var(--f-mono);padding:1px 8px;border-radius:999px;backgrou
 @media (max-width:520px){.yrsplit{grid-template-columns:1fr}}
 tr.best td{background:var(--up-soft)}
 tr.avg td{background:var(--bg)}
-.st-note.mood.pos{background:var(--up-soft)}.st-note.mood.neg{background:var(--down-soft)}
+.st-note.mood.m-good{background:var(--up-soft)}.st-note.mood.m-bad{background:var(--down-soft)}
 .capc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:10px;background:var(--accent-soft);border-radius:8px;padding:10px}
 .capc .k{font-size:11.5px;color:var(--muted)}.capc .v{font:700 17px var(--f-mono)}.capc .mut{font-size:11.5px}
 @media (max-width:520px){.capc{grid-template-columns:1fr}}
@@ -1222,9 +1222,22 @@ function moodHTML(t){
   if (t.type !== "switch") return "";
   const m = (SD.mood || {})[t.id];
   if (!m) return `<div class="st-note">🧭 Nifty Smallcap 100 not checked yet — it appears after the next robot run.</div>`;
-  return `<div class="st-note mood ${m.above ? "pos" : "neg"}">🧭 <b>Nifty Smallcap 100 ${inr0(m.close).slice(1)}</b> is <b>${m.above ? "above" : "below"}</b> its EMA 50 (${inr0(m.ema50).slice(1)}) on ${esc(m.date)}
+  return `<div class="st-note mood ${m.above ? "m-good" : "m-bad"}">🧭 <b>Nifty Smallcap 100 ${inr0(m.close).slice(1)}</b> is <b>${m.above ? "above" : "below"}</b> its EMA 50 (${inr0(m.ema50).slice(1)}) on ${esc(m.date)}
     → open trades follow the <b>${esc(m.rules)}</b> exit rules today (${m.rules === "Positional" ? "50% at +30%, rest on 2 closes below EMA 50" : "50% at +20%, EMA 10 trail, 10-day time stop"}).
     The robot checks the index every day, so a trade switches rules when small caps turn strong or weak.</div>`;
+}
+function healthHTML(){
+  const h = SD.health;
+  if (!h) return "";
+  const lab = {healthy: "🟢 Healthy", neutral: "🟡 Neutral", weak: "🔴 Weak", few: "⚪ Too few trades yet", waiting: "⚪ No closed trades yet"}[h.status] || h.status;
+  const cls = h.status === "healthy" ? "m-good" : h.status === "weak" ? "m-bad" : "";
+  const rule = `Edge factor = (Win% ÷ Loss%) × (Avg gain% ÷ Avg loss%), from your last ${h.last} closed paper trades of all strategies.
+    Above ${h.good} = Healthy, below ${h.weak} = Weak, in between = Neutral (a verdict needs at least ${h.min} trades). Shown only — trading is not changed.`;
+  if (h.status === "waiting") return `<div class="st-note">🩺 <b>Smallcap market health:</b> ${lab}. ${rule}</div>`;
+  const ed = h.edge == null ? "no losing trade yet" : `<b>${esc(h.edge)}</b>`;
+  return `<div class="st-note mood ${cls}">🩺 <b>Smallcap market health: ${lab}</b> · Edge factor ${ed}<br>
+    Last ${esc(h.trades)} closed trades: won ${esc(h.win_pct)}% (${esc(h.wins)} of ${esc(h.trades)}) · avg gain +${esc(h.avg_gain)}% · avg loss −${esc(h.avg_loss)}%<br>
+    <small class="mut">${rule}</small></div>`;
 }
 function perfHTML(t){
   const live = (SD.live || {})[t.id], bt = (SD.backtest || {})[t.id] || {};
@@ -1309,6 +1322,7 @@ function drawStrategies(){
       ${f ? "" : `<button class="btn pri" data-st-new>+ Add strategy</button>`}</div>
     <div class="st-note">📝 <b>Paper trading.</b> Strategies that are ON record the trades they would take (as buy-stop orders at the
       "buy above" price) and send them on Telegram each morning. Real orders start when your broker (Zerodha / Angel One) is connected through the VPS.</div>
+    ${healthHTML()}
     ${local}${form}
     <div class="st-list">${cards || (f ? "" : `<div class="empty">No strategies yet. Tap <b>+ Add strategy</b> to create one.</div>`)}</div>
     ${compareHTML()}
@@ -1446,7 +1460,7 @@ def _strategy_view(strategies, sp, dt):
                        for t in [x for x in book.get("closed", []) if x.get("strategy") == sid][-100:]][::-1],
             "backtest": strategies.get("backtest") or {}, "log": (strategies.get("log") or [])[-400:][::-1],
             "capital": {st.get("id"): _stg.capital_of(st, book) for st in (strategies.get("settings") or {}).get("strategies", [])},
-            "mood": book.get("mood", {}), "universe": strategies.get("universe")}
+            "mood": book.get("mood", {}), "universe": strategies.get("universe"), "health": _stg.edge(book.get("closed"))}
 
 
 def page_data(sp, dt, run, history, rules_cfg, banner="", snaps=None, charts=None, alerts=None, strategies=None):

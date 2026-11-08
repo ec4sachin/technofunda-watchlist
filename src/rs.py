@@ -68,9 +68,9 @@ def _score(now, then):
     return sum(WEIGHT[mo] * now / then[mo] for mo in then) / w
 
 
-def rating(chart, mk):
+def rating(chart, mk, upto=12):
     """RS Rating (1-99) of a stock with price history chart {"t": [...], "c": [...]} against market mk.
-    Returns (rating or None, note)."""
+    upto=3: the 3-month RS (last 3 months only). Returns (rating or None, note)."""
     if not chart or not chart.get("t"):
         return None, "no price history"
     t, c = chart["t"], chart["c"]
@@ -96,7 +96,7 @@ def rating(chart, mk):
     # keep only periods without a gap: 3, then 6, then 9, then 12
     use = []
     for mo in MONTHS:
-        if mo not in then:
+        if mo not in then or mo > upto:
             break
         use.append(mo)
     mine = _score(now, {mo: then[mo] for mo in use})
@@ -111,6 +111,8 @@ def rating(chart, mk):
     others.sort()
     below = bisect.bisect_left(others, mine)
     r = max(1, min(99, round(100 * below / len(others))))
+    if upto == 3:
+        return r, f"3-month RS {r}"
     span = f"{use[-1]} months" if len(use) < 4 else "12 months"
     return r, f"RS {r} ({span}, vs {len(others)} BSE stocks)"
 
@@ -131,16 +133,29 @@ def chart_for(code, m):
     return res[3] if res and len(res) > 3 else None
 
 
-def check(code, m, min_rs, today=None, chart=None):
-    """Returns (status, rating, note): "pass" (RS above min_rs, or too new to rate),
-    "fail" (RS min_rs or lower), "retry" (prices could not be read).
+def check(code, m, min_rs, today=None, chart=None, min_rs3=0):
+    """Returns (status, rating, note): "pass" (RS above min_rs and 3-month RS above min_rs3, or too new to rate),
+    "fail" (either one at the level or lower - the note says which), "retry" (prices could not be read).
+    rating = the lower of the ratings checked (for sorting). min_rs / min_rs3 = 0: that one is not checked.
     chart: the stock's price history when already downloaded (else it is downloaded here)."""
     mk = market(today)
     if not mk:
         return "retry", None, "BSE price files could not be downloaded"
-    r, note = rating(chart if chart and chart.get("t") else chart_for(code, m or {}), mk)
+    ch = chart if chart and chart.get("t") else chart_for(code, m or {})
+    r, note = rating(ch, mk)
     if r is None:
         if note.startswith("too new"):
             return "pass", None, "RS: " + note
         return "retry", None, "RS: " + note
-    return ("pass" if r > min_rs else "fail"), r, note
+    got = []                       # (rating, level, text)
+    if min_rs:
+        got.append((r, min_rs, f"RS {r}"))
+    if min_rs3:
+        r3, _ = rating(ch, mk, upto=3)
+        got.append((r3, min_rs3, f"3-month RS {r3}"))
+        note = f"{note}, 3-month RS {r3}" if min_rs else f"3-month RS {r3} (vs {note.split('vs ')[-1]}"
+    low = [f"{txt} (need above {lvl:g})" for v, lvl, txt in got if v <= lvl]
+    worst = min(v for v, _, _ in got) if got else r
+    if low:
+        return "fail", worst, " and ".join(low)
+    return "pass", worst, note

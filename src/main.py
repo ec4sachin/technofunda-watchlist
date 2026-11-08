@@ -104,10 +104,11 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
         snaps[code] = fx.snapshot(m, today)
         mk = f"{fx.on_full_scale(got, out_of, rules_cfg):g}/{full:g}"
         ok = fx.passes(got, out_of, need, rules_cfg)
-        rs_note, min_rs = "", rules_cfg.get("new_stock_min_rs")
-        if ok and min_rs:   # Relative Strength rating (1-99) must be above min_rs
+        rs_note = ""
+        min_rs, min_rs3 = float(rules_cfg.get("new_stock_min_rs") or 0), float(rules_cfg.get("new_stock_min_rs3") or 0)
+        if ok and (min_rs or min_rs3):   # Relative Strength ratings (1-99): 12-month and 3-month must be above the levels
             try:
-                status, _, rs_note = rs.check(code, m, float(min_rs))
+                status, _, rs_note = rs.check(code, m, min_rs, min_rs3=min_rs3)
             except Exception as e_:   # never stop the run for this
                 status, rs_note = "retry", f"RS check failed: {e_}"
             if status == "retry":
@@ -116,7 +117,6 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
                 continue
             if status == "fail":
                 ok = False
-                rs_note = f"{rs_note}, need above {float(min_rs):g}"
         if ok:
             e = entry(code, s["name"] or m.get("_name", ""), ", ".join(s["sources"]), today)
             e.update(last_fund_check=today, fund_result=mk, marks_detail=detail_json(items),
@@ -292,12 +292,13 @@ def judge(res, period, short=20):
 def rs_lists(rules_cfg):
     """Monthly Relative Strength check: (min RS, lists checked) - min 0 = off."""
     lists = rules_cfg.get("monthly_rs_lists", ["SP", "DT"]) or []
-    return float(rules_cfg.get("monthly_min_rs", 0) or 0), {str(x).upper() for x in lists}
+    return (float(rules_cfg.get("monthly_min_rs", 0) or 0), float(rules_cfg.get("monthly_min_rs3", 0) or 0),
+            {str(x).upper() for x in lists})
 
 
 def monthly(sp, dt, rules_cfg, today, report, history, snaps, charts=None):
     need = float(rules_cfg.get("monthly_pass", 7))
-    min_rs, rs_in = rs_lists(rules_cfg)
+    min_rs, min_rs3, rs_in = rs_lists(rules_cfg)
     rs_skip = 0
     full = rules_cfg.get("full_marks", 11)
     drop_missing = str(rules_cfg.get("page_missing_monthly", "keep")).lower() == "remove"
@@ -328,13 +329,13 @@ def monthly(sp, dt, rules_cfg, today, report, history, snaps, charts=None):
             reason = None
             if not fx.passes(got, out_of, need, rules_cfg):
                 reason = f"marks {mk} — missed: " + fx.short_reason(marks)
-            elif min_rs and list_name in rs_in:   # Relative Strength rating must be above monthly_min_rs
+            elif (min_rs or min_rs3) and list_name in rs_in:   # RS (12-month and 3-month) must be above the levels
                 try:
-                    status, _, note = rs.check(sym, m, min_rs, chart=(charts or {}).get(sym))
+                    status, _, note = rs.check(sym, m, min_rs, chart=(charts or {}).get(sym), min_rs3=min_rs3)
                 except Exception as e_:
                     status, note = "retry", f"RS check failed: {e_}"
                 if status == "fail":
-                    reason = f"marks {mk} OK, but {note}, need above {min_rs:g}"
+                    reason = f"marks {mk} OK, but {note}"
                 elif status == "retry":
                     rs_skip += 1   # RS not known today: never removed for that
                     report["unchecked"].append((sym, row["name"], f"{list_name}: {note} — kept"))
@@ -351,8 +352,9 @@ def monthly(sp, dt, rules_cfg, today, report, history, snaps, charts=None):
 def rs_preview(sp, dt, rules_cfg, state, today, report, charts):
     """Once, after the monthly RS check was switched on: which SP / DT stocks have RS at or below the level
     (they would be removed at the next monthly review). Nothing is removed here."""
-    min_rs, rs_in = rs_lists(rules_cfg)
-    if not min_rs or state.get("rs_preview_done") or not charts:
+    min_rs, min_rs3, rs_in = rs_lists(rules_cfg)
+    sig = f"{min_rs:g}/{min_rs3:g}/{','.join(sorted(rs_in))}"     # shown again once when the RS rules change
+    if not (min_rs or min_rs3) or state.get("rs_preview_done") == sig or not charts:
         return
     rows, known, lose = [], 0, []
     for list_name, items in (("SP", sp), ("DT", dt)):
@@ -361,17 +363,18 @@ def rs_preview(sp, dt, rules_cfg, state, today, report, charts):
         for sym, row in items.items():
             if not (charts.get(sym) or {}).get("t"):
                 continue          # no prices today: not downloaded again just for the preview
-            status, r, note = rs.check(sym, None, min_rs, chart=charts.get(sym))
+            status, r, note = rs.check(sym, None, min_rs, chart=charts.get(sym), min_rs3=min_rs3)
             if status == "retry" and "BSE price files" in note:
                 return            # market prices not available today: try again on the next run
             if r is not None:
                 known += 1
-                rows.append((list_name, r))
+                rows.append((list_name, status == "fail"))
                 if status == "fail":
-                    lose.append((sym, row["name"], f"{list_name} · RS {r}"))
-    by = {ln: (sum(1 for l_, r in rows if l_ == ln and r <= min_rs), sum(1 for l_, _ in rows if l_ == ln)) for ln in ("SP", "DT")}
-    report["rs_preview"] = {"min": min_rs, "by": by, "known": known, "lose": sorted(lose, key=lambda x: int(x[2].split()[-1]))}
-    state["rs_preview_done"] = today
+                    lose.append((r, sym, row["name"], f"{list_name} · {note}"))
+    by = {ln: (sum(1 for l_, f in rows if l_ == ln and f), sum(1 for l_, _ in rows if l_ == ln)) for ln in ("SP", "DT")}
+    report["rs_preview"] = {"min": min_rs, "min3": min_rs3, "by": by, "known": known,
+                            "lose": [x[1:] for x in sorted(lose, key=lambda x: x[0])]}
+    state["rs_preview_done"] = sig
 
 
 # ----------------------------------------------------------------- report
@@ -492,6 +495,17 @@ def strategy_lines(st):
     names = st.get("names") or {}
     sids = list(dict.fromkeys(list((st.get("capital") or {}).keys()) + [e.get("strategy") for e in st.get("entries", []) + st.get("exits", [])]))
     L = []
+    h = st.get("health")
+    if h:
+        lab = strategy.HEALTH_LABEL.get(h["status"], h["status"])
+        if h["status"] == "waiting":
+            L += ["", f"🩺 <b>Smallcap market health</b>: {lab} — the Edge factor starts with your first closed paper trade "
+                      f"(a verdict from {h['min']} trades)"]
+        else:
+            ed = "no losses yet" if h["edge"] is None else f"<b>{h['edge']:g}</b>"
+            L += ["", f"🩺 <b>Smallcap market health</b>: {lab} · Edge factor {ed}",
+                  f"Last {h['trades']} closed paper trades: won {h['win_pct']:g}% ({h['wins']} of {h['trades']}) · "
+                  f"avg gain +{h['avg_gain']:g}% · avg loss −{h['avg_loss']:g}%  (Healthy above {h['good']:g}, Weak below {h['weak']:g})"]
     for sid in [x for x in sids if x]:
         L += ["", f"🎯 <b>{html.escape(str(names.get(sid, sid)))}</b> (paper trading)"]
         md = (st.get("mood") or {}).get(sid)
@@ -573,7 +587,9 @@ def build_message(r, sp, dt, today_label, dashboard_url=""):
     rp = r.get("rs_preview")
     if rp:
         counts = " · ".join(f"{ln}: <b>{a}</b> of {b}" for ln, (a, b) in rp["by"].items() if b)
-        L += ["", f"🧪 <b>Relative Strength preview</b> (nothing removed yet) — RS {rp['min']:g} or lower:",
+        lv = " and ".join(x for x in (f"RS above {rp['min']:g}" if rp.get("min") else "",
+                                      f"3-month RS above {rp['min3']:g}" if rp.get("min3") else "") if x)
+        L += ["", f"🧪 <b>Relative Strength preview</b> (nothing removed yet) — stocks failing {lv}:",
               f"{counts or 'none'} stocks (RS worked out for {rp['known']})",
               "These will be removed at the monthly review if their RS is still low then:"]
         L += [tg.stock_line(s_, n_, why) for s_, n_, why in rp["lose"][:40]]
@@ -645,6 +661,7 @@ def main():
     if mode in ("auto", "daily") and charts:
         try:
             report["strategy"] = strategy.run(strat_cfg, book, {**g_charts, **charts}, sp, dt, mood=mood, growth=growth)
+            report["strategy"]["health"] = strategy.edge(book.get("closed"))
             storage.save_json("strategy_trades.json", book)
             storage.append_trade_log(report["strategy"].get("log"))
         except Exception as e:  # never stop the watchlist for a strategy problem

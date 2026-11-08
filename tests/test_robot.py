@@ -31,7 +31,7 @@ MID = {**GOOD, "sales_growth_qtr_yoy": 10.0, "eps_latest_qtr": 5.0, "fii_dii_lat
 _CFG = main.cfg
 # this flow test is built around the 6 basic marks (the Business / Management / Future marks: test_extra_marks.py)
 # (and without the Relative Strength gate for new stocks: test_rs.py)
-main.cfg = lambda name: dict(_CFG(name), extra_marks="off", new_stock_min_rs=0, monthly_min_rs=0) if name == "rules.yaml" else _CFG(name)
+main.cfg = lambda name: dict(_CFG(name), extra_marks="off", new_stock_min_rs=0, new_stock_min_rs3=0, monthly_min_rs=0, monthly_min_rs3=0) if name == "rules.yaml" else _CFG(name)
 
 
 def run(day, mode, metrics_by_code, price_by_ticker, email_stocks):

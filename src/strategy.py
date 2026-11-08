@@ -768,3 +768,45 @@ def stats(book, sid=None):
     wins = [t for t in closed if t["pnl"] > 0]
     return {"trades": len(closed), "wins": len(wins), "win_rate": round(len(wins) / len(closed) * 100) if closed else None,
             "pnl": round(sum(t["pnl"] for t in closed), 2)}
+
+
+# ------------------------------------------------------------------ market health
+EDGE_TRADES, EDGE_MIN, EDGE_GOOD, EDGE_WEAK = 30, 10, 2.0, 1.0
+
+
+def edge(closed, last=EDGE_TRADES, min_trades=EDGE_MIN, good=EDGE_GOOD, weak=EDGE_WEAK):
+    """Smallcap market health from your own paper trades (all strategies): the latest `last` closed trades.
+    Edge factor = (Win% / Loss%) x (Avg gain % / Avg loss %).  Above 2 = Healthy, below 1 = Weak, between = Neutral.
+    A trade's result is its whole P&L % after costs (both halves of a trade that booked 50%)."""
+    done = sorted([t for t in closed or [] if t.get("status") == "closed" and t.get("pnl_pct") is not None],
+                  key=lambda t: (t.get("closed_on") or "", t.get("entry_date") or ""))[-last:]
+    pct = [float(t["pnl_pct"]) for t in done]
+    gains, losses = [x for x in pct if x > 0], [-x for x in pct if x <= 0]
+    out = {"trades": len(pct), "wins": len(gains), "losses": len(losses), "last": last, "min": min_trades,
+           "good": good, "weak": weak, "since": done[0].get("closed_on") if done else None}
+    if not pct:
+        return {**out, "edge": None, "status": "waiting"}
+    out["win_pct"] = round(100 * len(gains) / len(pct), 1)
+    out["avg_gain"] = round(sum(gains) / len(gains), 2) if gains else 0.0
+    out["avg_loss"] = round(sum(losses) / len(losses), 2) if losses else 0.0
+    if not gains:
+        e = 0.0
+    elif not losses or out["avg_loss"] == 0:
+        e = None           # no losing trade yet: edge cannot be divided out, counted as healthy
+    else:
+        e = round((len(gains) / len(losses)) * (out["avg_gain"] / out["avg_loss"]), 2)
+    out["edge"] = e
+    if len(pct) < min_trades:
+        out["status"] = "few"
+    elif e is None or e > good:
+        out["status"] = "healthy"
+    elif e < weak:
+        out["status"] = "weak"
+    else:
+        out["status"] = "neutral"
+    return out
+
+
+HEALTH_LABEL = {"healthy": "🟢 Healthy", "neutral": "🟡 Neutral", "weak": "🔴 Weak", "few": "⚪ Too few trades yet",
+                "waiting": "⚪ No closed trades yet"}
+
