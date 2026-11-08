@@ -273,19 +273,19 @@
   ]
  ],
  "per_alert": {
-  "TTM Profit > 30%": 2,
-  "52W High": 2,
+  "TTM Profit > 30%": 0,
+  "52W High": 0,
   "Daily Volume Scan": 0,
   "Weekly Volume Scan": 0,
   "Ready after 6 Months": 0,
   "Mukul Mahavir Agrawal": 0,
   "Ashish Kacholia": 0
  },
- "email_total": 2,
- "already_listed": 2,
+ "email_total": 0,
+ "already_listed": 0,
  "price_date": "06 Nov 2026",
  "monthly_pass": 0,
- "mode": "auto",
+ "mode": "daily",
  "monthly_done": false,
- "run_at": "08 Nov 2026, 07:49 AM IST"
+ "run_at": "08 Nov 2026, 09:09 AM IST"
 }
