@@ -84,6 +84,12 @@ def test_off_and_preview_do_not_change_marks():
     for mode in ("off", "preview"):
         got, out_of, items = fx.score(m, dict(CFG, extra_marks=mode))
         assert out_of == 6.0, (mode, out_of)
+    for v in (True, "on", "ON", "true"):   # YAML turns a bare  on  into True
+        assert fx.score(m, dict(CFG, extra_marks=v))[1] == 10.0, v
+    for v in (False, "off", "preview", None):
+        assert fx.score(m, dict(CFG, extra_marks=v))[1] == 6.0, v
+    # pass mark 5: the shown score counts (4.5 of 10 shows 5.0/11 -> passes; 4.4 of 10 shows 4.8 -> fails)
+    assert fx.passes(4.5, 10, 5, CFG) and not fx.passes(4.4, 10, 5, CFG) and fx.passes(3, 6, 5, CFG) and not fx.passes(2.5, 6, 5, CFG)
     got, out_of, items = fx.score(m, dict(CFG, extra_marks="on"))
     assert out_of == 10.0     # 6 + 2 + 1 + 1 (no outlook check for this stock: that mark is left out)
     print("Off / preview / on OK")

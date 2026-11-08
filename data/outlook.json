@@ -166,5 +166,23 @@
   "date": "2026-11-07",
   "until": "2027-02-05",
   "note": "Slow growth: FY26 revenue only +11%; June 2026 quarter revenue ~₹59 cr and profit ~₹2 cr, below Sep 2025 levels"
+ },
+ "544765": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "FY26 revenue +39%, PAT +47%, EBITDA margin up; expanding cloud kitchens (target 50+), new outlets opened Sep 2026, Gurgaon banquet hall planned. Risk: >90% of sales via Swiggy/Zomato, Delhi NCR only"
+ },
+ "MEGAFLEX": {
+  "ok": true,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "FY26 revenue +29%, net profit more than doubled (₹3.4 cr -> ₹7.3 cr). Based on results only - no management guidance found"
+ },
+ "544746": {
+  "ok": false,
+  "date": "2026-11-07",
+  "until": "2027-02-05",
+  "note": "FY26 profit +89% on revenue +14%, but cash from operations negative 2 years running, receivables (₹159 cr) now larger than a full year's sales (₹117 cr), short-term debt up - growth not turning into cash"
  }
 }

@@ -22,6 +22,7 @@ import storage  # noqa: E402
 import strategy  # noqa: E402
 import market  # noqa: E402
 import universe  # noqa: E402
+import rs  # noqa: E402
 import telegram as tg  # noqa: E402
 import web  # noqa: E402
 
@@ -102,7 +103,21 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
         got, out_of, items = fx.score(m, rules_cfg)
         snaps[code] = fx.snapshot(m, today)
         mk = f"{fx.on_full_scale(got, out_of, rules_cfg):g}/{full:g}"
-        if fx.passes(got, out_of, need, rules_cfg):
+        ok = fx.passes(got, out_of, need, rules_cfg)
+        rs_note, min_rs = "", rules_cfg.get("new_stock_min_rs")
+        if ok and min_rs:   # Relative Strength rating (1-99) must be above min_rs
+            try:
+                status, _, rs_note = rs.check(code, m, float(min_rs))
+            except Exception as e_:   # never stop the run for this
+                status, rs_note = "retry", f"RS check failed: {e_}"
+            if status == "retry":
+                pending.setdefault(code, {**s, "since": today})
+                report["unchecked"].append((code, s["name"], f"marks {mk} passed, but {rs_note} — will try again tomorrow"))
+                continue
+            if status == "fail":
+                ok = False
+                rs_note = f"{rs_note}, need above {float(min_rs):g}"
+        if ok:
             e = entry(code, s["name"] or m.get("_name", ""), ", ".join(s["sources"]), today)
             e.update(last_fund_check=today, fund_result=mk, marks_detail=detail_json(items),
                      consolidated="yes" if "consolidated" in m.get("_path", "") else "no",
@@ -110,11 +125,15 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
             set_codes(e, m)
             sp[code] = e
             why = "; ".join(s.get("notes") or []) or ", ".join(s["sources"])
-            report["added"].append((code, e["name"], f"marks {mk} · " + why))
+            if rs_note:
+                e["rs"] = rs_note
+            rs_txt = f" · {rs_note}" if rs_note else ""
+            report["added"].append((code, e["name"], f"marks {mk}{rs_txt} · " + why))
             history.append({"date": today, "symbol": code, "name": e["name"], "action": "ADDED to SP",
-                            "reason": f"marks {mk}; from " + why})
+                            "reason": f"marks {mk}{'; ' + rs_note if rs_note else ''}; from " + why})
         else:
-            report["rejected"].append((code, s["name"], mk + (f" ({s['sources'][0]})" if s.get("notes") else "")))
+            report["rejected"].append((code, s["name"], mk + (f" · {rs_note}" if rs_note else "") +
+                                       (f" ({s['sources'][0]})" if s.get("notes") else "")))
 
     # Marks (not removal) for: stocks added by hand that were never marked, and stocks whose
     # last marks had 2+ checks without data (re-read, in case the other Screener page is complete)
@@ -270,8 +289,16 @@ def judge(res, period, short=20):
 
 
 # ----------------------------------------------------------------- Step 5
-def monthly(sp, dt, rules_cfg, today, report, history, snaps):
+def rs_lists(rules_cfg):
+    """Monthly Relative Strength check: (min RS, lists checked) - min 0 = off."""
+    lists = rules_cfg.get("monthly_rs_lists", ["SP", "DT"]) or []
+    return float(rules_cfg.get("monthly_min_rs", 0) or 0), {str(x).upper() for x in lists}
+
+
+def monthly(sp, dt, rules_cfg, today, report, history, snaps, charts=None):
     need = float(rules_cfg.get("monthly_pass", 7))
+    min_rs, rs_in = rs_lists(rules_cfg)
+    rs_skip = 0
     full = rules_cfg.get("full_marks", 11)
     drop_missing = str(rules_cfg.get("page_missing_monthly", "keep")).lower() == "remove"
     for list_name, items in (("SP", sp), ("DT", dt)):
@@ -298,22 +325,60 @@ def monthly(sp, dt, rules_cfg, today, report, history, snaps):
                        consolidated="yes" if "consolidated" in m.get("_path", "") else "no",
                        screener_id=m.get("_company_id", "") or row.get("screener_id", ""))
             set_codes(row, m)
-            if fx.passes(got, out_of, need, rules_cfg):
+            reason = None
+            if not fx.passes(got, out_of, need, rules_cfg):
+                reason = f"marks {mk} — missed: " + fx.short_reason(marks)
+            elif min_rs and list_name in rs_in:   # Relative Strength rating must be above monthly_min_rs
+                try:
+                    status, _, note = rs.check(sym, m, min_rs, chart=(charts or {}).get(sym))
+                except Exception as e_:
+                    status, note = "retry", f"RS check failed: {e_}"
+                if status == "fail":
+                    reason = f"marks {mk} OK, but {note}, need above {min_rs:g}"
+                elif status == "retry":
+                    rs_skip += 1   # RS not known today: never removed for that
+                    report["unchecked"].append((sym, row["name"], f"{list_name}: {note} — kept"))
+            if reason is None:
                 report["monthly_pass"] += 1
             else:
                 items.pop(sym)
-                reason = f"marks {mk} — missed: " + fx.short_reason(marks)
                 report["removed"].append((sym, row["name"], f"{list_name}: {reason}"))
                 history.append({"date": today, "symbol": sym, "name": row["name"],
                                 "action": f"REMOVED from {list_name}", "reason": reason})
     report["monthly_done"] = True
 
 
+def rs_preview(sp, dt, rules_cfg, state, today, report, charts):
+    """Once, after the monthly RS check was switched on: which SP / DT stocks have RS at or below the level
+    (they would be removed at the next monthly review). Nothing is removed here."""
+    min_rs, rs_in = rs_lists(rules_cfg)
+    if not min_rs or state.get("rs_preview_done") or not charts:
+        return
+    rows, known, lose = [], 0, []
+    for list_name, items in (("SP", sp), ("DT", dt)):
+        if list_name not in rs_in:
+            continue
+        for sym, row in items.items():
+            if not (charts.get(sym) or {}).get("t"):
+                continue          # no prices today: not downloaded again just for the preview
+            status, r, note = rs.check(sym, None, min_rs, chart=charts.get(sym))
+            if status == "retry" and "BSE price files" in note:
+                return            # market prices not available today: try again on the next run
+            if r is not None:
+                known += 1
+                rows.append((list_name, r))
+                if status == "fail":
+                    lose.append((sym, row["name"], f"{list_name} · RS {r}"))
+    by = {ln: (sum(1 for l_, r in rows if l_ == ln and r <= min_rs), sum(1 for l_, _ in rows if l_ == ln)) for ln in ("SP", "DT")}
+    report["rs_preview"] = {"min": min_rs, "by": by, "known": known, "lose": sorted(lose, key=lambda x: int(x[2].split()[-1]))}
+    state["rs_preview_done"] = today
+
+
 # ----------------------------------------------------------------- report
 def marks_preview(sp, dt, rules_cfg, state, today, report):
     """rules.yaml extra_marks: preview -> every SP / DT stock is checked once with the Business / Management / Future
     marks and the result is reported (nothing is removed). Unfinished stocks continue on the next run."""
-    if str(rules_cfg.get("extra_marks", "off")).lower() != "preview":
+    if fx.extra_mode(rules_cfg) != "preview":
         return
     sig = json.dumps([rules_cfg.get("extra_rules"), rules_cfg.get("auto_marks"), rules_cfg.get("monthly_pass")], sort_keys=True)
     old = storage.load_json("marks_preview.json", {})
@@ -482,7 +547,7 @@ def build_message(r, sp, dt, today_label, dashboard_url=""):
     block("🔼 <b>Moved DT → SP</b> (back above 200 EMA / 20 EMA)", r["to_sp"])
     if r.get("monthly_done"):
         L += ["", f"🗓 <b>Monthly fundamental review</b>: {r['monthly_pass']} passed, {len(r['removed'])} removed"]
-        block("❌ <b>Removed</b> (below monthly pass marks)", r["removed"])
+        block("❌ <b>Removed</b> (below monthly pass marks, or Relative Strength too low)", r["removed"])
     block("🆕 <b>Marks updated</b> (added by hand, or data was missing before)", r["first_marked"])
     block("⚠️ <b>Could not check</b>", r["unchecked"])
     if r["new_listing"]:
@@ -505,6 +570,15 @@ def build_message(r, sp, dt, today_label, dashboard_url=""):
         if mp["lose"]:
             L += ["Would be removed at the monthly review:"] + [tg.stock_line(s, n, why) for s, n, why in mp["lose"][:40]]
         L.append("To use them: set <code>extra_marks: on</code> in config/rules.yaml (or tell Claude).")
+    rp = r.get("rs_preview")
+    if rp:
+        counts = " · ".join(f"{ln}: <b>{a}</b> of {b}" for ln, (a, b) in rp["by"].items() if b)
+        L += ["", f"🧪 <b>Relative Strength preview</b> (nothing removed yet) — RS {rp['min']:g} or lower:",
+              f"{counts or 'none'} stocks (RS worked out for {rp['known']})",
+              "These will be removed at the monthly review if their RS is still low then:"]
+        L += [tg.stock_line(s_, n_, why) for s_, n_, why in rp["lose"][:40]]
+        if len(rp["lose"]) > 40:
+            L.append(f"… and {len(rp['lose']) - 40} more")
     if r.get("strategy_check"):
         L += ["", "📅 <b>Monthly paper-trading check</b> (live result vs backtest)"] + r["strategy_check"]
     st = r.get("strategy")
@@ -642,13 +716,17 @@ def main():
             marks_preview(sp, dt, rules_cfg, state, today, report)
         except Exception as e:
             report["warnings"].append(f"New marks preview failed: {e}")
+        try:
+            rs_preview(sp, dt, rules_cfg, state, today, report, charts)
+        except Exception as e:
+            report["warnings"].append(f"RS preview failed: {e}")
     # Runs on the review day, or on the next run if that day was missed (crash, skipped run)
     is_review_day = now.day >= int(settings.get("monthly_review_day", 1)) and str(state.get("last_monthly", ""))[:7] != today[:7]
     if not state.get("last_monthly"):
         state["last_monthly"] = today  # first run ever: the first review is on the next review day
         is_review_day = False
     if mode == "monthly" or (mode == "auto" and is_review_day):
-        monthly(sp, dt, rules_cfg, today, report, history, snaps)
+        monthly(sp, dt, rules_cfg, today, report, history, snaps, charts=charts)
         if storage.screener_blocked():   # Screener blocked us (or out of time): the review runs again tomorrow
             report["warnings"].append("Screener blocked the monthly review part-way — it will run again on the next run")
         else:

@@ -28,6 +28,12 @@ LOW = WEAK
 MID = {**GOOD, "sales_growth_qtr_yoy": 10.0, "eps_latest_qtr": 5.0, "fii_dii_latest": 3.0}
 
 
+_CFG = main.cfg
+# this flow test is built around the 6 basic marks (the Business / Management / Future marks: test_extra_marks.py)
+# (and without the Relative Strength gate for new stocks: test_rs.py)
+main.cfg = lambda name: dict(_CFG(name), extra_marks="off", new_stock_min_rs=0, monthly_min_rs=0) if name == "rules.yaml" else _CFG(name)
+
+
 def run(day, mode, metrics_by_code, price_by_ticker, email_stocks):
     main.datetime = type("D", (), {"now": staticmethod(lambda tz=None: datetime(2026, 11, day, 7, 0, tzinfo=tz))})
     emails.fetch_alert_stocks = lambda *a, **k: (email_stocks, ["<id>"], {"52W High": len(email_stocks)})
@@ -55,7 +61,7 @@ def test_real_stocks():
                 "SUPREMEPWR": 5.5, "EIMCOELECO": 4.0, "SAHANA": 5.0}
     for sym, d in real_stocks.STOCKS.items():
         m = fx.parse_company_page(real_stocks.to_html(d))
-        got, out_of, _ = fx.score(m, cfg)
+        got, out_of, _ = fx.score(m, cfg, extra=False)   # the 6 basic marks
         assert (got, out_of) == (expected[sym], 6.0), (sym, got)
     m = fx.parse_company_page(real_stocks.to_html(real_stocks.STOCKS["RATNAVEER"]))
     assert m["opm_latest_qtr"] == 9.0 and m["opm_avg_prev"] == 10.5   # (10 + 11 + 11 + 10) / 4

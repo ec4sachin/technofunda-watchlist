@@ -420,7 +420,7 @@ def score(m, cfg, extra=None):
     """
     w = cfg.get("auto_marks", {})
     if extra is None:
-        extra = str(cfg.get("extra_marks", "off")).lower() == "on"
+        extra = extra_mode(cfg) == "on"
     tol = float(cfg.get("stable_tolerance_pct", 2)) / 100
     mtol = float(cfg.get("margin_tolerance_points", 1))
     # margin_tolerance_pct (7 Nov 2026): OPM may be this % below the average (10 = at least 90% of it);
@@ -475,6 +475,14 @@ def score(m, cfg, extra=None):
     return round(got, 2), round(out_of, 2), items
 
 
+def extra_mode(cfg):
+    """rules.yaml extra_marks -> "on" / "preview" / "off". (YAML reads a bare on / off as true / false.)"""
+    v = cfg.get("extra_marks", "off")
+    if v is True or str(v).strip().lower() in ("on", "true", "yes"):
+        return "on"
+    return "preview" if str(v).strip().lower() == "preview" else "off"
+
+
 def _extra_checks(m, cfg, add):
     """Business (2), Management (1) and Future (2) - rules given 7 Nov 2026."""
     g = m.get
@@ -516,9 +524,9 @@ def on_full_scale(got, out_of, cfg):
 
 
 def passes(got, out_of, pass_marks, cfg):
-    """Same percentage bar: 7/11 needed  ->  got/out_of must be >= 7/11."""
-    full = float(cfg.get("full_marks", 11))
-    return out_of > 0 and got / out_of >= float(pass_marks) / full - 1e-9
+    """Passes when the score shown on the 11-mark scale (rounded to 0.1, e.g. 4.5 of 10 -> 5.0/11) is at least
+    pass_marks - the same number you see on Telegram and the dashboard (7 Nov 2026)."""
+    return out_of > 0 and on_full_scale(got, out_of, cfg) >= float(pass_marks) - 1e-9
 
 
 def short_reason(items, limit=3):

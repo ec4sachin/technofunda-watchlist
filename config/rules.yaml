@@ -53,7 +53,7 @@ auto_marks:
 #   preview = the next run checks every SP / DT stock with them once and sends you the result (nothing removed)
 #   on      = they count in the marks (new stocks and the monthly review)
 #   off     = not used
-extra_marks: preview
+extra_marks: "on"          # switched on 7 Nov 2026 after the preview (307 stocks: 289 pass). Keep the quotes.
 extra_rules:
   return_tolerance_pct: 15      # ROE / ROCE may be up to 15% below the 4-quarter average
   promoter_min: 45              # %
@@ -63,12 +63,17 @@ extra_rules:
 
 # Pass marks — out of your full system of 11 marks.
 # The robot applies the same percentage to the marks it can check:
-#   5.5 out of 11 (50%) = 3 out of the 6 basic marks (extra_marks: off / preview)
-#                       = 5 out of 10 when extra_marks: on (stock without an outlook check)
-#                       = 5.5 out of 11 when the stock has an outlook check
+#   The score shown (on the 11 scale, rounded to 0.1) must be at least the pass mark:
+#   5.0/11  = 3 out of the 6 basic marks (extra_marks: off / preview)
+#           = 4.5 out of 10 when extra_marks: on (stock without an outlook check)  -> shown 5.0/11
+#           = 5 out of 11 when the stock has an outlook check
 full_marks: 11
-new_stock_pass: 5.5      # Step 2 — new stock from emails needs this to enter SP (50%; was 5 until 7 Nov 2026)
-monthly_pass: 5.5        # Step 5 — stock in SP/DT needs this to stay (50%; was 5 until 7 Nov 2026)
+new_stock_pass: 5        # Step 2 — new stock from emails needs this shown score to enter SP
+new_stock_min_rs: 80     # Step 2 — and its Relative Strength rating (1-99, vs all BSE stocks) must be above this
+                         #   (0 = no RS check). Stocks already in SP / DT: monthly_min_rs below.
+monthly_pass: 5          # Step 5 — stock in SP/DT needs this shown score to stay
+monthly_min_rs: 80       # Step 5 — and its Relative Strength rating must be above this to stay (0 = no RS check)
+monthly_rs_lists: [SP]   # which lists the monthly RS check removes from (DT not checked: its stocks are below the 200 EMA)
 
 # What counts as "stable"
 stable_tolerance_pct: 2      # fixed assets / shareholders may move 2% the wrong way
