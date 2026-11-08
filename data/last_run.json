@@ -1,105 +1,8 @@
 {
  "added": [],
  "rejected": [],
- "to_dt": [
-  [
-   "517336",
-   "Modern Malleable",
-   "close 41 < 20 EMA 41.31"
-  ],
-  [
-   "544551",
-   "Bhavik Enterpris",
-   "close 146.5 < 20 EMA 149.59"
-  ],
-  [
-   "EPWINDIA",
-   "EPW India",
-   "close 235 < 20 EMA 241.02"
-  ],
-  [
-   "YAAP",
-   "Yaap Digital Ltd",
-   "close 105 < 20 EMA 107.63"
-  ]
- ],
- "to_sp": [
-  [
-   "538862",
-   "My Money Sec.",
-   "close 39.9 > 200 EMA 39.76"
-  ],
-  [
-   "544538",
-   "Praruh Tech",
-   "close 142.2 > 20 EMA 141.07"
-  ],
-  [
-   "544695",
-   "Msafe Equipments",
-   "close 278 > 20 EMA 274.69"
-  ],
-  [
-   "544746",
-   "Safety Controls & Devices Ltd",
-   "close 74 > 20 EMA 71.61"
-  ],
-  [
-   "ASHIANA",
-   "Ashiana Housing",
-   "close 353.8 > 200 EMA 352.33"
-  ],
-  [
-   "BALUFORGE",
-   "Balu Forge Industries Ltd",
-   "close 511.95 > 200 EMA 503.86"
-  ],
-  [
-   "CONNPLEX",
-   "Connplex Cinemas",
-   "close 240 > 200 EMA 233.86"
-  ],
-  [
-   "MPSLTD",
-   "MPS Ltd",
-   "close 2299.6 > 200 EMA 2263.08"
-  ],
-  [
-   "ORIRAIL",
-   "Oriental Rail Infrastructure Ltd",
-   "close 117.34 > 20 EMA 116"
-  ],
-  [
-   "RSL",
-   "Rajputana Stain.",
-   "close 170.45 > 20 EMA 170.36"
-  ],
-  [
-   "STAR",
-   "Strides Pharma Science Ltd",
-   "close 1035.9 > 200 EMA 1023.47"
-  ],
-  [
-   "TAALTECH",
-   "TAAL Tech Ltd",
-   "close 946.25 > 20 EMA 927.2"
-  ],
-  [
-   "TAMBOLIIN",
-   "Tamboli Industri",
-   "close 324.85 > 20 EMA 313.42"
-  ],
-  [
-   "THEJO",
-   "Thejo Engineering Ltd",
-   "close 1923.5 > 200 EMA 1918.93"
-  ],
-  [
-   "THOMASCOTT",
-   "Thomas Scott India Ltd",
-   "close 291.15 > 200 EMA 290.81"
-  ]
- ],
+ "to_dt": [],
+ "to_sp": [],
  "removed": [],
  "unchecked": [
   [
@@ -111,88 +14,17 @@
  "investor_moves": [],
  "no_price": [],
  "warnings": [],
- "first_marked": [
-  [
-   "544468",
-   "B. D. Industries",
-   "5.5/11 (was 7.3/11)"
-  ],
-  [
-   "544809",
-   "Adon Agro",
-   "3.3/11 (was 2.8/11)"
-  ],
-  [
-   "544810",
-   "Sampark India",
-   "7.7/11 (was 6.4/11)"
-  ],
-  [
-   "544844",
-   "Poojaa Precision Engg. Ltd",
-   "6.6/11 (was 8.3/11)"
-  ],
-  [
-   "ESCONET",
-   "Esconet",
-   "6.1/11 (was 7.3/11)"
-  ],
-  [
-   "SIMCA",
-   "Simca Advertis.",
-   "6.1/11 (was 6.4/11)"
-  ],
-  [
-   "SMT",
-   "Sahajanand Medical Technologies Ltd",
-   "5.5/11 (was 6.4/11)"
-  ],
-  [
-   "ANAWIL",
-   "Anawil Wire and Engineering Ltd",
-   "6.1/11 (was 6.4/11)"
-  ],
-  [
-   "DEEPA",
-   "Deepa Jewellers",
-   "5/11 (was 4.6/11)"
-  ],
-  [
-   "ESDS",
-   "ESDS Software Solution Ltd",
-   "6.6/11 (was 8.3/11)"
-  ],
-  [
-   "MPIMANIPAL",
-   "Manipal Payment and Identity Solutions Ltd",
-   "7.2/11 (was 8.3/11)"
-  ],
-  [
-   "SWASTIKAIN",
-   "Swastika Infra",
-   "6.6/11 (was 8.3/11)"
-  ],
-  [
-   "XTRANET",
-   "Xtranet Techno.",
-   "6.6/11 (was 8.3/11)"
-  ]
- ],
+ "first_marked": [],
  "new_listing": [
-  [
-   "517336",
-   "Modern Malleable",
-   "close 41 vs 20 EMA 41.31 → DT"
-  ],
   [
    "544468",
    "B. D. Industries",
    "close 143.8 vs 20 EMA 120.19 → SP"
   ],
   [
-   "544551",
-   "Bhavik Enterpris",
-   "close 146.5 vs 20 EMA 149.59 → DT"
+   "544538",
+   "Praruh Tech",
+   "close 142.2 vs 20 EMA 141.07 → SP"
   ],
   [
    "544623",
@@ -213,6 +45,16 @@
    "544694",
    "Accretion Nutraveda",
    "close 331 vs 20 EMA 301.03 → SP"
+  ],
+  [
+   "544695",
+   "Msafe Equipments",
+   "close 278 vs 20 EMA 274.69 → SP"
+  ],
+  [
+   "544746",
+   "Safety Controls & Devices Ltd",
+   "close 74 vs 20 EMA 71.61 → SP"
   ],
   [
    "544755",
@@ -280,14 +122,19 @@
    "close 133.95 vs 20 EMA 132.03 → SP"
   ],
   [
-   "EPWINDIA",
-   "EPW India",
-   "close 235 vs 20 EMA 241.02 → DT"
-  ],
-  [
    "MARUSHIKA",
    "Marushika Tech.",
    "close 127.95 vs 20 EMA 117.92 → SP"
+  ],
+  [
+   "ORIRAIL",
+   "Oriental Rail Infrastructure Ltd",
+   "close 117.34 vs 20 EMA 116 → SP"
+  ],
+  [
+   "RSL",
+   "Rajputana Stain.",
+   "close 170.45 vs 20 EMA 170.36 → SP"
   ],
   [
    "SHUKRAPHAR",
@@ -305,6 +152,16 @@
    "close 534.7 (too new for any EMA)"
   ],
   [
+   "TAALTECH",
+   "TAAL Tech Ltd",
+   "close 946.25 vs 20 EMA 927.2 → SP"
+  ],
+  [
+   "TAMBOLIIN",
+   "Tamboli Industri",
+   "close 324.85 vs 20 EMA 313.42 → SP"
+  ],
+  [
    "TEAMTECH",
    "Teamtech Formwork",
    "close 172.35 vs 20 EMA 153.31 → SP"
@@ -315,29 +172,19 @@
    "close 212.92 vs 20 EMA 210.4 → SP"
   ],
   [
-   "YAAP",
-   "Yaap Digital Ltd",
-   "close 105 vs 20 EMA 107.63 → DT"
+   "517336",
+   "Modern Malleable",
+   "close 41 vs 20 EMA 41.31"
   ],
   [
-   "544538",
-   "Praruh Tech",
-   "close 142.2 vs 20 EMA 141.07"
-  ],
-  [
-   "544695",
-   "Msafe Equipments",
-   "close 278 vs 20 EMA 274.69"
+   "544551",
+   "Bhavik Enterpris",
+   "close 146.5 vs 20 EMA 149.59"
   ],
   [
    "544735",
    "Novus Loyalty",
    "close 183.55 vs 20 EMA 184.47"
-  ],
-  [
-   "544746",
-   "Safety Controls & Devices Ltd",
-   "close 74 vs 20 EMA 71.61"
   ],
   [
    "544774",
@@ -370,6 +217,11 @@
    "close 216.21 vs 20 EMA 217.66"
   ],
   [
+   "EPWINDIA",
+   "EPW India",
+   "close 235 vs 20 EMA 241.02"
+  ],
+  [
    "ESDS",
    "ESDS Software Solution Ltd",
    "close 1166.6 vs 20 EMA 1278.13"
@@ -390,34 +242,14 @@
    "close 315.65 vs 20 EMA 323.63"
   ],
   [
-   "ORIRAIL",
-   "Oriental Rail Infrastructure Ltd",
-   "close 117.34 vs 20 EMA 116"
-  ],
-  [
    "RAMBHAJO",
    "Advit Jewels",
    "close 327.2 vs 20 EMA 335.36"
   ],
   [
-   "RSL",
-   "Rajputana Stain.",
-   "close 170.45 vs 20 EMA 170.36"
-  ],
-  [
    "SWASTIKAIN",
    "Swastika Infra",
-   "close 197.09 (too new for any EMA)"
-  ],
-  [
-   "TAALTECH",
-   "TAAL Tech Ltd",
-   "close 946.25 vs 20 EMA 927.2"
-  ],
-  [
-   "TAMBOLIIN",
-   "Tamboli Industri",
-   "close 324.85 vs 20 EMA 313.42"
+   "close 197.09 vs 20 EMA 203.14"
   ],
   [
    "TRANSPEK",
@@ -428,6 +260,11 @@
    "XTRANET",
    "Xtranet Techno.",
    "close 275.95 vs 20 EMA 280.04"
+  ],
+  [
+   "YAAP",
+   "Yaap Digital Ltd",
+   "close 105 vs 20 EMA 107.63"
   ]
  ],
  "per_alert": {
@@ -445,5 +282,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "08 Nov 2026, 03:46 PM IST"
+ "run_at": "08 Nov 2026, 04:37 PM IST"
 }

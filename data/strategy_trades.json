@@ -2296,6 +2296,26 @@
     "turnover": 1255814
    },
    {
+    "symbol": "543616",
+    "name": "Trident Lifeline",
+    "buy_above": 430.11,
+    "stop": 404.91,
+    "qty": 302,
+    "amount": 129893.22,
+    "range_pct": 4.0,
+    "risk_pct": 5.9,
+    "as_of": "2026-11-08",
+    "score": {
+     "tight": 3.96,
+     "strength": 55.17,
+     "near_high": 3.85,
+     "trend": 14.02,
+     "low_risk": 5.86,
+     "volume": 0.55
+    },
+    "turnover": 9051497
+   },
+   {
     "symbol": "SAAKSHI",
     "name": "Saakshi Medtech",
     "buy_above": 378.75,
@@ -2314,6 +2334,46 @@
      "volume": 0.48
     },
     "turnover": 3093788
+   },
+   {
+    "symbol": "544141",
+    "name": "Pune e-Stock Broking",
+    "buy_above": 272.7,
+    "stop": 256.34,
+    "qty": 476,
+    "amount": 129805.2,
+    "range_pct": 5.4,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-08",
+    "score": {
+     "tight": 5.35,
+     "strength": -8.78,
+     "near_high": 19.15,
+     "trend": 3.73,
+     "low_risk": 6.0,
+     "volume": 1.02
+    },
+    "turnover": 5640802
+   },
+   {
+    "symbol": "544529",
+    "name": "Aptus Pharma",
+    "buy_above": 485.96,
+    "stop": 456.8,
+    "qty": 267,
+    "amount": 129751.32,
+    "range_pct": 4.6,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-08",
+    "score": {
+     "tight": 4.58,
+     "strength": 159.58,
+     "near_high": 9.56,
+     "trend": 14.1,
+     "low_risk": 6.0,
+     "volume": 1.17
+    },
+    "turnover": 8552622
    },
    {
     "symbol": "INTEGRITY",
@@ -2398,6 +2458,26 @@
     "turnover": 1255814
    },
    {
+    "symbol": "543616",
+    "name": "Trident Lifeline",
+    "buy_above": 430.11,
+    "stop": 404.91,
+    "qty": 278,
+    "amount": 119570.58,
+    "range_pct": 4.0,
+    "risk_pct": 5.9,
+    "as_of": "2026-11-08",
+    "score": {
+     "tight": 3.96,
+     "strength": 55.17,
+     "near_high": 3.85,
+     "trend": 14.02,
+     "low_risk": 5.86,
+     "volume": 0.55
+    },
+    "turnover": 9051497
+   },
+   {
     "symbol": "SAAKSHI",
     "name": "Saakshi Medtech",
     "buy_above": 378.75,
@@ -2416,6 +2496,46 @@
      "volume": 0.48
     },
     "turnover": 3093788
+   },
+   {
+    "symbol": "544141",
+    "name": "Pune e-Stock Broking",
+    "buy_above": 272.7,
+    "stop": 256.34,
+    "qty": 440,
+    "amount": 119988.0,
+    "range_pct": 5.4,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-08",
+    "score": {
+     "tight": 5.35,
+     "strength": -8.78,
+     "near_high": 19.15,
+     "trend": 3.73,
+     "low_risk": 6.0,
+     "volume": 1.02
+    },
+    "turnover": 5640802
+   },
+   {
+    "symbol": "544529",
+    "name": "Aptus Pharma",
+    "buy_above": 485.96,
+    "stop": 456.8,
+    "qty": 246,
+    "amount": 119546.16,
+    "range_pct": 4.6,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-08",
+    "score": {
+     "tight": 4.58,
+     "strength": 159.58,
+     "near_high": 9.56,
+     "trend": 14.1,
+     "low_risk": 6.0,
+     "volume": 1.17
+    },
+    "turnover": 8552622
    },
    {
     "symbol": "INTEGRITY",
@@ -2500,6 +2620,26 @@
     "turnover": 1255814
    },
    {
+    "symbol": "543616",
+    "name": "Trident Lifeline",
+    "buy_above": 430.11,
+    "stop": 404.91,
+    "qty": 278,
+    "amount": 119570.58,
+    "range_pct": 4.0,
+    "risk_pct": 5.9,
+    "as_of": "2026-11-08",
+    "score": {
+     "tight": 3.96,
+     "strength": 55.17,
+     "near_high": 3.85,
+     "trend": 14.02,
+     "low_risk": 5.86,
+     "volume": 0.55
+    },
+    "turnover": 9051497
+   },
+   {
     "symbol": "SAAKSHI",
     "name": "Saakshi Medtech",
     "buy_above": 378.75,
@@ -2518,6 +2658,46 @@
      "volume": 0.48
     },
     "turnover": 3093788
+   },
+   {
+    "symbol": "544141",
+    "name": "Pune e-Stock Broking",
+    "buy_above": 272.7,
+    "stop": 256.34,
+    "qty": 440,
+    "amount": 119988.0,
+    "range_pct": 5.4,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-08",
+    "score": {
+     "tight": 5.35,
+     "strength": -8.78,
+     "near_high": 19.15,
+     "trend": 3.73,
+     "low_risk": 6.0,
+     "volume": 1.02
+    },
+    "turnover": 5640802
+   },
+   {
+    "symbol": "544529",
+    "name": "Aptus Pharma",
+    "buy_above": 485.96,
+    "stop": 456.8,
+    "qty": 246,
+    "amount": 119546.16,
+    "range_pct": 4.6,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-08",
+    "score": {
+     "tight": 4.58,
+     "strength": 159.58,
+     "near_high": 9.56,
+     "trend": 14.1,
+     "low_risk": 6.0,
+     "volume": 1.17
+    },
+    "turnover": 8552622
    },
    {
     "symbol": "INTEGRITY",

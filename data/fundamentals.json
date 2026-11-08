@@ -916,11 +916,11 @@
   "as_of": "2026-11-02"
  },
  "ESCONET": {
-  "market_cap": 486.0,
-  "price": 368.0,
+  "market_cap": 482.0,
+  "price": 365.0,
   "high_52w": 407.0,
   "low_52w": 91.2,
-  "pe": 18.9,
+  "pe": 18.8,
   "book_value": 75.0,
   "dividend_yield": 0.0,
   "roce": 11.8,
@@ -6878,11 +6878,11 @@
   "as_of": "2026-11-06"
  },
  "DEEPA": {
-  "market_cap": 2038.0,
-  "price": 212.0,
+  "market_cap": 2087.0,
+  "price": 217.0,
   "high_52w": 277.0,
   "low_52w": 165.0,
-  "pe": 17.8,
+  "pe": 18.2,
   "book_value": 55.4,
   "dividend_yield": 0.0,
   "roce": 51.6,
@@ -15958,11 +15958,11 @@
   "as_of": "2026-11-07"
  },
  "ANAWIL": {
-  "market_cap": 968.0,
-  "price": 387.0,
+  "market_cap": 963.0,
+  "price": 385.0,
   "high_52w": 540.0,
   "low_52w": 313.0,
-  "pe": 19.8,
+  "pe": 19.7,
   "book_value": 90.5,
   "dividend_yield": 0.0,
   "roce": 32.3,
@@ -22510,11 +22510,11 @@
   "as_of": "2026-11-07"
  },
  "SMT": {
-  "market_cap": 5419.0,
-  "price": 533.0,
+  "market_cap": 5430.0,
+  "price": 534.0,
   "high_52w": 566.0,
   "low_52w": 347.0,
-  "pe": 75.4,
+  "pe": 75.6,
   "dividend_yield": 0.0,
   "roce": 11.4,
   "roe": 10.4,
