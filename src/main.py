@@ -168,6 +168,12 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
             if m and not (row.get("nse") or row.get("bse")):
                 row["codes_checked"] = today  # page has no exchange links: do not try every day
 
+    # Newest results for the catalyst box (quarter numbers + price target) in results season - marks are not changed
+    try:
+        refresh_results(sp, dt, snaps, today)
+    except Exception as e:   # never stop the run for this
+        report["warnings"].append(f"Results refresh failed: {e}")
+
     # Step 4 - price vs 200 EMA
     period = int(settings.get("ema_period", 200))
     tick = {sym: prices.yahoo_ticker(sym, row.get("yahoo_override", ""))
@@ -257,6 +263,38 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
                             "reason": f"close {close:g} back above {basis} EMA {ema:g}" + (" (new listing)" if basis != period else "")})
     report["price_date"] = max((v[2] for v in res_by.values() if v),
                                key=lambda d: _DT.strptime(d, "%d %b %Y"), default="")
+
+
+RESULTS_REFRESH_PER_RUN, RESULTS_REFRESH_DAYS = 40, 3
+
+
+def _results_due(snap, today):
+    """True when a newer quarter / half-year may be out: the latest saved one ended 4+ months ago
+    (Jun results when it is Nov, Mar results when it is Nov, ...) and the page was last read 3+ days ago."""
+    q = (snap.get("quarters") or {}).get("t") or []
+    last = fx._month_index(q[-1]) if q else None
+    now = _DT.strptime(today, "%Y-%m-%d")
+    if last is None or now.year * 12 + now.month - last < 4:
+        return False
+    return _days_since(str(snap.get("as_of") or "2000-01-01"), today) >= RESULTS_REFRESH_DAYS
+
+
+def refresh_results(sp, dt, snaps, today, limit=RESULTS_REFRESH_PER_RUN):
+    """Results season: re-read the Screener page of stocks whose saved results are a period behind (max `limit` a run)
+    so the catalyst box shows the latest quarter. Only the saved Screener numbers change - marks stay until the review."""
+    n = 0
+    for items in (sp, dt):
+        for sym, row in items.items():
+            snap = snaps.get(sym)
+            if not snap or n >= limit or storage.screener_blocked() or not _results_due(snap, today):
+                continue
+            n += 1
+            m = fx.fetch_metrics(sym, row.get("consolidated", "yes") != "no")
+            if m and fx.completeness(m) >= 3:
+                snaps[sym] = fx.snapshot(m, today)
+            else:
+                snap["as_of"] = today      # page not readable today: try again in 3 days
+    return n
 
 
 def _days_since(a, b):

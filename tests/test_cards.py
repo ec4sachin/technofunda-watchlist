@@ -25,9 +25,9 @@ def test():
     assert 'class="nmline"' in js and "catBox(r)" in js and "openCat(" in js
     storage.save_json("catalysts.json", [])                                 # a broken file never breaks the page
     assert web.page_data(sp, {}, {}, [], {"full_marks": 11})["catalysts"] == {}
-    real = os.path.join(HERE, "..", "data", "catalysts.json")      # the summaries written so far: about 100 words each
+    real = os.path.join(HERE, "..", "data", "catalysts.json")      # the catalyst notes written so far
     for k, v in (json.load(open(real, encoding="utf-8")) if os.path.exists(real) else {}).items():
-        assert 60 <= len(v["text"].split()) <= 130, (k, len(v["text"].split()))
+        assert 25 <= len(v["text"].replace("==", "").split()) <= 130, (k, len(v["text"].split()))
     print("Stock card OK")
 
 

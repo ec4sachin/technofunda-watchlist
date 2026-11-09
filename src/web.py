@@ -60,7 +60,8 @@ main{padding-block:18px 56px}
 .tools input{flex:1 1 220px;min-width:0}
 input,select{font:15px var(--f-body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 11px}
 .list{display:flex;flex-direction:column;gap:8px}
-.row{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1.7fr) minmax(0,.55fr) auto;gap:10px 18px;align-items:center}
+.row{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,2fr) minmax(86px,.3fr) auto;gap:10px 18px;align-items:center}
+.row .mk{min-width:0}.row .mk .top{font-size:11px}.row .mk .top b{font-size:12px}.row .mk .bar{height:6px}
 .nmline{display:flex;align-items:baseline;gap:4px 10px;flex-wrap:wrap}
 .nmline .px{font-size:14px;color:var(--ink);white-space:nowrap}
 .cat{appearance:none;display:block;width:100%;min-width:0;text-align:left;font:13px/1.4 var(--f-body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer}
@@ -69,7 +70,17 @@ input,select{font:15px var(--f-body);color:var(--ink);background:var(--surface);
 .cat .cx{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .cat.none{cursor:default;color:var(--muted);font-style:italic}.cat.none:hover{border-color:var(--line)}
 .order .oh.cat{background:var(--accent)}
+.order.wide{width:min(560px,calc(100vw - 24px))}
+.cs{border-top:1px solid var(--line);padding-top:10px}.cs:first-child{border-top:0;padding-top:0}
+.cs h4{margin:0 0 6px;font:700 14px var(--f-body);color:var(--ink)}.cs h4 small{font-weight:500;color:var(--muted);margin-left:4px}
+.cs .nv{display:flex;flex-wrap:wrap;gap:6px}.cs .nv span{font-size:13px;padding:3px 8px;border-radius:6px;background:var(--bg);border:1px solid var(--line)}
+.cs .nv b{font-family:var(--f-mono);font-weight:600}
+mark.g,.cs .nv span.g{background:var(--up-soft);color:var(--ink);border-color:transparent}mark.g{padding:0 2px;border-radius:3px}
+.cs .nv span.r b{color:var(--down)}
+.cs .pt{font:700 20px var(--f-mono)}.cs .how{font-size:12.5px;color:var(--muted);margin-top:2px}
+.cat .cx mark.g{padding:0 1px}
 .order .catbody p{margin:0;font-size:15px;line-height:1.6}
+.order .catbody p.src{font-size:12.5px;line-height:1.5}
 .order .catbody .src{margin:0}
 .order .catbody .src a{color:var(--accent)}
 .row.dt{border-left:4px solid var(--down)}
@@ -195,7 +206,7 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
 @media (max-width:720px){
   .row{grid-template-columns:minmax(0,1fr) auto}
   .row .cat{grid-column:1/-1;order:2}
-  .row .mk{grid-column:1/-1;order:3;width:50%}
+  .row .mk{grid-column:1/-1;order:3;width:25%;min-width:110px}
   .row .acts{grid-column:1/-1;order:4;flex-direction:row;align-items:center;justify-content:flex-start}
   .row .pricecol{text-align:right}
 }
@@ -364,23 +375,79 @@ function codesHTML(r){
 const emaN = r => String(r.ema_basis) === "20" ? 20 : 200;
 function emaGap(r){ const c = num(r.last_close), e = num(r.ema200); return (c && e) ? (c - e) / e * 100 : null; }
 
-// Catalyst summary for next quarter's earnings growth (data/catalysts.json, written by Claude): a short preview
-// on the card, the whole summary in a small window on tap
+// Catalyst box: Claude's catalyst note (data/catalysts.json) + the latest / previous quarter numbers and the
+// expected price (both worked out here from the Screener quarterly results the robot saved)
 const CAT = D.catalysts || {};
+const hl = t => esc(t).replace(/==(.+?)==/g, '<mark class="g">$1</mark>');      // ==text== = highlighted
+const pctTxt = v => v == null ? "—" : (v >= 0 ? "+" : "−") + Math.abs(v).toFixed(Math.abs(v) >= 100 ? 0 : 1) + "%";
+function qStats(f){
+  const q = f && f.quarters; if (!q || !q.t || q.t.length < 2) return null;
+  const half = +f.result_period_months === 6, back = half ? 2 : 4, n = q.t.length;
+  const g = (a, b) => (a == null || b == null || b <= 0) ? null : (a - b) / b * 100;
+  const one = i => { const j = i - back; if (i < 0) return null;
+    const ok = j >= 0;
+    return {t: q.t[i], vs: ok ? q.t[j] : "", sales: ok ? g(q.sales[i], q.sales[j]) : null, profit: ok ? g(q.profit[i], q.profit[j]) : null,
+      lossToProfit: ok && q.profit[j] != null && q.profit[j] <= 0 && q.profit[i] > 0,
+      eps: q.eps[i], epsg: ok ? g(q.eps[i], q.eps[j]) : null, opm: q.opm[i],
+      opmch: ok && q.opm[i] != null && q.opm[j] != null ? q.opm[i] - q.opm[j] : null}; };
+  return {half, last: one(n - 1), prev: one(n - 2), eps2: q.eps.slice(-2)};
+}
+// Expected price = current P/E x (average EPS of the last 2 quarters) x 5 / 4 / 3 by TTM PEG (<= 0.5 / 0.5-1 / above 1).
+// Current P/E = Screener's P/E moved to today's price. Half-yearly results: half-year EPS / 2. (Rule of 9 Nov 2026)
+function priceTarget(r, f){
+  const st = qStats(f); if (!st) return null;
+  const e = st.eps2.filter(x => x != null); if (e.length < 2) return {why: "needs 2 results with EPS"};
+  let avg = (e[0] + e[1]) / 2; if (st.half) avg /= 2;
+  const c = num(r.last_close), pe0 = num(f.pe), px0 = num(f.price), g = num(f.profit_growth_ttm);
+  if (!pe0 || pe0 <= 0) return {avg, why: "no P/E (the company has losses)"};
+  const pe = c && px0 ? pe0 * c / px0 : pe0;
+  const peg = g && g > 0 ? pe0 / g : null;                  // TTM PEG = P/E ÷ TTM profit growth (as in the marks)
+  const k = peg == null ? 3 : peg <= 0.5 ? 5 : peg <= 1 ? 4 : 3;
+  if (avg <= 0) return {avg, pe, peg, k, g, why: "average EPS is not positive"};
+  const price = pe * avg * k;
+  return {avg, pe, peg, k, g, price, up: c ? (price - c) / c * 100 : null};
+}
 function catBox(r){
-  const k = CAT[r.symbol];
-  if (!k || !k.text) return `<div class="cat none">Catalyst summary not written yet</div>`;
-  return `<button class="cat" data-cat="${esc(r.symbol)}" aria-label="Read the catalyst summary of ${esc(r.name || r.symbol)}">
-    <span class="ct">Next-quarter catalyst</span><span class="cx">${esc(k.text)}</span></button>`;
+  const k = CAT[r.symbol], f = (D.fund || {})[r.symbol], st = qStats(f);
+  if (!(k && k.text) && !(st && st.last)) return `<div class="cat none">Catalyst and results not available yet</div>`;
+  const L = st && st.last;
+  const body = k && k.text ? hl(k.text)
+    : `Latest ${st.half ? "half-year" : "quarter"} (${esc(L.t)}): sales ${pctTxt(L.sales)} · profit ${L.lossToProfit ? "loss → profit" : pctTxt(L.profit)} · EPS ₹${esc(L.eps ?? "—")}`;
+  return `<button class="cat" data-cat="${esc(r.symbol)}" aria-label="Catalyst, results and price target of ${esc(r.name || r.symbol)}">
+    <span class="ct">${k && k.text ? "Catalyst" : "Results"} · tap for details</span><span class="cx">${body}</span></button>`;
+}
+function qBlock(title, x, better){
+  if (!x) return "";
+  const cmp = (a, b) => better && a != null && b != null && a > b && a > 0;      // green = better than the quarter before
+  const P = better || {};
+  const item = (label, txt, good, bad) => `<span class="${good ? "g" : bad ? "r" : ""}">${label} <b>${txt}</b></span>`;
+  return `<div class="cs"><h4>${title}<small>${esc(x.t)}${x.vs ? " vs " + esc(x.vs) : ""}</small></h4><div class="nv">
+    ${item("Sales growth", pctTxt(x.sales), cmp(x.sales, P.sales), x.sales != null && x.sales < 0)}
+    ${item("Profit growth", x.lossToProfit ? "loss → profit" : pctTxt(x.profit), x.lossToProfit || cmp(x.profit, P.profit), x.profit != null && x.profit < 0)}
+    ${item("EPS growth", pctTxt(x.epsg), cmp(x.epsg, P.epsg), x.epsg != null && x.epsg < 0)}
+    ${item("EPS", x.eps == null ? "—" : "₹" + x.eps, better && x.eps != null && P.eps != null && x.eps > P.eps && x.eps > 0, x.eps != null && x.eps < 0)}
+    ${item("OPM", x.opm == null ? "—" : x.opm.toFixed(1) + "%" + (x.opmch == null ? "" : ` (${x.opmch >= 0 ? "+" : "−"}${Math.abs(x.opmch).toFixed(1)} pts)`),
+      x.opmch != null && x.opmch > 0 && (!better || P.opmch == null || x.opmch > P.opmch), x.opmch != null && x.opmch < 0)}
+  </div></div>`;
 }
 function openCat(sym){
-  const [r] = findRow(sym), k = CAT[sym]; if (!k) return;
+  const [r] = findRow(sym); if (!r) return;
+  const k = CAT[sym] || {}, f = (D.fund || {})[sym], st = qStats(f), pt = f && priceTarget(r, f);
   const src = (k.sources || []).map(([t, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join(" · ");
+  const word = st && st.half ? "Half-year" : "Quarter";
+  const tgt = !pt ? "" : `<div class="cs"><h4>Price Target Expected</h4>${pt.price ? `<div class="pt ${pt.up >= 0 ? "" : "down"}">${fmtINR(Math.round(pt.price))}
+      ${pt.up == null ? "" : `<small class="${pt.up >= 0 ? "up" : "down"}" style="font-size:13px">${pctTxt(pt.up)} vs ${fmtINR(num(r.last_close))}</small>`}</div>` : `<div class="mut">Not available: ${esc(pt.why)}</div>`}
+      <div class="how">= current P/E ${pt.pe == null ? "—" : pt.pe.toFixed(1)} × average EPS of last 2 ${st.half ? "half-years ÷ 2" : "quarters"} ₹${pt.avg == null ? "—" : pt.avg.toFixed(2)} × ${pt.k ?? "—"}
+        <br>Multiplier ${pt.k ?? "—"}: TTM PEG ${pt.peg == null ? (pt.g == null ? "not known" : "not usable (TTM profit growth " + pctTxt(pt.g) + ")") + ", counted as above 1" : pt.peg.toFixed(2) + (pt.peg <= 0.5 ? " is 0.5 or less" : pt.peg <= 1 ? " is between 0.5 and 1" : " is above 1")} (PEG ≤ 0.5 → 5 · 0.5–1 → 4 · above 1 → 3)</div></div>`;
   const o = document.getElementById("order");
-  o.innerHTML = `<div class="oh cat"><h3 id="o-title">${esc((r && r.name) || sym)}</h3><button class="btn x" data-oclose aria-label="Close">✕</button></div>
-    <div class="ob catbody"><div class="ct" style="font:700 11px var(--f-body);letter-spacing:.07em;text-transform:uppercase;color:var(--accent)">Catalyst for next quarter's earnings growth</div>
-    <p>${esc(k.text)}</p>
-    <p class="src">Written ${esc(k.date || "")}${src ? " · Sources: " + src : ""} · Not investment advice.</p></div>`;
+  o.classList.add("wide");
+  o.innerHTML = `<div class="oh cat"><h3 id="o-title">${esc(r.name || sym)}</h3><button class="btn x" data-oclose aria-label="Close">✕</button></div>
+    <div class="ob catbody">
+      <div class="cs"><h4>Catalyst</h4>${k.text ? `<p>${hl(k.text)}</p>` : `<div class="mut">Not written yet — ask Claude for the next catalyst batch.</div>`}</div>
+      ${st ? qBlock(`Latest ${word} Numbers`, st.last, st.prev) + qBlock(`Previous ${word} Numbers`, st.prev, null) : ""}
+      ${tgt}
+      <p class="src">Green = important point, or better than the ${word.toLowerCase()} before. Numbers: Screener ${esc((f && f.basis) || "")} results${f && f.as_of ? " as read on " + esc(f.as_of) : ""}.
+      ${k.text ? `Catalyst written ${esc(k.date || "")}${src ? " · Sources: " + src : ""}.` : ""} Not investment advice.</p></div>`;
   document.getElementById("oscrim").hidden = false; o.hidden = false; o.querySelector("[data-oclose]").focus();
 }
 function stockRow(r, list){
@@ -843,7 +910,7 @@ function openOrder(sym, side){
   document.getElementById("oscrim").hidden = false; document.getElementById("order").hidden = false;
   document.getElementById("o-qty").focus();
 }
-function closeOrder(){ document.getElementById("order").hidden = true; document.getElementById("oscrim").hidden = true; }
+function closeOrder(){ const o = document.getElementById("order"); o.hidden = true; o.classList.remove("wide"); document.getElementById("oscrim").hidden = true; }
 function drawOrder(r){
   const c = num(r.last_close), buy = ORD.side === "BUY";
   const seg = (key, opts) => `<div class="seg" role="group">${opts.map(([v, l]) => `<button data-oset="${key}" data-val="${v}" aria-pressed="${ORD[key] === v}">${l}</button>`).join("")}</div>`;
