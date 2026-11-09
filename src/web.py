@@ -60,7 +60,18 @@ main{padding-block:18px 56px}
 .tools input{flex:1 1 220px;min-width:0}
 input,select{font:15px var(--f-body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 11px}
 .list{display:flex;flex-direction:column;gap:8px}
-.row{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1.1fr) auto;gap:10px 18px;align-items:center}
+.row{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1.7fr) minmax(0,.55fr) auto;gap:10px 18px;align-items:center}
+.nmline{display:flex;align-items:baseline;gap:4px 10px;flex-wrap:wrap}
+.nmline .px{font-size:14px;color:var(--ink);white-space:nowrap}
+.cat{appearance:none;display:block;width:100%;min-width:0;text-align:left;font:13px/1.4 var(--f-body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer}
+.cat:hover{border-color:var(--accent)}
+.cat .ct{display:block;font:700 10.5px var(--f-body);letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+.cat .cx{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cat.none{cursor:default;color:var(--muted);font-style:italic}.cat.none:hover{border-color:var(--line)}
+.order .oh.cat{background:var(--accent)}
+.order .catbody p{margin:0;font-size:15px;line-height:1.6}
+.order .catbody .src{margin:0}
+.order .catbody .src a{color:var(--accent)}
 .row.dt{border-left:4px solid var(--down)}
 .nm{font-weight:600;line-height:1.3}
 .linkish{appearance:none;border:0;background:none;padding:0;color:var(--ink);font:inherit;font-weight:600;text-align:left;cursor:pointer}
@@ -75,7 +86,7 @@ input,select{font:15px var(--f-body);color:var(--ink);background:var(--surface);
 .up{color:var(--up)}.down{color:var(--down)}.warn{color:var(--warn)}.mut{color:var(--muted)}
 .mk{display:flex;flex-direction:column;gap:5px;min-width:0}
 .mk .top{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--muted)}
-.mk .top b{font:600 14px var(--f-mono);color:var(--ink)}
+.mk .top b{font:600 14px var(--f-mono);color:var(--ink);white-space:nowrap}
 .bar{position:relative;height:8px;border-radius:4px;background:var(--bg);border:1px solid var(--line);overflow:hidden}
 .bar i{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:3px}
 .bar.low i{background:var(--down)}
@@ -183,7 +194,8 @@ td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
 .note{color:var(--muted);font-size:12.5px;margin-top:22px;max-width:70ch}
 @media (max-width:720px){
   .row{grid-template-columns:minmax(0,1fr) auto}
-  .row .mk{grid-column:1/-1;order:3}
+  .row .cat{grid-column:1/-1;order:2}
+  .row .mk{grid-column:1/-1;order:3;width:50%}
   .row .acts{grid-column:1/-1;order:4;flex-direction:row;align-items:center;justify-content:flex-start}
   .row .pricecol{text-align:right}
 }
@@ -352,15 +364,33 @@ function codesHTML(r){
 const emaN = r => String(r.ema_basis) === "20" ? 20 : 200;
 function emaGap(r){ const c = num(r.last_close), e = num(r.ema200); return (c && e) ? (c - e) / e * 100 : null; }
 
+// Catalyst summary for next quarter's earnings growth (data/catalysts.json, written by Claude): a short preview
+// on the card, the whole summary in a small window on tap
+const CAT = D.catalysts || {};
+function catBox(r){
+  const k = CAT[r.symbol];
+  if (!k || !k.text) return `<div class="cat none">Catalyst summary not written yet</div>`;
+  return `<button class="cat" data-cat="${esc(r.symbol)}" aria-label="Read the catalyst summary of ${esc(r.name || r.symbol)}">
+    <span class="ct">Next-quarter catalyst</span><span class="cx">${esc(k.text)}</span></button>`;
+}
+function openCat(sym){
+  const [r] = findRow(sym), k = CAT[sym]; if (!k) return;
+  const src = (k.sources || []).map(([t, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join(" · ");
+  const o = document.getElementById("order");
+  o.innerHTML = `<div class="oh cat"><h3 id="o-title">${esc((r && r.name) || sym)}</h3><button class="btn x" data-oclose aria-label="Close">✕</button></div>
+    <div class="ob catbody"><div class="ct" style="font:700 11px var(--f-body);letter-spacing:.07em;text-transform:uppercase;color:var(--accent)">Catalyst for next quarter's earnings growth</div>
+    <p>${esc(k.text)}</p>
+    <p class="src">Written ${esc(k.date || "")}${src ? " · Sources: " + src : ""} · Not investment advice.</p></div>`;
+  document.getElementById("oscrim").hidden = false; o.hidden = false; o.querySelector("[data-oclose]").focus();
+}
 function stockRow(r, list){
-  const mk = marksOf(r), gap = emaGap(r), c = num(r.last_close);
+  const mk = marksOf(r), c = num(r.last_close);
   const pct = mk == null ? 0 : Math.min(100, mk / FULL * 100);
   return `<article class="row ${list === "DT" ? "dt" : ""}">
-    <div><button class="nm linkish" data-open="${esc(r.symbol)}" data-tab="chart">${esc(r.name || r.symbol)}</button>
+    <div><div class="nmline"><button class="nm linkish" data-open="${esc(r.symbol)}" data-tab="chart">${esc(r.name || r.symbol)}</button><span class="px">${c ? fmtINR(c) : "—"}</span></div>
       <div class="meta">${codesHTML(r)}</div></div>
-    <div class="pricecol"><div class="px">${c ? fmtINR(c) : "—"}</div>
-      <div class="ema ${gap == null ? "mut" : gap >= 0 ? "up" : "down"}">${gap == null ? (c ? "New listing: under 200 days" : "200 EMA n/a") : (gap >= 0 ? "▲ " : "▼ ") + Math.abs(gap).toFixed(1) + "% " + (gap >= 0 ? "above" : "below") + " " + emaN(r) + " EMA" + (emaN(r) === 20 ? " · new listing" : "")}</div></div>
-    <div class="mk"><div class="top"><span>Marks${r.last_fund_check ? " · " + esc(r.last_fund_check) : ""}</span><b>${mk == null ? "not marked yet" : mk + " / " + FULL}</b></div>
+    ${catBox(r)}
+    <div class="mk"${r.last_fund_check ? ` title="Marks checked ${esc(r.last_fund_check)}"` : ""}><div class="top"><span>Marks</span><b>${mk == null ? "not marked" : mk + "/" + FULL}</b></div>
       <div class="bar ${mk != null && mk < PASS ? "low" : ""}" role="img" aria-label="${mk == null ? "No marks yet" : mk + " of " + FULL + " marks, pass mark " + PASS}"><i style="width:${pct}%"></i><u style="left:${PASS / FULL * 100}%"></u></div></div>
     <div class="acts"><div class="r1"><button class="btn pri" data-open="${esc(r.symbol)}" data-tab="chart">Chart</button><button class="btn" data-open="${esc(r.symbol)}" data-tab="fund">Screener</button></div>
       <div class="r2"><button class="btn buy" data-order="BUY" data-sym="${esc(r.symbol)}" aria-label="Buy ${esc(r.name || r.symbol)}" title="Buy">B</button><button class="btn sell" data-order="SELL" data-sym="${esc(r.symbol)}" aria-label="Sell ${esc(r.name || r.symbol)}" title="Sell">S</button></div></div>
@@ -927,6 +957,7 @@ document.addEventListener("click", async e => {
     showToast(savePos() ? "✅ Position saved on this device." : "⚠️ This browser is blocking storage, so the position can't be saved."); posChanged(); return; }
   if (e.target.closest("[data-pos-del]") && cur) { delete POS[cur.r.symbol]; savePos(); showToast("Position removed."); posChanged(); return; }
   const ob = e.target.closest("[data-order]"); if (ob) { openOrder(ob.dataset.sym, ob.dataset.order); return; }
+  const cb = e.target.closest("[data-cat]"); if (cb) { openCat(cb.dataset.cat); return; }
   const os = e.target.closest("[data-oset]"); if (os) { ORD[os.dataset.oset] = os.dataset.val; const [r] = findRow(ORD.sym); if (r) drawOrder(r); return; }
   if (e.target.closest("[data-oclose]") || e.target.id === "oscrim") { closeOrder(); return; }
   const ai = e.target.closest("[data-alert-op]"); if (ai) { closeMenu(); saveAlert(cur.r.symbol, cur.r.name, ai.dataset.alertOp, +ai.dataset.alertPrice); return; }
@@ -1463,6 +1494,16 @@ def _strategy_view(strategies, sp, dt):
             "mood": book.get("mood", {}), "universe": strategies.get("universe"), "health": _stg.edge(book.get("closed"))}
 
 
+def _catalysts(sp, dt):
+    """data/catalysts.json (written by Claude): {CODE: {text, date, sources: [[title, url], ...]}}, only listed stocks."""
+    try:
+        import storage
+        cat = storage.load_json("catalysts.json", {}) or {}
+    except Exception:
+        return {}
+    return {k: v for k, v in cat.items() if (k in sp or k in dt) and isinstance(v, dict) and v.get("text")}
+
+
 def page_data(sp, dt, run, history, rules_cfg, banner="", snaps=None, charts=None, alerts=None, strategies=None):
     def rows(items):
         return [{**items[s], "symbol": s, "chart": chart_url(s),
@@ -1471,6 +1512,7 @@ def page_data(sp, dt, run, history, rules_cfg, banner="", snaps=None, charts=Non
         "SP": rows(sp), "DT": rows(dt), "run": run or {}, "history": history or [],
         "fund": {k: v for k, v in (snaps or {}).items() if k in sp or k in dt},
         "alerts": _alerts_view(alerts),
+        "catalysts": _catalysts(sp, dt),
         "strat": _strategy_view(strategies, sp, dt),
         "charts": charts,  # None on the live site: the page loads charts/SYMBOL.json instead
         "cfg": {"full": rules_cfg.get("full_marks", 11), "pass_new": rules_cfg.get("new_stock_pass", 7),
