@@ -392,8 +392,8 @@ function qStats(f){
       opmch: ok && q.opm[i] != null && q.opm[j] != null ? q.opm[i] - q.opm[j] : null}; };
   return {half, last: one(n - 1), prev: one(n - 2), eps2: q.eps.slice(-2)};
 }
-// Expected price = current P/E x (average EPS of the last 2 quarters) x 5 / 4 / 3 by TTM PEG (<= 0.5 / 0.5-1 / above 1).
-// Current P/E = Screener's P/E moved to today's price. Half-yearly results: half-year EPS / 2. (Rule of 9 Nov 2026)
+// Expected price = current P/E x (average EPS of the last 2 quarters) x 6 / 5 / 4 by TTM PEG (<= 0.5 / 0.5-1 / above 1).
+// Current P/E = Screener's P/E moved to today's price. Half-yearly results: half-year EPS / 2. (Multipliers changed 9 Nov 2026, 2 PM)
 function priceTarget(r, f){
   const st = qStats(f); if (!st) return null;
   const e = st.eps2.filter(x => x != null); if (e.length < 2) return {why: "needs 2 results with EPS"};
@@ -402,7 +402,7 @@ function priceTarget(r, f){
   if (!pe0 || pe0 <= 0) return {avg, why: "no P/E (the company has losses)"};
   const pe = c && px0 ? pe0 * c / px0 : pe0;
   const peg = g && g > 0 ? pe0 / g : null;                  // TTM PEG = P/E ÷ TTM profit growth (as in the marks)
-  const k = peg == null ? 3 : peg <= 0.5 ? 5 : peg <= 1 ? 4 : 3;
+  const k = peg == null ? 4 : peg <= 0.5 ? 6 : peg <= 1 ? 5 : 4;
   if (avg <= 0) return {avg, pe, peg, k, g, why: "average EPS is not positive"};
   const price = pe * avg * k;
   return {avg, pe, peg, k, g, price, up: c ? (price - c) / c * 100 : null};
@@ -438,7 +438,7 @@ function openCat(sym){
   const tgt = !pt ? "" : `<div class="cs"><h4>Price Target Expected</h4>${pt.price ? `<div class="pt ${pt.up >= 0 ? "" : "down"}">${fmtINR(Math.round(pt.price))}
       ${pt.up == null ? "" : `<small class="${pt.up >= 0 ? "up" : "down"}" style="font-size:13px">${pctTxt(pt.up)} vs ${fmtINR(num(r.last_close))}</small>`}</div>` : `<div class="mut">Not available: ${esc(pt.why)}</div>`}
       <div class="how">= current P/E ${pt.pe == null ? "—" : pt.pe.toFixed(1)} × average EPS of last 2 ${st.half ? "half-years ÷ 2" : "quarters"} ₹${pt.avg == null ? "—" : pt.avg.toFixed(2)} × ${pt.k ?? "—"}
-        <br>Multiplier ${pt.k ?? "—"}: TTM PEG ${pt.peg == null ? (pt.g == null ? "not known" : "not usable (TTM profit growth " + pctTxt(pt.g) + ")") + ", counted as above 1" : pt.peg.toFixed(2) + (pt.peg <= 0.5 ? " is 0.5 or less" : pt.peg <= 1 ? " is between 0.5 and 1" : " is above 1")} (PEG ≤ 0.5 → 5 · 0.5–1 → 4 · above 1 → 3)</div></div>`;
+        <br>Multiplier ${pt.k ?? "—"}: TTM PEG ${pt.peg == null ? (pt.g == null ? "not known" : "not usable (TTM profit growth " + pctTxt(pt.g) + ")") + ", counted as above 1" : pt.peg.toFixed(2) + (pt.peg <= 0.5 ? " is 0.5 or less" : pt.peg <= 1 ? " is between 0.5 and 1" : " is above 1")} (PEG ≤ 0.5 → 6 · 0.5–1 → 5 · above 1 → 4)</div></div>`;
   const o = document.getElementById("order");
   o.classList.add("wide");
   o.innerHTML = `<div class="oh cat"><h3 id="o-title">${esc(r.name || sym)}</h3><button class="btn x" data-oclose aria-label="Close">✕</button></div>
