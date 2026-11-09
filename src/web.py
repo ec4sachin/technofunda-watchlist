@@ -64,6 +64,7 @@ input,select{font:15px var(--f-body);color:var(--ink);background:var(--surface);
 .row .mk{min-width:0}.row .mk .top{font-size:11px}.row .mk .top b{font-size:12px}.row .mk .bar{height:6px}
 .nmline{display:flex;align-items:baseline;gap:4px 10px;flex-wrap:wrap}
 .nmline .px{font-size:14px;color:var(--ink);white-space:nowrap}
+.row .meta{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}.meta .tgt{font-size:12px;white-space:nowrap}.meta .tgt b{font-family:var(--f-mono);font-weight:600}
 .cat{appearance:none;display:block;width:100%;min-width:0;text-align:left;font:13px/1.4 var(--f-body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer}
 .cat:hover{border-color:var(--accent)}
 .cat .ct{display:block;font:700 10.5px var(--f-body);letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
@@ -407,6 +408,13 @@ function priceTarget(r, f){
   const price = pe * avg * k;
   return {avg, pe, peg, k, g, price, up: c ? (price - c) / c * 100 : null};
 }
+// "Target ₹747 (+8.9%)" next to the NSE / BSE codes (same rule as Price Target Expected in the catalyst box)
+function tgtChip(r){
+  const f = (D.fund || {})[r.symbol], pt = f && priceTarget(r, f);
+  if (!pt || !pt.price) return "";
+  const up = pt.up;
+  return `<span class="tgt ${up == null ? "" : up >= 0 ? "up" : "down"}" title="Price Target Expected: current P/E × average EPS of last 2 quarters × ${pt.k}">Target <b>${fmtINR(Math.round(pt.price))}</b>${up == null ? "" : ` (${pctTxt(up)})`}</span>`;
+}
 function catBox(r){
   const k = CAT[r.symbol], f = (D.fund || {})[r.symbol], st = qStats(f);
   if (!(k && k.text) && !(st && st.last)) return `<div class="cat none">Catalyst and results not available yet</div>`;
@@ -455,7 +463,7 @@ function stockRow(r, list){
   const pct = mk == null ? 0 : Math.min(100, mk / FULL * 100);
   return `<article class="row ${list === "DT" ? "dt" : ""}">
     <div><div class="nmline"><button class="nm linkish" data-open="${esc(r.symbol)}" data-tab="chart">${esc(r.name || r.symbol)}</button><span class="px">${c ? fmtINR(c) : "—"}</span></div>
-      <div class="meta">${codesHTML(r)}</div></div>
+      <div class="meta">${codesHTML(r)}${tgtChip(r)}</div></div>
     ${catBox(r)}
     <div class="mk"${r.last_fund_check ? ` title="Marks checked ${esc(r.last_fund_check)}"` : ""}><div class="top"><span>Marks</span><b>${mk == null ? "not marked" : mk + "/" + FULL}</b></div>
       <div class="bar ${mk != null && mk < PASS ? "low" : ""}" role="img" aria-label="${mk == null ? "No marks yet" : mk + " of " + FULL + " marks, pass mark " + PASS}"><i style="width:${pct}%"></i><u style="left:${PASS / FULL * 100}%"></u></div></div>
