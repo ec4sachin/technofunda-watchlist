@@ -1,63 +1,7 @@
 {
  "added": [],
  "rejected": [],
- "to_dt": [
-  [
-   "ASHIANA",
-   "Ashiana Housing",
-   "close 351.8 < 200 EMA 352.32"
-  ],
-  [
-   "BALUFORGE",
-   "Balu Forge Industries Ltd",
-   "close 501.7 < 200 EMA 503.78"
-  ],
-  [
-   "KANOHAR",
-   "Kanohar Elect.",
-   "close 992.35 < 20 EMA 994.96"
-  ],
-  [
-   "MPSLTD",
-   "MPS Ltd",
-   "close 2232.9 < 200 EMA 2262.71"
-  ],
-  [
-   "ORIRAIL",
-   "Oriental Rail Infrastructure Ltd",
-   "close 115.2 < 20 EMA 115.86"
-  ],
-  [
-   "RSL",
-   "Rajputana Stain.",
-   "close 166.85 < 20 EMA 170.35"
-  ],
-  [
-   "STAR",
-   "Strides Pharma Science Ltd",
-   "close 999.6 < 200 EMA 1023.35"
-  ],
-  [
-   "TAALTECH",
-   "TAAL Tech Ltd",
-   "close 912.6 < 20 EMA 925.19"
-  ],
-  [
-   "TAMBOLIIN",
-   "Tamboli Industri",
-   "close 308.45 < 20 EMA 312.21"
-  ],
-  [
-   "THEJO",
-   "Thejo Engineering Ltd",
-   "close 1914.2 < 200 EMA 1918.88"
-  ],
-  [
-   "THOMASCOTT",
-   "Thomas Scott India Ltd",
-   "close 285.6 < 200 EMA 290.8"
-  ]
- ],
+ "to_dt": [],
  "to_sp": [],
  "removed": [],
  "unchecked": [
@@ -183,24 +127,9 @@
    "close 133.95 vs 20 EMA 132.03 → SP"
   ],
   [
-   "KANOHAR",
-   "Kanohar Elect.",
-   "close 992.35 vs 20 EMA 994.96 → DT"
-  ],
-  [
    "MARUSHIKA",
    "Marushika Tech.",
    "close 127.95 vs 20 EMA 117.92 → SP"
-  ],
-  [
-   "ORIRAIL",
-   "Oriental Rail Infrastructure Ltd",
-   "close 115.2 vs 20 EMA 115.86 → DT"
-  ],
-  [
-   "RSL",
-   "Rajputana Stain.",
-   "close 166.85 vs 20 EMA 170.35 → DT"
   ],
   [
    "SHUKRAPHAR",
@@ -215,17 +144,7 @@
   [
    "SMT",
    "Sahajanand Medical Technologies Ltd",
-   "close 534.7 (too new for any EMA)"
-  ],
-  [
-   "TAALTECH",
-   "TAAL Tech Ltd",
-   "close 912.6 vs 20 EMA 925.19 → DT"
-  ],
-  [
-   "TAMBOLIIN",
-   "Tamboli Industri",
-   "close 308.45 vs 20 EMA 312.21 → DT"
+   "close 525.95 (too new for any EMA)"
   ],
   [
    "TEAMTECH",
@@ -298,9 +217,19 @@
    "close 58.98 vs 20 EMA 61.76"
   ],
   [
+   "KANOHAR",
+   "Kanohar Elect.",
+   "close 992.35 vs 20 EMA 994.96"
+  ],
+  [
    "MPIMANIPAL",
    "Manipal Payment and Identity Solutions Ltd",
    "close 312.8 vs 20 EMA 324.5"
+  ],
+  [
+   "ORIRAIL",
+   "Oriental Rail Infrastructure Ltd",
+   "close 115.2 vs 20 EMA 115.86"
   ],
   [
    "RAMBHAJO",
@@ -308,9 +237,24 @@
    "close 323.5 vs 20 EMA 336.22"
   ],
   [
+   "RSL",
+   "Rajputana Stain.",
+   "close 166.85 vs 20 EMA 170.35"
+  ],
+  [
    "SWASTIKAIN",
    "Swastika Infra",
-   "close 197.09 vs 20 EMA 203.14"
+   "close 195.05 vs 20 EMA 203.82"
+  ],
+  [
+   "TAALTECH",
+   "TAAL Tech Ltd",
+   "close 912.6 vs 20 EMA 925.19"
+  ],
+  [
+   "TAMBOLIIN",
+   "Tamboli Industri",
+   "close 308.45 vs 20 EMA 312.21"
   ],
   [
    "TRANSPEK",
@@ -343,5 +287,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "09 Nov 2026, 11:31 AM IST"
+ "run_at": "09 Nov 2026, 02:09 PM IST"
 }
