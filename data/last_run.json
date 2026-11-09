@@ -254,7 +254,7 @@
   [
    "SWASTIKAIN",
    "Swastika Infra",
-   "close 197.09 (too new for any EMA)"
+   "close 197.09 vs 20 EMA 203.14"
   ],
   [
    "TRANSPEK",
@@ -287,5 +287,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "09 Nov 2026, 08:35 AM IST"
+ "run_at": "09 Nov 2026, 09:07 AM IST"
 }
