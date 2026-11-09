@@ -459,3 +459,11 @@ date,symbol,name,action,reason
 2026-11-08,TAMBOLIIN,Tamboli Industri,DT -> SP,close 324.85 back above 20 EMA 313.42 (new listing)
 2026-11-08,THEJO,Thejo Engineering Ltd,DT -> SP,close 1923.5 back above 200 EMA 1918.93
 2026-11-08,THOMASCOTT,Thomas Scott India Ltd,DT -> SP,close 291.15 back above 200 EMA 290.81
+2026-11-09,KANOHAR,Kanohar Elect.,ADDED to SP,"marks 8.8/11; RS: too new (under 3 months of prices); from TTM Profit > 30%, 52W High"
+2026-11-09,KSHINTL,KSH Internationa,ADDED to SP,"marks 6.6/11; 3-month RS 84 (vs 3712 BSE stocks); from TTM Profit > 30%, 52W High"
+2026-11-09,CEIGALL,Ceigall India,ADDED to SP,"marks 10.5/11; 3-month RS 87 (vs 3575 BSE stocks); from TTM Profit > 30%, 52W High"
+2026-11-09,WHEELS,Wheels India,ADDED to SP,"marks 10.5/11; 3-month RS 98 (vs 3575 BSE stocks); from TTM Profit > 30%, 52W High"
+2026-11-09,VRLLOG,VRL Logistics,ADDED to SP,"marks 11/11; 3-month RS 90 (vs 3575 BSE stocks); from TTM Profit > 30%, Weekly Volume Scan, 52W High"
+2026-11-09,ENTERO,Entero Healthcar,ADDED to SP,"marks 9.4/11; 3-month RS 97 (vs 3575 BSE stocks); from Weekly Volume Scan, 52W High"
+2026-11-09,538862,My Money Sec.,SP -> DT,close 39.62 below 200 EMA 39.76
+2026-11-09,517336,Modern Malleable,DT -> SP,close 41.37 back above 20 EMA 41.34 (new listing)

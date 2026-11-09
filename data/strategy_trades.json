@@ -903,7 +903,6 @@
    "BALUFORGE": "2026-11-08",
    "THOMASCOTT": "2026-11-08",
    "544695": "2026-11-08",
-   "538862": "2026-11-08",
    "544746": "2026-11-08",
    "544538": "2026-11-08",
    "CONNPLEX": "2026-11-08",
@@ -913,7 +912,14 @@
    "STAR": "2026-11-08",
    "TAALTECH": "2026-11-08",
    "TAMBOLIIN": "2026-11-08",
-   "THEJO": "2026-11-08"
+   "THEJO": "2026-11-08",
+   "ENTERO": "2026-11-08",
+   "KANOHAR": "2026-11-08",
+   "KSHINTL": "2026-11-08",
+   "517336": "2026-11-08",
+   "CEIGALL": "2026-11-08",
+   "WHEELS": "2026-11-08",
+   "VRLLOG": "2026-11-08"
   },
   "positional": {
    "INTEGRITY": "2026-11-06",
@@ -1131,7 +1137,6 @@
    "BALUFORGE": "2026-11-08",
    "THOMASCOTT": "2026-11-08",
    "544695": "2026-11-08",
-   "538862": "2026-11-08",
    "544746": "2026-11-08",
    "544538": "2026-11-08",
    "CONNPLEX": "2026-11-08",
@@ -1141,7 +1146,14 @@
    "STAR": "2026-11-08",
    "TAALTECH": "2026-11-08",
    "TAMBOLIIN": "2026-11-08",
-   "THEJO": "2026-11-08"
+   "THEJO": "2026-11-08",
+   "ENTERO": "2026-11-08",
+   "KANOHAR": "2026-11-08",
+   "KSHINTL": "2026-11-08",
+   "517336": "2026-11-08",
+   "CEIGALL": "2026-11-08",
+   "WHEELS": "2026-11-08",
+   "VRLLOG": "2026-11-08"
   },
   "switch": {
    "INTEGRITY": "2026-11-06",
@@ -1359,7 +1371,6 @@
    "BALUFORGE": "2026-11-08",
    "THOMASCOTT": "2026-11-08",
    "544695": "2026-11-08",
-   "538862": "2026-11-08",
    "544746": "2026-11-08",
    "544538": "2026-11-08",
    "CONNPLEX": "2026-11-08",
@@ -1369,7 +1380,14 @@
    "STAR": "2026-11-08",
    "TAALTECH": "2026-11-08",
    "TAMBOLIIN": "2026-11-08",
-   "THEJO": "2026-11-08"
+   "THEJO": "2026-11-08",
+   "ENTERO": "2026-11-08",
+   "KANOHAR": "2026-11-08",
+   "KSHINTL": "2026-11-08",
+   "517336": "2026-11-08",
+   "CEIGALL": "2026-11-08",
+   "WHEELS": "2026-11-08",
+   "VRLLOG": "2026-11-08"
   },
   "growth_switch": {
    "540718": "2026-11-06",
@@ -2298,22 +2316,22 @@
    {
     "symbol": "543616",
     "name": "Trident Lifeline",
-    "buy_above": 430.11,
+    "buy_above": 429.25,
     "stop": 404.91,
     "qty": 302,
-    "amount": 129893.22,
-    "range_pct": 4.0,
-    "risk_pct": 5.9,
+    "amount": 129633.5,
+    "range_pct": 3.8,
+    "risk_pct": 5.7,
     "as_of": "2026-11-08",
     "score": {
-     "tight": 3.96,
-     "strength": 55.17,
-     "near_high": 3.85,
-     "trend": 14.02,
-     "low_risk": 5.86,
+     "tight": 3.77,
+     "strength": 54.86,
+     "near_high": 4.04,
+     "trend": 13.8,
+     "low_risk": 5.67,
      "volume": 0.55
     },
-    "turnover": 9051497
+    "turnover": 9051506
    },
    {
     "symbol": "SAAKSHI",
@@ -2460,22 +2478,22 @@
    {
     "symbol": "543616",
     "name": "Trident Lifeline",
-    "buy_above": 430.11,
+    "buy_above": 429.25,
     "stop": 404.91,
-    "qty": 278,
-    "amount": 119570.58,
-    "range_pct": 4.0,
-    "risk_pct": 5.9,
+    "qty": 279,
+    "amount": 119760.75,
+    "range_pct": 3.8,
+    "risk_pct": 5.7,
     "as_of": "2026-11-08",
     "score": {
-     "tight": 3.96,
-     "strength": 55.17,
-     "near_high": 3.85,
-     "trend": 14.02,
-     "low_risk": 5.86,
+     "tight": 3.77,
+     "strength": 54.86,
+     "near_high": 4.04,
+     "trend": 13.8,
+     "low_risk": 5.67,
      "volume": 0.55
     },
-    "turnover": 9051497
+    "turnover": 9051506
    },
    {
     "symbol": "SAAKSHI",
@@ -2622,22 +2640,22 @@
    {
     "symbol": "543616",
     "name": "Trident Lifeline",
-    "buy_above": 430.11,
+    "buy_above": 429.25,
     "stop": 404.91,
-    "qty": 278,
-    "amount": 119570.58,
-    "range_pct": 4.0,
-    "risk_pct": 5.9,
+    "qty": 279,
+    "amount": 119760.75,
+    "range_pct": 3.8,
+    "risk_pct": 5.7,
     "as_of": "2026-11-08",
     "score": {
-     "tight": 3.96,
-     "strength": 55.17,
-     "near_high": 3.85,
-     "trend": 14.02,
-     "low_risk": 5.86,
+     "tight": 3.77,
+     "strength": 54.86,
+     "near_high": 4.04,
+     "trend": 13.8,
+     "low_risk": 5.67,
      "volume": 0.55
     },
-    "turnover": 9051497
+    "turnover": 9051506
    },
    {
     "symbol": "SAAKSHI",
