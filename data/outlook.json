@@ -184,5 +184,11 @@
   "date": "2026-11-07",
   "until": "2027-02-05",
   "note": "FY26 profit +89% on revenue +14%, but cash from operations negative 2 years running, receivables (₹159 cr) now larger than a full year's sales (₹117 cr), short-term debt up - growth not turning into cash"
+ },
+ "TECHERA": {
+  "ok": false,
+  "date": "2026-11-09",
+  "until": "2027-02-07",
+  "note": "Growth stalled: Oct 2025-Mar 2026 half sales -24% (₹24.2 cr vs ₹31.9 cr) and profit -61% (₹1.7 cr vs ₹4.3 cr); FY26 sales flat despite 30-40% growth guidance. Re-check after Sep 2026 half-year results"
  }
 }
