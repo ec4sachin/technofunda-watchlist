@@ -40,8 +40,8 @@
      "volume": 0.35
     }
    },
-   "ltp": 330.4,
-   "ltp_date": "2026-11-08"
+   "ltp": 329.35,
+   "ltp_date": "2026-11-06"
   },
   {
    "id": "swing-MODIS-2026-11-05",
@@ -83,8 +83,8 @@
      "volume": 1.02
     }
    },
-   "ltp": 427.85,
-   "ltp_date": "2026-11-08"
+   "ltp": 428.65,
+   "ltp_date": "2026-11-06"
   },
   {
    "id": "positional-DCI-2026-11-05",
@@ -126,8 +126,8 @@
      "volume": 0.35
     }
    },
-   "ltp": 330.4,
-   "ltp_date": "2026-11-08"
+   "ltp": 329.35,
+   "ltp_date": "2026-11-06"
   },
   {
    "id": "positional-MODIS-2026-11-05",
@@ -169,8 +169,8 @@
      "volume": 1.02
     }
    },
-   "ltp": 427.85,
-   "ltp_date": "2026-11-08"
+   "ltp": 428.65,
+   "ltp_date": "2026-11-06"
   },
   {
    "id": "switch-DCI-2026-11-05",
@@ -212,8 +212,8 @@
      "volume": 0.35
     }
    },
-   "ltp": 330.4,
-   "ltp_date": "2026-11-08",
+   "ltp": 329.35,
+   "ltp_date": "2026-11-06",
    "below50": 0,
    "switches": [
     "2026-11-06: → positional",
@@ -260,8 +260,8 @@
      "volume": 1.02
     }
    },
-   "ltp": 427.85,
-   "ltp_date": "2026-11-08",
+   "ltp": 428.65,
+   "ltp_date": "2026-11-06",
    "below50": 0,
    "switches": [
     "2026-11-06: → positional",
@@ -308,8 +308,8 @@
      "volume": 1.6
     }
    },
-   "ltp": 699.75,
-   "ltp_date": "2026-11-08",
+   "ltp": 686.05,
+   "ltp_date": "2026-11-06",
    "below50": 0,
    "switches": [
     "2026-11-06: → positional",
@@ -356,8 +356,8 @@
      "volume": 0.35
     }
    },
-   "ltp": 330.4,
-   "ltp_date": "2026-11-08",
+   "ltp": 329.35,
+   "ltp_date": "2026-11-06",
    "below50": 0,
    "switches": [
     "2026-11-06: → positional",
@@ -500,8 +500,8 @@
      "volume": 1.02
     }
    },
-   "ltp": 427.85,
-   "ltp_date": "2026-11-08",
+   "ltp": 428.65,
+   "ltp_date": "2026-11-06",
    "below50": 0,
    "switches": [
     "2026-11-06: → positional",
@@ -548,8 +548,8 @@
      "volume": 1.4
     }
    },
-   "ltp": 699.75,
-   "ltp_date": "2026-11-08"
+   "ltp": 686.05,
+   "ltp_date": "2026-11-06"
   },
   {
    "id": "positional-PANACHE-2026-11-06",
@@ -591,8 +591,8 @@
      "volume": 1.4
     }
    },
-   "ltp": 699.75,
-   "ltp_date": "2026-11-08"
+   "ltp": 686.05,
+   "ltp_date": "2026-11-06"
   },
   {
    "id": "switch-PANACHE-2026-11-06",
@@ -634,8 +634,8 @@
      "volume": 1.4
     }
    },
-   "ltp": 699.75,
-   "ltp_date": "2026-11-08",
+   "ltp": 686.05,
+   "ltp_date": "2026-11-06",
    "below50": 0,
    "switches": [
     "2026-11-08: → swing"
@@ -899,22 +899,11 @@
    "530427": "2026-11-08",
    "DENTALKART": "2026-11-06",
    "BPLPHARMA": "2026-11-08",
-   "ASHIANA": "2026-11-08",
-   "BALUFORGE": "2026-11-08",
-   "THOMASCOTT": "2026-11-08",
    "544695": "2026-11-08",
    "544746": "2026-11-08",
    "544538": "2026-11-08",
    "CONNPLEX": "2026-11-08",
-   "MPSLTD": "2026-11-08",
-   "ORIRAIL": "2026-11-08",
-   "RSL": "2026-11-08",
-   "STAR": "2026-11-08",
-   "TAALTECH": "2026-11-08",
-   "TAMBOLIIN": "2026-11-08",
-   "THEJO": "2026-11-08",
    "ENTERO": "2026-11-08",
-   "KANOHAR": "2026-11-08",
    "KSHINTL": "2026-11-08",
    "517336": "2026-11-08",
    "CEIGALL": "2026-11-08",
@@ -1133,22 +1122,11 @@
    "530427": "2026-11-08",
    "DENTALKART": "2026-11-06",
    "BPLPHARMA": "2026-11-08",
-   "ASHIANA": "2026-11-08",
-   "BALUFORGE": "2026-11-08",
-   "THOMASCOTT": "2026-11-08",
    "544695": "2026-11-08",
    "544746": "2026-11-08",
    "544538": "2026-11-08",
    "CONNPLEX": "2026-11-08",
-   "MPSLTD": "2026-11-08",
-   "ORIRAIL": "2026-11-08",
-   "RSL": "2026-11-08",
-   "STAR": "2026-11-08",
-   "TAALTECH": "2026-11-08",
-   "TAMBOLIIN": "2026-11-08",
-   "THEJO": "2026-11-08",
    "ENTERO": "2026-11-08",
-   "KANOHAR": "2026-11-08",
    "KSHINTL": "2026-11-08",
    "517336": "2026-11-08",
    "CEIGALL": "2026-11-08",
@@ -1367,22 +1345,11 @@
    "530427": "2026-11-08",
    "DENTALKART": "2026-11-06",
    "BPLPHARMA": "2026-11-08",
-   "ASHIANA": "2026-11-08",
-   "BALUFORGE": "2026-11-08",
-   "THOMASCOTT": "2026-11-08",
    "544695": "2026-11-08",
    "544746": "2026-11-08",
    "544538": "2026-11-08",
    "CONNPLEX": "2026-11-08",
-   "MPSLTD": "2026-11-08",
-   "ORIRAIL": "2026-11-08",
-   "RSL": "2026-11-08",
-   "STAR": "2026-11-08",
-   "TAALTECH": "2026-11-08",
-   "TAMBOLIIN": "2026-11-08",
-   "THEJO": "2026-11-08",
    "ENTERO": "2026-11-08",
-   "KANOHAR": "2026-11-08",
    "KSHINTL": "2026-11-08",
    "517336": "2026-11-08",
    "CEIGALL": "2026-11-08",
@@ -2249,7 +2216,6 @@
    "ZEAL": "2026-11-06",
    "ZTECH": "2026-11-06",
    "WTICAB": "2026-11-06",
-   "BCSSL": "2026-11-08",
    "SIGNORIA": "2026-11-06",
    "SILKFLEX": "2026-11-06",
    "SONUINFRA": "2026-11-06",
@@ -2414,26 +2380,6 @@
     "turnover": 1246284
    },
    {
-    "symbol": "KANPRPLA",
-    "name": "Kanpur Plastipa.",
-    "buy_above": 256.24,
-    "stop": 240.87,
-    "qty": 507,
-    "amount": 129913.68,
-    "range_pct": 4.3,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-08",
-    "score": {
-     "tight": 4.29,
-     "strength": 15.83,
-     "near_high": 11.56,
-     "trend": 3.17,
-     "low_risk": 6.0,
-     "volume": 0.56
-    },
-    "turnover": 5588029
-   },
-   {
     "symbol": "PTCIL",
     "name": "PTC Industries Ltd",
     "buy_above": 25149.0,
@@ -2442,16 +2388,16 @@
     "amount": 125745.0,
     "range_pct": 5.9,
     "risk_pct": 6.0,
-    "as_of": "2026-11-08",
+    "as_of": "2026-11-06",
     "score": {
-     "tight": 5.92,
-     "strength": 45.45,
-     "near_high": 6.4,
-     "trend": 5.46,
+     "tight": 5.94,
+     "strength": 44.73,
+     "near_high": 6.71,
+     "trend": 5.35,
      "low_risk": 6.0,
-     "volume": 0.82
+     "volume": 0.85
     },
-    "turnover": 555720022
+    "turnover": 588007681
    }
   ],
   "positional": [
@@ -2576,26 +2522,6 @@
     "turnover": 1246284
    },
    {
-    "symbol": "KANPRPLA",
-    "name": "Kanpur Plastipa.",
-    "buy_above": 256.24,
-    "stop": 240.87,
-    "qty": 468,
-    "amount": 119920.32,
-    "range_pct": 4.3,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-08",
-    "score": {
-     "tight": 4.29,
-     "strength": 15.83,
-     "near_high": 11.56,
-     "trend": 3.17,
-     "low_risk": 6.0,
-     "volume": 0.56
-    },
-    "turnover": 5588029
-   },
-   {
     "symbol": "PTCIL",
     "name": "PTC Industries Ltd",
     "buy_above": 25149.0,
@@ -2604,16 +2530,16 @@
     "amount": 100596.0,
     "range_pct": 5.9,
     "risk_pct": 6.0,
-    "as_of": "2026-11-08",
+    "as_of": "2026-11-06",
     "score": {
-     "tight": 5.92,
-     "strength": 45.45,
-     "near_high": 6.4,
-     "trend": 5.46,
+     "tight": 5.94,
+     "strength": 44.73,
+     "near_high": 6.71,
+     "trend": 5.35,
      "low_risk": 6.0,
-     "volume": 0.82
+     "volume": 0.85
     },
-    "turnover": 555720022
+    "turnover": 588007681
    }
   ],
   "switch": [
@@ -2738,26 +2664,6 @@
     "turnover": 1246284
    },
    {
-    "symbol": "KANPRPLA",
-    "name": "Kanpur Plastipa.",
-    "buy_above": 256.24,
-    "stop": 240.87,
-    "qty": 468,
-    "amount": 119920.32,
-    "range_pct": 4.3,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-08",
-    "score": {
-     "tight": 4.29,
-     "strength": 15.83,
-     "near_high": 11.56,
-     "trend": 3.17,
-     "low_risk": 6.0,
-     "volume": 0.56
-    },
-    "turnover": 5588029
-   },
-   {
     "symbol": "PTCIL",
     "name": "PTC Industries Ltd",
     "buy_above": 25149.0,
@@ -2766,16 +2672,16 @@
     "amount": 100596.0,
     "range_pct": 5.9,
     "risk_pct": 6.0,
-    "as_of": "2026-11-08",
+    "as_of": "2026-11-06",
     "score": {
-     "tight": 5.92,
-     "strength": 45.45,
-     "near_high": 6.4,
-     "trend": 5.46,
+     "tight": 5.94,
+     "strength": 44.73,
+     "near_high": 6.71,
+     "trend": 5.35,
      "low_risk": 6.0,
-     "volume": 0.82
+     "volume": 0.85
     },
-    "turnover": 555720022
+    "turnover": 588007681
    }
   ],
   "growth_switch": [

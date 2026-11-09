@@ -1,10 +1,10 @@
 {
  "513472": {
-  "market_cap": 491.0,
-  "price": 120.0,
+  "market_cap": 528.0,
+  "price": 129.0,
   "high_52w": 146.0,
   "low_52w": 80.1,
-  "pe": 20.4,
+  "pe": 22.0,
   "book_value": 27.7,
   "dividend_yield": 0.0,
   "roce": 24.3,
@@ -84,7 +84,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-02"
+  "as_of": "2026-11-09"
  },
  "513507": {
   "market_cap": 94.9,
@@ -261,28 +261,28 @@
   "as_of": "2026-11-02"
  },
  "530741": {
-  "market_cap": 274.0,
-  "price": 288.0,
+  "market_cap": 195.0,
+  "price": 206.0,
   "high_52w": 350.0,
   "low_52w": 106.0,
-  "pe": 7.04,
-  "book_value": 116.0,
+  "pe": 5.32,
+  "book_value": 137.0,
   "dividend_yield": 0.0,
   "roce": 28.3,
   "roe": 24.9,
   "roe_3y": 21.0,
-  "sales_growth_ttm": 38.0,
+  "sales_growth_ttm": 28.0,
   "sales_growth_3y": 5.0,
   "sales_growth_5y": 18.0,
-  "profit_growth_ttm": 329.0,
+  "profit_growth_ttm": 166.0,
   "profit_growth_3y": -15.0,
   "profit_growth_5y": 73.0,
-  "sales_growth_qtr_yoy": 31.15,
-  "profit_growth_qtr_yoy": 400.0,
-  "opm_latest_qtr": 23.0,
+  "sales_growth_qtr_yoy": 0.35,
+  "profit_growth_qtr_yoy": -30.58,
+  "opm_latest_qtr": 8.87,
   "opm_last_year": 11.0,
-  "net_profit_ttm": 39.0,
-  "debt_to_equity": 0.26,
+  "net_profit_ttm": 37.0,
+  "debt_to_equity": 0.22,
   "interest_coverage": 18.0,
   "cfo_to_profit_5y": 0.86,
   "debtor_days": 21.0,
@@ -294,82 +294,82 @@
   "result_period_months": 3,
   "quarters": {
    "t": [
-    "Sep 2024",
     "Dec 2024",
     "Mar 2025",
     "Jun 2025",
     "Sep 2025",
     "Dec 2025",
     "Mar 2026",
-    "Jun 2026"
+    "Jun 2026",
+    "Sep 2026"
    ],
    "sales": [
-    42.0,
-    51.0,
-    48.0,
-    61.0,
-    57.0,
-    74.0,
-    66.0,
-    80.0
+    51.11,
+    47.87,
+    60.68,
+    56.99,
+    74.05,
+    66.5,
+    79.97,
+    57.19
    ],
    "profit": [
-    2.0,
-    -1.0,
-    6.0,
-    3.0,
-    6.0,
-    3.0,
-    14.0,
-    15.0
+    -1.15,
+    5.85,
+    2.75,
+    6.41,
+    2.78,
+    14.19,
+    15.4,
+    4.45
    ],
    "opm": [
-    3.6,
-    -6.0,
-    15.0,
-    7.0,
-    13.0,
-    2.5,
-    22.0,
-    23.0
+    -6.32,
+    15.19,
+    7.05,
+    13.11,
+    2.51,
+    22.42,
+    22.83,
+    8.87
    ],
    "eps": [
-    1.68,
     -1.21,
     6.16,
     2.89,
     6.75,
     2.93,
     14.94,
-    16.21
+    16.21,
+    4.68
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-02"
+  "as_of": "2026-11-09"
  },
  "543963": {
-  "market_cap": 75.0,
-  "price": 44.6,
+  "market_cap": 77.0,
+  "price": 45.8,
   "high_52w": 55.9,
   "low_52w": 23.0,
-  "pe": 8.31,
-  "book_value": 46.1,
+  "pe": 7.91,
+  "book_value": 49.0,
   "dividend_yield": 0.0,
   "roce": 20.4,
   "roe": 15.1,
   "roe_3y": 18.0,
-  "sales_growth_ttm": 44.0,
+  "sales_growth_ttm": 42.0,
   "sales_growth_3y": 26.0,
   "sales_growth_5y": 27.0,
-  "profit_growth_ttm": 25.0,
+  "profit_growth_ttm": 19.0,
   "profit_growth_3y": 15.0,
   "profit_growth_5y": 196.0,
-  "sales_growth_qtr_yoy": 49.77,
-  "profit_growth_qtr_yoy": 22.43,
-  "opm_latest_qtr": 16.24,
+  "sales_growth_qtr_yoy": 35.57,
+  "profit_growth_qtr_yoy": 15.78,
+  "opm_latest_qtr": 16.33,
   "opm_last_year": 17.43,
-  "net_profit_ttm": 9.03,
-  "debt_to_equity": 0.01,
+  "net_profit_ttm": 9.74,
+  "debt_to_equity": 0.02,
   "interest_coverage": 102.83,
   "cfo_to_profit_5y": -0.29,
   "debtor_days": 59.03,
@@ -381,58 +381,58 @@
   "result_period_months": 6,
   "quarters": {
    "t": [
-    "Sep 2022",
     "Mar 2023",
     "Sep 2023",
     "Mar 2024",
     "Sep 2024",
     "Mar 2025",
     "Sep 2025",
-    "Mar 2026"
+    "Mar 2026",
+    "Sep 2026"
    ],
    "sales": [
-    17.02,
     19.13,
     19.31,
     20.71,
     24.06,
     26.6,
     33.29,
-    39.84
+    39.84,
+    45.13
    ],
    "profit": [
-    2.4,
     2.81,
     3.1,
     3.12,
     3.54,
     3.7,
     4.5,
-    4.53
+    4.53,
+    5.21
    ],
    "opm": [
-    19.45,
     22.53,
     22.22,
     20.71,
     20.37,
     19.47,
     18.8,
-    16.24
+    16.24,
+    16.33
    ],
    "eps": [
-    3.12,
     3.63,
     2.68,
     2.7,
     3.06,
     3.2,
     3.89,
-    2.73
+    2.73,
+    3.09
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-02"
+  "as_of": "2026-11-09"
  },
  "544141": {
   "market_cap": 460.0,
@@ -586,12 +586,12 @@
   "as_of": "2026-11-02"
  },
  "544464": {
-  "market_cap": 116.0,
-  "price": 81.9,
-  "high_52w": 106.0,
+  "market_cap": 118.0,
+  "price": 83.0,
+  "high_52w": 105.0,
   "low_52w": 41.8,
-  "pe": 12.7,
-  "book_value": 34.0,
+  "pe": 9.33,
+  "book_value": 39.1,
   "dividend_yield": 0.0,
   "roce": 31.0,
   "roe": 29.2,
@@ -600,12 +600,12 @@
   "sales_growth_3y": 36.0,
   "profit_growth_ttm": 67.0,
   "profit_growth_3y": 271.0,
-  "sales_growth_qtr_yoy": 52.56,
-  "profit_growth_qtr_yoy": 167.82,
-  "opm_latest_qtr": -3.38,
+  "sales_growth_qtr_yoy": 44.93,
+  "profit_growth_qtr_yoy": 75.0,
+  "opm_latest_qtr": 2.1,
   "opm_last_year": -4.0,
   "net_profit_ttm": 9.0,
-  "debt_to_equity": 0.12,
+  "debt_to_equity": 0.38,
   "interest_coverage": 7.0,
   "cfo_to_profit_5y": -1.71,
   "debtor_days": 3.0,
@@ -613,36 +613,36 @@
   "promoter_holding": 73.8,
   "fii_dii_latest": 0,
   "shareholders_latest": 513.0,
-  "result_period_months": 3,
+  "result_period_months": 12,
   "quarters": {
    "t": [
-    "Mar 2025",
-    "Dec 2025",
-    "Mar 2026"
+    "Sep 2024",
+    "Sep 2025",
+    "Sep 2026"
    ],
    "sales": [
-    308.68,
-    365.19,
-    470.91
+    251.0,
+    365.0,
+    529.0
    ],
    "profit": [
-    2.02,
-    3.78,
-    5.41
+    3.0,
+    4.0,
+    7.0
    ],
    "opm": [
-    -5.65,
-    -4.73,
-    -3.38
+    -5.0,
+    -4.7,
+    2.1
    ],
    "eps": [
-    1.93,
+    3.31,
     2.66,
-    3.8
+    5.11
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-02"
+  "as_of": "2026-11-09"
  },
  "544694": {
   "market_cap": 232.0,
@@ -709,11 +709,11 @@
   "as_of": "2026-11-02"
  },
  "ACETEC": {
-  "market_cap": 223.0,
-  "price": 136.0,
+  "market_cap": 231.0,
+  "price": 141.0,
   "high_52w": 164.0,
   "low_52w": 112.0,
-  "pe": 21.7,
+  "pe": 22.5,
   "book_value": 42.6,
   "dividend_yield": 0.0,
   "roce": 34.6,
@@ -764,31 +764,31 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-02"
+  "as_of": "2026-11-09"
  },
  "DURLAX": {
-  "market_cap": 222.0,
-  "price": 76.7,
-  "high_52w": 79.2,
+  "market_cap": 216.0,
+  "price": 74.5,
+  "high_52w": 80.0,
   "low_52w": 28.1,
-  "pe": 15.5,
-  "book_value": 40.3,
+  "pe": 10.1,
+  "book_value": 47.6,
   "dividend_yield": 0.0,
   "roce": 17.2,
   "roe": 14.7,
   "roe_3y": 17.0,
-  "sales_growth_ttm": 51.0,
+  "sales_growth_ttm": 84.0,
   "sales_growth_3y": 40.0,
   "sales_growth_5y": 57.0,
-  "profit_growth_ttm": 71.0,
+  "profit_growth_ttm": 194.0,
   "profit_growth_3y": 70.0,
   "profit_growth_5y": 77.0,
-  "sales_growth_qtr_yoy": 89.22,
-  "profit_growth_qtr_yoy": 118.25,
-  "opm_latest_qtr": 4.86,
+  "sales_growth_qtr_yoy": 80.85,
+  "profit_growth_qtr_yoy": 370.83,
+  "opm_latest_qtr": 21.04,
   "opm_last_year": 12.0,
   "net_profit_ttm": 13.0,
-  "debt_to_equity": 0.34,
+  "debt_to_equity": 0.55,
   "interest_coverage": 4.6,
   "cfo_to_profit_5y": -1.03,
   "debtor_days": 127.0,
@@ -801,41 +801,51 @@
   "quarters": {
    "t": [
     "Jun 2025",
+    "Sep 2025",
     "Mar 2026",
-    "Jun 2026"
+    "Jun 2026",
+    "Sep 2026"
    ],
    "sales": [
     29.59,
+    38.6,
     76.81,
-    55.99
+    55.99,
+    69.81
    ],
    "profit": [
     1.26,
+    1.92,
     8.19,
-    2.75
+    2.75,
+    9.04
    ],
    "opm": [
     11.56,
+    9.97,
     14.61,
-    4.86
+    4.86,
+    21.04
    ],
    "eps": [
-    0.44,
+    0.7,
+    1.06,
     2.83,
-    0.95
+    0.95,
+    3.12
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-02"
+  "as_of": "2026-11-09"
  },
  "EIMCOELECO": {
-  "market_cap": 1235.0,
-  "price": 2140.0,
-  "high_52w": 2475.0,
+  "market_cap": 1437.0,
+  "price": 2490.0,
+  "high_52w": 2545.0,
   "low_52w": 1406.0,
-  "pe": 32.2,
+  "pe": 37.5,
   "book_value": 669.0,
-  "dividend_yield": 0.19,
+  "dividend_yield": 0.16,
   "roce": 13.2,
   "roe": 10.4,
   "roe_3y": 6.0,
@@ -913,14 +923,14 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-02"
+  "as_of": "2026-11-09"
  },
  "ESCONET": {
-  "market_cap": 482.0,
-  "price": 365.0,
+  "market_cap": 495.0,
+  "price": 375.0,
   "high_52w": 407.0,
   "low_52w": 91.2,
-  "pe": 18.8,
+  "pe": 19.3,
   "book_value": 75.0,
   "dividend_yield": 0.0,
   "roce": 11.8,
@@ -969,28 +979,28 @@
   "as_of": "2026-11-09"
  },
  "HOACFOODS": {
-  "market_cap": 415.0,
-  "price": 955.0,
+  "market_cap": 428.0,
+  "price": 985.0,
   "high_52w": 1110.0,
-  "low_52w": 244.0,
-  "pe": 73.0,
-  "book_value": 57.9,
+  "low_52w": 286.0,
+  "pe": 66.2,
+  "book_value": 67.4,
   "dividend_yield": 0.0,
   "roce": 29.4,
   "roe": 24.1,
   "roe_3y": 28.0,
-  "sales_growth_ttm": 83.0,
+  "sales_growth_ttm": 99.0,
   "sales_growth_3y": 59.0,
   "sales_growth_5y": 46.0,
-  "profit_growth_ttm": 76.0,
+  "profit_growth_ttm": 77.0,
   "profit_growth_3y": 106.0,
   "profit_growth_5y": 102.0,
-  "sales_growth_qtr_yoy": 137.23,
-  "profit_growth_qtr_yoy": 203.17,
-  "opm_latest_qtr": 15.42,
+  "sales_growth_qtr_yoy": 90.66,
+  "profit_growth_qtr_yoy": 55.24,
+  "opm_latest_qtr": 13.89,
   "opm_last_year": 14.44,
   "net_profit_ttm": 4.4,
-  "debt_to_equity": 0.24,
+  "debt_to_equity": 0.46,
   "interest_coverage": 7.94,
   "cfo_to_profit_5y": -0.72,
   "debtor_days": 63.92,
@@ -1003,54 +1013,64 @@
   "quarters": {
    "t": [
     "Jun 2025",
+    "Sep 2025",
     "Mar 2026",
-    "Jun 2026"
+    "Jun 2026",
+    "Sep 2026"
    ],
    "sales": [
     7.79,
+    12.2,
     15.59,
-    18.48
+    18.48,
+    23.26
    ],
    "profit": [
     0.63,
+    1.43,
     1.31,
-    1.91
+    1.91,
+    2.22
    ],
    "opm": [
     13.09,
+    18.93,
     13.15,
-    15.42
+    15.42,
+    13.89
    ],
    "eps": [
     1.64,
+    3.29,
     3.02,
-    4.4
+    4.4,
+    5.11
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-02"
+  "as_of": "2026-11-09"
  },
  "INTEGRITY": {
-  "market_cap": 81.9,
-  "price": 190.0,
+  "market_cap": 83.0,
+  "price": 193.0,
   "high_52w": 205.0,
   "low_52w": 100.0,
-  "pe": 11.8,
-  "book_value": 63.8,
+  "pe": 10.9,
+  "book_value": 77.8,
   "dividend_yield": 0.0,
   "roce": 35.9,
   "roe": 41.8,
   "roe_3y": 45.0,
-  "sales_growth_ttm": 60.0,
+  "sales_growth_ttm": 78.0,
   "sales_growth_3y": 57.0,
-  "profit_growth_ttm": 155.0,
+  "profit_growth_ttm": 104.0,
   "profit_growth_3y": 188.0,
-  "sales_growth_qtr_yoy": 73.02,
-  "profit_growth_qtr_yoy": 300.0,
-  "opm_latest_qtr": 9.0,
+  "sales_growth_qtr_yoy": 83.08,
+  "profit_growth_qtr_yoy": 50.0,
+  "opm_latest_qtr": 6.0,
   "opm_last_year": 9.0,
-  "net_profit_ttm": 7.0,
-  "debt_to_equity": 0.63,
+  "net_profit_ttm": 8.0,
+  "debt_to_equity": 0.38,
   "interest_coverage": 11.0,
   "cfo_to_profit_5y": 0.73,
   "debtor_days": 4.0,
@@ -1065,35 +1085,40 @@
     "Sep 2024",
     "Mar 2025",
     "Sep 2025",
-    "Mar 2026"
+    "Mar 2026",
+    "Sep 2026"
    ],
    "sales": [
     46.0,
     63.0,
     65.0,
-    109.0
+    109.0,
+    119.0
    ],
    "profit": [
     1.0,
     1.0,
     2.0,
-    4.0
+    4.0,
+    3.0
    ],
    "opm": [
     8.0,
     8.0,
     9.0,
-    9.0
+    9.0,
+    6.0
    ],
    "eps": [
     4.68,
     4.26,
     5.58,
-    10.47
+    10.47,
+    7.19
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-02"
+  "as_of": "2026-11-09"
  },
  "KRISHNADEF": {
   "market_cap": 1842.0,
@@ -1356,28 +1381,28 @@
   "as_of": "2026-11-02"
  },
  "PATELRMART": {
-  "market_cap": 808.0,
-  "price": 242.0,
+  "market_cap": 823.0,
+  "price": 246.0,
   "high_52w": 266.0,
   "low_52w": 149.0,
-  "pe": 19.4,
-  "book_value": 109.0,
+  "pe": 19.9,
+  "book_value": 115.0,
   "dividend_yield": 0.0,
   "roce": 15.6,
   "roe": 15.6,
   "roe_3y": 19.0,
-  "sales_growth_ttm": 42.0,
+  "sales_growth_ttm": 47.0,
   "sales_growth_3y": 1.0,
   "sales_growth_5y": 5.0,
-  "profit_growth_ttm": 60.0,
+  "profit_growth_ttm": 36.0,
   "profit_growth_3y": 34.0,
   "profit_growth_5y": 28.0,
-  "sales_growth_qtr_yoy": 69.66,
-  "profit_growth_qtr_yoy": 37.57,
-  "opm_latest_qtr": 6.13,
+  "sales_growth_qtr_yoy": 34.24,
+  "profit_growth_qtr_yoy": -2.27,
+  "opm_latest_qtr": 6.1,
   "opm_last_year": 7.0,
-  "net_profit_ttm": 42.0,
-  "debt_to_equity": 0.45,
+  "net_profit_ttm": 41.0,
+  "debt_to_equity": 0.36,
   "interest_coverage": 5.0,
   "cfo_to_profit_5y": -0.02,
   "debtor_days": 56.0,
@@ -1389,58 +1414,58 @@
   "result_period_months": 3,
   "quarters": {
    "t": [
-    "Sep 2024",
     "Dec 2024",
     "Mar 2025",
     "Jun 2025",
     "Sep 2025",
     "Dec 2025",
     "Mar 2026",
-    "Jun 2026"
+    "Jun 2026",
+    "Sep 2026"
    ],
    "sales": [
-    195.33,
     228.31,
     219.67,
     182.45,
     222.44,
     309.27,
     334.16,
-    309.54
+    309.54,
+    298.6
    ],
    "profit": [
-    5.85,
     6.13,
     7.18,
     6.92,
     10.14,
     12.0,
     9.98,
-    9.52
+    9.52,
+    9.91
    ],
    "opm": [
-    7.24,
     6.11,
     7.09,
     8.3,
     7.44,
     7.46,
     5.19,
-    6.13
+    6.13,
+    6.1
    ],
    "eps": [
-    2.4,
     2.46,
     2.89,
     2.78,
     3.04,
     3.59,
     2.99,
-    2.85
+    2.85,
+    2.97
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-02"
+  "as_of": "2026-11-09"
  },
  "PRIZOR": {
   "market_cap": 1312.0,
@@ -3463,13 +3488,13 @@
   "as_of": "2026-11-03"
  },
  "526071": {
-  "market_cap": 561.0,
-  "price": 987.0,
+  "market_cap": 424.0,
+  "price": 747.0,
   "high_52w": 1105.0,
-  "low_52w": 294.0,
-  "pe": 15.3,
+  "low_52w": 341.0,
+  "pe": 11.6,
   "book_value": 141.0,
-  "dividend_yield": 0.02,
+  "dividend_yield": 0.03,
   "roce": 71.7,
   "roe": 53.0,
   "roe_3y": 54.0,
@@ -3547,14 +3572,14 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-03"
+  "as_of": "2026-11-09"
  },
  "544627": {
-  "market_cap": 416.0,
-  "price": 450.0,
-  "high_52w": 479.0,
+  "market_cap": 557.0,
+  "price": 603.0,
+  "high_52w": 603.0,
   "low_52w": 95.1,
-  "pe": 31.0,
+  "pe": 41.5,
   "book_value": 62.3,
   "dividend_yield": 0.0,
   "roce": 36.9,
@@ -3613,14 +3638,14 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-03"
+  "as_of": "2026-11-09"
  },
  "OMFREIGHT": {
-  "market_cap": 412.0,
-  "price": 122.0,
+  "market_cap": 391.0,
+  "price": 116.0,
   "high_52w": 128.0,
   "low_52w": 59.0,
-  "pe": 21.1,
+  "pe": 20.0,
   "book_value": 60.9,
   "dividend_yield": 0.0,
   "roce": 10.3,
@@ -3699,29 +3724,30 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-03"
+  "as_of": "2026-11-09"
  },
  "524336": {
-  "market_cap": 215.0,
-  "price": 341.0,
-  "high_52w": 352.0,
+  "market_cap": 232.0,
+  "price": 368.0,
+  "high_52w": 368.0,
   "low_52w": 92.0,
-  "pe": 18.3,
+  "pe": 9.96,
   "book_value": 80.2,
   "dividend_yield": 0.0,
   "roce": 11.3,
   "roe": 10.3,
   "roe_3y": 14.0,
-  "sales_growth_ttm": 60.0,
+  "sales_growth_ttm": 27.0,
   "sales_growth_3y": 22.0,
   "sales_growth_5y": 27.0,
-  "profit_growth_ttm": 262.0,
+  "profit_growth_ttm": 413.0,
   "profit_growth_3y": 30.0,
   "profit_growth_5y": 36.0,
-  "sales_growth_qtr_yoy": 125.78,
-  "opm_latest_qtr": 15.52,
+  "sales_growth_qtr_yoy": 6.76,
+  "profit_growth_qtr_yoy": 275.0,
+  "opm_latest_qtr": 26.0,
   "opm_last_year": 3.8,
-  "net_profit_ttm": 12.0,
+  "net_profit_ttm": 23.0,
   "debt_to_equity": 0.64,
   "interest_coverage": 3.5,
   "debtor_days": 48.0,
@@ -3733,65 +3759,65 @@
   "result_period_months": 3,
   "quarters": {
    "t": [
-    "Sep 2024",
     "Dec 2024",
     "Mar 2025",
     "Jun 2025",
     "Sep 2025",
     "Dec 2025",
     "Mar 2026",
-    "Jun 2026"
+    "Jun 2026",
+    "Sep 2026"
    ],
    "sales": [
-    36.28,
-    39.02,
-    35.03,
-    24.32,
-    74.49,
-    44.49,
-    41.22,
-    54.91
+    39.0,
+    35.0,
+    24.0,
+    74.0,
+    44.0,
+    41.0,
+    55.0,
+    79.0
    ],
    "profit": [
-    2.24,
-    2.65,
-    0.02,
-    -1.66,
-    3.54,
-    1.29,
-    1.06,
-    5.89
+    3.0,
+    0.0,
+    -2.0,
+    4.0,
+    1.0,
+    1.0,
+    6.0,
+    15.0
    ],
    "opm": [
-    10.56,
-    11.38,
-    3.03,
-    -5.39,
-    7.1,
-    5.08,
-    1.26,
-    15.52
+    11.0,
+    3.0,
+    -5.0,
+    7.0,
+    5.0,
+    1.3,
+    16.0,
+    26.0
    ],
    "eps": [
-    5.04,
     5.96,
     0.04,
     -3.37,
     7.18,
     2.33,
     1.91,
-    9.33
+    9.33,
+    23.89
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-03"
+  "as_of": "2026-11-09"
  },
  "MYMUDRA": {
-  "market_cap": 112.0,
-  "price": 98.7,
+  "market_cap": 98.0,
+  "price": 86.0,
   "high_52w": 103.0,
   "low_52w": 59.0,
-  "pe": 9.37,
+  "pe": 8.16,
   "book_value": 57.4,
   "dividend_yield": 0.0,
   "roce": 26.3,
@@ -3859,16 +3885,16 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-03"
+  "as_of": "2026-11-09"
  },
  "INDIAGLYCO": {
-  "market_cap": 2181.0,
-  "price": 325.0,
+  "market_cap": 2052.0,
+  "price": 306.0,
   "high_52w": 400.0,
   "low_52w": 168.0,
-  "pe": 6.88,
+  "pe": 6.48,
   "book_value": 438.0,
-  "dividend_yield": 2.31,
+  "dividend_yield": 2.47,
   "roce": 12.4,
   "roe": 11.3,
   "roe_3y": 10.0,
@@ -3946,14 +3972,14 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-03"
+  "as_of": "2026-11-09"
  },
  "544809": {
-  "market_cap": 236.0,
-  "price": 102.0,
+  "market_cap": 228.0,
+  "price": 99.0,
   "high_52w": 113.0,
   "low_52w": 75.2,
-  "pe": 6.39,
+  "pe": 6.18,
   "book_value": 40.5,
   "dividend_yield": 0.0,
   "roce": 84.0,
@@ -4065,28 +4091,28 @@
   "as_of": "2026-11-03"
  },
  "530477": {
-  "market_cap": 1215.0,
-  "price": 387.0,
+  "market_cap": 1034.0,
+  "price": 330.0,
   "high_52w": 465.0,
   "low_52w": 132.0,
-  "pe": 27.7,
-  "book_value": 50.0,
-  "dividend_yield": 0.32,
+  "pe": 22.3,
+  "book_value": 57.3,
+  "dividend_yield": 0.39,
   "roce": 36.2,
   "roe": 27.4,
   "roe_3y": 20.0,
-  "sales_growth_ttm": 17.0,
+  "sales_growth_ttm": 24.0,
   "sales_growth_3y": 6.0,
   "sales_growth_5y": 13.0,
-  "profit_growth_ttm": 34.0,
+  "profit_growth_ttm": 41.0,
   "profit_growth_3y": 31.0,
   "profit_growth_5y": 26.0,
-  "sales_growth_qtr_yoy": 31.03,
-  "profit_growth_qtr_yoy": 62.5,
-  "opm_latest_qtr": 48.0,
+  "sales_growth_qtr_yoy": 25.71,
+  "profit_growth_qtr_yoy": 27.27,
+  "opm_latest_qtr": 41.0,
   "opm_last_year": 40.0,
-  "net_profit_ttm": 44.0,
-  "debt_to_equity": 0.03,
+  "net_profit_ttm": 46.0,
+  "debt_to_equity": 0.02,
   "interest_coverage": 999.0,
   "cfo_to_profit_5y": 1.22,
   "debtor_days": 125.0,
@@ -4098,82 +4124,82 @@
   "result_period_months": 3,
   "quarters": {
    "t": [
-    "Sep 2024",
     "Dec 2024",
     "Mar 2025",
     "Jun 2025",
     "Sep 2025",
     "Dec 2025",
     "Mar 2026",
-    "Jun 2026"
+    "Jun 2026",
+    "Sep 2026"
    ],
    "sales": [
-    34.0,
     34.0,
     27.0,
     29.0,
     35.0,
     34.0,
     38.0,
-    38.0
+    38.0,
+    44.0
    ],
    "profit": [
-    10.0,
     9.0,
     4.0,
     8.0,
     11.0,
     11.0,
     9.0,
-    13.0
+    13.0,
+    14.0
    ],
    "opm": [
-    37.0,
     39.0,
     25.0,
     40.0,
     45.0,
     44.0,
     32.0,
-    48.0
+    48.0,
+    41.0
    ],
    "eps": [
-    3.12,
     2.87,
     1.3,
     2.53,
     3.53,
     3.49,
     2.71,
-    4.23
+    4.23,
+    4.33
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-03"
+  "as_of": "2026-11-09"
  },
  "544682": {
-  "market_cap": 314.0,
-  "price": 220.0,
+  "market_cap": 343.0,
+  "price": 240.0,
   "high_52w": 279.0,
   "low_52w": 77.5,
-  "pe": 26.0,
-  "book_value": 48.1,
+  "pe": 19.5,
+  "book_value": 54.7,
   "dividend_yield": 0.0,
   "roce": 35.2,
   "roe": 26.7,
   "roe_3y": 39.0,
-  "sales_growth_ttm": 45.0,
+  "sales_growth_ttm": 150.0,
   "sales_growth_3y": 50.0,
   "sales_growth_5y": 42.0,
-  "profit_growth_ttm": 73.0,
+  "profit_growth_ttm": 140.0,
   "profit_growth_3y": 150.0,
   "profit_growth_5y": 89.0,
-  "sales_growth_qtr_yoy": 76.19,
-  "profit_growth_qtr_yoy": 166.67,
-  "opm_latest_qtr": 13.0,
+  "sales_growth_qtr_yoy": 221.95,
+  "profit_growth_qtr_yoy": 125.0,
+  "opm_latest_qtr": 10.0,
   "opm_last_year": 13.0,
-  "net_profit_ttm": 12.0,
-  "debt_to_equity": 0.03,
+  "net_profit_ttm": 18.0,
+  "debt_to_equity": 0.15,
   "interest_coverage": 999.0,
   "cfo_to_profit_5y": 0.71,
   "debtor_days": 31.0,
@@ -4181,31 +4207,41 @@
   "promoter_holding": 69.99,
   "fii_dii_latest": 5.72,
   "shareholders_latest": 403.0,
-  "result_period_months": 12,
+  "result_period_months": 6,
   "quarters": {
    "t": [
     "Mar 2025",
-    "Mar 2026"
+    "Sep 2025",
+    "Mar 2026",
+    "Sep 2026"
    ],
    "sales": [
     42.0,
-    74.0
+    41.0,
+    74.0,
+    132.0
    ],
    "profit": [
     3.0,
-    8.0
+    4.0,
+    8.0,
+    9.0
    ],
    "opm": [
     11.0,
-    13.0
+    14.0,
+    13.0,
+    10.0
    ],
    "eps": [
     3.22,
-    5.7
+    3.75,
+    5.7,
+    6.61
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-03"
+  "as_of": "2026-11-09"
  },
  "TAURIAN": {
   "market_cap": 509.0,
@@ -4524,28 +4560,28 @@
   "as_of": "2026-11-03"
  },
  "514280": {
-  "market_cap": 91.3,
-  "price": 160.0,
+  "market_cap": 95.2,
+  "price": 167.0,
   "high_52w": 184.0,
   "low_52w": 98.2,
-  "pe": 13.6,
-  "book_value": 59.2,
-  "dividend_yield": 0.93,
+  "pe": 11.8,
+  "book_value": 65.1,
+  "dividend_yield": 0.89,
   "roce": 23.2,
   "roe": 19.2,
   "roe_3y": 21.0,
-  "sales_growth_ttm": 20.0,
+  "sales_growth_ttm": 29.0,
   "sales_growth_3y": 9.0,
   "sales_growth_5y": 16.0,
-  "profit_growth_ttm": 41.0,
+  "profit_growth_ttm": 86.0,
   "profit_growth_3y": 31.0,
   "profit_growth_5y": 23.0,
-  "sales_growth_qtr_yoy": 59.57,
-  "profit_growth_qtr_yoy": 102.02,
-  "opm_latest_qtr": 11.96,
+  "sales_growth_qtr_yoy": 27.69,
+  "profit_growth_qtr_yoy": 173.42,
+  "opm_latest_qtr": 15.59,
   "opm_last_year": 13.75,
-  "net_profit_ttm": 6.7,
-  "debt_to_equity": 0.12,
+  "net_profit_ttm": 8.07,
+  "debt_to_equity": 0.28,
   "interest_coverage": 6.99,
   "cfo_to_profit_5y": 0.92,
   "debtor_days": 53.85,
@@ -4557,79 +4593,80 @@
   "result_period_months": 3,
   "quarters": {
    "t": [
-    "Sep 2024",
     "Dec 2024",
     "Mar 2025",
     "Jun 2025",
     "Sep 2025",
     "Dec 2025",
     "Mar 2026",
-    "Jun 2026"
+    "Jun 2026",
+    "Sep 2026"
    ],
    "sales": [
-    19.77,
     19.47,
     18.83,
     17.76,
     18.38,
     23.02,
     21.29,
-    28.34
+    28.34,
+    23.47
    ],
    "profit": [
-    1.2,
     0.95,
     1.62,
     0.99,
     0.79,
     1.55,
     2.36,
-    2.0
+    2.0,
+    2.16
    ],
    "opm": [
-    11.79,
     10.99,
     16.52,
     12.44,
     10.12,
     12.99,
     18.79,
-    11.96
+    11.96,
+    15.59
    ],
    "eps": [
-    2.4,
     1.9,
     3.24,
     1.74,
     1.39,
     2.72,
     4.15,
-    3.51
+    3.51,
+    3.8
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-03"
+  "as_of": "2026-11-09"
  },
  "543542": {
-  "market_cap": 3766.0,
-  "price": 1158.0,
+  "market_cap": 4018.0,
+  "price": 1235.0,
   "high_52w": 1341.0,
-  "low_52w": 705.0,
-  "pe": 80.5,
-  "book_value": 87.2,
+  "low_52w": 850.0,
+  "pe": 53.2,
+  "book_value": 123.0,
   "dividend_yield": 0.0,
   "roce": 23.2,
   "roe": 20.0,
   "roe_3y": 28.0,
-  "sales_growth_ttm": 64.0,
+  "sales_growth_ttm": 413.0,
   "sales_growth_3y": 126.0,
-  "profit_growth_ttm": 62.0,
+  "profit_growth_ttm": 1435.0,
   "profit_growth_3y": 237.0,
-  "sales_growth_qtr_yoy": 1040.0,
-  "opm_latest_qtr": 8.0,
+  "sales_growth_qtr_yoy": 566.67,
+  "profit_growth_qtr_yoy": 2900.0,
+  "opm_latest_qtr": 42.0,
   "opm_last_year": 24.0,
-  "net_profit_ttm": 47.0,
-  "debt_to_equity": 0.18,
+  "net_profit_ttm": 76.0,
+  "debt_to_equity": 0.25,
   "interest_coverage": 11.0,
   "cfo_to_profit_5y": -2.06,
   "debtor_days": 124.0,
@@ -4647,7 +4684,8 @@
     "Sep 2025",
     "Dec 2025",
     "Mar 2026",
-    "Jun 2026"
+    "Jun 2026",
+    "Sep 2026"
    ],
    "sales": [
     17.0,
@@ -4656,7 +4694,8 @@
     15.0,
     92.0,
     85.0,
-    171.0
+    171.0,
+    100.0
    ],
    "profit": [
     2.0,
@@ -4665,7 +4704,8 @@
     1.0,
     15.0,
     15.0,
-    16.0
+    16.0,
+    30.0
    ],
    "opm": [
     15.0,
@@ -4674,7 +4714,8 @@
     19.0,
     25.0,
     24.0,
-    8.0
+    8.0,
+    42.0
    ],
    "eps": [
     0.88,
@@ -4683,20 +4724,21 @@
     0.35,
     5.48,
     5.09,
-    5.31
+    5.31,
+    9.11
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-03"
+  "as_of": "2026-11-09"
  },
  "RAPIDFLEET": {
-  "market_cap": 151.0,
-  "price": 203.0,
+  "market_cap": 154.0,
+  "price": 207.0,
   "high_52w": 245.0,
   "low_52w": 158.0,
-  "pe": 12.4,
+  "pe": 12.7,
   "book_value": 110.0,
-  "dividend_yield": 0.59,
+  "dividend_yield": 0.58,
   "roce": 19.0,
   "roe": 16.1,
   "roe_3y": 20.0,
@@ -4752,16 +4794,16 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-03"
+  "as_of": "2026-11-09"
  },
  "AVTNPL": {
-  "market_cap": 1438.0,
-  "price": 94.4,
+  "market_cap": 1513.0,
+  "price": 99.3,
   "high_52w": 108.0,
   "low_52w": 53.3,
-  "pe": 17.2,
+  "pe": 18.1,
   "book_value": 36.7,
-  "dividend_yield": 0.85,
+  "dividend_yield": 0.8,
   "roce": 14.2,
   "roe": 12.2,
   "roe_3y": 11.0,
@@ -4839,14 +4881,14 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-03"
+  "as_of": "2026-11-09"
  },
  "GUFICBIO": {
-  "market_cap": 4178.0,
-  "price": 417.0,
+  "market_cap": 4623.0,
+  "price": 461.0,
   "high_52w": 468.0,
   "low_52w": 268.0,
-  "pe": 56.8,
+  "pe": 62.8,
   "book_value": 66.2,
   "dividend_yield": 0.02,
   "roce": 12.2,
@@ -4926,14 +4968,14 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-03"
+  "as_of": "2026-11-09"
  },
  "522294": {
-  "market_cap": 96.3,
-  "price": 190.0,
+  "market_cap": 93.2,
+  "price": 184.0,
   "high_52w": 212.0,
   "low_52w": 142.0,
-  "pe": 15.5,
+  "pe": 15.0,
   "book_value": 195.0,
   "dividend_yield": 0.0,
   "roce": 10.5,
@@ -5013,7 +5055,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-03"
+  "as_of": "2026-11-09"
  },
  "504240": {
   "market_cap": 608.0,
@@ -5592,28 +5634,28 @@
   "as_of": "2026-11-04"
  },
  "MAYURUNIQ": {
-  "market_cap": 3274.0,
-  "price": 754.0,
+  "market_cap": 3256.0,
+  "price": 749.0,
   "high_52w": 907.0,
   "low_52w": 471.0,
-  "pe": 15.8,
-  "book_value": 261.0,
-  "dividend_yield": 0.8,
+  "pe": 14.5,
+  "book_value": 281.0,
+  "dividend_yield": 0.79,
   "roce": 24.5,
-  "roe": 18.0,
+  "roe": 18.2,
   "roe_3y": 17.0,
   "sales_growth_ttm": 16.0,
   "sales_growth_3y": 8.0,
   "sales_growth_5y": 14.0,
-  "profit_growth_ttm": 36.0,
-  "profit_growth_3y": 22.0,
+  "profit_growth_ttm": 46.0,
+  "profit_growth_3y": 23.0,
   "profit_growth_5y": 17.0,
-  "sales_growth_qtr_yoy": 24.54,
-  "profit_growth_qtr_yoy": 36.59,
-  "opm_latest_qtr": 22.0,
+  "sales_growth_qtr_yoy": 17.92,
+  "profit_growth_qtr_yoy": 41.46,
+  "opm_latest_qtr": 28.0,
   "opm_last_year": 24.0,
-  "net_profit_ttm": 207.0,
-  "debt_to_equity": 0.01,
+  "net_profit_ttm": 224.0,
+  "debt_to_equity": 0.0,
   "interest_coverage": 260.0,
   "cfo_to_profit_5y": 0.81,
   "debtor_days": 79.0,
@@ -5625,82 +5667,82 @@
   "result_period_months": 3,
   "quarters": {
    "t": [
-    "Sep 2024",
     "Dec 2024",
     "Mar 2025",
     "Jun 2025",
     "Sep 2025",
     "Dec 2025",
     "Mar 2026",
-    "Jun 2026"
+    "Jun 2026",
+    "Sep 2026"
    ],
    "sales": [
-    208.0,
     208.0,
     251.0,
     216.0,
     240.0,
     237.0,
     273.0,
-    269.0
+    269.0,
+    283.0
    ],
    "profit": [
-    40.0,
     31.0,
     42.0,
     41.0,
     41.0,
     51.0,
     59.0,
-    56.0
+    56.0,
+    58.0
    ],
    "opm": [
-    21.0,
     22.0,
     21.0,
     20.0,
     21.0,
     23.0,
     31.0,
-    22.0
+    22.0,
+    28.0
    ],
    "eps": [
-    9.17,
     7.04,
     9.55,
     9.37,
     9.4,
     11.67,
     13.68,
-    12.92
+    12.92,
+    13.35
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-04"
+  "as_of": "2026-11-09"
  },
  "DANISH": {
-  "market_cap": 1852.0,
-  "price": 941.0,
+  "market_cap": 1894.0,
+  "price": 962.0,
   "high_52w": 1095.0,
   "low_52w": 550.0,
-  "pe": 26.5,
-  "book_value": 232.0,
+  "pe": 23.6,
+  "book_value": 249.0,
   "dividend_yield": 0.21,
   "roce": 22.5,
   "roe": 17.1,
   "roe_3y": 24.0,
-  "sales_growth_ttm": 23.0,
+  "sales_growth_ttm": 27.0,
   "sales_growth_3y": 40.0,
   "sales_growth_5y": 35.0,
   "profit_growth_ttm": 20.0,
   "profit_growth_3y": 101.0,
   "profit_growth_5y": 103.0,
-  "sales_growth_qtr_yoy": 18.77,
-  "profit_growth_qtr_yoy": 7.89,
-  "opm_latest_qtr": 17.0,
+  "sales_growth_qtr_yoy": 38.39,
+  "profit_growth_qtr_yoy": 34.48,
+  "opm_latest_qtr": 19.0,
   "opm_last_year": 17.0,
-  "net_profit_ttm": 70.0,
-  "debt_to_equity": 0.0,
+  "net_profit_ttm": 80.0,
+  "debt_to_equity": 0.03,
   "interest_coverage": 46.5,
   "cfo_to_profit_5y": 0.43,
   "debtor_days": 78.0,
@@ -5715,35 +5757,40 @@
     "Sep 2024",
     "Mar 2025",
     "Sep 2025",
-    "Mar 2026"
+    "Mar 2026",
+    "Sep 2026"
    ],
    "sales": [
     163.0,
     261.0,
     211.0,
-    310.0
+    310.0,
+    292.0
    ],
    "profit": [
     21.0,
     38.0,
     29.0,
-    41.0
+    41.0,
+    39.0
    ],
    "opm": [
     19.0,
     19.0,
     17.0,
-    17.0
+    17.0,
+    19.0
    ],
    "eps": [
     14.31,
     19.14,
-    14.88,
-    20.91
+    14.65,
+    20.91,
+    19.79
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-04"
+  "as_of": "2026-11-09"
  },
  "OBSCP": {
   "market_cap": 2239.0,
@@ -6005,11 +6052,11 @@
   "as_of": "2026-11-05"
  },
  "XTRANET": {
-  "market_cap": 1443.0,
-  "price": 276.0,
+  "market_cap": 1406.0,
+  "price": 269.0,
   "high_52w": 359.0,
   "low_52w": 120.0,
-  "pe": 30.0,
+  "pe": 29.2,
   "book_value": 58.1,
   "dividend_yield": 0.0,
   "roce": 32.8,
@@ -6402,26 +6449,26 @@
   "as_of": "2026-11-05"
  },
  "CONNPLEX": {
-  "market_cap": 458.0,
-  "price": 240.0,
+  "market_cap": 465.0,
+  "price": 243.0,
   "high_52w": 312.0,
   "low_52w": 188.0,
-  "pe": 17.7,
-  "book_value": 70.3,
+  "pe": 15.5,
+  "book_value": 79.2,
   "dividend_yield": 0.0,
   "roce": 43.6,
   "roe": 32.6,
   "roe_3y": 49.0,
-  "sales_growth_ttm": 54.0,
+  "sales_growth_ttm": 53.0,
   "sales_growth_3y": 80.0,
-  "profit_growth_ttm": 43.0,
+  "profit_growth_ttm": 34.0,
   "profit_growth_3y": 150.0,
-  "sales_growth_qtr_yoy": 50.91,
-  "profit_growth_qtr_yoy": 44.44,
-  "opm_latest_qtr": 20.0,
+  "sales_growth_qtr_yoy": 54.69,
+  "profit_growth_qtr_yoy": 30.77,
+  "opm_latest_qtr": 24.0,
   "opm_last_year": 24.0,
-  "net_profit_ttm": 26.0,
-  "debt_to_equity": 0.01,
+  "net_profit_ttm": 30.0,
+  "debt_to_equity": 0.02,
   "interest_coverage": 999.0,
   "cfo_to_profit_5y": -0.96,
   "debtor_days": 53.0,
@@ -6435,42 +6482,47 @@
     "Sep 2024",
     "Mar 2025",
     "Sep 2025",
-    "Mar 2026"
+    "Mar 2026",
+    "Sep 2026"
    ],
    "sales": [
     41.0,
     55.0,
     64.0,
-    83.0
+    83.0,
+    99.0
    ],
    "profit": [
     10.0,
     9.0,
     13.0,
-    13.0
+    13.0,
+    17.0
    ],
    "opm": [
     31.0,
     24.0,
     28.0,
-    20.0
+    20.0,
+    24.0
    ],
    "eps": [
     6.85,
     6.7,
     6.83,
-    6.82
+    6.82,
+    8.91
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-05"
+  "as_of": "2026-11-09"
  },
  "544563": {
-  "market_cap": 2187.0,
-  "price": 1034.0,
+  "market_cap": 2115.0,
+  "price": 1000.0,
   "high_52w": 1159.0,
   "low_52w": 222.0,
-  "pe": 78.4,
+  "pe": 75.8,
   "book_value": 52.6,
   "dividend_yield": 0.0,
   "roce": 38.3,
@@ -6527,16 +6579,16 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-05"
+  "as_of": "2026-11-09"
  },
  "ARIES": {
-  "market_cap": 615.0,
-  "price": 473.0,
+  "market_cap": 644.0,
+  "price": 495.0,
   "high_52w": 525.0,
   "low_52w": 285.0,
-  "pe": 12.9,
+  "pe": 13.5,
   "book_value": 257.0,
-  "dividend_yield": 0.32,
+  "dividend_yield": 0.31,
   "roce": 20.5,
   "roe": 12.7,
   "roe_3y": 11.0,
@@ -6614,16 +6666,16 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-05"
+  "as_of": "2026-11-09"
  },
  "NPST": {
-  "market_cap": 3614.0,
-  "price": 1732.0,
+  "market_cap": 3663.0,
+  "price": 1756.0,
   "high_52w": 1934.0,
   "low_52w": 847.0,
-  "pe": 80.9,
+  "pe": 82.0,
   "book_value": 211.0,
-  "dividend_yield": 0.12,
+  "dividend_yield": 0.11,
   "roce": 19.7,
   "roe": 15.0,
   "roe_3y": 29.0,
@@ -6701,14 +6753,14 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-05"
+  "as_of": "2026-11-09"
  },
  "515008": {
-  "market_cap": 2195.0,
-  "price": 466.0,
+  "market_cap": 2291.0,
+  "price": 486.0,
   "high_52w": 579.0,
   "low_52w": 142.0,
-  "pe": 23.3,
+  "pe": 24.3,
   "book_value": 115.0,
   "dividend_yield": 0.0,
   "roce": 19.3,
@@ -6788,7 +6840,7 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-05"
+  "as_of": "2026-11-09"
  },
  "GNA": {
   "market_cap": 2389.0,
@@ -6878,11 +6930,11 @@
   "as_of": "2026-11-06"
  },
  "DEEPA": {
-  "market_cap": 2078.0,
-  "price": 216.0,
+  "market_cap": 2022.0,
+  "price": 210.0,
   "high_52w": 277.0,
   "low_52w": 165.0,
-  "pe": 18.1,
+  "pe": 17.6,
   "book_value": 55.4,
   "dividend_yield": 0.0,
   "roce": 51.6,
@@ -7561,15 +7613,15 @@
   "as_of": "2026-11-06"
  },
  "COMSYN": {
-  "market_cap": 1037.0,
-  "price": 247.0,
+  "market_cap": 1028.0,
+  "price": 245.0,
   "high_52w": 315.0,
   "low_52w": 136.0,
-  "pe": 32.8,
+  "pe": 32.6,
   "book_value": 43.1,
   "dividend_yield": 0.2,
   "roce": 15.0,
-  "roe": 16.8,
+  "roe": 16.9,
   "roe_3y": 12.0,
   "sales_growth_ttm": 13.0,
   "sales_growth_3y": 10.0,
@@ -7645,31 +7697,31 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-06"
+  "as_of": "2026-11-09"
  },
  "DPABHUSHAN": {
-  "market_cap": 4570.0,
-  "price": 2002.0,
+  "market_cap": 4328.0,
+  "price": 1896.0,
   "high_52w": 2495.0,
   "low_52w": 856.0,
   "pe": 19.0,
-  "book_value": 277.0,
+  "book_value": 324.0,
   "dividend_yield": 0.0,
   "roce": 39.6,
   "roe": 40.9,
   "roe_3y": 37.0,
-  "sales_growth_ttm": 31.0,
+  "sales_growth_ttm": 26.0,
   "sales_growth_3y": 27.0,
   "sales_growth_5y": 27.0,
-  "profit_growth_ttm": 93.0,
+  "profit_growth_ttm": 52.0,
   "profit_growth_3y": 67.0,
   "profit_growth_5y": 51.0,
-  "sales_growth_qtr_yoy": 57.78,
-  "profit_growth_qtr_yoy": 77.78,
-  "opm_latest_qtr": 11.0,
+  "sales_growth_qtr_yoy": -21.49,
+  "profit_growth_qtr_yoy": -21.57,
+  "opm_latest_qtr": 8.0,
   "opm_last_year": 8.0,
-  "net_profit_ttm": 240.0,
-  "debt_to_equity": 0.48,
+  "net_profit_ttm": 228.0,
+  "debt_to_equity": 0.49,
   "interest_coverage": 15.89,
   "cfo_to_profit_5y": -0.08,
   "debtor_days": 0.0,
@@ -7681,58 +7733,58 @@
   "result_period_months": 3,
   "quarters": {
    "t": [
-    "Sep 2024",
     "Dec 2024",
     "Mar 2025",
     "Jun 2025",
     "Sep 2025",
     "Dec 2025",
     "Mar 2026",
-    "Jun 2026"
+    "Jun 2026",
+    "Sep 2026"
    ],
    "sales": [
-    1005.0,
     1084.0,
     717.0,
     540.0,
     968.0,
     1222.0,
     1335.0,
-    852.0
+    852.0,
+    760.0
    ],
    "profit": [
-    25.0,
     37.0,
     25.0,
     36.0,
     51.0,
     73.0,
     51.0,
-    64.0
+    64.0,
+    40.0
    ],
    "opm": [
-    3.8,
     5.0,
     6.0,
     10.0,
     8.0,
     9.0,
     5.0,
-    11.0
+    11.0,
+    8.0
    ],
    "eps": [
-    11.11,
     16.51,
     11.1,
     16.07,
     22.54,
     32.13,
     22.17,
-    28.23
+    28.23,
+    17.41
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-06"
+  "as_of": "2026-11-09"
  },
  "544980": {
   "market_cap": 126.0,
@@ -7875,11 +7927,11 @@
   "as_of": "2026-11-06"
  },
  "532329": {
-  "market_cap": 678.0,
-  "price": 1393.0,
+  "market_cap": 650.0,
+  "price": 1334.0,
   "high_52w": 1839.0,
   "low_52w": 428.0,
-  "pe": 26.6,
+  "pe": 25.5,
   "book_value": 205.0,
   "dividend_yield": 0.0,
   "roce": 27.6,
@@ -7959,7 +8011,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-06"
+  "as_of": "2026-11-09"
  },
  "MONARCH": {
   "market_cap": 2804.0,
@@ -8049,28 +8101,28 @@
   "as_of": "2026-11-06"
  },
  "GOLDIAM": {
-  "market_cap": 4852.0,
-  "price": 322.0,
+  "market_cap": 4690.0,
+  "price": 312.0,
   "high_52w": 398.0,
   "low_52w": 198.0,
-  "pe": 23.0,
-  "book_value": 73.4,
-  "dividend_yield": 0.64,
+  "pe": 20.5,
+  "book_value": 82.4,
+  "dividend_yield": 0.68,
   "roce": 25.8,
   "roe": 20.0,
   "roe_3y": 18.0,
-  "sales_growth_ttm": 27.0,
+  "sales_growth_ttm": 28.0,
   "sales_growth_3y": 22.0,
   "sales_growth_5y": 19.0,
-  "profit_growth_ttm": 64.0,
+  "profit_growth_ttm": 66.0,
   "profit_growth_3y": 30.0,
   "profit_growth_5y": 29.0,
-  "sales_growth_qtr_yoy": 41.74,
-  "profit_growth_qtr_yoy": 117.65,
+  "sales_growth_qtr_yoy": 41.97,
+  "profit_growth_qtr_yoy": 58.06,
   "opm_latest_qtr": 20.0,
   "opm_last_year": 23.0,
-  "net_profit_ttm": 211.0,
-  "debt_to_equity": 0.07,
+  "net_profit_ttm": 229.0,
+  "debt_to_equity": 0.04,
   "interest_coverage": 58.75,
   "cfo_to_profit_5y": 0.31,
   "debtor_days": 65.0,
@@ -8082,66 +8134,66 @@
   "result_period_months": 3,
   "quarters": {
    "t": [
-    "Sep 2024",
     "Dec 2024",
     "Mar 2025",
     "Jun 2025",
     "Sep 2025",
     "Dec 2025",
     "Mar 2026",
-    "Jun 2026"
+    "Jun 2026",
+    "Sep 2026"
    ],
    "sales": [
-    137.0,
     280.0,
     199.0,
     230.0,
     193.0,
     320.0,
     235.0,
-    326.0
+    326.0,
+    274.0
    ],
    "profit": [
-    22.0,
     50.0,
     23.0,
     34.0,
     31.0,
     68.0,
     37.0,
-    74.0
+    74.0,
+    49.0
    ],
    "opm": [
-    22.0,
     22.0,
     20.0,
     18.0,
     20.0,
     24.0,
     21.0,
+    20.0,
     20.0
    ],
    "eps": [
-    1.55,
     3.49,
     1.62,
     2.37,
     2.08,
     4.54,
     2.48,
-    4.91
+    4.91,
+    3.28
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-06"
+  "as_of": "2026-11-09"
  },
  "DHABRIYA": {
-  "market_cap": 512.0,
-  "price": 473.0,
+  "market_cap": 547.0,
+  "price": 505.0,
   "high_52w": 603.0,
   "low_52w": 280.0,
-  "pe": 15.8,
-  "book_value": 120.0,
+  "pe": 16.1,
+  "book_value": 136.0,
   "dividend_yield": 0.0,
   "roce": 25.5,
   "roe": 26.0,
@@ -8149,15 +8201,15 @@
   "sales_growth_ttm": 14.0,
   "sales_growth_3y": 16.0,
   "sales_growth_5y": 20.0,
-  "profit_growth_ttm": 63.0,
+  "profit_growth_ttm": 46.0,
   "profit_growth_3y": 52.0,
   "profit_growth_5y": 46.0,
-  "sales_growth_qtr_yoy": 10.02,
-  "profit_growth_qtr_yoy": 35.47,
-  "opm_latest_qtr": 23.07,
+  "sales_growth_qtr_yoy": 16.11,
+  "profit_growth_qtr_yoy": 21.02,
+  "opm_latest_qtr": 21.06,
   "opm_last_year": 21.0,
-  "net_profit_ttm": 32.0,
-  "debt_to_equity": 0.58,
+  "net_profit_ttm": 34.0,
+  "debt_to_equity": 0.68,
   "interest_coverage": 9.2,
   "cfo_to_profit_5y": 1.08,
   "debtor_days": 44.0,
@@ -8169,65 +8221,65 @@
   "result_period_months": 3,
   "quarters": {
    "t": [
-    "Sep 2024",
     "Dec 2024",
     "Mar 2025",
     "Jun 2025",
     "Sep 2025",
     "Dec 2025",
     "Mar 2026",
-    "Jun 2026"
+    "Jun 2026",
+    "Sep 2026"
    ],
    "sales": [
-    58.05,
     54.9,
     63.47,
     62.09,
     66.99,
     65.66,
     69.74,
-    68.31
+    68.31,
+    77.78
    ],
    "profit": [
-    4.18,
     3.82,
     5.37,
     6.54,
     7.61,
     7.66,
     8.32,
-    8.86
+    8.86,
+    9.21
    ],
    "opm": [
-    15.81,
     16.12,
     16.13,
     19.89,
     20.39,
     21.09,
     21.11,
-    23.07
+    23.07,
+    21.06
    ],
    "eps": [
-    3.86,
     3.53,
     4.96,
     6.04,
     7.03,
     7.08,
     7.69,
-    8.19
+    8.19,
+    8.51
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-06"
+  "as_of": "2026-11-09"
  },
  "543920": {
-  "market_cap": 2217.0,
-  "price": 1057.0,
+  "market_cap": 2264.0,
+  "price": 1079.0,
   "high_52w": 1148.0,
   "low_52w": 445.0,
-  "pe": 56.5,
+  "pe": 57.7,
   "book_value": 127.0,
   "dividend_yield": 0.12,
   "roce": 23.5,
@@ -8307,31 +8359,31 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-06"
+  "as_of": "2026-11-09"
  },
  "DCI": {
-  "market_cap": 546.0,
-  "price": 333.0,
+  "market_cap": 538.0,
+  "price": 328.0,
   "high_52w": 475.0,
   "low_52w": 209.0,
-  "pe": 24.8,
-  "book_value": 65.8,
+  "pe": 23.3,
+  "book_value": 72.4,
   "dividend_yield": 0.03,
   "roce": 23.0,
   "roe": 23.7,
   "roe_3y": 25.0,
-  "sales_growth_ttm": 29.0,
+  "sales_growth_ttm": 34.0,
   "sales_growth_3y": 27.0,
   "sales_growth_5y": 34.0,
-  "profit_growth_ttm": 42.0,
+  "profit_growth_ttm": 38.0,
   "profit_growth_3y": 44.0,
   "profit_growth_5y": 58.0,
-  "sales_growth_qtr_yoy": 12.9,
-  "profit_growth_qtr_yoy": 16.3,
-  "opm_latest_qtr": 4.78,
+  "sales_growth_qtr_yoy": 38.5,
+  "profit_growth_qtr_yoy": 22.95,
+  "opm_latest_qtr": 5.21,
   "opm_last_year": 4.8,
-  "net_profit_ttm": 22.0,
-  "debt_to_equity": 0.81,
+  "net_profit_ttm": 23.0,
+  "debt_to_equity": 1.04,
   "interest_coverage": 4.11,
   "cfo_to_profit_5y": -0.86,
   "debtor_days": 104.0,
@@ -8343,82 +8395,82 @@
   "result_period_months": 3,
   "quarters": {
    "t": [
-    "Sep 2024",
     "Dec 2024",
     "Mar 2025",
     "Jun 2025",
     "Sep 2025",
     "Dec 2025",
     "Mar 2026",
-    "Jun 2026"
+    "Jun 2026",
+    "Sep 2026"
    ],
    "sales": [
-    130.32,
     134.19,
     172.72,
     148.09,
     153.42,
     195.78,
     239.42,
-    167.2
+    167.2,
+    212.48
    ],
    "profit": [
-    3.69,
     4.04,
     3.72,
     4.05,
     5.01,
     6.48,
     5.79,
-    4.71
+    4.71,
+    6.16
    ],
    "opm": [
-    4.92,
     5.57,
     4.03,
     4.38,
     5.52,
     5.24,
     4.31,
-    4.78
+    4.78,
+    5.21
    ],
    "eps": [
-    2.73,
     2.85,
     2.62,
     2.53,
     3.13,
     4.05,
     3.53,
-    2.87
+    2.87,
+    3.76
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-06"
+  "as_of": "2026-11-09"
  },
  "CORDSCABLE": {
-  "market_cap": 386.0,
-  "price": 299.0,
+  "market_cap": 403.0,
+  "price": 312.0,
   "high_52w": 407.0,
   "low_52w": 126.0,
-  "pe": 15.7,
-  "book_value": 156.0,
-  "dividend_yield": 0.4,
+  "pe": 13.1,
+  "book_value": 170.0,
+  "dividend_yield": 0.38,
   "roce": 17.6,
   "roe": 10.8,
   "roe_3y": 9.0,
-  "sales_growth_ttm": 15.0,
+  "sales_growth_ttm": 24.0,
   "sales_growth_3y": 22.0,
   "sales_growth_5y": 24.0,
-  "profit_growth_ttm": 57.0,
+  "profit_growth_ttm": 85.0,
   "profit_growth_3y": 42.0,
   "profit_growth_5y": 37.0,
-  "sales_growth_qtr_yoy": 9.53,
-  "profit_growth_qtr_yoy": 101.55,
-  "opm_latest_qtr": 6.1,
+  "sales_growth_qtr_yoy": 56.16,
+  "profit_growth_qtr_yoy": 172.07,
+  "opm_latest_qtr": 6.11,
   "opm_last_year": 6.0,
-  "net_profit_ttm": 25.0,
-  "debt_to_equity": 0.55,
+  "net_profit_ttm": 31.0,
+  "debt_to_equity": 0.44,
   "interest_coverage": 2.08,
   "cfo_to_profit_5y": 2.58,
   "debtor_days": 84.0,
@@ -8430,58 +8482,58 @@
   "result_period_months": 3,
   "quarters": {
    "t": [
-    "Sep 2024",
     "Dec 2024",
     "Mar 2025",
     "Jun 2025",
     "Sep 2025",
     "Dec 2025",
     "Mar 2026",
-    "Jun 2026"
+    "Jun 2026",
+    "Sep 2026"
    ],
    "sales": [
-    182.95,
     205.4,
     233.24,
     225.7,
     225.7,
     235.61,
     266.9,
-    247.2
+    247.2,
+    352.45
    ],
    "profit": [
-    2.63,
     4.68,
     4.49,
     3.87,
     3.58,
     4.92,
     8.28,
-    7.8
+    7.8,
+    9.74
    ],
    "opm": [
-    6.24,
     6.26,
     6.32,
     6.03,
     6.19,
     6.21,
     6.03,
-    6.1
+    6.1,
+    6.11
    ],
    "eps": [
-    2.03,
     3.62,
     3.47,
     2.99,
     2.77,
     3.81,
     6.4,
-    6.03
+    6.03,
+    7.53
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-06"
+  "as_of": "2026-11-09"
  },
  "KRYSTAL": {
   "market_cap": 861.0,
@@ -8658,13 +8710,13 @@
   "as_of": "2026-11-06"
  },
  "DEEDEV": {
-  "market_cap": 4537.0,
-  "price": 603.0,
+  "market_cap": 3921.0,
+  "price": 520.0,
   "high_52w": 760.0,
   "low_52w": 183.0,
-  "pe": 55.3,
+  "pe": 47.8,
   "book_value": 129.0,
-  "dividend_yield": 0.17,
+  "dividend_yield": 0.18,
   "roce": 10.7,
   "roe": 9.31,
   "roe_3y": 8.0,
@@ -8742,7 +8794,7 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-06"
+  "as_of": "2026-11-09"
  },
  "NGLFINE": {
   "market_cap": 1750.0,
@@ -9874,11 +9926,11 @@
   "as_of": "2026-11-07"
  },
  "MPIMANIPAL": {
-  "market_cap": 7317.0,
-  "price": 316.0,
+  "market_cap": 7308.0,
+  "price": 315.0,
   "high_52w": 458.0,
   "low_52w": 295.0,
-  "pe": 27.1,
+  "pe": 27.0,
   "book_value": 54.6,
   "dividend_yield": 0.0,
   "roce": 44.9,
@@ -10402,11 +10454,11 @@
   "as_of": "2026-11-07"
  },
  "544468": {
-  "market_cap": 204.0,
-  "price": 144.0,
+  "market_cap": 199.0,
+  "price": 140.0,
   "high_52w": 144.0,
   "low_52w": 98.0,
-  "pe": 21.4,
+  "pe": 20.8,
   "book_value": 50.5,
   "dividend_yield": 0.0,
   "roce": 23.9,
@@ -15958,7 +16010,7 @@
   "as_of": "2026-11-07"
  },
  "ANAWIL": {
-  "market_cap": 963.0,
+  "market_cap": 962.0,
   "price": 385.0,
   "high_52w": 540.0,
   "low_52w": 313.0,
@@ -18042,11 +18094,11 @@
   "as_of": "2026-11-07"
  },
  "544844": {
-  "market_cap": 1916.0,
-  "price": 961.0,
+  "market_cap": 1895.0,
+  "price": 950.0,
   "high_52w": 1066.0,
   "low_52w": 447.0,
-  "pe": 42.5,
+  "pe": 42.0,
   "book_value": 151.0,
   "dividend_yield": 0.0,
   "roce": 33.4,
@@ -18702,11 +18754,11 @@
   "as_of": "2026-11-07"
  },
  "ESDS": {
-  "market_cap": 13674.0,
-  "price": 1167.0,
+  "market_cap": 13365.0,
+  "price": 1140.0,
   "high_52w": 1864.0,
   "low_52w": 746.0,
-  "pe": 106.0,
+  "pe": 104.0,
   "book_value": 110.0,
   "dividend_yield": 0.0,
   "roce": 30.2,
@@ -20868,11 +20920,11 @@
   "as_of": "2026-11-07"
  },
  "SWASTIKAIN": {
-  "market_cap": 672.0,
-  "price": 197.0,
+  "market_cap": 661.0,
+  "price": 194.0,
   "high_52w": 256.0,
   "low_52w": 188.0,
-  "pe": 13.8,
+  "pe": 13.6,
   "book_value": 85.0,
   "dividend_yield": 0.0,
   "roce": 31.4,
@@ -22510,11 +22562,11 @@
   "as_of": "2026-11-07"
  },
  "SMT": {
-  "market_cap": 5435.0,
-  "price": 535.0,
+  "market_cap": 5113.0,
+  "price": 503.0,
   "high_52w": 566.0,
   "low_52w": 347.0,
-  "pe": 75.7,
+  "pe": 71.2,
   "dividend_yield": 0.0,
   "roce": 11.4,
   "roe": 10.4,
@@ -24582,11 +24634,11 @@
   "as_of": "2026-11-07"
  },
  "KANOHAR": {
-  "market_cap": 7965.0,
-  "price": 1006.0,
+  "market_cap": 8090.0,
+  "price": 1022.0,
   "high_52w": 1210.0,
   "low_52w": 672.0,
-  "pe": 48.4,
+  "pe": 49.2,
   "book_value": 93.3,
   "dividend_yield": 0.0,
   "roce": 54.3,
