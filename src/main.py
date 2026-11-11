@@ -104,9 +104,13 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
         snaps[code] = fx.snapshot(m, today)
         mk = f"{fx.on_full_scale(got, out_of, rules_cfg):g}/{full:g}"
         ok = fx.passes(got, out_of, need, rules_cfg)
+        slow = _slow_growth(m, rules_cfg, "new_stock_min_profit_growth")
+        if ok and slow:   # TTM profit growth below 20%: not added (rule of 11 Nov 2026)
+            ok = False
+            mk = f"{mk} · {slow}"
         rs_note = ""
         min_rs, min_rs3 = float(rules_cfg.get("new_stock_min_rs") or 0), float(rules_cfg.get("new_stock_min_rs3") or 0)
-        if ok and (min_rs or min_rs3):   # Relative Strength ratings (1-99): 12-month and 3-month must be above the levels
+        if ok and not slow and (min_rs or min_rs3):   # Relative Strength ratings (1-99): 12-month and 3-month must be above the levels
             try:
                 status, _, rs_note = rs.check(code, m, min_rs, min_rs3=min_rs3)
             except Exception as e_:   # never stop the run for this
@@ -327,6 +331,16 @@ def judge(res, period, short=20):
 
 
 # ----------------------------------------------------------------- Step 5
+def _slow_growth(m, rules_cfg, key):
+    """'TTM profit growth 12% (need 20% or more)' when the stock's TTM profit growth is below the level in rules.yaml,
+    else None. Not known (no number on the page): never removed for that."""
+    level = rules_cfg.get(key)
+    g = (m or {}).get("profit_growth_ttm")
+    if level in (None, "", 0) or g is None:
+        return None
+    return f"TTM profit growth {g:g}% (need {float(level):g}% or more)" if g < float(level) else None
+
+
 def rs_lists(rules_cfg):
     """Monthly Relative Strength check: (min RS, lists checked) - min 0 = off."""
     lists = rules_cfg.get("monthly_rs_lists", ["SP", "DT"]) or []
@@ -365,8 +379,11 @@ def monthly(sp, dt, rules_cfg, today, report, history, snaps, charts=None):
                        screener_id=m.get("_company_id", "") or row.get("screener_id", ""))
             set_codes(row, m)
             reason = None
+            slow = _slow_growth(m, rules_cfg, "monthly_min_profit_growth")
             if not fx.passes(got, out_of, need, rules_cfg):
                 reason = f"marks {mk} — missed: " + fx.short_reason(marks)
+            elif slow:   # TTM profit growth below 20% (rule of 11 Nov 2026)
+                reason = f"marks {mk} OK, but {slow}"
             elif (min_rs or min_rs3) and list_name in rs_in:   # RS (12-month and 3-month) must be above the levels
                 try:
                     status, _, note = rs.check(sym, m, min_rs, chart=(charts or {}).get(sym), min_rs3=min_rs3)
@@ -599,7 +616,7 @@ def build_message(r, sp, dt, today_label, dashboard_url=""):
     block("🔼 <b>Moved DT → SP</b> (back above 200 EMA / 20 EMA)", r["to_sp"])
     if r.get("monthly_done"):
         L += ["", f"🗓 <b>Monthly fundamental review</b>: {r['monthly_pass']} passed, {len(r['removed'])} removed"]
-        block("❌ <b>Removed</b> (below monthly pass marks, or Relative Strength too low)", r["removed"])
+        block("❌ <b>Removed</b> (below monthly pass marks, TTM profit growth below 20%, or Relative Strength too low)", r["removed"])
     block("🆕 <b>Marks updated</b> (added by hand, or data was missing before)", r["first_marked"])
     block("⚠️ <b>Could not check</b>", r["unchecked"])
     if r["new_listing"]:
