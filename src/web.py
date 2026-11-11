@@ -541,6 +541,9 @@ const LW_URL = "lightweight-charts-4.1.3.js";
 const LW_CDN = "https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js";
 const LW_SRI = "sha384-JZigAjwiaZtkUbA44CWkPaT3iBb/mU5pO6QOANp+OqHd4q+1+7MG1kzp2OOP9ZfP";
 let lwLoad = null, chartObj = null, cur = null, curTab = "chart", curRange = 260, curTf = "D";
+try { const v = JSON.parse(localStorage.getItem("tf-view") || "{}");    // Daily / Weekly / Monthly and period, kept on this device
+  if (["D", "W", "M"].includes(v.tf)) curTf = v.tf; if ([63, 126, 260, 780, 1300, 0].includes(v.range)) curRange = v.range; } catch (e) {}
+function saveView(){ try { localStorage.setItem("tf-view", JSON.stringify({tf: curTf, range: curRange})); } catch (e) {} }
 let emaOn = {10: true, 20: true, 50: true, 200: true};
 try { emaOn = Object.assign(emaOn, JSON.parse(localStorage.getItem("tf-ema") || "{}")); } catch (e) {}
 const chartCache = {};
@@ -619,7 +622,7 @@ function drawPanel(){
     body.innerHTML = `<div class="ranges" role="group" aria-label="Candle size">${[["D", "Daily"], ["W", "Weekly"], ["M", "Monthly"]].map(([k, l]) =>
         `<button class="rg" data-tf="${k}" aria-pressed="${k === curTf}">${l}</button>`).join("")}${topLinks}</div>
       <div class="ranges" role="group" aria-label="Period">${[["3M", 63], ["6M", 126], ["1Y", 260], ["3Y", 780], ["5Y", 1300], ["All", 0]].map(([l, n]) =>
-        `<button class="rg" data-range="${n}" aria-pressed="${n === curRange}">${l}</button>`).join("")}
+        `<button class="rg" data-range="${n}" aria-pressed="${n === curRange && !ZOOM[curTf]}">${l}</button>`).join("")}
       <div class="legend" id="legend"></div></div>
       <div class="chartbox" id="chartbox"><div class="empty" style="border:0">Loading chart…</div></div>
       <div class="src"><span id="chartsrc"></span> <b>Tip:</b> right-click the chart (long-press on a phone) to set a price alert.</div>`;
@@ -755,14 +758,40 @@ function fitChart(){
   const top = box.getBoundingClientRect().top + window.scrollY;
   box.style.height = Math.max(260, Math.floor(innerHeight - top - 40)) + "px";
 }
+// View: the latest candle sits 20% in from the right edge (empty space on the right). When you zoom in or out,
+// the number of candles on screen is remembered (per Daily / Weekly / Monthly, also on this device), so Next / Prev
+// open the next stock at the same zoom - again with the last candle 20% from the right.
+const RIGHT_GAP = 0.2;
+let ZOOM = {}; try { ZOOM = JSON.parse(localStorage.getItem("tf-zoom") || "{}") || {}; } catch (e) { ZOOM = {}; }
+let zoomBusy = false;
+function saveZoom(){ try { localStorage.setItem("tf-zoom", JSON.stringify(ZOOM)); } catch (e) {} }
+function showBars(width){
+  const n = cur.bars.length, last = n - 1 + 0.5;
+  zoomBusy = true;
+  chartObj.timeScale().setVisibleLogicalRange({from: last - width * (1 - RIGHT_GAP), to: last + width * RIGHT_GAP});
+  setTimeout(() => { zoomBusy = false; }, 80);
+}
 function setRange(){
   if (!chartObj || !cur || !cur.bars || !cur.bars.length) return;
-  const b = cur.bars, n = b.length;
-  if (!curRange) { chartObj.timeScale().fitContent(); return; }
-  const lastDay = new Date(b[n - 1].end + "T00:00:00Z"), from = new Date(lastDay);
-  from.setUTCDate(from.getUTCDate() - Math.round(curRange * 7 / 5));
-  const fromStr = from.toISOString().slice(0, 10), i = b.findIndex(x => x.end >= fromStr);
-  chartObj.timeScale().setVisibleRange({from: b[Math.max(0, i)].time, to: b[n - 1].time});
+  const b = cur.bars, n = b.length, ts = chartObj.timeScale();
+  if (!ts.__zoomWatch) {   // remember the zoom when YOU change it (mouse wheel, pinch, drag on the time axis)
+    ts.__zoomWatch = true;
+    ts.subscribeVisibleLogicalRangeChange(r => {
+      if (zoomBusy || !r) return;
+      const w = r.to - r.from;
+      if (w > 3 && Math.abs(w - (ZOOM[curTf] || 0)) > 0.5) { ZOOM[curTf] = Math.round(w * 10) / 10; saveZoom();
+        document.querySelectorAll("[data-range]").forEach(x => x.setAttribute("aria-pressed", "false")); }
+    });
+  }
+  if (ZOOM[curTf]) { showBars(ZOOM[curTf]); return; }
+  let k = n;                                   // candles in the chosen period (3M, 6M, 1Y ...; All = every candle)
+  if (curRange) {
+    const lastDay = new Date(b[n - 1].end + "T00:00:00Z"), from = new Date(lastDay);
+    from.setUTCDate(from.getUTCDate() - Math.round(curRange * 7 / 5));
+    const fromStr = from.toISOString().slice(0, 10), i = b.findIndex(x => x.end >= fromStr);
+    k = n - Math.max(0, i);
+  }
+  showBars(Math.max(k, 5) / (1 - RIGHT_GAP));
 }
 // ---------------- Alerts: one-click saving through the user's own GitHub key (kept only in this browser)
 const AL = D.alerts || {active: [], done: [], bot: ""};
@@ -1075,9 +1104,10 @@ document.addEventListener("click", async e => {
     catch (x) { getSelection().selectAllChildren(document.getElementById(cp.dataset.copy)); } return; }
   const em = e.target.closest("[data-ema]"); if (em) { const p = +em.dataset.ema; emaOn[p] = emaOn[p] === false;
     try { localStorage.setItem("tf-ema", JSON.stringify(emaOn)); } catch (x) {} drawChart(); return; }
-  const tf = e.target.closest("[data-tf]"); if (tf) { curTf = tf.dataset.tf;
+  const tf = e.target.closest("[data-tf]"); if (tf) { curTf = tf.dataset.tf; saveView();
+    document.querySelectorAll("[data-range]").forEach(x => x.setAttribute("aria-pressed", +x.dataset.range === curRange && !ZOOM[curTf]));
     document.querySelectorAll("[data-tf]").forEach(b => b.setAttribute("aria-pressed", b === tf)); drawChart(); return; }
-  const rg = e.target.closest("[data-range]"); if (rg) { curRange = +rg.dataset.range;
+  const rg = e.target.closest("[data-range]"); if (rg) { curRange = +rg.dataset.range; delete ZOOM[curTf]; saveZoom(); saveView();
     document.querySelectorAll("[data-range]").forEach(b => b.setAttribute("aria-pressed", b === rg)); setRange(); return; }
 });
 document.getElementById("p-close").addEventListener("click", requestClose);
