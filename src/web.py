@@ -397,7 +397,8 @@ function qStats(f){
 //   PEG <= 0.5      : current P/E x (L x 4 + P x 2)
 //   0.5 < PEG <= 1  : current P/E x (L x 4 + P x 1)
 //   1 < PEG <= 3    : current P/E x (L x 4)
-//   PEG > 3: Don't invest.  TTM profit growth below 20%: Don't invest (any PEG) - rule of 11 Nov 2026
+//   PEG > 3: Don't invest.  TTM profit growth below 20%: Don't invest - unless the latest quarter's profit growth
+//   (vs the same quarter last year) is above 35%, then the PEG rule above applies (same as the watchlist rule, 11 Nov 2026)
 // Current P/E = Screener's P/E moved to today's price. Half-yearly results: each half-year EPS / 2 (quarter size).
 const PT_RULES = {a: "(latest EPS × 4 + previous EPS × 2)", b: "(latest EPS × 4 + previous EPS × 1)", c: "(latest EPS × 4)"};
 function priceTarget(r, f){
@@ -410,19 +411,21 @@ function priceTarget(r, f){
   const pe = c && px0 ? pe0 * c / px0 : pe0;
   if (g == null) return {L, P, pe, why: "TTM profit growth not known"};
   const peg = g > 0 ? pe0 / g : null;                       // TTM PEG = P/E ÷ TTM profit growth (as in the marks)
-  if (g < 20) return {L, P, pe, peg, g, avoid: true, slow: true};   // profit growth below 20%: Don't invest
-  if (peg > 3) return {L, P, pe, peg, g, avoid: true};
+  const q = num(f.profit_growth_qtr_yoy), qOk = q != null && q > 35;
+  if (g < 20 && !qOk) return {L, P, pe, peg, g, q, avoid: true, slow: true};   // profit growth below 20%: Don't invest
+  if (peg == null) return {L, P, pe, peg, g, q, avoid: true, noPeg: true};      // TTM profit not growing: no PEG
+  if (peg > 3) return {L, P, pe, peg, g, q, avoid: true};
   const band = peg <= 0.5 ? "a" : peg <= 1 ? "b" : "c";
   const eps = band === "a" ? L * 4 + P * 2 : band === "b" ? L * 4 + P : L * 4;
   if (eps <= 0) return {L, P, pe, peg, g, band, why: "latest EPS is not positive"};
   const price = pe * eps;
-  return {L, P, pe, peg, g, band, eps, price, up: c ? (price - c) / c * 100 : null};
+  return {L, P, pe, peg, g, q, qSaved: g < 20, band, eps, price, up: c ? (price - c) / c * 100 : null};
 }
 // "Target ₹747 (+8.9%)" (or "Don't invest") next to the NSE / BSE codes - same rule as Price Target Expected
 function tgtChip(r){
   const f = (D.fund || {})[r.symbol], pt = f && priceTarget(r, f);
   if (!pt) return "";
-  if (pt.avoid) return `<span class="tgt down" title="${pt.slow ? "TTM profit growth " + pctTxt(pt.g) + " is below 20%" : "TTM PEG " + pt.peg.toFixed(2) + " is above 3"}">Target <b>Don't invest</b></span>`;
+  if (pt.avoid) return `<span class="tgt down" title="${pt.slow ? "TTM profit growth " + pctTxt(pt.g) + " is below 20% and the latest quarter's profit growth is not above 35%" : pt.noPeg ? "TTM profit is not growing: no PEG" : "TTM PEG " + pt.peg.toFixed(2) + " is above 3"}">Target <b>Don't invest</b></span>`;
   if (!pt.price) return "";
   const up = pt.up;
   return `<span class="tgt ${up == null ? "" : up >= 0 ? "up" : "down"}" title="Price Target Expected: current P/E × ${PT_RULES[pt.band]} · TTM PEG ${pt.peg.toFixed(2)}">Target <b>${fmtINR(Math.round(pt.price))}</b>${up == null ? "" : ` (${pctTxt(up)})`}</span>`;
@@ -458,13 +461,14 @@ function openCat(sym){
   const f2 = v => v == null ? "—" : v.toFixed(2);
   const pegTxt = !pt ? "" : pt.peg == null ? "not usable" : pt.peg.toFixed(2);
   const tgt = !pt ? "" : `<div class="cs"><h4>Price Target Expected</h4>${pt.avoid
-      ? `<div class="pt down">Don't invest</div><div class="how">${pt.slow ? `TTM profit growth ${pctTxt(pt.g)} is below 20%.` : `TTM PEG ${pegTxt} is above 3 (TTM profit growth ${pctTxt(pt.g)}).`}</div>`
+      ? `<div class="pt down">Don't invest</div><div class="how">${pt.slow ? `TTM profit growth ${pctTxt(pt.g)} is below 20%, and the latest quarter's profit growth ${pctTxt(pt.q)} is not above 35%.`
+          : pt.noPeg ? `TTM profit growth ${pctTxt(pt.g)}: profit is not growing, so there is no PEG.` : `TTM PEG ${pegTxt} is above 3 (TTM profit growth ${pctTxt(pt.g)}).`}</div>`
       : pt.price ? `<div class="pt ${pt.up >= 0 ? "" : "down"}">${fmtINR(Math.round(pt.price))}
       ${pt.up == null ? "" : `<small class="${pt.up >= 0 ? "up" : "down"}" style="font-size:13px">${pctTxt(pt.up)} vs ${fmtINR(num(r.last_close))}</small>`}</div>
       <div class="how">= current P/E ${f2(pt.pe)} × ${PT_RULES[pt.band]} = ${f2(pt.pe)} × ₹${f2(pt.eps)}
-        <br>Latest EPS ₹${f2(pt.L)} (${esc(st.last.t)}), previous EPS ₹${f2(pt.P)} (${esc(st.prev ? st.prev.t : "")})${st.half ? " — half-year EPS ÷ 2" : ""} · TTM profit growth ${pctTxt(pt.g)} · TTM PEG ${pegTxt}</div>`
+        <br>Latest EPS ₹${f2(pt.L)} (${esc(st.last.t)}), previous EPS ₹${f2(pt.P)} (${esc(st.prev ? st.prev.t : "")})${st.half ? " — half-year EPS ÷ 2" : ""} · TTM profit growth ${pctTxt(pt.g)}${pt.qSaved ? ` (below 20%, but latest quarter +${pt.q.toFixed(0)}% is above 35%)` : ""} · TTM PEG ${pegTxt}</div>`
       : `<div class="mut">Not available: ${esc(pt.why)}</div>`}
-      <div class="how">Rule: PEG ≤ 0.5 → P/E × (latest EPS × 4 + previous × 2) · 0.5–1 → P/E × (latest × 4 + previous × 1) · 1–3 → P/E × (latest × 4) · above 3 → Don't invest. TTM profit growth below 20% → Don't invest.</div></div>`;
+      <div class="how">Rule: PEG ≤ 0.5 → P/E × (latest EPS × 4 + previous × 2) · 0.5–1 → P/E × (latest × 4 + previous × 1) · 1–3 → P/E × (latest × 4) · above 3 → Don't invest. TTM profit growth below 20% → Don't invest, unless the latest quarter's profit growth is above 35%.</div></div>`;
   const o = document.getElementById("order");
   o.classList.add("wide");
   o.innerHTML = `<div class="oh cat"><h3 id="o-title">${esc(r.name || sym)}</h3><button class="btn x" data-oclose aria-label="Close">✕</button></div>

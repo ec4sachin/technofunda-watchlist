@@ -332,13 +332,21 @@ def judge(res, period, short=20):
 
 # ----------------------------------------------------------------- Step 5
 def _slow_growth(m, rules_cfg, key):
-    """'TTM profit growth 12% (need 20% or more)' when the stock's TTM profit growth is below the level in rules.yaml,
-    else None. Not known (no number on the page): never removed for that."""
+    """Reason text when the stock fails the profit growth rule (11 Nov 2026), else None:
+    TTM profit growth below 20% fails - unless the latest quarter's profit growth (vs the same quarter last year)
+    is above 35%. TTM growth not known (no number on the page): never removed for that."""
     level = rules_cfg.get(key)
     g = (m or {}).get("profit_growth_ttm")
-    if level in (None, "", 0) or g is None:
+    if level in (None, "", 0) or g is None or g >= float(level):
         return None
-    return f"TTM profit growth {g:g}% (need {float(level):g}% or more)" if g < float(level) else None
+    q_level = rules_cfg.get("profit_growth_qtr_exception")
+    q = (m or {}).get("profit_growth_qtr_yoy")
+    if q_level not in (None, "", 0) and q is not None and q > float(q_level):
+        return None                       # slow year, but the latest quarter is strong: kept / added
+    txt = f"TTM profit growth {g:g}% (need {float(level):g}% or more)"
+    if q_level not in (None, "", 0):
+        txt += f" and latest quarter profit growth {'not comparable' if q is None else f'{q:g}%'} (need above {float(q_level):g}%)"
+    return txt
 
 
 def rs_lists(rules_cfg):

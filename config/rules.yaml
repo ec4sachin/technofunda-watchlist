@@ -75,6 +75,7 @@ new_stock_min_rs: 0      # Step 2 — 12-month RS (3/6/9/12 months, last 3 count
 new_stock_min_rs3: 80    # Step 2 — new stock's 3-month RS (last 3 months only) must be above this
 monthly_pass: 5          # Step 5 — stock in SP/DT needs this shown score to stay
 monthly_min_profit_growth: 20     # Step 5 — SP / DT stock with TTM profit growth below this % is removed (0 = off)
+profit_growth_qtr_exception: 35   # ... unless its latest quarter profit growth (vs same quarter last year) is above this % (0 = no exception)
 monthly_min_rs: 0        # Step 5 — 12-month RS: off
 monthly_min_rs3: 80      # Step 5 — 3-month RS must be above this to stay
 monthly_rs_lists: [SP]   # which lists the monthly RS check removes from (DT not checked: its stocks are below the 200 EMA)
