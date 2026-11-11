@@ -17,3 +17,10 @@ date,strategy,mode,action,symbol,name,qty,price,value,reason,pnl,pnl_pct,hold_da
 2026-11-09,Swing Strategy,paper,BUY,SAAKSHI,Saakshi Medtech,343,378.9,129962.7,"Breakout above ₹375 + 1% (stop ₹356.4, target ₹454.68)",,,,swing-SAAKSHI-2026-11-09
 2026-11-09,Positional Trading,paper,BUY,SAAKSHI,Saakshi Medtech,316,378.9,119732.4,"Breakout above ₹375 + 1% (stop ₹356.4, target ₹492.57)",,,,positional-SAAKSHI-2026-11-09
 2026-11-09,Smart Switch,paper,BUY,SAAKSHI,Saakshi Medtech,316,378.9,119732.4,"Breakout above ₹375 + 1% (stop ₹356.4, target ₹454.68) · Smallcap 100 18,975 below EMA 50 19,103 → Swing exits",,,,switch-SAAKSHI-2026-11-09
+2026-11-11,Swing Strategy,paper,BUY,544529,Aptus Pharma,273,475.96,129937.08,"Breakout above ₹471.25 + 1% (stop ₹455.4, target ₹571.15)",,,,swing-544529-2026-11-11
+2026-11-11,Swing Strategy,paper,BUY,OBSCP,OBSC Perfection,148,873.03,129208.44,"Breakout above ₹864.39 + 1% (stop ₹820.65, target ₹1047.64)",,,,swing-OBSCP-2026-11-11
+2026-11-11,Positional Trading,paper,BUY,544529,Aptus Pharma,252,475.96,119941.92,"Breakout above ₹471.25 + 1% (stop ₹455.4, target ₹618.75)",,,,positional-544529-2026-11-11
+2026-11-11,Positional Trading,paper,BUY,OBSCP,OBSC Perfection,137,873.03,119605.11,"Breakout above ₹864.39 + 1% (stop ₹820.65, target ₹1134.94)",,,,positional-OBSCP-2026-11-11
+2026-11-11,Smart Switch,paper,BUY,544529,Aptus Pharma,252,475.96,119941.92,"Breakout above ₹471.25 + 1% (stop ₹455.4, target ₹618.75) · Smallcap 100 19,185 above EMA 50 19,107 → Positional exits",,,,switch-544529-2026-11-11
+2026-11-11,Smart Switch,paper,BUY,OBSCP,OBSC Perfection,137,873.03,119605.11,"Breakout above ₹864.39 + 1% (stop ₹820.65, target ₹1134.94) · Smallcap 100 19,185 above EMA 50 19,107 → Positional exits",,,,switch-OBSCP-2026-11-11
+2026-11-11,Smart Switch · Growth list,paper,SELL,GLOBAL,Global Education,538,139.7,75158.6,Stop loss (6% max risk),-5109.19,-6.0,6,growth_switch-GLOBAL-2026-11-05
