@@ -5,127 +5,16 @@
    "SPARC",
    "SPARC",
    "6.1/11 · 3-month RS 68 (need above 80)"
-  ],
-  [
-   "HMVL",
-   "Hindustan Media",
-   "8.8/11 · 3-month RS 67 (need above 80)"
   ]
  ],
  "to_dt": [
   [
-   "513507",
-   "Guj. Containers",
-   "close 163.75 < 200 EMA 165.38"
-  ],
-  [
-   "526071",
-   "Stellant Secu.",
-   "close 746.55 < 200 EMA 772.2"
-  ],
-  [
-   "530741",
-   "Ovobel Foods",
-   "close 200.7 < 200 EMA 218.76"
-  ],
-  [
-   "539522",
-   "Grovy India",
-   "close 53.5 < 200 EMA 53.77"
-  ],
-  [
-   "544695",
-   "Msafe Equipments",
-   "close 270.45 < 20 EMA 274.28"
-  ],
-  [
-   "544746",
-   "Safety Controls & Devices Ltd",
-   "close 71 < 20 EMA 71.55"
-  ],
-  [
-   "544809",
-   "Adon Agro",
-   "close 94.58 < 20 EMA 97.38"
-  ],
-  [
-   "BPLPHARMA",
-   "Bharat Parenterals Ltd",
-   "close 1800.8 < 20 EMA 1838.75"
-  ],
-  [
-   "DEEDEV",
-   "DEE Development",
-   "close 524.8 < 200 EMA 526.95"
+   "DENTALKART",
+   "Vasa Denticity Ltd",
+   "close 446 < 200 EMA 446.77"
   ]
  ],
- "to_sp": [
-  [
-   "538862",
-   "My Money Sec.",
-   "close 41.47 > 200 EMA 39.77"
-  ],
-  [
-   "543895",
-   "Exhicon Events",
-   "close 495 > 200 EMA 491.16"
-  ],
-  [
-   "ASHIANA",
-   "Ashiana Housing",
-   "close 356.15 > 200 EMA 352.36"
-  ],
-  [
-   "BALUFORGE",
-   "Balu Forge Industries Ltd",
-   "close 529.6 > 200 EMA 504.04"
-  ],
-  [
-   "BETA",
-   "Beta Drugs Ltd",
-   "close 1881.6 > 200 EMA 1865.76"
-  ],
-  [
-   "HALDYNGL",
-   "Haldyn Glass",
-   "close 137.07 > 20 EMA 135.04"
-  ],
-  [
-   "KANOHAR",
-   "Kanohar Elect.",
-   "close 1006.75 > 20 EMA 996.11"
-  ],
-  [
-   "ORIRAIL",
-   "Oriental Rail Infrastructure Ltd",
-   "close 116.9 > 20 EMA 115.96"
-  ],
-  [
-   "TAALTECH",
-   "TAAL Tech Ltd",
-   "close 929.7 > 20 EMA 925.62"
-  ],
-  [
-   "TAMBOLIIN",
-   "Tamboli Industri",
-   "close 327.6 > 20 EMA 313.68"
-  ],
-  [
-   "THEJO",
-   "Thejo Engineering Ltd",
-   "close 1955.6 > 200 EMA 1919.25"
-  ],
-  [
-   "TRANSPEK",
-   "Transpek Industry Ltd",
-   "close 1292.6 > 20 EMA 1290.54"
-  ],
-  [
-   "ZOTA",
-   "Zota Health Care Ltd",
-   "close 1273.6 > 200 EMA 1256.64"
-  ]
- ],
+ "to_sp": [],
  "removed": [],
  "unchecked": [
   [
@@ -170,16 +59,6 @@
    "close 331 vs 20 EMA 301.03 → SP"
   ],
   [
-   "544695",
-   "Msafe Equipments",
-   "close 270.45 vs 20 EMA 274.28 → DT"
-  ],
-  [
-   "544746",
-   "Safety Controls & Devices Ltd",
-   "close 71 vs 20 EMA 71.55 → DT"
-  ],
-  [
    "544755",
    "Recode Studios",
    "close 419 vs 20 EMA 406.2 → SP"
@@ -188,11 +67,6 @@
    "544765",
    "Vegorama Punjabi",
    "close 270.1 vs 20 EMA 247.54 → SP"
-  ],
-  [
-   "544809",
-   "Adon Agro",
-   "close 94.58 vs 20 EMA 97.38 → DT"
   ],
   [
    "544810",
@@ -230,11 +104,6 @@
    "close 233.28 vs 20 EMA 220.33 → SP"
   ],
   [
-   "BPLPHARMA",
-   "Bharat Parenterals Ltd",
-   "close 1800.8 vs 20 EMA 1838.75 → DT"
-  ],
-  [
    "DHABRIYA",
    "Dhabriya Poly.",
    "close 505.25 vs 20 EMA 468.42 → SP"
@@ -245,9 +114,24 @@
    "close 133.95 vs 20 EMA 132.03 → SP"
   ],
   [
+   "HALDYNGL",
+   "Haldyn Glass",
+   "close 137.07 vs 20 EMA 135.04 → SP"
+  ],
+  [
+   "KANOHAR",
+   "Kanohar Elect.",
+   "close 1006.75 vs 20 EMA 996.11 → SP"
+  ],
+  [
    "MARUSHIKA",
    "Marushika Tech.",
    "close 124.7 vs 20 EMA 118.56 → SP"
+  ],
+  [
+   "ORIRAIL",
+   "Oriental Rail Infrastructure Ltd",
+   "close 116.9 vs 20 EMA 115.96 → SP"
   ],
   [
    "SHUKRAPHAR",
@@ -265,9 +149,24 @@
    "close 492.9 (too new for any EMA)"
   ],
   [
+   "TAALTECH",
+   "TAAL Tech Ltd",
+   "close 929.7 vs 20 EMA 925.62 → SP"
+  ],
+  [
+   "TAMBOLIIN",
+   "Tamboli Industri",
+   "close 327.6 vs 20 EMA 313.68 → SP"
+  ],
+  [
    "TEAMTECH",
    "Teamtech Formwork",
    "close 167.85 vs 20 EMA 154.69 → SP"
+  ],
+  [
+   "TRANSPEK",
+   "Transpek Industry Ltd",
+   "close 1292.6 vs 20 EMA 1290.54 → SP"
   ],
   [
    "UDAYJEW",
@@ -280,14 +179,29 @@
    "close 146.5 vs 20 EMA 149.59"
   ],
   [
+   "544695",
+   "Msafe Equipments",
+   "close 270.45 vs 20 EMA 274.28"
+  ],
+  [
    "544735",
    "Novus Loyalty",
    "close 178.9 vs 20 EMA 184.02"
   ],
   [
+   "544746",
+   "Safety Controls & Devices Ltd",
+   "close 71 vs 20 EMA 71.55"
+  ],
+  [
    "544774",
    "SMR Jewels",
    "close 85 vs 20 EMA 93.15"
+  ],
+  [
+   "544809",
+   "Adon Agro",
+   "close 94.58 vs 20 EMA 97.38"
   ],
   [
    "544980",
@@ -303,6 +217,11 @@
    "APSISAERO",
    "Apsis Aerocom Ltd",
    "close 467.8 vs 20 EMA 517.04"
+  ],
+  [
+   "BPLPHARMA",
+   "Bharat Parenterals Ltd",
+   "close 1800.8 vs 20 EMA 1838.75"
   ],
   [
    "BRANDMAN",
@@ -325,29 +244,14 @@
    "close 1147.7 vs 20 EMA 1276.31"
   ],
   [
-   "HALDYNGL",
-   "Haldyn Glass",
-   "close 137.07 vs 20 EMA 135.04"
-  ],
-  [
    "HEXAGON",
    "Hexagon Nutri.",
    "close 59.21 vs 20 EMA 61.52"
   ],
   [
-   "KANOHAR",
-   "Kanohar Elect.",
-   "close 1006.75 vs 20 EMA 996.11"
-  ],
-  [
    "MPIMANIPAL",
    "Manipal Payment and Identity Solutions Ltd",
    "close 312.6 vs 20 EMA 323.33"
-  ],
-  [
-   "ORIRAIL",
-   "Oriental Rail Infrastructure Ltd",
-   "close 116.9 vs 20 EMA 115.96"
   ],
   [
    "RAMBHAJO",
@@ -362,22 +266,7 @@
   [
    "SWASTIKAIN",
    "Swastika Infra",
-   "close 192.99 (too new for any EMA)"
-  ],
-  [
-   "TAALTECH",
-   "TAAL Tech Ltd",
-   "close 929.7 vs 20 EMA 925.62"
-  ],
-  [
-   "TAMBOLIIN",
-   "Tamboli Industri",
-   "close 327.6 vs 20 EMA 313.68"
-  ],
-  [
-   "TRANSPEK",
-   "Transpek Industry Ltd",
-   "close 1292.6 vs 20 EMA 1290.54"
+   "close 192.99 vs 20 EMA 202.72"
   ],
   [
    "XTRANET",
@@ -391,19 +280,19 @@
   ]
  ],
  "per_alert": {
-  "TTM Profit > 30%": 1,
-  "52W High": 3,
-  "Daily Volume Scan": 4,
+  "TTM Profit > 30%": 0,
+  "52W High": 0,
+  "Daily Volume Scan": 0,
   "Weekly Volume Scan": 1,
   "Ready after 6 Months": 0,
   "Mukul Mahavir Agrawal": 0,
   "Ashish Kacholia": 0
  },
- "email_total": 6,
- "already_listed": 4,
+ "email_total": 1,
+ "already_listed": 0,
  "price_date": "09 Nov 2026",
  "monthly_pass": 0,
  "mode": "auto",
  "monthly_done": false,
- "run_at": "10 Nov 2026, 07:50 AM IST"
+ "run_at": "11 Nov 2026, 07:48 AM IST"
 }

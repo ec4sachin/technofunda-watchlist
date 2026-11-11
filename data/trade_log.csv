@@ -14,3 +14,6 @@ date,strategy,mode,action,symbol,name,qty,price,value,reason,pnl,pnl_pct,hold_da
 2026-11-06,Positional Trading,paper,BUY,PANACHE,Panache Digilife,174,686.05,119372.7,"Breakout above ₹672.6 + 1% (stop ₹644.89, target ₹891.87)",,,,positional-PANACHE-2026-11-06
 2026-11-06,Smart Switch,paper,BUY,PANACHE,Panache Digilife,174,686.05,119372.7,"Breakout above ₹672.6 + 1% (stop ₹644.89, target ₹891.87) · Smallcap 100 19,132 above EMA 50 19,109 → Positional exits",,,,switch-PANACHE-2026-11-06
 2026-11-08,Smart Switch · Growth list,paper,BUY,CUBEXTUB,Cubex Tubings,409,195.25,79857.25,"Breakout above ₹191.43 + 1% (stop ₹183.53, target ₹234.3) · Smallcap 100 18,975 below EMA 50 19,103 → Swing exits",,,,growth_switch-CUBEXTUB-2026-11-08
+2026-11-09,Swing Strategy,paper,BUY,SAAKSHI,Saakshi Medtech,343,378.9,129962.7,"Breakout above ₹375 + 1% (stop ₹356.4, target ₹454.68)",,,,swing-SAAKSHI-2026-11-09
+2026-11-09,Positional Trading,paper,BUY,SAAKSHI,Saakshi Medtech,316,378.9,119732.4,"Breakout above ₹375 + 1% (stop ₹356.4, target ₹492.57)",,,,positional-SAAKSHI-2026-11-09
+2026-11-09,Smart Switch,paper,BUY,SAAKSHI,Saakshi Medtech,316,378.9,119732.4,"Breakout above ₹375 + 1% (stop ₹356.4, target ₹454.68) · Smallcap 100 18,975 below EMA 50 19,103 → Swing exits",,,,switch-SAAKSHI-2026-11-09
