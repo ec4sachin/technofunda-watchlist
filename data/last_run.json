@@ -1,19 +1,7 @@
 {
  "added": [],
- "rejected": [
-  [
-   "SPARC",
-   "SPARC",
-   "6.1/11 · 3-month RS 68 (need above 80)"
-  ]
- ],
- "to_dt": [
-  [
-   "DENTALKART",
-   "Vasa Denticity Ltd",
-   "close 446 < 200 EMA 446.77"
-  ]
- ],
+ "rejected": [],
+ "to_dt": [],
  "to_sp": [],
  "removed": [],
  "unchecked": [
@@ -266,7 +254,7 @@
   [
    "SWASTIKAIN",
    "Swastika Infra",
-   "close 192.99 vs 20 EMA 202.72"
+   "close 192.99 vs 20 EMA 202.11"
   ],
   [
    "XTRANET",
@@ -283,16 +271,16 @@
   "TTM Profit > 30%": 0,
   "52W High": 0,
   "Daily Volume Scan": 0,
-  "Weekly Volume Scan": 1,
+  "Weekly Volume Scan": 0,
   "Ready after 6 Months": 0,
   "Mukul Mahavir Agrawal": 0,
   "Ashish Kacholia": 0
  },
- "email_total": 1,
+ "email_total": 0,
  "already_listed": 0,
  "price_date": "09 Nov 2026",
  "monthly_pass": 0,
- "mode": "auto",
+ "mode": "daily",
  "monthly_done": false,
- "run_at": "11 Nov 2026, 07:48 AM IST"
+ "run_at": "11 Nov 2026, 11:09 AM IST"
 }
