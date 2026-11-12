@@ -149,3 +149,13 @@ class Mood:
 
     def now(self):
         return self.on(self.t[-1]) if self.t else None
+
+
+def cached():
+    """The saved Smallcap 100 closes (data/index_smallcap100.csv) without downloading anything, or None."""
+    p = os.path.join(storage.DATA, CACHE)
+    if not os.path.exists(p):
+        return None
+    with open(p, newline="", encoding="utf-8") as f:
+        rows = [(r["date"], float(r["close"])) for r in csv.DictReader(f) if r.get("close")]
+    return {"t": [d for d, _ in rows], "c": [c for _, c in rows]} if rows else None

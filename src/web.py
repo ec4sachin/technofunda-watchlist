@@ -71,6 +71,24 @@ input,select{font:15px var(--f-body);color:var(--ink);background:var(--surface);
 .cat .cx{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .cat.none{cursor:default;color:var(--muted);font-style:italic}.cat.none:hover{border-color:var(--line)}
 .order .oh.cat{background:var(--accent)}
+.sx-legend{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.sx-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:flex-end}.sx-tools select{max-width:100%;font-size:14px;padding:7px 10px}
+.phs{display:inline-block;font-size:12px;line-height:1.5;padding:1px 8px;border-radius:999px;background:var(--bg);border:1px solid var(--line);white-space:nowrap}
+.phs.m-good{background:var(--up-soft);border-color:transparent}.phs.m-bad{background:var(--down-soft);border-color:transparent}
+.sx-list{display:flex;flex-direction:column;gap:6px}
+.sx{appearance:none;font:inherit;color:var(--ink);text-align:left;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:10px;
+  padding:10px 12px;display:grid;grid-template-columns:minmax(0,1.5fr) repeat(5,minmax(60px,.45fr)) minmax(96px,.7fr);gap:6px 8px;align-items:center}
+.sx:hover{border-color:var(--accent)}
+.sx-n b{display:block;font-weight:600}.sx-n small{color:var(--muted);font-size:12px}
+.sv{display:flex;flex-direction:column;align-items:flex-end;font:600 13.5px var(--f-mono);padding:3px 6px;border-radius:6px}
+.sv small{font:500 10.5px var(--f-body);color:var(--muted)}.sv.sel{outline:1px solid var(--line)}.sv.beat,td.beat{background:var(--up-soft)}
+.sx-p{display:flex;flex-direction:column;align-items:flex-end;gap:2px}.sx-p small{font-size:11.5px}
+.secchart{height:240px;border:1px solid var(--line);border-radius:8px;overflow:hidden;position:relative}
+.sx-key{display:flex;gap:14px;font-size:12.5px;color:var(--muted)}.sx-key i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:5px;vertical-align:middle}
+#secbody{gap:10px}#secbody .tbl table{min-width:0;font-size:12.5px}#secbody .tbl td,#secbody .tbl th{padding:6px 6px}#secbody .tbl td,#secbody .tbl th{padding:6px 8px}#secbody .ra{text-align:right;white-space:nowrap}#secbody .tbl td:first-child{min-width:84px}
+@media (max-width:520px){#secbody .tbl table{font-size:11px}#secbody .tbl td,#secbody .tbl th{padding:5px 3px}#secbody .tbl td:first-child{min-width:72px}#secbody .xc{font-size:10px;padding:0 4px}}
+@media (max-width:720px){.sx{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px 4px}.sx .sv{font-size:12px;padding:3px 3px}.sx-n{grid-column:1/-1}.sx-p{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center}}
+
 .order.wide{width:min(560px,calc(100vw - 24px))}
 .cs{border-top:1px solid var(--line);padding-top:10px}.cs:first-child{border-top:0;padding-top:0}
 .cs h4{margin:0 0 6px;font:700 14px var(--f-body);color:var(--ink)}.cs h4 small{font-weight:500;color:var(--muted);margin-left:4px}
@@ -203,6 +221,8 @@ table{border-collapse:collapse;width:100%;min-width:640px;font-size:13.5px}
 th,td{text-align:left;padding:9px 12px;border-top:1px solid var(--line);vertical-align:top}
 th{border-top:0;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
 td.r{color:var(--muted);font-family:var(--f-mono);font-size:12.5px}
+/* the chart library lays itself out with a table: keep the page's table style away from it */
+.chartbox table,.secchart table{min-width:0;width:auto;border-collapse:separate;font-size:inherit}.chartbox td,.chartbox th,.secchart td,.secchart th{padding:0;border:0;vertical-align:initial}
 .note{color:var(--muted);font-size:12.5px;margin-top:22px;max-width:70ch}
 @media (max-width:720px){
   .row{grid-template-columns:minmax(0,1fr) auto}
@@ -313,6 +333,7 @@ main.wide{max-width:max(1080px,80vw)}
     <button class="tab" role="tab" data-v="history" id="t-history">History</button>
     <button class="tab" role="tab" data-v="alerts" id="t-alerts">Alerts<b id="c-alerts">0</b></button>
     <button class="tab" role="tab" data-v="strategy" id="t-strategy">Strategy<b id="c-strategy">0</b></button>
+    <button class="tab" role="tab" data-v="sector" id="t-sector">Sector Rotation</button>
   </nav>
 </div></header>
 
@@ -333,6 +354,7 @@ main.wide{max-width:max(1080px,80vw)}
   <section id="v-today" hidden></section>
   <section id="v-alerts" hidden></section>
   <section id="v-strategy" hidden></section>
+  <section id="v-sector" hidden></section>
   <section class="viewer" id="panel" hidden aria-label="Stock chart and details">
     <div class="list" id="p-row"></div>
     <div class="pcard">
@@ -797,6 +819,100 @@ function setRange(){
   }
   showBars(Math.max(k, 5) / (1 - RIGHT_GAP));
 }
+
+// ---------------- Sector Rotation: SP + DT stocks by sub-sector (Screener "Broad Industry") vs the Nifty Smallcap 100.
+// Data: sectors.json written by the robot each run (equal-weight index of each sub-sector, 1 year of days).
+let SEC = null, secLoad = null, secChart = null, secCur = null, secPeriod = "1M", secSector = "";
+try { const p = localStorage.getItem("tf-secp"); if (["1W", "1M", "3M", "6M", "1Y"].includes(p)) secPeriod = p; } catch (e) {}
+try { secSector = localStorage.getItem("tf-secs") || ""; } catch (e) {}
+const SEC_DAYS = {"1W": 5, "1M": 21, "3M": 63, "6M": 126, "1Y": 252}, SEC_P = Object.keys(SEC_DAYS);
+const SEC_NAME = {"1W": "1 week", "1M": "1 month", "3M": "3 months", "6M": "6 months", "1Y": "1 year"};
+const PHASE = {Leading: ["m-good", "Leading", "beating the index over 1 month and 1 week"],
+  Improving: ["", "Improving", "behind over 1 month, but beating it this week"],
+  Weakening: ["", "Weakening", "ahead over 1 month, but behind this week"],
+  Lagging: ["m-bad", "Lagging", "behind the index over 1 month and 1 week"]};
+function loadSectors(){
+  if (!secLoad) secLoad = (D.sectors ? Promise.resolve(D.sectors) : fetch("sectors.json?t=" + Date.now(), {cache: "no-store"})
+    .then(r => r.ok ? r.json() : null)).catch(() => null).then(d => (SEC = d));
+  return secLoad;
+}
+const pc = v => v == null ? `<span class="mut">—</span>` : `<span class="${v >= 0 ? "up" : "down"}">${v >= 0 ? "+" : "−"}${Math.abs(v).toFixed(1)}%</span>`;
+async function drawSectors(){
+  const v = document.getElementById("v-sector");
+  if (!SEC) { v.innerHTML = `<div class="empty">Loading sector data…</div>`; await loadSectors(); }
+  if (!SEC || !SEC.subs) { v.innerHTML = `<div class="empty">Sector Rotation appears after the next robot run.</div>`; return; }
+  const P = secPeriod, ix = SEC.index.perf;
+  const sectorsAll = [...new Set(SEC.subs.map(x => x.sector))].sort();
+  if (secSector && !sectorsAll.includes(secSector)) secSector = "";
+  const subs = SEC.subs.filter(x => !secSector || x.sector === secSector).sort((a, b) => (b.perf[P] ?? -1e9) - (a.perf[P] ?? -1e9));
+  const nStocks = s_ => SEC.subs.filter(x => x.sector === s_).reduce((t, x) => t + x.n, 0);
+  const cnt = {}; subs.forEach(x => { cnt[x.phase] = (cnt[x.phase] || 0) + 1; });
+  const cell = (x, k) => `<div class="sv ${x.rel[k] != null && x.rel[k] > 0 ? "beat" : ""}${k === P ? " sel" : ""}"><small>${k}</small>${pc(x.perf[k])}</div>`;
+  v.innerHTML = `
+    <div class="st-head"><div><h2 style="margin:0">Sector Rotation<span class="cnt">${subs.length}</span></h2>
+      <div class="meta">${SEC.total - SEC.unclassified} of ${SEC.total} SP + DT stocks in ${SEC.subs.length} sub-sectors${secSector ? ` · showing ${esc(secSector)}` : ""} · prices of ${esc(SEC.as_of)}</div></div>
+      <div class="sx-tools"><select id="sec-filter" aria-label="Show sector"><option value="">All sectors (${sectorsAll.length})</option>${sectorsAll.map(s_ =>
+        `<option value="${esc(s_)}"${s_ === secSector ? " selected" : ""}>${esc(s_)} · ${SEC.subs.filter(x => x.sector === s_).length} sub-sectors, ${nStocks(s_)} stocks</option>`).join("")}</select>
+      <div class="ranges" role="group" aria-label="Sort by period">${SEC_P.map(k => `<button class="rg" data-secp="${k}" aria-pressed="${k === P}">${k}</button>`).join("")}</div></div></div>
+    <div class="st-note sx-index">📈 <b>Nifty Smallcap 100</b> &nbsp; ${SEC_P.map(k => `${k} ${pc(ix[k])}`).join(" · ")}
+      <br><small class="mut">Sorted by ${P} performance. Green box = beating the Smallcap 100 over that period. Tap a sub-sector for its chart and stocks.</small></div>
+    ${SEC.unclassified ? `<div class="st-note">⏳ ${SEC.unclassified} stock(s) not sorted into a sub-sector yet — the robot reads up to 60 Screener pages a day, so all are in within a few days.</div>` : ""}
+    <div class="sx-legend">${Object.keys(PHASE).map(k => `<span class="phs ${PHASE[k][0]}" title="${PHASE[k][2]}">${k} <b>${cnt[k] || 0}</b></span>`).join("")}</div>
+    <div class="sx-list">${subs.map(x => `<button class="sx" data-sec="${SEC.subs.indexOf(x)}">
+      <div class="sx-n"><b>${esc(x.name)}</b><small>${esc(x.sector)} · ${x.n} stock${x.n > 1 ? "s" : ""}</small></div>
+      ${SEC_P.map(k => cell(x, k)).join("")}
+      <div class="sx-p">${x.phase ? `<span class="phs ${PHASE[x.phase][0]}">${x.phase}</span>` : ""}<small class="mut">${x.rel[P] == null ? "" : (x.rel[P] >= 0 ? "+" : "−") + Math.abs(x.rel[P]).toFixed(1) + " vs index"}</small></div>
+    </button>`).join("")}</div>
+    <p class="src">Sub-sectors are a specific grouping made for your list (stocks not yet grouped use Screener's industry). Each sub-sector line is an equal-weight average of its SP + DT stocks (every stock counts the same).
+      1W = 5, 1M = 21, 3M = 63, 6M = 126, 1Y = 252 trading days. Sub-sectors with only 1–2 stocks move with those stocks — read them with care. Not investment advice.</p>`;
+  document.getElementById("sec-filter").addEventListener("change", e => {
+    secSector = e.target.value; try { localStorage.setItem("tf-secs", secSector); } catch (x) {} drawSectors(); });
+}
+async function openSector(i){
+  if (!SEC || !SEC.subs[i]) return;
+  secCur = SEC.subs[i];
+  const o = document.getElementById("order");
+  o.classList.add("wide");
+  o.innerHTML = `<div class="oh cat"><h3 id="o-title">${esc(secCur.name)}</h3><button class="btn x" data-oclose aria-label="Close">✕</button></div><div class="ob" id="secbody"></div>`;
+  document.getElementById("oscrim").hidden = false; o.hidden = false;
+  secWin();
+  o.querySelector("[data-oclose]").focus();
+}
+async function secWin(){
+  const x = secCur, P = secPeriod, body = document.getElementById("secbody"); if (!x || !body) return;
+  const ix = SEC.index.perf;
+  const stocks = x.stocks.slice().sort((a, b) => (b[P] ?? -1e9) - (a[P] ?? -1e9));
+  body.innerHTML = `<div class="small mut">${esc(x.sector)} · ${x.n} stock${x.n > 1 ? "s" : ""}${x.phase ? ` · <span class="phs ${PHASE[x.phase][0]}">${x.phase}</span> <small>${PHASE[x.phase][2]}</small>` : ""}</div>
+    <div class="ranges" role="group" aria-label="Chart period">${SEC_P.map(k => `<button class="rg" data-secp="${k}" aria-pressed="${k === P}">${k}</button>`).join("")}</div>
+    <div class="secchart" id="secchart"></div>
+    <div class="sx-key"><span><i style="background:var(--accent)"></i>${esc(x.name)}</span><span><i style="background:var(--muted)"></i>Nifty Smallcap 100</span></div>
+    <div class="tbl"><table><thead><tr><th></th>${SEC_P.map(k => `<th class="ra" title="${SEC_NAME[k]}">${k}</th>`).join("")}</tr></thead><tbody>
+      <tr><td><b>${esc(x.name)}</b></td>${SEC_P.map(k => `<td class="ra${x.rel[k] > 0 ? " beat" : ""}">${pc(x.perf[k])}</td>`).join("")}</tr>
+      <tr><td>Nifty Smallcap 100</td>${SEC_P.map(k => `<td class="ra">${pc(ix[k])}</td>`).join("")}</tr>
+      <tr><td class="mut" title="Sub-sector minus index, in % points">Difference</td>${SEC_P.map(k => `<td class="ra">${x.rel[k] == null ? "—" : (x.rel[k] >= 0 ? "+" : "−") + Math.abs(x.rel[k]).toFixed(1)}</td>`).join("")}</tr>
+    </tbody></table></div>
+    <h4 style="margin:6px 0 0">Stocks <small class="mut">(sorted by ${P}, tap to open)</small></h4>
+    <div class="tbl"><table><thead><tr><th>Stock</th>${SEC_P.map(k => `<th class="ra">${k}</th>`).join("")}</tr></thead><tbody>
+      ${stocks.map(t => `<tr><td><button class="linkish" data-sec-open="${esc(t.s)}">${esc(t.n)}</button> <span class="xc">${t.l}</span></td>${SEC_P.map(k => `<td class="ra">${pc(t[k])}</td>`).join("")}</tr>`).join("")}
+    </tbody></table></div>`;
+  body.querySelectorAll("[data-secp]").forEach(b => b.setAttribute("aria-pressed", b.dataset.secp === P));
+  try { await loadLW(); } catch (e) { document.getElementById("secchart").innerHTML = `<div class="empty" style="border:0">The chart library could not load.</div>`; return; }
+  if (secChart) { secChart.remove(); secChart = null; }
+  const box = document.getElementById("secchart"); if (!box) return;
+  const n = SEC_DAYS[P], d = SEC.dates, from = Math.max(0, d.length - 1 - n);
+  const line = (arr) => { const b0 = arr[from]; return d.slice(from).map((t, k) => ({time: t, value: arr[from + k] != null && b0 ? +(arr[from + k] / b0 * 100).toFixed(2) : null})).filter(p => p.value != null); };
+  secChart = LightweightCharts.createChart(box, {width: box.clientWidth, height: box.clientHeight || 240,
+    layout: {background: {type: "solid", color: tok("--surface")}, textColor: tok("--muted"), fontFamily: tok("--f-body"), fontSize: 11},
+    grid: {vertLines: {color: alpha(tok("--line"), .5)}, horzLines: {color: alpha(tok("--line"), .5)}},
+    rightPriceScale: {borderColor: tok("--line")}, timeScale: {borderColor: tok("--line")}, handleScroll: false, handleScale: false,
+    localization: {priceFormatter: p => (p - 100 >= 0 ? "+" : "") + (p - 100).toFixed(1) + "%"}});
+  secChart.addLineSeries({color: tok("--muted"), lineWidth: 2, lineStyle: 2, priceLineVisible: false, lastValueVisible: true}).setData(line(SEC.index.series));
+  secChart.addLineSeries({color: tok("--accent"), lineWidth: 3, priceLineVisible: false, lastValueVisible: true}).setData(line(x.series));
+  // exact size of the box (re-checked once the window has opened), then all of the period in view
+  const fit = () => { if (!secChart || !box.isConnected) return; secChart.applyOptions({width: box.clientWidth, height: box.clientHeight || 240});
+    secChart.timeScale().fitContent(); };
+  fit(); requestAnimationFrame(fit); setTimeout(fit, 250);
+}
 // ---------------- Alerts: one-click saving through the user's own GitHub key (kept only in this browser)
 const AL = D.alerts || {active: [], done: [], bot: ""};
 AL.pending = []; AL.deleting = new Set();
@@ -969,7 +1085,8 @@ function openOrder(sym, side){
   document.getElementById("oscrim").hidden = false; document.getElementById("order").hidden = false;
   document.getElementById("o-qty").focus();
 }
-function closeOrder(){ const o = document.getElementById("order"); o.hidden = true; o.classList.remove("wide"); document.getElementById("oscrim").hidden = true; }
+function closeOrder(){ const o = document.getElementById("order"); o.hidden = true; o.classList.remove("wide");
+  if (secChart) { secChart.remove(); secChart = null; } document.getElementById("oscrim").hidden = true; }
 function drawOrder(r){
   const c = num(r.last_close), buy = ORD.side === "BUY";
   const seg = (key, opts) => `<div class="seg" role="group">${opts.map(([v, l]) => `<button data-oset="${key}" data-val="${v}" aria-pressed="${ORD[key] === v}">${l}</button>`).join("")}</div>`;
@@ -1084,6 +1201,10 @@ document.addEventListener("click", async e => {
   if (e.target.closest("[data-pos-del]") && cur) { delete POS[cur.r.symbol]; savePos(); showToast("Position removed."); posChanged(); return; }
   const ob = e.target.closest("[data-order]"); if (ob) { openOrder(ob.dataset.sym, ob.dataset.order); return; }
   const cb = e.target.closest("[data-cat]"); if (cb) { openCat(cb.dataset.cat); return; }
+  const sx = e.target.closest("[data-sec]"); if (sx) { openSector(+sx.dataset.sec); return; }
+  const sp_ = e.target.closest("[data-secp]"); if (sp_) { secPeriod = sp_.dataset.secp; try { localStorage.setItem("tf-secp", secPeriod); } catch (x) {}
+    if (sp_.closest("#order")) { secWin(); } else drawSectors(); return; }
+  const so = e.target.closest("[data-sec-open]"); if (so) { closeOrder(); openPanel(so.dataset.secOpen, "chart"); return; }
   const os = e.target.closest("[data-oset]"); if (os) { ORD[os.dataset.oset] = os.dataset.val; const [r] = findRow(ORD.sym); if (r) drawOrder(r); return; }
   if (e.target.closest("[data-oclose]") || e.target.id === "oscrim") { closeOrder(); return; }
   const ai = e.target.closest("[data-alert-op]"); if (ai) { closeMenu(); saveAlert(cur.r.symbol, cur.r.name, ai.dataset.alertOp, +ai.dataset.alertPrice); return; }
@@ -1530,7 +1651,7 @@ async function migrateLocal(){
 }
 
 function show(v){
-  if (!["sp", "dt", "today", "history", "alerts", "strategy"].includes(v)) v = "sp";
+  if (!["sp", "dt", "today", "history", "alerts", "strategy", "sector"].includes(v)) v = "sp";
   view = v;
   if (cur) { if (chartObj) { chartObj.remove(); chartObj = null; } cur = null; document.getElementById("panel").hidden = true;
     document.getElementById("strip").hidden = false; document.querySelector("main").classList.remove("wide"); document.body.classList.remove("viewing"); }
@@ -1540,8 +1661,10 @@ function show(v){
   document.getElementById("v-history").hidden = v !== "history";
   document.getElementById("v-alerts").hidden = v !== "alerts";
   document.getElementById("v-strategy").hidden = v !== "strategy";
+  document.getElementById("v-sector").hidden = v !== "sector";
   if (v === "sp" || v === "dt") drawList();
   if (v === "strategy") drawStrategies();
+  if (v === "sector") drawSectors();
 }
 
 let drawStrip = () => {};
@@ -1653,13 +1776,16 @@ def render_fragment(data):
     return FRAGMENT.replace("__DATA__", blob)
 
 
-def build(sp, dt, run, history, rules_cfg, out=None, snaps=None, charts=None, alerts=None, strategies=None):
+def build(sp, dt, run, history, rules_cfg, out=None, snaps=None, charts=None, alerts=None, strategies=None, sectors=None):
     """Write the dashboard page. charts (price history) goes to charts.json next to it, loaded when a chart opens."""
     out = out or OUT
     os.makedirs(os.path.dirname(out), exist_ok=True)
     page = FULL_PAGE.replace("{fragment}", render_fragment(page_data(sp, dt, run, history, rules_cfg, snaps=snaps, alerts=alerts, strategies=strategies)))
     with open(out, "w", encoding="utf-8") as f:
         f.write(page)
+    if sectors is not None:   # Sector Rotation tab data, loaded when the tab is opened
+        with open(os.path.join(os.path.dirname(out), "sectors.json"), "w", encoding="utf-8") as f:
+            json.dump(sectors, f, separators=(",", ":"))
     # the chart library is published next to the page (see LW_URL)
     lib = os.path.join(os.path.dirname(os.path.abspath(__file__)), "vendor", "lightweight-charts-4.1.3.js")
     if os.path.exists(lib):

@@ -112,6 +112,13 @@ def parse_company_page(html):
     cid = COMPANY_ID_RE.search(html)
     if cid:
         m["_company_id"] = cid.group(1) or cid.group(2)
+    # Screener's 4-level classification (Peer comparison): Broad Sector > Sector > Broad Industry > Industry
+    path = []
+    for level in ("Broad Sector", "Sector", "Broad Industry", "Industry"):
+        a_ = soup.find("a", attrs={"title": level}, href=re.compile(r"/market/"))
+        path.append(a_.get_text(" ", strip=True) if a_ else "")
+    if any(path):
+        m["sector_path"] = path
 
     # Top ratios box
     for li in soup.select("#top-ratios li"):
@@ -269,7 +276,7 @@ SNAPSHOT_KEYS = ("market_cap", "price", "high_52w", "low_52w", "pe", "book_value
                  "profit_growth_qtr_yoy", "opm_latest_qtr", "opm_last_year", "net_profit_ttm",
                  "debt_to_equity", "interest_coverage", "cfo_to_profit_5y", "debtor_days",
                  "working_capital_days", "promoter_holding", "promoter_change_1y", "fii_dii_latest",
-                 "shareholders_latest", "result_period_months")
+                 "shareholders_latest", "result_period_months", "sector_path")
 
 
 def snapshot(m, today=""):

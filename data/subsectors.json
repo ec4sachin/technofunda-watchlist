@@ -1,0 +1,1078 @@
+{
+ "500220": [
+  "Textiles & Apparel",
+  "Synthetic leather & coated fabrics"
+ ],
+ "500346": [
+  "Electronics",
+  "Telecom equipment"
+ ],
+ "504240": [
+  "Electrical Equipment",
+  "Wires & cables"
+ ],
+ "512399": [
+  "Financial Services",
+  "Investment companies"
+ ],
+ "513472": [
+  "Metals",
+  "Castings (investment & steel)"
+ ],
+ "513502": [
+  "Metals",
+  "Copper & non-ferrous products"
+ ],
+ "513507": [
+  "Packaging",
+  "Metal containers"
+ ],
+ "514280": [
+  "Textiles & Apparel",
+  "Technical textiles"
+ ],
+ "515008": [
+  "Electrical Equipment",
+  "Insulators"
+ ],
+ "522294": [
+  "Capital Goods",
+  "Industrial machinery & SPMs"
+ ],
+ "524218": [
+  "Chemicals",
+  "Pyridine & agro intermediates"
+ ],
+ "524336": [
+  "Chemicals",
+  "Dyes & dye intermediates"
+ ],
+ "524717": [
+  "Pharma & Healthcare",
+  "Culture media & life-science reagents"
+ ],
+ "526433": [
+  "IT & Internet",
+  "Engineering R&D services"
+ ],
+ "526638": [
+  "Textiles & Apparel",
+  "Technical textiles"
+ ],
+ "530477": [
+  "Pharma & Healthcare",
+  "Pharma excipients"
+ ],
+ "530615": [
+  "Metals",
+  "Steel – integrated & long products"
+ ],
+ "530741": [
+  "FMCG & Food",
+  "Poultry, eggs & feed"
+ ],
+ "531569": [
+  "Pharma & Healthcare",
+  "Injectables"
+ ],
+ "532329": [
+  "Auto & Auto Parts",
+  "Auto electronics & software"
+ ],
+ "538546": [
+  "Building Materials",
+  "Roofing & pre-engineered buildings"
+ ],
+ "538862": [
+  "Financial Services",
+  "Stock broking"
+ ],
+ "539984": [
+  "Electrical Equipment",
+  "Insulators"
+ ],
+ "540652": [
+  "Metals",
+  "Castings (investment & steel)"
+ ],
+ "541083": [
+  "Consumer Durables",
+  "Kitchen appliances, cookware & sinks"
+ ],
+ "542669": [
+  "Metals",
+  "Coated & processed steel"
+ ],
+ "543542": [
+  "Realty",
+  "Residential developers"
+ ],
+ "543616": [
+  "Pharma & Healthcare",
+  "Branded & export formulations"
+ ],
+ "543619": [
+  "Railways",
+  "Rail electronics & control systems"
+ ],
+ "543787": [
+  "Retail",
+  "E-commerce"
+ ],
+ "543895": [
+  "Media & Services",
+  "Events & exhibitions"
+ ],
+ "543920": [
+  "Defence & Aerospace",
+  "Naval systems & equipment"
+ ],
+ "543963": [
+  "Pharma & Healthcare",
+  "Ayurvedic & herbal medicines"
+ ],
+ "543991": [
+  "Media & Services",
+  "Environmental consulting"
+ ],
+ "544047": [
+  "Metals",
+  "Metal recycling (lead, brass, aluminium)"
+ ],
+ "544091": [
+  "Media & Services",
+  "Testing & certification labs"
+ ],
+ "544141": [
+  "Financial Services",
+  "Stock broking"
+ ],
+ "544330": [
+  "Metals",
+  "Copper & non-ferrous products"
+ ],
+ "544335": [
+  "Infrastructure",
+  "Roads & highways EPC"
+ ],
+ "544354": [
+  "Power",
+  "Solar EPC & solar pumps"
+ ],
+ "544383": [
+  "Logistics",
+  "Port & container logistics"
+ ],
+ "544406": [
+  "IT & Internet",
+  "IT infrastructure & cybersecurity"
+ ],
+ "544434": [
+  "Railways",
+  "Rail castings & track components"
+ ],
+ "544435": [
+  "Media & Services",
+  "Advertising & digital marketing"
+ ],
+ "544442": [
+  "Pharma & Healthcare",
+  "Nutraceutical ingredients & nutrition"
+ ],
+ "544458": [
+  "Capital Goods",
+  "HVAC & refrigeration"
+ ],
+ "544463": [
+  "Logistics",
+  "Warehousing"
+ ],
+ "544464": [
+  "Retail",
+  "Mobile & electronics retail"
+ ],
+ "544504": [
+  "Infrastructure",
+  "Civil & building construction"
+ ],
+ "544516": [
+  "Railways",
+  "Rail coach components & interiors"
+ ],
+ "544518": [
+  "Capital Goods",
+  "Elevators & escalators"
+ ],
+ "544563": [
+  "Auto & Auto Parts",
+  "Electric two-wheelers"
+ ],
+ "544607": [
+  "Capital Goods",
+  "Cutting tools & abrasives"
+ ],
+ "544623": [
+  "FMCG & Food",
+  "Packaged foods"
+ ],
+ "544627": [
+  "IT & Internet",
+  "Audio-visual & system integration"
+ ],
+ "544667": [
+  "Media & Services",
+  "Education publishing"
+ ],
+ "544669": [
+  "Capital Goods",
+  "Industrial machinery & SPMs"
+ ],
+ "544675": [
+  "Infrastructure",
+  "Geosynthetics & slope protection"
+ ],
+ "544694": [
+  "FMCG & Food",
+  "Ayurvedic & wellness products"
+ ],
+ "544695": [
+  "Capital Goods",
+  "Scaffolding & formwork"
+ ],
+ "544735": [
+  "IT & Internet",
+  "SaaS & data platforms"
+ ],
+ "544755": [
+  "FMCG & Food",
+  "Cosmetics & personal care"
+ ],
+ "544765": [
+  "Consumer Services",
+  "Restaurants & cloud kitchens"
+ ],
+ "544774": [
+  "Jewellery",
+  "Gold jewellery manufacturing"
+ ],
+ "544844": [
+  "Capital Goods",
+  "Precision engineered components"
+ ],
+ "ACCENTMIC": [
+  "Pharma & Healthcare",
+  "Pharma excipients"
+ ],
+ "ADVAIT": [
+  "Power",
+  "Transmission equipment & EPC"
+ ],
+ "ADVENTHTL": [
+  "Consumer Services",
+  "Hotels"
+ ],
+ "AEROFLEX": [
+  "Capital Goods",
+  "Process piping & flow solutions"
+ ],
+ "AEROPLANE": [
+  "FMCG & Food",
+  "Rice (basmati) brands & exports"
+ ],
+ "AGARIND": [
+  "Oil & Gas",
+  "Bitumen & tanker logistics"
+ ],
+ "AJMERA": [
+  "Realty",
+  "Residential developers"
+ ],
+ "ALLCARGO": [
+  "Logistics",
+  "Freight forwarding"
+ ],
+ "ANAWIL": [
+  "Electrical Equipment",
+  "Wires & cables"
+ ],
+ "ANTELOPUS": [
+  "Oil & Gas",
+  "Exploration & production"
+ ],
+ "APEXECO": [
+  "Utilities",
+  "Water & wastewater treatment"
+ ],
+ "APOLLOPIPE": [
+  "Building Materials",
+  "Plastic pipes"
+ ],
+ "ARIES": [
+  "Agri",
+  "Specialty plant nutrients"
+ ],
+ "ARIS": [
+  "Building Materials",
+  "Construction materials supply (B2B)"
+ ],
+ "ARMANFIN": [
+  "Financial Services",
+  "NBFC – microfinance"
+ ],
+ "ASHIANA": [
+  "Realty",
+  "Residential developers"
+ ],
+ "ASHWINI": [
+  "Logistics",
+  "Port & container logistics"
+ ],
+ "ASIANENE": [
+  "Oil & Gas",
+  "Oilfield & offshore services"
+ ],
+ "AVTNPL": [
+  "Chemicals",
+  "Natural extracts & ingredients"
+ ],
+ "AYMSYNTEX": [
+  "Textiles & Apparel",
+  "Synthetic yarn & fibre"
+ ],
+ "BALUFORGE": [
+  "Auto & Auto Parts",
+  "Forgings & bearing rings"
+ ],
+ "BELLACASA": [
+  "Textiles & Apparel",
+  "Home textiles"
+ ],
+ "BETA": [
+  "Pharma & Healthcare",
+  "Oncology formulations"
+ ],
+ "BHAGERIA": [
+  "Chemicals",
+  "Dyes & dye intermediates"
+ ],
+ "BHARATSE": [
+  "Auto & Auto Parts",
+  "Seating & interiors"
+ ],
+ "BPLPHARMA": [
+  "Pharma & Healthcare",
+  "Injectables"
+ ],
+ "BRANDMAN": [
+  "Retail",
+  "Fashion & lifestyle retail"
+ ],
+ "CANARYS": [
+  "IT & Internet",
+  "IT services"
+ ],
+ "CAPACITE": [
+  "Infrastructure",
+  "Civil & building construction"
+ ],
+ "CARYSIL": [
+  "Consumer Durables",
+  "Kitchen appliances, cookware & sinks"
+ ],
+ "CEIGALL": [
+  "Infrastructure",
+  "Roads & highways EPC"
+ ],
+ "CNL": [
+  "Retail",
+  "Consumer electronics distribution"
+ ],
+ "COMSYN": [
+  "Packaging",
+  "FIBC & woven sacks"
+ ],
+ "CONNPLEX": [
+  "Consumer Services",
+  "Cinemas"
+ ],
+ "CORDSCABLE": [
+  "Electrical Equipment",
+  "Wires & cables"
+ ],
+ "DANISH": [
+  "Electrical Equipment",
+  "Transformers"
+ ],
+ "DBREALTY": [
+  "Realty",
+  "Residential developers"
+ ],
+ "DCI": [
+  "IT & Internet",
+  "IT products distribution"
+ ],
+ "DEEDEV": [
+  "Capital Goods",
+  "Process piping & flow solutions"
+ ],
+ "DEEPA": [
+  "Jewellery",
+  "Gold jewellery manufacturing"
+ ],
+ "DEEPAKFERT": [
+  "Chemicals",
+  "Industrial chemicals & fertilisers"
+ ],
+ "DENTALKART": [
+  "Pharma & Healthcare",
+  "Pharma distribution & pharmacy retail"
+ ],
+ "DHABRIYA": [
+  "Building Materials",
+  "uPVC profiles & surfaces"
+ ],
+ "DHARARAIL": [
+  "Railways",
+  "Rail services & maintenance"
+ ],
+ "DIFFNKG": [
+  "Capital Goods",
+  "Welding & wear-resistance solutions"
+ ],
+ "DMCC": [
+  "Chemicals",
+  "Specialty chemicals – others"
+ ],
+ "DOLPHIN": [
+  "Oil & Gas",
+  "Oilfield & offshore services"
+ ],
+ "DPABHUSHAN": [
+  "Jewellery",
+  "Jewellery retail"
+ ],
+ "DURLAX": [
+  "Building Materials",
+  "uPVC profiles & surfaces"
+ ],
+ "EBGNG": [
+  "IT & Internet",
+  "Laptops & refurbished devices"
+ ],
+ "EIMCOELECO": [
+  "Capital Goods",
+  "Mining & bulk-handling equipment"
+ ],
+ "ENTERO": [
+  "Pharma & Healthcare",
+  "Pharma distribution & pharmacy retail"
+ ],
+ "EPACKPEB": [
+  "Building Materials",
+  "Roofing & pre-engineered buildings"
+ ],
+ "ESCONET": [
+  "IT & Internet",
+  "IT infrastructure & cybersecurity"
+ ],
+ "ESDS": [
+  "IT & Internet",
+  "Cloud & data centres"
+ ],
+ "FAZE3Q": [
+  "Textiles & Apparel",
+  "Home textiles"
+ ],
+ "FCL": [
+  "Chemicals",
+  "Textile chemicals"
+ ],
+ "FONEBOX": [
+  "Retail",
+  "Mobile & electronics retail"
+ ],
+ "GALAPREC": [
+  "Capital Goods",
+  "Precision engineered components"
+ ],
+ "GANDHAR": [
+  "Oil & Gas",
+  "Specialty oils & lubricants"
+ ],
+ "GKSL": [
+  "Pharma & Healthcare",
+  "Hospitals"
+ ],
+ "GNA": [
+  "Auto & Auto Parts",
+  "Axles & drivetrain"
+ ],
+ "GOLDIAM": [
+  "Jewellery",
+  "Diamond & lab-grown diamond jewellery"
+ ],
+ "GUFICBIO": [
+  "Pharma & Healthcare",
+  "Injectables"
+ ],
+ "HALDYNGL": [
+  "Packaging",
+  "Glass containers"
+ ],
+ "HEXAGON": [
+  "Pharma & Healthcare",
+  "Nutraceutical ingredients & nutrition"
+ ],
+ "HIRECT": [
+  "Electronics",
+  "Power electronics & semiconductors"
+ ],
+ "HOACFOODS": [
+  "FMCG & Food",
+  "Packaged foods"
+ ],
+ "HUHTAMAKI": [
+  "Packaging",
+  "Flexible packaging"
+ ],
+ "ICIL": [
+  "Textiles & Apparel",
+  "Home textiles"
+ ],
+ "IFBIND": [
+  "Consumer Durables",
+  "Home appliances"
+ ],
+ "IMFA": [
+  "Metals",
+  "Ferro alloys"
+ ],
+ "INDIAGLYCO": [
+  "Chemicals",
+  "Bio-based & glycol chemicals"
+ ],
+ "INDOAMIN": [
+  "Chemicals",
+  "Specialty chemicals – others"
+ ],
+ "INFINIUM": [
+  "Pharma & Healthcare",
+  "APIs & intermediates"
+ ],
+ "INFOBEAN": [
+  "IT & Internet",
+  "IT services"
+ ],
+ "INTEGRITY": [
+  "Infrastructure",
+  "Civil & building construction"
+ ],
+ "J&KBANK": [
+  "Financial Services",
+  "Banks"
+ ],
+ "JAYBARMARU": [
+  "Auto & Auto Parts",
+  "Sheet-metal & chassis parts"
+ ],
+ "JKIL": [
+  "Infrastructure",
+  "Metro & urban infrastructure"
+ ],
+ "KANPRPLA": [
+  "Packaging",
+  "FIBC & woven sacks"
+ ],
+ "KILITCH": [
+  "Pharma & Healthcare",
+  "Injectables"
+ ],
+ "KIRLFER": [
+  "Metals",
+  "Pig iron & ferrous castings"
+ ],
+ "KMEW": [
+  "Infrastructure",
+  "Marine works & dredging"
+ ],
+ "KORE": [
+  "Retail",
+  "Mobile & electronics retail"
+ ],
+ "KRISHNADEF": [
+  "Defence & Aerospace",
+  "Naval systems & equipment"
+ ],
+ "KRN": [
+  "Capital Goods",
+  "HVAC & refrigeration"
+ ],
+ "KRYSTAL": [
+  "Media & Services",
+  "Facility management"
+ ],
+ "KSHINTL": [
+  "Electrical Equipment",
+  "Winding wires"
+ ],
+ "LAXMIINDIA": [
+  "Financial Services",
+  "NBFC – lending"
+ ],
+ "LRRPL": [
+  "Metals",
+  "Metal recycling (lead, brass, aluminium)"
+ ],
+ "LTFOODS": [
+  "FMCG & Food",
+  "Rice (basmati) brands & exports"
+ ],
+ "LUXIND": [
+  "Textiles & Apparel",
+  "Apparel – sourcing, brands & innerwear"
+ ],
+ "MACPOWER": [
+  "Capital Goods",
+  "CNC machine tools"
+ ],
+ "MANAKSTEEL": [
+  "Metals",
+  "Coated & processed steel"
+ ],
+ "MANINDS": [
+  "Metals",
+  "Steel pipes & tubes"
+ ],
+ "MATRIMONY": [
+  "IT & Internet",
+  "Internet platforms"
+ ],
+ "MAYURUNIQ": [
+  "Textiles & Apparel",
+  "Synthetic leather & coated fabrics"
+ ],
+ "MEGATHERM": [
+  "Capital Goods",
+  "Industrial furnaces"
+ ],
+ "MODIS": [
+  "Realty",
+  "Residential developers"
+ ],
+ "MONARCH": [
+  "Financial Services",
+  "Stock broking"
+ ],
+ "MONOLITH": [
+  "Metals",
+  "Refractories"
+ ],
+ "MPIMANIPAL": [
+  "IT & Internet",
+  "Fintech & payments"
+ ],
+ "MPSLTD": [
+  "IT & Internet",
+  "Publishing & e-learning services"
+ ],
+ "MVGJL": [
+  "Jewellery",
+  "Jewellery retail"
+ ],
+ "MYMUDRA": [
+  "Financial Services",
+  "Loan distribution & fintech"
+ ],
+ "NGLFINE": [
+  "Pharma & Healthcare",
+  "APIs & intermediates"
+ ],
+ "NITINSPIN": [
+  "Textiles & Apparel",
+  "Cotton yarn & fabrics"
+ ],
+ "NPST": [
+  "IT & Internet",
+  "Fintech & payments"
+ ],
+ "NRAIL": [
+  "Paper",
+  "Paper & packaging board"
+ ],
+ "NUVAMA": [
+  "Financial Services",
+  "Wealth & asset management"
+ ],
+ "OBSCP": [
+  "Metals",
+  "Coated & processed steel"
+ ],
+ "OCCLLTD": [
+  "Chemicals",
+  "Rubber & polymer additives"
+ ],
+ "OMAXAUTO": [
+  "Auto & Auto Parts",
+  "Sheet-metal & chassis parts"
+ ],
+ "OMFREIGHT": [
+  "Logistics",
+  "Freight forwarding"
+ ],
+ "ORBTEXP": [
+  "Textiles & Apparel",
+  "Denim, suiting & specialty fabrics"
+ ],
+ "ORIRAIL": [
+  "Railways",
+  "Rail coach components & interiors"
+ ],
+ "PANACHE": [
+  "IT & Internet",
+  "Laptops & refurbished devices"
+ ],
+ "PANAMAPET": [
+  "Oil & Gas",
+  "Specialty oils & lubricants"
+ ],
+ "PASUPTAC": [
+  "Textiles & Apparel",
+  "Synthetic yarn & fibre"
+ ],
+ "PATELRMART": [
+  "Retail",
+  "Supermarkets"
+ ],
+ "PDSL": [
+  "Textiles & Apparel",
+  "Apparel – sourcing, brands & innerwear"
+ ],
+ "PPL": [
+  "Building Materials",
+  "Plastic pipes"
+ ],
+ "PRAKASH": [
+  "Metals",
+  "Steel – integrated & long products"
+ ],
+ "PRATHAM": [
+  "Infrastructure",
+  "Pipeline EPC (oil, gas & water)"
+ ],
+ "PREMIERPOL": [
+  "Plastics",
+  "PVC & specialty films"
+ ],
+ "PRIMECAB": [
+  "Electrical Equipment",
+  "Wires & cables"
+ ],
+ "PRIZOR": [
+  "Electronics",
+  "Security & surveillance systems"
+ ],
+ "PROTEAN": [
+  "IT & Internet",
+  "E-governance services"
+ ],
+ "PROV": [
+  "FMCG & Food",
+  "Dry fruits & nuts"
+ ],
+ "PTCIL": [
+  "Defence & Aerospace",
+  "Aerospace castings & titanium"
+ ],
+ "PUSHPA": [
+  "Jewellery",
+  "Gold jewellery manufacturing"
+ ],
+ "RAMBHAJO": [
+  "Jewellery",
+  "Gold jewellery manufacturing"
+ ],
+ "RAPIDFLEET": [
+  "Logistics",
+  "Trucking & fleet services"
+ ],
+ "RATNAVEER": [
+  "Metals",
+  "Stainless steel products"
+ ],
+ "RAYMONDLSL": [
+  "Textiles & Apparel",
+  "Apparel – sourcing, brands & innerwear"
+ ],
+ "RBZJEWEL": [
+  "Jewellery",
+  "Gold jewellery manufacturing"
+ ],
+ "RELTD": [
+  "Power",
+  "Solar EPC & solar pumps"
+ ],
+ "ROCKINGDCE": [
+  "Retail",
+  "Recommerce (refurbished & surplus goods)"
+ ],
+ "ROLEXRINGS": [
+  "Auto & Auto Parts",
+  "Forgings & bearing rings"
+ ],
+ "RSL": [
+  "Metals",
+  "Stainless steel products"
+ ],
+ "SAAKSHI": [
+  "Pharma & Healthcare",
+  "Medical devices"
+ ],
+ "SAFARI": [
+  "Consumer Durables",
+  "Luggage"
+ ],
+ "SAHANA": [
+  "IT & Internet",
+  "IT services"
+ ],
+ "SAHASRA": [
+  "Electronics",
+  "Electronics manufacturing services (EMS)"
+ ],
+ "SAMBHV": [
+  "Metals",
+  "Steel pipes & tubes"
+ ],
+ "SARDAEN": [
+  "Metals",
+  "Steel – integrated & long products"
+ ],
+ "SCPL": [
+  "FMCG & Food",
+  "Dairy & ice cream"
+ ],
+ "SEAMECLTD": [
+  "Oil & Gas",
+  "Oilfield & offshore services"
+ ],
+ "SGFIN": [
+  "Financial Services",
+  "NBFC – lending"
+ ],
+ "SHAILY": [
+  "Plastics",
+  "Precision plastic components"
+ ],
+ "SHANTIGOLD": [
+  "Jewellery",
+  "Gold jewellery manufacturing"
+ ],
+ "SHETHJI": [
+  "FMCG & Food",
+  "Spices & agri commodities"
+ ],
+ "SHREEOSFM": [
+  "Logistics",
+  "Employee transport (EV fleets)"
+ ],
+ "SHREEPUSHK": [
+  "Chemicals",
+  "Dyes & dye intermediates"
+ ],
+ "SHRIAHIMSA": [
+  "Chemicals",
+  "Natural extracts & ingredients"
+ ],
+ "SHRINGARMS": [
+  "Jewellery",
+  "Gold jewellery manufacturing"
+ ],
+ "SHUKRAPHAR": [
+  "Pharma & Healthcare",
+  "Branded & export formulations"
+ ],
+ "SIDDHIKA": [
+  "Chemicals",
+  "Paints & coatings"
+ ],
+ "SIMCA": [
+  "Media & Services",
+  "Advertising & digital marketing"
+ ],
+ "SMT": [
+  "Pharma & Healthcare",
+  "Medical devices"
+ ],
+ "SOTL": [
+  "Oil & Gas",
+  "Specialty oils & lubricants"
+ ],
+ "SSFL": [
+  "FMCG & Food",
+  "Spices & agri commodities"
+ ],
+ "STAR": [
+  "Pharma & Healthcare",
+  "Generic formulations – regulated markets"
+ ],
+ "STOVEKRAFT": [
+  "Consumer Durables",
+  "Kitchen appliances, cookware & sinks"
+ ],
+ "SUDEEPPHRM": [
+  "Pharma & Healthcare",
+  "Pharma excipients"
+ ],
+ "SUNLITE": [
+  "Metals",
+  "Metal recycling (lead, brass, aluminium)"
+ ],
+ "SUPREMEPWR": [
+  "Electrical Equipment",
+  "Transformers"
+ ],
+ "SURAKSHA": [
+  "Pharma & Healthcare",
+  "Diagnostics"
+ ],
+ "SURYODAY": [
+  "Financial Services",
+  "Banks"
+ ],
+ "SWARAJ": [
+  "Textiles & Apparel",
+  "Denim, suiting & specialty fabrics"
+ ],
+ "TAALTECH": [
+  "IT & Internet",
+  "Engineering R&D services"
+ ],
+ "TAMBOLIIN": [
+  "Metals",
+  "Castings (investment & steel)"
+ ],
+ "TANFACIND": [
+  "Chemicals",
+  "Fluorochemicals"
+ ],
+ "TATVA": [
+  "Chemicals",
+  "Specialty chemicals – others"
+ ],
+ "TAURIAN": [
+  "Capital Goods",
+  "Mining & bulk-handling equipment"
+ ],
+ "TEAMTECH": [
+  "Capital Goods",
+  "Scaffolding & formwork"
+ ],
+ "TECHERA": [
+  "Defence & Aerospace",
+  "Aerospace components & MRO"
+ ],
+ "THEJO": [
+  "Capital Goods",
+  "Mining & bulk-handling equipment"
+ ],
+ "THOMASCOTT": [
+  "Textiles & Apparel",
+  "Apparel – sourcing, brands & innerwear"
+ ],
+ "TRACXN": [
+  "IT & Internet",
+  "SaaS & data platforms"
+ ],
+ "TRANSPEK": [
+  "Chemicals",
+  "Specialty chemicals – others"
+ ],
+ "UDAYJEW": [
+  "Jewellery",
+  "Gold jewellery manufacturing"
+ ],
+ "UNIDT": [
+  "Oil & Gas",
+  "Oilfield & offshore services"
+ ],
+ "UNITEDPOLY": [
+  "Textiles & Apparel",
+  "Denim, suiting & specialty fabrics"
+ ],
+ "UNIVASTU": [
+  "Infrastructure",
+  "Civil & building construction"
+ ],
+ "USHAFIN": [
+  "Financial Services",
+  "NBFC – lending"
+ ],
+ "UTSSAV": [
+  "Jewellery",
+  "Gold jewellery manufacturing"
+ ],
+ "UYFINCORP": [
+  "Financial Services",
+  "NBFC – lending"
+ ],
+ "VENKEYS": [
+  "FMCG & Food",
+  "Poultry, eggs & feed"
+ ],
+ "VETO": [
+  "Electrical Equipment",
+  "Switches & electrical products"
+ ],
+ "VIDHIING": [
+  "Chemicals",
+  "Food colours & food ingredients"
+ ],
+ "VIDYAWIRES": [
+  "Electrical Equipment",
+  "Winding wires"
+ ],
+ "VIVIANA": [
+  "Power",
+  "Transmission equipment & EPC"
+ ],
+ "VMARCIND": [
+  "Electrical Equipment",
+  "Wires & cables"
+ ],
+ "VRLLOG": [
+  "Logistics",
+  "Trucking & fleet services"
+ ],
+ "WENDT": [
+  "Capital Goods",
+  "Cutting tools & abrasives"
+ ],
+ "WHEELS": [
+  "Auto & Auto Parts",
+  "Wheels"
+ ],
+ "WSTCSTPAPR": [
+  "Paper",
+  "Paper & packaging board"
+ ],
+ "XPROINDIA": [
+  "Plastics",
+  "PVC & specialty films"
+ ],
+ "YAAP": [
+  "Media & Services",
+  "Advertising & digital marketing"
+ ],
+ "YASHO": [
+  "Chemicals",
+  "Rubber & polymer additives"
+ ],
+ "YATHARTH": [
+  "Pharma & Healthcare",
+  "Hospitals"
+ ],
+ "ZOTA": [
+  "Pharma & Healthcare",
+  "Pharma distribution & pharmacy retail"
+ ]
+}

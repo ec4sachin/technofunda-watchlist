@@ -23,6 +23,7 @@ import strategy  # noqa: E402
 import market  # noqa: E402
 import universe  # noqa: E402
 import rs  # noqa: E402
+import sectors  # noqa: E402
 import telegram as tg  # noqa: E402
 import web  # noqa: E402
 
@@ -172,6 +173,18 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
             if m and not (row.get("nse") or row.get("bse")):
                 row["codes_checked"] = today  # page has no exchange links: do not try every day
 
+    # Sub-sector of each stock for the Sector Rotation tab (read once from its Screener page, 60 stocks a run)
+    try:
+        classify(sp, dt, snaps)
+    except Exception as e:   # never stop the run for this
+        report["warnings"].append(f"Sub-sector reading failed: {e}")
+
+    # New stocks: a specific sub-sector of their own (joins an existing one, or a new one is made) - saved in subsectors.json
+    try:
+        sub_new(sp, dt, snaps, report)
+    except Exception as e:   # never stop the run for this
+        report["warnings"].append(f"Sub-sector for new stocks failed: {e}")
+
     # Newest results for the catalyst box (quarter numbers + price target) in results season - marks are not changed
     try:
         refresh_results(sp, dt, snaps, today)
@@ -267,6 +280,46 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
                             "reason": f"close {close:g} back above {basis} EMA {ema:g}" + (" (new listing)" if basis != period else "")})
     report["price_date"] = max((v[2] for v in res_by.values() if v),
                                key=lambda d: _DT.strptime(d, "%d %b %Y"), default="")
+
+
+CLASSIFY_PER_RUN = 60
+
+
+def sub_new(sp, dt, snaps, report):
+    """Give every listed stock without a specific sub-sector one (sectors.assign) and save data/subsectors.json."""
+    override = storage.load_json(sectors.OVERRIDE_FILE, {}) or {}
+    listed = list(sp) + list(dt)
+    hand = [c for c in listed if c in override and "auto" not in (override[c][2:] if isinstance(override[c], list) else [])]
+    read = sum(1 for c in hand if (snaps.get(c) or {}).get("sector_path"))
+    if hand and read < 0.9 * len(hand):
+        return []     # first week: the Screener industries of the hand-grouped stocks are still being read (they teach the grouping)
+    made = sectors.assign(listed, snaps, override)
+    if made:
+        storage.save_json(sectors.OVERRIDE_FILE, override)
+        names = {**{k: v.get("name") for k, v in dt.items()}, **{k: v.get("name") for k, v in sp.items()}}
+        report["sub_sectors"] = [(c, names.get(c) or c, f"{sub} ({sec})" + (" · new sub-sector" if new else ""))
+                                 for c, sec, sub, new in made]
+    return made
+
+
+def classify(sp, dt, snaps, limit=CLASSIFY_PER_RUN, override=None):
+    """Stocks marked before 12 Nov 2026 have no Screener classification yet: read their Screener page once (max `limit`
+    a run). New stocks get it with their marks."""
+    override = storage.load_json(sectors.OVERRIDE_FILE, {}) if override is None else override
+    n = 0
+    # stocks not grouped yet first; grouped ones are read too (their Screener industry teaches the grouping of new stocks)
+    order = sorted([(sym, row) for items in (sp, dt) for sym, row in items.items()], key=lambda x: x[0] in override)
+    for sym, row in order:
+        snap = snaps.get(sym)
+        if snap is None or "sector_path" in snap or n >= limit or storage.screener_blocked():
+            continue
+        n += 1
+        m = fx.fetch_metrics(sym, row.get("consolidated", "yes") != "no")
+        if m:
+            snap["sector_path"] = m.get("sector_path") or ["", "", "", ""]   # no classification on the page: not asked again
+            if m.get("_quarters"):
+                snap["quarters"] = m["_quarters"]
+    return n
 
 
 RESULTS_REFRESH_PER_RUN, RESULTS_REFRESH_DAYS = 40, 3
@@ -647,6 +700,11 @@ def build_message(r, sp, dt, today_label, dashboard_url=""):
         if mp["lose"]:
             L += ["Would be removed at the monthly review:"] + [tg.stock_line(s, n, why) for s, n, why in mp["lose"][:40]]
         L.append("To use them: set <code>extra_marks: on</code> in config/rules.yaml (or tell Claude).")
+    if r.get("sub_sectors"):
+        L += ["", "🏷 <b>Sub-sector given</b> (automatic — ask Claude to make it more specific)"] + \
+             [tg.stock_line(s_, n_, why) for s_, n_, why in r["sub_sectors"][:25]]
+        if len(r["sub_sectors"]) > 25:
+            L.append(f"… and {len(r['sub_sectors']) - 25} more")
     rp = r.get("rs_preview")
     if rp:
         counts = " · ".join(f"{ln}: <b>{a}</b> of {b}" for ln, (a, b) in rp["by"].items() if b)
@@ -695,10 +753,11 @@ def main():
         daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, charts)
     # Strategies (paper trading until a broker is connected)
     strat_cfg, book = strategy.load_settings(), storage.load_json("strategy_trades.json", {})
-    mood = None
+    mood, idx_hist = None, None
     if mode in ("auto", "daily") and charts and any(x.get("type") in strategy.TRADING_TYPES for x in strat_cfg.get("strategies", [])):
         try:
-            mood = market.Mood(market.history())  # Nifty Smallcap 100 vs EMA 50 (Smart Switch + climax exit levels)
+            idx_hist = market.history()
+            mood = market.Mood(idx_hist)  # Nifty Smallcap 100 vs EMA 50 (Smart Switch + climax exit levels)
             if not mood.t:
                 report["warnings"].append("Nifty Smallcap 100 prices not available — Smart Switch uses Swing exits and climax exits use the lower levels today")
         except Exception as e:
@@ -831,7 +890,12 @@ def main():
     rules_cfg = {**rules_cfg, "_repo": os.getenv("GITHUB_REPOSITORY", "")}
     # the lists and data above are already saved: a problem in the page or the message must not lose them
     try:
-        web.build(sp, dt, summary, storage.load_history(), rules_cfg, snaps=snaps, charts=charts or None, alerts=alert_store,
+        try:
+            sec = sectors.build(sp, dt, snaps, charts, idx_hist or market.cached(), override=storage.load_json(sectors.OVERRIDE_FILE, {}))
+        except Exception as e:   # the rest of the page is still built
+            sec = None
+            report["warnings"].append(f"Sector Rotation not updated: {e}")
+        web.build(sp, dt, summary, storage.load_history(), rules_cfg, snaps=snaps, charts=charts or None, alerts=alert_store, sectors=sec,
                   strategies={"settings": strat_cfg, "book": book, "backtest": storage.load_json("strategy_backtest.json", {}),
                               "universe": storage.load_json("universe_backtest.json", None),
                               "log": storage.load_trade_log()})
