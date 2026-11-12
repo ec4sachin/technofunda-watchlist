@@ -35,9 +35,13 @@
   "Electrical Equipment",
   "Insulators"
  ],
+ "517336": [
+  "Metals",
+  "Castings (investment & steel)"
+ ],
  "522294": [
   "Capital Goods",
-  "Industrial machinery & SPMs"
+  "Tea & food processing machinery"
  ],
  "524218": [
   "Chemicals",
@@ -50,6 +54,10 @@
  "524717": [
   "Pharma & Healthcare",
   "Culture media & life-science reagents"
+ ],
+ "526071": [
+  "Financial Services",
+  "Investment companies"
  ],
  "526433": [
   "IT & Internet",
@@ -86,6 +94,10 @@
  "538862": [
   "Financial Services",
   "Stock broking"
+ ],
+ "539522": [
+  "Realty",
+  "Residential developers"
  ],
  "539984": [
   "Electrical Equipment",
@@ -157,11 +169,15 @@
  ],
  "544354": [
   "Power",
-  "Solar EPC & solar pumps"
+  "Solar EPC & solar projects"
  ],
  "544383": [
   "Logistics",
   "Port & container logistics"
+ ],
+ "544391": [
+  "Jewellery",
+  "Gold jewellery manufacturing"
  ],
  "544406": [
   "IT & Internet",
@@ -191,6 +207,10 @@
   "Retail",
   "Mobile & electronics retail"
  ],
+ "544501": [
+  "Power",
+  "Solar EPC & solar projects"
+ ],
  "544504": [
   "Infrastructure",
   "Civil & building construction"
@@ -203,9 +223,25 @@
   "Capital Goods",
   "Elevators & escalators"
  ],
+ "544531": [
+  "Textiles & Apparel",
+  "Digital textile printing (machines & inks)"
+ ],
+ "544538": [
+  "IT & Internet",
+  "ICT & AV system integration"
+ ],
+ "544551": [
+  "Chemicals",
+  "Chemical trading & distribution"
+ ],
  "544563": [
   "Auto & Auto Parts",
-  "Electric two-wheelers"
+  "Electric two-wheelers (makers & dealers)"
+ ],
+ "544567": [
+  "IT & Internet",
+  "SaaS & data platforms"
  ],
  "544607": [
   "Capital Goods",
@@ -217,7 +253,7 @@
  ],
  "544627": [
   "IT & Internet",
-  "Audio-visual & system integration"
+  "ICT & AV system integration"
  ],
  "544667": [
   "Media & Services",
@@ -225,11 +261,15 @@
  ],
  "544669": [
   "Capital Goods",
-  "Industrial machinery & SPMs"
+  "Factory automation & special-purpose machines"
  ],
  "544675": [
   "Infrastructure",
   "Geosynthetics & slope protection"
+ ],
+ "544682": [
+  "Power",
+  "Solar EPC & solar projects"
  ],
  "544694": [
   "FMCG & Food",
@@ -243,6 +283,10 @@
   "IT & Internet",
   "SaaS & data platforms"
  ],
+ "544746": [
+  "Power",
+  "Transmission equipment & EPC"
+ ],
  "544755": [
   "FMCG & Food",
   "Cosmetics & personal care"
@@ -255,13 +299,37 @@
   "Jewellery",
   "Gold jewellery manufacturing"
  ],
+ "544809": [
+  "FMCG & Food",
+  "Dry fruits & nuts"
+ ],
+ "544810": [
+  "Logistics",
+  "Trucking & fleet services"
+ ],
+ "544812": [
+  "Plastics & Rubber",
+  "Precision plastic components"
+ ],
  "544844": [
   "Capital Goods",
   "Precision engineered components"
  ],
+ "544980": [
+  "Capital Goods",
+  "Factory automation & special-purpose machines"
+ ],
  "ACCENTMIC": [
   "Pharma & Healthcare",
   "Pharma excipients"
+ ],
+ "ACETEC": [
+  "Retail",
+  "E-commerce"
+ ],
+ "ADISOFT": [
+  "Capital Goods",
+  "Factory automation & special-purpose machines"
  ],
  "ADVAIT": [
   "Power",
@@ -270,6 +338,10 @@
  "ADVENTHTL": [
   "Consumer Services",
   "Hotels"
+ ],
+ "AEROENTER": [
+  "Capital Goods",
+  "Process piping & flow solutions"
  ],
  "AEROFLEX": [
   "Capital Goods",
@@ -295,6 +367,10 @@
   "Electrical Equipment",
   "Wires & cables"
  ],
+ "ANLON": [
+  "Media & Services",
+  "Facility management & technical services"
+ ],
  "ANTELOPUS": [
   "Oil & Gas",
   "Exploration & production"
@@ -307,6 +383,10 @@
   "Building Materials",
   "Plastic pipes"
  ],
+ "APSISAERO": [
+  "Defence & Aerospace",
+  "Aerospace components & precision parts"
+ ],
  "ARIES": [
   "Agri",
   "Specialty plant nutrients"
@@ -318,6 +398,10 @@
  "ARMANFIN": [
   "Financial Services",
   "NBFC – microfinance"
+ ],
+ "ARROWGREEN": [
+  "Plastics & Rubber",
+  "PVC & specialty films"
  ],
  "ASHIANA": [
   "Realty",
@@ -358,6 +442,10 @@
  "BHARATSE": [
   "Auto & Auto Parts",
   "Seating & interiors"
+ ],
+ "BIKEWO": [
+  "Auto & Auto Parts",
+  "Electric two-wheelers (makers & dealers)"
  ],
  "BPLPHARMA": [
   "Pharma & Healthcare",
@@ -471,6 +559,10 @@
   "Building Materials",
   "Roofing & pre-engineered buildings"
  ],
+ "EPWINDIA": [
+  "IT & Internet",
+  "Laptops & refurbished devices"
+ ],
  "ESCONET": [
   "IT & Internet",
   "IT infrastructure & cybersecurity"
@@ -491,6 +583,10 @@
   "Retail",
   "Mobile & electronics retail"
  ],
+ "FORCAS": [
+  "Textiles & Apparel",
+  "Apparel – sourcing, brands & innerwear"
+ ],
  "GALAPREC": [
   "Capital Goods",
   "Precision engineered components"
@@ -510,6 +606,10 @@
  "GOLDIAM": [
   "Jewellery",
   "Diamond & lab-grown diamond jewellery"
+ ],
+ "GRCL": [
+  "Plastics & Rubber",
+  "Rubber products"
  ],
  "GUFICBIO": [
   "Pharma & Healthcare",
@@ -579,9 +679,17 @@
   "Infrastructure",
   "Metro & urban infrastructure"
  ],
+ "KANOHAR": [
+  "Electrical Equipment",
+  "Transformers"
+ ],
  "KANPRPLA": [
   "Packaging",
   "FIBC & woven sacks"
+ ],
+ "KEN": [
+  "Textiles & Apparel",
+  "Denim, suiting & specialty fabrics"
  ],
  "KILITCH": [
   "Pharma & Healthcare",
@@ -609,7 +717,7 @@
  ],
  "KRYSTAL": [
   "Media & Services",
-  "Facility management"
+  "Facility management & technical services"
  ],
  "KSHINTL": [
   "Electrical Equipment",
@@ -639,6 +747,10 @@
   "Metals",
   "Coated & processed steel"
  ],
+ "MANAV": [
+  "Infrastructure",
+  "Civil & building construction"
+ ],
  "MANINDS": [
   "Metals",
   "Steel pipes & tubes"
@@ -650,6 +762,10 @@
  "MAYURUNIQ": [
   "Textiles & Apparel",
   "Synthetic leather & coated fabrics"
+ ],
+ "MEGAFLEX": [
+  "Packaging",
+  "FIBC & woven sacks"
  ],
  "MEGATHERM": [
   "Capital Goods",
@@ -682,6 +798,10 @@
  "MYMUDRA": [
   "Financial Services",
   "Loan distribution & fintech"
+ ],
+ "NEOCHEM": [
+  "Chemicals",
+  "Textile chemicals"
  ],
  "NGLFINE": [
   "Pharma & Healthcare",
@@ -727,6 +847,10 @@
   "Railways",
   "Rail coach components & interiors"
  ],
+ "OSELDEVICE": [
+  "Electronics",
+  "LED displays & hearing aids"
+ ],
  "PANACHE": [
   "IT & Internet",
   "Laptops & refurbished devices"
@@ -734,6 +858,10 @@
  "PANAMAPET": [
   "Oil & Gas",
   "Specialty oils & lubricants"
+ ],
+ "PARTH": [
+  "Electrical Equipment",
+  "Switchgear & control panels"
  ],
  "PASUPTAC": [
   "Textiles & Apparel",
@@ -760,7 +888,7 @@
   "Pipeline EPC (oil, gas & water)"
  ],
  "PREMIERPOL": [
-  "Plastics",
+  "Plastics & Rubber",
   "PVC & specialty films"
  ],
  "PRIMECAB": [
@@ -809,7 +937,7 @@
  ],
  "RELTD": [
   "Power",
-  "Solar EPC & solar pumps"
+  "Solar EPC & solar projects"
  ],
  "ROCKINGDCE": [
   "Retail",
@@ -839,6 +967,10 @@
   "Electronics",
   "Electronics manufacturing services (EMS)"
  ],
+ "SAMAY": [
+  "Infrastructure",
+  "Industrial EPC (piping, tanks, structures)"
+ ],
  "SAMBHV": [
   "Metals",
   "Steel pipes & tubes"
@@ -860,12 +992,16 @@
   "NBFC – lending"
  ],
  "SHAILY": [
-  "Plastics",
+  "Plastics & Rubber",
   "Precision plastic components"
  ],
  "SHANTIGOLD": [
   "Jewellery",
   "Gold jewellery manufacturing"
+ ],
+ "SHEETAL": [
+  "FMCG & Food",
+  "Spices & agri commodities"
  ],
  "SHETHJI": [
   "FMCG & Food",
@@ -943,6 +1079,10 @@
   "Textiles & Apparel",
   "Denim, suiting & specialty fabrics"
  ],
+ "SWASTIKAIN": [
+  "Infrastructure",
+  "Civil & building construction"
+ ],
  "TAALTECH": [
   "IT & Internet",
   "Engineering R&D services"
@@ -963,13 +1103,17 @@
   "Capital Goods",
   "Mining & bulk-handling equipment"
  ],
+ "TBI": [
+  "FMCG & Food",
+  "Corn & grain processing"
+ ],
  "TEAMTECH": [
   "Capital Goods",
   "Scaffolding & formwork"
  ],
  "TECHERA": [
   "Defence & Aerospace",
-  "Aerospace components & MRO"
+  "Aerospace components & precision parts"
  ],
  "THEJO": [
   "Capital Goods",
@@ -1056,8 +1200,12 @@
   "Paper & packaging board"
  ],
  "XPROINDIA": [
-  "Plastics",
+  "Plastics & Rubber",
   "PVC & specialty films"
+ ],
+ "XTRANET": [
+  "IT & Internet",
+  "E-governance services"
  ],
  "YAAP": [
   "Media & Services",
