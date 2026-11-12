@@ -1,76 +1,24 @@
 {
- "added": [
-  [
-   "SURAKSHA",
-   "Suraksha Diagno.",
-   "marks 9.4/11 · 3-month RS 93 (vs 3643 BSE stocks) · TTM Profit > 30%, Daily Volume Scan, Weekly Volume Scan, 52W High"
-  ]
- ],
- "rejected": [
-  [
-   "SKIPPER",
-   "Skipper",
-   "7.7/11 · 3-month RS 48 (need above 80)"
-  ],
-  [
-   "SPORTKING",
-   "Sportking India",
-   "10.5/11 · 3-month RS 53 (need above 80)"
-  ],
-  [
-   "TALBROAUTO",
-   "Talbros Auto.",
-   "11/11 · 3-month RS 42 (need above 80)"
-  ],
-  [
-   "KNACK",
-   "Knack Packaging",
-   "5/11 · 3-month RS 65 (need above 80)"
-  ],
-  [
-   "KOVAI",
-   "Kovai Medical",
-   "9.4/11 · 3-month RS 70 (need above 80)"
-  ]
- ],
- "to_dt": [
-  [
-   "BPLPHARMA",
-   "Bharat Parenterals Ltd",
-   "close 1800.8 < 20 EMA 1838.75"
-  ],
-  [
-   "DEEDEV",
-   "DEE Development",
-   "close 524.8 < 200 EMA 526.95"
-  ],
+ "added": [],
+ "rejected": [],
+ "to_dt": [],
+ "to_sp": [
   [
    "DEEPA",
    "Deepa Jewellers",
-   "close 210.73 < 20 EMA 217.13"
-  ],
-  [
-   "HUHTAMAKI",
-   "Huhtamaki India",
-   "close 220.62 < 200 EMA 224.3"
-  ],
-  [
-   "MPSLTD",
-   "MPS Ltd",
-   "close 2247.4 < 200 EMA 2262.56"
+   "close 222.78 > 20 EMA 217.67"
   ],
   [
    "MVGJL",
    "Manoj Vaibhav",
-   "close 179.17 < 200 EMA 180.3"
+   "close 183.51 > 200 EMA 180.33"
   ],
   [
    "THOMASCOTT",
    "Thomas Scott India Ltd",
-   "close 290.1 < 200 EMA 290.8"
+   "close 304.4 > 200 EMA 290.93"
   ]
  ],
- "to_sp": [],
  "removed": [],
  "unchecked": [
   [
@@ -162,22 +110,12 @@
   [
    "ADVAIT",
    "Advait Energy Transitions Limited",
-   "close 1895.1 vs 20 EMA 1794.91 → SP"
+   "close 1903 vs 20 EMA 1805.2 → SP"
   ],
   [
    "AEROPLANE",
    "A C J K Exports",
    "close 233.28 vs 20 EMA 220.33 → SP"
-  ],
-  [
-   "BPLPHARMA",
-   "Bharat Parenterals Ltd",
-   "close 1800.8 vs 20 EMA 1838.75 → DT"
-  ],
-  [
-   "DEEPA",
-   "Deepa Jewellers",
-   "close 210.73 vs 20 EMA 217.13 → DT"
   ],
   [
    "DHABRIYA",
@@ -285,9 +223,19 @@
    "close 477.15 vs 20 EMA 513.24"
   ],
   [
+   "BPLPHARMA",
+   "Bharat Parenterals Ltd",
+   "close 1800.8 vs 20 EMA 1838.75"
+  ],
+  [
    "BRANDMAN",
    "Brandman Retail Ltd",
    "close 143.4 vs 20 EMA 151.01"
+  ],
+  [
+   "DEEPA",
+   "Deepa Jewellers",
+   "close 222.78 vs 20 EMA 217.67"
   ],
   [
    "EPWINDIA",
@@ -297,7 +245,7 @@
   [
    "ESDS",
    "ESDS Software Solution Ltd",
-   "close 1147.7 vs 20 EMA 1276.31"
+   "close 1205 vs 20 EMA 1269.44"
   ],
   [
    "HEXAGON",
@@ -307,7 +255,7 @@
   [
    "MPIMANIPAL",
    "Manipal Payment and Identity Solutions Ltd",
-   "close 312.6 vs 20 EMA 323.33"
+   "close 319.95 vs 20 EMA 323"
   ],
   [
    "RAMBHAJO",
@@ -336,19 +284,19 @@
   ]
  ],
  "per_alert": {
-  "TTM Profit > 30%": 11,
-  "52W High": 16,
-  "Daily Volume Scan": 5,
-  "Weekly Volume Scan": 5,
-  "Ready after 6 Months": 1,
+  "TTM Profit > 30%": 0,
+  "52W High": 0,
+  "Daily Volume Scan": 0,
+  "Weekly Volume Scan": 0,
+  "Ready after 6 Months": 0,
   "Mukul Mahavir Agrawal": 0,
   "Ashish Kacholia": 0
  },
- "email_total": 19,
- "already_listed": 13,
+ "email_total": 0,
+ "already_listed": 0,
  "price_date": "11 Nov 2026",
  "monthly_pass": 0,
- "mode": "auto",
+ "mode": "daily",
  "monthly_done": false,
- "run_at": "12 Nov 2026, 07:54 AM IST"
+ "run_at": "12 Nov 2026, 09:10 AM IST"
 }

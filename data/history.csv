@@ -522,3 +522,6 @@ date,symbol,name,action,reason
 2026-11-12,MPSLTD,MPS Ltd,SP -> DT,close 2247.4 below 200 EMA 2262.56
 2026-11-12,MVGJL,Manoj Vaibhav,SP -> DT,close 179.17 below 200 EMA 180.3
 2026-11-12,THOMASCOTT,Thomas Scott India Ltd,SP -> DT,close 290.1 below 200 EMA 290.8
+2026-11-12,DEEPA,Deepa Jewellers,DT -> SP,close 222.78 back above 20 EMA 217.67 (new listing)
+2026-11-12,MVGJL,Manoj Vaibhav,DT -> SP,close 183.51 back above 200 EMA 180.33
+2026-11-12,THOMASCOTT,Thomas Scott India Ltd,DT -> SP,close 304.4 back above 200 EMA 290.93
