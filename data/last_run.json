@@ -1,115 +1,8 @@
 {
  "added": [],
  "rejected": [],
- "to_dt": [
-  [
-   "544695",
-   "Msafe Equipments",
-   "close 270 < 20 EMA 274.02"
-  ],
-  [
-   "ADVAIT",
-   "Advait Energy Transitions Limited",
-   "close 1859.2 < 200 EMA 1976.53"
-  ],
-  [
-   "BETA",
-   "Beta Drugs Ltd",
-   "close 1838.5 < 200 EMA 1865.54"
-  ],
-  [
-   "DHARARAIL",
-   "Dhara Rail Pro.",
-   "close 131 < 20 EMA 131.93"
-  ]
- ],
- "to_sp": [
-  [
-   "536565",
-   "Novelix Pharma.",
-   "close 69.12 > 200 EMA 67.43"
-  ],
-  [
-   "539522",
-   "Grovy India",
-   "close 55 > 200 EMA 53.8"
-  ],
-  [
-   "544551",
-   "Bhavik Enterpris",
-   "close 151.9 > 20 EMA 149.81"
-  ],
-  [
-   "544623",
-   "Mother Nutri",
-   "close 161.7 > 20 EMA 157.9"
-  ],
-  [
-   "544746",
-   "Safety Controls & Devices Ltd",
-   "close 73.4 > 20 EMA 71.6"
-  ],
-  [
-   "AJMERA",
-   "Ajmera Realty & Infra India Ltd",
-   "close 134.01 > 200 EMA 133.04"
-  ],
-  [
-   "BPLPHARMA",
-   "Bharat Parenterals Ltd",
-   "close 1909.8 > 20 EMA 1846.48"
-  ],
-  [
-   "DEEDEV",
-   "DEE Development",
-   "close 550.15 > 200 EMA 527.32"
-  ],
-  [
-   "DENTALKART",
-   "Vasa Denticity Ltd",
-   "close 459.6 > 200 EMA 446.9"
-  ],
-  [
-   "HUHTAMAKI",
-   "Huhtamaki India",
-   "close 228.79 > 200 EMA 224.35"
-  ],
-  [
-   "J&KBANK",
-   "Jammu and Kashmir Bank Ltd",
-   "close 137.68 > 200 EMA 136.27"
-  ],
-  [
-   "MEGATHERM",
-   "Megatherm Induction Ltd",
-   "close 236.8 > 200 EMA 235.3"
-  ],
-  [
-   "MPIMANIPAL",
-   "Manipal Payment and Identity Solutions Ltd",
-   "close 338 > 20 EMA 324.47"
-  ],
-  [
-   "MPSLTD",
-   "MPS Ltd",
-   "close 2297 > 200 EMA 2262.91"
-  ],
-  [
-   "SURYODAY",
-   "Suryoday Small Finance Bank Ltd",
-   "close 159.73 > 200 EMA 151.05"
-  ],
-  [
-   "VIVIANA",
-   "Viviana Power",
-   "close 778.6 > 200 EMA 754.83"
-  ],
-  [
-   "XPROINDIA",
-   "XPRO India Ltd",
-   "close 1142.2 > 200 EMA 1139.19"
-  ]
- ],
+ "to_dt": [],
+ "to_sp": [],
  "removed": [],
  "unchecked": [
   [
@@ -134,6 +27,16 @@
    "close 153.7 vs 20 EMA 144.08 → SP"
   ],
   [
+   "544551",
+   "Bhavik Enterpris",
+   "close 151.9 vs 20 EMA 149.81 → SP"
+  ],
+  [
+   "544623",
+   "Mother Nutri",
+   "close 161.7 vs 20 EMA 157.9 → SP"
+  ],
+  [
    "544667",
    "Dachepalli Pub.",
    "close 99.05 vs 20 EMA 93.84 → SP"
@@ -149,14 +52,14 @@
    "close 353 vs 20 EMA 309.68 → SP"
   ],
   [
-   "544695",
-   "Msafe Equipments",
-   "close 270 vs 20 EMA 274.02 → DT"
-  ],
-  [
    "544735",
    "Novus Loyalty",
    "close 184.65 vs 20 EMA 184.16 → SP"
+  ],
+  [
+   "544746",
+   "Safety Controls & Devices Ltd",
+   "close 73.4 vs 20 EMA 71.6 → SP"
   ],
   [
    "544755",
@@ -204,6 +107,11 @@
    "close 242.83 vs 20 EMA 224.69 → SP"
   ],
   [
+   "BPLPHARMA",
+   "Bharat Parenterals Ltd",
+   "close 1909.8 vs 20 EMA 1846.48 → SP"
+  ],
+  [
    "DEEPA",
    "Deepa Jewellers",
    "close 226.58 vs 20 EMA 218.53 → SP"
@@ -212,11 +120,6 @@
    "DHABRIYA",
    "Dhabriya Poly.",
    "close 486.8 vs 20 EMA 472.15 → SP"
-  ],
-  [
-   "DHARARAIL",
-   "Dhara Rail Pro.",
-   "close 131 vs 20 EMA 131.93 → DT"
   ],
   [
    "HALDYNGL",
@@ -232,6 +135,11 @@
    "MARUSHIKA",
    "Marushika Tech.",
    "close 130.8 vs 20 EMA 120.46 → SP"
+  ],
+  [
+   "MPIMANIPAL",
+   "Manipal Payment and Identity Solutions Ltd",
+   "close 338 vs 20 EMA 324.47 → SP"
   ],
   [
    "ORIRAIL",
@@ -279,19 +187,9 @@
    "close 218.3 vs 20 EMA 213.51 → SP"
   ],
   [
-   "544551",
-   "Bhavik Enterpris",
-   "close 151.9 vs 20 EMA 149.81"
-  ],
-  [
-   "544623",
-   "Mother Nutri",
-   "close 161.7 vs 20 EMA 157.9"
-  ],
-  [
-   "544746",
-   "Safety Controls & Devices Ltd",
-   "close 73.4 vs 20 EMA 71.6"
+   "544695",
+   "Msafe Equipments",
+   "close 270 vs 20 EMA 274.02"
   ],
   [
    "544774",
@@ -314,14 +212,14 @@
    "close 486.65 vs 20 EMA 510.71"
   ],
   [
-   "BPLPHARMA",
-   "Bharat Parenterals Ltd",
-   "close 1909.8 vs 20 EMA 1846.48"
-  ],
-  [
    "BRANDMAN",
    "Brandman Retail Ltd",
    "close 143.7 vs 20 EMA 150.31"
+  ],
+  [
+   "DHARARAIL",
+   "Dhara Rail Pro.",
+   "close 131 vs 20 EMA 131.93"
   ],
   [
    "EPWINDIA",
@@ -337,11 +235,6 @@
    "HEXAGON",
    "Hexagon Nutri.",
    "close 59.91 vs 20 EMA 61.23"
-  ],
-  [
-   "MPIMANIPAL",
-   "Manipal Payment and Identity Solutions Ltd",
-   "close 338 vs 20 EMA 324.47"
   ],
   [
    "RAMBHAJO",
@@ -384,5 +277,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "12 Nov 2026, 09:45 PM IST"
+ "run_at": "12 Nov 2026, 10:15 PM IST"
 }

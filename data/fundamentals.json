@@ -1647,7 +1647,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-02"
+  "as_of": "2026-11-02",
+  "sector_path": [
+   "Industrials",
+   "Capital Goods",
+   "Industrial Manufacturing",
+   "Industrial Products"
+  ]
  },
  "RAMBHAJO": {
   "market_cap": 1517.0,
@@ -1793,17 +1799,23 @@
     9.0
    ],
    "eps": [
-    1.72,
-    2.4,
+    2.01,
+    2.8,
+    2.89,
     2.48,
-    2.12,
-    2.13,
-    2.17,
+    2.49,
+    2.54,
     2.87
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-02"
+  "as_of": "2026-11-02",
+  "sector_path": [
+   "Industrials",
+   "Capital Goods",
+   "Industrial Products",
+   "Iron & Steel Products"
+  ]
  },
  "SAAKSHI": {
   "market_cap": 714.0,
@@ -1885,7 +1897,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-12"
+  "as_of": "2026-11-12",
+  "sector_path": [
+   "Industrials",
+   "Capital Goods",
+   "Electrical Equipment",
+   "Other Electrical Equipment"
+  ]
  },
  "SAHANA": {
   "market_cap": 1262.0,
@@ -1970,7 +1988,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-12"
+  "as_of": "2026-11-12",
+  "sector_path": [
+   "Information Technology",
+   "Information Technology",
+   "IT - Services",
+   "IT Enabled Services"
+  ]
  },
  "SHANTIGOLD": {
   "market_cap": 2086.0,
@@ -2057,7 +2081,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-09"
+  "as_of": "2026-11-09",
+  "sector_path": [
+   "Consumer Discretionary",
+   "Consumer Durables",
+   "Consumer Durables",
+   "Gems, Jewellery And Watches"
+  ]
  },
  "SHETHJI": {
   "market_cap": 535.0,
@@ -2121,7 +2151,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-12"
+  "as_of": "2026-11-12",
+  "sector_path": [
+   "Fast Moving Consumer Goods",
+   "Fast Moving Consumer Goods",
+   "Agricultural Food & other Products",
+   "Other Agricultural Products"
+  ]
  },
  "SHRINGARMS": {
   "market_cap": 3012.0,
@@ -2208,7 +2244,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-09"
+  "as_of": "2026-11-09",
+  "sector_path": [
+   "Consumer Discretionary",
+   "Consumer Durables",
+   "Consumer Durables",
+   "Gems, Jewellery And Watches"
+  ]
  },
  "SUPREMEPWR": {
   "market_cap": 684.0,
@@ -2288,7 +2330,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-09"
+  "as_of": "2026-11-09",
+  "sector_path": [
+   "Industrials",
+   "Capital Goods",
+   "Electrical Equipment",
+   "Other Electrical Equipment"
+  ]
  },
  "TEAMTECH": {
   "market_cap": 507.0,
@@ -2342,7 +2390,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-02"
+  "as_of": "2026-11-02",
+  "sector_path": [
+   "Commodities",
+   "Construction Materials",
+   "Other Construction Materials",
+   "Other Construction Materials"
+  ]
  },
  "SAMBHV": {
   "market_cap": 4862.0,
@@ -2429,7 +2483,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-03"
+  "as_of": "2026-11-03",
+  "sector_path": [
+   "Industrials",
+   "Capital Goods",
+   "Industrial Products",
+   "Iron & Steel Products"
+  ]
  },
  "543619": {
   "market_cap": 2506.0,
@@ -3231,7 +3291,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-03"
+  "as_of": "2026-11-03",
+  "sector_path": [
+   "Financial Services",
+   "Financial Services",
+   "Finance",
+   "Non Banking Financial Company (NBFC)"
+  ]
  },
  "GRCL": {
   "market_cap": 346.0,
@@ -4545,7 +4611,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-09"
+  "as_of": "2026-11-09",
+  "sector_path": [
+   "Industrials",
+   "Capital Goods",
+   "Industrial Manufacturing",
+   "Industrial Products"
+  ]
  },
  "543991": {
   "market_cap": 91.6,
@@ -5061,7 +5133,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-12"
+  "as_of": "2026-11-12",
+  "sector_path": [
+   "Services",
+   "Services",
+   "Transport Services",
+   "Logistics Solution Provider"
+  ]
  },
  "AVTNPL": {
   "market_cap": 1459.0,
@@ -5703,7 +5781,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-04"
+  "as_of": "2026-11-04",
+  "sector_path": [
+   "Commodities",
+   "Chemicals",
+   "Chemicals & Petrochemicals",
+   "Dyes And Pigments"
+  ]
  },
  "UDAYJEW": {
   "market_cap": 777.0,
@@ -5790,7 +5874,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-12"
+  "as_of": "2026-11-12",
+  "sector_path": [
+   "Consumer Discretionary",
+   "Consumer Durables",
+   "Consumer Durables",
+   "Gems, Jewellery And Watches"
+  ]
  },
  "VMARCIND": {
   "market_cap": 4733.0,
@@ -5944,7 +6034,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-12"
+  "as_of": "2026-11-12",
+  "sector_path": [
+   "Fast Moving Consumer Goods",
+   "Fast Moving Consumer Goods",
+   "Food Products",
+   "Other Food Products"
+  ]
  },
  "MAYURUNIQ": {
   "market_cap": 3256.0,
@@ -6720,7 +6816,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-05"
+  "as_of": "2026-11-05",
+  "sector_path": [
+   "Consumer Discretionary",
+   "Automobile and Auto Components",
+   "Auto Components",
+   "Auto Components & Equipments"
+  ]
  },
  "CNL": {
   "market_cap": 2082.0,
@@ -8399,7 +8501,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-09"
+  "as_of": "2026-11-09",
+  "sector_path": [
+   "Industrials",
+   "Construction",
+   "Construction",
+   "Civil Construction"
+  ]
  },
  "532329": {
   "market_cap": 663.0,
@@ -9230,7 +9338,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-12"
+  "as_of": "2026-11-12",
+  "sector_path": [
+   "Fast Moving Consumer Goods",
+   "Fast Moving Consumer Goods",
+   "Food Products",
+   "Meat Products including Poultry"
+  ]
  },
  "DEEDEV": {
   "market_cap": 4073.0,
@@ -9317,7 +9431,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-12"
+  "as_of": "2026-11-12",
+  "sector_path": [
+   "Industrials",
+   "Capital Goods",
+   "Industrial Manufacturing",
+   "Industrial Products"
+  ]
  },
  "NGLFINE": {
   "market_cap": 1750.0,
@@ -9747,7 +9867,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-10"
+  "as_of": "2026-11-10",
+  "sector_path": [
+   "Fast Moving Consumer Goods",
+   "Fast Moving Consumer Goods",
+   "Food Products",
+   "Other Food Products"
+  ]
  },
  "SCPL": {
   "market_cap": 655.0,
@@ -9834,7 +9960,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-10"
+  "as_of": "2026-11-10",
+  "sector_path": [
+   "Fast Moving Consumer Goods",
+   "Fast Moving Consumer Goods",
+   "Food Products",
+   "Dairy Products"
+  ]
  },
  "DHARARAIL": {
   "market_cap": 202.0,
@@ -10249,7 +10381,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Consumer Discretionary",
+   "Consumer Durables",
+   "Consumer Durables",
+   "Consumer Electronics"
+  ]
  },
  "UNIDT": {
   "market_cap": 381.0,
@@ -11079,7 +11217,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Consumer Discretionary",
+   "Consumer Durables",
+   "Consumer Durables",
+   "Gems, Jewellery And Watches"
+  ]
  },
  "544468": {
   "market_cap": 190.0,
@@ -11364,7 +11508,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Fast Moving Consumer Goods",
+   "Fast Moving Consumer Goods",
+   "Food Products",
+   "Other Food Products"
+  ]
  },
  "500220": {
   "market_cap": 172.0,
@@ -11544,7 +11694,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Consumer Discretionary",
+   "Textiles",
+   "Textiles & Apparels",
+   "Other Textile Products"
+  ]
  },
  "BHAGERIA": {
   "market_cap": 1575.0,
@@ -11812,7 +11968,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-10"
+  "as_of": "2026-11-10",
+  "sector_path": [
+   "Consumer Discretionary",
+   "Textiles",
+   "Textiles & Apparels",
+   "Other Textile Products"
+  ]
  },
  "530615": {
   "market_cap": 135.0,
@@ -12079,7 +12241,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Healthcare",
+   "Healthcare",
+   "Pharmaceuticals & Biotechnology",
+   "Pharmaceuticals"
+  ]
  },
  "PRIMECAB": {
   "market_cap": 313.0,
@@ -12150,7 +12318,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Industrials",
+   "Capital Goods",
+   "Industrial Products",
+   "Cables - Electricals"
+  ]
  },
  "LRRPL": {
   "market_cap": 102.0,
@@ -12867,7 +13041,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Energy",
+   "Oil, Gas & Consumable Fuels",
+   "Petroleum Products",
+   "Lubricants"
+  ]
  },
  "GKSL": {
   "market_cap": 1229.0,
@@ -14558,7 +14738,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-10"
+  "as_of": "2026-11-10",
+  "sector_path": [
+   "Consumer Discretionary",
+   "Consumer Durables",
+   "Consumer Durables",
+   "Gems, Jewellery And Watches"
+  ]
  },
  "544435": {
   "market_cap": 162.0,
@@ -14814,7 +15000,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Healthcare",
+   "Healthcare",
+   "Pharmaceuticals & Biotechnology",
+   "Pharmaceuticals"
+  ]
  },
  "APSISAERO": {
   "market_cap": 564.0,
@@ -14971,7 +15163,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Commodities",
+   "Chemicals",
+   "Chemicals & Petrochemicals",
+   "Commodity Chemicals"
+  ]
  },
  "SHREEOSFM": {
   "market_cap": 75.5,
@@ -15483,7 +15681,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Financial Services",
+   "Financial Services",
+   "Finance",
+   "Holding Company"
+  ]
  },
  "BPLPHARMA": {
   "market_cap": 1297.0,
@@ -15566,7 +15770,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Healthcare",
+   "Healthcare",
+   "Pharmaceuticals & Biotechnology",
+   "Pharmaceuticals"
+  ]
  },
  "TBI": {
   "market_cap": 127.0,
@@ -15831,7 +16041,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Consumer Discretionary",
+   "Media, Entertainment & Publication",
+   "Printing & Publication",
+   "Printing & Publication"
+  ]
  },
  "WSTCSTPAPR": {
   "market_cap": 4875.0,
@@ -16496,7 +16712,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Financial Services",
+   "Financial Services",
+   "Finance",
+   "Non Banking Financial Company (NBFC)"
+  ]
  },
  "MEGATHERM": {
   "market_cap": 437.0,
@@ -16578,7 +16800,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-11"
+  "as_of": "2026-11-11",
+  "sector_path": [
+   "Industrials",
+   "Capital Goods",
+   "Industrial Products",
+   "Other Industrial Products"
+  ]
  },
  "INFINIUM": {
   "market_cap": 435.0,
@@ -16848,7 +17076,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Financial Services",
+   "Financial Services",
+   "Banks",
+   "Private Sector Bank"
+  ]
  },
  "ANAWIL": {
   "market_cap": 977.0,
@@ -17306,7 +17540,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Consumer Discretionary",
+   "Consumer Durables",
+   "Consumer Durables",
+   "Household Appliances"
+  ]
  },
  "AGARIND": {
   "market_cap": 580.0,
@@ -17960,7 +18200,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-10"
+  "as_of": "2026-11-10",
+  "sector_path": [
+   "Industrials",
+   "Capital Goods",
+   "Industrial Products",
+   "Other Industrial Products"
+  ]
  },
  "ROCKINGDCE": {
   "market_cap": 180.0,
@@ -18040,7 +18286,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Services",
+   "Services",
+   "Commercial Services & Supplies",
+   "Trading & Distributors"
+  ]
  },
  "539984": {
   "market_cap": 1795.0,
@@ -19611,7 +19863,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Commodities",
+   "Chemicals",
+   "Chemicals & Petrochemicals",
+   "Specialty Chemicals"
+  ]
  },
  "APOLLOPIPE": {
   "market_cap": 2296.0,
@@ -20112,7 +20370,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Consumer Discretionary",
+   "Consumer Durables",
+   "Consumer Durables",
+   "Plastic Products - Consumer"
+  ]
  },
  "PTCIL": {
   "market_cap": 39214.0,
@@ -20199,7 +20463,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-10"
+  "as_of": "2026-11-10",
+  "sector_path": [
+   "Industrials",
+   "Capital Goods",
+   "Industrial Products",
+   "Castings & Forgings"
+  ]
  },
  "PPL": {
   "market_cap": 551.0,
@@ -20407,58 +20677,64 @@
   "result_period_months": 3,
   "quarters": {
    "t": [
-    "Sep 2024",
     "Dec 2024",
     "Mar 2025",
     "Jun 2025",
     "Sep 2025",
     "Dec 2025",
     "Mar 2026",
-    "Jun 2026"
+    "Jun 2026",
+    "Sep 2026"
    ],
    "sales": [
-    133.0,
     136.0,
     153.0,
     136.0,
     153.0,
     162.0,
     181.0,
-    178.0
+    178.0,
+    198.0
    ],
    "profit": [
-    12.0,
     14.0,
     17.0,
     10.0,
     14.0,
     8.0,
     17.0,
-    15.0
+    15.0,
+    18.0
    ],
    "opm": [
-    13.0,
     18.0,
     18.0,
     12.0,
     14.0,
     11.0,
     13.0,
-    14.0
+    14.0,
+    15.0
    ],
    "eps": [
-    10.98,
     12.13,
     14.03,
     8.68,
     13.92,
     8.2,
     14.6,
-    14.91
+    14.91,
+    17.41
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-11"
+  "as_of": "2026-11-11",
+  "sector_path": [
+   "Industrials",
+   "Capital Goods",
+   "Industrial Manufacturing",
+   "Industrial Products"
+  ]
  },
  "544774": {
   "market_cap": 153.0,
@@ -21039,7 +21315,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Services",
+   "Services",
+   "Transport Services",
+   "Airline"
+  ]
  },
  "TRACXN": {
   "market_cap": 308.0,
@@ -21208,7 +21490,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Information Technology",
+   "Information Technology",
+   "IT - Services",
+   "IT Enabled Services"
+  ]
  },
  "ARIS": {
   "market_cap": 1214.0,
@@ -21571,7 +21859,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Healthcare",
+   "Healthcare",
+   "Healthcare Equipment & Supplies",
+   "Medical Equipment & Supplies"
+  ]
  },
  "TRANSPEK": {
   "market_cap": 722.0,
@@ -21658,7 +21952,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-11"
+  "as_of": "2026-11-11",
+  "sector_path": [
+   "Commodities",
+   "Chemicals",
+   "Chemicals & Petrochemicals",
+   "Commodity Chemicals"
+  ]
  },
  "BELLACASA": {
   "market_cap": 282.0,
@@ -22072,7 +22372,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Industrials",
+   "Capital Goods",
+   "Industrial Products",
+   "Aluminium, Copper & Zinc Products"
+  ]
  },
  "THOMASCOTT": {
   "market_cap": 431.0,
@@ -22159,7 +22465,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-11"
+  "as_of": "2026-11-11",
+  "sector_path": [
+   "Consumer Discretionary",
+   "Textiles",
+   "Textiles & Apparels",
+   "Garments & Apparels"
+  ]
  },
  "526433": {
   "market_cap": 9204.0,
@@ -23008,7 +23320,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Consumer Discretionary",
+   "Realty",
+   "Realty",
+   "Residential, Commercial Projects"
+  ]
  },
  "CAPACITE": {
   "market_cap": 1522.0,
@@ -23180,7 +23498,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Financial Services",
+   "Financial Services",
+   "Banks",
+   "Other Bank"
+  ]
  },
  "ADVENTHTL": {
   "market_cap": 640.0,
@@ -24629,7 +24953,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Consumer Discretionary",
+   "Consumer Durables",
+   "Consumer Durables",
+   "Gems, Jewellery And Watches"
+  ]
  },
  "544391": {
   "market_cap": 132.0,
@@ -24968,7 +25298,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-10"
+  "as_of": "2026-11-10",
+  "sector_path": [
+   "Fast Moving Consumer Goods",
+   "Fast Moving Consumer Goods",
+   "Food Products",
+   "Other Food Products"
+  ]
  },
  "KEN": {
   "market_cap": 103.0,
@@ -25115,7 +25451,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-10"
+  "as_of": "2026-11-10",
+  "sector_path": [
+   "Financial Services",
+   "Financial Services",
+   "Finance",
+   "Non Banking Financial Company (NBFC)"
+  ]
  },
  "GANDHAR": {
   "market_cap": 2462.0,
@@ -25633,7 +25975,13 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Industrials",
+   "Capital Goods",
+   "Industrial Products",
+   "Packaging"
+  ]
  },
  "SEAMECLTD": {
   "market_cap": 3748.0,
@@ -25719,7 +26067,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Services",
+   "Services",
+   "Transport Services",
+   "Shipping"
+  ]
  },
  "536565": {
   "market_cap": 180.0,
@@ -26705,6 +27059,12 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-12"
+  "as_of": "2026-11-12",
+  "sector_path": [
+   "Healthcare",
+   "Healthcare",
+   "Healthcare Services",
+   "Healthcare Service Provider"
+  ]
  }
 }
