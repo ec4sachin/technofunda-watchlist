@@ -1,8 +1,115 @@
 {
  "added": [],
  "rejected": [],
- "to_dt": [],
- "to_sp": [],
+ "to_dt": [
+  [
+   "544695",
+   "Msafe Equipments",
+   "close 270 < 20 EMA 274.02"
+  ],
+  [
+   "ADVAIT",
+   "Advait Energy Transitions Limited",
+   "close 1859.2 < 200 EMA 1976.53"
+  ],
+  [
+   "BETA",
+   "Beta Drugs Ltd",
+   "close 1838.5 < 200 EMA 1865.54"
+  ],
+  [
+   "DHARARAIL",
+   "Dhara Rail Pro.",
+   "close 131 < 20 EMA 131.93"
+  ]
+ ],
+ "to_sp": [
+  [
+   "536565",
+   "Novelix Pharma.",
+   "close 69.12 > 200 EMA 67.43"
+  ],
+  [
+   "539522",
+   "Grovy India",
+   "close 55 > 200 EMA 53.8"
+  ],
+  [
+   "544551",
+   "Bhavik Enterpris",
+   "close 151.9 > 20 EMA 149.81"
+  ],
+  [
+   "544623",
+   "Mother Nutri",
+   "close 161.7 > 20 EMA 157.9"
+  ],
+  [
+   "544746",
+   "Safety Controls & Devices Ltd",
+   "close 73.4 > 20 EMA 71.6"
+  ],
+  [
+   "AJMERA",
+   "Ajmera Realty & Infra India Ltd",
+   "close 134.01 > 200 EMA 133.04"
+  ],
+  [
+   "BPLPHARMA",
+   "Bharat Parenterals Ltd",
+   "close 1909.8 > 20 EMA 1846.48"
+  ],
+  [
+   "DEEDEV",
+   "DEE Development",
+   "close 550.15 > 200 EMA 527.32"
+  ],
+  [
+   "DENTALKART",
+   "Vasa Denticity Ltd",
+   "close 459.6 > 200 EMA 446.9"
+  ],
+  [
+   "HUHTAMAKI",
+   "Huhtamaki India",
+   "close 228.79 > 200 EMA 224.35"
+  ],
+  [
+   "J&KBANK",
+   "Jammu and Kashmir Bank Ltd",
+   "close 137.68 > 200 EMA 136.27"
+  ],
+  [
+   "MEGATHERM",
+   "Megatherm Induction Ltd",
+   "close 236.8 > 200 EMA 235.3"
+  ],
+  [
+   "MPIMANIPAL",
+   "Manipal Payment and Identity Solutions Ltd",
+   "close 338 > 20 EMA 324.47"
+  ],
+  [
+   "MPSLTD",
+   "MPS Ltd",
+   "close 2297 > 200 EMA 2262.91"
+  ],
+  [
+   "SURYODAY",
+   "Suryoday Small Finance Bank Ltd",
+   "close 159.73 > 200 EMA 151.05"
+  ],
+  [
+   "VIVIANA",
+   "Viviana Power",
+   "close 778.6 > 200 EMA 754.83"
+  ],
+  [
+   "XPROINDIA",
+   "XPRO India Ltd",
+   "close 1142.2 > 200 EMA 1139.19"
+  ]
+ ],
  "removed": [],
  "unchecked": [
   [
@@ -19,17 +126,17 @@
   [
    "517336",
    "Modern Malleable",
-   "close 43.4 vs 20 EMA 41.72 → SP"
+   "close 42.58 vs 20 EMA 41.8 → SP"
   ],
   [
    "544538",
    "Praruh Tech",
-   "close 154.9 vs 20 EMA 143.07 → SP"
+   "close 153.7 vs 20 EMA 144.08 → SP"
   ],
   [
    "544667",
    "Dachepalli Pub.",
-   "close 95 vs 20 EMA 93.29 → SP"
+   "close 99.05 vs 20 EMA 93.84 → SP"
   ],
   [
    "544682",
@@ -39,47 +146,47 @@
   [
    "544694",
    "Accretion Nutraveda",
-   "close 344 vs 20 EMA 305.12 → SP"
+   "close 353 vs 20 EMA 309.68 → SP"
   ],
   [
    "544695",
    "Msafe Equipments",
-   "close 275.95 vs 20 EMA 274.44 → SP"
+   "close 270 vs 20 EMA 274.02 → DT"
   ],
   [
    "544735",
    "Novus Loyalty",
-   "close 184.95 vs 20 EMA 184.11 → SP"
+   "close 184.65 vs 20 EMA 184.16 → SP"
   ],
   [
    "544755",
    "Recode Studios",
-   "close 432.05 vs 20 EMA 408.66 → SP"
+   "close 418.5 vs 20 EMA 409.6 → SP"
   ],
   [
    "544765",
    "Vegorama Punjabi",
-   "close 272.25 vs 20 EMA 249.9 → SP"
+   "close 260.15 vs 20 EMA 250.87 → SP"
   ],
   [
    "544809",
    "Adon Agro",
-   "close 99 vs 20 EMA 97.54 → SP"
+   "close 99 vs 20 EMA 97.68 → SP"
   ],
   [
    "544810",
    "Sampark India",
-   "close 135 vs 20 EMA 131.85 → SP"
+   "close 140 vs 20 EMA 132.63 → SP"
   ],
   [
    "544812",
    "Atharva Poly-Plast",
-   "close 157.35 vs 20 EMA 132.89 → SP"
+   "close 165.2 vs 20 EMA 135.97 → SP"
   ],
   [
    "544844",
    "Poojaa Precision Engg. Ltd",
-   "close 924.9 vs 20 EMA 905.54 → SP"
+   "close 940.25 vs 20 EMA 908.85 → SP"
   ],
   [
    "ACETEC",
@@ -89,137 +196,132 @@
   [
    "ADISOFT",
    "Adisoft Technol.",
-   "close 288.35 vs 20 EMA 269.56 → SP"
-  ],
-  [
-   "ADVAIT",
-   "Advait Energy Transitions Limited",
-   "close 1903 vs 20 EMA 1805.2 → SP"
+   "close 289.75 vs 20 EMA 271.48 → SP"
   ],
   [
    "AEROPLANE",
    "A C J K Exports",
-   "close 233.28 vs 20 EMA 220.33 → SP"
+   "close 242.83 vs 20 EMA 224.69 → SP"
   ],
   [
    "DEEPA",
    "Deepa Jewellers",
-   "close 222.78 vs 20 EMA 217.67 → SP"
+   "close 226.58 vs 20 EMA 218.53 → SP"
   ],
   [
    "DHABRIYA",
    "Dhabriya Poly.",
-   "close 505.25 vs 20 EMA 468.42 → SP"
+   "close 486.8 vs 20 EMA 472.15 → SP"
   ],
   [
    "DHARARAIL",
    "Dhara Rail Pro.",
-   "close 133.95 vs 20 EMA 132.03 → SP"
+   "close 131 vs 20 EMA 131.93 → DT"
   ],
   [
    "HALDYNGL",
    "Haldyn Glass",
-   "close 137.07 vs 20 EMA 135.04 → SP"
+   "close 136.04 vs 20 EMA 135.38 → SP"
   ],
   [
    "KANOHAR",
    "Kanohar Elect.",
-   "close 1006.75 vs 20 EMA 996.11 → SP"
+   "close 1064.4 vs 20 EMA 1004.45 → SP"
   ],
   [
    "MARUSHIKA",
    "Marushika Tech.",
-   "close 127 vs 20 EMA 119.37 → SP"
+   "close 130.8 vs 20 EMA 120.46 → SP"
   ],
   [
    "ORIRAIL",
    "Oriental Rail Infrastructure Ltd",
-   "close 116.9 vs 20 EMA 115.96 → SP"
+   "close 123.89 vs 20 EMA 117.41 → SP"
   ],
   [
    "SHUKRAPHAR",
    "Shukra Pharma.",
-   "close 82.05 vs 20 EMA 73.35 → SP"
+   "close 82.2 vs 20 EMA 74.96 → SP"
   ],
   [
    "SIMCA",
    "Simca Advertis.",
-   "close 480.65 vs 20 EMA 452.1 → SP"
+   "close 482 vs 20 EMA 454.95 → SP"
   ],
   [
    "SMT",
    "Sahajanand Medical Technologies Ltd",
-   "close 492.9 (too new for any EMA)"
+   "close 504.65 (too new for any EMA)"
   ],
   [
    "TAALTECH",
    "TAAL Tech Ltd",
-   "close 929.7 vs 20 EMA 925.62 → SP"
+   "close 944.1 vs 20 EMA 928.8 → SP"
   ],
   [
    "TAMBOLIIN",
    "Tamboli Industri",
-   "close 327.6 vs 20 EMA 313.68 → SP"
+   "close 329.35 vs 20 EMA 316.55 → SP"
   ],
   [
    "TEAMTECH",
    "Teamtech Formwork",
-   "close 166 vs 20 EMA 155.77 → SP"
+   "close 161.15 vs 20 EMA 156.28 → SP"
   ],
   [
    "TRANSPEK",
    "Transpek Industry Ltd",
-   "close 1292.6 vs 20 EMA 1290.54 → SP"
+   "close 1336.3 vs 20 EMA 1295.35 → SP"
   ],
   [
    "UDAYJEW",
    "Uday Jewellery",
-   "close 223.48 vs 20 EMA 211.41 → SP"
+   "close 218.3 vs 20 EMA 213.51 → SP"
   ],
   [
    "544551",
    "Bhavik Enterpris",
-   "close 146.5 vs 20 EMA 149.59"
+   "close 151.9 vs 20 EMA 149.81"
   ],
   [
    "544623",
    "Mother Nutri",
-   "close 155.2 vs 20 EMA 157.5"
+   "close 161.7 vs 20 EMA 157.9"
   ],
   [
    "544746",
    "Safety Controls & Devices Ltd",
-   "close 70 vs 20 EMA 71.41"
+   "close 73.4 vs 20 EMA 71.6"
   ],
   [
    "544774",
    "SMR Jewels",
-   "close 84.07 vs 20 EMA 92.28"
+   "close 82.5 vs 20 EMA 91.35"
   ],
   [
    "544980",
    "SJP Ultrasonics",
-   "close 90.2 vs 20 EMA 95.9"
+   "close 89.5 vs 20 EMA 95.24"
   ],
   [
    "ANAWIL",
    "Anawil Wire and Engineering Ltd",
-   "close 400.5 vs 20 EMA 404.8"
+   "close 390.75 vs 20 EMA 403.46"
   ],
   [
    "APSISAERO",
    "Apsis Aerocom Ltd",
-   "close 477.15 vs 20 EMA 513.24"
+   "close 486.65 vs 20 EMA 510.71"
   ],
   [
    "BPLPHARMA",
    "Bharat Parenterals Ltd",
-   "close 1800.8 vs 20 EMA 1838.75"
+   "close 1909.8 vs 20 EMA 1846.48"
   ],
   [
    "BRANDMAN",
    "Brandman Retail Ltd",
-   "close 143.4 vs 20 EMA 151.01"
+   "close 143.7 vs 20 EMA 150.31"
   ],
   [
    "EPWINDIA",
@@ -229,42 +331,42 @@
   [
    "ESDS",
    "ESDS Software Solution Ltd",
-   "close 1205 vs 20 EMA 1269.44"
+   "close 1265.2 vs 20 EMA 1269.03"
   ],
   [
    "HEXAGON",
    "Hexagon Nutri.",
-   "close 59.21 vs 20 EMA 61.52"
+   "close 59.91 vs 20 EMA 61.23"
   ],
   [
    "MPIMANIPAL",
    "Manipal Payment and Identity Solutions Ltd",
-   "close 319.95 vs 20 EMA 323"
+   "close 338 vs 20 EMA 324.47"
   ],
   [
    "RAMBHAJO",
    "Advit Jewels",
-   "close 325.65 vs 20 EMA 335.21"
+   "close 316.2 vs 20 EMA 331.74"
   ],
   [
    "RSL",
    "Rajputana Stain.",
-   "close 168.67 vs 20 EMA 170.19"
+   "close 168.8 vs 20 EMA 169.86"
   ],
   [
    "SWASTIKAIN",
    "Swastika Infra",
-   "close 192.99 vs 20 EMA 202.72"
+   "close 193.15 vs 20 EMA 200.46"
   ],
   [
    "XTRANET",
    "Xtranet Techno.",
-   "close 270.65 vs 20 EMA 279.53"
+   "close 270.35 vs 20 EMA 278.21"
   ],
   [
    "YAAP",
    "Yaap Digital Ltd",
-   "close 105.1 vs 20 EMA 107.32"
+   "close 102.55 vs 20 EMA 106.86"
   ]
  ],
  "per_alert": {
@@ -278,9 +380,9 @@
  },
  "email_total": 0,
  "already_listed": 0,
- "price_date": "11 Nov 2026",
+ "price_date": "12 Nov 2026",
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "12 Nov 2026, 09:37 AM IST"
+ "run_at": "12 Nov 2026, 09:45 PM IST"
 }

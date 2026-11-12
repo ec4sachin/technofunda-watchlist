@@ -24,3 +24,7 @@ date,strategy,mode,action,symbol,name,qty,price,value,reason,pnl,pnl_pct,hold_da
 2026-11-11,Smart Switch,paper,BUY,544529,Aptus Pharma,252,475.96,119941.92,"Breakout above ₹471.25 + 1% (stop ₹455.4, target ₹618.75) · Smallcap 100 19,185 above EMA 50 19,107 → Positional exits",,,,switch-544529-2026-11-11
 2026-11-11,Smart Switch,paper,BUY,OBSCP,OBSC Perfection,137,873.03,119605.11,"Breakout above ₹864.39 + 1% (stop ₹820.65, target ₹1134.94) · Smallcap 100 19,185 above EMA 50 19,107 → Positional exits",,,,switch-OBSCP-2026-11-11
 2026-11-11,Smart Switch · Growth list,paper,SELL,GLOBAL,Global Education,538,139.7,75158.6,Stop loss (6% max risk),-5109.19,-6.0,6,growth_switch-GLOBAL-2026-11-05
+2026-11-12,Swing Strategy,paper,BUY,544141,Pune e-Stock Broking,476,272.7,129805.2,"Breakout above ₹270 + 1% (stop ₹256.34, target ₹327.24)",,,,swing-544141-2026-11-12
+2026-11-12,Positional Trading,paper,BUY,544141,Pune e-Stock Broking,440,272.7,119988.0,"Breakout above ₹270 + 1% (stop ₹256.34, target ₹354.51)",,,,positional-544141-2026-11-12
+2026-11-12,Smart Switch,paper,BUY,544141,Pune e-Stock Broking,440,272.7,119988.0,"Breakout above ₹270 + 1% (stop ₹256.34, target ₹354.51) · Smallcap 100 19,489 above EMA 50 19,122 → Positional exits",,,,switch-544141-2026-11-12
+2026-11-11,Smart Switch · Growth list,paper,BUY,VINSYS,Vinsys IT Serv.,125,632.31,79038.75,"Breakout above ₹626.05 + 1% (stop ₹600.43, target ₹822) · Smallcap 100 19,185 above EMA 50 19,107 → Positional exits",,,,growth_switch-VINSYS-2026-11-11
