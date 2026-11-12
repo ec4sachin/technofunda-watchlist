@@ -75,6 +75,8 @@ input,select{font:15px var(--f-body);color:var(--ink);background:var(--surface);
 .sx-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:flex-end}.sx-tools select{max-width:100%;font-size:14px;padding:7px 10px}
 .phs{display:inline-block;font-size:12px;line-height:1.5;padding:1px 8px;border-radius:999px;background:var(--bg);border:1px solid var(--line);white-space:nowrap}
 .phs.m-good{background:var(--up-soft);border-color:transparent}.phs.m-bad{background:var(--down-soft);border-color:transparent}
+button.phs{font:inherit;font-size:12.5px;color:var(--ink);cursor:pointer;padding:4px 10px}button.phs:hover{border-color:var(--accent)}
+button.phs[aria-pressed="true"]{outline:2px solid var(--ink);outline-offset:1px;font-weight:600}.sx-legend{align-items:center}.sx-legend small{font-size:12px}
 .sx-list{display:flex;flex-direction:column;gap:6px}
 .sx{appearance:none;font:inherit;color:var(--ink);text-align:left;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:10px;
   padding:10px 12px;display:grid;grid-template-columns:minmax(0,1.5fr) repeat(5,minmax(60px,.45fr)) minmax(96px,.7fr);gap:6px 8px;align-items:center}
@@ -822,9 +824,9 @@ function setRange(){
 
 // ---------------- Sector Rotation: SP + DT stocks by sub-sector (Screener "Broad Industry") vs the Nifty Smallcap 100.
 // Data: sectors.json written by the robot each run (equal-weight index of each sub-sector, 1 year of days).
-let SEC = null, secLoad = null, secChart = null, secCur = null, secPeriod = "1M", secSector = "";
+let SEC = null, secLoad = null, secChart = null, secCur = null, secPeriod = "1M", secSector = "", secPhase = "";
 try { const p = localStorage.getItem("tf-secp"); if (["1W", "1M", "3M", "6M", "1Y"].includes(p)) secPeriod = p; } catch (e) {}
-try { secSector = localStorage.getItem("tf-secs") || ""; } catch (e) {}
+try { secSector = localStorage.getItem("tf-secs") || ""; secPhase = localStorage.getItem("tf-secph") || ""; } catch (e) {}
 const SEC_DAYS = {"1W": 5, "1M": 21, "3M": 63, "6M": 126, "1Y": 252}, SEC_P = Object.keys(SEC_DAYS);
 const SEC_NAME = {"1W": "1 week", "1M": "1 month", "3M": "3 months", "6M": "6 months", "1Y": "1 year"};
 const PHASE = {Leading: ["m-good", "Leading", "beating the index over 1 month and 1 week"],
@@ -844,21 +846,24 @@ async function drawSectors(){
   const P = secPeriod, ix = SEC.index.perf;
   const sectorsAll = [...new Set(SEC.subs.map(x => x.sector))].sort();
   if (secSector && !sectorsAll.includes(secSector)) secSector = "";
-  const subs = SEC.subs.filter(x => !secSector || x.sector === secSector).sort((a, b) => (b.perf[P] ?? -1e9) - (a.perf[P] ?? -1e9));
+  if (secPhase && !PHASE[secPhase]) secPhase = "";
+  const inSector = SEC.subs.filter(x => !secSector || x.sector === secSector);
+  const subs = inSector.filter(x => !secPhase || x.phase === secPhase).sort((a, b) => (b.perf[P] ?? -1e9) - (a.perf[P] ?? -1e9));
   const nStocks = s_ => SEC.subs.filter(x => x.sector === s_).reduce((t, x) => t + x.n, 0);
-  const cnt = {}; subs.forEach(x => { cnt[x.phase] = (cnt[x.phase] || 0) + 1; });
+  const cnt = {}; inSector.forEach(x => { cnt[x.phase] = (cnt[x.phase] || 0) + 1; });
   const cell = (x, k) => `<div class="sv ${x.rel[k] != null && x.rel[k] > 0 ? "beat" : ""}${k === P ? " sel" : ""}"><small>${k}</small>${pc(x.perf[k])}</div>`;
   v.innerHTML = `
     <div class="st-head"><div><h2 style="margin:0">Sector Rotation<span class="cnt">${subs.length}</span></h2>
-      <div class="meta">${SEC.total - SEC.unclassified} of ${SEC.total} SP + DT stocks in ${SEC.subs.length} sub-sectors${secSector ? ` · showing ${esc(secSector)}` : ""} · prices of ${esc(SEC.as_of)}</div></div>
+      <div class="meta">${SEC.total - SEC.unclassified} of ${SEC.total} SP + DT stocks in ${SEC.subs.length} sub-sectors${secSector || secPhase ? ` · showing ${[secPhase, secSector].filter(Boolean).map(esc).join(" · ")} (${subs.length})` : ""} · prices of ${esc(SEC.as_of)}</div></div>
       <div class="sx-tools"><select id="sec-filter" aria-label="Show sector"><option value="">All sectors (${sectorsAll.length})</option>${sectorsAll.map(s_ =>
         `<option value="${esc(s_)}"${s_ === secSector ? " selected" : ""}>${esc(s_)} · ${SEC.subs.filter(x => x.sector === s_).length} sub-sectors, ${nStocks(s_)} stocks</option>`).join("")}</select>
       <div class="ranges" role="group" aria-label="Sort by period">${SEC_P.map(k => `<button class="rg" data-secp="${k}" aria-pressed="${k === P}">${k}</button>`).join("")}</div></div></div>
     <div class="st-note sx-index">📈 <b>Nifty Smallcap 100</b> &nbsp; ${SEC_P.map(k => `${k} ${pc(ix[k])}`).join(" · ")}
       <br><small class="mut">Sorted by ${P} performance. Green box = beating the Smallcap 100 over that period. Tap a sub-sector for its chart and stocks.</small></div>
     ${SEC.unclassified ? `<div class="st-note">⏳ ${SEC.unclassified} stock(s) not sorted into a sub-sector yet — the robot reads up to 60 Screener pages a day, so all are in within a few days.</div>` : ""}
-    <div class="sx-legend">${Object.keys(PHASE).map(k => `<span class="phs ${PHASE[k][0]}" title="${PHASE[k][2]}">${k} <b>${cnt[k] || 0}</b></span>`).join("")}</div>
-    <div class="sx-list">${subs.map(x => `<button class="sx" data-sec="${SEC.subs.indexOf(x)}">
+    <div class="sx-legend" role="group" aria-label="Show only">${Object.keys(PHASE).map(k => `<button class="phs ${PHASE[k][0]}" data-secph="${k}" aria-pressed="${k === secPhase}" title="Show only ${k}: ${PHASE[k][2]}">${k} <b>${cnt[k] || 0}</b></button>`).join("")}
+      ${secPhase ? `<button class="phs" data-secph="">✕ Show all</button>` : `<small class="mut">Tap a label to show only those sub-sectors</small>`}</div>
+    <div class="sx-list">${subs.length ? "" : `<div class="empty">No ${esc(secPhase)} sub-sectors${secSector ? " in " + esc(secSector) : ""} right now.</div>`}${subs.map(x => `<button class="sx" data-sec="${SEC.subs.indexOf(x)}">
       <div class="sx-n"><b>${esc(x.name)}</b><small>${esc(x.sector)} · ${x.n} stock${x.n > 1 ? "s" : ""}</small></div>
       ${SEC_P.map(k => cell(x, k)).join("")}
       <div class="sx-p">${x.phase ? `<span class="phs ${PHASE[x.phase][0]}">${x.phase}</span>` : ""}<small class="mut">${x.rel[P] == null ? "" : (x.rel[P] >= 0 ? "+" : "−") + Math.abs(x.rel[P]).toFixed(1) + " vs index"}</small></div>
@@ -1202,6 +1207,8 @@ document.addEventListener("click", async e => {
   const ob = e.target.closest("[data-order]"); if (ob) { openOrder(ob.dataset.sym, ob.dataset.order); return; }
   const cb = e.target.closest("[data-cat]"); if (cb) { openCat(cb.dataset.cat); return; }
   const sx = e.target.closest("[data-sec]"); if (sx) { openSector(+sx.dataset.sec); return; }
+  const ph = e.target.closest("[data-secph]"); if (ph) { secPhase = ph.dataset.secph === secPhase ? "" : ph.dataset.secph;
+    try { localStorage.setItem("tf-secph", secPhase); } catch (x) {} drawSectors(); return; }
   const sp_ = e.target.closest("[data-secp]"); if (sp_) { secPeriod = sp_.dataset.secp; try { localStorage.setItem("tf-secp", secPeriod); } catch (x) {}
     if (sp_.closest("#order")) { secWin(); } else drawSectors(); return; }
   const so = e.target.closest("[data-sec-open]"); if (so) { closeOrder(); openPanel(so.dataset.secOpen, "chart"); return; }
