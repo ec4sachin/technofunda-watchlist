@@ -2,23 +2,7 @@
  "added": [],
  "rejected": [],
  "to_dt": [],
- "to_sp": [
-  [
-   "DEEPA",
-   "Deepa Jewellers",
-   "close 222.78 > 20 EMA 217.67"
-  ],
-  [
-   "MVGJL",
-   "Manoj Vaibhav",
-   "close 183.51 > 200 EMA 180.33"
-  ],
-  [
-   "THOMASCOTT",
-   "Thomas Scott India Ltd",
-   "close 304.4 > 200 EMA 290.93"
-  ]
- ],
+ "to_sp": [],
  "removed": [],
  "unchecked": [
   [
@@ -116,6 +100,11 @@
    "AEROPLANE",
    "A C J K Exports",
    "close 233.28 vs 20 EMA 220.33 → SP"
+  ],
+  [
+   "DEEPA",
+   "Deepa Jewellers",
+   "close 222.78 vs 20 EMA 217.67 → SP"
   ],
   [
    "DHABRIYA",
@@ -233,11 +222,6 @@
    "close 143.4 vs 20 EMA 151.01"
   ],
   [
-   "DEEPA",
-   "Deepa Jewellers",
-   "close 222.78 vs 20 EMA 217.67"
-  ],
-  [
    "EPWINDIA",
    "EPW India",
    "close 239 vs 20 EMA 240.48"
@@ -298,5 +282,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "12 Nov 2026, 09:10 AM IST"
+ "run_at": "12 Nov 2026, 09:37 AM IST"
 }
