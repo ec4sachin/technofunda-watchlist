@@ -70,12 +70,14 @@ extra_rules:
 full_marks: 11
 new_stock_pass: 5        # Step 2 — new stock from emails needs this shown score to enter SP
 new_stock_min_profit_growth: 20   # Step 2 — and TTM profit growth of at least this % (0 = off; rule of 11 Nov 2026)
+new_stock_min_revenue_guidance: 15   # Step 2 — and management revenue guidance (Claude's data/catalysts.json) of at least this % a year; no guidance = not checked (0 = off; 13 Nov 2026)
 # Relative Strength (RS) rating 1-99 vs all BSE stocks. Only the 3-month RS is used (8 Nov 2026); 0 = that check is off.
 new_stock_min_rs: 0      # Step 2 — 12-month RS (3/6/9/12 months, last 3 counted double): off
 new_stock_min_rs3: 80    # Step 2 — new stock's 3-month RS (last 3 months only) must be above this
 monthly_pass: 5          # Step 5 — stock in SP/DT needs this shown score to stay
 monthly_min_profit_growth: 20     # Step 5 — SP / DT stock with TTM profit growth below this % is removed (0 = off)
 profit_growth_qtr_exception: 35   # ... unless its latest quarter profit growth (vs same quarter last year) is above this % (0 = no exception)
+monthly_min_revenue_guidance: 15     # Step 5 — SP / DT stock whose revenue guidance is below this % a year is removed; range = middle; no guidance = kept (0 = off)
 monthly_min_rs: 0        # Step 5 — 12-month RS: off
 monthly_min_rs3: 80      # Step 5 — 3-month RS must be above this to stay
 monthly_rs_lists: [SP]   # which lists the monthly RS check removes from (DT not checked: its stocks are below the 200 EMA)
