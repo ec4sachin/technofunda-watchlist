@@ -24,6 +24,8 @@ assert k("Closure of Trading Window") is None
 assert k("Intimation of Board Meeting to consider financial results") is None
 assert k("Copy of Newspaper Publication") is None
 assert k("Allotment of ESOP") is None
+assert k("Disclosures under Regulation 10(6) in respect of any acquisition ... SEBI (SAST) Regulations, 2011") is None
+assert k("public announcement under Substantial Acquisition of Shares and Takeovers Regulations") is None
 assert k("Board meeting outcome - approved capacity expansion of 20,000 TPA") == "Capacity"
 
 def bse(day, s=None):
