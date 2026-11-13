@@ -13948,7 +13948,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Industrials",
+   "Capital Goods",
+   "Industrial Products",
+   "Aluminium, Copper & Zinc Products"
+  ]
  },
  "PANAMAPET": {
   "market_cap": 2651.0,
@@ -16516,7 +16522,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-11"
+  "as_of": "2026-11-11",
+  "sector_path": [
+   "Consumer Discretionary",
+   "Media, Entertainment & Publication",
+   "Media",
+   "Advertising & Media Agencies"
+  ]
  },
  "509597": {
   "market_cap": 57.7,
@@ -22518,7 +22530,13 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-07"
+  "as_of": "2026-11-07",
+  "sector_path": [
+   "Industrials",
+   "Capital Goods",
+   "Industrial Products",
+   "Abrasives & Bearings"
+  ]
  },
  "SWASTIKAIN": {
   "market_cap": 659.0,
