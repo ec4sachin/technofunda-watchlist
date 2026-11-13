@@ -100,6 +100,16 @@ mark.g,.cs .nv span.g{background:var(--up-soft);color:var(--ink);border-color:tr
 .cs .nv span.r b{color:var(--down)}
 .cs .pt{font:700 20px var(--f-mono)}.cs .how{font-size:12.5px;color:var(--muted);margin-top:2px}
 .cat .cx mark.g{padding:0 1px}
+.gd{margin-top:10px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}.gd h5{margin:0 0 6px;font:700 13px var(--f-body);color:var(--ink)}.gd h5 small{font-weight:500;color:var(--muted);margin-left:4px}
+.gd .gl{display:grid;grid-template-columns:130px 1fr;gap:8px;font-size:13px;padding:3px 0;border-top:1px dashed var(--line)}.gd .gl:first-of-type{border-top:0}.gd .gk{color:var(--muted)}.gd .gk small{font-family:var(--f-mono);font-size:11px}
+.gd b{font-family:var(--f-mono);font-weight:600}.gd b.up{color:var(--up)}.gd b.down{color:var(--down)}
+.gd .gl.inc,.gd .gl.dec{border-top-color:transparent;border-radius:6px;padding:4px 6px;margin:2px -6px}.gd .gl.inc{background:var(--up-soft)}.gd .gl.dec{background:var(--down-soft)}
+.gd .gl.inc .gk,.gd .gl.dec .gk{color:var(--ink)}
+.ann{margin:0;padding:0;list-style:none;display:grid;gap:4px}.ann li{font-size:13px;padding:4px 6px;border-radius:6px;line-height:1.4}.ann li.nw{background:var(--warn-soft)}
+.ann .ad{font:12px var(--f-mono);color:var(--muted)}.ann .ak{font-size:11.5px;font-weight:600;padding:1px 6px;border-radius:10px;background:var(--bg);border:1px solid var(--line)}.ann a{color:var(--ink)}
+.nb{font-size:11px;font-weight:700;color:var(--warn);margin-left:4px}
+.gd .gwarn{margin-top:6px;font-size:12.5px;font-weight:600;color:var(--down)}
+@media(max-width:520px){.gd .gl{grid-template-columns:1fr;gap:0}}
 .order .catbody p{margin:0;font-size:15px;line-height:1.6}
 .order .catbody p.src{font-size:12.5px;line-height:1.5}
 .order .catbody .src{margin:0}
@@ -403,6 +413,8 @@ function emaGap(r){ const c = num(r.last_close), e = num(r.ema200); return (c &&
 // Catalyst box: Claude's catalyst note (data/catalysts.json) + the latest / previous quarter numbers and the
 // expected price (both worked out here from the Screener quarterly results the robot saved)
 const CAT = D.catalysts || {};
+const ANN = D.ann || {};
+const newAnn = (sym, k) => (ANN[sym] || []).filter(x => !(k && k.date) || x.d > k.date);
 const hl = t => esc(t).replace(/==(.+?)==/g, '<mark class="g">$1</mark>');      // ==text== = highlighted
 const pctTxt = v => v == null ? "—" : (v >= 0 ? "+" : "−") + Math.abs(v).toFixed(Math.abs(v) >= 100 ? 0 : 1) + "%";
 function qStats(f){
@@ -461,7 +473,83 @@ function catBox(r){
   const body = k && k.text ? hl(k.text)
     : `Latest ${st.half ? "half-year" : "quarter"} (${esc(L.t)}): sales ${pctTxt(L.sales)} · profit ${L.lossToProfit ? "loss → profit" : pctTxt(L.profit)} · EPS ₹${esc(L.eps ?? "—")}`;
   return `<button class="cat" data-cat="${esc(r.symbol)}" aria-label="Catalyst, results and price target of ${esc(r.name || r.symbol)}">
-    <span class="ct">${k && k.text ? "Catalyst" : "Results"} · tap for details</span><span class="cx">${body}</span></button>`;
+    <span class="ct">${k && k.text ? "Catalyst" : "Results"} · tap for details${newAnn(r.symbol, k).length ? ` <b class="nb">📢 ${newAnn(r.symbol, k).length} new</b>` : ""}</span><span class="cx">${body}</span></button>`;
+}
+// Management guidance (added 13 Nov 2026), written by Claude in data/catalysts.json as
+//   "guide": {"rev": {"fy": "FY27", "cr": [lo, hi]} or {"fy", "pct": [lo, hi]}, "profit": {..., "kind": "PAT"|"EBITDA"},
+//             "margin": {"fy", "kind": "EBITDA"|"PAT", "pct": [lo, hi]}, each may have "text"; "note": ""}
+// Last year = the last full financial year (Apr-Mar) added up from the Screener quarterly results the robot saved.
+function lastFY(f){
+  const q = f && f.quarters; if (!q || !q.t) return null;
+  const half = +f.result_period_months === 6;
+  for (let i = q.t.length - 1; i >= 0; i--) {
+    const m = /^Mar (\d{4})$/.exec(q.t[i] || ""); if (!m) continue;
+    const y = +m[1], need = half ? [`Sep ${y - 1}`, `Mar ${y}`] : [`Jun ${y - 1}`, `Sep ${y - 1}`, `Dec ${y - 1}`, `Mar ${y}`];
+    const idx = need.map(t => q.t.indexOf(t)); if (idx.some(j => j < 0)) return null;
+    const sum = a => idx.reduce((s, j) => (s == null || a[j] == null) ? null : s + a[j], 0);
+    const sales = sum(q.sales), profit = sum(q.profit);
+    const ebitda = idx.reduce((s, j) => (s == null || q.sales[j] == null || q.opm[j] == null) ? null : s + q.sales[j] * q.opm[j] / 100, 0);
+    const opm = sales > 0 && ebitda != null ? ebitda / sales * 100 : num(f.opm_last_year);
+    return {fy: "FY" + String(y).slice(2), y, sales, profit, ebitda, opm, npm: sales > 0 && profit != null ? profit / sales * 100 : null};
+  }
+  return null;
+}
+const rng = (a, fmt) => !a || !a.length ? "" : a.length > 1 && a[1] != null && a[1] !== a[0] ? fmt(a[0]) + "–" + fmt(a[1]) : fmt(a[0]);
+const crTxt = v => "₹" + Math.round(v).toLocaleString("en-IN") + " cr";
+const pRng = a => { const f = v => Math.abs(v).toFixed(Math.abs(v) >= 10 || v % 1 === 0 ? 0 : 1);   // [20, 25] -> "+20–25%"
+  const s = v => v >= 0 ? "+" : "−";
+  return a.length > 1 && a[1] != null && a[1] !== a[0] ? (s(a[0]) === s(a[1]) ? s(a[0]) + f(a[0]) + "–" + f(a[1]) : pctTxt(a[0]) + " to " + pctTxt(a[1]).slice(0, -1)) + "%" : s(a[0]) + f(a[0]) + "%"; };
+function guideHTML(G, f, OB){
+  const ly = lastFY(f);
+  if (!G && OB) G = {};
+  if (!G) return `<div class="gd"><h5>Guidance</h5><div class="mut">Not added yet — ask Claude for a guidance batch.</div></div>`;
+  const yrs = g => { const m = /FY(\d{2})/.exec(g.fy || ""); return ly && m ? (2000 + +m[1]) - ly.y : null; };
+  const span = g => { const n = yrs(g); return n && n > 1 ? ` (over ${n} years)` : ""; };
+  const amount = (g, base, what) => {           // revenue / profit line
+    if (!g) return `<span class="mut">Not given by management</span>${base != null ? ` <span class="mut">· ${ly.fy} ${crTxt(base)}</span>` : ""}`;
+    let main = "", vs = "";
+    if (g.cr) {
+      main = `<b>${rng(g.cr, v => "₹" + Math.round(v).toLocaleString("en-IN"))} cr</b>`;
+      if (base != null && base > 0) vs = ` = <b class="${g.cr[0] >= base ? "up" : "down"}">${pRng(g.cr.map(v => (v - base) / base * 100))}</b>${span(g)} vs ${ly.fy} ${crTxt(base)}`;
+    } else if (g.pct) {
+      main = `<b class="up">${pRng(g.pct)}</b> growth`;
+      if (base != null && base > 0) vs = ` → about ${rng(g.pct.map(p => base * (1 + p / 100)), v => "₹" + Math.round(v).toLocaleString("en-IN"))} cr vs ${ly.fy} ${crTxt(base)}`;
+    }
+    return `${main}${vs}${g.text ? ` <span class="mut">· ${esc(g.text)}</span>` : ""}`;
+  };
+  const R = G.rev, P = G.profit, M = G.margin;
+  // green row = guidance above last year, red row = below (middle of a range is used; 13 Nov 2026)
+  const mid = a => a && a.length ? (a.length > 1 && a[1] != null ? (a[0] + a[1]) / 2 : a[0]) : null;
+  const dir = (g, base) => { if (!g) return "";
+    const v = g.cr ? (base != null && base > 0 ? mid(g.cr) - base : null) : g.pct ? mid(g.pct) : null;
+    return v == null || Math.abs(v) < 1e-9 ? "" : v > 0 ? " inc" : " dec"; };
+  const pk = (P && P.kind) || "PAT", mk = (M && M.kind) || "EBITDA";
+  const pBase = !ly ? null : pk === "EBITDA" ? ly.ebitda : ly.profit;
+  const mBase = !ly ? null : mk === "PAT" ? ly.npm : ly.opm;
+  const marginLine = !M ? `<span class="mut">Not given by management</span>${mBase != null ? ` <span class="mut">· ${ly.fy} ${mBase.toFixed(1)}%</span>` : ""}`
+    : `${M.pct ? `<b>${rng(M.pct, v => v.toFixed(v % 1 ? 1 : 0) + "%")}</b>` : ""}${M.text ? ` <span class="mut">${M.pct ? "· " : ""}${esc(M.text)}</span>` : ""}`
+      + (mBase != null ? ` vs ${ly.fy} <b>${mBase.toFixed(1)}%</b>${M.pct ? ` (${M.pct[0] >= mBase ? "+" : "−"}${Math.abs(M.pct[0] - mBase).toFixed(1)} pts)` : ""}` : "");
+  const fy = g => g && g.fy ? ` <small>${esc(g.fy)}</small>` : "";
+  return `<div class="gd"><h5>Guidance & order book${ly ? ` <small>last year = ${ly.fy}, from Screener results</small>` : ""}</h5>
+    <div class="gl${dir(R, ly && ly.sales)}"><span class="gk">Revenue${fy(R)}</span><span>${amount(R, ly && ly.sales)}</span></div>
+    <div class="gl${dir(P, pBase)}"><span class="gk">${esc(pk === "EBITDA" ? "EBITDA" : "Profit")}${fy(P)}</span><span>${amount(P, pBase)}</span></div>
+    <div class="gl${M && M.pct && mBase != null ? (mid(M.pct) > mBase + 0.05 ? " inc" : mid(M.pct) < mBase - 0.05 ? " dec" : "") : ""}"><span class="gk">${esc(mk)} margin${fy(M)}</span><span>${marginLine}</span></div>
+    ${obRow()}
+    ${G.note ? `<div class="how">${hl(G.note)}</div>` : ""}${gRule()}</div>`;
+  function obRow(){     // unexecuted order book as % of last full year's revenue (13 Nov 2026); green = 1 year of sales or more
+    if (!OB || !OB.cr) return `<div class="gl"><span class="gk">Order book</span><span class="mut">Not disclosed${ly && ly.sales ? ` · ${ly.fy} revenue ${crTxt(ly.sales)}` : ""}</span></div>`;
+    const v = mid(OB.cr), pc = ly && ly.sales > 0 ? v / ly.sales * 100 : null;
+    return `<div class="gl${pc != null && pc >= 100 ? " inc" : ""}"><span class="gk">Order book${OB.asof ? ` <small>${esc(OB.asof)}</small>` : ""}</span><span>
+      <b>${rng(OB.cr, v => "₹" + Math.round(v).toLocaleString("en-IN"))} cr</b>${pc != null ? ` = <b>${Math.round(pc)}%</b> of ${ly.fy} revenue ${crTxt(ly.sales)} (${(pc / 100).toFixed(1)}× a year of sales)` : ""}${OB.text ? ` <span class="mut">· ${esc(OB.text)}</span>` : ""}</span></div>`;
+  }
+  function gRule(){      // same rule as the robot (13 Nov 2026): revenue guidance below 15% a year -> removed at the monthly review
+    if (!R) return "";
+    let yr = null;
+    if (R.pct) yr = mid(R.pct);
+    else if (R.cr && ly && ly.sales > 0) { const n = yrs(R); if (n >= 1) yr = (Math.pow(mid(R.cr) / ly.sales, 1 / n) - 1) * 100; }
+    if (yr == null || yr >= 15) return "";
+    return `<div class="gwarn">⚠ Revenue guidance ${pctTxt(yr)} a year is below 15% — removed from SP / DT at the monthly review.</div>`;
+  }
 }
 function qBlock(title, x, better){
   if (!x) return "";
@@ -476,6 +564,15 @@ function qBlock(title, x, better){
     ${item("OPM", x.opm == null ? "—" : x.opm.toFixed(1) + "%" + (x.opmch == null ? "" : ` (${x.opmch >= 0 ? "+" : "−"}${Math.abs(x.opmch).toFixed(1)} pts)`),
       x.opmch != null && x.opmch > 0 && (!better || P.opmch == null || x.opmch > P.opmch), x.opmch != null && x.opmch < 0)}
   </div></div>`;
+}
+// Business announcements from BSE / NSE (robot, 13 Nov 2026). "new" = filed after the catalyst note was written.
+function annHTML(sym, k){
+  const a = ANN[sym] || []; if (!a.length) return "";
+  const nw = new Set(newAnn(sym, k));
+  return `<div class="cs"><h4>Business announcements<small>last 30 days, from ${esc([...new Set(a.map(x => x.ex))].join(" / "))}</small></h4>
+    <ul class="ann">${a.map(x => `<li class="${nw.has(x) ? "nw" : ""}"><span class="ad">${esc(x.d)}</span> <span class="ak">${esc(x.k)}</span>
+      <a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.t)}</a>${nw.has(x) ? ` <b class="nb">new</b>` : ""}</li>`).join("")}</ul>
+    ${nw.size ? `<div class="how">“new” = filed after the catalyst note — Claude checks these next day and adds the real catalysts.</div>` : ""}</div>`;
 }
 function openCat(sym){
   const [r] = findRow(sym); if (!r) return;
@@ -497,7 +594,8 @@ function openCat(sym){
   o.classList.add("wide");
   o.innerHTML = `<div class="oh cat"><h3 id="o-title">${esc(r.name || sym)}</h3><button class="btn x" data-oclose aria-label="Close">✕</button></div>
     <div class="ob catbody">
-      <div class="cs"><h4>Catalyst</h4>${k.text ? `<p>${hl(k.text)}</p>` : `<div class="mut">Not written yet — ask Claude for the next catalyst batch.</div>`}</div>
+      <div class="cs"><h4>Catalyst</h4>${k.text ? `<p>${hl(k.text)}</p>` : `<div class="mut">Not written yet — ask Claude for the next catalyst batch.</div>`}${k.text ? guideHTML(k.guide, f, k.ob) : ""}</div>
+      ${annHTML(sym, k)}
       ${st ? qBlock(`Latest ${word} Numbers`, st.last, st.prev) + qBlock(`Previous ${word} Numbers`, st.prev, null) : ""}
       ${tgt}
       <p class="src">Green = important point, or better than the ${word.toLowerCase()} before. Numbers: Screener ${esc((f && f.basis) || "")} results${f && f.as_of ? " as read on " + esc(f.as_of) : ""}.
@@ -1761,6 +1859,15 @@ def _catalysts(sp, dt):
     return {k: v for k, v in cat.items() if (k in sp or k in dt) and isinstance(v, dict) and v.get("text")}
 
 
+def _announcements(sp, dt):
+    """Business announcements of the last 30 days (data/announcements.json, written by the robot from BSE / NSE)."""
+    try:
+        import announce
+        return announce.recent(sp, dt)
+    except Exception:
+        return {}
+
+
 def page_data(sp, dt, run, history, rules_cfg, banner="", snaps=None, charts=None, alerts=None, strategies=None):
     def rows(items):
         return [{**items[s], "symbol": s, "chart": chart_url(s),
@@ -1770,6 +1877,7 @@ def page_data(sp, dt, run, history, rules_cfg, banner="", snaps=None, charts=Non
         "fund": {k: v for k, v in (snaps or {}).items() if k in sp or k in dt},
         "alerts": _alerts_view(alerts),
         "catalysts": _catalysts(sp, dt),
+        "ann": _announcements(sp, dt),
         "strat": _strategy_view(strategies, sp, dt),
         "charts": charts,  # None on the live site: the page loads charts/SYMBOL.json instead
         "cfg": {"full": rules_cfg.get("full_marks", 11), "pass_new": rules_cfg.get("new_stock_pass", 7),

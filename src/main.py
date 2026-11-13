@@ -19,6 +19,7 @@ import fundamentals as fx  # noqa: E402
 import bhav  # noqa: E402
 import prices  # noqa: E402
 import storage  # noqa: E402
+import announce  # noqa: E402
 import strategy  # noqa: E402
 import market  # noqa: E402
 import universe  # noqa: E402
@@ -109,6 +110,10 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
         if ok and slow:   # TTM profit growth below 20%: not added (rule of 11 Nov 2026)
             ok = False
             mk = f"{mk} · {slow}"
+        low_g = _low_guidance(code, snaps[code], rules_cfg, "new_stock_min_revenue_guidance") if ok else None
+        if low_g:         # management's revenue guidance below 15%: not added (rule of 13 Nov 2026)
+            ok = False
+            mk = f"{mk} · {low_g}"
         rs_note = ""
         min_rs, min_rs3 = float(rules_cfg.get("new_stock_min_rs") or 0), float(rules_cfg.get("new_stock_min_rs3") or 0)
         if ok and not slow and (min_rs or min_rs3):   # Relative Strength ratings (1-99): 12-month and 3-month must be above the levels
@@ -190,6 +195,16 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
         refresh_results(sp, dt, snaps, today)
     except Exception as e:   # never stop the run for this
         report["warnings"].append(f"Results refresh failed: {e}")
+
+    # Business announcements (orders, capacity, acquisitions...) filed on BSE / NSE since the last run (13 Nov 2026)
+    if not storage.out_of_time():
+        try:
+            new_ann, ok_ann = announce.update(sp, dt, today)
+            report["announcements"] = new_ann
+            if not ok_ann:
+                report["warnings"].append("Exchange announcements could not be read today — will try again next run")
+        except Exception as e:   # never stop the run for this
+            report["warnings"].append(f"Announcements reading failed: {e}")
 
     # Step 4 - price vs 200 EMA
     period = int(settings.get("ema_period", 200))
@@ -402,6 +417,65 @@ def _slow_growth(m, rules_cfg, key):
     return txt
 
 
+def _fy_base(snap):
+    """Last full financial year (Apr-Mar) added up from the quarterly results saved in the snapshot:
+    (year it ends, sales) - e.g. (2026, 521.0) for FY26 - or (None, None)."""
+    q = (snap or {}).get("quarters") or {}
+    t, s = q.get("t") or [], q.get("sales") or []
+    if not t or len(s) != len(t):
+        return None, None
+    half = str((snap or {}).get("result_period_months", "")) == "6"
+    for i in range(len(t) - 1, -1, -1):
+        mo, _, yr = str(t[i]).partition(" ")
+        if mo != "Mar" or not yr.isdigit():
+            continue
+        y = int(yr)
+        need = [f"Sep {y - 1}", f"Mar {y}"] if half else [f"Jun {y - 1}", f"Sep {y - 1}", f"Dec {y - 1}", f"Mar {y}"]
+        if not all(x in t for x in need):
+            return None, None
+        vals = [s[t.index(x)] for x in need]
+        return (y, float(sum(vals))) if all(v is not None for v in vals) else (None, None)
+    return None, None
+
+
+def guided_growth(code, snap, catalysts=None):
+    """Yearly revenue growth % from management's guidance that Claude saved in data/catalysts.json
+    ("guide": {"rev": {"fy": "FY27", "pct": [lo, hi]} or {"fy", "cr": [lo, hi]}}), or None when not given.
+    Range: the middle is used. Rupee guidance: % vs last full year (FY26) from the saved quarterly results;
+    guidance for a later year (e.g. FY28 vs FY26) is turned into a yearly rate (CAGR). Rule of 13 Nov 2026."""
+    if catalysts is None:
+        catalysts = storage.load_json("catalysts.json", {}) or {}
+    g = (((catalysts.get(code) or {}).get("guide") or {}).get("rev")) or {}
+    mid = lambda a: None if not a else (float(a[0]) + float(a[1])) / 2 if len(a) > 1 and a[1] is not None else float(a[0])  # noqa: E731
+    if g.get("pct"):
+        return round(mid(g["pct"]), 2)
+    if g.get("cr"):
+        y0, base = _fy_base(snap)
+        fy = str(g.get("fy", ""))
+        if not base or base <= 0 or not fy.upper().startswith("FY") or not fy[2:].isdigit():
+            return None
+        n = (2000 + int(fy[2:])) - y0
+        if n < 1:
+            return None
+        return round(((mid(g["cr"]) / base) ** (1 / n) - 1) * 100, 2)
+    return None
+
+
+def _low_guidance(code, snap, rules_cfg, key, catalysts=None):
+    """Reason text when management's revenue guidance is below the level (15%), else None.
+    No guidance saved / not comparable: never removed or blocked for that."""
+    level = rules_cfg.get(key)
+    if level in (None, "", 0):
+        return None
+    try:
+        g = guided_growth(code, snap, catalysts)
+    except Exception:
+        return None
+    if g is None or g >= float(level):
+        return None
+    return f"revenue guidance {g:+.1f}% a year (need {float(level):g}% or more)"
+
+
 def rs_lists(rules_cfg):
     """Monthly Relative Strength check: (min RS, lists checked) - min 0 = off."""
     lists = rules_cfg.get("monthly_rs_lists", ["SP", "DT"]) or []
@@ -415,6 +489,10 @@ def monthly(sp, dt, rules_cfg, today, report, history, snaps, charts=None):
     rs_skip = 0
     full = rules_cfg.get("full_marks", 11)
     drop_missing = str(rules_cfg.get("page_missing_monthly", "keep")).lower() == "remove"
+    try:
+        cats = storage.load_json("catalysts.json", {}) or {}   # Claude's notes incl. management guidance
+    except Exception:
+        cats = {}
     for list_name, items in (("SP", sp), ("DT", dt)):
         for sym in list(items):
             row = items[sym]
@@ -445,6 +523,8 @@ def monthly(sp, dt, rules_cfg, today, report, history, snaps, charts=None):
                 reason = f"marks {mk} — missed: " + fx.short_reason(marks)
             elif slow:   # TTM profit growth below 20% (rule of 11 Nov 2026)
                 reason = f"marks {mk} OK, but {slow}"
+            elif _low_guidance(sym, snaps[sym], rules_cfg, "monthly_min_revenue_guidance", cats):   # rule of 13 Nov 2026
+                reason = f"marks {mk} OK, but " + _low_guidance(sym, snaps[sym], rules_cfg, "monthly_min_revenue_guidance", cats)
             elif (min_rs or min_rs3) and list_name in rs_in:   # RS (12-month and 3-month) must be above the levels
                 try:
                     status, _, note = rs.check(sym, m, min_rs, chart=(charts or {}).get(sym), min_rs3=min_rs3)
@@ -700,6 +780,12 @@ def build_message(r, sp, dt, today_label, dashboard_url=""):
         if mp["lose"]:
             L += ["Would be removed at the monthly review:"] + [tg.stock_line(s, n, why) for s, n, why in mp["lose"][:40]]
         L.append("To use them: set <code>extra_marks: on</code> in config/rules.yaml (or tell Claude).")
+    if r.get("announcements"):
+        an = r["announcements"]
+        L += ["", f"📢 <b>Business announcements</b> ({len(an)}) — Claude checks them and adds real catalysts to the Catalyst notes"] + \
+             [tg.stock_line(s_, n_, why) for s_, n_, why, _u in an[:20]]
+        if len(an) > 20:
+            L.append(f"… and {len(an) - 20} more (see the Catalyst window on the dashboard)")
     if r.get("sub_sectors"):
         L += ["", "🏷 <b>Sub-sector given</b> (automatic — ask Claude to make it more specific)"] + \
              [tg.stock_line(s_, n_, why) for s_, n_, why in r["sub_sectors"][:25]]
