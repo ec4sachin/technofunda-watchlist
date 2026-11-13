@@ -998,11 +998,11 @@
   ]
  },
  "ESCONET": {
-  "market_cap": 522.0,
-  "price": 395.0,
+  "market_cap": 504.0,
+  "price": 382.0,
   "high_52w": 407.0,
   "low_52w": 91.2,
-  "pe": 20.4,
+  "pe": 19.7,
   "book_value": 75.0,
   "dividend_yield": 0.0,
   "roce": 11.8,
@@ -6527,7 +6527,7 @@
   ]
  },
  "XTRANET": {
-  "market_cap": 1414.0,
+  "market_cap": 1412.0,
   "price": 270.0,
   "high_52w": 359.0,
   "low_52w": 120.0,
@@ -7471,11 +7471,11 @@
   ]
  },
  "DEEPA": {
-  "market_cap": 2178.0,
-  "price": 227.0,
+  "market_cap": 2110.0,
+  "price": 219.0,
   "high_52w": 277.0,
   "low_52w": 165.0,
-  "pe": 19.0,
+  "pe": 18.4,
   "book_value": 55.4,
   "dividend_yield": 0.0,
   "roce": 51.6,
@@ -10705,11 +10705,11 @@
   ]
  },
  "MPIMANIPAL": {
-  "market_cap": 7835.0,
-  "price": 338.0,
+  "market_cap": 7468.0,
+  "price": 322.0,
   "high_52w": 458.0,
   "low_52w": 295.0,
-  "pe": 29.0,
+  "pe": 27.7,
   "book_value": 54.6,
   "dividend_yield": 0.0,
   "roce": 44.9,
@@ -11280,11 +11280,11 @@
   ]
  },
  "544468": {
-  "market_cap": 190.0,
-  "price": 134.0,
+  "market_cap": 193.0,
+  "price": 136.0,
   "high_52w": 144.0,
   "low_52w": 98.0,
-  "pe": 19.9,
+  "pe": 20.2,
   "book_value": 50.5,
   "dividend_yield": 0.0,
   "roce": 23.9,
@@ -11431,11 +11431,11 @@
   ]
  },
  "544810": {
-  "market_cap": 172.0,
-  "price": 140.0,
+  "market_cap": 169.0,
+  "price": 138.0,
   "high_52w": 153.0,
   "low_52w": 74.0,
-  "pe": 16.3,
+  "pe": 16.1,
   "dividend_yield": 0.0,
   "roce": 23.1,
   "roe": 24.9,
@@ -17264,11 +17264,11 @@
   ]
  },
  "ANAWIL": {
-  "market_cap": 977.0,
-  "price": 391.0,
+  "market_cap": 983.0,
+  "price": 393.0,
   "high_52w": 540.0,
   "low_52w": 313.0,
-  "pe": 20.0,
+  "pe": 20.1,
   "book_value": 90.5,
   "dividend_yield": 0.0,
   "roce": 32.3,
@@ -19509,8 +19509,8 @@
   ]
  },
  "544844": {
-  "market_cap": 1875.0,
-  "price": 940.0,
+  "market_cap": 1878.0,
+  "price": 942.0,
   "high_52w": 1066.0,
   "low_52w": 447.0,
   "pe": 41.6,
@@ -20217,8 +20217,8 @@
   ]
  },
  "ESDS": {
-  "market_cap": 14830.0,
-  "price": 1265.0,
+  "market_cap": 14779.0,
+  "price": 1260.0,
   "high_52w": 1864.0,
   "low_52w": 746.0,
   "pe": 115.0,
@@ -22539,11 +22539,11 @@
   ]
  },
  "SWASTIKAIN": {
-  "market_cap": 659.0,
-  "price": 193.0,
+  "market_cap": 663.0,
+  "price": 194.0,
   "high_52w": 256.0,
   "low_52w": 187.0,
-  "pe": 13.5,
+  "pe": 13.6,
   "book_value": 85.0,
   "dividend_yield": 0.0,
   "roce": 31.4,
@@ -24140,11 +24140,11 @@
   ]
  },
  "SIMCA": {
-  "market_cap": 577.0,
-  "price": 482.0,
+  "market_cap": 593.0,
+  "price": 495.0,
   "high_52w": 524.0,
   "low_52w": 132.0,
-  "pe": 27.2,
+  "pe": 28.0,
   "book_value": 75.9,
   "dividend_yield": 0.0,
   "roce": 110.0,
@@ -24301,11 +24301,11 @@
   "as_of": "2026-11-13"
  },
  "SMT": {
-  "market_cap": 5130.0,
-  "price": 505.0,
+  "market_cap": 5433.0,
+  "price": 534.0,
   "high_52w": 566.0,
   "low_52w": 347.0,
-  "pe": 71.4,
+  "pe": 75.7,
   "dividend_yield": 0.0,
   "roce": 11.4,
   "roe": 10.4,
@@ -26540,11 +26540,11 @@
   ]
  },
  "KANOHAR": {
-  "market_cap": 8429.0,
-  "price": 1064.0,
+  "market_cap": 8269.0,
+  "price": 1045.0,
   "high_52w": 1210.0,
   "low_52w": 672.0,
-  "pe": 51.2,
+  "pe": 50.3,
   "book_value": 93.3,
   "dividend_yield": 0.0,
   "roce": 54.3,
