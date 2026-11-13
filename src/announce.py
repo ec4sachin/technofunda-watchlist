@@ -23,6 +23,9 @@ MAX_BACK = 4              # days read on the first run / after a gap
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36"
 BSE_API = ("https://api.bseindia.com/BseIndiaAPI/api/AnnSubCategoryGetData/w?pageno={page}&strCat=-1"
            "&strPrevDate={ymd}&strScrip=&strSearch=P&strToDate={ymd}&strType=C&subcategory=-1")
+BSE_API2 = ("https://api.bseindia.com/BseIndiaAPI/api/AnnGetData/w?strCat=-1&strPrevDate={ymd}&strScrip=&strSearch=P"
+            "&strToDate={ymd}&strType=C&pageno={page}")
+STATUS = {}               # what happened while reading (saved in announcements.json -> "status", for checking)
 BSE_PDF = "https://www.bseindia.com/xml-data/corpfiling/AttachLive/{}"
 NSE_HOME = "https://www.nseindia.com/companies-listing/corporate-filings-announcements"
 NSE_API = "https://www.nseindia.com/api/corporate-announcements?index={index}&from_date={dmy}&to_date={dmy}"
@@ -46,6 +49,10 @@ DROP = (r"trading window|board meeting|newspaper|publication|\besop|\besos|emplo
         r"change in (?:director|auditor|kmp|company secretary)|resignation|appointment of|book closure|"
         r"financial results|integrated filing|statement of deviation|monitoring agency|insider trading|"
         r"sast|pledge|encumbrance|allotment|warrant")
+# share-holding / takeover filings are never business news, even when they say "acquisition"
+HARD_DROP = (r"\bsast\b|substantial acquisition|takeover|open offer|public announcement|regulation 10\s*\(|"
+             r"regulation 29|regulation 31|regulation 7\s*\(|acquisition of shares|shareholding|promoter group")
+_HARD = re.compile(HARD_DROP, re.I)
 _KIND = [(k, re.compile(p, re.I)) for k, p in KINDS]
 _DROP = re.compile(DROP, re.I)
 
@@ -53,6 +60,8 @@ _DROP = re.compile(DROP, re.I)
 def kind_of(text, sub=""):
     """Business label for an announcement, or None when it is routine paperwork."""
     txt = f"{sub} {text}"
+    if _HARD.search(txt):
+        return None
     if "award of order" in sub.lower() or "receipt of order" in sub.lower():
         return "Order"
     if _DROP.search(txt) and not re.search(r"\border\b|contract|capacity|acqui|joint venture", text, re.I):
@@ -74,16 +83,28 @@ def bse_day(day, session=None, max_pages=60):
     h = {"User-Agent": UA, "Referer": "https://www.bseindia.com/", "Origin": "https://www.bseindia.com",
          "Accept": "application/json, text/plain, */*"}
     out, ymd = [], day.strftime("%Y%m%d")
+    st = STATUS.setdefault("bse", {"days": 0, "rows": 0, "last_error": ""})
+    st["days"] += 1
+    api = STATUS.get("bse_api", BSE_API)
     for page in range(1, max_pages + 1):
         if storage.out_of_time():
             break
-        try:
-            r = s.get(BSE_API.format(page=page, ymd=ymd), headers=h, timeout=20)
-            rows = ((r.json() or {}).get("Table") or []) if r.ok else []
-        except Exception:
-            rows = []
+        rows = []
+        for url in ([api] if page > 1 else [api] + [u for u in (BSE_API, BSE_API2) if u != api]):
+            try:
+                r = s.get(url.format(page=page, ymd=ymd), headers=h, timeout=20)
+                if not r.ok:
+                    st["last_error"] = f"HTTP {r.status_code} ({url.split('/api/')[1][:22]})"
+                    continue
+                rows = (r.json() or {}).get("Table") or []
+                if rows:
+                    api = STATUS["bse_api"] = url
+                    break
+            except Exception as e:
+                st["last_error"] = f"{type(e).__name__}: {str(e)[:120]}"
         if not rows:
             break
+        st["rows"] += len(rows)
         for x in rows:
             sub = str(x.get("SUBCATNAME") or x.get("CATEGORYNAME") or "")
             title = x.get("HEADLINE") or x.get("NEWSSUB") or ""
@@ -110,14 +131,20 @@ def nse_day(day, session=None):
     except Exception:
         return []
     out, dmy = [], day.strftime("%d-%m-%Y")
+    st = STATUS.setdefault("nse", {"days": 0, "rows": 0, "last_error": ""})
+    st["days"] += 1
     for index in ("equities", "sme"):
         try:
             r = s.get(NSE_API.format(index=index, dmy=dmy), headers=h, timeout=20)
             rows = r.json() if r.ok else []
-        except Exception:
+            if not r.ok:
+                st["last_error"] = f"HTTP {r.status_code}"
+        except Exception as e:
             rows = []
+            st["last_error"] = f"{type(e).__name__}: {str(e)[:120]}"
         if isinstance(rows, dict):
             rows = rows.get("data") or []
+        st["rows"] += len(rows or [])
         for x in rows or []:
             dt = str(x.get("an_dt") or x.get("sort_date") or "")
             try:
@@ -134,7 +161,7 @@ def update(sp, dt, today, days=None, bse=bse_day, nse=nse_day):
     """Read the announcements filed since the last run and keep the business ones of SP / DT stocks.
     Returns the NEW ones as [(code, name, "Kind: title", url)] for the Telegram message."""
     saved = storage.load_json(FILE, {}) or {}
-    items = saved.get("items") or {}
+    items = {c: [x for x in lst if kind_of(x.get("t", ""))] for c, lst in (saved.get("items") or {}).items()}  # filter rules may change
     now = datetime.strptime(today, "%Y-%m-%d")
     last = saved.get("last")
     start = max(now - timedelta(days=MAX_BACK), datetime.strptime(last, "%Y-%m-%d")) if last else now - timedelta(days=MAX_BACK)
@@ -178,7 +205,9 @@ def update(sp, dt, today, days=None, bse=bse_day, nse=nse_day):
              for c, lst in items.items()}
     items = {c: v for c, v in items.items() if v}
     # move "last" on only when something could be read (a blocked day is tried again next run)
-    storage.save_json(FILE, {"last": today if read_any else (last or ""), "items": items})
+    status = {k: v for k, v in STATUS.items() if k in ("bse", "nse")}
+    status["matched"] = {"bse_codes": len(by_bse), "nse_only_codes": len(by_nse), "new": len(new)}
+    storage.save_json(FILE, {"last": today if read_any else (last or ""), "status": status, "items": items})
     return new, read_any
 
 
