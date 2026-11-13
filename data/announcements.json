@@ -1,16 +1,23 @@
 {
  "last": "2026-11-13",
+ "status": {
+  "bse": {
+   "days": 1,
+   "rows": 0,
+   "last_error": "HTTP 403 (AnnGetData/w?strCat=-1)"
+  },
+  "nse": {
+   "days": 1,
+   "rows": 1347,
+   "last_error": ""
+  },
+  "matched": {
+   "bse_codes": 245,
+   "nse_only_codes": 74,
+   "new": 0
+  }
+ },
  "items": {
-  "MACPOWER": [
-   {
-    "d": "2026-11-09",
-    "t": "Macpower CNC Machines Limited has submitted to the Exchange a copy of Disclosures under Regulation 10(6)-Report to stock Exchange in respect of any acquisition made in reliance upon exemption provided for in regulation 10 of SEBI (SAST) Regulations, 2011",
-    "k": "Acquisition / JV",
-    "url": "https://nsearchives.nseindia.com/corporate/team_sandeshc_09112026113936_Dis2.pdf",
-    "ex": "NSE",
-    "seen": "2026-11-13"
-   }
-  ],
   "BIKEWO": [
    {
     "d": "2026-11-09",
@@ -37,16 +44,6 @@
     "t": "Apsis Aerocom Limited has informed the Exchange about Bagging/Receiving of orders/contracts",
     "k": "Order",
     "url": "https://nsearchives.nseindia.com/corporate/APSIS2025_12112026164829_Dislcosure_under_Reg30_Work_order_11112026_signed.pdf",
-    "ex": "NSE",
-    "seen": "2026-11-13"
-   }
-  ],
-  "SHREEOSFM": [
-   {
-    "d": "2026-11-13",
-    "t": "Credora Partners Private Limited has Submitted to the Exchange a copy of public announcement (PA) under Regulation 3(1) and Regulation 4 read with Regulations 13(1), 14 and 15(1) of Securities and Exchange Board of India (Substantial Acquisition of Shares and Takeovers) Regulati…",
-    "k": "Acquisition / JV",
-    "url": "https://nsearchives.nseindia.com/corporate/team_sandeshc_13112026112306_SHREEOSFM.zip",
     "ex": "NSE",
     "seen": "2026-11-13"
    }
