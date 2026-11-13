@@ -1,8 +1,8 @@
 {
- "as_of": "2026-11-06",
+ "as_of": "2026-11-13",
  "signature": "8a023d6820b09235",
  "stocks": 961,
- "with_prices": 885,
+ "with_prices": 886,
  "from_bse_files": 34,
  "missing": [
   "AAKAAR",
@@ -32,7 +32,6 @@
   "GREENLEAF",
   "HPTL",
   "HVAX",
-  "544930",
   "INNOMET",
   "IWARE",
   "JAINIK",
@@ -87,162 +86,162 @@
    "name": "Swing Strategy",
    "pct": 13.0,
    "last2y": {
-    "start": "2024-11-06",
+    "start": "2024-11-13",
     "capital": 1000000.0,
     "pct": 13.0,
-    "final": 1063519.47,
-    "profit": 63519.47,
+    "final": 1183001.96,
+    "profit": 183001.96,
     "open_trades": 9,
-    "return_pct": 6.4,
-    "trades": 321,
-    "skipped": 495,
-    "wins": 110,
-    "win_rate": 34.3,
-    "max_drawdown_pct": 25.2,
+    "return_pct": 18.3,
+    "trades": 319,
+    "skipped": 493,
+    "wins": 113,
+    "win_rate": 35.4,
+    "max_drawdown_pct": 23.9,
     "months": {
-     "2024-11": -68431.05,
-     "2024-12": 34629.01,
-     "2025-01": -56489.01,
-     "2025-02": 56673.57,
-     "2025-03": 16741.47,
-     "2025-04": -53732.12,
-     "2025-05": -11717.83,
-     "2025-06": -19265.69,
-     "2025-07": 26951.18,
-     "2025-08": -18190.9,
-     "2025-09": -33550.62,
-     "2025-10": 21477.94,
-     "2025-11": -98163.0,
-     "2025-12": -49077.6,
-     "2026-01": 22046.58,
-     "2026-02": -3612.99,
-     "2026-03": 13034.57,
-     "2026-04": 34681.84,
-     "2026-05": 99250.88,
-     "2026-06": 52510.39,
-     "2026-07": 23522.02,
-     "2026-08": 45054.14,
-     "2026-09": 59188.34,
-     "2026-10": -43314.2,
-     "2026-11": 13302.55
+     "2024-11": -15750.92,
+     "2024-12": 48458.63,
+     "2025-01": -31902.39,
+     "2025-02": 41784.4,
+     "2025-03": 18254.49,
+     "2025-04": -57982.31,
+     "2025-05": -12648.83,
+     "2025-06": -20788.32,
+     "2025-07": 29081.68,
+     "2025-08": -19628.82,
+     "2025-09": -36202.7,
+     "2025-10": 23175.72,
+     "2025-11": -105922.51,
+     "2025-12": -52957.04,
+     "2026-01": 23789.3,
+     "2026-02": -3898.6,
+     "2026-03": 14064.92,
+     "2026-04": 37423.35,
+     "2026-05": 107096.41,
+     "2026-06": 56661.2,
+     "2026-07": 25381.39,
+     "2026-08": 48615.54,
+     "2026-09": 63867.0,
+     "2026-10": -46738.09,
+     "2026-11": 49768.44
     },
     "curve": [
      [
       "2024-11",
-      931568.95
+      984249.08
      ],
      [
       "2024-12",
-      966197.96
+      1032707.71
      ],
      [
       "2025-01",
-      909708.95
+      1000805.32
      ],
      [
       "2025-02",
-      966382.52
+      1042589.72
      ],
      [
       "2025-03",
-      983123.99
+      1060844.21
      ],
      [
       "2025-04",
-      929391.87
+      1002861.9
      ],
      [
       "2025-05",
-      917674.04
+      990213.07
      ],
      [
       "2025-06",
-      898408.35
+      969424.75
      ],
      [
       "2025-07",
-      925359.53
+      998506.43
      ],
      [
       "2025-08",
-      907168.63
+      978877.61
      ],
      [
       "2025-09",
-      873618.01
+      942674.91
      ],
      [
       "2025-10",
-      895095.95
+      965850.63
      ],
      [
       "2025-11",
-      796932.95
+      859928.12
      ],
      [
       "2025-12",
-      747855.35
+      806971.08
      ],
      [
       "2026-01",
-      769901.93
+      830760.38
      ],
      [
       "2026-02",
-      766288.94
+      826861.78
      ],
      [
       "2026-03",
-      779323.51
+      840926.7
      ],
      [
       "2026-04",
-      814005.35
+      878350.05
      ],
      [
       "2026-05",
-      913256.23
+      985446.46
      ],
      [
       "2026-06",
-      965766.62
+      1042107.66
      ],
      [
       "2026-07",
-      989288.64
+      1067489.05
      ],
      [
       "2026-08",
-      1034342.78
+      1116104.59
      ],
      [
       "2026-09",
-      1093531.12
+      1179971.59
      ],
      [
       "2026-10",
-      1050216.92
+      1133233.5
      ],
      [
       "2026-11",
-      1063519.47
+      1183001.94
      ]
     ],
-    "first_trade": "2024-11-06"
+    "first_trade": "2024-11-19"
    },
    "since": "2017-01-01",
    "period": {
     "start": "2017-01-01",
     "capital": 1000000.0,
     "pct": 13.0,
-    "final": 6325296.8,
-    "profit": 5325296.8,
+    "final": 6520494.43,
+    "profit": 5520494.43,
     "open_trades": 9,
-    "return_pct": 532.5,
-    "trades": 1254,
-    "skipped": 1606,
-    "wins": 442,
-    "win_rate": 35.2,
+    "return_pct": 552.0,
+    "trades": 1256,
+    "skipped": 1608,
+    "wins": 444,
+    "win_rate": 35.4,
     "max_drawdown_pct": 23.9,
     "months": {
      "2017-01": 157.79,
@@ -361,7 +360,7 @@
      "2026-08": 267960.14,
      "2026-09": 352023.42,
      "2026-10": -257611.93,
-     "2026-11": 79117.17
+     "2026-11": 274314.79
     },
     "curve": [
      [
@@ -830,7 +829,7 @@
      ],
      [
       "2026-11",
-      6325296.77
+      6520494.39
      ]
     ],
     "first_trade": "2017-01-04"
@@ -900,257 +899,257 @@
      "max_drawdown_pct": 27.0
     },
     "2026": {
-     "return_pct": 38.9,
-     "trades": 126,
-     "skipped": 245,
-     "win_rate": 39.7,
+     "return_pct": 43.2,
+     "trades": 128,
+     "skipped": 247,
+     "win_rate": 40.6,
      "max_drawdown_pct": 4.0
     }
    },
    "report": {
-    "trades": 3808,
-    "open": 13,
-    "wins": 1358,
-    "losses": 2450,
+    "trades": 3811,
+    "open": 14,
+    "wins": 1359,
+    "losses": 2452,
     "win_rate": 35.7,
-    "total_pnl": 4983101.37,
-    "open_pnl": 46526.65,
-    "avg_win": 13096.58,
-    "avg_loss": -5225.33,
+    "total_pnl": 4992593.35,
+    "open_pnl": 62887.13,
+    "avg_win": 13100.37,
+    "avg_loss": -5224.63,
     "profit_factor": 1.39,
-    "expectancy": 1308.59,
+    "expectancy": 1310.05,
     "avg_return_pct": 1.31,
     "best": 88430.7,
     "worst": -73179.72,
     "max_drawdown": 299360.39,
     "avg_hold_days": 15.3,
     "first": "1997-01-29",
-    "last": "2026-11-06"
+    "last": "2026-11-11"
    },
    "rank": "low_risk",
    "nofilter": null,
    "filter": null,
    "rank_test": {
     "alpha": {
-     "return_pct": 498.0,
-     "final": 5979890.51,
+     "return_pct": 506.6,
+     "final": 6066107.64,
      "capital": 1000000.0,
      "max_drawdown_pct": 24.0,
-     "trades": 1246,
-     "skipped": 1614,
-     "win_rate": 36.0,
-     "last2y": 0.9,
+     "trades": 1248,
+     "skipped": 1616,
+     "win_rate": 36.1,
+     "last2y": 8.9,
      "last2y_dd": 24.0,
      "loss_years": 2,
      "worst_year": -25.8
     },
     "tight": {
-     "return_pct": 898.8,
-     "final": 9987824.24,
+     "return_pct": 923.4,
+     "final": 10233757.29,
      "capital": 1000000.0,
      "max_drawdown_pct": 26.3,
-     "trades": 1243,
-     "skipped": 1617,
-     "win_rate": 36.4,
-     "last2y": 1.3,
-     "last2y_dd": 28.4,
+     "trades": 1245,
+     "skipped": 1619,
+     "win_rate": 36.5,
+     "last2y": 12.2,
+     "last2y_dd": 26.3,
      "loss_years": 2,
      "worst_year": -25.2
     },
     "strength": {
-     "return_pct": 502.3,
-     "final": 6023404.52,
+     "return_pct": 517.3,
+     "final": 6172832.23,
      "capital": 1000000.0,
      "max_drawdown_pct": 23.4,
-     "trades": 1250,
-     "skipped": 1610,
+     "trades": 1253,
+     "skipped": 1611,
      "win_rate": 36.2,
-     "last2y": -1.0,
+     "last2y": 4.7,
      "last2y_dd": 18.9,
      "loss_years": 3,
      "worst_year": -21.4
     },
     "near_high": {
-     "return_pct": 394.3,
-     "final": 4942941.64,
+     "return_pct": 406.6,
+     "final": 5065799.77,
      "capital": 1000000.0,
      "max_drawdown_pct": 22.6,
-     "trades": 1255,
-     "skipped": 1605,
-     "win_rate": 35.4,
-     "last2y": -10.1,
+     "trades": 1258,
+     "skipped": 1606,
+     "win_rate": 35.5,
+     "last2y": -3.9,
      "last2y_dd": 16.5,
      "loss_years": 3,
      "worst_year": -19.0
     },
     "trend": {
-     "return_pct": 555.7,
-     "final": 6556636.52,
+     "return_pct": 571.8,
+     "final": 6717943.03,
      "capital": 1000000.0,
      "max_drawdown_pct": 23.9,
-     "trades": 1268,
-     "skipped": 1592,
-     "win_rate": 36.4,
-     "last2y": -0.1,
+     "trades": 1270,
+     "skipped": 1594,
+     "win_rate": 36.5,
+     "last2y": 8.7,
      "last2y_dd": 15.8,
      "loss_years": 2,
      "worst_year": -17.2
     },
     "low_risk": {
-     "return_pct": 532.5,
-     "final": 6325296.8,
+     "return_pct": 552.0,
+     "final": 6520494.43,
      "capital": 1000000.0,
      "max_drawdown_pct": 23.9,
-     "trades": 1254,
-     "skipped": 1606,
-     "win_rate": 35.2,
-     "last2y": 6.4,
-     "last2y_dd": 25.2,
+     "trades": 1256,
+     "skipped": 1608,
+     "win_rate": 35.4,
+     "last2y": 18.3,
+     "last2y_dd": 23.9,
      "loss_years": 2,
      "worst_year": -23.9
     },
     "volume": {
-     "return_pct": 390.2,
-     "final": 4902486.32,
+     "return_pct": 403.4,
+     "final": 5033862.44,
      "capital": 1000000.0,
      "max_drawdown_pct": 21.6,
-     "trades": 1277,
-     "skipped": 1583,
-     "win_rate": 35.4,
-     "last2y": -0.8,
-     "last2y_dd": 19.9,
+     "trades": 1279,
+     "skipped": 1585,
+     "win_rate": 35.5,
+     "last2y": 10.0,
+     "last2y_dd": 19.5,
      "loss_years": 2,
      "worst_year": -20.9
     }
    },
    "pct_test": {
     "6": {
-     "return_pct": 350.7,
-     "final": 4507115.87,
+     "return_pct": 354.5,
+     "final": 4545441.97,
      "capital": 1000000.0,
      "max_drawdown_pct": 12.6,
-     "trades": 2076,
+     "trades": 2080,
      "skipped": 784,
      "win_rate": 36.2,
-     "last2y": 8.8,
+     "last2y": 12.5,
      "last2y_dd": 10.0,
      "loss_years": 3,
      "worst_year": -12.0
     },
     "7": {
-     "return_pct": 407.6,
-     "final": 5075767.18,
+     "return_pct": 412.7,
+     "final": 5126593.47,
      "capital": 1000000.0,
      "max_drawdown_pct": 16.0,
-     "trades": 1912,
+     "trades": 1916,
      "skipped": 948,
-     "win_rate": 35.8,
-     "last2y": 4.8,
+     "win_rate": 35.9,
+     "last2y": 9.8,
      "last2y_dd": 16.0,
      "loss_years": 3,
      "worst_year": -17.3
     },
     "8": {
-     "return_pct": 369.5,
-     "final": 4694956.9,
+     "return_pct": 374.9,
+     "final": 4748993.71,
      "capital": 1000000.0,
      "max_drawdown_pct": 15.3,
-     "trades": 1756,
+     "trades": 1760,
      "skipped": 1104,
-     "win_rate": 35.5,
-     "last2y": 8.9,
+     "win_rate": 35.6,
+     "last2y": 13.7,
      "last2y_dd": 13.8,
      "loss_years": 3,
      "worst_year": -15.0
     },
     "9": {
-     "return_pct": 329.6,
-     "final": 4296028.18,
+     "return_pct": 336.4,
+     "final": 4364384.85,
      "capital": 1000000.0,
      "max_drawdown_pct": 23.4,
-     "trades": 1645,
+     "trades": 1649,
      "skipped": 1215,
-     "win_rate": 35.2,
-     "last2y": -2.2,
+     "win_rate": 35.3,
+     "last2y": 2.8,
      "last2y_dd": 23.4,
      "loss_years": 3,
      "worst_year": -24.8
     },
     "10": {
-     "return_pct": 456.6,
-     "final": 5565722.5,
+     "return_pct": 466.5,
+     "final": 5664565.13,
      "capital": 1000000.0,
      "max_drawdown_pct": 23.3,
-     "trades": 1504,
+     "trades": 1508,
      "skipped": 1356,
-     "win_rate": 35.6,
-     "last2y": 8.4,
+     "win_rate": 35.7,
+     "last2y": 13.6,
      "last2y_dd": 23.3,
      "loss_years": 3,
      "worst_year": -24.3
     },
     "11": {
-     "return_pct": 399.4,
-     "final": 4994489.58,
+     "return_pct": 408.9,
+     "final": 5088991.76,
      "capital": 1000000.0,
      "max_drawdown_pct": 23.1,
-     "trades": 1420,
-     "skipped": 1440,
-     "win_rate": 35.2,
-     "last2y": 4.7,
+     "trades": 1423,
+     "skipped": 1441,
+     "win_rate": 35.3,
+     "last2y": 12.4,
      "last2y_dd": 23.1,
      "loss_years": 3,
      "worst_year": -24.8
     },
     "12": {
-     "return_pct": 345.3,
-     "final": 4452791.03,
+     "return_pct": 355.3,
+     "final": 4552552.3,
      "capital": 1000000.0,
      "max_drawdown_pct": 20.8,
-     "trades": 1314,
-     "skipped": 1546,
+     "trades": 1317,
+     "skipped": 1547,
      "win_rate": 34.5,
-     "last2y": 8.7,
+     "last2y": 17.7,
      "last2y_dd": 19.4,
      "loss_years": 2,
      "worst_year": -21.8
     },
     "13": {
-     "return_pct": 532.5,
-     "final": 6325296.8,
+     "return_pct": 552.0,
+     "final": 6520494.43,
      "capital": 1000000.0,
      "max_drawdown_pct": 23.9,
-     "trades": 1254,
-     "skipped": 1606,
-     "win_rate": 35.2,
-     "last2y": 6.4,
-     "last2y_dd": 25.2,
+     "trades": 1256,
+     "skipped": 1608,
+     "win_rate": 35.4,
+     "last2y": 18.3,
+     "last2y_dd": 23.9,
      "loss_years": 2,
      "worst_year": -23.9
     },
     "14": {
-     "return_pct": 403.1,
-     "final": 5031434.43,
+     "return_pct": 422.1,
+     "final": 5220707.38,
      "capital": 1000000.0,
      "max_drawdown_pct": 22.6,
-     "trades": 1186,
-     "skipped": 1674,
-     "win_rate": 34.6,
-     "last2y": 15.2,
+     "trades": 1187,
+     "skipped": 1677,
+     "win_rate": 34.7,
+     "last2y": 24.7,
      "last2y_dd": 20.3,
      "loss_years": 2,
      "worst_year": -22.4
     },
     "15": {
-     "return_pct": 518.7,
-     "final": 6186786.83,
+     "return_pct": 543.9,
+     "final": 6438948.94,
      "capital": 1000000.0,
      "max_drawdown_pct": 26.7,
-     "trades": 1121,
-     "skipped": 1739,
-     "win_rate": 35.0,
-     "last2y": 7.4,
-     "last2y_dd": 26.2,
+     "trades": 1122,
+     "skipped": 1742,
+     "win_rate": 35.1,
+     "last2y": 11.5,
+     "last2y_dd": 26.3,
      "loss_years": 2,
      "worst_year": -24.7
     }
@@ -1160,152 +1159,152 @@
    "name": "Positional Trading",
    "pct": 12.0,
    "last2y": {
-    "start": "2024-11-06",
+    "start": "2024-11-13",
     "capital": 1000000.0,
     "pct": 12.0,
-    "final": 967978.77,
-    "profit": -32021.23,
-    "open_trades": 8,
-    "return_pct": -3.2,
-    "trades": 135,
-    "skipped": 480,
-    "wins": 24,
-    "win_rate": 17.8,
-    "max_drawdown_pct": 29.9,
+    "final": 1132822.36,
+    "profit": 132822.36,
+    "open_trades": 9,
+    "return_pct": 13.3,
+    "trades": 133,
+    "skipped": 478,
+    "wins": 28,
+    "win_rate": 21.1,
+    "max_drawdown_pct": 19.6,
     "months": {
-     "2024-11": -44045.17,
-     "2024-12": -12949.34,
-     "2025-01": -64266.41,
-     "2025-02": -17429.37,
-     "2025-04": -69859.18,
-     "2025-05": -16581.16,
-     "2025-06": -13353.36,
-     "2025-08": -13540.82,
-     "2025-09": -2657.46,
-     "2025-10": 14703.48,
-     "2025-11": -45324.14,
-     "2025-12": -14158.55,
-     "2026-01": 15590.96,
-     "2026-02": 7000.8,
-     "2026-03": -22472.77,
-     "2026-04": 25544.83,
-     "2026-05": 43197.5,
-     "2026-06": -10151.8,
-     "2026-07": 12076.99,
-     "2026-08": 796.13,
-     "2026-09": 3938.99,
-     "2026-10": 57342.2,
-     "2026-11": 134576.39
+     "2024-12": -21179.03,
+     "2025-01": -66538.89,
+     "2025-02": 1940.76,
+     "2025-03": 38519.35,
+     "2025-04": -64063.56,
+     "2025-05": -18617.38,
+     "2025-06": -14993.77,
+     "2025-08": -8715.39,
+     "2025-09": 13827.94,
+     "2025-10": 9227.72,
+     "2025-11": -33186.68,
+     "2025-12": -32039.24,
+     "2026-01": 12600.82,
+     "2026-02": 23334.06,
+     "2026-03": -17973.2,
+     "2026-04": 29688.57,
+     "2026-05": 49810.52,
+     "2026-06": -11898.43,
+     "2026-07": 13920.17,
+     "2026-08": 940.83,
+     "2026-09": -2231.07,
+     "2026-10": 67195.07,
+     "2026-11": 163253.17
     },
     "curve": [
      [
-      "2024-11",
-      955954.83
-     ],
-     [
       "2024-12",
-      943005.49
+      978820.97
      ],
      [
       "2025-01",
-      878739.08
+      912282.08
      ],
      [
       "2025-02",
-      861309.71
+      914222.84
+     ],
+     [
+      "2025-03",
+      952742.19
      ],
      [
       "2025-04",
-      791450.53
+      888678.63
      ],
      [
       "2025-05",
-      774869.37
+      870061.25
      ],
      [
       "2025-06",
-      761516.01
+      855067.48
      ],
      [
       "2025-08",
-      747975.19
+      846352.09
      ],
      [
       "2025-09",
-      745317.73
+      860180.03
      ],
      [
       "2025-10",
-      760021.21
+      869407.75
      ],
      [
       "2025-11",
-      714697.07
+      836221.07
      ],
      [
       "2025-12",
-      700538.52
+      804181.83
      ],
      [
       "2026-01",
-      716129.48
+      816782.65
      ],
      [
       "2026-02",
-      723130.28
+      840116.71
      ],
      [
       "2026-03",
-      700657.51
+      822143.51
      ],
      [
       "2026-04",
-      726202.34
+      851832.08
      ],
      [
       "2026-05",
-      769399.84
+      901642.6
      ],
      [
       "2026-06",
-      759248.04
+      889744.17
      ],
      [
       "2026-07",
-      771325.03
+      903664.34
      ],
      [
       "2026-08",
-      772121.16
+      904605.17
      ],
      [
       "2026-09",
-      776060.15
+      902374.1
      ],
      [
       "2026-10",
-      833402.35
+      969569.17
      ],
      [
       "2026-11",
-      967978.74
+      1132822.34
      ]
     ],
-    "first_trade": "2024-11-06"
+    "first_trade": "2024-11-19"
    },
    "since": "2017-01-01",
    "period": {
     "start": "2017-01-01",
     "capital": 1000000.0,
     "pct": 12.0,
-    "final": 4973216.56,
-    "profit": 3973216.56,
-    "open_trades": 8,
-    "return_pct": 397.3,
-    "trades": 649,
-    "skipped": 1471,
-    "wins": 142,
-    "win_rate": 21.9,
+    "final": 5001994.99,
+    "profit": 4001994.99,
+    "open_trades": 9,
+    "return_pct": 400.2,
+    "trades": 651,
+    "skipped": 1472,
+    "wins": 144,
+    "win_rate": 22.1,
     "max_drawdown_pct": 27.3,
     "months": {
      "2017-01": -22973.15,
@@ -1422,7 +1421,7 @@
      "2026-08": 4090.34,
      "2026-09": 20237.49,
      "2026-10": 294608.9,
-     "2026-11": 691417.14
+     "2026-11": 720195.57
     },
     "curve": [
      [
@@ -1883,7 +1882,7 @@
      ],
      [
       "2026-11",
-      4973216.44
+      5001994.87
      ]
     ],
     "first_trade": "2017-01-04"
@@ -1953,257 +1952,257 @@
      "max_drawdown_pct": 27.3
     },
     "2026": {
-     "return_pct": 36.1,
-     "trades": 54,
+     "return_pct": 37.5,
+     "trades": 57,
      "skipped": 225,
-     "win_rate": 29.6,
+     "win_rate": 33.3,
      "max_drawdown_pct": 2.3
     }
    },
    "report": {
-    "trades": 2849,
-    "open": 28,
-    "wins": 678,
-    "losses": 2171,
+    "trades": 2854,
+    "open": 26,
+    "wins": 680,
+    "losses": 2174,
     "win_rate": 23.8,
-    "total_pnl": 10439332.32,
-    "open_pnl": 308770.19,
-    "avg_win": 35647.16,
-    "avg_loss": -6324.02,
+    "total_pnl": 10482705.61,
+    "open_pnl": 279665.2,
+    "avg_win": 35635.8,
+    "avg_loss": -6324.58,
     "profit_factor": 1.76,
-    "expectancy": 3664.21,
-    "avg_return_pct": 3.67,
+    "expectancy": 3672.99,
+    "avg_return_pct": 3.68,
     "best": 116156.7,
     "worst": -73179.72,
     "max_drawdown": 619743.87,
     "avg_hold_days": 40.3,
     "first": "1997-01-29",
-    "last": "2026-11-06"
+    "last": "2026-11-11"
    },
    "rank": "low_risk",
    "nofilter": null,
    "filter": null,
    "rank_test": {
     "alpha": {
-     "return_pct": 599.4,
-     "final": 6993964.41,
+     "return_pct": 596.8,
+     "final": 6967936.15,
      "capital": 1000000.0,
      "max_drawdown_pct": 27.5,
-     "trades": 621,
-     "skipped": 1499,
-     "win_rate": 23.7,
-     "last2y": -6.2,
-     "last2y_dd": 27.8,
+     "trades": 623,
+     "skipped": 1500,
+     "win_rate": 23.8,
+     "last2y": 2.7,
+     "last2y_dd": 23.8,
      "loss_years": 3,
      "worst_year": -24.0
     },
     "tight": {
-     "return_pct": 480.9,
-     "final": 5808632.78,
+     "return_pct": 488.3,
+     "final": 5882880.66,
      "capital": 1000000.0,
      "max_drawdown_pct": 27.3,
-     "trades": 599,
+     "trades": 602,
      "skipped": 1521,
-     "win_rate": 22.4,
-     "last2y": -10.9,
-     "last2y_dd": 30.0,
+     "win_rate": 22.9,
+     "last2y": 2.9,
+     "last2y_dd": 23.1,
      "loss_years": 3,
      "worst_year": -24.0
     },
     "strength": {
-     "return_pct": 407.0,
-     "final": 5069980.27,
+     "return_pct": 408.3,
+     "final": 5083017.66,
      "capital": 1000000.0,
      "max_drawdown_pct": 27.3,
-     "trades": 628,
-     "skipped": 1492,
-     "win_rate": 22.0,
-     "last2y": -3.9,
-     "last2y_dd": 26.3,
+     "trades": 630,
+     "skipped": 1493,
+     "win_rate": 22.4,
+     "last2y": -0.2,
+     "last2y_dd": 23.6,
      "loss_years": 3,
      "worst_year": -24.0
     },
     "near_high": {
-     "return_pct": 593.8,
-     "final": 6937606.18,
+     "return_pct": 607.2,
+     "final": 7072025.65,
      "capital": 1000000.0,
      "max_drawdown_pct": 27.6,
-     "trades": 619,
+     "trades": 622,
      "skipped": 1501,
-     "win_rate": 23.1,
-     "last2y": 9.5,
-     "last2y_dd": 23.4,
+     "win_rate": 23.5,
+     "last2y": 14.7,
+     "last2y_dd": 20.6,
      "loss_years": 3,
      "worst_year": -24.0
     },
     "trend": {
-     "return_pct": 448.0,
-     "final": 5480366.95,
+     "return_pct": 452.2,
+     "final": 5522135.69,
      "capital": 1000000.0,
      "max_drawdown_pct": 27.5,
-     "trades": 612,
+     "trades": 615,
      "skipped": 1508,
-     "win_rate": 22.4,
-     "last2y": 4.2,
-     "last2y_dd": 24.7,
+     "win_rate": 22.8,
+     "last2y": 8.7,
+     "last2y_dd": 22.0,
      "loss_years": 3,
      "worst_year": -24.0
     },
     "low_risk": {
-     "return_pct": 397.3,
-     "final": 4973216.56,
+     "return_pct": 400.2,
+     "final": 5001994.99,
      "capital": 1000000.0,
      "max_drawdown_pct": 27.3,
-     "trades": 649,
-     "skipped": 1471,
-     "win_rate": 21.9,
-     "last2y": -3.2,
-     "last2y_dd": 29.9,
+     "trades": 651,
+     "skipped": 1472,
+     "win_rate": 22.1,
+     "last2y": 13.3,
+     "last2y_dd": 19.6,
      "loss_years": 3,
      "worst_year": -24.0
     },
     "volume": {
-     "return_pct": 394.9,
-     "final": 4949124.77,
+     "return_pct": 399.6,
+     "final": 4996084.77,
      "capital": 1000000.0,
      "max_drawdown_pct": 28.0,
-     "trades": 638,
+     "trades": 641,
      "skipped": 1482,
-     "win_rate": 21.6,
-     "last2y": -5.4,
-     "last2y_dd": 30.3,
+     "win_rate": 22.0,
+     "last2y": -1.9,
+     "last2y_dd": 28.4,
      "loss_years": 3,
      "worst_year": -24.0
     }
    },
    "pct_test": {
     "6": {
-     "return_pct": 547.9,
-     "final": 6478850.63,
+     "return_pct": 545.5,
+     "final": 6454657.12,
      "capital": 1000000.0,
      "max_drawdown_pct": 19.6,
-     "trades": 1111,
+     "trades": 1114,
      "skipped": 1009,
-     "win_rate": 23.6,
-     "last2y": 14.9,
-     "last2y_dd": 14.7,
+     "win_rate": 23.9,
+     "last2y": 16.3,
+     "last2y_dd": 14.1,
      "loss_years": 3,
      "worst_year": -14.1
     },
     "7": {
-     "return_pct": 600.8,
-     "final": 7007938.78,
+     "return_pct": 598.6,
+     "final": 6986463.65,
      "capital": 1000000.0,
      "max_drawdown_pct": 19.8,
-     "trades": 975,
+     "trades": 978,
      "skipped": 1145,
-     "win_rate": 23.7,
-     "last2y": 20.4,
-     "last2y_dd": 14.4,
+     "win_rate": 24.0,
+     "last2y": 27.1,
+     "last2y_dd": 12.8,
      "loss_years": 3,
      "worst_year": -16.3
     },
     "8": {
-     "return_pct": 472.6,
-     "final": 5726264.23,
+     "return_pct": 474.4,
+     "final": 5743642.9,
      "capital": 1000000.0,
      "max_drawdown_pct": 21.6,
-     "trades": 871,
+     "trades": 874,
      "skipped": 1249,
-     "win_rate": 22.4,
-     "last2y": 11.4,
-     "last2y_dd": 17.5,
+     "win_rate": 22.8,
+     "last2y": 14.9,
+     "last2y_dd": 15.2,
      "loss_years": 3,
      "worst_year": -18.4
     },
     "9": {
-     "return_pct": 542.7,
-     "final": 6427167.86,
+     "return_pct": 548.2,
+     "final": 6481531.35,
      "capital": 1000000.0,
      "max_drawdown_pct": 21.3,
-     "trades": 799,
+     "trades": 802,
      "skipped": 1321,
-     "win_rate": 22.7,
-     "last2y": 2.4,
-     "last2y_dd": 23.6,
+     "win_rate": 23.1,
+     "last2y": 13.2,
+     "last2y_dd": 16.3,
      "loss_years": 3,
      "worst_year": -20.4
     },
     "10": {
-     "return_pct": 621.4,
-     "final": 7213535.08,
+     "return_pct": 628.0,
+     "final": 7279745.08,
      "capital": 1000000.0,
      "max_drawdown_pct": 19.3,
-     "trades": 740,
+     "trades": 743,
      "skipped": 1380,
-     "win_rate": 23.1,
-     "last2y": 6.5,
-     "last2y_dd": 24.0,
+     "win_rate": 23.6,
+     "last2y": 12.8,
+     "last2y_dd": 20.2,
      "loss_years": 3,
      "worst_year": -22.0
     },
     "11": {
-     "return_pct": 449.1,
-     "final": 5491307.96,
+     "return_pct": 454.9,
+     "final": 5548790.95,
      "capital": 1000000.0,
      "max_drawdown_pct": 25.8,
-     "trades": 686,
+     "trades": 689,
      "skipped": 1434,
-     "win_rate": 21.9,
-     "last2y": 0.8,
-     "last2y_dd": 25.9,
+     "win_rate": 22.2,
+     "last2y": 12.4,
+     "last2y_dd": 18.3,
      "loss_years": 3,
      "worst_year": -23.4
     },
     "12": {
-     "return_pct": 397.3,
-     "final": 4973216.56,
+     "return_pct": 400.2,
+     "final": 5001994.99,
      "capital": 1000000.0,
      "max_drawdown_pct": 27.3,
-     "trades": 649,
-     "skipped": 1471,
-     "win_rate": 21.9,
-     "last2y": -3.2,
-     "last2y_dd": 29.9,
+     "trades": 651,
+     "skipped": 1472,
+     "win_rate": 22.1,
+     "last2y": 13.3,
+     "last2y_dd": 19.6,
      "loss_years": 3,
      "worst_year": -24.0
     },
     "13": {
-     "return_pct": 524.5,
-     "final": 6245195.11,
+     "return_pct": 528.1,
+     "final": 6281019.61,
      "capital": 1000000.0,
      "max_drawdown_pct": 26.7,
-     "trades": 570,
+     "trades": 573,
      "skipped": 1550,
-     "win_rate": 23.2,
-     "last2y": 10.0,
-     "last2y_dd": 26.7,
+     "win_rate": 23.6,
+     "last2y": 14.9,
+     "last2y_dd": 23.8,
      "loss_years": 3,
      "worst_year": -24.3
     },
     "14": {
-     "return_pct": 766.7,
-     "final": 8667469.47,
+     "return_pct": 774.4,
+     "final": 8744092.7,
      "capital": 1000000.0,
      "max_drawdown_pct": 23.4,
-     "trades": 551,
+     "trades": 554,
      "skipped": 1569,
-     "win_rate": 23.0,
-     "last2y": -1.5,
-     "last2y_dd": 29.5,
+     "win_rate": 23.5,
+     "last2y": -2.9,
+     "last2y_dd": 26.6,
      "loss_years": 3,
      "worst_year": -23.7
     },
     "15": {
-     "return_pct": 605.4,
-     "final": 7054012.9,
+     "return_pct": 611.9,
+     "final": 7119257.26,
      "capital": 1000000.0,
      "max_drawdown_pct": 24.2,
-     "trades": 535,
-     "skipped": 1585,
-     "win_rate": 22.6,
-     "last2y": -2.0,
-     "last2y_dd": 29.1,
+     "trades": 537,
+     "skipped": 1586,
+     "win_rate": 22.9,
+     "last2y": 5.4,
+     "last2y_dd": 24.6,
      "loss_years": 3,
      "worst_year": -24.5
     }
@@ -2213,162 +2212,162 @@
    "name": "Smart Switch",
    "pct": 12.0,
    "last2y": {
-    "start": "2024-11-06",
+    "start": "2024-11-13",
     "capital": 1000000.0,
     "pct": 12.0,
-    "final": 1094608.19,
-    "profit": 94608.19,
-    "open_trades": 10,
-    "return_pct": 9.5,
-    "trades": 235,
-    "skipped": 490,
-    "wins": 66,
-    "win_rate": 28.1,
+    "final": 1203959.8,
+    "profit": 203959.8,
+    "open_trades": 9,
+    "return_pct": 20.4,
+    "trades": 229,
+    "skipped": 492,
+    "wins": 67,
+    "win_rate": 29.3,
     "max_drawdown_pct": 15.1,
     "months": {
-     "2024-11": -63236.02,
-     "2024-12": 67672.86,
-     "2025-01": -14409.13,
-     "2025-02": 55368.54,
-     "2025-03": 16750.41,
-     "2025-04": -49262.43,
-     "2025-05": -37909.51,
-     "2025-06": -31442.15,
-     "2025-07": 73192.64,
-     "2025-08": 27283.64,
-     "2025-09": -39091.49,
-     "2025-10": 16561.56,
-     "2025-11": -76200.42,
-     "2025-12": -38119.08,
-     "2026-01": -1922.9,
-     "2026-02": -3732.98,
-     "2026-03": 14176.98,
-     "2026-04": 30206.32,
-     "2026-05": 32116.9,
-     "2026-06": -15143.65,
-     "2026-07": 29616.48,
-     "2026-08": 17478.14,
-     "2026-09": 95944.25,
-     "2026-10": -28459.1,
-     "2026-11": 17168.39
+     "2024-11": -14543.74,
+     "2024-12": 88571.97,
+     "2025-01": 3497.03,
+     "2025-02": 41521.32,
+     "2025-03": 18092.62,
+     "2025-04": -52743.42,
+     "2025-05": -40586.02,
+     "2025-06": -33662.03,
+     "2025-07": 78360.23,
+     "2025-08": 29204.26,
+     "2025-09": -41851.24,
+     "2025-10": 17730.75,
+     "2025-11": -81579.93,
+     "2025-12": -40810.15,
+     "2026-01": -2058.63,
+     "2026-02": -3996.51,
+     "2026-03": 15177.81,
+     "2026-04": 32338.78,
+     "2026-05": 34384.22,
+     "2026-06": -16212.73,
+     "2026-07": 31707.29,
+     "2026-08": 18712.04,
+     "2026-09": 102717.57,
+     "2026-10": -30468.22,
+     "2026-11": 50456.52
     },
     "curve": [
      [
       "2024-11",
-      936763.98
+      985456.26
      ],
      [
       "2024-12",
-      1004436.84
+      1074028.23
      ],
      [
       "2025-01",
-      990027.71
+      1077525.26
      ],
      [
       "2025-02",
-      1045396.25
+      1119046.58
      ],
      [
       "2025-03",
-      1062146.66
+      1137139.2
      ],
      [
       "2025-04",
-      1012884.23
+      1084395.78
      ],
      [
       "2025-05",
-      974974.72
+      1043809.76
      ],
      [
       "2025-06",
-      943532.57
+      1010147.73
      ],
      [
       "2025-07",
-      1016725.21
+      1088507.96
      ],
      [
       "2025-08",
-      1044008.85
+      1117712.22
      ],
      [
       "2025-09",
-      1004917.36
+      1075860.98
      ],
      [
       "2025-10",
-      1021478.92
+      1093591.73
      ],
      [
       "2025-11",
-      945278.5
+      1012011.8
      ],
      [
       "2025-12",
-      907159.42
+      971201.65
      ],
      [
       "2026-01",
-      905236.52
+      969143.02
      ],
      [
       "2026-02",
-      901503.54
+      965146.51
      ],
      [
       "2026-03",
-      915680.52
+      980324.32
      ],
      [
       "2026-04",
-      945886.84
+      1012663.1
      ],
      [
       "2026-05",
-      978003.74
+      1047047.32
      ],
      [
       "2026-06",
-      962860.09
+      1030834.59
      ],
      [
       "2026-07",
-      992476.57
+      1062541.88
      ],
      [
       "2026-08",
-      1009954.71
+      1081253.92
      ],
      [
       "2026-09",
-      1105898.96
+      1183971.49
      ],
      [
       "2026-10",
-      1077439.86
+      1153503.27
      ],
      [
       "2026-11",
-      1094608.25
+      1203959.79
      ]
     ],
-    "first_trade": "2024-11-06"
+    "first_trade": "2024-11-19"
    },
    "since": "2017-01-01",
    "period": {
     "start": "2017-01-01",
     "capital": 1000000.0,
     "pct": 12.0,
-    "final": 8294483.31,
-    "profit": 7294483.31,
-    "open_trades": 10,
-    "return_pct": 729.4,
-    "trades": 918,
-    "skipped": 1464,
-    "wins": 279,
-    "win_rate": 30.4,
+    "final": 8521514.85,
+    "profit": 7521514.85,
+    "open_trades": 9,
+    "return_pct": 752.2,
+    "trades": 919,
+    "skipped": 1467,
+    "wins": 280,
+    "win_rate": 30.5,
     "max_drawdown_pct": 23.5,
     "months": {
      "2017-01": 174.25,
@@ -2487,7 +2486,7 @@
      "2026-08": 132442.01,
      "2026-09": 727025.36,
      "2026-10": -215651.29,
-     "2026-11": 130094.96
+     "2026-11": 357126.52
     },
     "curve": [
      [
@@ -2956,7 +2955,7 @@
      ],
      [
       "2026-11",
-      8294483.16
+      8521514.72
      ]
     ],
     "first_trade": "2017-01-04"
@@ -3026,124 +3025,124 @@
      "max_drawdown_pct": 17.9
     },
     "2026": {
-     "return_pct": 21.5,
-     "trades": 75,
-     "skipped": 231,
-     "win_rate": 32.0,
+     "return_pct": 24.8,
+     "trades": 76,
+     "skipped": 234,
+     "win_rate": 32.9,
      "max_drawdown_pct": 2.6
     }
    },
    "report": {
-    "trades": 3328,
-    "open": 15,
-    "wins": 1064,
-    "losses": 2264,
+    "trades": 3331,
+    "open": 16,
+    "wins": 1065,
+    "losses": 2266,
     "win_rate": 32.0,
-    "total_pnl": 9190361.68,
-    "open_pnl": 61895.37,
-    "avg_win": 20641.33,
-    "avg_loss": -5641.35,
+    "total_pnl": 9208732.94,
+    "open_pnl": 69967.36,
+    "avg_win": 20647.41,
+    "avg_loss": -5640.23,
     "profit_factor": 1.72,
-    "expectancy": 2761.53,
-    "avg_return_pct": 2.76,
+    "expectancy": 2764.56,
+    "avg_return_pct": 2.77,
     "best": 108703.8,
     "worst": -73179.72,
     "max_drawdown": 546543.2,
     "avg_hold_days": 25.6,
     "first": "1997-01-29",
-    "last": "2026-11-06"
+    "last": "2026-11-11"
    },
    "rank": "low_risk",
    "nofilter": null,
    "filter": null,
    "rank_test": {
     "alpha": {
-     "return_pct": 1028.5,
-     "final": 11285432.34,
+     "return_pct": 1040.8,
+     "final": 11408361.13,
      "capital": 1000000.0,
      "max_drawdown_pct": 24.1,
-     "trades": 905,
-     "skipped": 1477,
-     "win_rate": 32.0,
-     "last2y": 19.8,
+     "trades": 907,
+     "skipped": 1479,
+     "win_rate": 32.1,
+     "last2y": 29.8,
      "last2y_dd": 11.6,
      "loss_years": 2,
      "worst_year": -18.1
     },
     "tight": {
-     "return_pct": 659.8,
-     "final": 7597902.41,
+     "return_pct": 677.9,
+     "final": 7779231.17,
      "capital": 1000000.0,
      "max_drawdown_pct": 23.5,
-     "trades": 908,
-     "skipped": 1474,
-     "win_rate": 30.6,
-     "last2y": 23.4,
+     "trades": 909,
+     "skipped": 1477,
+     "win_rate": 30.7,
+     "last2y": 34.3,
      "last2y_dd": 11.2,
      "loss_years": 2,
      "worst_year": -18.1
     },
     "strength": {
-     "return_pct": 648.8,
-     "final": 7487627.77,
+     "return_pct": 667.3,
+     "final": 7673405.43,
      "capital": 1000000.0,
      "max_drawdown_pct": 24.1,
-     "trades": 918,
-     "skipped": 1464,
-     "win_rate": 31.2,
-     "last2y": 3.2,
+     "trades": 919,
+     "skipped": 1467,
+     "win_rate": 31.3,
+     "last2y": 12.5,
      "last2y_dd": 14.3,
      "loss_years": 2,
      "worst_year": -18.0
     },
     "near_high": {
-     "return_pct": 825.8,
-     "final": 9257926.75,
+     "return_pct": 844.5,
+     "final": 9445404.68,
      "capital": 1000000.0,
      "max_drawdown_pct": 24.6,
-     "trades": 902,
-     "skipped": 1480,
-     "win_rate": 32.0,
-     "last2y": 33.0,
+     "trades": 903,
+     "skipped": 1483,
+     "win_rate": 32.1,
+     "last2y": 45.7,
      "last2y_dd": 11.2,
      "loss_years": 2,
      "worst_year": -18.0
     },
     "trend": {
-     "return_pct": 857.8,
-     "final": 9578190.42,
+     "return_pct": 881.4,
+     "final": 9813854.52,
      "capital": 1000000.0,
      "max_drawdown_pct": 25.7,
-     "trades": 903,
-     "skipped": 1479,
-     "win_rate": 32.1,
-     "last2y": 24.2,
+     "trades": 905,
+     "skipped": 1481,
+     "win_rate": 32.3,
+     "last2y": 37.5,
      "last2y_dd": 8.5,
      "loss_years": 2,
      "worst_year": -18.0
     },
     "low_risk": {
-     "return_pct": 729.4,
-     "final": 8294483.31,
+     "return_pct": 752.2,
+     "final": 8521514.85,
      "capital": 1000000.0,
      "max_drawdown_pct": 23.5,
-     "trades": 918,
-     "skipped": 1464,
-     "win_rate": 30.4,
-     "last2y": 9.5,
+     "trades": 919,
+     "skipped": 1467,
+     "win_rate": 30.5,
+     "last2y": 20.4,
      "last2y_dd": 15.1,
      "loss_years": 2,
      "worst_year": -18.1
     },
     "volume": {
-     "return_pct": 729.0,
-     "final": 8289583.37,
+     "return_pct": 748.8,
+     "final": 8487842.28,
      "capital": 1000000.0,
      "max_drawdown_pct": 24.7,
-     "trades": 917,
-     "skipped": 1465,
-     "win_rate": 31.3,
-     "last2y": 19.2,
+     "trades": 918,
+     "skipped": 1468,
+     "win_rate": 31.4,
+     "last2y": 27.6,
      "last2y_dd": 9.3,
      "loss_years": 2,
      "worst_year": -18.1
@@ -3151,131 +3150,131 @@
    },
    "pct_test": {
     "6": {
-     "return_pct": 566.5,
-     "final": 6664748.03,
+     "return_pct": 573.7,
+     "final": 6737035.41,
      "capital": 1000000.0,
      "max_drawdown_pct": 16.2,
-     "trades": 1448,
+     "trades": 1452,
      "skipped": 934,
-     "win_rate": 31.3,
-     "last2y": 21.6,
+     "win_rate": 31.4,
+     "last2y": 27.3,
      "last2y_dd": 8.3,
      "loss_years": 3,
      "worst_year": -10.4
     },
     "7": {
-     "return_pct": 573.8,
-     "final": 6737617.93,
+     "return_pct": 580.3,
+     "final": 6802824.77,
      "capital": 1000000.0,
      "max_drawdown_pct": 17.0,
-     "trades": 1340,
+     "trades": 1344,
      "skipped": 1042,
-     "win_rate": 30.9,
-     "last2y": 25.1,
+     "win_rate": 31.0,
+     "last2y": 31.0,
      "last2y_dd": 7.6,
      "loss_years": 3,
      "worst_year": -12.0
     },
     "8": {
-     "return_pct": 522.7,
-     "final": 6227463.94,
+     "return_pct": 531.8,
+     "final": 6318330.74,
      "capital": 1000000.0,
      "max_drawdown_pct": 18.2,
-     "trades": 1225,
+     "trades": 1229,
      "skipped": 1157,
-     "win_rate": 30.5,
-     "last2y": 17.6,
+     "win_rate": 30.7,
+     "last2y": 20.9,
      "last2y_dd": 7.4,
      "loss_years": 3,
      "worst_year": -13.7
     },
     "9": {
-     "return_pct": 627.0,
-     "final": 7269896.25,
+     "return_pct": 638.4,
+     "final": 7383546.71,
      "capital": 1000000.0,
      "max_drawdown_pct": 20.9,
-     "trades": 1107,
+     "trades": 1111,
      "skipped": 1275,
-     "win_rate": 31.4,
-     "last2y": 22.0,
+     "win_rate": 31.6,
+     "last2y": 28.0,
      "last2y_dd": 7.8,
      "loss_years": 3,
      "worst_year": -14.8
     },
     "10": {
-     "return_pct": 708.6,
-     "final": 8085993.59,
+     "return_pct": 723.4,
+     "final": 8233581.6,
      "capital": 1000000.0,
      "max_drawdown_pct": 21.7,
-     "trades": 1038,
+     "trades": 1042,
      "skipped": 1344,
-     "win_rate": 31.3,
-     "last2y": 21.0,
+     "win_rate": 31.5,
+     "last2y": 26.5,
      "last2y_dd": 8.6,
      "loss_years": 3,
      "worst_year": -15.8
     },
     "11": {
-     "return_pct": 812.8,
-     "final": 9128468.91,
+     "return_pct": 836.1,
+     "final": 9361462.24,
      "capital": 1000000.0,
      "max_drawdown_pct": 20.9,
-     "trades": 967,
-     "skipped": 1415,
-     "win_rate": 31.4,
-     "last2y": 14.1,
+     "trades": 969,
+     "skipped": 1417,
+     "win_rate": 31.6,
+     "last2y": 24.0,
      "last2y_dd": 10.9,
      "loss_years": 3,
      "worst_year": -16.7
     },
     "12": {
-     "return_pct": 729.4,
-     "final": 8294483.31,
+     "return_pct": 752.2,
+     "final": 8521514.85,
      "capital": 1000000.0,
      "max_drawdown_pct": 23.5,
-     "trades": 918,
-     "skipped": 1464,
-     "win_rate": 30.4,
-     "last2y": 9.5,
+     "trades": 919,
+     "skipped": 1467,
+     "win_rate": 30.5,
+     "last2y": 20.4,
      "last2y_dd": 15.1,
      "loss_years": 2,
      "worst_year": -18.1
     },
     "13": {
-     "return_pct": 916.3,
-     "final": 10163344.33,
+     "return_pct": 949.7,
+     "final": 10497399.28,
      "capital": 1000000.0,
      "max_drawdown_pct": 23.7,
-     "trades": 864,
-     "skipped": 1518,
-     "win_rate": 31.1,
-     "last2y": 1.4,
+     "trades": 866,
+     "skipped": 1520,
+     "win_rate": 31.3,
+     "last2y": 10.1,
      "last2y_dd": 20.1,
      "loss_years": 2,
      "worst_year": -22.0
     },
     "14": {
-     "return_pct": 742.6,
-     "final": 8425800.1,
+     "return_pct": 764.9,
+     "final": 8648594.05,
      "capital": 1000000.0,
      "max_drawdown_pct": 25.7,
      "trades": 824,
-     "skipped": 1558,
-     "win_rate": 30.7,
-     "last2y": 11.2,
+     "skipped": 1562,
+     "win_rate": 30.8,
+     "last2y": 25.4,
      "last2y_dd": 14.9,
      "loss_years": 2,
      "worst_year": -21.3
     },
     "15": {
-     "return_pct": 1085.1,
-     "final": 11850582.02,
+     "return_pct": 1120.1,
+     "final": 12201468.27,
      "capital": 1000000.0,
      "max_drawdown_pct": 24.6,
      "trades": 778,
-     "skipped": 1604,
-     "win_rate": 31.9,
-     "last2y": 10.3,
+     "skipped": 1608,
+     "win_rate": 32.0,
+     "last2y": 17.9,
      "last2y_dd": 15.0,
      "loss_years": 2,
      "worst_year": -19.8
@@ -3286,157 +3285,157 @@
    "name": "Smart Switch · Growth list",
    "pct": 8.0,
    "last2y": {
-    "start": "2024-11-06",
+    "start": "2024-11-13",
     "capital": 1000000.0,
     "pct": 8.0,
-    "final": 945817.42,
-    "profit": -54182.58,
+    "final": 982471.67,
+    "profit": -17528.33,
     "open_trades": 7,
-    "return_pct": -5.4,
-    "trades": 247,
-    "skipped": 260,
-    "wins": 72,
-    "win_rate": 29.1,
-    "max_drawdown_pct": 19.5,
+    "return_pct": -1.8,
+    "trades": 246,
+    "skipped": 257,
+    "wins": 74,
+    "win_rate": 30.1,
+    "max_drawdown_pct": 20.9,
     "months": {
-     "2024-11": -30226.22,
-     "2024-12": 45102.36,
-     "2025-01": -32963.73,
-     "2025-02": 5899.57,
-     "2025-04": -28213.23,
-     "2025-05": -23237.64,
-     "2025-06": -40764.68,
-     "2025-07": 36598.91,
-     "2025-08": -8487.09,
-     "2025-09": -6587.36,
-     "2025-10": -13118.88,
-     "2025-11": -16749.0,
-     "2025-12": -15746.68,
-     "2026-01": -19472.49,
-     "2026-02": -11327.95,
-     "2026-03": -10462.92,
-     "2026-04": -12659.18,
-     "2026-05": 3860.91,
-     "2026-06": -4196.08,
-     "2026-07": 44070.87,
-     "2026-08": 21427.8,
-     "2026-09": 27907.03,
-     "2026-10": 19284.94,
-     "2026-11": 15878.11
+     "2024-11": -9707.63,
+     "2024-12": 78696.7,
+     "2025-01": -40686.31,
+     "2025-02": -5767.48,
+     "2025-04": -29204.98,
+     "2025-05": -24054.5,
+     "2025-06": -42197.63,
+     "2025-07": 37885.45,
+     "2025-08": -8785.41,
+     "2025-09": -6818.91,
+     "2025-10": -13580.03,
+     "2025-11": -17337.77,
+     "2025-12": -16300.17,
+     "2026-01": -20156.95,
+     "2026-02": -11726.15,
+     "2026-03": -10830.69,
+     "2026-04": -13104.18,
+     "2026-05": 3996.62,
+     "2026-06": -4343.58,
+     "2026-07": 45620.04,
+     "2026-08": 22181.04,
+     "2026-09": 28888.01,
+     "2026-10": 19962.84,
+     "2026-11": 19843.39
     },
     "curve": [
      [
       "2024-11",
-      969773.78
+      990292.37
      ],
      [
       "2024-12",
-      1014876.14
+      1068989.07
      ],
      [
       "2025-01",
-      981912.41
+      1028302.76
      ],
      [
       "2025-02",
-      987811.98
+      1022535.28
      ],
      [
       "2025-04",
-      959598.75
+      993330.3
      ],
      [
       "2025-05",
-      936361.11
+      969275.8
      ],
      [
       "2025-06",
-      895596.43
+      927078.17
      ],
      [
       "2025-07",
-      932195.34
+      964963.62
      ],
      [
       "2025-08",
-      923708.25
+      956178.21
      ],
      [
       "2025-09",
-      917120.89
+      949359.3
      ],
      [
       "2025-10",
-      904002.01
+      935779.27
      ],
      [
       "2025-11",
-      887253.01
+      918441.5
      ],
      [
       "2025-12",
-      871506.33
+      902141.33
      ],
      [
       "2026-01",
-      852033.84
+      881984.38
      ],
      [
       "2026-02",
-      840705.89
+      870258.23
      ],
      [
       "2026-03",
-      830242.97
+      859427.54
      ],
      [
       "2026-04",
-      817583.79
+      846323.36
      ],
      [
       "2026-05",
-      821444.7
+      850319.98
      ],
      [
       "2026-06",
-      817248.62
+      845976.4
      ],
      [
       "2026-07",
-      861319.49
+      891596.44
      ],
      [
       "2026-08",
-      882747.29
+      913777.48
      ],
      [
       "2026-09",
-      910654.32
+      942665.49
      ],
      [
       "2026-10",
-      929939.26
+      962628.33
      ],
      [
       "2026-11",
-      945817.37
+      982471.72
      ]
     ],
-    "first_trade": "2024-11-06"
+    "first_trade": "2024-11-19"
    },
    "since": "2017-01-01",
    "period": {
     "start": "2017-01-01",
     "capital": 1000000.0,
     "pct": 8.0,
-    "final": 3778693.36,
-    "profit": 2778693.36,
+    "final": 3791843.15,
+    "profit": 2791843.15,
     "open_trades": 7,
-    "return_pct": 277.9,
-    "trades": 880,
+    "return_pct": 279.2,
+    "trades": 881,
     "skipped": 735,
-    "wins": 285,
-    "win_rate": 32.4,
+    "wins": 286,
+    "win_rate": 32.5,
     "max_drawdown_pct": 19.6,
     "months": {
      "2017-01": -1203.39,
@@ -3546,7 +3545,7 @@
      "2026-08": 85607.6,
      "2026-09": 111493.15,
      "2026-10": 77046.44,
-     "2026-11": 63435.63
+     "2026-11": 76585.42
     },
     "curve": [
      [
@@ -3979,7 +3978,7 @@
      ],
      [
       "2026-11",
-      3778693.5
+      3791843.29
      ]
     ],
     "first_trade": "2017-01-10"
@@ -4049,43 +4048,43 @@
      "max_drawdown_pct": 21.0
     },
     "2026": {
-     "return_pct": 10.7,
-     "trades": 75,
+     "return_pct": 11.1,
+     "trades": 76,
      "skipped": 119,
-     "win_rate": 34.7,
+     "win_rate": 35.5,
      "max_drawdown_pct": 4.4
     }
    },
    "report": {
-    "trades": 1927,
+    "trades": 1928,
     "open": 9,
     "wins": 627,
-    "losses": 1300,
+    "losses": 1301,
     "win_rate": 32.5,
-    "total_pnl": 5621909.56,
-    "open_pnl": 44442.04,
+    "total_pnl": 5615527.82,
+    "open_pnl": 53892.86,
     "avg_win": 20984.02,
-    "avg_loss": -5796.21,
-    "profit_factor": 1.75,
-    "expectancy": 2917.44,
+    "avg_loss": -5796.66,
+    "profit_factor": 1.74,
+    "expectancy": 2912.62,
     "avg_return_pct": 2.92,
     "best": 107659.08,
     "worst": -73179.72,
     "max_drawdown": 683537.47,
     "avg_hold_days": 30.4,
     "first": "1997-01-29",
-    "last": "2026-11-06"
+    "last": "2026-11-11"
    },
    "rank": "low_risk",
    "nofilter": {
-    "return_pct": 522.7,
-    "final": 6227463.94,
+    "return_pct": 531.8,
+    "final": 6318330.74,
     "capital": 1000000.0,
     "max_drawdown_pct": 18.2,
-    "trades": 1225,
+    "trades": 1229,
     "skipped": 1157,
-    "win_rate": 30.5,
-    "last2y": 17.6,
+    "win_rate": 30.7,
+    "last2y": 20.9,
     "last2y_dd": 7.4,
     "loss_years": 3,
     "worst_year": -13.7
@@ -4096,225 +4095,225 @@
    },
    "rank_test": {
     "alpha": {
-     "return_pct": 309.2,
-     "final": 4091707.98,
+     "return_pct": 310.6,
+     "final": 4105923.59,
      "capital": 1000000.0,
      "max_drawdown_pct": 18.3,
-     "trades": 876,
+     "trades": 877,
      "skipped": 739,
-     "win_rate": 32.6,
-     "last2y": -6.0,
-     "last2y_dd": 18.2,
+     "win_rate": 32.7,
+     "last2y": -2.3,
+     "last2y_dd": 19.6,
      "loss_years": 3,
      "worst_year": -19.8
     },
     "tight": {
-     "return_pct": 277.6,
-     "final": 3776401.45,
+     "return_pct": 279.0,
+     "final": 3789576.22,
      "capital": 1000000.0,
      "max_drawdown_pct": 18.6,
-     "trades": 870,
+     "trades": 871,
      "skipped": 745,
      "win_rate": 32.8,
-     "last2y": -1.1,
-     "last2y_dd": 18.5,
+     "last2y": 2.7,
+     "last2y_dd": 19.9,
      "loss_years": 3,
      "worst_year": -20.1
     },
     "strength": {
-     "return_pct": 329.6,
-     "final": 4296468.39,
+     "return_pct": 331.1,
+     "final": 4311496.86,
      "capital": 1000000.0,
      "max_drawdown_pct": 19.2,
-     "trades": 874,
+     "trades": 875,
      "skipped": 741,
-     "win_rate": 32.6,
-     "last2y": 3.3,
-     "last2y_dd": 19.2,
+     "win_rate": 32.7,
+     "last2y": 5.5,
+     "last2y_dd": 20.5,
      "loss_years": 3,
      "worst_year": -21.1
     },
     "near_high": {
-     "return_pct": 283.5,
-     "final": 3835031.74,
+     "return_pct": 284.8,
+     "final": 3848407.29,
      "capital": 1000000.0,
      "max_drawdown_pct": 18.7,
-     "trades": 871,
+     "trades": 872,
      "skipped": 744,
-     "win_rate": 32.7,
-     "last2y": 0.0,
-     "last2y_dd": 18.6,
+     "win_rate": 32.8,
+     "last2y": 2.2,
+     "last2y_dd": 19.9,
      "loss_years": 3,
      "worst_year": -20.5
     },
     "trend": {
-     "return_pct": 281.0,
-     "final": 3809643.38,
+     "return_pct": 282.3,
+     "final": 3822983.77,
      "capital": 1000000.0,
      "max_drawdown_pct": 19.7,
-     "trades": 873,
+     "trades": 874,
      "skipped": 742,
-     "win_rate": 32.4,
-     "last2y": -0.8,
-     "last2y_dd": 19.6,
+     "win_rate": 32.5,
+     "last2y": 1.3,
+     "last2y_dd": 20.9,
      "loss_years": 3,
      "worst_year": -20.7
     },
     "low_risk": {
-     "return_pct": 277.9,
-     "final": 3778693.36,
+     "return_pct": 279.2,
+     "final": 3791843.15,
      "capital": 1000000.0,
      "max_drawdown_pct": 19.6,
-     "trades": 880,
+     "trades": 881,
      "skipped": 735,
-     "win_rate": 32.4,
-     "last2y": -5.4,
-     "last2y_dd": 19.5,
+     "win_rate": 32.5,
+     "last2y": -1.8,
+     "last2y_dd": 20.9,
      "loss_years": 3,
      "worst_year": -21.0
     },
     "volume": {
-     "return_pct": 301.2,
-     "final": 4011599.43,
+     "return_pct": 302.6,
+     "final": 4025637.71,
      "capital": 1000000.0,
      "max_drawdown_pct": 19.6,
-     "trades": 883,
+     "trades": 884,
      "skipped": 732,
-     "win_rate": 32.5,
-     "last2y": -1.7,
-     "last2y_dd": 19.5,
+     "win_rate": 32.6,
+     "last2y": 0.4,
+     "last2y_dd": 20.9,
      "loss_years": 3,
      "worst_year": -20.2
     }
    },
    "pct_test": {
     "6": {
-     "return_pct": 270.3,
-     "final": 3703444.85,
+     "return_pct": 271.3,
+     "final": 3713121.1,
      "capital": 1000000.0,
      "max_drawdown_pct": 15.0,
-     "trades": 1031,
+     "trades": 1032,
      "skipped": 584,
-     "win_rate": 32.5,
-     "last2y": 9.3,
-     "last2y_dd": 14.6,
+     "win_rate": 32.6,
+     "last2y": 9.9,
+     "last2y_dd": 15.6,
      "loss_years": 3,
      "worst_year": -14.9
     },
     "7": {
-     "return_pct": 263.1,
-     "final": 3631095.87,
+     "return_pct": 264.0,
+     "final": 3639586.12,
      "capital": 1000000.0,
      "max_drawdown_pct": 19.9,
-     "trades": 942,
+     "trades": 943,
      "skipped": 673,
      "win_rate": 32.2,
-     "last2y": -1.5,
-     "last2y_dd": 19.8,
+     "last2y": -1.2,
+     "last2y_dd": 20.6,
      "loss_years": 3,
      "worst_year": -20.5
     },
     "8": {
-     "return_pct": 277.9,
-     "final": 3778693.36,
+     "return_pct": 279.2,
+     "final": 3791843.15,
      "capital": 1000000.0,
      "max_drawdown_pct": 19.6,
-     "trades": 880,
+     "trades": 881,
      "skipped": 735,
-     "win_rate": 32.4,
-     "last2y": -5.4,
-     "last2y_dd": 19.5,
+     "win_rate": 32.5,
+     "last2y": -1.8,
+     "last2y_dd": 20.9,
      "loss_years": 3,
      "worst_year": -21.0
     },
     "9": {
-     "return_pct": 333.1,
-     "final": 4330528.17,
+     "return_pct": 335.5,
+     "final": 4355188.42,
      "capital": 1000000.0,
      "max_drawdown_pct": 19.7,
-     "trades": 807,
+     "trades": 808,
      "skipped": 808,
-     "win_rate": 32.8,
-     "last2y": -7.1,
-     "last2y_dd": 19.5,
+     "win_rate": 32.9,
+     "last2y": -4.7,
+     "last2y_dd": 21.0,
      "loss_years": 3,
      "worst_year": -21.0
     },
     "10": {
-     "return_pct": 284.4,
-     "final": 3844001.05,
+     "return_pct": 286.1,
+     "final": 3860633.96,
      "capital": 1000000.0,
      "max_drawdown_pct": 24.0,
-     "trades": 757,
+     "trades": 758,
      "skipped": 858,
-     "win_rate": 32.2,
-     "last2y": -10.8,
-     "last2y_dd": 23.5,
+     "win_rate": 32.3,
+     "last2y": -7.9,
+     "last2y_dd": 23.8,
      "loss_years": 3,
      "worst_year": -24.8
     },
     "11": {
-     "return_pct": 344.8,
-     "final": 4448289.89,
+     "return_pct": 347.0,
+     "final": 4469706.99,
      "capital": 1000000.0,
      "max_drawdown_pct": 23.7,
-     "trades": 705,
+     "trades": 706,
      "skipped": 910,
-     "win_rate": 32.8,
-     "last2y": -6.0,
-     "last2y_dd": 21.7,
+     "win_rate": 32.9,
+     "last2y": -2.6,
+     "last2y_dd": 21.8,
      "loss_years": 3,
      "worst_year": -22.7
     },
     "12": {
-     "return_pct": 321.2,
-     "final": 4212308.57,
+     "return_pct": 323.4,
+     "final": 4233978.93,
      "capital": 1000000.0,
      "max_drawdown_pct": 24.3,
-     "trades": 654,
+     "trades": 655,
      "skipped": 961,
-     "win_rate": 31.8,
-     "last2y": -4.1,
-     "last2y_dd": 18.6,
+     "win_rate": 31.9,
+     "last2y": -2.1,
+     "last2y_dd": 19.2,
      "loss_years": 3,
      "worst_year": -18.8
     },
     "13": {
-     "return_pct": 335.4,
-     "final": 4354495.07,
+     "return_pct": 337.9,
+     "final": 4378707.51,
      "capital": 1000000.0,
      "max_drawdown_pct": 23.8,
-     "trades": 622,
+     "trades": 623,
      "skipped": 993,
-     "win_rate": 31.5,
-     "last2y": -7.0,
-     "last2y_dd": 21.0,
+     "win_rate": 31.6,
+     "last2y": -6.0,
+     "last2y_dd": 22.5,
      "loss_years": 3,
      "worst_year": -21.4
     },
     "14": {
-     "return_pct": 367.1,
-     "final": 4671396.46,
+     "return_pct": 371.3,
+     "final": 4712896.19,
      "capital": 1000000.0,
      "max_drawdown_pct": 29.2,
-     "trades": 592,
+     "trades": 593,
      "skipped": 1023,
-     "win_rate": 32.8,
-     "last2y": -18.7,
-     "last2y_dd": 29.5,
+     "win_rate": 32.9,
+     "last2y": -17.5,
+     "last2y_dd": 31.0,
      "loss_years": 3,
      "worst_year": -29.2
     },
     "15": {
-     "return_pct": 358.0,
-     "final": 4579735.22,
+     "return_pct": 362.3,
+     "final": 4623030.01,
      "capital": 1000000.0,
      "max_drawdown_pct": 28.9,
-     "trades": 563,
+     "trades": 564,
      "skipped": 1052,
-     "win_rate": 31.6,
+     "win_rate": 31.7,
      "last2y": -4.7,
-     "last2y_dd": 19.7,
+     "last2y_dd": 22.2,
      "loss_years": 3,
      "worst_year": -21.6
     }

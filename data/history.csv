@@ -546,3 +546,13 @@ date,symbol,name,action,reason
 2026-11-12,SURYODAY,Suryoday Small Finance Bank Ltd,DT -> SP,close 159.73 back above 200 EMA 151.05
 2026-11-12,VIVIANA,Viviana Power,DT -> SP,close 778.6 back above 200 EMA 754.83
 2026-11-12,XPROINDIA,XPRO India Ltd,DT -> SP,close 1142.2 back above 200 EMA 1139.19
+2026-11-13,PCCL,Petro Carbon,ADDED to SP,"marks 9.9/11; 3-month RS 93 (vs 3622 BSE stocks); from TTM Profit > 30%, 52W High"
+2026-11-13,KHAZANCHI,Khazanchi Jewell,ADDED to SP,marks 9.4/11; RS: too new (under 3 months of prices); from Daily Volume Scan
+2026-11-13,AJMERA,Ajmera Realty & Infra India Ltd,SP -> DT,close 132.76 below 200 EMA 133.03
+2026-11-13,J&KBANK,Jammu and Kashmir Bank Ltd,SP -> DT,close 134.18 below 200 EMA 136.26
+2026-11-13,MPIMANIPAL,Manipal Payment and Identity Solutions Ltd,SP -> DT,close 319.95 below 20 EMA 323 (new listing)
+2026-11-13,SURYODAY,Suryoday Small Finance Bank Ltd,SP -> DT,close 150.37 below 200 EMA 150.96
+2026-11-13,VIVIANA,Viviana Power,SP -> DT,close 751.55 below 200 EMA 754.59
+2026-11-13,XPROINDIA,XPRO India Ltd,SP -> DT,close 1106.6 below 200 EMA 1139.15
+2026-11-13,ADVAIT,Advait Energy Transitions Limited,DT -> SP,close 1903 back above 20 EMA 1805.2 (new listing)
+2026-11-13,BETA,Beta Drugs Ltd,DT -> SP,close 1871 back above 200 EMA 1865.81

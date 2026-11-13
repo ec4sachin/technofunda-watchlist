@@ -40,8 +40,8 @@
      "volume": 0.35
     }
    },
-   "ltp": 332.55,
-   "ltp_date": "2026-11-12"
+   "ltp": 329.55,
+   "ltp_date": "2026-11-11"
   },
   {
    "id": "swing-MODIS-2026-11-05",
@@ -83,8 +83,8 @@
      "volume": 1.02
     }
    },
-   "ltp": 433.65,
-   "ltp_date": "2026-11-12"
+   "ltp": 430.25,
+   "ltp_date": "2026-11-11"
   },
   {
    "id": "positional-DCI-2026-11-05",
@@ -126,8 +126,8 @@
      "volume": 0.35
     }
    },
-   "ltp": 332.55,
-   "ltp_date": "2026-11-12"
+   "ltp": 329.55,
+   "ltp_date": "2026-11-11"
   },
   {
    "id": "positional-MODIS-2026-11-05",
@@ -169,8 +169,8 @@
      "volume": 1.02
     }
    },
-   "ltp": 433.65,
-   "ltp_date": "2026-11-12"
+   "ltp": 430.25,
+   "ltp_date": "2026-11-11"
   },
   {
    "id": "switch-DCI-2026-11-05",
@@ -212,8 +212,8 @@
      "volume": 0.35
     }
    },
-   "ltp": 332.55,
-   "ltp_date": "2026-11-12",
+   "ltp": 329.55,
+   "ltp_date": "2026-11-11",
    "below50": 0,
    "switches": [
     "2026-11-06: → positional",
@@ -261,8 +261,8 @@
      "volume": 1.02
     }
    },
-   "ltp": 433.65,
-   "ltp_date": "2026-11-12",
+   "ltp": 430.25,
+   "ltp_date": "2026-11-11",
    "below50": 0,
    "switches": [
     "2026-11-06: → positional",
@@ -310,8 +310,8 @@
      "volume": 1.6
     }
    },
-   "ltp": 742.5,
-   "ltp_date": "2026-11-12",
+   "ltp": 727.95,
+   "ltp_date": "2026-11-11",
    "below50": 0,
    "switches": [
     "2026-11-06: → positional",
@@ -359,8 +359,8 @@
      "volume": 0.35
     }
    },
-   "ltp": 332.55,
-   "ltp_date": "2026-11-12",
+   "ltp": 329.55,
+   "ltp_date": "2026-11-11",
    "below50": 0,
    "switches": [
     "2026-11-06: → positional",
@@ -408,8 +408,8 @@
      "volume": 0.63
     }
    },
-   "ltp": 783.1,
-   "ltp_date": "2026-11-12",
+   "ltp": 785.8,
+   "ltp_date": "2026-11-11",
    "below50": 0,
    "switches": [
     "2026-11-06: → positional",
@@ -457,8 +457,8 @@
      "volume": 1.02
     }
    },
-   "ltp": 433.65,
-   "ltp_date": "2026-11-12",
+   "ltp": 430.25,
+   "ltp_date": "2026-11-11",
    "below50": 0,
    "switches": [
     "2026-11-06: → positional",
@@ -506,8 +506,8 @@
      "volume": 1.4
     }
    },
-   "ltp": 742.5,
-   "ltp_date": "2026-11-12"
+   "ltp": 727.95,
+   "ltp_date": "2026-11-11"
   },
   {
    "id": "positional-PANACHE-2026-11-06",
@@ -549,8 +549,8 @@
      "volume": 1.4
     }
    },
-   "ltp": 742.5,
-   "ltp_date": "2026-11-12"
+   "ltp": 727.95,
+   "ltp_date": "2026-11-11"
   },
   {
    "id": "switch-PANACHE-2026-11-06",
@@ -592,8 +592,8 @@
      "volume": 1.4
     }
    },
-   "ltp": 742.5,
-   "ltp_date": "2026-11-12",
+   "ltp": 727.95,
+   "ltp_date": "2026-11-11",
    "below50": 0,
    "switches": [
     "2026-11-08: → swing",
@@ -640,8 +640,8 @@
      "volume": 0.79
     }
    },
-   "ltp": 199.07,
-   "ltp_date": "2026-11-12",
+   "ltp": 195.17,
+   "ltp_date": "2026-11-11",
    "below50": 0,
    "switches": [
     "2026-11-11: → positional"
@@ -1505,11 +1505,8 @@
    "THOMASCOTT": "2026-11-12",
    "DEEPA": "2026-11-12",
    "MVGJL": "2026-11-12",
-   "AJMERA": "2026-11-12",
    "DENTALKART": "2026-11-11",
    "MEGATHERM": "2026-11-11",
-   "SURYODAY": "2026-11-12",
-   "VIVIANA": "2026-11-12",
    "544746": "2026-11-12",
    "536565": "2026-11-12",
    "539522": "2026-11-12",
@@ -1518,10 +1515,11 @@
    "BPLPHARMA": "2026-11-12",
    "DEEDEV": "2026-11-12",
    "HUHTAMAKI": "2026-11-12",
-   "J&KBANK": "2026-11-12",
-   "MPIMANIPAL": "2026-11-12",
    "MPSLTD": "2026-11-12",
-   "XPROINDIA": "2026-11-12"
+   "ADVAIT": "2026-11-11",
+   "BETA": "2026-11-11",
+   "KHAZANCHI": "2026-11-11",
+   "PCCL": "2026-11-11"
   },
   "positional": {
    "INTEGRITY": "2026-11-12",
@@ -1753,11 +1751,8 @@
    "THOMASCOTT": "2026-11-12",
    "DEEPA": "2026-11-12",
    "MVGJL": "2026-11-12",
-   "AJMERA": "2026-11-12",
    "DENTALKART": "2026-11-11",
    "MEGATHERM": "2026-11-11",
-   "SURYODAY": "2026-11-12",
-   "VIVIANA": "2026-11-12",
    "544746": "2026-11-12",
    "536565": "2026-11-12",
    "539522": "2026-11-12",
@@ -1766,10 +1761,11 @@
    "BPLPHARMA": "2026-11-12",
    "DEEDEV": "2026-11-12",
    "HUHTAMAKI": "2026-11-12",
-   "J&KBANK": "2026-11-12",
-   "MPIMANIPAL": "2026-11-12",
    "MPSLTD": "2026-11-12",
-   "XPROINDIA": "2026-11-12"
+   "ADVAIT": "2026-11-11",
+   "BETA": "2026-11-11",
+   "KHAZANCHI": "2026-11-11",
+   "PCCL": "2026-11-11"
   },
   "switch": {
    "INTEGRITY": "2026-11-12",
@@ -2001,11 +1997,8 @@
    "THOMASCOTT": "2026-11-12",
    "DEEPA": "2026-11-12",
    "MVGJL": "2026-11-12",
-   "AJMERA": "2026-11-12",
    "DENTALKART": "2026-11-11",
    "MEGATHERM": "2026-11-11",
-   "SURYODAY": "2026-11-12",
-   "VIVIANA": "2026-11-12",
    "544746": "2026-11-12",
    "536565": "2026-11-12",
    "539522": "2026-11-12",
@@ -2014,10 +2007,11 @@
    "BPLPHARMA": "2026-11-12",
    "DEEDEV": "2026-11-12",
    "HUHTAMAKI": "2026-11-12",
-   "J&KBANK": "2026-11-12",
-   "MPIMANIPAL": "2026-11-12",
    "MPSLTD": "2026-11-12",
-   "XPROINDIA": "2026-11-12"
+   "ADVAIT": "2026-11-11",
+   "BETA": "2026-11-11",
+   "KHAZANCHI": "2026-11-11",
+   "PCCL": "2026-11-11"
   },
   "growth_switch": {
    "540718": "2026-11-12",
@@ -3082,46 +3076,6 @@
      "volume": 0.66
     },
     "turnover": 450447
-   },
-   {
-    "symbol": "SWARAJ",
-    "name": "Swaraj Suiting",
-    "buy_above": 378.55,
-    "stop": 355.84,
-    "qty": 343,
-    "amount": 129842.65,
-    "range_pct": 5.6,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-12",
-    "score": {
-     "tight": 5.57,
-     "strength": 26.67,
-     "near_high": 9.99,
-     "trend": 2.33,
-     "low_risk": 6.0,
-     "volume": 0.71
-    },
-    "turnover": 33868033
-   },
-   {
-    "symbol": "YATHARTH",
-    "name": "Yatharth Hospital & Trauma Care Services Ltd",
-    "buy_above": 1080.7,
-    "stop": 1015.86,
-    "qty": 120,
-    "amount": 129684.0,
-    "range_pct": 6.0,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-12",
-    "score": {
-     "tight": 5.97,
-     "strength": 29.68,
-     "near_high": 10.44,
-     "trend": 7.63,
-     "low_risk": 6.0,
-     "volume": 0.75
-    },
-    "turnover": 337619050
    }
   ],
   "positional": [
@@ -3284,46 +3238,6 @@
      "volume": 0.66
     },
     "turnover": 450447
-   },
-   {
-    "symbol": "SWARAJ",
-    "name": "Swaraj Suiting",
-    "buy_above": 378.55,
-    "stop": 355.84,
-    "qty": 316,
-    "amount": 119621.8,
-    "range_pct": 5.6,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-12",
-    "score": {
-     "tight": 5.57,
-     "strength": 26.67,
-     "near_high": 9.99,
-     "trend": 2.33,
-     "low_risk": 6.0,
-     "volume": 0.71
-    },
-    "turnover": 33868033
-   },
-   {
-    "symbol": "YATHARTH",
-    "name": "Yatharth Hospital & Trauma Care Services Ltd",
-    "buy_above": 1080.7,
-    "stop": 1015.86,
-    "qty": 111,
-    "amount": 119957.7,
-    "range_pct": 6.0,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-12",
-    "score": {
-     "tight": 5.97,
-     "strength": 29.68,
-     "near_high": 10.44,
-     "trend": 7.63,
-     "low_risk": 6.0,
-     "volume": 0.75
-    },
-    "turnover": 337619050
    }
   ],
   "switch": [
@@ -3486,46 +3400,6 @@
      "volume": 0.66
     },
     "turnover": 450447
-   },
-   {
-    "symbol": "SWARAJ",
-    "name": "Swaraj Suiting",
-    "buy_above": 378.55,
-    "stop": 355.84,
-    "qty": 316,
-    "amount": 119621.8,
-    "range_pct": 5.6,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-12",
-    "score": {
-     "tight": 5.57,
-     "strength": 26.67,
-     "near_high": 9.99,
-     "trend": 2.33,
-     "low_risk": 6.0,
-     "volume": 0.71
-    },
-    "turnover": 33868033
-   },
-   {
-    "symbol": "YATHARTH",
-    "name": "Yatharth Hospital & Trauma Care Services Ltd",
-    "buy_above": 1080.7,
-    "stop": 1015.86,
-    "qty": 111,
-    "amount": 119957.7,
-    "range_pct": 6.0,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-12",
-    "score": {
-     "tight": 5.97,
-     "strength": 29.68,
-     "near_high": 10.44,
-     "trend": 7.63,
-     "low_risk": 6.0,
-     "volume": 0.75
-    },
-    "turnover": 337619050
    }
   ],
   "growth_switch": [
@@ -3570,26 +3444,6 @@
     "turnover": 25746473
    },
    {
-    "symbol": "CONSOFINVT",
-    "name": "Cons. Finvest",
-    "buy_above": 342.34,
-    "stop": 321.8,
-    "qty": 232,
-    "amount": 79422.88,
-    "range_pct": 5.9,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-12",
-    "score": {
-     "tight": 5.92,
-     "strength": 42.92,
-     "near_high": 5.55,
-     "trend": 8.79,
-     "low_risk": 6.0,
-     "volume": 1.36
-    },
-    "turnover": 6533486
-   },
-   {
     "symbol": "MANBA",
     "name": "Manba Finance",
     "buy_above": 150.78,
@@ -3607,7 +3461,7 @@
      "low_risk": 6.0,
      "volume": 0.84
     },
-    "turnover": 20820309
+    "turnover": 20820526
    },
    {
     "symbol": "NAZARA",
@@ -3627,47 +3481,7 @@
      "low_risk": 6.0,
      "volume": 0.67
     },
-    "turnover": 574650448
-   },
-   {
-    "symbol": "SWARAJ",
-    "name": "Swaraj Suiting",
-    "buy_above": 378.55,
-    "stop": 355.84,
-    "qty": 210,
-    "amount": 79495.5,
-    "range_pct": 5.6,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-12",
-    "score": {
-     "tight": 5.57,
-     "strength": 26.67,
-     "near_high": 9.99,
-     "trend": 2.33,
-     "low_risk": 6.0,
-     "volume": 0.71
-    },
-    "turnover": 33868033
-   },
-   {
-    "symbol": "YATHARTH",
-    "name": "Yatharth Hospital & Trauma Care Services Ltd",
-    "buy_above": 1080.7,
-    "stop": 1015.86,
-    "qty": 73,
-    "amount": 78891.1,
-    "range_pct": 6.0,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-12",
-    "score": {
-     "tight": 5.97,
-     "strength": 29.68,
-     "near_high": 10.44,
-     "trend": 7.63,
-     "low_risk": 6.0,
-     "volume": 0.75
-    },
-    "turnover": 337619050
+    "turnover": 574651174
    }
   ]
  },

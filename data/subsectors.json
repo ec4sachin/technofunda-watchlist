@@ -1222,5 +1222,70 @@
  "ZOTA": [
   "Pharma & Healthcare",
   "Pharma distribution & pharmacy retail"
+ ],
+ "509597": [
+  "Chemicals",
+  "Specialty chemicals – others",
+  "auto"
+ ],
+ "519097": [
+  "Chemicals",
+  "Fluorochemicals",
+  "auto"
+ ],
+ "523289": [
+  "Retail",
+  "Consumer electronics distribution",
+  "auto"
+ ],
+ "530427": [
+  "Pharma & Healthcare",
+  "Pharma distribution & pharmacy retail",
+  "auto"
+ ],
+ "536565": [
+  "Pharma & Healthcare",
+  "Healthcare Research, Analytics & Technology",
+  "auto"
+ ],
+ "538401": [
+  "Capital Goods",
+  "Mining & bulk-handling equipment",
+  "auto"
+ ],
+ "543351": [
+  "IT & Internet",
+  "IT services",
+  "auto"
+ ],
+ "544468": [
+  "Building Materials",
+  "Plastic pipes",
+  "auto"
+ ],
+ "544529": [
+  "Pharma & Healthcare",
+  "Injectables",
+  "auto"
+ ],
+ "MARUSHIKA": [
+  "IT & Internet",
+  "Laptops & refurbished devices",
+  "auto"
+ ],
+ "PCCL": [
+  "Metals",
+  "Industrial Minerals",
+  "auto"
+ ],
+ "KHAZANCHI": [
+  "Jewellery",
+  "Gold jewellery manufacturing",
+  "auto"
+ ],
+ "538565": [
+  "FMCG & Food",
+  "Packaged foods",
+  "auto"
  ]
 }
