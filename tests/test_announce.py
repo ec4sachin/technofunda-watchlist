@@ -40,12 +40,12 @@ sp = {"513472": {"name": "Simplex Castings", "bse": "513472"}, "PRIMECAB": {"nam
 day = datetime(2026, 11, 12)
 new, ok = A.update(sp, {}, "2026-11-13", days=[day], bse=bse, nse=nse)
 codes = sorted(c for c, *_ in new)
-assert ok and codes == ["513472", "PRIMECAB"], new          # DANISH has a BSE code: its NSE copy is not used
+assert ok and codes == ["513472", "DANISH", "PRIMECAB"], new   # NSE first: DANISH (both codes) is read from NSE
 items = _save[A.FILE]["items"]
 assert items["513472"][0]["k"] == "Order" and items["PRIMECAB"][0]["k"] == "Capacity"
 new2, _ = A.update(sp, {}, "2026-11-13", days=[day], bse=bse, nse=nse)
 assert new2 == [], new2                                     # same announcement is not added again
-assert set(A.recent(sp, {}, today="2026-11-13")) == {"513472", "PRIMECAB"}
+assert set(A.recent(sp, {}, today="2026-11-13")) == {"513472", "DANISH", "PRIMECAB"}
 # nothing could be read: "last" date is not moved on
 _save.clear()
 new3, ok3 = A.update(sp, {}, "2026-11-13", days=[day], bse=lambda d, s=None: [], nse=lambda d, s=None: [])
