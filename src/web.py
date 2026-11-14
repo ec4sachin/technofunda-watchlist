@@ -108,6 +108,7 @@ mark.g,.cs .nv span.g{background:var(--up-soft);color:var(--ink);border-color:tr
 .ann{margin:0;padding:0;list-style:none;display:grid;gap:4px}.ann li{font-size:13px;padding:4px 6px;border-radius:6px;line-height:1.4}.ann li.nw{background:var(--warn-soft)}
 .ann .ad{font:12px var(--f-mono);color:var(--muted)}.ann .ak{font-size:11.5px;font-weight:600;padding:1px 6px;border-radius:10px;background:var(--bg);border:1px solid var(--line)}.ann a{color:var(--ink)}
 .nb{font-size:11px;font-weight:700;color:var(--warn);margin-left:4px}
+.ranges .vz{display:inline-flex;gap:4px;margin-left:6px}.ranges .vz .rg{min-width:34px}
 .gd .gwarn{margin-top:6px;font-size:12.5px;font-weight:600;color:var(--down)}
 @media(max-width:520px){.gd .gl{grid-template-columns:1fr;gap:0}}
 .order .catbody p{margin:0;font-size:15px;line-height:1.6}
@@ -693,10 +694,11 @@ const alpha = (hex, a) => /^#[0-9a-f]{6}$/i.test(hex) ? hex + Math.round(a * 255
 const fmtN = (v, d = 2) => v == null || !isFinite(v) ? "—" : Number(v).toLocaleString("en-IN", {maximumFractionDigits: d});
 
 let VSEQ = [], VLIST = "SP", backY = 0;
-function openPanel(sym, tab){
+function openPanel(sym, tab, seq){
   const [r, list] = findRow(sym); if (!r) return;
   const wasOpen = !!cur;
-  if (!wasOpen || !VSEQ.includes(sym)) {
+  if (seq && seq.syms.length) { VSEQ = seq.syms; VLIST = seq.label; }   // e.g. the stocks of one sub-sector
+  else if (!wasOpen || !VSEQ.includes(sym)) {
     // Prev / Next walk through the list this stock is in, in the order shown on screen
     VLIST = list; VSEQ = listRows(list).map(x => x.symbol);
     if (!VSEQ.includes(sym)) VSEQ = D[list].map(x => x.symbol);
@@ -704,7 +706,7 @@ function openPanel(sym, tab){
   if (!wasOpen) backY = window.scrollY;
   closeMenu();
   cur = {r, list}; curTab = tab || curTab || "chart";
-  for (const id of ["v-list", "v-today", "v-history", "v-alerts", "v-strategy", "strip"]) document.getElementById(id).hidden = true;
+  for (const id of ["v-list", "v-today", "v-history", "v-alerts", "v-strategy", "v-sector", "strip"]) document.getElementById(id).hidden = true;
   document.getElementById("panel").hidden = false;
   document.querySelector("main").classList.add("wide"); document.body.classList.add("viewing");
   drawHead();
@@ -718,7 +720,7 @@ function drawHead(){
   if (!cur) return;
   const i = VSEQ.indexOf(cur.r.symbol), n = VSEQ.length;
   document.getElementById("p-count").textContent = n ? `${i + 1} of ${n} · ${VLIST}` : "";
-  document.getElementById("p-back").textContent = {sp: "SP", dt: "DT", today: "Today", history: "History", alerts: "Alerts", strategy: "Strategy"}[view] || "list";
+  document.getElementById("p-back").textContent = {sp: "SP", dt: "DT", today: "Today", history: "History", alerts: "Alerts", strategy: "Strategy", sector: "Sector Rotation"}[view] || "list";
   document.getElementById("p-prev").disabled = document.getElementById("p-next").disabled = n < 2;
   document.getElementById("p-row").innerHTML = stockRow(cur.r, cur.list);
 }
@@ -736,7 +738,11 @@ function closePanel(){
   cur = null;
   show(view);
   window.scrollTo(0, backY);
+  // opened from a sub-sector window: open that window again (14 Nov 2026)
+  const sb = secBack; secBack = null;
+  if (view === "sector" && sb != null && SEC && SEC.subs[sb]) setTimeout(() => openSector(sb), 0);
 }
+let secBack = null;
 function drawPanel(){
   document.querySelectorAll("[data-p]").forEach(t => { t.setAttribute("aria-selected", t.dataset.p === curTab);
     if (t.dataset.p === curTab && t.scrollIntoView) t.scrollIntoView({block: "nearest", inline: "nearest"}); });
@@ -749,9 +755,10 @@ function drawPanel(){
         `<button class="rg" data-tf="${k}" aria-pressed="${k === curTf}">${l}</button>`).join("")}${topLinks}</div>
       <div class="ranges" role="group" aria-label="Period">${[["3M", 63], ["6M", 126], ["1Y", 260], ["3Y", 780], ["5Y", 1300], ["All", 0]].map(([l, n]) =>
         `<button class="rg" data-range="${n}" aria-pressed="${n === curRange && !ZOOM[curTf]}">${l}</button>`).join("")}
+      <span class="vz" role="group" aria-label="Price zoom (up-down)"><button class="rg" data-vz="out" title="Zoom out up-down (Shift + mouse wheel also works)" aria-label="Zoom out vertically">↕−</button><button class="rg" data-vz="in" title="Zoom in up-down (Shift + mouse wheel also works)" aria-label="Zoom in vertically">↕+</button><button class="rg" data-vz="auto" title="Fit prices to the screen again" aria-label="Auto fit prices">Auto</button></span>
       <div class="legend" id="legend"></div></div>
       <div class="chartbox" id="chartbox"><div class="empty" style="border:0">Loading chart…</div></div>
-      <div class="src"><span id="chartsrc"></span> <b>Tip:</b> right-click the chart (long-press on a phone) to set a price alert.</div>`;
+      <div class="src"><span id="chartsrc"></span> <b>Tip:</b> right-click the chart (long-press on a phone) to set a price alert. Up-down zoom: ↕+ / ↕− buttons, Shift + mouse wheel, or drag the price numbers on the right up / down (double-click them or tap Auto to fit again).</div>`;
     drawChart();
   } else if (curTab === "fund") {
     body.innerHTML = fundHTML(D.fund[r.symbol]) + links;
@@ -818,8 +825,10 @@ async function drawChart(){
     rightPriceScale: {borderColor: line, scaleMargins: {top: .14, bottom: .24}}, timeScale: {borderColor: line},
     localization: {priceFormatter: p => p < 0 ? "" : "₹" + Number(p).toLocaleString("en-IN", {maximumFractionDigits: 2})},
     handleScroll: {vertTouchDrag: false},
+    handleScale: {axisPressedMouseMove: {time: true, price: true}, axisDoubleClickReset: {time: true, price: true}},
   });
-  const main = chartObj.addCandlestickSeries({upColor: up, downColor: dn, borderVisible: false, wickUpColor: up, wickDownColor: dn, priceLineVisible: false});
+  const main = chartObj.addCandlestickSeries({upColor: up, downColor: dn, borderVisible: false, wickUpColor: up, wickDownColor: dn, priceLineVisible: false,
+    autoscaleInfoProvider: vzScale});
   main.setData(bars.map(b => ({time: b.time, open: b.open, high: b.high, low: b.low, close: b.close})));
   if (h.v) {
     const vol = chartObj.addHistogramSeries({priceFormat: {type: "volume"}, priceScaleId: "", lastValueVisible: false, priceLineVisible: false});
@@ -836,7 +845,7 @@ async function drawChart(){
     if (!ok || !on) continue;
     const e = ema(closes, p);
     chartObj.addLineSeries({color: tok(col), lineWidth: w, lineStyle: style, priceLineVisible: false, lastValueVisible: p === 200,
-      crosshairMarkerVisible: false}).setData(bars.map((b, i) => ({time: b.time, value: e[i]})));
+      crosshairMarkerVisible: false, autoscaleInfoProvider: o => VZ === 1 ? o() : null}).setData(bars.map((b, i) => ({time: b.time, value: e[i]})));
   }
   document.getElementById("legend").innerHTML = chips.join("");
   drawOHLC(box, bars, main, candles);
@@ -851,7 +860,28 @@ async function drawChart(){
   for (const a of [...activeAlerts(), ...AL.pending].filter(x => x.symbol === sym))
     main.createPriceLine({price: +a.price, color: tok("--accent"), lineWidth: 1, lineStyle: 2, axisLabelVisible: true, title: "🔔 " + String(a.op).slice(0, 6)});
   attachMenu(box);
+  if (!box.__vzWheel) {          // Shift + mouse wheel = zoom up-down (plain wheel still zooms left-right)
+    box.__vzWheel = true;
+    box.addEventListener("wheel", e => { if (!e.shiftKey || !chartObj) return; e.preventDefault(); e.stopPropagation();
+      setVZ((e.deltaY || e.deltaX) < 0 ? VZ * 1.15 : VZ / 1.15); }, {capture: true, passive: false});
+  }
   setRange();
+}
+// Up-down (price) zoom, 14 Nov 2026 (zooms in around the latest price): buttons ↕+ / ↕− / Auto, Shift + mouse wheel, or drag the price numbers on the right
+// up / down (double-click them = fit again). VZ = how many times the price range is stretched (1 = fit to screen);
+// kept for Next / Prev and on this device.
+let VZ = 1; try { VZ = Math.min(8, Math.max(0.5, +localStorage.getItem("tf-vzoom") || 1)); } catch (e) { VZ = 1; }
+function vzScale(orig){
+  const r = orig(); if (!r || !r.priceRange || VZ === 1) return r;
+  const a = r.priceRange.minValue, b = r.priceRange.maxValue, half = (b - a) / 2 / VZ;
+  const lastC = cur && cur.bars && cur.bars.length ? cur.bars[cur.bars.length - 1].close : null;   // keep today's price in view
+  const c = VZ > 1 && lastC != null ? Math.min(b - half, Math.max(a + half, lastC)) : (a + b) / 2;
+  return {priceRange: {minValue: c - half, maxValue: c + half}, margins: r.margins};
+}
+function setVZ(v){
+  VZ = Math.abs(v - 1) < 0.04 ? 1 : Math.min(8, Math.max(0.5, v));
+  try { localStorage.setItem("tf-vzoom", String(VZ)); } catch (e) {}
+  if (chartObj) chartObj.priceScale("right").applyOptions({autoScale: true});   // re-fit with the new stretch
 }
 // Top-left box: date, O H L C, % change for the candle under the mouse (latest candle otherwise), and the cursor price
 function drawOHLC(box, bars, main, real){
@@ -1309,7 +1339,11 @@ document.addEventListener("click", async e => {
     try { localStorage.setItem("tf-secph", secPhase); } catch (x) {} drawSectors(); return; }
   const sp_ = e.target.closest("[data-secp]"); if (sp_) { secPeriod = sp_.dataset.secp; try { localStorage.setItem("tf-secp", secPeriod); } catch (x) {}
     if (sp_.closest("#order")) { secWin(); } else drawSectors(); return; }
-  const so = e.target.closest("[data-sec-open]"); if (so) { closeOrder(); openPanel(so.dataset.secOpen, "chart"); return; }
+  const so = e.target.closest("[data-sec-open]"); if (so) {   // chart opens at the top of the screen, like from the SP list
+    secBack = SEC && secCur ? SEC.subs.indexOf(secCur) : null; if (secBack < 0) secBack = null;
+    const syms = secCur ? secCur.stocks.slice().sort((a, b) => (b[secPeriod] ?? -1e9) - (a[secPeriod] ?? -1e9))
+      .map(x => x.s).filter(s_ => findRow(s_)[0]) : [];
+    closeOrder(); openPanel(so.dataset.secOpen, "chart", secCur ? {syms, label: secCur.name} : null); return; }
   const os = e.target.closest("[data-oset]"); if (os) { ORD[os.dataset.oset] = os.dataset.val; const [r] = findRow(ORD.sym); if (r) drawOrder(r); return; }
   if (e.target.closest("[data-oclose]") || e.target.id === "oscrim") { closeOrder(); return; }
   const ai = e.target.closest("[data-alert-op]"); if (ai) { closeMenu(); saveAlert(cur.r.symbol, cur.r.name, ai.dataset.alertOp, +ai.dataset.alertPrice); return; }
@@ -1337,6 +1371,8 @@ document.addEventListener("click", async e => {
   const tf = e.target.closest("[data-tf]"); if (tf) { curTf = tf.dataset.tf; saveView();
     document.querySelectorAll("[data-range]").forEach(x => x.setAttribute("aria-pressed", +x.dataset.range === curRange && !ZOOM[curTf]));
     document.querySelectorAll("[data-tf]").forEach(b => b.setAttribute("aria-pressed", b === tf)); drawChart(); return; }
+  const vz = e.target.closest("[data-vz]"); if (vz) { const k = vz.dataset.vz;
+    setVZ(k === "auto" ? 1 : k === "in" ? VZ * 1.4 : VZ / 1.4); return; }
   const rg = e.target.closest("[data-range]"); if (rg) { curRange = +rg.dataset.range; delete ZOOM[curTf]; saveZoom(); saveView();
     document.querySelectorAll("[data-range]").forEach(b => b.setAttribute("aria-pressed", b === rg)); setRange(); return; }
 });
