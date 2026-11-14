@@ -1,13 +1,7 @@
 {
  "added": [],
  "rejected": [],
- "to_dt": [
-  [
-   "MPSLTD",
-   "MPS Ltd",
-   "close 2259.3 < 200 EMA 2262.88"
-  ]
- ],
+ "to_dt": [],
  "to_sp": [],
  "removed": [],
  "unchecked": [],
@@ -282,5 +276,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "14 Nov 2026, 02:53 PM IST"
+ "run_at": "14 Nov 2026, 03:08 PM IST"
 }
