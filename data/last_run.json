@@ -1,7 +1,13 @@
 {
  "added": [],
  "rejected": [],
- "to_dt": [],
+ "to_dt": [
+  [
+   "MPSLTD",
+   "MPS Ltd",
+   "close 2259.3 < 200 EMA 2262.88"
+  ]
+ ],
  "to_sp": [],
  "removed": [],
  "unchecked": [],
@@ -93,22 +99,22 @@
   [
    "AEROPLANE",
    "A C J K Exports",
-   "close 242.83 vs 20 EMA 224.69 → SP"
+   "close 243.14 vs 20 EMA 226.45 → SP"
   ],
   [
    "BPLPHARMA",
    "Bharat Parenterals Ltd",
-   "close 1909.8 vs 20 EMA 1846.48 → SP"
+   "close 2120.7 vs 20 EMA 1872.66 → SP"
   ],
   [
    "DEEPA",
    "Deepa Jewellers",
-   "close 226.58 vs 20 EMA 218.53 → SP"
+   "close 219.48 vs 20 EMA 218.62 → SP"
   ],
   [
    "DHABRIYA",
    "Dhabriya Poly.",
-   "close 486.8 vs 20 EMA 472.15 → SP"
+   "close 477.25 vs 20 EMA 472.63 → SP"
   ],
   [
    "EPWINDIA",
@@ -118,7 +124,7 @@
   [
    "HALDYNGL",
    "Haldyn Glass",
-   "close 136.04 vs 20 EMA 135.38 → SP"
+   "close 136.56 vs 20 EMA 135.49 → SP"
   ],
   [
    "KANOHAR",
@@ -128,7 +134,7 @@
   [
    "KHAZANCHI",
    "Khazanchi Jewell",
-   "close 726.25 (too new for any EMA)"
+   "close 721.35 (too new for any EMA)"
   ],
   [
    "MARUSHIKA",
@@ -138,7 +144,7 @@
   [
    "ORIRAIL",
    "Oriental Rail Infrastructure Ltd",
-   "close 123.89 vs 20 EMA 117.41 → SP"
+   "close 121.78 vs 20 EMA 117.82 → SP"
   ],
   [
    "SHUKRAPHAR",
@@ -153,17 +159,17 @@
   [
    "SMT",
    "Sahajanand Medical Technologies Ltd",
-   "close 533.95 (too new for any EMA)"
+   "close 537.3 (too new for any EMA)"
   ],
   [
    "TAALTECH",
    "TAAL Tech Ltd",
-   "close 944.1 vs 20 EMA 928.8 → SP"
+   "close 933.3 vs 20 EMA 929.23 → SP"
   ],
   [
    "TAMBOLIIN",
    "Tamboli Industri",
-   "close 329.35 vs 20 EMA 316.55 → SP"
+   "close 328.05 vs 20 EMA 317.65 → SP"
   ],
   [
    "TEAMTECH",
@@ -173,12 +179,12 @@
   [
    "TRANSPEK",
    "Transpek Industry Ltd",
-   "close 1336.3 vs 20 EMA 1295.35 → SP"
+   "close 1360.2 vs 20 EMA 1301.52 → SP"
   ],
   [
    "UDAYJEW",
    "Uday Jewellery",
-   "close 218.3 vs 20 EMA 213.51 → SP"
+   "close 220.1 vs 20 EMA 214.14 → SP"
   ],
   [
    "544623",
@@ -223,12 +229,12 @@
   [
    "ESDS",
    "ESDS Software Solution Ltd",
-   "close 1265.2 vs 20 EMA 1269.03"
+   "close 1260.5 vs 20 EMA 1268.21"
   ],
   [
    "HEXAGON",
    "Hexagon Nutri.",
-   "close 59.91 vs 20 EMA 61.23"
+   "close 58.7 vs 20 EMA 60.99"
   ],
   [
    "MPIMANIPAL",
@@ -238,22 +244,22 @@
   [
    "RAMBHAJO",
    "Advit Jewels",
-   "close 316.2 vs 20 EMA 331.74"
+   "close 305.6 vs 20 EMA 329.25"
   ],
   [
    "RSL",
    "Rajputana Stain.",
-   "close 168.8 vs 20 EMA 169.86"
+   "close 167.01 vs 20 EMA 169.59"
   ],
   [
    "SWASTIKAIN",
    "Swastika Infra",
-   "close 193.15 vs 20 EMA 200.46"
+   "close 194.9 (too new for any EMA)"
   ],
   [
    "XTRANET",
    "Xtranet Techno.",
-   "close 270.35 vs 20 EMA 278.21"
+   "close 270.15 vs 20 EMA 277.44"
   ],
   [
    "YAAP",
@@ -276,5 +282,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "14 Nov 2026, 09:59 AM IST"
+ "run_at": "14 Nov 2026, 02:53 PM IST"
 }

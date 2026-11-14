@@ -31,3 +31,6 @@ date,strategy,mode,action,symbol,name,qty,price,value,reason,pnl,pnl_pct,hold_da
 2026-11-13,Positional Trading,paper,BUY,RAPIDFLEET,Rapid Fleet,568,211.09,119899.12,"Breakout above ₹209 + 1% (stop ₹202.55, target ₹274.42)",,,,positional-RAPIDFLEET-2026-11-13
 2026-11-13,Smart Switch,paper,BUY,RAPIDFLEET,Rapid Fleet,568,211.09,119899.12,"Breakout above ₹209 + 1% (stop ₹202.55, target ₹274.42) · Smallcap 100 19,707 above EMA 50 19,145 → Positional exits",,,,switch-RAPIDFLEET-2026-11-13
 2026-11-13,Smart Switch · Growth list,paper,BUY,YATHARTH,Yatharth Hospital & Trauma Care Services Ltd,73,1080.7,78891.1,"Breakout above ₹1070 + 1% (stop ₹1015.86, target ₹1404.91) · Smallcap 100 19,707 above EMA 50 19,145 → Positional exits",,,,growth_switch-YATHARTH-2026-11-13
+2026-11-13,Swing Strategy,paper,SELL,SAAKSHI,Saakshi Medtech,343,347.5,119192.5,Stop loss (1% below 5-candle base),-11268.51,-8.29,4,swing-SAAKSHI-2026-11-09
+2026-11-13,Positional Trading,paper,SELL,SAAKSHI,Saakshi Medtech,316,347.5,109810.0,Stop loss (1% below 5-candle base),-10381.48,-8.29,4,positional-SAAKSHI-2026-11-09
+2026-11-13,Smart Switch,paper,SELL,SAAKSHI,Saakshi Medtech,316,347.5,109810.0,Stop loss (1% below 5-candle base),-10381.48,-8.29,4,switch-SAAKSHI-2026-11-09
