@@ -71,6 +71,9 @@ input,select{font:15px var(--f-body);color:var(--ink);background:var(--surface);
 .cat .cx{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .cat.none{cursor:default;color:var(--muted);font-style:italic}.cat.none:hover{border-color:var(--line)}
 .order .oh.cat{background:var(--accent)}
+.order .oh .ohr{display:flex;align-items:center;gap:8px;flex-shrink:0}.secnav{display:flex;align-items:center;gap:6px}
+.secnav .btn{padding:5px 10px;font-size:13px}.secnav .small{color:#fff;opacity:.9;white-space:nowrap}
+@media(max-width:520px){.order .oh.cat{flex-wrap:wrap}.order .oh.cat h3{flex:1 1 100%}.order .oh .ohr{width:100%;justify-content:space-between}}
 .sx-legend{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
 .sx-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:flex-end}.sx-tools select{max-width:100%;font-size:14px;padding:7px 10px}
 .phs{display:inline-block;font-size:12px;line-height:1.5;padding:1px 8px;border-radius:999px;background:var(--bg);border:1px solid var(--line);white-space:nowrap}
@@ -980,6 +983,7 @@ async function drawSectors(){
   if (secPhase && !PHASE[secPhase]) secPhase = "";
   const inSector = SEC.subs.filter(x => !secSector || x.sector === secSector);
   const subs = inSector.filter(x => !secPhase || x.phase === secPhase).sort((a, b) => (b.perf[P] ?? -1e9) - (a.perf[P] ?? -1e9));
+  SEC_ORDER = subs.map(x => SEC.subs.indexOf(x));   // Prev / Next in the sub-sector window follow this list
   const nStocks = s_ => SEC.subs.filter(x => x.sector === s_).reduce((t, x) => t + x.n, 0);
   const cnt = {}; inSector.forEach(x => { cnt[x.phase] = (cnt[x.phase] || 0) + 1; });
   const cell = (x, k) => `<div class="sv ${x.rel[k] != null && x.rel[k] > 0 ? "beat" : ""}${k === P ? " sel" : ""}"><small>${k}</small>${pc(x.perf[k])}</div>`;
@@ -1006,12 +1010,16 @@ async function drawSectors(){
   document.getElementById("sec-filter").addEventListener("change", e => {
     secSector = e.target.value; try { localStorage.setItem("tf-secs", secSector); } catch (x) {} drawSectors(); });
 }
+let SEC_ORDER = [];
 async function openSector(i){
   if (!SEC || !SEC.subs[i]) return;
   secCur = SEC.subs[i];
   const o = document.getElementById("order");
   o.classList.add("wide");
-  o.innerHTML = `<div class="oh cat"><h3 id="o-title">${esc(secCur.name)}</h3><button class="btn x" data-oclose aria-label="Close">✕</button></div><div class="ob" id="secbody"></div>`;
+  const ord = SEC_ORDER.includes(i) ? SEC_ORDER : SEC.subs.map((_, k) => k), at = ord.indexOf(i), n = ord.length;
+  const nav = n > 1 ? `<div class="secnav"><button class="btn" data-secstep="-1" aria-label="Previous sub-sector" title="Previous sub-sector (← key)">◀ Prev</button>
+      <span class="small">${at + 1} of ${n}</span><button class="btn" data-secstep="1" aria-label="Next sub-sector" title="Next sub-sector (→ key)">Next ▶</button></div>` : "";
+  o.innerHTML = `<div class="oh cat"><h3 id="o-title">${esc(secCur.name)}</h3><div class="ohr">${nav}<button class="btn x" data-oclose aria-label="Close">✕</button></div></div><div class="ob" id="secbody"></div>`;
   document.getElementById("oscrim").hidden = false; o.hidden = false;
   secWin();
   o.querySelector("[data-oclose]").focus();
@@ -1340,6 +1348,7 @@ document.addEventListener("click", async e => {
   const ob = e.target.closest("[data-order]"); if (ob) { openOrder(ob.dataset.sym, ob.dataset.order); return; }
   const cb = e.target.closest("[data-cat]"); if (cb) { openCat(cb.dataset.cat); return; }
   const sx = e.target.closest("[data-sec]"); if (sx) { openSector(+sx.dataset.sec); return; }
+  const ss = e.target.closest("[data-secstep]"); if (ss) { secStep(+ss.dataset.secstep); return; }
   const ph = e.target.closest("[data-secph]"); if (ph) { secPhase = ph.dataset.secph === secPhase ? "" : ph.dataset.secph;
     try { localStorage.setItem("tf-secph", secPhase); } catch (x) {} drawSectors(); return; }
   const sp_ = e.target.closest("[data-secp]"); if (sp_) { secPeriod = sp_.dataset.secp; try { localStorage.setItem("tf-secp", secPeriod); } catch (x) {}
@@ -1384,7 +1393,16 @@ document.addEventListener("click", async e => {
 document.getElementById("p-close").addEventListener("click", requestClose);
 document.getElementById("p-prev").addEventListener("click", () => stepStock(-1));
 document.getElementById("p-next").addEventListener("click", () => stepStock(1));
+function secStep(d){   // next / previous sub-sector in the order shown on the Sector Rotation list
+  if (!SEC || !secCur) return;
+  const i = SEC.subs.indexOf(secCur), ord = SEC_ORDER.includes(i) ? SEC_ORDER : SEC.subs.map((_, k) => k);
+  if (ord.length < 2) return;
+  openSector(ord[(ord.indexOf(i) + d + ord.length) % ord.length]);
+}
 document.addEventListener("keydown", e => {
+  if ((e.key === "ArrowLeft" || e.key === "ArrowRight") && !e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey && !cur && secCur
+      && !document.getElementById("order").hidden && document.getElementById("secbody") && !e.target.closest("input,select,textarea")) {
+    e.preventDefault(); secStep(e.key === "ArrowLeft" ? -1 : 1); return; }
   if ((e.key === "ArrowLeft" || e.key === "ArrowRight") && !e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey && cur && document.getElementById("order").hidden && document.getElementById("ctx").hidden
       && !e.target.closest("input,select,textarea")) { e.preventDefault(); stepStock(e.key === "ArrowLeft" ? -1 : 1); return; }
   if (e.key !== "Escape") return; if (!document.getElementById("ctx").hidden) { closeMenu(); return; }
