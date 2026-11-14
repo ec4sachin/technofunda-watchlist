@@ -153,7 +153,7 @@
   [
    "SMT",
    "Sahajanand Medical Technologies Ltd",
-   "close 537.3 (too new for any EMA)"
+   "close 533.95 (too new for any EMA)"
   ],
   [
    "TAALTECH",
@@ -248,7 +248,7 @@
   [
    "SWASTIKAIN",
    "Swastika Infra",
-   "close 194.9 (too new for any EMA)"
+   "close 193.69 vs 20 EMA 199.78"
   ],
   [
    "XTRANET",
@@ -276,5 +276,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "14 Nov 2026, 03:08 PM IST"
+ "run_at": "14 Nov 2026, 03:36 PM IST"
 }
