@@ -75,6 +75,8 @@ input,select{font:15px var(--f-body);color:var(--ink);background:var(--surface);
 .sx-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:flex-end}.sx-tools select{max-width:100%;font-size:14px;padding:7px 10px}
 .phs{display:inline-block;font-size:12px;line-height:1.5;padding:1px 8px;border-radius:999px;background:var(--bg);border:1px solid var(--line);white-space:nowrap}
 .phs.m-good{background:var(--up-soft);border-color:transparent}.phs.m-bad{background:var(--down-soft);border-color:transparent}
+.phs.m-imp{background:var(--accent-soft, #E6ECFB);border-color:transparent}.phs.m-weak{background:var(--warn-soft);border-color:transparent}
+.sx-cycle{font-size:13px;margin:0 0 8px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--surface);line-height:1.9}.ar{color:var(--muted);margin:0 2px}
 button.phs{font:inherit;font-size:12.5px;color:var(--ink);cursor:pointer;padding:4px 10px}button.phs:hover{border-color:var(--accent)}
 button.phs[aria-pressed="true"]{outline:2px solid var(--ink);outline-offset:1px;font-weight:600}.sx-legend{align-items:center}.sx-legend small{font-size:12px}
 .sx-list{display:flex;flex-direction:column;gap:6px}
@@ -957,10 +959,11 @@ try { const p = localStorage.getItem("tf-secp"); if (["1W", "1M", "3M", "6M", "1
 try { secSector = localStorage.getItem("tf-secs") || ""; secPhase = localStorage.getItem("tf-secph") || ""; } catch (e) {}
 const SEC_DAYS = {"1W": 5, "1M": 21, "3M": 63, "6M": 126, "1Y": 252}, SEC_P = Object.keys(SEC_DAYS);
 const SEC_NAME = {"1W": "1 week", "1M": "1 month", "3M": "3 months", "6M": "6 months", "1Y": "1 year"};
-const PHASE = {Leading: ["m-good", "Leading", "beating the index over 1 month and 1 week"],
-  Improving: ["", "Improving", "behind over 1 month, but beating it this week"],
-  Weakening: ["", "Weakening", "ahead over 1 month, but behind this week"],
-  Lagging: ["m-bad", "Lagging", "behind the index over 1 month and 1 week"]};
+// Rotation cycle (14 Nov 2026: 3 months = longer trend, 1 month = latest move), shown in this order
+const PHASE = {Improving: ["m-imp", "Improving", "behind the index over 3 months, but beating it over the last 1 month"],
+  Leading: ["m-good", "Leading", "beating the index over 3 months and 1 month"],
+  Weakening: ["m-weak", "Weakening", "ahead over 3 months, but behind over the last 1 month"],
+  Lagging: ["m-bad", "Lagging", "behind the index over 3 months and 1 month"]};
 function loadSectors(){
   if (!secLoad) secLoad = (D.sectors ? Promise.resolve(D.sectors) : fetch("sectors.json?t=" + Date.now(), {cache: "no-store"})
     .then(r => r.ok ? r.json() : null)).catch(() => null).then(d => (SEC = d));
@@ -989,7 +992,9 @@ async function drawSectors(){
     <div class="st-note sx-index">📈 <b>Nifty Smallcap 100</b> &nbsp; ${SEC_P.map(k => `${k} ${pc(ix[k])}`).join(" · ")}
       <br><small class="mut">Sorted by ${P} performance. Green box = beating the Smallcap 100 over that period. Tap a sub-sector for its chart and stocks.</small></div>
     ${SEC.unclassified ? `<div class="st-note">⏳ ${SEC.unclassified} stock(s) not sorted into a sub-sector yet — the robot reads up to 60 Screener pages a day, so all are in within a few days.</div>` : ""}
-    <div class="sx-legend" role="group" aria-label="Show only">${Object.keys(PHASE).map(k => `<button class="phs ${PHASE[k][0]}" data-secph="${k}" aria-pressed="${k === secPhase}" title="Show only ${k}: ${PHASE[k][2]}">${k} <b>${cnt[k] || 0}</b></button>`).join("")}
+    <div class="sx-cycle" aria-label="Rotation cycle"><b>Rotation cycle:</b> ${Object.keys(PHASE).map(k => `<span class="phs ${PHASE[k][0]}">${k}</span>`).join(' <span class="ar">→</span> ')} <span class="ar">→</span> <small class="mut">back to Improving</small>
+      <br><small class="mut">Improving = behind over 3 months but ahead over 1 month (early turn up) · Leading = ahead on both · Weakening = ahead over 3 months but behind over 1 month (slowing) · Lagging = behind on both. Compared with the Nifty Smallcap 100.</small></div>
+    <div class="sx-legend" role="group" aria-label="Show only">${Object.keys(PHASE).map(k => `<button class="phs ${PHASE[k][0]}" data-secph="${k}" aria-pressed="${k === secPhase}" title="Show only ${k}: ${PHASE[k][2]}">${k} <b>${cnt[k] || 0}</b></button>`).join('<span class="ar">→</span>')}
       ${secPhase ? `<button class="phs" data-secph="">✕ Show all</button>` : `<small class="mut">Tap a label to show only those sub-sectors</small>`}</div>
     <div class="sx-list">${subs.length ? "" : `<div class="empty">No ${esc(secPhase)} sub-sectors${secSector ? " in " + esc(secSector) : ""} right now.</div>`}${subs.map(x => `<button class="sx" data-sec="${SEC.subs.indexOf(x)}">
       <div class="sx-n"><b>${esc(x.name)}</b><small>${esc(x.sector)} · ${x.n} stock${x.n > 1 ? "s" : ""}</small></div>

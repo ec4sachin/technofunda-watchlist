@@ -37,7 +37,9 @@ def test():
     ph = subs["Drugs"]
     assert abs(ph["perf"]["1W"] - (1.002 ** 5 - 1) * 100) < 0.01 and ph["n"] == 1
     assert abs(out["index"]["perf"]["1M"] - (1.001 ** 21 - 1) * 100) < 0.01
-    assert ph["rel"]["1M"] > 0 and ph["phase"] == "Leading"
+    assert ph["rel"]["3M"] > 0 and ph["rel"]["1M"] > 0 and ph["phase"] == "Leading"   # 3 months + 1 month (14 Nov 2026)
+    assert sectors._phase({"3M": 2, "1M": -1}) == "Weakening" and sectors._phase({"3M": -2, "1M": 1}) == "Improving"
+    assert sectors._phase({"3M": -2, "1M": -1}) == "Lagging" and sectors._phase({"3M": 1, "1M": None}) == ""
     ae = subs["Aerospace parts"]
     # equal weight: early on only A (+0.2%) and B (0%) -> +0.1% a day; the last 9 days N (+1%) joins: (0.2 + 0 + 1) / 3 = +0.4%
     assert abs(ae["series"][-1] / ae["series"][-2] - 1.004) < 1e-4 and abs(ae["series"][100] / ae["series"][99] - 1.001) < 1e-4

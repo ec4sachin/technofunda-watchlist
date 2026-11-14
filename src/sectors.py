@@ -4,8 +4,9 @@ Sub-sector: Claude's own specific grouping in data/subsectors.json ({"CODE": ["S
 ["Pharma & Healthcare", "Injectables"]) - written on request 12 Nov 2026. Stocks not in that file use Screener's
 finest level, "Industry" (4th of Broad Sector > Sector > Broad Industry > Industry), under its Sector. A sub-sector's line is an equal-weight index of its stocks: each day the average % move of
 the stocks that traded, chained from 100 one year ago. Performance: 1 week = 5, 1 month = 21, 3 months = 63, 6 months = 126, 1 year = 252 trading days.
-Phase (rotation): Leading = beating the index over 1 month and 1 week; Weakening = 1 month yes, 1 week no;
-Improving = 1 month no, 1 week yes; Lagging = neither.
+Phase (rotation, changed 14 Nov 2026 from 1 month + 1 week to the steadier 3 months + 1 month):
+Leading = beating the index over 3 months and 1 month; Weakening = 3 months yes, 1 month no;
+Improving = 3 months no, 1 month yes; Lagging = neither. Cycle: Improving -> Leading -> Weakening -> Lagging.
 """
 import bisect
 
@@ -46,7 +47,7 @@ def _perf(series, n):
 
 
 def _phase(rel):
-    m, w = rel.get("1M"), rel.get("1W")
+    m, w = rel.get("3M"), rel.get("1M")       # longer trend, latest move
     if m is None or w is None:
         return ""
     return "Leading" if m >= 0 and w >= 0 else "Weakening" if m >= 0 else "Improving" if w >= 0 else "Lagging"
