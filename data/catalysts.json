@@ -1668,5 +1668,362 @@
    ],
    "asof": "Oct 2026"
   }
+ },
+ "GNA": {
+  "text": "Rear axle shafts and spindles for trucks, tractors and off-highway vehicles; big export share (US, Europe). ==Q2 revenue +50% to ₹521 cr, PAT +41% to ₹44 cr==. Strong ==order backlog from North American and European truck makers==, and management targets ==~30% revenue growth in FY27==. Watch: profit grew slower than sales (margin 8.5% vs 9%); steel prices, US/EU truck cycle and currency.",
+  "date": "2026-11-14",
+  "sources": [
+   [
+    "Univest – GNA Axles Q2 FY27",
+    "https://univest.in/blogs/gna-axles-q2-results-fy27-pat-44-crore"
+   ],
+   [
+    "Sahi – GNA Axles Q2 and backlog",
+    "https://www.sahi.com/news/gna-axles-reports-strong-q2-fy27-performance-and-western-market-backlog"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     30
+    ]
+   }
+  }
+ },
+ "RATNAVEER": {
+  "text": "Stainless-steel products maker (pipes, tubes, washers, sheets) for engineering, auto and export customers. ==Q2 revenue +35% to ₹387 cr, EBITDA +39%, PAT +56% to ₹24 cr==; margin up to 10.9%. Big trigger: ==new cold-rolling (CCL) plant 75% complete – trial runs from ~20 Dec 2026==, adding higher-value products. Management targets ==30%+ revenue growth, 13% EBITDA and 9% PAT margin==. Watch: machinery delayed by shipping; nickel price swings.",
+  "date": "2026-11-14",
+  "sources": [
+   [
+    "UNI – Ratnaveer Q2 FY27",
+    "https://www.uniindia.com/business-wire-india/ratnaveer-precision-engineering-reports-355-revenue-growth-389-ebitda-growth-and-561-pat-growth-in-q/231546"
+   ],
+   [
+    "Sahi – Ratnaveer FY27 targets",
+    "https://sahi.com/news/ratnaveer-precision-targets-30-revenue-growth-and-13-ebitda-margin-by-fy27-5388-PE1_COR"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     30
+    ],
+    "text": "30%+"
+   },
+   "margin": {
+    "fy": "FY27",
+    "pct": [
+     13
+    ]
+   },
+   "note": "PAT margin target ~9%."
+  }
+ },
+ "INFOBEAN": {
+  "text": "Digital engineering and AI-transformation IT services for US and global enterprises. ==Q2 revenue +30% to ₹163 cr, PAT +16% to ₹26 cr==, as demand for ==enterprise AI and digital-engineering projects== grows. Got an EcoVadis ESG bronze medal (top 35% globally). Watch: profit growing slower than revenue (net margin 16% vs 18%); depends on a few large US clients and US tech spending.",
+  "date": "2026-11-14",
+  "sources": [
+   [
+    "Univest – InfoBeans Q2 FY27",
+    "https://univest.in/blogs/infobeans-technologies-q2-results-fy27-pat-26-crore"
+   ],
+   [
+    "Sahi – InfoBeans Q2 revenue",
+    "https://www.sahi.com/news/infobeans-technologies-reports-q2-revenue-at-160-crore-versus-125-crore-yoy"
+   ]
+  ],
+  "guide": {}
+ },
+ "ENTERO": {
+  "text": "Pharma and medtech distributor to 92,000+ pharmacies and 2,900+ hospitals; consolidating a fragmented market (51 acquisitions so far). ==Q2 revenue +33% to ₹2,087 cr== (+35% like-for-like vs ~14.5% industry), ==PAT ₹61 cr==; H1 EBITDA margin up 139 bps to 5.2%. ==Higher-margin MedTech to cross ₹1,000 cr in FY27==. Management says it will 'comfortably' beat FY27 guidance (~23% growth, 5% EBITDA). Watch: thin margins, working capital, acquisition integration.",
+  "date": "2026-11-14",
+  "sources": [
+   [
+    "InvestyWise – Entero Q2 FY27 presentation",
+    "https://www.investywise.com/entero-healthcare-solutions-limited-investor-presentation-for-q2fy27/"
+   ],
+   [
+    "InvestyWise – Entero Q1 FY27 call (guidance)",
+    "https://www.investywise.com/entero-healthcare-solutions-limited-q1-fy27-earnings-conference-call-transcript/"
+   ],
+   [
+    "Sahi – Entero Q2 revenue",
+    "https://www.sahi.com/news/entero-reports-q2-revenue-of-20-87-billion-up-from-15-71-billion-yoy"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     23
+    ],
+    "text": "~23%, excluding new acquisitions"
+   },
+   "margin": {
+    "fy": "FY27",
+    "pct": [
+     5
+    ]
+   }
+  }
+ },
+ "AJMERA": {
+  "text": "Mumbai-based real-estate developer (also Bengaluru, Pune). ==Q2 revenue +45% to ₹320 cr, PAT +55% to ₹49 cr==; debt cut to ₹646 cr (0.44× equity). Big trigger: ==about 8 launches in H2 FY27 worth ~₹7,000 cr== (38 lakh sq ft), on top of ==₹3,510 cr revenue visibility== from sold and unsold stock. FY27 pre-sales target ₹2,200 cr. Watch: H1 bookings only ₹370 cr, so the target depends on launches getting approvals on time.",
+  "date": "2026-11-14",
+  "sources": [
+   [
+    "Multibagg – Ajmera H2 launches",
+    "https://www.multibagg.ai/market-pulse/articles/ajmera-realty-eight-h2-launches-concall-cmw3ll9bj008s2kqq0cixbxk9"
+   ],
+   [
+    "Sahi – Ajmera ₹2,200 cr FY27 target",
+    "https://sahi.com/news/ajmera-realty-q4-profit-surges-141-to-58-5-cr-with-2-200-cr-fy27-target-983-PE1_CORP"
+   ]
+  ],
+  "guide": {
+   "note": "Pre-sales (bookings) target ₹2,200 cr in FY27 – bookings, not reported revenue; H1 bookings ₹370 cr."
+  }
+ },
+ "ICIL": {
+  "text": "World's leading bed-linen exporter (US retailers) with own brands. ==Record Q2 income +57% to ₹1,699 cr, PAT 3.4× to ₹132 cr==, EBITDA margin up to ==15.3%==. ==New businesses (utility bedding, Wamsutta brand in US) now 30% of sales==. H1 already ==52% of FY27 income guidance and margin (14.4%) above the ~13% guided== – management expects to beat guidance; volume guidance 105–110 mn metres; targets ~2× revenue by FY28. Watch: US trade policy, cotton prices.",
+  "date": "2026-11-14",
+  "sources": [
+   [
+    "DSIJ – Indo Count Q2, guidance",
+    "https://insights.dsij.in/appmindshare/mukul-agrawal-held-small-cap-stock-jumps-13-margins-exceed-guidance-company-targets-2x-revenue-by-fy28"
+   ],
+   [
+    "Multibagg – Indo Count Q2 margin",
+    "https://www.multibagg.ai/market-pulse/articles/indo-count-q2-profit-margin-ppt-cmw38pvgf003k2hmn64fm73gm"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "cr": [
+     5620
+    ],
+    "text": "implied: H1 ₹2,923 cr = 52% of the income guidance"
+   },
+   "margin": {
+    "fy": "FY27",
+    "pct": [
+     13
+    ]
+   },
+   "note": "Volume guidance 105–110 mn metres in FY27; targets ~2× revenue by FY28."
+  }
+ },
+ "MONOLITH": {
+  "text": "Maker of premixed silica ramming mass – the lining used in induction furnaces for steelmaking. ==Record Q2: revenue +88% to ₹54 cr, EBITDA nearly 3× (+192%), PAT +145% to ₹11 cr==; EBITDA margin up to ==29.5% from 19%==. New greenfield plant started ==10 Oct 2026==; Udaipur and Hospet plants to lift capacity from ~5.76 to ~8.75 lakh t by Q3 FY28. ==Own Bihar quartzite mine (7.1 lakh t) from ~Jan 2027== cuts raw-material cost. FY27 revenue guidance ₹250 cr, to be revised once the mine starts. Watch: mine approvals timing.",
+  "date": "2026-11-14",
+  "sources": [
+   [
+    "UNI – Monolithisch record Q2 FY27",
+    "https://www.uniindia.com/business-wire-india/monolithisch-india-reports-record-q2-fy27-performance-revenue-rises-882-ebitda-surges-1922-and-pat-g/224595"
+   ],
+   [
+    "Multibagg – Monolithisch Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/monolithisch-india-q2-fy27-results-cmvpa78kl000p2gmpj5y2tcgq"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "cr": [
+     250
+    ],
+    "text": "to be raised once the Bihar mine starts"
+   }
+  }
+ },
+ "KRYSTAL": {
+  "text": "Integrated facility management, staffing, security and catering for government and corporate clients. ==Q2 revenue +46% to ₹414 cr, PAT +42% to ₹18.7 cr==; added ==31 new customers in H1== (547 customers). Big new wins: ==₹296 cr sewage-treatment orders (Pune/Nagpur, 40% share)==, ₹134 cr MSRTC and ₹33 cr Mumbai Metro contracts. Bought ==Citelum India (city lighting)== – targeting ₹300–350 cr yearly revenue in 3–4 years. Watch: thin margins (~6% EBITDA), government payment delays.",
+  "date": "2026-11-14",
+  "sources": [
+   [
+    "Multibagg – Krystal Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/krystal-integrated-services-q2-growth-announcement-cmw01fdss009l2vpellak5t96"
+   ],
+   [
+    "Arthneeti – Krystal Citelum acquisition",
+    "https://www.arthneeti.com/announcements/krystal-integrat-announcement-under-regulation-30-lodr-press-release-media-release-02-nov-2026"
+   ]
+  ],
+  "guide": {
+   "note": "No company-wide guidance. Citelum (city lighting) business targeted at ₹300–350 cr yearly revenue in 3–4 years."
+  }
+ },
+ "PCCL": {
+  "text": "Calcined petroleum coke maker (used in aluminium smelting), Haldia. ==H1 FY27 revenue +32% to ₹344 cr; PAT ₹48 cr vs just ₹2.9 cr a year ago (~16×)== on much better spreads and ==finance cost down 43%==. New growth leg: ==48,000 t/yr electrically calcined anthracite plant at Haldia to be commissioned this year== (used in steel/electrode making). Watch: profit depends on coke price spreads, which swing a lot; no guidance given.",
+  "date": "2026-11-14",
+  "sources": [
+   [
+    "Multibagg – Petro Carbon H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/petro-carbon-and-chemicals-profit-announcement-cmw44h6a1001v2pp1fxfki5ax"
+   ]
+  ],
+  "guide": {}
+ },
+ "CORDSCABLE": {
+  "text": "Instrumentation, control and power cables for oil & gas, power, steel and infra projects. ==Q2 revenue +56% to ₹352 cr, PAT 2.7× (+172%) to ₹9.7 cr== as margin improved; FY26 revenue was +20% to ₹954 cr. Demand from ==refinery, power and data-centre projects== keeps cable volumes strong. Watch: thin net margin (~2.8%), copper price swings and working capital.",
+  "date": "2026-11-14",
+  "sources": [
+   [
+    "Univest – Cords Cable Q2 FY27",
+    "https://univest.in/blogs/cords-cable-industries-q2-results-fy27-pat-10-crore"
+   ],
+   [
+    "Whalesbook – Cords Cable FY26",
+    "https://www.whalesbook.com/corporate-news/English/industrial-goodsservices/Cords-Cable-FY26-Revenue-Jumps-20percent-To-indian-rupee954-Cr-Profit-Soars-41percent/6a180a790c0232fe81a8f408"
+   ]
+  ],
+  "guide": {}
+ },
+ "SHANTIGOLD": {
+  "text": "Gold jewellery maker (casting) supplying big retail chains. ==Q2 revenue +73% to ₹746 cr; volume +25%==; H1 revenue doubled (+102%), PAT +33%. ==FY27 revenue guidance ₹3,200–3,500 cr (~60% growth) retained==, helped by the ==expanded Marol plant== and retail chains shifting to organised makers; Jaipur plain-gold plant planned. Watch: profit growing much slower than sales (Q2 PAT +13.5%) – margins thin as it chases market share; H2 must deliver ~₹1,740–2,040 cr.",
+  "date": "2026-11-14",
+  "sources": [
+   [
+    "Multibagg – Shanti Gold FY27 guidance",
+    "https://www.multibagg.ai/market-pulse/articles/shanti-gold-retains-fy27-guidance-concall-cmw617b7m007k2bnx9j7j47jh"
+   ],
+   [
+    "Multibagg – Shanti Gold Q2 revenue",
+    "https://www.multibagg.ai/market-pulse/articles/shanti-gold-q2-revenue-growth-cmw6174uu007h2bnxx4204l2x"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "cr": [
+     3200,
+     3500
+    ],
+    "text": "~60% growth, retained in Nov 2026"
+   }
+  }
+ },
+ "PARTH": {
+  "text": "Electrical panels, switchgear and power-distribution solutions (incl. data centres). ==H1 FY27 revenue +42% to ₹114 cr, PAT +49% to ₹9.1 cr==; gross margin up 4.4 pts. ==Order book ₹470 cr (12–15 months)== plus ₹300 cr+ pipeline, incl. a Jamnagar data-centre project. New ==Vadodara GIS plant (Nov 2026, up to ₹150 cr sales)==, Odisha unit by mid-2027, new 33 kV GIS/RMU products. Guidance: ==30%+ yearly revenue growth, ~10% PAT margin==. Watch: negative cash flow, higher subcontracting costs.",
+  "date": "2026-11-14",
+  "sources": [
+   [
+    "Multibagg – Parth backlog and guidance",
+    "https://www.multibagg.ai/market-pulse/articles/parth-electricals-backlog-execution-concall-cmw6zjixo000q2mphtking67t"
+   ],
+   [
+    "Multibagg – Parth order book mix",
+    "https://www.multibagg.ai/market-pulse/articles/parth-electricals-order-book-mix-ppt-cmw179wur007331ql4dssgl60"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     30
+    ],
+    "text": "30%+ a year, medium term"
+   },
+   "margin": {
+    "fy": "FY29",
+    "kind": "PAT",
+    "pct": [
+     10
+    ],
+    "text": "stable ~10% over 2–3 years"
+   }
+  },
+  "ob": {
+   "cr": [
+    470
+   ],
+   "asof": "Sep 2026",
+   "text": "12–15 months; pipeline ₹300 cr+"
+  }
+ },
+ "OCCLLTD": {
+  "text": "Maker of insoluble sulphur – a key tyre-rubber chemical – and one of few global suppliers. ==Q2 revenue more than doubled (+115%) to ₹257 cr, PAT 3.2× to ₹28 cr==; H1 EBITDA +138% with 23.5% margin. Demand jumped as ==China supply shrank== (sulphur shortage, Huatai plant closure) and ==Indian anti-dumping duties cut Chinese imports==, so tyre makers shifted orders to OCCL. Watch: part of the boost is temporary (China, stock-building); H1 operating cash flow negative (higher inventory, receivables).",
+  "date": "2026-11-14",
+  "sources": [
+   [
+    "Multibagg – OCCL Q2 China supply",
+    "https://www.multibagg.ai/market-pulse/articles/occl-limited-china-supply-sales-announcement-cmw4tud0b005cu02rzs0u8qpw"
+   ],
+   [
+    "Sahi – OCCL Q2 revenue",
+    "https://www.sahi.com/news/occl-limited-reports-q2-revenue-of-257-crore-versus-120-crore-yoy"
+   ]
+  ],
+  "guide": {}
+ },
+ "NGLFINE": {
+  "text": "Veterinary (animal-health) API maker with export focus. ==Q2 revenue +32% to ₹159 cr, EBITDA +64%, PAT +69% to ₹16 cr==; margin up to ==17.7% from 14.3%==. New ==Phase II plant commissioned – 30–40% utilisation expected in 2–3 quarters==. ==US entry being prepared: Veterinary Master Files filed for 9 products==, USFDA inspection to follow; European registrations moving to the new plant by end-2027. Watch: ramp-up costs pressure margins; higher inventory and short-term debt.",
+  "date": "2026-11-14",
+  "sources": [
+   [
+    "Multibagg – NGL Q2 and Phase II",
+    "https://www.multibagg.ai/market-pulse/articles/ngl-fine-chem-phase-two-ppt-cmway3vny005w2qo605dfvld4"
+   ],
+   [
+    "Multibagg – NGL Q2 growth",
+    "https://www.multibagg.ai/market-pulse/articles/ngl-fine-chem-q2-growth-ppt-cmway3z6j005x2qo6ozu8kr5c"
+   ]
+  ],
+  "guide": {}
+ },
+ "JAYBARMARU": {
+  "text": "Auto-parts maker (body panels, chassis, axles, tooling) – main supplier to Maruti Suzuki. ==Q2 revenue +41% to ₹823 cr, PAT +73% to ₹31 cr==, on ==higher volume demand== from car makers. Lower tax rate (25% from 35%) from FY27 also lifts profit. Watch: depends heavily on Maruti; raw-material costs rose 50%, margins thin.",
+  "date": "2026-11-14",
+  "sources": [
+   [
+    "Autocar Pro – JBML Q2 FY27",
+    "https://www.autocarpro.in/news/jay-bharat-maruti-jbml-q2-net-profit-jumps-73-percent-to-rs-31-crore-135654"
+   ],
+   [
+    "Multibagg – JBML Q2",
+    "https://www.multibagg.ai/market-pulse/articles/jay-bharat-maruti-q2-profit-cmvzggutw00002vpebbw12q76"
+   ]
+  ],
+  "guide": {}
+ },
+ "OMAXAUTO": {
+  "text": "Auto and railway components maker (sheet-metal parts, railway products, Lucknow plant). ==Q2 revenue +87% to ₹165 cr, PAT ₹11.7 cr vs just ₹0.33 cr== a year ago; ==H1 profit nearly 3×== on bigger volumes and better margins. Larger scale and better operating margins are turning around a long-weak business. Watch: small base effect; material costs rose 91%; no guidance given.",
+  "date": "2026-11-14",
+  "sources": [
+   [
+    "Autocar Pro – Omax Autos Q2 FY27",
+    "https://www.autocarpro.in/news/omax-autos-q2-net-profit-surges-to-rs-1170-crore-from-rs-33-lakh-135558"
+   ]
+  ],
+  "guide": {}
+ },
+ "PASUPTAC": {
+  "text": "Acrylic fibre and packaging film maker (plus ethanol). ==Q2 EBITDA +68% to ₹45.5 cr, margin up to 16.6% from 9.7%==; ==Q2 PAT ~₹32 cr== after Q1 PAT jumped to ₹27 cr from ₹1.8 cr. Better input-cost control and operating leverage drive the margin jump. ==UP Excise approved higher ethanol plant capacity (Oct 2026)== – new growth leg. Watch: acrylonitrile price swings, cyclical fibre demand.",
+  "date": "2026-11-14",
+  "sources": [
+   [
+    "Sahi – Pasupati Q2 EBITDA",
+    "https://www.sahi.com/news/pasupati-acrylon-reports-q2-ebitda-of-45-5-cr-vs-27-1-cr-yoy"
+   ],
+   [
+    "Univest – Pasupati Q2 FY27",
+    "https://univest.in/blogs/pasupati-acrylon-q2-results-fy27-pat-32-crore"
+   ]
+  ],
+  "guide": {}
+ },
+ "MANAKSTEEL": {
+  "text": "Cold-rolled and coated (galvanised/colour-coated) steel maker, Haldia. ==Q1 FY27 revenue +52% to ₹330 cr, PAT 3.5× (+248%) to ₹22.6 cr==, EBITDA +118% (margin 10.2%). Board approved a ==₹800 cr two-phase expansion at Haldia== in cold-rolled coil and higher-margin coated steel (includes +2.5 lakh t CRC capacity). Watch: steel price spreads, funding of the ₹800 cr capex and Phase-1 timing.",
+  "date": "2026-11-14",
+  "sources": [
+   [
+    "Sahi – Manaksia Steels Q1 and ₹800 cr expansion",
+    "https://www.sahi.com/news/manaksia-steels-net-profit-surges-247-to-22-6-crore-approves-800-crore-expansion-4296-PE1_COR"
+   ]
+  ],
+  "guide": {}
  }
 }
