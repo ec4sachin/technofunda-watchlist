@@ -85,6 +85,12 @@ def bse_day(day, session=None, max_pages=60):
     out, ymd = [], day.strftime("%Y%m%d")
     st = STATUS.setdefault("bse", {"days": 0, "rows": 0, "last_error": ""})
     st["days"] += 1
+    if not STATUS.get("bse_warm"):
+        try:   # cookies of the website first - the API may refuse a visitor without them
+            s.get("https://www.bseindia.com/corporates/ann.html", headers={"User-Agent": UA}, timeout=20)
+        except Exception:
+            pass
+        STATUS["bse_warm"] = True
     api = STATUS.get("bse_api", BSE_API)
     for page in range(1, max_pages + 1):
         if storage.out_of_time():
@@ -167,11 +173,13 @@ def update(sp, dt, today, days=None, bse=bse_day, nse=nse_day):
     start = max(now - timedelta(days=MAX_BACK), datetime.strptime(last, "%Y-%m-%d")) if last else now - timedelta(days=MAX_BACK)
     days = days or [start + timedelta(days=i) for i in range((now - start).days + 1)]
     rows = {**sp, **dt}
-    by_bse = {str(r.get("bse") or (c if str(c).isdigit() else "")): c for c, r in rows.items()}
-    by_bse.pop("", None)
-    by_nse = {str(r.get("nse") or (c if not str(c).isdigit() else "")).upper(): c for c, r in rows.items()
-              if not (r.get("bse") or str(c).isdigit())}
+    # NSE first (14 Nov 2026: BSE's API refuses GitHub's computers): every stock with an NSE symbol is read
+    # from NSE; BSE only for the stocks listed on BSE alone
+    nse_of = lambda c, r: str(r.get("nse") or (c if not str(c).isdigit() else "")).upper()  # noqa: E731
+    by_nse = {nse_of(c, r): c for c, r in rows.items()}
     by_nse.pop("", None)
+    by_bse = {str(r.get("bse") or (c if str(c).isdigit() else "")): c for c, r in rows.items() if not nse_of(c, r)}
+    by_bse.pop("", None)
     new, s_b, s_n, read_any = [], requests.Session(), requests.Session(), False
 
     def add(code, a, ex):
