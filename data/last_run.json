@@ -248,7 +248,7 @@
   [
    "SWASTIKAIN",
    "Swastika Infra",
-   "close 193.69 (too new for any EMA)"
+   "close 193.15 vs 20 EMA 200.46"
   ],
   [
    "XTRANET",
@@ -276,5 +276,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "14 Nov 2026, 08:30 AM IST"
+ "run_at": "14 Nov 2026, 09:59 AM IST"
 }
