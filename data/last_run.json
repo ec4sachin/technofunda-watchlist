@@ -1,8 +1,56 @@
 {
- "added": [],
- "rejected": [],
+ "added": [
+  [
+   "544740",
+   "TIPCO Engineering",
+   "marks 6.6/11 · 3-month RS 99 (vs 3865 BSE stocks) · TTM Profit > 30%, 52W High"
+  ]
+ ],
+ "rejected": [
+  [
+   "PRECOT",
+   "Precot",
+   "9.9/11 · 3-month RS 26 (need above 80)"
+  ],
+  [
+   "CLSEL",
+   "Chamanlal Setia",
+   "10.5/11 · 3-month RS 77 (need above 80)"
+  ],
+  [
+   "INFLUX",
+   "Influx Health.",
+   "6.6/11 · 3-month RS 56 (need above 80)"
+  ],
+  [
+   "NEPHROPLUS",
+   "Nephrocare Health Services",
+   "8.3/11 · 3-month RS 31 (need above 80)"
+  ]
+ ],
  "to_dt": [],
- "to_sp": [],
+ "to_sp": [
+  [
+   "DEEDEV",
+   "DEE Development",
+   "close 550.15 > 200 EMA 527.32"
+  ],
+  [
+   "MPIMANIPAL",
+   "Manipal Payment and Identity Solutions Ltd",
+   "close 338 > 20 EMA 324.47"
+  ],
+  [
+   "MPSLTD",
+   "MPS Ltd",
+   "close 2297 > 200 EMA 2262.91"
+  ],
+  [
+   "THOMASCOTT",
+   "Thomas Scott India Ltd",
+   "close 305.45 > 200 EMA 291.08"
+  ]
+ ],
  "removed": [],
  "unchecked": [],
  "investor_moves": [],
@@ -88,22 +136,22 @@
   [
    "AEROPLANE",
    "A C J K Exports",
-   "close 243.14 vs 20 EMA 226.45 → SP"
+   "close 242.83 vs 20 EMA 224.69 → SP"
   ],
   [
    "BPLPHARMA",
    "Bharat Parenterals Ltd",
-   "close 2120.7 vs 20 EMA 1872.66 → SP"
+   "close 1909.8 vs 20 EMA 1846.48 → SP"
   ],
   [
    "DEEPA",
    "Deepa Jewellers",
-   "close 219.48 vs 20 EMA 218.62 → SP"
+   "close 226.58 vs 20 EMA 218.53 → SP"
   ],
   [
    "DHABRIYA",
    "Dhabriya Poly.",
-   "close 477.25 vs 20 EMA 472.63 → SP"
+   "close 486.8 vs 20 EMA 472.15 → SP"
   ],
   [
    "EPWINDIA",
@@ -113,17 +161,17 @@
   [
    "HALDYNGL",
    "Haldyn Glass",
-   "close 136.56 vs 20 EMA 135.49 → SP"
+   "close 136.04 vs 20 EMA 135.38 → SP"
   ],
   [
    "KANOHAR",
    "Kanohar Elect.",
-   "close 1045.25 vs 20 EMA 1008.41 → SP"
+   "close 1064.4 vs 20 EMA 1004.45 → SP"
   ],
   [
    "KHAZANCHI",
    "Khazanchi Jewell",
-   "close 721.35 (too new for any EMA)"
+   "close 726.25 (too new for any EMA)"
   ],
   [
    "MARUSHIKA",
@@ -133,12 +181,12 @@
   [
    "ORIRAIL",
    "Oriental Rail Infrastructure Ltd",
-   "close 121.78 vs 20 EMA 117.82 → SP"
+   "close 123.89 vs 20 EMA 117.41 → SP"
   ],
   [
    "SHUKRAPHAR",
    "Shukra Pharma.",
-   "close 82.23 vs 20 EMA 75.65 → SP"
+   "close 82.2 vs 20 EMA 74.96 → SP"
   ],
   [
    "SIMCA",
@@ -148,17 +196,17 @@
   [
    "SMT",
    "Sahajanand Medical Technologies Ltd",
-   "close 533.95 (too new for any EMA)"
+   "close 504.65 (too new for any EMA)"
   ],
   [
    "TAALTECH",
    "TAAL Tech Ltd",
-   "close 933.3 vs 20 EMA 929.23 → SP"
+   "close 944.1 vs 20 EMA 928.8 → SP"
   ],
   [
    "TAMBOLIIN",
    "Tamboli Industri",
-   "close 328.05 vs 20 EMA 317.65 → SP"
+   "close 329.35 vs 20 EMA 316.55 → SP"
   ],
   [
    "TEAMTECH",
@@ -168,12 +216,17 @@
   [
    "TRANSPEK",
    "Transpek Industry Ltd",
-   "close 1360.2 vs 20 EMA 1301.52 → SP"
+   "close 1336.3 vs 20 EMA 1295.35 → SP"
   ],
   [
    "UDAYJEW",
    "Uday Jewellery",
-   "close 220.1 vs 20 EMA 214.14 → SP"
+   "close 218.3 vs 20 EMA 213.51 → SP"
+  ],
+  [
+   "544740",
+   "TIPCO Engineering",
+   "close 329.7 vs 20 EMA 290.13 → SP"
   ],
   [
    "544623",
@@ -218,37 +271,37 @@
   [
    "ESDS",
    "ESDS Software Solution Ltd",
-   "close 1260.5 vs 20 EMA 1268.21"
+   "close 1265.2 vs 20 EMA 1269.03"
   ],
   [
    "HEXAGON",
    "Hexagon Nutri.",
-   "close 58.7 vs 20 EMA 60.99"
+   "close 59.91 vs 20 EMA 61.23"
   ],
   [
    "MPIMANIPAL",
    "Manipal Payment and Identity Solutions Ltd",
-   "close 322.15 vs 20 EMA 324.24"
+   "close 338 vs 20 EMA 324.47"
   ],
   [
    "RAMBHAJO",
    "Advit Jewels",
-   "close 305.6 vs 20 EMA 329.25"
+   "close 316.2 vs 20 EMA 331.74"
   ],
   [
    "RSL",
    "Rajputana Stain.",
-   "close 167.01 vs 20 EMA 169.59"
+   "close 168.8 vs 20 EMA 169.86"
   ],
   [
    "SWASTIKAIN",
    "Swastika Infra",
-   "close 193.69 vs 20 EMA 199.78"
+   "close 193.15 vs 20 EMA 200.46"
   ],
   [
    "XTRANET",
    "Xtranet Techno.",
-   "close 270.15 vs 20 EMA 277.44"
+   "close 270.35 vs 20 EMA 278.21"
   ],
   [
    "YAAP",
@@ -257,19 +310,19 @@
   ]
  ],
  "per_alert": {
-  "TTM Profit > 30%": 0,
-  "52W High": 0,
-  "Daily Volume Scan": 0,
-  "Weekly Volume Scan": 0,
+  "TTM Profit > 30%": 9,
+  "52W High": 12,
+  "Daily Volume Scan": 3,
+  "Weekly Volume Scan": 2,
   "Ready after 6 Months": 0,
   "Mukul Mahavir Agrawal": 0,
   "Ashish Kacholia": 0
  },
- "email_total": 0,
- "already_listed": 0,
+ "email_total": 13,
+ "already_listed": 8,
  "price_date": "13 Nov 2026",
  "monthly_pass": 0,
- "mode": "daily",
+ "mode": "auto",
  "monthly_done": false,
- "run_at": "13 Nov 2026, 09:52 PM IST"
+ "run_at": "14 Nov 2026, 07:48 AM IST"
 }
