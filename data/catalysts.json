@@ -2025,5 +2025,1432 @@
    ]
   ],
   "guide": {}
+ },
+ "EBGNG": {
+  "text": "India's largest refurbished laptop/IT device company (Electronics Bazaar brand), selling in India and abroad. ==Q2 revenue +42% to ₹625 cr, PAT ₹56 cr, EBITDA doubled==; volume +30%, laptop selling price up to ~₹31,000. Now supplies ==55 countries== (49 in Q1). ==FY27 guidance raised: revenue +40% (from 30%), PAT margin +150 bps== over FY26 (~8.5%). Watch: part of the Q2 margin came from cheap older inventory; net debt ~₹427 cr and high inventory.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – GNG FY27 guidance raised",
+    "https://www.multibagg.ai/market-pulse/articles/gng-fy27-growth-margin-guidance-concall-cmw90j37e005j2mphdr5p6fgj"
+   ],
+   [
+    "Multibagg – GNG Q2 revenue",
+    "https://www.multibagg.ai/market-pulse/articles/gng-electronics-q2-revenue-growth-cmw90isqh005f2mphswgu0k88"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     40
+    ],
+    "text": "raised from 30%"
+   },
+   "margin": {
+    "fy": "FY27",
+    "kind": "PAT",
+    "pct": [
+     8.5
+    ],
+    "text": "FY26 + 1.5 pts (raised from +1 pt)"
+   }
+  }
+ },
+ "ARIS": {
+  "text": "Construction-materials supply and contract-manufacturing platform for real-estate and infra builders. ==Record Q2 PAT ₹22.8 cr (+50%), revenue +28% to ₹308 cr==, EBITDA margin up to ==11.6% from 9.3%==. Higher-margin contract manufacturing + design-as-a-service now ==66% of revenue==; reserved capacity up to ==11.7 mn tonnes==; DaaS project value above ₹2,750 cr. ==FY27 PAT guidance ~₹100 cr vs ₹60 cr in FY26==. Watch: H2 must step up sharply; revenue growth below earlier outlook.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – ARIS record Q2 PAT",
+    "https://www.multibagg.ai/market-pulse/articles/aris-record-quarterly-pat-margin-ppt-cmw38yfq500482hmn11efkg70"
+   ],
+   [
+    "Inc42 – ArisInfra Q2",
+    "https://inc42.com/buzz/arisinfra-q2-profit-rises-78-yoy-to-₹22-8-cr-on-the-back-of-strong-revenue-uptick/"
+   ]
+  ],
+  "guide": {
+   "profit": {
+    "fy": "FY27",
+    "kind": "PAT",
+    "cr": [
+     100
+    ],
+    "text": "about ₹100 cr vs ₹60 cr in FY26"
+   }
+  }
+ },
+ "CNL": {
+  "text": "IT, electronics and infrastructure-tech distributor and solutions company (consumer electronics, ICT, AV systems). ==Q2 revenue +15% to ₹752 cr, PAT +37% to ₹26 cr, operating profit +69%== as it shifts toward ==bigger, higher-margin infrastructure and integration projects==. Watch: thin distribution margins (net ~3.4%), working capital needs.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Univest – Creative Newtech Q2 FY27",
+    "https://univest.in/blogs/creative-newtech-q2-results-fy27-pat-26-crore"
+   ],
+   [
+    "Multibagg – Creative Newtech Q1 focus",
+    "https://www.multibagg.ai/market-pulse/articles/q1-fy27-update-97162"
+   ]
+  ],
+  "guide": {}
+ },
+ "HALDYNGL": {
+  "text": "Glass bottle and container maker for liquor, food and pharma packaging. ==Q2 revenue +21% to ₹140 cr, PAT +88% to ₹12.8 cr==; Q1 profit was also up 90%. Board approved a ==₹150 cr capacity expansion and modernisation== to meet steady packaging demand. Watch: gas/fuel costs, liquor-industry demand, capex execution.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Sahi – Haldyn Glass Q2",
+    "https://www.sahi.com/news/haldyn-glass-reports-q2-net-profit-of-12-75-crore-on-140-crore-revenue"
+   ],
+   [
+    "Tijori – Haldyn ₹150 cr expansion",
+    "https://www.tijorialerts.com/company-updates/haldyn-glass-plans-150-crore-capacity-expansion-and-modernisation-132897/"
+   ]
+  ],
+  "guide": {}
+ },
+ "BPLPHARMA": {
+  "text": "Injectable and formulation maker with subsidiaries Innoxel (US-focused contract manufacturing/licensing) and Varenyam. ==Q2 revenue more than doubled (+110%) to ₹136 cr; PAT ₹11.8 cr vs a ₹8.6 cr loss==. ==Innoxel revenue +253%, 33% margin==; its ==first US contract-manufacturing export shipped 20 Oct 2026==, second product expected in FY27 (needs USFDA nod). Innoxel guides 35–45% growth; standalone order book ₹117 cr. Watch: lumpy licensing income, input costs, ₹139 cr fund-raise.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Bharat Parenterals Q2 & Innoxel",
+    "https://www.multibagg.ai/market-pulse/articles/bharat-parenterals-profit-innoxel-ebitda-concall-cmvzfan0s000n2vplyabsny7e"
+   ]
+  ],
+  "guide": {
+   "note": "Segment guidance only: Innoxel revenue +35–45% with 20–25% EBITDA margin and ₹80–90 cr licensing income; Varenyam +20–25% with 8–13% margin."
+  },
+  "ob": {
+   "cr": [
+    117
+   ],
+   "asof": "Sep 2026",
+   "text": "standalone business only"
+  }
+ },
+ "VIVIANA": {
+  "text": "Power transmission and distribution EPC contractor (substations, lines) for Gujarat and other state utilities. ==H1 FY27 revenue nearly 2.7× (+173%) to ₹189 cr, PAT +169% to ₹18.6 cr==; Q2 revenue +141%. ==Order book above ₹1,800 cr== – including repeat orders from Gujarat's PGVCL. Receivables halved since March. Selling stakes in non-core real-estate and transformer subsidiaries. Watch: EBITDA margin slipped to 14.7% from 16.8%; execution speed.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "HDFC Sky – Viviana H1 FY27",
+    "https://hdfcsky.com/news/viviana-power-tech-h1-fy27-results-revenue-jumps-173-percent"
+   ],
+   [
+    "Sahi – Viviana PGVCL order",
+    "https://www.sahi.com/news/viviana-power-tech-bags-71-39-crore-order-from-pgvcl-for-18-month-gujarat-project-5244-PE1_COR"
+   ]
+  ],
+  "guide": {},
+  "ob": {
+   "cr": [
+    1800
+   ],
+   "asof": "Nov 2026",
+   "text": "more than ₹1,800 cr"
+  }
+ },
+ "SURAKSHA": {
+  "text": "Diagnostic chain (pathology and radiology) in Eastern India, led by Kolkata. ==Q2 revenue +26% to ₹99 cr, PAT +69% to ₹15 cr==; net margin up to ~15% from ~11% as ==revenue grew faster than costs==. Adding new centres, hubs and collection points across the region (PPE up ~₹47 cr since March). Watch: depreciation and interest rising with expansion; competition from national chains; no guidance given.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Suraksha Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/suraksha-diagnostic-q2-profit-growth-announcement-cmwaloo5y00122qo67qfkzxsv"
+   ]
+  ],
+  "guide": {}
+ },
+ "MONARCH": {
+  "text": "Stock broking, merchant banking (IPOs), wealth and asset-management group (Gujarat-based). ==Q2 income +48% to ₹124 cr, PAT +26% to ₹57 cr==; H1 PAT ₹102 cr. Income comes from ==broking, IPO merchant banking and wealth/asset management== (no segment split given). Board proposed a ==share sub-division (split)==. Watch: earnings swing with market activity; PBT grew slower (+19%) than income.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Monarch Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/monarch-networth-capital-q2-profit-announcement-cmvuqsee900002klz23narl25"
+   ],
+   [
+    "Arthneeti – Monarch results and split",
+    "https://www.arthneeti.com/announcements/monarch-networth-capital-ltd-financial-results-for-quartre-ended-september-30-2026-29-oct-2026"
+   ]
+  ],
+  "guide": {}
+ },
+ "KHAZANCHI": {
+  "text": "Chennai gold jewellery and bullion wholesaler moving into retail. ==Q1 FY27 income +45% to ₹586 cr, PAT +84% to ₹27.8 cr==; ==EBITDA margin up to 6.8% from 5.2%==. New ==flagship retail showroom== got a strong response and lifts higher-margin retail sales; Q2 FY26 had shown similar momentum. Watch: thin margins typical of bullion trading, gold-price swings; no guidance; Q2 FY27 numbers not yet checked.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Daily Guardian – Khazanchi Q1 FY27",
+    "https://thedailyguardian.com/business/khazanchi-jewellers-delivers-stellar-q1-fy27-performance-revenue-grows-45-yoy-to-rs-586-cr-ebitda-surges-89-pat-jumps-84-748185/"
+   ]
+  ],
+  "guide": {}
+ },
+ "KSHINTL": {
+  "text": "Magnet winding wires (copper/aluminium) for transformers, motors and EV/industrial OEMs. ==Q2 revenue +85% to ₹1,320 cr, EBITDA +95%, PAT +62% to ₹48 cr==; volume +26%, ==exports +108% (32% of sales)==. Approved for ==765 kV transformer wires== and got a trial ==HVDC== export order. Phase 2 capacity done early (57,845 t, 76% used); ==Phase 3 to ~72,200 t by Q1 FY29 (₹185 cr)==. Debt cut to 0.38× equity. Watch: copper price swings; no formal guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "InvestyWise – KSH Q2 and Phase 3",
+    "https://www.investywise.com/?p=131014"
+   ],
+   [
+    "Multibagg – KSH Q2 revenue",
+    "https://www.multibagg.ai/market-pulse/articles/ksh-international-q2-revenue-growth-cmw2g7a5z00a92mtkvxpzrj59"
+   ]
+  ],
+  "guide": {}
+ },
+ "GKSL": {
+  "text": "Kidney and multi-speciality hospital group in Gujarat, growing by acquisitions. ==Q2 revenue nearly 3× (+195%) to ₹38 cr==, EBITDA margin up to ==26.8%==; ==H1 revenue already 88% of all of FY26==, H1 PAT +44%. Bought ==51% of a Dubai polyclinic (~₹20 cr revenue)== for medical-tourism patients. Net cash ₹32 cr. Watch: growth mostly from acquisitions; margins below last year; no bed/occupancy guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "InvestyWise – Gujarat Kidney H1 FY27",
+    "https://www.investywise.com/gujarat-kidney-and-superspeciality-limited-q2-h1-fy27-earnings-call-transcript/"
+   ],
+   [
+    "Multibagg – Gujarat Kidney Q2",
+    "https://www.multibagg.ai/market-pulse/articles/company-q2-revenue-margin-recovery-ppt-cmw3i9snc001ajk2rbz13tbcn"
+   ]
+  ],
+  "guide": {}
+ },
+ "KORE": {
+  "text": "Electronics and mobile-phone retail chain (Gujarat). ==H1 FY27 sales +84% to ₹656 cr, PAT +80% to ₹9.3 cr, EBITDA 2.5× (+154%)==; EBITDA grew faster than sales, so margins are improving. Watch: very thin margins (~1.4% net, ~2.4% EBITDA); borrowings nearly tripled to ₹112 cr; no guidance given.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Jay Jalaram H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/jay-jalaram-h1-fy27-results-cmvzbnjow00462hlycr7vnmg9"
+   ]
+  ],
+  "guide": {}
+ },
+ "SHRINGARMS": {
+  "text": "Mangalsutra and gold jewellery maker supplying large jewellery retailers (B2B). ==Q2 revenue +55% to ₹820 cr==, ==Q2 PAT ~₹39 cr==; FY26 PAT was ₹115 cr on ₹2,246 cr revenue. Strong business volumes; the festive and wedding season and gold prices drive the next quarters. Watch: thin manufacturing margins, gold-price swings, customer concentration; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Sahi – Shringar Q2 revenue",
+    "https://www.sahi.com/news/shringar-house-of-mangalsutra-reports-q2-revenue-of-820-crore-vs-530-crore-yoy"
+   ],
+   [
+    "Univest – Shringar Q2 FY27",
+    "https://univest.in/blogs/shringar-house-of-mangalsutra-q2-results-fy27-pat-39-crore"
+   ]
+  ],
+  "guide": {}
+ },
+ "DEEPA": {
+  "text": "Hyderabad gold jewellery maker (temple/vaddanam and studded jewellery) for retailers. ==Q2 revenue +25% to ₹626 cr, PAT +37% to ₹37 cr==; H1 PAT +32%. Higher-margin ==job work +44% in volume==, better product mix (studded, temple vaddanam). New ==Hyderabad manufacturing unit started Sep 2026==; Chennai sales office by Dec, Bangalore next. Management projects ~40–45% yearly growth for FY27–29. Watch: gold-price swings (94% hedged), thin margins.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "InvestyWise – Deepa Q2 FY27 call",
+    "https://www.investywise.com/deepa-jewellers-limited-earnings-conference-call-transcripts-released/"
+   ],
+   [
+    "InvestyWise – Deepa Q2/H1 presentation",
+    "https://www.investywise.com/deepa-jewellers-limited-investor-presentation-for-q2-h1-fy27/"
+   ]
+  ],
+  "guide": {
+   "note": "Management projects ~40–45% yearly growth (CAGR) for FY27–FY29 – the source does not say if this is revenue or profit, so it is not used for the 15% rule."
+  }
+ },
+ "ORBTEXP": {
+  "text": "Maker and exporter of specialty fancy fabrics (embroidered and jacquard textiles). ==Q2 revenue +42% to ₹83 cr, PAT +73% to ₹17 cr, operating profit +74%== – profit growing faster than sales as margins widen. Q1 was also strong (PAT +64%). Watch: export demand and currency swings; no guidance given; data from a secondary source – check against the filing.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Univest – Orbit Exports Q2 FY27",
+    "https://univest.in/blogs/orbit-exports-q2-results-fy27-pat-17-crore"
+   ],
+   [
+    "Multibagg – Orbit Exports Q1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/orbit-exports-q1fy27-results-dividend-cmskcfisf76ip0zn3tj1buoam"
+   ]
+  ],
+  "guide": {}
+ },
+ "SCPL": {
+  "text": "Gujarat ice-cream, dairy and namkeen maker (Amreli). ==Q2 revenue +17% to ₹65 cr, PAT doubled (+104%) to ₹3.2 cr== as costs grew slower than sales; FY26 profit had also jumped. Watch: milk and packaging costs, seasonal ice-cream demand; small profit base; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Sahi – Sheetal Cool Q2",
+    "https://www.sahi.com/news/sheetal-cool-products-reports-q2-net-profit-of-3-24-crore-and-revenue-of-65-31-crore"
+   ],
+   [
+    "Whalesbook – Sheetal Cool FY26",
+    "https://www.whalesbook.com/corporate-news/English/industrial-goodsservices/Sheetal-Cool-Products-Sees-FY26-Profit-Jump-to-indian-rupee191183-Lakhs/6a0ee21c057ca1d3da17c19f"
+   ]
+  ],
+  "guide": {}
+ },
+ "HOACFOODS": {
+  "text": "Packaged atta, spices, pulses and mustard oil brand (Hariom) in Delhi NCR, plus exports. ==H1 FY27 revenue doubled (+99%) to ₹43 cr, PAT +125% to ₹4.4 cr==, EBITDA margin ~15%. ==Export shipments +86%==. New ==Vidisha (MP) plant started commercial production 5 Nov 2026== (flour milling + oil crushing); first Bhopal store; bought the ==EVERGROW B2B brand (₹1 cr+ monthly sales)==. Watch: very small company; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – HOAC Foods H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/hoac-foods-h1-fy27-growth-cmw6zh5zt000h2mphl3d8p3wy"
+   ],
+   [
+    "ThePrint – HOAC Foods H1 FY27",
+    "https://theprint.in/ani-press-releases/hoac-foods-india-limited-reports-strong-h1-fy27-results/3091383/"
+   ]
+  ],
+  "guide": {}
+ },
+ "MVGJL": {
+  "text": "Jewellery retailer in Andhra Pradesh and Telangana (Vaibhav Jewellers). ==Q1 FY27 PAT +34% to ₹27.6 cr==, helped by ==new stores and franchise outlets in tier-2/3 towns== (incl. new Visakhapatnam franchise stores), steady margins and gold-buying policies that soften gold-price swings. Watch: ₹5.8 cr GST order under appeal; Q2 FY27 numbers not yet checked; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Sahi – Manoj Vaibhav Q1 FY27",
+    "https://www.sahi.com/news/manoj-vaibhav-gems-q1-net-profit-jumps-34-yoy-to-27-6-crore-5083-PE1_COR"
+   ]
+  ],
+  "guide": {}
+ },
+ "544516": {
+  "text": "Railway coach interiors, components and signalling products maker (Chennai/Pune). ==Q1 FY27 revenue a record ₹101 cr – about 3× (+200%)== after FY26 revenue rose 66% to ₹320 cr. Expanding Pune plant for ==electronic interlocking and signalling== systems; talks for localised Vande Bharat parts; planned defence JV. Management targets ==₹500 cr FY27 revenue with 12–13% PAT margin==. Watch: lumpy Railway orders; H1 numbers not yet checked.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Sahi – Airfloa ₹500 cr FY27 target",
+    "https://www.sahi.com/news/airfloa-rail-technology-targets-500-crore-revenue-by-fy27-with-13-pat-margin-4562321-PE1_"
+   ],
+   [
+    "Tijori – Airfloa record Q1",
+    "https://www.tijorialerts.com/company-updates/airfloa-rail-tech-posts-record-101-crore-q1-revenue-up-200-122058/"
+   ],
+   [
+    "Whalesbook – Airfloa FY26 and defence JV",
+    "https://www.whalesbook.com/corporate-news/English/industrial-goodsservices/Airfloa-Rail-Technology-posts-66percent-revenue-growth-to-form-defense-JV/6a1f05f0d19f4f3fe8e79bfa"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "cr": [
+     500
+    ]
+   },
+   "margin": {
+    "fy": "FY27",
+    "kind": "PAT",
+    "pct": [
+     12,
+     13
+    ]
+   }
+  }
+ },
+ "544504": {
+  "text": "Industrial construction contractor (factories, plants) for large corporates incl. Adani and Aditya Birla groups. ==H1 FY27 revenue +45% to ₹356 cr, PAT +55% to ₹26 cr==. ==Order book jumped to ~₹2,375 cr from ₹1,291 cr in March== – several years of work. Watch: execution and working capital on big orders; no guidance given.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Arthneeti – Goel H1 FY27",
+    "https://www.arthneeti.com/announcements/goel-construction-company-ltd-announcement-under-regulation-30-lodr-press-release-media-release-04-nov-2026"
+   ],
+   [
+    "Whalesbook – Goel order book FY26",
+    "https://www.whalesbook.com/corporate-news/English/industrial-goodsservices/Goel-Construction-Hits-Record-indian-rupee1291-Cr-Order-Book-FY26-Profit-indian-rupee463-Cr/6a0b348fcfe07c0307e6cf20"
+   ]
+  ],
+  "guide": {},
+  "ob": {
+   "cr": [
+    2375
+   ],
+   "asof": "Sep 2026",
+   "text": "up from ₹1,291 cr in March"
+  }
+ },
+ "544669": {
+  "text": "Special-purpose machines and automation equipment maker. ==H1 FY27 revenue +48% to ₹42 cr, PAT +46% to ₹6.5 cr==, EBITDA margin ~23% (more parts made in-house). ==Order book ₹77 cr==, mostly to be executed by March. ==European partners shifting projects to India== (China competition). Management commits to ==FY27 revenue above ₹100 cr== and margin above 20% in H2; ₹15–16 cr capex. Watch: order-book conversion timing; small company.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Admach order book & FY27",
+    "https://www.multibagg.ai/market-pulse/articles/admach-order-book-fy27-execution-concall-cmvywpf2z001b2cpc7vn54uyx"
+   ],
+   [
+    "Multibagg – Admach European projects",
+    "https://www.multibagg.ai/market-pulse/articles/admach-european-projects-india-shift-concall-cmvywwf2n001h2cpcx83f3a9r"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "cr": [
+     100
+    ],
+    "text": "above ₹100 cr"
+   },
+   "margin": {
+    "fy": "FY27",
+    "pct": [
+     20
+    ],
+    "text": "above 20% in H2"
+   }
+  },
+  "ob": {
+   "cr": [
+    77.4
+   ],
+   "asof": "Sep 2026"
+  }
+ },
+ "544682": {
+  "text": "Solar EPC and RESCO (solar power as a service) company for industrial, commercial and government customers. ==Order book ~₹224 cr (75 MWp) – more than FY26 revenue (₹123 cr)==, incl. a ==₹175 cr 65 MWp Maharashtra project==. Crossed 100 MWp installed; FY26 PAT ₹13.6 cr. Watch: H1 FY27 results not yet checked; project timing and payment cycles; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "PV Magazine – GRE Renew order book",
+    "https://www.pv-magazine-india.com/press-releases/gre-renew-enertech-reports-100-mwp-solar-portfolio-and-consolidated-epc-order-book-of-75-mwp-worth-approximately-inr-224-crore/"
+   ],
+   [
+    "Sahi – GRE Renew ₹224 cr order book",
+    "https://www.sahi.com/news/gre-renew-enertech-order-book-reaches-224-crore-after-q1-project-wins-6138462-PE1_"
+   ]
+  ],
+  "guide": {},
+  "ob": {
+   "cr": [
+    224
+   ],
+   "asof": "Jun 2026",
+   "text": "75 MWp"
+  }
+ },
+ "ADISOFT": {
+  "text": "Industrial automation solutions provider (Pune), mainly for auto plants and now expanding into pharma, packaging, warehousing and white goods. ==H1 FY27 income +48% to ₹74 cr, EBITDA doubled (+106%), PAT +118% to ₹11.6 cr==; margins up sharply (EBITDA 23%). New ==70,000 sq ft Bhosari plant, partly live from end-Q3 FY27, built for 4–5× today's revenue==. Guidance: ==~25% revenue growth, 13–14% PAT margin, debt-free by year-end==. Watch: unaudited press-release numbers; H2-heavy business.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Outlook Business – Adisoft H1 FY27",
+    "https://www.outlookbusiness.com/spotlight/news-wire/adisoft-technologies-doubles-up-in-h1-fy27-net-profit-soars-118-ebitda-rockets-106"
+   ],
+   [
+    "Outlook Business – Adisoft new facility",
+    "https://www.outlookbusiness.com/spotlight/news-wire/adisoft-technologies-closes-a-strong-h1-fy27-new-facility-to-support-45x-scale"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     25
+    ]
+   },
+   "margin": {
+    "fy": "FY27",
+    "kind": "PAT",
+    "pct": [
+     13,
+     14
+    ]
+   }
+  }
+ },
+ "544442": {
+  "text": "Nutraceutical ingredients supplier (sports nutrition, functional foods, health ingredients). ==H1 FY27 revenue doubled (+99%) to ₹206 cr – nearly all of FY26==, ==PAT +122% to ₹22.6 cr==, margins up. Building a ==manufacturing facility in a nutraceutical SEZ hub== for own production. Watch: operating cash outflow ₹18.7 cr, receivables up sharply, short-term debt up; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Chemkart H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/chemkart-h1-fy27-results-growth-ppt-cmvvqlirx00r22klz7uc2lweq"
+   ],
+   [
+    "Multibagg – Chemkart cash outflow",
+    "https://www.multibagg.ai/market-pulse/articles/chemkart-working-capital-cash-outflow-ppt-cmvvqmwgc00r32klzaoy4if7q"
+   ]
+  ],
+  "guide": {}
+ },
+ "544607": {
+  "text": "Cutting-tools maker (SME). ==H1 FY27 profit before tax doubled (+105%) to ₹5.2 cr==, PAT ₹3.7 cr on ₹18.6 cr income; FY26 profit had jumped 117%. Bought ==55% of Shinvi Tools== (new unit, not yet operating); IPO money fully used for expansion. Watch: very small company; prior-year revenue not given; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "InvestyWise – Shining Tools H1 FY27",
+    "https://www.investywise.com/?p=132241"
+   ],
+   [
+    "Whalesbook – Shining Tools FY26",
+    "https://www.whalesbook.com/corporate-news/English/industrial-goodsservices/Shining-Tools-Ltd-FY26-Revenue-Up-242percent-Profit-Jumps-1167percent/6a1af575de28c5c0a91315e5"
+   ]
+  ],
+  "guide": {}
+ },
+ "SURYODAY": {
+  "text": "Small finance bank (microfinance, vehicle and home loans). ==Q2 FY27 net profit +152% to ₹76.6 cr== as bad loans fell: ==gross NPA down to ~2.9% from 9.3% a year ago==, net NPA 1.54%. ==Advances +34.6% to ₹14,972 cr, deposits +35% to ₹16,184 cr==; total income +38%. Watch: microfinance credit cycle; no guidance given.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Suryoday Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/suryoday-q2-profit-npa-improvement-cmvtpw89500442gqikr1b20m7"
+   ],
+   [
+    "Sahi – Suryoday advances",
+    "https://www.sahi.com/news/suryoday-small-finance-gross-advances-rise-34-60-yoy-gnpa-improves-to-2-90"
+   ]
+  ],
+  "guide": {}
+ },
+ "J&KBANK": {
+  "text": "Jammu & Kashmir's leading private-sector bank. ==Q2 FY27 net profit ₹546 cr, +10.6% YoY and +29% QoQ==; operating profit +27% to ₹789 cr. ==Asset quality at decade-best: GNPA 2.23%, NNPA 0.51%==, PCR 92%. Total business ₹3.10 lakh cr (+19%). Raised guidance: ==credit growth above 14% (aiming ~18%), deposits above 12%, ROA ~1.2%, GNPA below 2%==. Watch: shares fell 14% after results; margin recovery needed in H2.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – J&K Bank Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/jk-bank-q2-profit-rise-cmvqobm7w000w2gmkdbhl3t0h"
+   ],
+   [
+    "Equentis – J&K Bank shares after Q2",
+    "https://www.equentis.com/blog/?p=71322"
+   ]
+  ],
+  "guide": {
+   "note": "Bank: credit growth >14% (aim ~18%), deposits >12%, ROA ~1.2%, GNPA <2% for FY27"
+  }
+ },
+ "VETO": {
+  "text": "Maker of wires, cables, switches and electrical goods (Jaipur). ==Q2 FY27 revenue +33% to ₹118 cr==, ==operating profit +45% to ₹12.2 cr==, ==PAT +33% to ₹8.1 cr==; operating margin improved to ~10%. Watch: thin PAT margin (~7%); copper price swings; no guidance given.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Univest – Veto Q2 FY27",
+    "https://univest.in/blogs/veto-switchgears-and-cables-q2-results-fy27-pat-8-crore"
+   ]
+  ],
+  "guide": {}
+ },
+ "ARROWGREEN": {
+  "text": "India's largest maker of water-soluble films and compostable plastics. ==Q2 FY27 revenue +40% to ₹85 cr==, ==PAT +60% to ₹25 cr==, net margin up to 29%. Q1 FY27 had already doubled revenue as ==commercialisation of new film products== scaled up. Watch: Q2 slightly below Q1 (revenue −3%, profit −8% QoQ); profits swing a lot quarter to quarter; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Univest – Arrow Greentech Q2 FY27",
+    "https://univest.in/blogs/arrow-greentech-q2-results-fy27-pat-25-crore"
+   ],
+   [
+    "Multibagg – Arrow Greentech Q1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/arrow-greentech-q1fy27-results-cmswucy39008n0zo48surqlro"
+   ]
+  ],
+  "guide": {}
+ },
+ "BHARATSE": {
+  "text": "Seats and interior parts supplier to Maruti Suzuki. ==Q2 FY27 revenue +54% to ₹709 cr, PAT +54% to ₹15.2 cr==; ==H1 revenue +45% to ₹1,287 cr, PAT +49%== on strong car demand. Taking 26% of a ==solar power SPV for captive power== (due Q1 FY28). Watch: very thin margins (~2% PAT), raw material costs up 62%; depends on one customer; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Autocar Pro – Bharat Seats Q2 FY27",
+    "https://www.autocarpro.in/news/bharat-seats-q2-net-profit-up-54-percent-to-rs-152-crore-as-operational-revenue-reaches-rs-709-crore-135499"
+   ]
+  ],
+  "guide": {}
+ },
+ "BIKEWO": {
+  "text": "EV fleet and logistics services company. ==Won Reliance Bio Energy contracts worth ~₹66 cr (electric tractors, till 2033)==; ==MoU with Hala Mobility for 1,000 EVs==; MoU to buy 51% of PositiEV Mobility. Management targets a ==10,000-vehicle fleet in FY27==, funded by a ₹76 cr+ warrant issue. ==H1 FY27 revenue ₹44.5 cr (vs ₹54.5 cr for all FY26), PAT ₹5.0 cr==. Watch: MoUs are not binding orders; warrant money must come in.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Autocar Pro – Bikewo Reliance contract",
+    "https://www.autocarpro.in/news/bikewo-targets-10000-vehicles-rs-6646-crore-reliance-contract-134838"
+   ],
+   [
+    "Multibagg – Bikewo H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/bikewo-h1-fy27-results-cmvzbbz53003y2hlyerwq2zjb"
+   ],
+   [
+    "Autocar Pro – Bikewo Hala MoU",
+    "https://www.autocarpro.in/news/bikewo-signs-mou-with-hala-mobility-for-1000-ev-fleet-134075?amp=1"
+   ]
+  ],
+  "guide": {
+   "note": "Fleet target ~10,000 vehicles in FY27; no revenue guidance"
+  }
+ },
+ "USHAFIN": {
+  "text": "Delhi NBFC lending to MSMEs, women entrepreneurs and EV financing. ==H1 FY27 income +34% to ₹45.8 cr, net profit +80% to ₹16.8 cr==; Q2 profit more than doubled. Board proposes a ==1:1 bonus issue (EGM 8 Dec 2026)== and higher authorised capital for growth. Watch: small NBFC – asset quality and funding cost; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Screener – Usha Financial quarterly results",
+    "https://www.screener.in/company/USHAFIN/"
+   ]
+  ],
+  "guide": {}
+ },
+ "544627": {
+  "text": "IT hardware and digital-display solutions provider. New orders: ==₹9.25 cr from Samsung Data System (90 showrooms + 5-year maintenance)== and a ==BPCL cloud-integration deal worth up to ₹10 cr over 5 years (5,000+ units)==. H1 FY27 revenue rose only ~9% to ₹85 cr, profit ~₹8 cr (+~14%). Watch: slow revenue growth; EPS fell on more shares; BPCL value is potential, not fixed.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Screener – Purple Wave announcements & results",
+    "https://www.screener.in/company/544627/"
+   ]
+  ],
+  "guide": {}
+ },
+ "544773": {
+  "text": "Electronics design and manufacturing (ESDM) company making high-reliability assemblies for defence, aerospace, telecom and industry. ==H1 FY27 revenue +90% to ₹106 cr== (business update), with an ==order book of ₹101.6 cr== and new capacity due to be commissioned. Watch: H1 profit not yet published; an independent director resigned in Oct 2026; CRISIL rating BBB- on watch.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Screener – Merritronix announcements",
+    "https://www.screener.in/company/id/1285988/"
+   ]
+  ],
+  "guide": {},
+  "ob": {
+   "cr": [
+    101.64
+   ],
+   "asof": "2026-09-30",
+   "text": "Order book in Oct 2026 business update"
+  }
+ },
+ "544812": {
+  "text": "Plastic-moulded parts maker for premium furniture, home appliances and engineering. ==H1 FY27 revenue +78% to ₹36.7 cr== as ==new customers moved into production==; PAT ₹4.4 cr (−7% YoY but +150% vs H2 FY26). Plans chair tilt-recline mechanisms (target ~₹200 cr market share) and has a ==5-year assured drip-irrigation product with Toro==. Watch: EBITDA margin fell from 36% to 20% on raw material costs; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Atharva Polyplast H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/atharva-polyplast-h1-margin-performance-ppt-cmw07slu2000x2hmu9js1v53m"
+   ]
+  ],
+  "guide": {}
+ },
+ "544844": {
+  "text": "Precision machined components for auto, EV and energy sectors. ==H1 FY27 revenue +68% to ₹210 cr, PAT +88% to ₹24.9 cr==; non-auto share up to 38%, ==energy revenue ~₹48 cr vs ₹17 cr==, EV +80%. ==Order book ~₹1,180 cr==, RFQ pipeline above ₹2,000 cr. Management guides ==~50% revenue growth in FY27== and ~₹1,000 cr revenue by FY30. Watch: gross margin down to 53% on heavier parts; reported guidance numbers are partly inconsistent.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Poojaa Precision H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/poojaa-precision-h1-fy27-results-cmvq8oslu00052cry2vk3xsyc"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     50,
+     50
+    ],
+    "text": "~50% growth over FY26 (₹294 cr)"
+   }
+  },
+  "ob": {
+   "cr": [
+    1180
+   ],
+   "asof": "2026-09-30",
+   "text": "~52% auto, 48% engineering/non-auto"
+  }
+ },
+ "544335": {
+  "text": "Road, building and toll-collection contractor (Rajasthan/MP). ==H1 FY27 revenue +61% to ₹550 cr, PAT +38% to ₹22 cr==. ==Won ₹1,087 cr of new orders in Apr–Sep 2026==, taking the ==order book to ₹1,755 cr (+42%)==, incl. ₹967 cr of toll contracts. Watch: EBITDA margin fell 1.65 points; toll contracts are lower-margin; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Arthneeti – BRG Infra H1 FY27 press release",
+    "https://www.arthneeti.com/announcements/brgoyal-infrastructure-ltd-announcement-under-regulation-30-lodr-press-release-media-release-05-nov-2026"
+   ],
+   [
+    "Multibagg – BRG order book",
+    "https://www.multibagg.ai/market-pulse/articles/brg-infra-order-book-growth-ppt-cmw3o2zoc00he2kqqc8e9ykzh"
+   ]
+  ],
+  "guide": {},
+  "ob": {
+   "cr": [
+    1755
+   ],
+   "asof": "2026-09-30",
+   "text": "Incl. ₹967 cr toll collection contracts"
+  }
+ },
+ "SUNLITE": {
+  "text": "Copper and aluminium scrap recycler making copper rods and wires. ==H1 FY27 income +75% to ₹1,962 cr==, ==EBITDA +114%, PAT +132% to ₹33 cr==; margins improved. ==Copper rod plant running above 100% utilisation==; Q1 aluminium business more than doubled. Watch: very thin margins (~1.7% PAT); volume grew only 11% – much of growth is copper price; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Sunlite H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/sunlite-h1fy27-profit-margin-ppt-cmw3iqexj0033jk2rohdcdjbx"
+   ],
+   [
+    "Alcircle – Sunlite Q1 FY27",
+    "https://www.alcircle.com/news/sunlite-recycling-s-revenue-climbs-75-in-q1-fy27-as-aluminium-business-more-than-doubles-120644"
+   ]
+  ],
+  "guide": {}
+ },
+ "543963": {
+  "text": "Ayurvedic and herbal medicine maker (Gujarat). ==H1 FY27 revenue +36% to ₹45 cr==, PAT +16% to ₹5.2 cr. Buying land at Himmatnagar for a ==₹12–15 cr second plant== (production from 2028). Guidance: ==FY27 revenue growth 35–40%, EBITDA margin 16–18%, PAT margin 11–13%==. Watch: margins fell 2.4 points on fuel and freight costs; operating cash flow negative on inventory build-up.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Shelter Pharma H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/shelter-pharma-h1-margins-narrow-announcement-cmw6d3hhl00222xo80yiw15va"
+   ],
+   [
+    "Multibagg – Shelter second plant",
+    "https://www.multibagg.ai/market-pulse/articles/shelter-pharma-plans-second-plant-announcement-cmw6d3j4300252xo8xhzgw3x4"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     35,
+     40
+    ]
+   },
+   "margin": {
+    "fy": "FY27",
+    "kind": "EBITDA",
+    "pct": [
+     16,
+     18
+    ],
+    "text": "PAT margin 11–13%"
+   }
+  }
+ },
+ "544675": {
+  "text": "Gabion and geo-technical protection solutions (rail, roads, defence, river works). ==H1 FY27 revenue +76% to ₹71.5 cr, PAT +124% to ₹5.4 cr==, PAT margin up to 7.6%. Post-IPO net worth lets it ==bid for larger government works==; adding ash-pond/industrial line and exports (CE marking under way). Watch: operating cash outflow ₹5.7 cr, borrowings up; H1 slightly below H2 FY26.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Gabion H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/gabion-technologies-h1-fy27-profit-ppt-cmw3pt6lk000qlw2rqgpcrv4f"
+   ]
+  ],
+  "guide": {}
+ },
+ "544567": {
+  "text": "Ed-tech and AI-solutions company with the patented ==ZEROTOUCH device for secure question-paper delivery==. ==H1 FY27 revenue doubled (+106%) to ₹16.8 cr, PAT +79% to ₹5.0 cr==, EBITDA margin ~48%. 150 ZEROTOUCH machines built, pilot orders under way; expected to give 20–22% of revenue. Watch: very small company; guidance timeline unclear; higher tax cut net margin.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Infinity Infoway H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/infinity-infoway-h1fy27-profit-growth-cmvkxh4j5001i2ls0i83qpcsj"
+   ]
+  ],
+  "guide": {}
+ },
+ "544694": {
+  "text": "Pharma and nutraceutical formulations maker selling in India and abroad. ==H1 FY27 revenue +26% to ₹55 cr==, ==PAT +73% to ₹8.2 cr==, EBITDA margin up 6 points to 22.5%. ==Export share nearly doubled to 18%==. Plans capacity expansion on adjacent land and own brands. Watch: no amounts or timelines for expansion; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Accretion H1 FY27 margins",
+    "https://www.multibagg.ai/market-pulse/articles/accretion-ebitda-margin-h1-fy27-ppt-cmw2aaka6004e2mtkdbeqd3x6"
+   ],
+   [
+    "Multibagg – Accretion export share",
+    "https://www.multibagg.ai/market-pulse/articles/accretion-export-mix-h1-fy27-ppt-cmw2a8gnb004b2mtk7yceqs2u"
+   ]
+  ],
+  "guide": {}
+ },
+ "544330": {
+  "text": "Copper wire and rod maker from recycled copper scrap (Gujarat). ==H1 FY27 revenue +69% to ₹1,425 cr==, ==net profit +156% to ₹23 cr==; operating margin up to 2.1%. FY26 profit had nearly tripled. Plans bunched copper wire. Watch: very thin margins; copper price drives revenue; GST demand of ₹1.35 cr; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Screener – Parmeshwar Metal results",
+    "https://www.screener.in/company/544330/"
+   ],
+   [
+    "ScanX – Parmeshwar FY26",
+    "https://scanx.trade/stock-market-news/companies/parmeshwar-metal-reports-nearly-threefold-jump-in-net-profit-for-fy26-recommends-final-dividend-of-inr-1-25-per-share/39802627"
+   ]
+  ],
+  "guide": {}
+ },
+ "544538": {
+  "text": "IT infrastructure firm running data-centre, CCTV and clock systems for Delhi Metro and RailTel; mostly government clients. ==H1 FY27 revenue up 4.8× (+378%) to ₹84 cr==, ==PAT ₹8.2 cr vs ₹1 cr==, EBITDA margin up to 13.5%. New ==defence vertical expects ₹50–70 cr revenue this year==, rising above ₹100 cr later; launching NeuralOps software from January. Watch: lumpy government orders; order book not disclosed.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Praruh H1 FY27 concall",
+    "https://www.multibagg.ai/market-pulse/articles/praruh-h1-revenue-growth-concall-cmw3p77jc000blw2rwjobo1w0"
+   ],
+   [
+    "Multibagg – Praruh defence target",
+    "https://www.multibagg.ai/market-pulse/articles/praruh-defence-fy28-revenue-target-concall-cmw3p7o3e00lfjk2rhwh1xeec"
+   ]
+  ],
+  "guide": {
+   "note": "Management hopes for >₹100 cr revenue in FY27; defence ₹50–70 cr this year"
+  }
+ },
+ "544667": {
+  "text": "School textbook publisher (Telangana/AP) expanding into notebooks and school supplies. ==H1 FY27 total income +74% to ₹70 cr==, ==PAT +29% to ~₹10 cr==; Q1 revenue had jumped 159%. Started ==in-house notebook making (PageCraft brand)==, Pelican Edu Supply for ~100 schools, smart-panel distribution, and an MoU to buy Hara Communications. Management ==eyes ₹150 cr+ revenue in FY27==. Watch: profit growing slower than income (margins down); seasonal business.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Devdiscourse – Dachepalli H1 FY27",
+    "https://www.devdiscourse.com/article/business/3997342-dachepalli-publishers-limited-reports-h1-fy27-total-income-of-7006-lakh-up-74-yoy"
+   ],
+   [
+    "Whalesbook – Dachepalli Q4, eyes ₹150 cr FY27",
+    "https://www.whalesbook.com/corporate-news/English/consumer-products/Dachepalli-Publishers-Q4-Profit-Soars-818percent-Revenue-Climbs-422percent-Eyes-indian-rupee150-Cr-FY27/6a04a2db9444064ed06d3113"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "cr": [
+     150,
+     150
+    ],
+    "text": "Management eyes ₹150 cr+"
+   }
+  }
+ },
+ "544809": {
+  "text": "Dry fruits, nuts and seeds importer, processor and distributor (B2B, modern trade, exports, D2C). ==H1 FY27 revenue more than doubled (+129%) to ₹304 cr==, ==net profit up ~5× to ₹16 cr==. Reported its first consolidated results; ==IPO money fully used as planned==. Watch: commodity trading business with thin margins; import price swings; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Screener – Adon Agro results & announcements",
+    "https://www.screener.in/company/544809/"
+   ]
+  ],
+  "guide": {}
+ },
+ "544434": {
+  "text": "Railway components maker, mainly bogies, now adding track parts. FY26 income +44% to ₹101 cr, PAT +53% to ₹25 cr. ==New bogie plant== lifts capacity; management guides ==FY27 revenue ₹210–220 cr (about double)== and peak potential ₹340–350 cr from old + new plants. ==Order book ₹140–150 cr==; won an ICF order earlier. Watch: H1 FY27 numbers not yet checked; depends on Railways ordering.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Whalesbook – Neetu Yoshi FY26 & FY27 guidance",
+    "https://www.whalesbook.com/corporate-news/English/industrial-goodsservices/Neetu-Yoshi-Ltd-FY26-Profit-indian-rupee25-Cr-Guides-indian-rupee210-220-Cr-FY27-Revenue/6a28efffd7b7b190c0724408"
+   ],
+   [
+    "Multibagg – Neetu Yoshi ICF order",
+    "https://www.multibagg.ai/market-pulse/articles/neetu-yoshi-icf-order-1712cr-cmrxjpspd9bce0zms46xk3aav"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "cr": [
+     210,
+     220
+    ]
+   }
+  },
+  "ob": {
+   "cr": [
+    140,
+    150
+   ],
+   "asof": "2026-05-31",
+   "text": "Order book stated with FY26 results"
+  }
+ },
+ "544464": {
+  "text": "Mobile phone and electronics retail chain with 400+ stores in Gujarat, Maharashtra and MP. ==H1 FY27 revenue +45% to ₹530 cr==, ==EBITDA +61%, PAT +92% to ₹7.3 cr==. Expanding into Tier 2/3 towns and more product categories. Watch: operating cash outflow ₹21 cr in H1; very thin retail margins (~1.4% PAT); no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "InvestyWise – Umiya Mobile H1 FY27 presentation",
+    "https://www.investywise.com/?p=129634"
+   ],
+   [
+    "Multibagg – Umiya cash outflow",
+    "https://www.multibagg.ai/market-pulse/articles/umiya-mobile-h1-cash-outflow-ppt-cmw2l7m9800fn2mtkq9of9hth"
+   ]
+  ],
+  "guide": {}
+ },
+ "543616": {
+  "text": "Pharma formulations exporter (Surat). ==Q2 FY27 revenue +50% to ₹47 cr==, ==operating profit +58% to ₹7.8 cr==, PAT +30% to ₹6.6 cr; Q1 FY27 PAT had jumped 82%. FY26 revenue crossed ₹100 cr. Watch: net margin fell to 14% from 16%; borrowings up to ~₹90 cr; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Univest – Trident Lifeline Q2 FY27",
+    "https://univest.in/blogs/trident-lifeline-q2-results-fy27-pat-7-crore"
+   ],
+   [
+    "Multibagg – Trident Lifeline borrowings",
+    "https://www.multibagg.ai/market-pulse/articles/trident-lifeline-borrowings-h1-fy27-ppt-cmw3mqozw00co2kqqp7r8fo51"
+   ]
+  ],
+  "guide": {}
+ },
+ "538546": {
+  "text": "Steel roofing sheets and pre-engineered building maker (Vadodara). ==Q2 FY27 revenue +46% to ₹50 cr, PAT +79% to ₹2.6 cr==; H1 PAT ₹5.3 cr. ==Started commercial production at Unit-II (Phase V & VI)==, and will take ~80% of new PUF/insulated panel maker DIPPL for ₹3.9 cr; also entering solar structures. Watch: DIPPL is a related party with no revenue yet; thin margins (~5%).",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Univest – Bansal Roofing Q2 FY27",
+    "https://univest.in/blogs/bansal-roofing-products-q2-results-fy27-pat-3-crore"
+   ],
+   [
+    "Arthneeti – Bansal Roofing board outcome",
+    "https://www.arthneeti.com/announcements/bansal-roofing-products-ltd-board-meeting-outcome-for-intimation-of-outcome-of-board-meeting-for-quarter-and-half-year-ended-september-30-2026-04-nov-2026"
+   ]
+  ],
+  "guide": {}
+ },
+ "513502": {
+  "text": "Copper and brass extrusion maker (rods, pipes, sections) from Gujarat. ==Q2 FY27 revenue +45% to ₹64 cr==, ==operating profit tripled (+204%) to ₹5.1 cr==, ==PAT +183% to ₹3.5 cr==. Watch: copper price swings drive revenue; FY26 profit fell on working capital needs; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Univest – Baroda Extrusion Q2 FY27",
+    "https://univest.in/blogs/baroda-extrusion-q2-results-fy27-pat-4-crore"
+   ],
+   [
+    "Whalesbook – Baroda Extrusion FY26",
+    "https://www.whalesbook.com/corporate-news/English/industrial-goodsservices/Baroda-Extrusion-FY26-Profit-Down-Amid-Higher-Working-Capital-Needs/6a195b206ec823f1f2913707"
+   ]
+  ],
+  "guide": {}
+ },
+ "524218": {
+  "text": "Specialty chemicals maker (pyridine derivatives, APIs and intermediates). ==Q2 FY27 revenue +59% to ₹34 cr==, ==operating profit up 4.6× to ₹10.9 cr==, ==PAT up 5× to ₹8.5 cr==. Buying a ==WHO-approved Mandideep plant from Kaygee Labs for ₹30 cr== to make its own APIs and intermediates and cut outsourcing. Watch: plant bought from a promoter-group company; needs shareholder approval; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Univest – Resonance Q2 FY27",
+    "https://univest.in/blogs/resonance-specialties-q2-results-fy27-pat-8-crore"
+   ],
+   [
+    "Tijori – Resonance to acquire Kaygee unit",
+    "https://www.tijorialerts.com/company-updates/resonance-specialties-to-acquire-kaygee-laboratories-mandideep-unit-for-2998-crore-133728/"
+   ]
+  ],
+  "guide": {}
+ },
+ "DHABRIYA": {
+  "text": "uPVC/aluminium windows, doors and modular furniture maker (Jaipur). H1 FY27 revenue +13% to ₹146 cr, but ==PAT +28% to ₹18 cr== with EBITDA margin up to 22%. ==Order book above ₹240 cr==, including ==₹100 cr+ in aluminium windows & façade== that converts to revenue from Q4 FY27; H2 is seasonally stronger. Management targets ==~30% revenue growth for FY27==. Watch: H1 growth well below target; investment outflow exceeded operating cash.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Dhabriya H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/dhabriya-polywood-h1-profit-margins-ppt-cmw51gbhk00572gmf3336rk3i"
+   ],
+   [
+    "Whalesbook – Dhabriya FY26, targets 30% growth",
+    "https://www.whalesbook.com/corporate-news/English/industrial-goodsservices/Dhabriya-Polywood-FY26-Profit-Jumps-67percent-to-indian-rupee3014-Crore-Targets-30percent-Revenue-Growth/6a32960fb6609c8f9dd18d0f"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     30,
+     30
+    ]
+   }
+  },
+  "ob": {
+   "cr": [
+    240
+   ],
+   "asof": "2026-09-30",
+   "text": "Incl. ₹100 cr+ aluminium windows & façade"
+  }
+ },
+ "GRCL": {
+  "text": "Rubber products for Indian Railways coaches (63 of 75 coach rubber parts) from Faridabad. ==H1 FY27 revenue +59% to ₹27.5 cr, PAT +54% to ₹4.1 cr==, EBITDA margin 23.5%. Plant 2 (rubber flooring, vestibules) is only 35% used and targets ==30% of a ₹70–80 cr yearly tender pool==. Guidance: ==FY27 revenue ₹55 cr (+32%) and PAT ₹9 cr (+61%)==. Watch: depends on winning railway tenders; H2 must be much bigger than H1.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Gayatri Rubbers FY27 targets",
+    "https://www.multibagg.ai/market-pulse/articles/gayatri-rubbers-fy27-revenue-targets-ppt-cmw29ei48003f2mtkcgkofx3d"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "cr": [
+     55,
+     55
+    ]
+   },
+   "profit": {
+    "fy": "FY27",
+    "kind": "PAT",
+    "cr": [
+     9,
+     9
+    ]
+   }
+  }
+ },
+ "SGFIN": {
+  "text": "Supply-chain finance NBFC (dealer and vendor financing, Ghaziabad). ==Q2 FY27 PAT +106% to ₹58.5 cr==; ==H1 PAT +112% to ₹112 cr==, income +109%. ==Loan book doubled (+98%) to a record ₹5,694 cr==, +25% in one quarter, mostly from new customers. ==Zero NPAs==, ROA above 4.5%. Watch: very fast loan growth needs funding; no guidance given.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Free Press Journal – SG Finserve Q2 FY27",
+    "https://www.freepressjournal.in/business/sg-finserve-q2-pat-jumps-106-to-5853-crore-loan-book-hits-5694-crore"
+   ],
+   [
+    "Sahi – SG Finserve Q2",
+    "https://www.sahi.com/news/sg-finserve-reports-q2-net-profit-of-58-8-crore-up-from-28-39-crore-yoy"
+   ]
+  ],
+  "guide": {}
+ },
+ "SHEETAL": {
+  "text": "Agri commodities processor and trader (seeds, spices, grains) from Gujarat. ==H1 FY27 revenue up 2.6× (+159%) to ₹124 cr==, ==PAT up 4.4× to ₹6.7 cr==; FY26 profit was ₹11.5 cr. Watch: operating cash outflow ₹7.8 cr as inventory rose ₹17 cr; trading business with thin margins; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Sheetal Universal H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/sheetal-universal-h1-cash-outflow-announcement-cmw44ph0u00262pp1g1yv4h0d"
+   ]
+  ],
+  "guide": {}
+ },
+ "SHRIAHIMSA": {
+  "text": "Maker of natural caffeine and green coffee bean extract (Jaipur). ==H1 FY27 revenue +32% to ₹80 cr==, PAT +16% to ₹17 cr (21% net margin). Building a ==new manufacturing unit at Sawarda, Jaipur== for its healthcare subsidiary – ₹31 cr of ₹35 cr IPO money already spent; company targets up to 3× capacity. Watch: profit growing slower than sales; single-product business; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Shri Ahimsa H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/shri-ahimsa-naturals-h1-results-announcement-cmw5kev5j004s2bnxpskg5ywe"
+   ],
+   [
+    "Multibagg – Shri Ahimsa capacity",
+    "https://www.multibagg.ai/market-pulse/articles/shri-ahimsa-naturals-capacity-expansion-announcement-cmw5k4s8n003u2bnx4rhhbne1"
+   ]
+  ],
+  "guide": {}
+ },
+ "MEGAFLEX": {
+  "text": "Leno bag maker (PP packaging for potatoes, onions and produce) in Eastern India. ==H1 FY27 revenue +58% to ₹46 cr==, ==net profit doubled (+99%) to ₹3.3 cr==, operating margin up from 3% to 7.5%. FY26 profit had risen 112%. Watch: small company; seasonal farm-linked demand; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Screener – Mega Flex results",
+    "https://www.screener.in/company/MEGAFLEX/"
+   ],
+   [
+    "ScanX – Mega Flex FY26",
+    "https://scanx.trade/stock-market-news/companies/mega-flex-plastics-fy26-net-profit-rises-112-to-727-lakh/41083935"
+   ]
+  ],
+  "guide": {}
+ },
+ "SIMCA": {
+  "text": "Outdoor and digital-outdoor (DOOH) advertising agency. ==H1 FY27 revenue more than doubled (+124%) to ₹109 cr==, ==PAT +60% to ₹12.1 cr==. Won ==BFSI client mandates worth ~₹35 cr== this year (incl. a ₹10 cr order) and a new ==Shirdi Airport advertising deal==; expanding its premium DOOH network. Watch: profit growing much slower than revenue (margins down); no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "MediaNews4U – Simca H1 FY27",
+    "https://www.medianews4u.com/simca-advertising-reports-124-revenue-growth-and-60-pat-rise-in-h1-fy27/"
+   ],
+   [
+    "Tribune – Simca ₹10 cr BFSI order",
+    "https://www.tribuneindia.com/news/business/simca-advertising-limited-expands-premium-media-network-strengthens-dooh-footprint-and-secures-%E2%82%B910-crore-bfsi-work-order/"
+   ]
+  ],
+  "guide": {}
+ },
+ "TAURIAN": {
+  "text": "Mineral processing and crushing equipment maker (Roorkee plant). ==H1 FY27 revenue +73% to ₹56 cr==, ==net profit doubled to ₹7.7 cr==, EBITDA margin up to 22%. Raising ==₹60 cr via preferential shares and warrants== (₹21 cr from promoters) for working capital and capex; adding Roorkee capacity. Management targets ==45–50% revenue CAGR over the coming years==. Watch: needs working capital; dilution from new shares.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "The Week (PTI) – Taurian MPS H1 FY27",
+    "https://www.theweek.in/wire-updates/business/2026/11/04/taurian-mps-doubles-half-year-profit-as-revenue-rises-73-percent-to-rs-56-crore.html"
+   ],
+   [
+    "Arthneeti – Taurian fundraise",
+    "https://www.arthneeti.com/announcements/taurian-mps-ltd-press-release-02-nov-2026"
+   ]
+  ],
+  "guide": {
+   "note": "Targets 45–50% revenue CAGR over coming years (no single-year figure)"
+  }
+ },
+ "UYFINCORP": {
+  "text": "Kolkata NBFC giving business and personal loans. ==Q2 FY27 revenue up 2.4× (+144%) to ₹67 cr==, ==net profit up 2.7× (+174%) to ₹22 cr==; financing profit +147%. Board also reviewed new fund-raising. Watch: very fast loan growth – check asset quality and funding; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Univest – UY Fincorp Q2 FY27",
+    "https://univest.in/blogs/uy-fincorp-q2-results-fy27-pat-22-crore"
+   ],
+   [
+    "Multibagg – UY Fincorp board & fundraising",
+    "https://www.multibagg.ai/market-pulse/articles/uy-fincorp-q2-fundraising-review-cmvz92xbf002v2hlycln5bbea"
+   ]
+  ],
+  "guide": {}
+ },
+ "VMARCIND": {
+  "text": "Wires and cables maker (Haridwar). ==H1 FY27 revenue +84% to ₹1,275 cr==, ==PAT doubled (+104%) to ₹76 cr==, EBITDA margin steady at 11.6%. Management ==raised FY27 revenue-growth guidance to 60%+ (from 40%+)==, EBITDA margin 11–12%. Spent ₹106 cr capex in H1; ~₹400 cr more planned to FY30 to lift capacity from 2.6 lakh km to 10 lakh+ km. Watch: operating cash flow negative; copper prices.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – V-Marc raises FY27 guidance",
+    "https://www.multibagg.ai/market-pulse/articles/v-marc-fy27-growth-guidance-ppt-cmw5k3g76003o2bnxiyay8yes"
+   ],
+   [
+    "Multibagg – V-Marc cash flow",
+    "https://www.multibagg.ai/market-pulse/articles/v-marc-h1-cash-flow-ppt-cmw5k3sgt003p2bnx7jpwx5o8"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     60,
+     60
+    ],
+    "text": "Raised to 60%+ from 40%+"
+   },
+   "margin": {
+    "fy": "FY27",
+    "kind": "EBITDA",
+    "pct": [
+     11,
+     12
+    ]
+   }
+  }
+ },
+ "PROV": {
+  "text": "Healthy-snacks brand ProV (dry fruits, makhana, nuts). ==H1 FY27 consolidated revenue ₹634 cr, PAT ₹11.8 cr==; standalone revenue +54%, profit about doubled. ==Monthly brand revenue crossed ₹100 cr==. Management earlier ==raised its FY28 target to ₹1,100 cr== brand revenue (FY26: ₹659 cr). Watch: very thin margins (~2–3% EBITDA); commodity prices.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Screener – Proventus results & shareholder letter",
+    "https://www.screener.in/company/PROV/"
+   ],
+   [
+    "ScanX – Proventus FY28 target ₹1,100 cr",
+    "https://scanx.trade/stock-market-news/companies/proventus-agrocom-fy26-investor-presentation-659-cr-revenue-93-pat-growth-and-fy28-target-revised-to-1-100-cr/40424623"
+   ]
+  ],
+  "guide": {
+   "note": "FY28 brand revenue target ₹1,100 cr (FY26 brand revenue ₹659 cr)"
+  }
+ },
+ "KANOHAR": {
+  "text": "Power and distribution transformer maker (Meerut). ==Q2 FY27 revenue +112% to ₹209 cr, PAT +180% to ₹54 cr==; ==H1 revenue +109% to ₹346 cr, PAT +165% to ₹81 cr==. ==Won ₹867 cr of orders in one quarter; order book ₹2,711 cr== (up 34% QoQ), executable over 24–30 months. Guidance kept: ==FY27 revenue ~₹950 cr, EBITDA margin ~28%==; capacity to double to ~38,000 MVA by end-FY28. Watch: H2 must deliver ~₹600 cr to meet guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "PowerPeak Digest – Kanohar Q2 FY27",
+    "https://powerpeakdigest.com/kanohar-electricals-q2-fy27-profit-order-book/"
+   ],
+   [
+    "Multibagg – Kanohar FY27 guidance",
+    "https://www.multibagg.ai/market-pulse/articles/kanohar-electricals-limited-fy27-margin-concall-cmw8w2hzu003x2mpheeisq67j"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "cr": [
+     950,
+     950
+    ]
+   },
+   "margin": {
+    "fy": "FY27",
+    "kind": "EBITDA",
+    "pct": [
+     28,
+     28
+    ],
+    "text": "Similar to FY26 (~28%)"
+   }
+  },
+  "ob": {
+   "cr": [
+    2711.2
+   ],
+   "asof": "2026-09-30",
+   "text": "Executable over 24–30 months"
+  }
+ },
+ "FORCAS": {
+  "text": "Kolkata apparel company with mass-market brands FTX and TRIBE (asset-light model). ==H1 FY27 income +56% to ₹131 cr==, ==PAT +72% to ₹10 cr==, EBITDA margin up to 11.7%. ==Quick commerce now ~10% of revenue== (FTX launched on Flipkart Minutes, 4 platforms), target 20%+. Guidance: ==FY27 revenue growth 25–30%== (lowered). Watch: guidance cut despite strong H1 – H2 may slow.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Forcas H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/forcas-studio-h1-fy27-results-cmvu7d1i5005j2gqigf47cgjt"
+   ],
+   [
+    "Outlook Business – Forcas H1 FY27",
+    "https://www.outlookbusiness.com/spotlight/news-wire/forcas-studio-reports-h1-fy27-performance-with-total-income-of-rs-131017-mn-pat-of-rs-9991-mn"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     25,
+     30
+    ],
+    "text": "Lowered guidance"
+   }
+  }
+ },
+ "MARUSHIKA": {
+  "text": "IT and telecom infrastructure integrator for government projects (Delhi Metro, RailTel, NHAI). ==H1 FY27 revenue +72% to ₹83 cr, PAT +126% to ₹7 cr== on bigger projects and direct government bids. Key contracts: ==Delhi Metro Phase 4 communications (₹31 cr, 85% done)==, RailCloud data-centre hardware (₹25 cr), ==₹30 cr smart-parking mandate== to July 2027. Watch: total order book not disclosed; lumpy government work; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Marushika H1 FY27 concall",
+    "https://www.multibagg.ai/market-pulse/articles/marushika-h1-growth-government-projects-concall-cmw6zhrbn000j2mphlx469rcc"
+   ]
+  ],
+  "guide": {}
+ },
+ "DURLAX": {
+  "text": "Solid surface and quartz countertop maker/distributor (Mumbai). ==Q2 FY27 revenue +81% to ₹70 cr==, ==PAT up 4.7× (+374%) to ₹9 cr==; H1 revenue ~₹126 cr, PAT ~₹11.8 cr. Watch: reasons for the jump not disclosed; one strong quarter; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Durlax Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/durlax-q2-profit-rises-cmw4zq69q00262gmfaekg1lmb"
+   ]
+  ],
+  "guide": {}
+ },
+ "AEROPLANE": {
+  "text": "Basmati rice exporter and miller ('Aeroplane' brand). ==Q2 FY27 revenue +17% to ₹694 cr, PAT +26% to ₹41 cr==; ==H1 PAT +60% to ₹78 cr== after Q1 profit more than doubled. Growth driven by export demand; finance costs fell 10%. Watch: receivables up 58% since March and H1 operating cash flow negative; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Amir Chand Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/amir-chand-jagdish-q2-results-cmvzcze4m000p2hpenwmizpt7"
+   ],
+   [
+    "Multibagg – Amir Chand Q1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/amir-chand-q1fy27-profit-revenue-cmsd9e35i00ms0zoyk185ansj"
+   ]
+  ],
+  "guide": {}
+ },
+ "523289": {
+  "text": "Packaged food and consumer products distributor/maker. ==Q2 FY27 revenue +47% to ₹60 cr, PAT +50% to ₹2.5 cr==; FY26 profit had doubled (+109%). Watch: thin margin (~4%); small company; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Univest – Rama Vision Q2 FY27",
+    "https://univest.in/blogs/rama-vision-q2-results-fy27-pat-2-crore"
+   ],
+   [
+    "ScanX – Rama Vision FY26",
+    "https://scanx.trade/stock-market-news/companies/rama-vision-fy26-net-profit-rises-109-to-592-lakh/41245875"
+   ]
+  ],
+  "guide": {}
+ },
+ "APEXECO": {
+  "text": "Water and wastewater treatment EPC (recycling, evaporators, zero liquid discharge). ==H1 FY27 revenue nearly tripled to ₹94 cr== (from ₹33 cr), PAT ₹4 cr, EPS +55%. FY26 revenue had doubled with a ==₹125 cr order book== at the time. Watch: EBITDA margin fell to ~6% from 9%; current order book not disclosed; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Screener – Apex Ecotech results",
+    "https://www.screener.in/company/APEXECO/"
+   ],
+   [
+    "ScanX – Apex Ecotech FY26 & order book",
+    "https://scanx.trade/stock-market-news/companies/apex-ecotech-reports-record-fy26-performance-with-109-5-revenue-growth-and-125-cr-order-book/40427783"
+   ]
+  ],
+  "guide": {}
+ },
+ "544746": {
+  "text": "EPC contractor for electrical substations, solar plants and fire-protection systems. ==H1 FY27 revenue +36% to ₹58 cr==, ==PAT +37% to ₹10.3 cr== (18% net margin); FY26 profit had jumped 89%. IPO money use reviewed with no deviation. Watch: earlier concern on weak operating cash flow; order book not disclosed; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Safety Controls H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/safety-controls-devices-h1-profit-announcement-cmwgl98q200d82rpbgq5nrc73"
+   ],
+   [
+    "Whalesbook – Safety Controls FY26",
+    "https://www.whalesbook.com/corporate-news/English/industrial-goodsservices/Safety-Controls-and-Devices-Ltd-posts-887percent-profit-jump-revenue-up-141percent/6a1ad7d6de28c5c0a9128ae6"
+   ]
+  ],
+  "guide": {}
+ },
+ "544810": {
+  "text": "Logistics and supply-chain company for OEMs (road, rail, air, warehousing, last-mile). ==H1 FY27 revenue +36% to ₹131 cr==, ==PAT +60% to ₹6.4 cr==, driven by ==new warehouses and onboarding of US clients==. IPO money used as planned. Watch: thin margins (~5%); no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Screener – Sampark India results & press release",
+    "https://www.screener.in/company/544810/"
+   ]
+  ],
+  "guide": {}
+ },
+ "FONEBOX": {
+  "text": "Mobile phone and electronics retail chain. ==H1 FY27 revenue ₹449 cr and profit ₹7.7 cr – already more than all of FY26 profit (₹6.8 cr)==. Issued 30 lakh shares (~₹26 cr value) to ==acquire NWOM Retailers==, adding stores. Watch: retail margins below 2%; share issue dilutes holders; prior-year H1 figures not given.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Arthneeti – Fonebox H1 FY27 board outcome",
+    "https://www.arthneeti.com/announcements/fonebox-retail-ltd-outcome-of-board-meeting-06-nov-2026"
+   ],
+   [
+    "ScanX – Fonebox FY26",
+    "https://scanx.trade/stock-market-news/companies/fonebox-retail-fy26-net-profit-rises-49-6-to-680-05-lakh/41878048"
+   ]
+  ],
+  "guide": {}
+ },
+ "UNIVASTU": {
+  "text": "Construction contractor (Pune) for buildings and infrastructure. ==Q2 FY27 revenue tripled (+210%) to ₹150 cr, PAT +211% to ₹15.6 cr==; ==H1 revenue ₹254 cr vs ₹78 cr, PAT ₹25.7 cr vs ₹9 cr==. Watch: gross margin fell from 31% to 22%; order book not disclosed; also handling NCLT resolution matters; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Univest – Univastu Q2 FY27",
+    "https://univest.in/blogs/univastu-india-q2-results-fy27-pat-16-crore"
+   ],
+   [
+    "Multibagg – Univastu H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/univastu-india-revenue-gross-margin-announcement-cmw501hw900322gmf0gz7fkur"
+   ]
+  ],
+  "guide": {}
+ },
+ "539522": {
+  "text": "South Delhi luxury residential redeveloper. ==Q2 FY27 revenue +75–80% to ~₹27 cr, PAT up ~5× to ₹2 cr==. ==2.48 lakh sq ft pipeline== (1.83 lakh sq ft under way, delivery Q3 FY27–Q4 FY28), three projects with a real-estate AIF. Raised ₹15 cr of a ₹40 cr FY27 fund-raise; plans NSE listing within 3 years. Watch: lumpy project revenue; small company.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Univest – Grovy Q2 FY27",
+    "https://univest.in/blogs/grovy-india-q2-results-fy27-pat-2-crore"
+   ],
+   [
+    "The Realty Today – Grovy pipeline",
+    "https://therealtytoday.com/news/residential/grovy-india-strengthens-south-delhi-presence-with-248-lakh-sq-ft-development-pipeline"
+   ]
+  ],
+  "guide": {}
+ },
+ "517336": {
+  "text": "Maker of overhead power conductors and line hardware for transmission and distribution projects. ==Q1 FY27 sales nearly doubled (+98%) to ₹55 cr==, ==net profit up 3× to ₹7.5 cr==, operating margin 19%. Benefits from the power-grid capex cycle. Watch: Q2 FY27 results not yet out; borrowings rose in FY26; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Screener – Modern Malleables results",
+    "https://www.screener.in/company/517336/"
+   ]
+  ],
+  "guide": {}
+ },
+ "519097": {
+  "text": "Punjab maker of oleochemicals (stearic acid, glycerin, fatty acids) with a small knitwear unit. ==Q2 FY27 revenue +82% to ₹70 cr==, ==PAT nearly 3× (+190%) to ₹3.1 cr==; ==H1 PAT ₹4.8 cr vs ₹1.4 cr==. Q1 profit had jumped 366%. Watch: thin margins (~4%); raw oil price swings; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "InvestyWise – Ritesh International Q2 FY27",
+    "https://www.investywise.com/?p=121521"
+   ],
+   [
+    "Screener – Ritesh International",
+    "https://screener.in/company/519097"
+   ]
+  ],
+  "guide": {}
+ },
+ "514280": {
+  "text": "Industrial technical-fabric maker (Gujarat). ==H1 FY27 revenue +43% to ₹52 cr==, ==PAT +134% to ₹4.2 cr==; Q2 profit +175% to ₹2.2 cr on +28% revenue. Watch: operating cash outflow ₹6.7 cr; Q2 revenue lower than Q1; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Sanrhea Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/sanrhea-september-profit-revenue-growth-announcement-cmw4wefd9006su02r32t2zju8"
+   ],
+   [
+    "Multibagg – Sanrhea cash outflow",
+    "https://www.multibagg.ai/market-pulse/articles/sanrhea-technical-textiles-operating-outflow-announcement-cmw4wee7u006ru02rgzvasete"
+   ]
+  ],
+  "guide": {}
+ },
+ "OMFREIGHT": {
+  "text": "Mumbai freight forwarder and 3PL logistics company (sea, air, road, rail, customs). ==Q2 FY27 revenue +78% to ₹204 cr, net profit +119% to ₹8.9 cr==; ==H1 revenue +90% to ₹399 cr, profit +122% to ₹16.2 cr==. Q1 had already doubled revenue. Watch: thin margins (~4%); freight rates can swing; no guidance.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "MarketScreener – Om Freight Q2 & H1 FY27",
+    "https://www.marketscreener.com/news/om-freight-forwarders-limited-reports-earnings-results-for-the-second-quarter-and-six-months-ended-s-ce785ededa8ef72d"
+   ],
+   [
+    "DSIJ – Om Freight Q1 FY27",
+    "https://insights.dsij.in/dsijarticledetail/penny-stock-below-rs-100-multibagger-logistics-solutions-provider-reports-q1-fy27-results-revenue-surges-105-yoy-pat-jumps-126-59023"
+   ]
+  ],
+  "guide": {}
+ },
+ "COMSYN": {
+  "text": "FIBC bulk bags and technical-textile packaging maker (Pithampur, MP). ==H1 FY27 revenue +23% to ₹232 cr, PAT +27% to ₹17.7 cr==. ==Commercial production started at the expanded Techtex unit==; ₹34 cr capex in H1 plus a 1 MW captive solar project. Watch: Q2 profit only +4% as costs rose; borrowings and capital work-in-progress up; operating cash outflow.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "Multibagg – Commercial Syn Bags H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/commercial-syn-bags-h1-profit-announcement-cmwglvu1a00ec2rpb718h1rg5"
+   ],
+   [
+    "Multibagg – Commercial Syn Bags Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/commercial-syn-bags-q2-results-cmwglv1jy00e32rpb8gz5c58h"
+   ]
+  ],
+  "guide": {}
+ },
+ "UTSSAV": {
+  "text": "Gold and diamond jewellery manufacturer (B2B, Kolkata). FY26 revenue +79% to ~₹1,155 cr, PAT +136%. Guidance: ==FY27 revenue growth ~60%== (volume +35–40%), ==EBITDA margin 7–8%, PAT margin 4–4.5%==. ==Capacity to go from ~2.5 to 6–7 tonnes/year== (~₹50 cr capex), diamond jewellery target ₹200 cr+ in two years, UAE unit for exports; ==1:1 bonus approved==. Watch: H1 FY27 numbers not yet checked; negative operating cash flow.",
+  "date": "2026-11-15",
+  "sources": [
+   [
+    "MoneyMuscle – Utssav FY26 & FY27 guidance",
+    "https://www.moneymuscle.in/p/utssav-cz-gold-fy26-results-profit"
+   ],
+   [
+    "Investing.com – Utssav 1:1 bonus",
+    "https://in.investing.com/analysis/utssav-cz-gold-jewels-approves-11-bonus-issue-whats-next-200640680"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     60,
+     60
+    ]
+   },
+   "margin": {
+    "fy": "FY27",
+    "kind": "EBITDA",
+    "pct": [
+     7,
+     8
+    ],
+    "text": "PAT margin 4–4.5%"
+   }
+  }
  }
 }
