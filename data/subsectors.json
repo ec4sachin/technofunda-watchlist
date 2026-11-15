@@ -1292,5 +1292,15 @@
   "Capital Goods",
   "Mining & bulk-handling equipment",
   "auto"
+ ],
+ "JSIPL": [
+  "Metals",
+  "Stainless steel products",
+  "auto"
+ ],
+ "544773": [
+  "Capital Goods",
+  "Factory automation & special-purpose machines",
+  "auto"
  ]
 }

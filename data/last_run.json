@@ -1,5 +1,16 @@
 {
- "added": [],
+ "added": [
+  [
+   "JSIPL",
+   "Jindal Supreme",
+   "marks 5.5/11 · RS: too new (under 3 months of prices) · TTM Profit > 30%, 52W High"
+  ],
+  [
+   "544773",
+   "Merritronix",
+   "marks 5.5/11 · 3-month RS 91 (vs 4118 BSE stocks) · TTM Profit > 30%, 52W High"
+  ]
+ ],
  "rejected": [],
  "to_dt": [],
  "to_sp": [],
@@ -153,7 +164,7 @@
   [
    "SMT",
    "Sahajanand Medical Technologies Ltd",
-   "close 533.95 (too new for any EMA)"
+   "close 537.3 (too new for any EMA)"
   ],
   [
    "TAALTECH",
@@ -179,6 +190,16 @@
    "UDAYJEW",
    "Uday Jewellery",
    "close 220.1 vs 20 EMA 214.14 → SP"
+  ],
+  [
+   "JSIPL",
+   "Jindal Supreme",
+   "close 173.06 vs 20 EMA 160.41 → SP"
+  ],
+  [
+   "544773",
+   "Merritronix",
+   "close 417.05 vs 20 EMA 408.73 → SP"
   ],
   [
    "544623",
@@ -248,7 +269,7 @@
   [
    "SWASTIKAIN",
    "Swastika Infra",
-   "close 193.69 vs 20 EMA 199.78"
+   "close 194.9 (too new for any EMA)"
   ],
   [
    "XTRANET",
@@ -262,19 +283,19 @@
   ]
  ],
  "per_alert": {
-  "TTM Profit > 30%": 0,
-  "52W High": 0,
+  "TTM Profit > 30%": 4,
+  "52W High": 6,
   "Daily Volume Scan": 0,
-  "Weekly Volume Scan": 0,
+  "Weekly Volume Scan": 2,
   "Ready after 6 Months": 0,
   "Mukul Mahavir Agrawal": 0,
   "Ashish Kacholia": 0
  },
- "email_total": 0,
- "already_listed": 0,
+ "email_total": 7,
+ "already_listed": 5,
  "price_date": "13 Nov 2026",
  "monthly_pass": 0,
- "mode": "daily",
+ "mode": "auto",
  "monthly_done": false,
- "run_at": "14 Nov 2026, 03:36 PM IST"
+ "run_at": "15 Nov 2026, 07:50 AM IST"
 }

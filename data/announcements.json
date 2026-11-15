@@ -1,5 +1,5 @@
 {
- "last": "2026-11-14",
+ "last": "2026-11-15",
  "status": {
   "bse": {
    "days": 1,
@@ -8,13 +8,13 @@
   },
   "nse": {
    "days": 1,
-   "rows": 373,
+   "rows": 8,
    "last_error": ""
   },
   "matched": {
-   "bse_codes": 91,
-   "nse_only_codes": 229,
-   "new": 0
+   "bse_codes": 92,
+   "nse_only_codes": 230,
+   "new": 1
   }
  },
  "items": {
@@ -46,6 +46,16 @@
     "url": "https://nsearchives.nseindia.com/corporate/APSIS2025_12112026164829_Dislcosure_under_Reg30_Work_order_11112026_signed.pdf",
     "ex": "NSE",
     "seen": "2026-11-13"
+   }
+  ],
+  "SWARAJ": [
+   {
+    "d": "2026-11-15",
+    "t": "Swaraj Suiting Limited has informed the Exchange regarding a press release dated November 14, 2026, titled \"Strong Growth Continues\".",
+    "k": "Business update",
+    "url": "https://nsearchives.nseindia.in/corporate/SWARAJ_15112026010406_Regu30IP15Nov2026.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-15"
    }
   ]
  }
