@@ -1,5 +1,5 @@
 {
- "last": "2026-11-15",
+ "last": "2026-11-16",
  "status": {
   "bse": {
    "days": 1,
@@ -8,7 +8,7 @@
   },
   "nse": {
    "days": 1,
-   "rows": 14,
+   "rows": 4,
    "last_error": ""
   },
   "matched": {
