@@ -584,3 +584,16 @@ date,symbol,name,action,reason
 2026-11-14,MPSLTD,MPS Ltd,SP -> DT,close 2259.3 below 200 EMA 2262.88
 2026-11-15,JSIPL,Jindal Supreme,ADDED to SP,"marks 5.5/11; RS: too new (under 3 months of prices); from TTM Profit > 30%, 52W High"
 2026-11-15,544773,Merritronix,ADDED to SP,"marks 5.5/11; 3-month RS 91 (vs 4118 BSE stocks); from TTM Profit > 30%, 52W High"
+2026-11-17,TECHNOCRAF,Technocraft Ven.,ADDED to SP,"marks 6.1/11; 3-month RS 98 (vs 4268 BSE stocks); from TTM Profit > 30%, 52W High"
+2026-11-17,543916,Hemant Surgical,ADDED to SP,"marks 8.8/11; 3-month RS 98 (vs 3771 BSE stocks); from TTM Profit > 30%, Daily Volume Scan, 52W High"
+2026-11-17,500346,Punjab Commun.,SP -> DT,close 53.18 below 200 EMA 53.39
+2026-11-17,509597,Hardcast.& Waud,SP -> DT,close 798.75 below 200 EMA 800.74
+2026-11-17,538862,My Money Sec.,SP -> DT,close 38 below 200 EMA 39.74
+2026-11-17,539522,Grovy India,SP -> DT,close 52.25 below 200 EMA 53.84
+2026-11-17,543351,Naapbooks,SP -> DT,close 126.6 below 200 EMA 126.9
+2026-11-17,543542,Kesar India,SP -> DT,close 1155.5 below 200 EMA 1182.04
+2026-11-17,544551,Bhavik Enterpris,SP -> DT,close 149 below 20 EMA 149.73 (new listing)
+2026-11-17,544682,GRE Renew,SP -> DT,close 210.05 below 20 EMA 224.9 (new listing)
+2026-11-17,544755,Recode Studios,SP -> DT,close 408.35 below 20 EMA 411.22 (new listing)
+2026-11-17,APEXECO,Apex Ecotech,SP -> DT,close 222.75 below 200 EMA 224.73
+2026-11-17,543895,Exhicon Events,DT -> SP,close 495.4 back above 200 EMA 490.93

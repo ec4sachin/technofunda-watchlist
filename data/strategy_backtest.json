@@ -1,24 +1,24 @@
 {
  "swing": {
   "report": {
-   "trades": 243,
+   "trades": 244,
    "open": 6,
    "wins": 109,
-   "losses": 134,
-   "win_rate": 44.9,
-   "total_pnl": 551673.26,
-   "open_pnl": 35848.16,
+   "losses": 135,
+   "win_rate": 44.7,
+   "total_pnl": 545349.14,
+   "open_pnl": 34909.54,
    "avg_win": 11410.65,
-   "avg_loss": -5164.83,
-   "profit_factor": 1.8,
-   "expectancy": 2270.26,
-   "avg_return_pct": 2.28,
+   "avg_loss": -5173.42,
+   "profit_factor": 1.78,
+   "expectancy": 2235.04,
+   "avg_return_pct": 2.24,
    "best": 42721.71,
    "worst": -14274.04,
    "max_drawdown": 143599.85,
-   "avg_hold_days": 17.2,
+   "avg_hold_days": 17.1,
    "first": "2024-11-21",
-   "last": "2026-11-13",
+   "last": "2026-11-16",
    "curve": [
     [
      "2024-12-05",
@@ -991,6 +991,10 @@
     [
      "2026-11-13",
      551673.26
+    ],
+    [
+     "2026-11-16",
+     545349.14
     ]
    ],
    "months": {
@@ -1017,12 +1021,37 @@
     "2026-08": 47070.82,
     "2026-09": 162612.54,
     "2026-10": 20269.35,
-    "2026-11": -11362.95
+    "2026-11": -17687.07
    },
-   "without_best": 508951.55,
+   "without_best": 502627.43,
    "best_trade": "Gandhar Oil Ref. 2026-06-15"
   },
   "trades": [
+   {
+    "symbol": "543920",
+    "name": "CFF Fluid",
+    "entry_date": "2026-11-16",
+    "entry": 1124.99,
+    "qty": 88,
+    "status": "closed",
+    "pnl": -6324.12,
+    "pnl_pct": -6.39,
+    "hold_days": 0,
+    "closed_on": "2026-11-16",
+    "exits": [
+     {
+      "date": "2026-11-16",
+      "qty": 88,
+      "price": 1057.49,
+      "reason": "Stop loss (6% max risk) — same day",
+      "pnl": -6324.12,
+      "charges": 384.12
+     }
+    ],
+    "open_pnl": null,
+    "type": "swing",
+    "regime": ""
+   },
    {
     "symbol": "YATHARTH",
     "name": "Yatharth Hospital & Trauma Care Services Ltd",
@@ -1083,7 +1112,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": 3810.56,
+    "open_pnl": 2871.94,
     "type": "swing",
     "regime": ""
    },
@@ -7660,20 +7689,20 @@
     "regime": ""
    }
   ],
-  "as_of": "2026-11-16",
-  "stocks": 244,
+  "as_of": "2026-11-17",
+  "stocks": 237,
   "last2y": {
-   "start": "2024-11-16",
+   "start": "2024-11-17",
    "capital": 1000000.0,
    "pct": 13.0,
-   "final": 1659410.09,
-   "profit": 659410.09,
+   "final": 1643710.57,
+   "profit": 643710.57,
    "open_trades": 6,
-   "return_pct": 65.9,
-   "trades": 181,
+   "return_pct": 64.4,
+   "trades": 182,
    "skipped": 68,
    "wins": 84,
-   "win_rate": 46.4,
+   "win_rate": 46.2,
    "max_drawdown_pct": 8.2,
    "months": {
     "2024-12": 35812.24,
@@ -7699,7 +7728,7 @@
     "2026-08": 57933.48,
     "2026-09": -998.59,
     "2026-10": 7799.26,
-    "2026-11": 49858.36
+    "2026-11": 34158.84
    },
    "curve": [
     [
@@ -7796,20 +7825,40 @@
     ],
     [
      "2026-11",
-     1659410.15
+     1643710.63
     ]
    ],
    "first_trade": "2024-11-21",
    "trades_list": [
+    {
+     "name": "CFF Fluid",
+     "symbol": "543920",
+     "entry_date": "2026-11-16",
+     "closed_on": "2026-11-16",
+     "open": false,
+     "money": 215472,
+     "pnl": -13764.46,
+     "pnl_pct": -6.39
+    },
     {
      "name": "Yatharth Hospital & Trauma Care Services Ltd",
      "symbol": "YATHARTH",
      "entry_date": "2026-11-13",
      "closed_on": "2026-11-13",
      "open": true,
-     "money": 216351,
-     "pnl": -4831.35,
+     "money": 215318,
+     "pnl": -4808.27,
      "pnl_pct": -2.23
+    },
+    {
+     "name": "Aptus Pharma",
+     "symbol": "544529",
+     "entry_date": "2026-11-03",
+     "closed_on": "2026-11-16",
+     "open": true,
+     "money": 207900,
+     "pnl": 5991.4,
+     "pnl_pct": 2.88
     },
     {
      "name": "DC Infotech",
@@ -7830,16 +7879,6 @@
      "money": 207900,
      "pnl": 25312.11,
      "pnl_pct": 12.18
-    },
-    {
-     "name": "Aptus Pharma",
-     "symbol": "544529",
-     "entry_date": "2026-11-03",
-     "closed_on": "2026-11-13",
-     "open": true,
-     "money": 207900,
-     "pnl": 7949.54,
-     "pnl_pct": 3.82
     },
     {
      "name": "Saakshi Medtech",
@@ -9614,7 +9653,7 @@
    ]
   },
   "year2": {
-   "start": "2024-11-16",
+   "start": "2024-11-17",
    "capital": 1000000.0,
    "pct": 13.0,
    "final": 1049431.34,
@@ -10520,17 +10559,17 @@
    ]
   },
   "year1": {
-   "start": "2025-11-16",
+   "start": "2025-11-17",
    "capital": 1000000.0,
    "pct": 13.0,
-   "final": 1622739.99,
-   "profit": 622739.99,
+   "final": 1607387.4,
+   "profit": 607387.4,
    "open_trades": 6,
-   "return_pct": 62.3,
-   "trades": 100,
+   "return_pct": 60.7,
+   "trades": 101,
    "skipped": 60,
    "wins": 51,
-   "win_rate": 51.0,
+   "win_rate": 50.5,
    "max_drawdown_pct": 2.4,
    "months": {
     "2025-11": -23874.73,
@@ -10545,7 +10584,7 @@
     "2026-08": 56653.24,
     "2026-09": -976.53,
     "2026-10": 7626.91,
-    "2026-11": 48756.57
+    "2026-11": 33403.98
    },
    "curve": [
     [
@@ -10598,20 +10637,40 @@
     ],
     [
      "2026-11",
-     1622740.01
+     1607387.42
     ]
    ],
    "first_trade": "2025-11-17",
    "trades_list": [
+    {
+     "name": "CFF Fluid",
+     "symbol": "543920",
+     "entry_date": "2026-11-16",
+     "closed_on": "2026-11-16",
+     "open": false,
+     "money": 210710,
+     "pnl": -13460.29,
+     "pnl_pct": -6.39
+    },
     {
      "name": "Yatharth Hospital & Trauma Care Services Ltd",
      "symbol": "YATHARTH",
      "entry_date": "2026-11-13",
      "closed_on": "2026-11-13",
      "open": true,
-     "money": 211570,
-     "pnl": -4724.59,
+     "money": 210560,
+     "pnl": -4702.02,
      "pnl_pct": -2.23
+    },
+    {
+     "name": "Aptus Pharma",
+     "symbol": "544529",
+     "entry_date": "2026-11-03",
+     "closed_on": "2026-11-16",
+     "open": true,
+     "money": 203306,
+     "pnl": 5859.0,
+     "pnl_pct": 2.88
     },
     {
      "name": "DC Infotech",
@@ -10632,16 +10691,6 @@
      "money": 203306,
      "pnl": 24752.75,
      "pnl_pct": 12.18
-    },
-    {
-     "name": "Aptus Pharma",
-     "symbol": "544529",
-     "entry_date": "2026-11-03",
-     "closed_on": "2026-11-13",
-     "open": true,
-     "money": 203306,
-     "pnl": 7773.87,
-     "pnl_pct": 3.82
     },
     {
      "name": "Saakshi Medtech",
@@ -11680,11 +11729,11 @@
     "max_drawdown_pct": 8.2
    },
    "2026": {
-    "final": 1484241.46,
+    "final": 1470199.2,
     "open_trades": 6,
-    "return_pct": 48.4,
-    "trades": 90,
-    "win_rate": 50.0,
+    "return_pct": 47.0,
+    "trades": 91,
+    "win_rate": 49.5,
     "max_drawdown_pct": 1.5
    }
   },
@@ -11703,24 +11752,24 @@
  },
  "positional": {
   "report": {
-   "trades": 164,
+   "trades": 165,
    "open": 16,
    "wins": 44,
-   "losses": 120,
-   "win_rate": 26.8,
-   "total_pnl": 695708.16,
-   "open_pnl": 205969.63,
+   "losses": 121,
+   "win_rate": 26.7,
+   "total_pnl": 689384.04,
+   "open_pnl": 205031.01,
    "avg_win": 33394.21,
-   "avg_loss": -6446.98,
-   "profit_factor": 1.9,
-   "expectancy": 4242.12,
-   "avg_return_pct": 4.24,
+   "avg_loss": -6445.96,
+   "profit_factor": 1.88,
+   "expectancy": 4178.09,
+   "avg_return_pct": 4.17,
    "best": 82528.59,
    "worst": -14274.04,
    "max_drawdown": 195819.6,
-   "avg_hold_days": 39.8,
+   "avg_hold_days": 39.6,
    "first": "2024-11-21",
-   "last": "2026-11-13",
+   "last": "2026-11-16",
    "curve": [
     [
      "2024-12-05",
@@ -12377,6 +12426,10 @@
     [
      "2026-11-13",
      695708.16
+    ],
+    [
+     "2026-11-16",
+     689384.04
     ]
    ],
    "months": {
@@ -12400,12 +12453,37 @@
     "2026-08": 96335.13,
     "2026-09": -19082.73,
     "2026-10": 325776.89,
-    "2026-11": 59748.74
+    "2026-11": 53424.62
    },
-   "without_best": 613179.57,
+   "without_best": 606855.45,
    "best_trade": "Hoac Foods 2026-03-24"
   },
   "trades": [
+   {
+    "symbol": "543920",
+    "name": "CFF Fluid",
+    "entry_date": "2026-11-16",
+    "entry": 1124.99,
+    "qty": 88,
+    "status": "closed",
+    "pnl": -6324.12,
+    "pnl_pct": -6.39,
+    "hold_days": 0,
+    "closed_on": "2026-11-16",
+    "exits": [
+     {
+      "date": "2026-11-16",
+      "qty": 88,
+      "price": 1057.49,
+      "reason": "Stop loss (6% max risk) — same day",
+      "pnl": -6324.12,
+      "charges": 384.12
+     }
+    ],
+    "open_pnl": null,
+    "type": "positional",
+    "regime": ""
+   },
    {
     "symbol": "YATHARTH",
     "name": "Yatharth Hospital & Trauma Care Services Ltd",
@@ -12450,7 +12528,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": 3810.56,
+    "open_pnl": 2871.94,
     "type": "positional",
     "regime": ""
    },
@@ -17178,20 +17256,20 @@
     "regime": ""
    }
   ],
-  "as_of": "2026-11-16",
-  "stocks": 244,
+  "as_of": "2026-11-17",
+  "stocks": 237,
   "last2y": {
-   "start": "2024-11-16",
+   "start": "2024-11-17",
    "capital": 1000000.0,
    "pct": 12.0,
-   "final": 1885415.53,
-   "profit": 885415.53,
+   "final": 1869163.16,
+   "profit": 869163.16,
    "open_trades": 8,
-   "return_pct": 88.5,
-   "trades": 88,
+   "return_pct": 86.9,
+   "trades": 89,
    "skipped": 92,
    "wins": 31,
-   "win_rate": 35.2,
+   "win_rate": 34.8,
    "max_drawdown_pct": 5.4,
    "months": {
     "2024-12": 22441.09,
@@ -17216,7 +17294,7 @@
     "2026-08": 68932.57,
     "2026-09": 35456.1,
     "2026-10": 92299.39,
-    "2026-11": 250888.95
+    "2026-11": 234636.57
    },
    "curve": [
     [
@@ -17309,20 +17387,40 @@
     ],
     [
      "2026-11",
-     1885415.55
+     1869163.17
     ]
    ],
    "first_trade": "2024-11-21",
    "trades_list": [
+    {
+     "name": "CFF Fluid",
+     "symbol": "543920",
+     "entry_date": "2026-11-16",
+     "closed_on": "2026-11-16",
+     "open": false,
+     "money": 226032,
+     "pnl": -14439.07,
+     "pnl_pct": -6.39
+    },
     {
      "name": "Yatharth Hospital & Trauma Care Services Ltd",
      "symbol": "YATHARTH",
      "entry_date": "2026-11-13",
      "closed_on": "2026-11-13",
      "open": true,
-     "money": 226858,
-     "pnl": -5065.97,
+     "money": 225965,
+     "pnl": -5046.03,
      "pnl_pct": -2.23
+    },
+    {
+     "name": "Aptus Pharma",
+     "symbol": "544529",
+     "entry_date": "2026-11-03",
+     "closed_on": "2026-11-16",
+     "open": true,
+     "money": 194640,
+     "pnl": 5609.26,
+     "pnl_pct": 2.88
     },
     {
      "name": "DC Infotech",
@@ -17333,16 +17431,6 @@
      "money": 206789,
      "pnl": -2084.1,
      "pnl_pct": -1.01
-    },
-    {
-     "name": "Aptus Pharma",
-     "symbol": "544529",
-     "entry_date": "2026-11-03",
-     "closed_on": "2026-11-13",
-     "open": true,
-     "money": 194640,
-     "pnl": 7442.51,
-     "pnl_pct": 3.82
     },
     {
      "name": "Lead Reclaim",
@@ -18197,7 +18285,7 @@
    ]
   },
   "year2": {
-   "start": "2024-11-16",
+   "start": "2024-11-17",
    "capital": 1000000.0,
    "pct": 12.0,
    "final": 1102106.77,
@@ -18758,17 +18846,17 @@
    ]
   },
   "year1": {
-   "start": "2025-11-16",
+   "start": "2025-11-17",
    "capital": 1000000.0,
    "pct": 12.0,
-   "final": 1794241.86,
-   "profit": 794241.86,
+   "final": 1778775.39,
+   "profit": 778775.39,
    "open_trades": 8,
-   "return_pct": 79.4,
-   "trades": 45,
+   "return_pct": 77.9,
+   "trades": 46,
    "skipped": 70,
    "wins": 23,
-   "win_rate": 51.1,
+   "win_rate": 50.0,
    "max_drawdown_pct": 1.4,
    "months": {
     "2025-11": -14436.21,
@@ -18783,7 +18871,7 @@
     "2026-08": 65653.76,
     "2026-09": 33744.33,
     "2026-10": 87615.67,
-    "2026-11": 238736.49
+    "2026-11": 223270.02
    },
    "curve": [
     [
@@ -18836,20 +18924,40 @@
     ],
     [
      "2026-11",
-     1794241.87
+     1778775.4
     ]
    ],
    "first_trade": "2025-11-17",
    "trades_list": [
+    {
+     "name": "CFF Fluid",
+     "symbol": "543920",
+     "entry_date": "2026-11-16",
+     "closed_on": "2026-11-16",
+     "open": false,
+     "money": 215102,
+     "pnl": -13740.83,
+     "pnl_pct": -6.39
+    },
     {
      "name": "Yatharth Hospital & Trauma Care Services Ltd",
      "symbol": "YATHARTH",
      "entry_date": "2026-11-13",
      "closed_on": "2026-11-13",
      "open": true,
-     "money": 215888,
-     "pnl": -4820.99,
+     "money": 215038,
+     "pnl": -4802.01,
      "pnl_pct": -2.23
+    },
+    {
+     "name": "Aptus Pharma",
+     "symbol": "544529",
+     "entry_date": "2026-11-03",
+     "closed_on": "2026-11-16",
+     "open": true,
+     "money": 185230,
+     "pnl": 5338.08,
+     "pnl_pct": 2.88
     },
     {
      "name": "DC Infotech",
@@ -18860,16 +18968,6 @@
      "money": 196740,
      "pnl": -1982.82,
      "pnl_pct": -1.01
-    },
-    {
-     "name": "Aptus Pharma",
-     "symbol": "544529",
-     "entry_date": "2026-11-03",
-     "closed_on": "2026-11-13",
-     "open": true,
-     "money": 185230,
-     "pnl": 7082.7,
-     "pnl_pct": 3.82
     },
     {
      "name": "Lead Reclaim",
@@ -19368,11 +19466,11 @@
     "max_drawdown_pct": 3.6
    },
    "2026": {
-    "final": 1496150.76,
+    "final": 1483270.45,
     "open_trades": 9,
-    "return_pct": 49.6,
-    "trades": 40,
-    "win_rate": 47.5,
+    "return_pct": 48.3,
+    "trades": 41,
+    "win_rate": 46.3,
     "max_drawdown_pct": 0.8
    }
   },
@@ -19391,24 +19489,24 @@
  },
  "switch": {
   "report": {
-   "trades": 207,
+   "trades": 208,
    "open": 6,
    "wins": 82,
-   "losses": 125,
-   "win_rate": 39.6,
-   "total_pnl": 924168.99,
-   "open_pnl": 29655.15,
+   "losses": 126,
+   "win_rate": 39.4,
+   "total_pnl": 917844.87,
+   "open_pnl": 28716.53,
    "avg_win": 19850.62,
-   "avg_loss": -5628.66,
-   "profit_factor": 2.31,
-   "expectancy": 4464.58,
-   "avg_return_pct": 4.48,
+   "avg_loss": -5634.18,
+   "profit_factor": 2.29,
+   "expectancy": 4412.72,
+   "avg_return_pct": 4.43,
    "best": 82214.12,
    "worst": -14274.04,
    "max_drawdown": 97559.76,
-   "avg_hold_days": 30.2,
+   "avg_hold_days": 30.0,
    "first": "2024-11-21",
-   "last": "2026-11-13",
+   "last": "2026-11-16",
    "curve": [
     [
      "2024-12-05",
@@ -20237,6 +20335,10 @@
     [
      "2026-11-13",
      924168.99
+    ],
+    [
+     "2026-11-16",
+     917844.87
     ]
    ],
    "months": {
@@ -20263,12 +20365,37 @@
     "2026-08": 96335.13,
     "2026-09": 235720.05,
     "2026-10": 349432.65,
-    "2026-11": -11362.95
+    "2026-11": -17687.07
    },
-   "without_best": 841954.87,
+   "without_best": 835630.75,
    "best_trade": "Hoac Foods 2026-03-24"
   },
   "trades": [
+   {
+    "symbol": "543920",
+    "name": "CFF Fluid",
+    "entry_date": "2026-11-16",
+    "entry": 1124.99,
+    "qty": 88,
+    "status": "closed",
+    "pnl": -6324.12,
+    "pnl_pct": -6.39,
+    "hold_days": 0,
+    "closed_on": "2026-11-16",
+    "exits": [
+     {
+      "date": "2026-11-16",
+      "qty": 88,
+      "price": 1057.49,
+      "reason": "Stop loss (6% max risk) — same day",
+      "pnl": -6324.12,
+      "charges": 384.12
+     }
+    ],
+    "open_pnl": null,
+    "type": "positional",
+    "regime": "Smallcap 100 19,656 above EMA 50 19,165 → Positional exits"
+   },
    {
     "symbol": "YATHARTH",
     "name": "Yatharth Hospital & Trauma Care Services Ltd",
@@ -20329,7 +20456,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": 3810.56,
+    "open_pnl": 2871.94,
     "type": "positional",
     "regime": "Smallcap 100 18,595 below EMA 50 19,130 → Swing exits"
    },
@@ -26005,20 +26132,20 @@
     "regime": "Smallcap 100 17,677 below EMA 50 18,525 → Swing exits"
    }
   ],
-  "as_of": "2026-11-16",
-  "stocks": 244,
+  "as_of": "2026-11-17",
+  "stocks": 237,
   "last2y": {
-   "start": "2024-11-16",
+   "start": "2024-11-17",
    "capital": 1000000.0,
    "pct": 12.0,
-   "final": 1762577.73,
-   "profit": 762577.73,
+   "final": 1747164.81,
+   "profit": 747164.81,
    "open_trades": 6,
-   "return_pct": 76.3,
-   "trades": 132,
+   "return_pct": 74.7,
+   "trades": 133,
    "skipped": 81,
    "wins": 56,
-   "win_rate": 42.4,
+   "win_rate": 42.1,
    "max_drawdown_pct": 2.5,
    "months": {
     "2024-12": 50544.74,
@@ -26043,7 +26170,7 @@
     "2026-08": 83479.07,
     "2026-09": 148838.79,
     "2026-10": 92928.33,
-    "2026-11": 38245.95
+    "2026-11": 22833.02
    },
    "curve": [
     [
@@ -26136,20 +26263,40 @@
     ],
     [
      "2026-11",
-     1762577.72
+     1747164.79
     ]
    ],
    "first_trade": "2024-11-21",
    "trades_list": [
+    {
+     "name": "CFF Fluid",
+     "symbol": "543920",
+     "entry_date": "2026-11-16",
+     "closed_on": "2026-11-16",
+     "open": false,
+     "money": 211279,
+     "pnl": -13496.65,
+     "pnl_pct": -6.39
+    },
     {
      "name": "Yatharth Hospital & Trauma Care Services Ltd",
      "symbol": "YATHARTH",
      "entry_date": "2026-11-13",
      "closed_on": "2026-11-13",
      "open": true,
-     "money": 212078,
-     "pnl": -4735.91,
+     "money": 211134,
+     "pnl": -4714.84,
      "pnl_pct": -2.23
+    },
+    {
+     "name": "Aptus Pharma",
+     "symbol": "544529",
+     "entry_date": "2026-11-03",
+     "closed_on": "2026-11-16",
+     "open": true,
+     "money": 205693,
+     "pnl": 5927.81,
+     "pnl_pct": 2.88
     },
     {
      "name": "DC Infotech",
@@ -26170,16 +26317,6 @@
      "money": 205693,
      "pnl": 25043.43,
      "pnl_pct": 12.18
-    },
-    {
-     "name": "Aptus Pharma",
-     "symbol": "544529",
-     "entry_date": "2026-11-03",
-     "closed_on": "2026-11-13",
-     "open": true,
-     "money": 205693,
-     "pnl": 7865.16,
-     "pnl_pct": 3.82
     },
     {
      "name": "Saakshi Medtech",
@@ -27464,7 +27601,7 @@
    ]
   },
   "year2": {
-   "start": "2024-11-16",
+   "start": "2024-11-17",
    "capital": 1000000.0,
    "pct": 12.0,
    "final": 1145110.26,
@@ -28200,17 +28337,17 @@
    ]
   },
   "year1": {
-   "start": "2025-11-16",
+   "start": "2025-11-17",
    "capital": 1000000.0,
    "pct": 12.0,
-   "final": 1542403.22,
-   "profit": 542403.22,
+   "final": 1528915.62,
+   "profit": 528915.62,
    "open_trades": 6,
-   "return_pct": 54.2,
-   "trades": 68,
+   "return_pct": 52.9,
+   "trades": 69,
    "skipped": 64,
    "wins": 33,
-   "win_rate": 48.5,
+   "win_rate": 47.8,
    "max_drawdown_pct": 1.4,
    "months": {
     "2025-11": -14436.21,
@@ -28224,7 +28361,7 @@
     "2026-08": 73051.17,
     "2026-09": 130246.41,
     "2026-10": 81320.06,
-    "2026-11": 33468.43
+    "2026-11": 19980.83
    },
    "curve": [
     [
@@ -28273,20 +28410,40 @@
     ],
     [
      "2026-11",
-     1542403.23
+     1528915.63
     ]
    ],
    "first_trade": "2025-11-17",
    "trades_list": [
+    {
+     "name": "CFF Fluid",
+     "symbol": "543920",
+     "entry_date": "2026-11-16",
+     "closed_on": "2026-11-16",
+     "open": false,
+     "money": 184887,
+     "pnl": -11810.7,
+     "pnl_pct": -6.39
+    },
     {
      "name": "Yatharth Hospital & Trauma Care Services Ltd",
      "symbol": "YATHARTH",
      "entry_date": "2026-11-13",
      "closed_on": "2026-11-13",
      "open": true,
-     "money": 185586,
-     "pnl": -4144.32,
+     "money": 184760,
+     "pnl": -4125.88,
      "pnl_pct": -2.23
+    },
+    {
+     "name": "Aptus Pharma",
+     "symbol": "544529",
+     "entry_date": "2026-11-03",
+     "closed_on": "2026-11-16",
+     "open": true,
+     "money": 179999,
+     "pnl": 5187.33,
+     "pnl_pct": 2.88
     },
     {
      "name": "DC Infotech",
@@ -28307,16 +28464,6 @@
      "money": 179999,
      "pnl": 21915.1,
      "pnl_pct": 12.18
-    },
-    {
-     "name": "Aptus Pharma",
-     "symbol": "544529",
-     "entry_date": "2026-11-03",
-     "closed_on": "2026-11-13",
-     "open": true,
-     "money": 179999,
-     "pnl": 6882.67,
-     "pnl_pct": 3.82
     },
     {
      "name": "Saakshi Medtech",
@@ -29035,11 +29182,11 @@
     "max_drawdown_pct": 2.6
    },
    "2026": {
-    "final": 1413942.52,
+    "final": 1401578.25,
     "open_trades": 6,
-    "return_pct": 41.4,
-    "trades": 59,
-    "win_rate": 45.8,
+    "return_pct": 40.2,
+    "trades": 60,
+    "win_rate": 45.0,
     "max_drawdown_pct": 1.4
    }
   },
@@ -29101,7 +29248,7 @@
     "partial": false
    },
    "2026": {
-    "change": 11.0,
+    "change": 9.8,
     "above_ema50_days_pct": 60,
     "phase": "sideways",
     "partial": true

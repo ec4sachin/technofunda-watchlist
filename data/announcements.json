@@ -1,20 +1,20 @@
 {
- "last": "2026-11-16",
+ "last": "2026-11-17",
  "status": {
   "bse": {
-   "days": 1,
+   "days": 2,
    "rows": 0,
    "last_error": "HTTP 403 (AnnGetData/w?strCat=-1)"
   },
   "nse": {
-   "days": 1,
-   "rows": 4,
+   "days": 2,
+   "rows": 762,
    "last_error": ""
   },
   "matched": {
-   "bse_codes": 92,
-   "nse_only_codes": 230,
-   "new": 0
+   "bse_codes": 93,
+   "nse_only_codes": 231,
+   "new": 7
   }
  },
  "items": {
@@ -56,6 +56,76 @@
     "url": "https://nsearchives.nseindia.in/corporate/SWARAJ_15112026010406_Regu30IP15Nov2026.pdf",
     "ex": "NSE",
     "seen": "2026-11-15"
+   }
+  ],
+  "SEAMECLTD": [
+   {
+    "d": "2026-11-16",
+    "t": "Seamec Limited has informed the Exchange about Awarding of order(s)/contract(s)",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/SEAMECLTD_16112026182933_BSENSELOAAdsunPRPVIIIA16112026.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-17"
+   }
+  ],
+  "UNIDT": [
+   {
+    "d": "2026-11-16",
+    "t": "United Drilling Tools Limited has informed the Exchange regarding a press release dated November 16, 2026, titled \"Earning Release\".",
+    "k": "Business update",
+    "url": "https://nsearchives.nseindia.in/corporate/UNIDT_16112026160604_Earning_Release_Submission.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-17"
+   }
+  ],
+  "CAPACITE": [
+   {
+    "d": "2026-11-16",
+    "t": "Capacite Infraprojects Limited has informed the Exchange regarding 'Letter of Acceptance from City and Industrial Development Corporation of Maharashtra Limited (CIDCO)'.",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/CAPACITE_16112026130434_IntimationtoSE.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-17"
+   }
+  ],
+  "PTCIL": [
+   {
+    "d": "2026-11-16",
+    "t": "Ptc Industries Limited has informed the Exchange regarding a press release dated November 16, 2026, titled \"PTC Industries Reports Strong H1FY27 Performance;Profit After Tax Rises 168% over H1FY26\".",
+    "k": "Business update",
+    "url": "https://nsearchives.nseindia.in/corporate/PTCINDUSTRIES_16112026113742_20261116_Exchange_Press_release_Q2FY27.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-17"
+   }
+  ],
+  "HIRECT": [
+   {
+    "d": "2026-11-16",
+    "t": "Hirect Limited has informed the Exchange regarding a press release dated November 16, 2026, titled \"Hirect receives a letter of acceptance for Appx. &#8377;133.38 Crore Order from Chittaranjan Locomotive Works for IGBT-Based Propulsion Systems \".",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/HIRECT_16112026110023_SE.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-17"
+   }
+  ],
+  "MEGATHERM": [
+   {
+    "d": "2026-11-16",
+    "t": "Megatherm Induction Limited has informed the Exchange about Intended Transformer Division Expansion Projects Initiative",
+    "k": "Capacity",
+    "url": "https://nsearchives.nseindia.in/corporate/MEGATHERM_16112026174846_NEAPSANNOUNCEMENTBUSINESSUPDATES16112026.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-17"
+   }
+  ],
+  "TECHERA": [
+   {
+    "d": "2026-11-16",
+    "t": "TechEra Engineering (India) Limited has informed the Exchange about Bagging/Receiving of orders/contracts",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/TECHERA_16112026100350_NSE_order_announcement.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-17"
    }
   ]
  }

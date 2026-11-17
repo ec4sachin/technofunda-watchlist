@@ -34,3 +34,21 @@ date,strategy,mode,action,symbol,name,qty,price,value,reason,pnl,pnl_pct,hold_da
 2026-11-13,Swing Strategy,paper,SELL,SAAKSHI,Saakshi Medtech,343,347.5,119192.5,Stop loss (1% below 5-candle base),-11268.51,-8.29,4,swing-SAAKSHI-2026-11-09
 2026-11-13,Positional Trading,paper,SELL,SAAKSHI,Saakshi Medtech,316,347.5,109810.0,Stop loss (1% below 5-candle base),-10381.48,-8.29,4,positional-SAAKSHI-2026-11-09
 2026-11-13,Smart Switch,paper,SELL,SAAKSHI,Saakshi Medtech,316,347.5,109810.0,Stop loss (1% below 5-candle base),-10381.48,-8.29,4,switch-SAAKSHI-2026-11-09
+2026-11-16,Swing Strategy,paper,BUY,543920,CFF Fluid,114,1124.99,128248.86,"Breakout above ₹1113.85 + 1% (stop ₹1057.49, target ₹1349.99)",,,,swing-543920-2026-11-16
+2026-11-16,Swing Strategy,paper,SELL,543920,CFF Fluid,114,1057.49,120553.86,Stop loss (6% max risk) — same day,-8192.61,-6.0,0,swing-543920-2026-11-16
+2026-11-16,Swing Strategy,paper,BUY,544567,Infinity Infoway,163,780.0,127140.0,"Breakout above ₹770 + 1% (stop ₹733.2, target ₹936)",,,,swing-544567-2026-11-16
+2026-11-16,Swing Strategy,paper,SELL,544567,Infinity Infoway,163,733.2,119511.6,Stop loss (6% max risk) — same day,-8121.7,-6.0,0,swing-544567-2026-11-16
+2026-11-16,Swing Strategy,paper,BUY,RAPIDFLEET,Rapid Fleet,582,216.95,126264.9,"Breakout above ₹214.8 + 1% (stop ₹203.93, target ₹260.34)",,,,swing-RAPIDFLEET-2026-11-16
+2026-11-16,Swing Strategy,paper,SELL,RAPIDFLEET,Rapid Fleet,582,203.93,118687.26,Stop loss (6% max risk) — same day,-8067.54,-6.0,0,swing-RAPIDFLEET-2026-11-16
+2026-11-16,Positional Trading,paper,SELL,RAPIDFLEET,Rapid Fleet,568,202.55,115048.4,Stop loss (1% below 5-candle base),-5320.62,-4.05,3,positional-RAPIDFLEET-2026-11-13
+2026-11-16,Positional Trading,paper,BUY,543920,CFF Fluid,104,1124.99,116998.96,"Breakout above ₹1113.85 + 1% (stop ₹1057.49, target ₹1462.49)",,,,positional-543920-2026-11-16
+2026-11-16,Positional Trading,paper,SELL,543920,CFF Fluid,104,1057.49,109978.96,Stop loss (6% max risk) — same day,-7473.96,-6.0,0,positional-543920-2026-11-16
+2026-11-16,Positional Trading,paper,BUY,544567,Infinity Infoway,150,780.0,117000.0,"Breakout above ₹770 + 1% (stop ₹733.2, target ₹1014)",,,,positional-544567-2026-11-16
+2026-11-16,Positional Trading,paper,SELL,544567,Infinity Infoway,150,733.2,109980.0,Stop loss (6% max risk) — same day,-7473.96,-6.0,0,positional-544567-2026-11-16
+2026-11-16,Smart Switch,paper,SELL,RAPIDFLEET,Rapid Fleet,568,202.55,115048.4,Stop loss (1% below 5-candle base),-5320.62,-4.05,3,switch-RAPIDFLEET-2026-11-13
+2026-11-16,Smart Switch,paper,BUY,543920,CFF Fluid,104,1124.99,116998.96,"Breakout above ₹1113.85 + 1% (stop ₹1057.49, target ₹1462.49) · Smallcap 100 19,656 above EMA 50 19,165 → Positional exits",,,,switch-543920-2026-11-16
+2026-11-16,Smart Switch,paper,SELL,543920,CFF Fluid,104,1057.49,109978.96,Stop loss (6% max risk) — same day,-7473.96,-6.0,0,switch-543920-2026-11-16
+2026-11-16,Smart Switch,paper,BUY,544567,Infinity Infoway,150,780.0,117000.0,"Breakout above ₹770 + 1% (stop ₹733.2, target ₹1014) · Smallcap 100 19,656 above EMA 50 19,165 → Positional exits",,,,switch-544567-2026-11-16
+2026-11-16,Smart Switch,paper,SELL,544567,Infinity Infoway,150,733.2,109980.0,Stop loss (6% max risk) — same day,-7473.96,-6.0,0,switch-544567-2026-11-16
+2026-11-16,Smart Switch · Growth list,paper,BUY,543920,CFF Fluid,70,1124.99,78749.3,"Breakout above ₹1113.85 + 1% (stop ₹1057.49, target ₹1462.49) · Smallcap 100 19,656 above EMA 50 19,165 → Positional exits",,,,growth_switch-543920-2026-11-16
+2026-11-16,Smart Switch · Growth list,paper,SELL,543920,CFF Fluid,70,1057.49,74024.3,Stop loss (6% max risk) — same day,-5030.55,-6.0,0,growth_switch-543920-2026-11-16

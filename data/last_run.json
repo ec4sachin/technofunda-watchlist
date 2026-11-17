@@ -1,29 +1,114 @@
 {
- "added": [],
- "rejected": [],
- "to_dt": [],
- "to_sp": [],
+ "added": [
+  [
+   "TECHNOCRAF",
+   "Technocraft Ven.",
+   "marks 6.1/11 · 3-month RS 98 (vs 4268 BSE stocks) · TTM Profit > 30%, 52W High"
+  ],
+  [
+   "543916",
+   "Hemant Surgical",
+   "marks 8.8/11 · 3-month RS 98 (vs 3771 BSE stocks) · TTM Profit > 30%, Daily Volume Scan, 52W High"
+  ]
+ ],
+ "rejected": [
+  [
+   "SPORTKING",
+   "Sportking India",
+   "10.5/11 · 3-month RS 58 (need above 80)"
+  ]
+ ],
+ "to_dt": [
+  [
+   "500346",
+   "Punjab Commun.",
+   "close 53.18 < 200 EMA 53.39"
+  ],
+  [
+   "509597",
+   "Hardcast.& Waud",
+   "close 798.75 < 200 EMA 800.74"
+  ],
+  [
+   "538862",
+   "My Money Sec.",
+   "close 38 < 200 EMA 39.74"
+  ],
+  [
+   "539522",
+   "Grovy India",
+   "close 52.25 < 200 EMA 53.84"
+  ],
+  [
+   "543351",
+   "Naapbooks",
+   "close 126.6 < 200 EMA 126.9"
+  ],
+  [
+   "543542",
+   "Kesar India",
+   "close 1155.5 < 200 EMA 1182.04"
+  ],
+  [
+   "544551",
+   "Bhavik Enterpris",
+   "close 149 < 20 EMA 149.73"
+  ],
+  [
+   "544682",
+   "GRE Renew",
+   "close 210.05 < 20 EMA 224.9"
+  ],
+  [
+   "544755",
+   "Recode Studios",
+   "close 408.35 < 20 EMA 411.22"
+  ],
+  [
+   "APEXECO",
+   "Apex Ecotech",
+   "close 222.75 < 200 EMA 224.73"
+  ]
+ ],
+ "to_sp": [
+  [
+   "543895",
+   "Exhicon Events",
+   "close 495.4 > 200 EMA 490.93"
+  ]
+ ],
  "removed": [],
  "unchecked": [],
  "investor_moves": [],
  "no_price": [],
  "warnings": [],
- "first_marked": [],
+ "first_marked": [
+  [
+   "544468",
+   "B. D. Industries",
+   "7.7/11 (was 5.5/11)"
+  ],
+  [
+   "544810",
+   "Sampark India",
+   "4.4/11 (was 7.7/11)"
+  ]
+ ],
  "new_listing": [
   [
    "517336",
    "Modern Malleable",
-   "close 44.5 vs 20 EMA 42.06 → SP"
+   "close 46.72 vs 20 EMA 42.5 → SP"
   ],
   [
    "544538",
    "Praruh Tech",
-   "close 151.65 vs 20 EMA 144.8 → SP"
+   "close 146.85 vs 20 EMA 144.99 → SP"
   ],
   [
    "544551",
    "Bhavik Enterpris",
-   "close 151.9 vs 20 EMA 149.81 → SP"
+   "close 149 vs 20 EMA 149.73 → DT"
   ],
   [
    "544667",
@@ -33,67 +118,67 @@
   [
    "544682",
    "GRE Renew",
-   "close 235 vs 20 EMA 226.46 → SP"
+   "close 210.05 vs 20 EMA 224.9 → DT"
   ],
   [
    "544694",
    "Accretion Nutraveda",
-   "close 348.8 vs 20 EMA 313.41 → SP"
+   "close 345 vs 20 EMA 316.42 → SP"
   ],
   [
    "544740",
    "TIPCO Engineering",
-   "close 329.7 vs 20 EMA 290.13 → SP"
+   "close 346.15 vs 20 EMA 295.46 → SP"
   ],
   [
    "544746",
    "Safety Controls & Devices Ltd",
-   "close 74.95 vs 20 EMA 71.91 → SP"
+   "close 72.05 vs 20 EMA 71.93 → SP"
   ],
   [
    "544755",
    "Recode Studios",
-   "close 429.8 vs 20 EMA 411.52 → SP"
+   "close 408.35 vs 20 EMA 411.22 → DT"
   ],
   [
    "544765",
    "Vegorama Punjabi",
-   "close 282 vs 20 EMA 253.84 → SP"
+   "close 288.05 vs 20 EMA 257.1 → SP"
   ],
   [
    "544773",
    "Merritronix",
-   "close 417.05 vs 20 EMA 408.73 → SP"
+   "close 438.05 vs 20 EMA 411.52 → SP"
   ],
   [
    "544809",
    "Adon Agro",
-   "close 99 vs 20 EMA 97.8 → SP"
+   "close 98.9 vs 20 EMA 97.91 → SP"
   ],
   [
    "544810",
    "Sampark India",
-   "close 138 vs 20 EMA 133.14 → SP"
+   "close 136.5 vs 20 EMA 133.46 → SP"
   ],
   [
    "544812",
    "Atharva Poly-Plast",
-   "close 171.85 vs 20 EMA 139.39 → SP"
+   "close 167.95 vs 20 EMA 142.11 → SP"
   ],
   [
    "544844",
    "Poojaa Precision Engg. Ltd",
-   "close 941.8 vs 20 EMA 911.99 → SP"
+   "close 934.5 vs 20 EMA 914.14 → SP"
   ],
   [
    "ACETEC",
    "Acetech E-Commerce",
-   "close 147.9 vs 20 EMA 137.19 → SP"
+   "close 147.9 vs 20 EMA 138.21 → SP"
   ],
   [
    "ADISOFT",
    "Adisoft Technol.",
-   "close 298.5 vs 20 EMA 274.05 → SP"
+   "close 283.75 vs 20 EMA 274.98 → SP"
   ],
   [
    "AEROPLANE",
@@ -118,7 +203,7 @@
   [
    "EPWINDIA",
    "EPW India",
-   "close 251 vs 20 EMA 241.48 → SP"
+   "close 243.5 vs 20 EMA 241.67 → SP"
   ],
   [
    "HALDYNGL",
@@ -143,7 +228,7 @@
   [
    "MARUSHIKA",
    "Marushika Tech.",
-   "close 129.95 vs 20 EMA 121.36 → SP"
+   "close 121.6 vs 20 EMA 121.38 → SP"
   ],
   [
    "ORIRAIL",
@@ -158,7 +243,7 @@
   [
    "SIMCA",
    "Simca Advertis.",
-   "close 494.95 vs 20 EMA 458.76 → SP"
+   "close 508.6 vs 20 EMA 463.51 → SP"
   ],
   [
    "SMT",
@@ -178,7 +263,7 @@
   [
    "TEAMTECH",
    "Teamtech Formwork",
-   "close 168.65 vs 20 EMA 157.46 → SP"
+   "close 165.75 vs 20 EMA 158.25 → SP"
   ],
   [
    "TRANSPEK",
@@ -191,6 +276,11 @@
    "close 220.1 vs 20 EMA 214.14 → SP"
   ],
   [
+   "TECHNOCRAF",
+   "Technocraft Ven.",
+   "close 494.6 vs 20 EMA 490.94 → SP"
+  ],
+  [
    "544623",
    "Mother Nutri",
    "close 155.1 vs 20 EMA 157.63"
@@ -198,37 +288,37 @@
   [
    "544695",
    "Msafe Equipments",
-   "close 271.05 vs 20 EMA 273.74"
+   "close 255.05 vs 20 EMA 271.96"
   ],
   [
    "544735",
    "Novus Loyalty",
-   "close 181 vs 20 EMA 183.86"
+   "close 178.05 vs 20 EMA 183.31"
   ],
   [
    "544774",
    "SMR Jewels",
-   "close 82.5 vs 20 EMA 90.51"
+   "close 84.58 vs 20 EMA 89.94"
   ],
   [
    "544980",
    "SJP Ultrasonics",
-   "close 88.15 vs 20 EMA 94.51"
+   "close 89 vs 20 EMA 93.94"
   ],
   [
    "ANAWIL",
    "Anawil Wire and Engineering Ltd",
-   "close 393.2 vs 20 EMA 402.48"
+   "close 380.85 vs 20 EMA 400.42"
   ],
   [
    "APSISAERO",
    "Apsis Aerocom Ltd",
-   "close 496.35 vs 20 EMA 509.34"
+   "close 506.25 vs 20 EMA 509.05"
   ],
   [
    "BRANDMAN",
    "Brandman Retail Ltd",
-   "close 142 vs 20 EMA 149.52"
+   "close 143 vs 20 EMA 148.9"
   ],
   [
    "ESDS",
@@ -268,23 +358,23 @@
   [
    "YAAP",
    "Yaap Digital Ltd",
-   "close 89.5 vs 20 EMA 105.21"
+   "close 87 vs 20 EMA 103.48"
   ]
  ],
  "per_alert": {
-  "TTM Profit > 30%": 0,
-  "52W High": 0,
-  "Daily Volume Scan": 0,
-  "Weekly Volume Scan": 1,
+  "TTM Profit > 30%": 10,
+  "52W High": 11,
+  "Daily Volume Scan": 7,
+  "Weekly Volume Scan": 2,
   "Ready after 6 Months": 0,
   "Mukul Mahavir Agrawal": 0,
   "Ashish Kacholia": 0
  },
- "email_total": 1,
- "already_listed": 1,
- "price_date": "13 Nov 2026",
+ "email_total": 15,
+ "already_listed": 12,
+ "price_date": "16 Nov 2026",
  "monthly_pass": 0,
  "mode": "auto",
  "monthly_done": false,
- "run_at": "16 Nov 2026, 08:02 AM IST"
+ "run_at": "17 Nov 2026, 07:58 AM IST"
 }
