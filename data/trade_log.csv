@@ -59,3 +59,4 @@ date,strategy,mode,action,symbol,name,qty,price,value,reason,pnl,pnl_pct,hold_da
 2026-11-16,Smart Switch,paper,BUY,NITINSPIN,Nitin Spinners Ltd,169,685.74,115890.06,"Breakout above ₹678.95 + 1% (stop ₹644.6, target ₹891.46) · Smallcap 100 19,656 above EMA 50 19,165 → Positional exits",,,,switch-NITINSPIN-2026-11-16
 2026-11-16,Smart Switch · Growth list,paper,BUY,MBAPL,M B Agro Prod.,378,209.0,79002.0,"Breakout above ₹202.63 + 1% (stop ₹196.46, target ₹271.7) · Smallcap 100 19,656 above EMA 50 19,165 → Positional exits",,,,growth_switch-MBAPL-2026-11-16
 2026-11-16,Smart Switch · Growth list,paper,SELL,MBAPL,M B Agro Prod.,378,196.46,74261.88,Stop loss (6% max risk) — same day,-5046.65,-6.0,0,growth_switch-MBAPL-2026-11-16
+2026-11-17,Smart Switch · Growth list,paper,SELL,VINSYS,Vinsys IT Serv.,125,600.43,75053.75,Stop loss (1% below 5-candle base),-4293.18,-5.04,6,growth_switch-VINSYS-2026-11-11

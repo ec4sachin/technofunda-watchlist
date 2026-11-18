@@ -2,19 +2,19 @@
  "last": "2026-11-18",
  "status": {
   "bse": {
-   "days": 2,
+   "days": 1,
    "rows": 0,
    "last_error": "HTTP 403 (AnnGetData/w?strCat=-1)"
   },
   "nse": {
-   "days": 2,
-   "rows": 575,
+   "days": 1,
+   "rows": 502,
    "last_error": ""
   },
   "matched": {
    "bse_codes": 93,
    "nse_only_codes": 232,
-   "new": 7
+   "new": 9
   }
  },
  "items": {
@@ -68,6 +68,14 @@
   ],
   "SEAMECLTD": [
    {
+    "d": "2026-11-18",
+    "t": "Seamec Limited has informed the Exchange about Bagging/Receiving of orders/contracts from POSH India Offshore Private Limited for undertaking subsea installation works of PRP X project of L&T",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/SEAMECLTD_18112026130610_BSENSELOAPOSHPRPX18112026.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-18"
+   },
+   {
     "d": "2026-11-16",
     "t": "Seamec Limited has informed the Exchange about Awarding of order(s)/contract(s)",
     "k": "Order",
@@ -107,6 +115,14 @@
    }
   ],
   "HIRECT": [
+   {
+    "d": "2026-11-18",
+    "t": "Hirect Limited has informed the Exchange regarding a press release dated November 18, 2026, titled \"HIRECT receives a letter of acceptance for Appx. &#8377; 136.26 Crore Order from Chittaranjan Locomotive Works for 900 Traction Motors for WAG-9 Electric Locomotives\".",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/HIRECT_18112026111316_SEP.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-18"
+   },
    {
     "d": "2026-11-16",
     "t": "Hirect Limited has informed the Exchange regarding a press release dated November 16, 2026, titled \"Hirect receives a letter of acceptance for Appx. &#8377;133.38 Crore Order from Chittaranjan Locomotive Works for IGBT-Based Propulsion Systems \".",
@@ -158,6 +174,22 @@
   ],
   "LTFOODS": [
    {
+    "d": "2026-11-18",
+    "t": "LT Foods Limited has informed the Exchange regarding a press release dated November 18, 2026, titled \"Please find enclosed herewith copy of Press Release on LT Foods further strengthens U.S. food portfolio with acquisition of the brand Maya Kaimal, a leading brand with mainstrea…",
+    "k": "Acquisition / JV",
+    "url": "https://nsearchives.nseindia.in/corporate/532783_18112026174016_intimation.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-18"
+   },
+   {
+    "d": "2026-11-18",
+    "t": "LT Foods Limited- Intimation under Regulation 30 of the SEBI (Listing Obligations and Disclosure Requirements) Regulations, 2015 regarding execution of Stock Purchase Agreement for acquisition of 100% equity share capital of MK Foods Holdings, Inc. by LT Foods Americas Inc., a s…",
+    "k": "Acquisition / JV",
+    "url": "https://nsearchives.nseindia.in/corporate/532783_18112026172535_intimation.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-18"
+   },
+   {
     "d": "2026-11-17",
     "t": "LT Foods Limited has informed the Exchange regarding a press release dated November 17, 2026, titled \"Please find enclosed herewith copy of Press Release on LT Foods makes Basmati rice the hero of every meal with DAAWAT® Delight s new campaign\".",
     "k": "Business update",
@@ -192,6 +224,56 @@
     "t": "Brandman Retail Limited has informed the Exchange regarding a press release dated November 17, 2026, titled \"Brandman Retail Expands Saucony s Retail Footprint with New Store in Jaipur\".",
     "k": "Business update",
     "url": "https://nsearchives.nseindia.in/corporate/BRANDMAN_17112026171329_Press_Release_Brandman.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-18"
+   }
+  ],
+  "OMFREIGHT": [
+   {
+    "d": "2026-11-18",
+    "t": "Om Freight Forwarders Limited has informed the Exchange about Action(s) initiated or orders passed",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/OMFRIEGHT_18112026204007_Disclosure_Final_Signed.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-18"
+   }
+  ],
+  "PROTEAN": [
+   {
+    "d": "2026-11-18",
+    "t": "Protean eGov Technologies Limited has informed the Exchange about Receipt of Order-In-Appeal from the Office of the Commissioner of Central Tax (Appeals-I), Bengaluru",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/PROTEANCS_18112026120015_SEintimation.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-18"
+   }
+  ],
+  "SUPREMEPWR": [
+   {
+    "d": "2026-11-18",
+    "t": "Supreme Power Equipment Limited has informed the Exchange about Bagging/Receiving of orders/contracts",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/SPEL_18112026153158_Intimationbaggingoforder.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-18"
+   }
+  ],
+  "CANARYS": [
+   {
+    "d": "2026-11-18",
+    "t": "Intimation regarding International order Secured by M/s. Canarys Automations Limited from M/s Tenpoint Therapeutics",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/CANARYS_18112026134026_IntimationmajorOrdersecuredbyTenPointdt18112026.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-18"
+   }
+  ],
+  "ESCONET": [
+   {
+    "d": "2026-11-18",
+    "t": "Esconet Technologies Limited has informed the Exchange about ISO Certifications of Zeacloud Services Private Limited (Wholly Owned Subsidiary)",
+    "k": "Product / approval",
+    "url": "https://nsearchives.nseindia.in/corporate/ESCONET_18112026120743_ETL_Int_ISO_Zeacloud.pdf",
     "ex": "NSE",
     "seen": "2026-11-18"
    }
