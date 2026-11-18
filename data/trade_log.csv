@@ -52,3 +52,10 @@ date,strategy,mode,action,symbol,name,qty,price,value,reason,pnl,pnl_pct,hold_da
 2026-11-16,Smart Switch,paper,SELL,544567,Infinity Infoway,150,733.2,109980.0,Stop loss (6% max risk) — same day,-7473.96,-6.0,0,switch-544567-2026-11-16
 2026-11-16,Smart Switch · Growth list,paper,BUY,543920,CFF Fluid,70,1124.99,78749.3,"Breakout above ₹1113.85 + 1% (stop ₹1057.49, target ₹1462.49) · Smallcap 100 19,656 above EMA 50 19,165 → Positional exits",,,,growth_switch-543920-2026-11-16
 2026-11-16,Smart Switch · Growth list,paper,SELL,543920,CFF Fluid,70,1057.49,74024.3,Stop loss (6% max risk) — same day,-5030.55,-6.0,0,growth_switch-543920-2026-11-16
+2026-11-16,Swing Strategy,paper,BUY,GRCL,Gayatri Rubbers,193,646.4,124755.2,"Breakout above ₹640 + 1% (stop ₹623.7, target ₹775.68)",,,,swing-GRCL-2026-11-16
+2026-11-16,Positional Trading,paper,BUY,GRCL,Gayatri Rubbers,179,646.4,115705.6,"Breakout above ₹640 + 1% (stop ₹623.7, target ₹840.32)",,,,positional-GRCL-2026-11-16
+2026-11-16,Positional Trading,paper,BUY,NITINSPIN,Nitin Spinners Ltd,169,685.74,115890.06,"Breakout above ₹678.95 + 1% (stop ₹644.6, target ₹891.46)",,,,positional-NITINSPIN-2026-11-16
+2026-11-16,Smart Switch,paper,BUY,GRCL,Gayatri Rubbers,179,646.4,115705.6,"Breakout above ₹640 + 1% (stop ₹623.7, target ₹840.32) · Smallcap 100 19,656 above EMA 50 19,165 → Positional exits",,,,switch-GRCL-2026-11-16
+2026-11-16,Smart Switch,paper,BUY,NITINSPIN,Nitin Spinners Ltd,169,685.74,115890.06,"Breakout above ₹678.95 + 1% (stop ₹644.6, target ₹891.46) · Smallcap 100 19,656 above EMA 50 19,165 → Positional exits",,,,switch-NITINSPIN-2026-11-16
+2026-11-16,Smart Switch · Growth list,paper,BUY,MBAPL,M B Agro Prod.,378,209.0,79002.0,"Breakout above ₹202.63 + 1% (stop ₹196.46, target ₹271.7) · Smallcap 100 19,656 above EMA 50 19,165 → Positional exits",,,,growth_switch-MBAPL-2026-11-16
+2026-11-16,Smart Switch · Growth list,paper,SELL,MBAPL,M B Agro Prod.,378,196.46,74261.88,Stop loss (6% max risk) — same day,-5046.65,-6.0,0,growth_switch-MBAPL-2026-11-16

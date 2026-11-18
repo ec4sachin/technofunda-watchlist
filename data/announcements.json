@@ -1,5 +1,5 @@
 {
- "last": "2026-11-17",
+ "last": "2026-11-18",
  "status": {
   "bse": {
    "days": 2,
@@ -8,17 +8,25 @@
   },
   "nse": {
    "days": 2,
-   "rows": 762,
+   "rows": 575,
    "last_error": ""
   },
   "matched": {
    "bse_codes": 93,
-   "nse_only_codes": 231,
+   "nse_only_codes": 232,
    "new": 7
   }
  },
  "items": {
   "BIKEWO": [
+   {
+    "d": "2026-11-17",
+    "t": "Bikewo Green Tech Limited has informed the Exchange regarding a press release dated November 17, 2026, titled \"BikeWo Green Tech Partners with Gravton Motors to Accelerate Electric Two-Wheeler Fleet Expansion\".",
+    "k": "Capacity",
+    "url": "https://nsearchives.nseindia.in/corporate/BIKEWO2016_17112026125503_presssrelease.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-18"
+   },
    {
     "d": "2026-11-09",
     "t": "Bikewo Green Tech Limited has informed the Exchange about Memorandum of Understanding/Agreements",
@@ -126,6 +134,66 @@
     "url": "https://nsearchives.nseindia.in/corporate/TECHERA_16112026100350_NSE_order_announcement.pdf",
     "ex": "NSE",
     "seen": "2026-11-17"
+   }
+  ],
+  "ADVENTHTL": [
+   {
+    "d": "2026-11-17",
+    "t": "Advent Hotels International Limited has informed the Exchange about Acquisition under Regulation 30 of SEBI (Listing Obligations and Disclosure Requirements) Regulations 2015.",
+    "k": "Acquisition / JV",
+    "url": "https://nsearchives.nseindia.in/corporate/ADVENTHTL_17112026192438_Advent_SE_Intimation.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-18"
+   }
+  ],
+  "ADVAIT": [
+   {
+    "d": "2026-11-17",
+    "t": "Advait Energy Transitions Limited has informed the Exchange about Bagging/Receiving of orders/contracts",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/ADVAITENERGY_17112026183621_SEintimationorderbagged_s.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-18"
+   }
+  ],
+  "LTFOODS": [
+   {
+    "d": "2026-11-17",
+    "t": "LT Foods Limited has informed the Exchange regarding a press release dated November 17, 2026, titled \"Please find enclosed herewith copy of Press Release on LT Foods makes Basmati rice the hero of every meal with DAAWAT® Delight s new campaign\".",
+    "k": "Business update",
+    "url": "https://nsearchives.nseindia.in/corporate/532783_17112026125226_Intimation.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-18"
+   }
+  ],
+  "MONOLITH": [
+   {
+    "d": "2026-11-17",
+    "t": "Monolithisch India Limited has informed the Exchange regarding a press release dated 0 ,",
+    "k": "Business update",
+    "url": "https://nsearchives.nseindia.in/corporate/MONOLITHISCH_17112026223313_Monolith_17112026_allotment_of_2nd_Quartzite_stone_block.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-18"
+   }
+  ],
+  "ANLON": [
+   {
+    "d": "2026-11-17",
+    "t": "Anlon Technology Solutions Limited has informed the Exchange regarding a press release dated November 17, 2026, titled \"Financial Performance of the company for the Half year ended 30th September 2026.\"",
+    "k": "Business update",
+    "url": "https://nsearchives.nseindia.in/corporate/ANLON_17112026174918_Business_update_signed.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-18"
+   }
+  ],
+  "BRANDMAN": [
+   {
+    "d": "2026-11-17",
+    "t": "Brandman Retail Limited has informed the Exchange regarding a press release dated November 17, 2026, titled \"Brandman Retail Expands Saucony s Retail Footprint with New Store in Jaipur\".",
+    "k": "Business update",
+    "url": "https://nsearchives.nseindia.in/corporate/BRANDMAN_17112026171329_Press_Release_Brandman.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-18"
    }
   ]
  }
