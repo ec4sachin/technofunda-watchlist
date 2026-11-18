@@ -33,7 +33,7 @@ def test():
     df = stg._frame(h)
     plan = stg.swing_setup(df, len(df) - 1)
     assert plan, "setup expected after a steady uptrend + tight base"
-    assert plan["range_pct"] <= 6 and plan["trigger"] == round(max(h["h"][-4:]) * 1.01, 2)
+    assert plan["range_pct"] <= 6 and plan["trigger"] == round(max(h["h"][-4:]) * 1.005, 2) and plan["max_open"] == round(max(h["h"][-4:]) * 1.03, 2)
     # rule 3: stretched far above EMA 10 -> no setup
     hs = hist_from(closes[:-1] + [closes[-1] * 1.2])
     assert stg.swing_setup(stg._frame(hs), len(hs["t"]) - 1) is None
@@ -308,3 +308,51 @@ def test_rank_same_day():
 if __name__ == "__main__":
     test_rank_same_day()
     test_join_bse_history()
+
+
+def test_gap_rule():
+    """18 Nov 2026: buy-stop 0.5% above resistance; open between 0.5% and 3% above = buy at the open; open more than 3% above = no buy."""
+    import pandas as pd
+    import strategy as S
+    class D:  # minimal candle frame for try_entry
+        pass
+    plan = {"trigger": 100.5, "max_open": 103.0, "resistance": 100.0, "base_low": 96.0, "stop": 95.0,
+            "range_pct": 4.0, "r42": 0, "room": None, "score": {}}
+    real = S.swing_setup
+    S.swing_setup = lambda df, i: plan
+    try:
+        def frame(o, h, l):
+            d = D(); d.o = [99, o]; d.h = [100, h]; d.l = [98, l]; d.c = [99, h]; d.index = ["2026-11-17", "2026-11-18"]
+            d.e50 = [e50, e50]
+            return d
+        e50 = 95.0
+        st = {"id": "swing", "name": "Swing", "type": "swing", "capital": 100000, "pct": 10}
+        t, _ = S.try_entry(st, "ABC", "ABC", frame(99.5, 101.5, 99.0), 1, money=10000)
+        assert t and t["entry"] == 100.5                       # normal breakout: filled at the buy-stop
+        t, _ = S.try_entry(st, "ABC", "ABC", frame(102.0, 104.0, 101.5), 1, money=10000)
+        assert t and t["entry"] == 102.0                       # gap up 2%: filled at the open
+        t, _ = S.try_entry(st, "ABC", "ABC", frame(103.5, 106.0, 103.0), 1, money=10000)
+        assert t is None                                       # gap up 3.5%: no buy
+        e50 = 88.0                                             # 102 is 15.9% above EMA 50 -> no buy
+        t, _ = S.try_entry(st, "ABC", "ABC", frame(102.0, 104.0, 101.5), 1, money=10000)
+        assert t is None
+    finally:
+        S.swing_setup = real
+
+
+def test_ema50_rule():
+    """18 Nov 2026: no setup when the buy-stop price is 15% or more above the daily EMA 50."""
+    import tempfile
+    import storage
+    import strategy as stg
+    storage.DATA = tempfile.mkdtemp()
+    closes = uptrend_then_base()
+    df = stg._frame(hist_from(closes))
+    plan = stg.swing_setup(df, len(df) - 1)
+    assert plan and plan["trigger"] < df.e50[len(df) - 1] * 1.15
+    keep = stg.EMA50_MAX
+    try:
+        stg.EMA50_MAX = (plan["trigger"] / float(df.e50[len(df) - 1])) - 1.001   # just below the distance -> blocked
+        assert stg.swing_setup(df, len(df) - 1) is None
+    finally:
+        stg.EMA50_MAX = keep
