@@ -725,10 +725,13 @@ def strategy_lines(st):
                      f"{html.escape(e['reason'])} · P&amp;L ₹{e['pnl']:+,.0f}")
         for x in [x for x in st.get("skipped", []) if x.get("strategy", sid) == sid]:
             L.append(f"⏭ Skipped {html.escape(x['name'])} ({x['symbol']}) — breakout, but no free capital")
+        for x in [x for x in st.get("gap_skips", []) if x.get("strategy", sid) == sid]:
+            L.append(f"⏭ Skipped {html.escape(x['name'])} ({x['symbol']}) — opened ₹{x['open']:g}, more than 3% above resistance (max ₹{x['max_open']:g})")
         items = (st.get("setups") or {}).get(sid) or []
         if items:
             L.append("⏳ <b>Setups for today</b> (buy-stop orders):")
-            L += [f"• {html.escape(x['name'])} ({x['symbol']}) — buy above ₹{x['buy_above']:g}, stop ₹{x['stop']:g}, "
+            L += [f"• {html.escape(x['name'])} ({x['symbol']}) — buy above ₹{x['buy_above']:g}"
+                  + (f" (no buy if it opens above ₹{x['max_open']:g})" if x.get("max_open") else "") + f", stop ₹{x['stop']:g}, "
                   f"qty {x['qty']} (risk {x['risk_pct']:g}%)" for x in items[:15]]
         if len(L) == n0:
             L.append("No entries, exits or setups today.")
@@ -898,7 +901,13 @@ def main():
                     rep["without_best"] = round(rep["total_pnl"] - best["pnl"], 2)
                     rep["best_trade"] = f"{best['name']} {best['entry_date']}"
                 keep = sorted(recent, key=lambda t: t["entry_date"], reverse=True)[:300]
-                bt[st_["id"]] = {"report": rep, "trades": [{k: t.get(k) for k in ("symbol", "name", "entry_date", "entry", "qty",
+                # entry rule comparison (18 Nov 2026), last 2 years with one money pot
+                cmp_ = {}
+                for v in strategy.ENTRY_VARIANTS:
+                    tv = trades if v == "new" else strategy.backtest_variant(v, st_, charts, names, syms, mood=mood)
+                    pv = strategy.portfolio(tv, d2, capital=cap, pct=pct, rank=st_.get("rank"))
+                    cmp_[v] = {k: pv[k] for k in ("return_pct", "trades", "win_rate", "max_drawdown_pct", "skipped")}
+                bt[st_["id"]] = {"entry_test": cmp_, "report": rep, "trades": [{k: t.get(k) for k in ("symbol", "name", "entry_date", "entry", "qty",
                                  "status", "pnl", "pnl_pct", "hold_days", "closed_on", "exits", "open_pnl", "type", "regime")} for t in keep],
                                  "as_of": today, "stocks": len(syms),
                                  "last2y": strategy.portfolio(trades, d2, capital=cap, pct=pct, rank=st_.get("rank")),

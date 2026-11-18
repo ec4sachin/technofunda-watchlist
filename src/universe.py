@@ -33,7 +33,7 @@ OUT = "universe_backtest.json"
 CODE_COLS = {"nse": ("nse code", "nse symbol", "nse", "symbol", "nse_code"),
              "bse": ("bse code", "bse", "bse_code", "scrip code", "security code")}
 NAME_COLS = ("name", "company", "company name", "stock")
-VERSION = "7"             # change to run the backtest again with new rules
+VERSION = "8"             # change to run the backtest again with new rules (8 = entry 0.5% + gap rule, 18 Nov 2026)
 PCT_TEST = (6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
 MAX_MCAP_CR = 25000        # only companies below ₹25,000 crore market cap (when the file has a market-cap column)
 
@@ -554,6 +554,10 @@ def run(settings, mood, today, now_year, stocks=None, charts=None, missing=None)
             "rank_test": {rk: _rank_row(trades, f"{first_year}-01-01", d2, cap, pct, rk, first_year, now_year)
                           for rk in strategy.RANKS},
             # smaller or bigger % per trade (with the strategy's own choice of which signal first)
+            # entry rule comparison (18 Nov 2026): old 1% / any gap vs new 0.5% / no buy on a gap above 3%
+            "entry_test": {v: _rank_row(trades if v == "new" else strategy.backtest_variant(v, st, charts, names, syms, mood=mood),
+                                        f"{first_year}-01-01", d2, cap, pct, st.get("rank") or strategy.RANK, first_year, now_year)
+                           for v in strategy.ENTRY_VARIANTS},
             "pct_test": {str(pc): _rank_row(trades, f"{first_year}-01-01", d2, cap, pc, st.get("rank") or strategy.RANK, first_year, now_year)
                          for pc in PCT_TEST},
         }
