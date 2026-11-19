@@ -12,8 +12,8 @@ Swing Strategy rules (given by the user) - "version 5", chosen 4 Nov 2026 after 
        Gap-up rule (18 Nov 2026): if the day OPENS above the 0.5% level, buy at the open only when the open is not more
        than 3% above the resistance; an open more than 3% above it = no buy that day (risk not favourable).
     3. The last candle's high is not more than 10% above EMA 10.
-    4. (18 Nov 2026) The buy price is less than 15% above the daily EMA 50 (checked for the buy-stop price, and again
-       for the actual buy price when the day opens with a gap).
+    4. (18 Nov 2026, switched OFF 19 Nov 2026 after the backtest - EMA50_MAX = None) The buy price is less than 15% above
+       the daily EMA 50.
     (The old 42-candle "room to resistance" rule is switched off: ROOM_RULE = False.)
   Stop loss (whole quantity): 1% below the lowest low of the base, but never more than 6% below
     the actual buy price (the higher of the two is used).
@@ -50,7 +50,8 @@ BASE_MEASURE = "hl"        # "hl" = highest high / lowest low (wicks count), "cl
 ROOM_RULE = False          # rule 4 / 6 (room to the 42-candle resistance) - off in version 5
 TRIGGER_ABOVE = 0.005      # buy-stop 0.5% above the resistance (was 1% until 18 Nov 2026)
 MAX_GAP = 0.03             # an open more than 3% above the resistance = no buy that day (rule of 18 Nov 2026)
-EMA50_MAX = 0.15           # buy price must be less than 15% above the daily EMA 50 (rule of 18 Nov 2026; None = off)
+EMA50_MAX = None           # 0.15 = buy price must be less than 15% above the daily EMA 50 (added 18 Nov 2026,
+                           # switched OFF 19 Nov 2026: worse in every backtest)
 STOP_BELOW_BASE = 0.01     # stop 1% below the base low
 MAX_RISK = 0.06            # ... but never more than 6% below the buy price
 TIME_STOP_DAYS, TIME_STOP_GAIN = 10, 0.03
@@ -458,8 +459,8 @@ def gap_too_big(plan, df, j):
 
 # Entry-rule comparison (18 Nov 2026): the old rule (1% above, any gap) vs the new rule (0.5% above, no buy on a gap > 3%)
 # (buy-stop above resistance, max gap, max distance above EMA 50)
-ENTRY_VARIANTS = {"old": (0.01, None, None), "new": (0.005, 0.03, 0.15), "half_pct_any_gap": (0.005, None, 0.15),
-                  "one_pct_gap3": (0.01, 0.03, 0.15), "new_without_ema50": (0.005, 0.03, None)}
+ENTRY_VARIANTS = {"old": (0.01, None, None), "new": (0.005, 0.03, None), "one_pct_gap3": (0.01, 0.03, None),
+                  "half_pct_any_gap": (0.005, None, None)}   # 19 Nov 2026: EMA 50 rule off; "new" = live rule
 
 
 def backtest_variant(variant, *args, **kw):
