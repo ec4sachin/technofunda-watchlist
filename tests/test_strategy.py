@@ -333,9 +333,15 @@ def test_gap_rule():
         assert t and t["entry"] == 102.0                       # gap up 2%: filled at the open
         t, _ = S.try_entry(st, "ABC", "ABC", frame(103.5, 106.0, 103.0), 1, money=10000)
         assert t is None                                       # gap up 3.5%: no buy
-        e50 = 88.0                                             # 102 is 15.9% above EMA 50 -> no buy
+        e50 = 88.0                                             # 102 is 15.9% above EMA 50
         t, _ = S.try_entry(st, "ABC", "ABC", frame(102.0, 104.0, 101.5), 1, money=10000)
-        assert t is None
+        assert t is not None                                   # EMA 50 rule is OFF (19 Nov 2026): still a buy
+        S.EMA50_MAX = 0.15
+        try:
+            t, _ = S.try_entry(st, "ABC", "ABC", frame(102.0, 104.0, 101.5), 1, money=10000)
+            assert t is None                                   # with the rule switched on: no buy
+        finally:
+            S.EMA50_MAX = None
     finally:
         S.swing_setup = real
 
