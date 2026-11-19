@@ -8,13 +8,13 @@
   },
   "nse": {
    "days": 1,
-   "rows": 8,
+   "rows": 53,
    "last_error": ""
   },
   "matched": {
    "bse_codes": 93,
    "nse_only_codes": 234,
-   "new": 0
+   "new": 2
   }
  },
  "items": {
@@ -276,6 +276,26 @@
     "url": "https://nsearchives.nseindia.in/corporate/ESCONET_18112026120743_ETL_Int_ISO_Zeacloud.pdf",
     "ex": "NSE",
     "seen": "2026-11-18"
+   }
+  ],
+  "BETA": [
+   {
+    "d": "2026-11-19",
+    "t": "Beta Drugs Limited has informed the Exchange regarding a press release dated November 19, 2026, titled \"Beta Drugs Limited ( Beta ) forms Oncology Joint Venture withIMGSA Groupe SPA ( IMGSA )\".",
+    "k": "Acquisition / JV",
+    "url": "https://nsearchives.nseindia.in/corporate/BETA_19112026112645_press_release_final.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-19"
+   }
+  ],
+  "VIVIANA": [
+   {
+    "d": "2026-11-19",
+    "t": "Viviana Power Tech Limited has informed the Exchange about Receiving of a new turnkey contract amounting to Rs.1,24,00,00,000.00 (Rupees One Hundred Twenty-Four Crore Only), inclusive of taxes, from the client M/s. Dakshin Haryana Bijli Vitran Nigam Limited (DHBVNL).",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/VIVIANA_19112026105817_VIVIANA__Intimation_of_Receiving_Order_DHBVN_19112026.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-19"
    }
   ]
  }

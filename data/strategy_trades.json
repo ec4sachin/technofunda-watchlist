@@ -3737,8 +3737,24 @@
    "SAMAY": "2026-11-13",
    "KEN": "2026-11-18",
    "USHAFIN": "2026-11-18",
-   "BCSSL": "2026-11-18",
-   "512377": "2026-11-18"
+   "512377": "2026-11-18",
+   "TGL": "2026-11-17",
+   "TIMESCAN": "2026-11-17",
+   "TIRUPATIFL": "2026-11-17",
+   "TRANSTEEL": "2026-11-17",
+   "TSFINV": "2026-11-17",
+   "TUNWAL": "2026-11-18",
+   "UWCSL": "2026-11-17",
+   "VEEKAYEM": "2026-11-17",
+   "VERTOZ": "2026-11-17",
+   "VILAS": "2026-11-17",
+   "VILINBIO": "2026-11-17",
+   "VINYAS": "2026-11-17",
+   "VISHNUINFR": "2026-11-17",
+   "VR": "2026-11-17",
+   "WALPAR": "2026-11-17",
+   "WTICAB": "2026-11-17",
+   "YASHOPTICS": "2026-11-17"
   }
  },
  "setups": {
@@ -3784,6 +3800,27 @@
      "volume": 0.77
     },
     "turnover": 627784
+   },
+   {
+    "symbol": "PDSL",
+    "name": "PDS Ltd",
+    "buy_above": 427.02,
+    "max_open": 437.65,
+    "stop": 402.04,
+    "qty": 293,
+    "amount": 125116.86,
+    "range_pct": 4.6,
+    "risk_pct": 5.8,
+    "as_of": "2026-11-17",
+    "score": {
+     "tight": 4.6,
+     "strength": 45.76,
+     "near_high": 3.86,
+     "trend": 12.47,
+     "low_risk": 5.85,
+     "volume": 2.25
+    },
+    "turnover": 360366934
    },
    {
     "symbol": "513502",
@@ -3952,6 +3989,27 @@
      "volume": 0.97
     },
     "turnover": 1437792
+   },
+   {
+    "symbol": "ZOTA",
+    "name": "Zota Health Care Ltd",
+    "buy_above": 1343.79,
+    "max_open": 1377.21,
+    "stop": 1263.16,
+    "qty": 93,
+    "amount": 124972.47,
+    "range_pct": 4.8,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-18",
+    "score": {
+     "tight": 4.75,
+     "strength": 9.05,
+     "near_high": 24.45,
+     "trend": 3.73,
+     "low_risk": 6.0,
+     "volume": 0.66
+    },
+    "turnover": 68244651
    }
   ],
   "positional": [
@@ -3998,6 +4056,27 @@
     "turnover": 627784
    },
    {
+    "symbol": "PDSL",
+    "name": "PDS Ltd",
+    "buy_above": 427.02,
+    "max_open": 437.65,
+    "stop": 402.04,
+    "qty": 272,
+    "amount": 116149.44,
+    "range_pct": 4.6,
+    "risk_pct": 5.8,
+    "as_of": "2026-11-17",
+    "score": {
+     "tight": 4.6,
+     "strength": 45.76,
+     "near_high": 3.86,
+     "trend": 12.47,
+     "low_risk": 5.85,
+     "volume": 2.25
+    },
+    "turnover": 360366934
+   },
+   {
     "symbol": "513502",
     "name": "Baroda Extrusion",
     "buy_above": 10.04,
@@ -4164,6 +4243,27 @@
      "volume": 0.97
     },
     "turnover": 1437792
+   },
+   {
+    "symbol": "ZOTA",
+    "name": "Zota Health Care Ltd",
+    "buy_above": 1343.79,
+    "max_open": 1377.21,
+    "stop": 1263.16,
+    "qty": 86,
+    "amount": 115565.94,
+    "range_pct": 4.8,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-18",
+    "score": {
+     "tight": 4.75,
+     "strength": 9.05,
+     "near_high": 24.45,
+     "trend": 3.73,
+     "low_risk": 6.0,
+     "volume": 0.66
+    },
+    "turnover": 68244651
    }
   ],
   "switch": [
@@ -4210,6 +4310,27 @@
     "turnover": 627784
    },
    {
+    "symbol": "PDSL",
+    "name": "PDS Ltd",
+    "buy_above": 427.02,
+    "max_open": 437.65,
+    "stop": 402.04,
+    "qty": 272,
+    "amount": 116149.44,
+    "range_pct": 4.6,
+    "risk_pct": 5.8,
+    "as_of": "2026-11-17",
+    "score": {
+     "tight": 4.6,
+     "strength": 45.76,
+     "near_high": 3.86,
+     "trend": 12.47,
+     "low_risk": 5.85,
+     "volume": 2.25
+    },
+    "turnover": 360366934
+   },
+   {
     "symbol": "513502",
     "name": "Baroda Extrusion",
     "buy_above": 10.04,
@@ -4376,6 +4497,27 @@
      "volume": 0.97
     },
     "turnover": 1437792
+   },
+   {
+    "symbol": "ZOTA",
+    "name": "Zota Health Care Ltd",
+    "buy_above": 1343.79,
+    "max_open": 1377.21,
+    "stop": 1263.16,
+    "qty": 86,
+    "amount": 115565.94,
+    "range_pct": 4.8,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-18",
+    "score": {
+     "tight": 4.75,
+     "strength": 9.05,
+     "near_high": 24.45,
+     "trend": 3.73,
+     "low_risk": 6.0,
+     "volume": 0.66
+    },
+    "turnover": 68244651
    }
   ],
   "growth_switch": [
@@ -4651,6 +4793,27 @@
      "volume": 0.53
     },
     "turnover": 1167627269
+   },
+   {
+    "symbol": "ZENTEC",
+    "name": "Zen Technologies",
+    "buy_above": 1803.87,
+    "max_open": 1848.75,
+    "stop": 1695.64,
+    "qty": 43,
+    "amount": 77566.41,
+    "range_pct": 5.8,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-18",
+    "score": {
+     "tight": 5.79,
+     "strength": 10.73,
+     "near_high": 15.64,
+     "trend": 2.31,
+     "low_risk": 6.0,
+     "volume": 1.12
+    },
+    "turnover": 871707129
    }
   ]
  },
