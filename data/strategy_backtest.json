@@ -37,6 +37,27 @@
     "skipped": 89
    }
   },
+  "pyramid_test": {
+   "none": {
+    "return_pct": 34.0,
+    "trades": 191,
+    "win_rate": 39.3,
+    "max_drawdown_pct": 19.3,
+    "skipped": 66,
+    "addons": 0
+   },
+   "add1": {
+    "return_pct": 55.2,
+    "trades": 209,
+    "win_rate": 43.1,
+    "max_drawdown_pct": 16.9,
+    "skipped": 83,
+    "addons": 54,
+    "addon_closed": 53,
+    "addon_win_rate": 47.2,
+    "addon_avg_return_pct": 2.59
+   }
+  },
   "report": {
    "trades": 251,
    "open": 6,
@@ -12166,6 +12187,27 @@
     "skipped": 107
    }
   },
+  "pyramid_test": {
+   "none": {
+    "return_pct": 63.1,
+    "trades": 103,
+    "win_rate": 30.1,
+    "max_drawdown_pct": 10.5,
+    "skipped": 88,
+    "addons": 0
+   },
+   "add1": {
+    "return_pct": 77.9,
+    "trades": 119,
+    "win_rate": 28.6,
+    "max_drawdown_pct": 9.5,
+    "skipped": 103,
+    "addons": 61,
+    "addon_closed": 56,
+    "addon_win_rate": 25.0,
+    "addon_avg_return_pct": 3.58
+   }
+  },
   "report": {
    "trades": 177,
    "open": 14,
@@ -20508,6 +20550,27 @@
     "win_rate": 40.1,
     "max_drawdown_pct": 3.1,
     "skipped": 102
+   }
+  },
+  "pyramid_test": {
+   "none": {
+    "return_pct": 46.3,
+    "trades": 142,
+    "win_rate": 34.5,
+    "max_drawdown_pct": 10.9,
+    "skipped": 80,
+    "addons": 0
+   },
+   "add1": {
+    "return_pct": 71.1,
+    "trades": 166,
+    "win_rate": 37.3,
+    "max_drawdown_pct": 6.6,
+    "skipped": 90,
+    "addons": 57,
+    "addon_closed": 56,
+    "addon_win_rate": 35.7,
+    "addon_avg_return_pct": 4.52
    }
   },
   "report": {

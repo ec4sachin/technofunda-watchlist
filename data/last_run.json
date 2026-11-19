@@ -1,87 +1,8 @@
 {
- "added": [
-  [
-   "HMAAGRO",
-   "HMA Agro Inds.",
-   "marks 7.7/11 · 3-month RS 91 (vs 3559 BSE stocks) · TTM Profit > 30%, Ready after 6 Months, 52W High"
-  ],
-  [
-   "FEDDERSHOL",
-   "Fedders Holding",
-   "marks 6.1/11 · 3-month RS 97 (vs 4105 BSE stocks) · TTM Profit > 30%, 52W High"
-  ]
- ],
- "rejected": [
-  [
-   "SUPREMEENG",
-   "Supreme Engineering Ltd",
-   "3.9/11 (Ashish Kacholia)"
-  ],
-  [
-   "KNACK",
-   "Knack Packaging",
-   "5/11 · 3-month RS 71 (need above 80)"
-  ]
- ],
- "to_dt": [
-  [
-   "DHABRIYA",
-   "Dhabriya Poly.",
-   "close 470.85 < 20 EMA 472.16"
-  ],
-  [
-   "RSL",
-   "Rajputana Stain.",
-   "close 167.93 < 20 EMA 169.1"
-  ]
- ],
- "to_sp": [
-  [
-   "ARROWGREEN",
-   "Arrow Greentech",
-   "close 687.4 > 200 EMA 674.54"
-  ],
-  [
-   "ASIANENE",
-   "Asian Energy Services Ltd",
-   "close 388.3 > 200 EMA 387.18"
-  ],
-  [
-   "HEXAGON",
-   "Hexagon Nutri.",
-   "close 64.17 > 20 EMA 61.2"
-  ],
-  [
-   "INFOBEAN",
-   "InfoBeans Technologies Ltd",
-   "close 159.14 > 200 EMA 158.94"
-  ],
-  [
-   "JSIPL",
-   "Jindal Supreme",
-   "close 167.53 > 20 EMA 162.16"
-  ],
-  [
-   "ORIRAIL",
-   "Oriental Rail Infrastructure Ltd",
-   "close 118.94 > 20 EMA 117.95"
-  ],
-  [
-   "SHANTIGOLD",
-   "Shanti Gold International",
-   "close 260.5 > 200 EMA 255.15"
-  ],
-  [
-   "TAMBOLIIN",
-   "Tamboli Industri",
-   "close 325.75 > 20 EMA 319.46"
-  ],
-  [
-   "UDAYJEW",
-   "Uday Jewellery",
-   "close 220.77 > 20 EMA 215.54"
-  ]
- ],
+ "added": [],
+ "rejected": [],
+ "to_dt": [],
+ "to_sp": [],
  "removed": [],
  "unchecked": [],
  "investor_moves": [],
@@ -165,9 +86,19 @@
    "close 148.8 vs 20 EMA 148.55 → SP"
   ],
   [
-   "DHABRIYA",
-   "Dhabriya Poly.",
-   "close 470.85 vs 20 EMA 472.16 → DT"
+   "FEDDERSHOL",
+   "Fedders Holding",
+   "close 59.22 vs 20 EMA 58.5 → SP"
+  ],
+  [
+   "HEXAGON",
+   "Hexagon Nutri.",
+   "close 64.17 vs 20 EMA 61.2 → SP"
+  ],
+  [
+   "JSIPL",
+   "Jindal Supreme",
+   "close 167.53 vs 20 EMA 162.16 → SP"
   ],
   [
    "KANOHAR",
@@ -185,9 +116,9 @@
    "close 164.77 vs 20 EMA 147.16 → SP"
   ],
   [
-   "RSL",
-   "Rajputana Stain.",
-   "close 167.93 vs 20 EMA 169.1 → DT"
+   "ORIRAIL",
+   "Oriental Rail Infrastructure Ltd",
+   "close 118.94 vs 20 EMA 117.95 → SP"
   ],
   [
    "SHUKRAPHAR",
@@ -205,6 +136,11 @@
    "close 546.8 (too new for any EMA)"
   ],
   [
+   "TAMBOLIIN",
+   "Tamboli Industri",
+   "close 325.75 vs 20 EMA 319.46 → SP"
+  ],
+  [
    "TEAMTECH",
    "Teamtech Formwork",
    "close 161.1 vs 20 EMA 158.89 → SP"
@@ -215,9 +151,9 @@
    "close 1370.6 vs 20 EMA 1314.84 → SP"
   ],
   [
-   "FEDDERSHOL",
-   "Fedders Holding",
-   "close 59.22 vs 20 EMA 58.5 → SP"
+   "UDAYJEW",
+   "Uday Jewellery",
+   "close 220.77 vs 20 EMA 215.54 → SP"
   ],
   [
    "544538",
@@ -285,6 +221,11 @@
    "close 199.78 vs 20 EMA 215.84"
   ],
   [
+   "DHABRIYA",
+   "Dhabriya Poly.",
+   "close 470.85 vs 20 EMA 472.16"
+  ],
+  [
    "EPWINDIA",
    "EPW India",
    "close 241 vs 20 EMA 241.69"
@@ -300,16 +241,6 @@
    "close 132.36 vs 20 EMA 135"
   ],
   [
-   "HEXAGON",
-   "Hexagon Nutri.",
-   "close 64.17 vs 20 EMA 61.2"
-  ],
-  [
-   "JSIPL",
-   "Jindal Supreme",
-   "close 167.53 vs 20 EMA 162.16"
-  ],
-  [
    "MARUSHIKA",
    "Marushika Tech.",
    "close 120 vs 20 EMA 121.22"
@@ -320,14 +251,14 @@
    "close 321.45 vs 20 EMA 323.57"
   ],
   [
-   "ORIRAIL",
-   "Oriental Rail Infrastructure Ltd",
-   "close 118.94 vs 20 EMA 117.95"
-  ],
-  [
    "RAMBHAJO",
    "Advit Jewels",
    "close 311.3 vs 20 EMA 324.75"
+  ],
+  [
+   "RSL",
+   "Rajputana Stain.",
+   "close 167.93 vs 20 EMA 169.1"
   ],
   [
    "SWASTIKAIN",
@@ -340,19 +271,9 @@
    "close 889.95 vs 20 EMA 925.64"
   ],
   [
-   "TAMBOLIIN",
-   "Tamboli Industri",
-   "close 325.75 vs 20 EMA 319.46"
-  ],
-  [
    "TECHNOCRAF",
    "Technocraft Ven.",
    "close 479.05 vs 20 EMA 489.62"
-  ],
-  [
-   "UDAYJEW",
-   "Uday Jewellery",
-   "close 220.77 vs 20 EMA 215.54"
   ],
   [
    "XTRANET",
@@ -366,19 +287,19 @@
   ]
  ],
  "per_alert": {
-  "TTM Profit > 30%": 7,
-  "52W High": 9,
+  "TTM Profit > 30%": 0,
+  "52W High": 0,
   "Daily Volume Scan": 0,
   "Weekly Volume Scan": 0,
-  "Ready after 6 Months": 1,
+  "Ready after 6 Months": 0,
   "Mukul Mahavir Agrawal": 0,
-  "Ashish Kacholia": 1
+  "Ashish Kacholia": 0
  },
- "email_total": 10,
- "already_listed": 6,
+ "email_total": 0,
+ "already_listed": 0,
  "price_date": "18 Nov 2026",
  "monthly_pass": 0,
- "mode": "auto",
+ "mode": "daily",
  "monthly_done": false,
- "run_at": "19 Nov 2026, 07:56 AM IST"
+ "run_at": "19 Nov 2026, 08:48 AM IST"
 }

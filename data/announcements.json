@@ -2,13 +2,13 @@
  "last": "2026-11-19",
  "status": {
   "bse": {
-   "days": 2,
+   "days": 1,
    "rows": 0,
    "last_error": "HTTP 403 (AnnGetData/w?strCat=-1)"
   },
   "nse": {
-   "days": 2,
-   "rows": 521,
+   "days": 1,
+   "rows": 8,
    "last_error": ""
   },
   "matched": {
