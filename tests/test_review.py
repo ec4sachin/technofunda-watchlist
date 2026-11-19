@@ -64,7 +64,7 @@ def test_catch_up_in_date_order():
     sig = {"AAA": 8, "BBB": 5}
     real_setup, real_frame = S.swing_setup, S._frame
 
-    def fake(df, i):
+    def fake(df, i, **kw):
         if i + 1 == sig[df.tag]:
             return {"score": {"low_risk": 1.0}, "trigger": 100.5, "stop": 95.0, "base_low": 96, "resistance": 99.5, "r42": 0,
                     "room": None, "range_pct": 1, "base_from": "", "base_to": ""}

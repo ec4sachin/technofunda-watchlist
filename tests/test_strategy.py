@@ -27,13 +27,22 @@ def uptrend_then_base(n_up=260, base=4):
 
 
 def test():
+    keep_add = stg.ADD_ON
+    stg.ADD_ON = False      # this test follows one single trade (Add 1 has its own test below)
+    try:
+        _single_trade_flow()
+    finally:
+        stg.ADD_ON = keep_add
+
+
+def _single_trade_flow():
     storage.DATA = tempfile.mkdtemp()
     closes = uptrend_then_base()
     h = hist_from(closes)
     df = stg._frame(h)
     plan = stg.swing_setup(df, len(df) - 1)
     assert plan, "setup expected after a steady uptrend + tight base"
-    assert plan["range_pct"] <= 6 and plan["trigger"] == round(max(h["h"][-4:]) * 1.005, 2) and plan["max_open"] == round(max(h["h"][-4:]) * 1.03, 2)
+    assert plan["range_pct"] <= 6 and plan["trigger"] == round(max(h["h"][-4:]) * 1.01, 2) and plan["max_open"] == round(max(h["h"][-4:]) * 1.03, 2)
     # rule 3: stretched far above EMA 10 -> no setup
     hs = hist_from(closes[:-1] + [closes[-1] * 1.2])
     assert stg.swing_setup(stg._frame(hs), len(hs["t"]) - 1) is None
@@ -319,7 +328,7 @@ def test_gap_rule():
     plan = {"trigger": 100.5, "max_open": 103.0, "resistance": 100.0, "base_low": 96.0, "stop": 95.0,
             "range_pct": 4.0, "r42": 0, "room": None, "score": {}}
     real = S.swing_setup
-    S.swing_setup = lambda df, i: plan
+    S.swing_setup = lambda df, i, **kw: plan
     try:
         def frame(o, h, l):
             d = D(); d.o = [99, o]; d.h = [100, h]; d.l = [98, l]; d.c = [99, h]; d.index = ["2026-11-17", "2026-11-18"]
@@ -376,7 +385,7 @@ def test_pyramid_backtest():
     c += [b2 * x for x in (0.996, 1.0, 0.998, 1.001, 0.999)]
     c += [b2 * 1.012 * (1.006 ** k) for k in range(15)]
     st = {"id": "positional", "name": "P", "type": "positional", "capital": 1000000, "pct": 10}
-    plain = stg.backtest(st, {"ABC": hist_from(c, rng=0.002)}, {"ABC": "ABC"}, ["ABC"])
+    plain = stg.backtest_single(st, {"ABC": hist_from(c, rng=0.002)}, {"ABC": "ABC"}, ["ABC"])
     pyr = stg.backtest_pyramid(st, {"ABC": hist_from(c, rng=0.002)}, {"ABC": "ABC"}, ["ABC"], max_adds=1)
     assert len(plain) == 1 and not plain[0].get("add")
     adds = [t for t in pyr if t.get("add")]
@@ -388,3 +397,38 @@ def test_pyramid_backtest():
     p = stg.portfolio(pyr, "2000-01-01", capital=1000000, pct=10)
     m = sorted(r["money"] for r in p["trades_list"])
     assert m == [50000, 100000]
+
+
+def test_trigger_per_strategy():
+    """19 Nov 2026: 1% above the resistance for SP / DT strategies, 0.5% for the Growth-list strategy."""
+    assert stg.trigger_of({"list": "SP"}) == 0.01 and stg.trigger_of({"list": "BOTH"}) == 0.01
+    assert stg.trigger_of({"list": "GROWTH"}) == 0.005
+    assert stg.trigger_of({"list": "SP", "trigger_pct": 0.75}) == 0.0075
+
+
+def test_live_add_on():
+    """19 Nov 2026: live paper trading takes ONE add-on (half the money) on a new breakout while the first trade is in profit."""
+    storage.DATA = tempfile.mkdtemp()
+    c = uptrend_then_base(base=4)
+    c += [c[-1] * 1.0]
+    top = max(c[-5:]) * 1.004
+    c += [top * (1.01 + 0.012 * k) for k in range(6)]
+    b2 = c[-1]
+    c += [b2 * x for x in (0.996, 1.0, 0.998, 1.001, 0.999)]
+    c += [b2 * 1.012 * (1.006 ** k) for k in range(15)]
+    h = hist_from(c, rng=0.002)
+    st = {"id": "positional", "name": "P", "type": "positional", "list": "SP", "capital": 1000000, "pct": 10, "on": True}
+    # walk the days one by one, like the daily robot
+    book = {"open": [], "closed": [], "last_day": {}}
+    n0 = 262
+    events_all = []
+    for k in range(n0, len(c) + 1):
+        hk = {key: v[:k] for key, v in h.items()}
+        ev = stg.run({"strategies": [st]}, book, {"ABC": hk}, {"ABC": {"name": "ABC"}}, {})
+        events_all += ev["entries"]
+    buys = [e for e in events_all if not e.get("add")]
+    addons = [e for e in events_all if e.get("add")]
+    assert len(buys) == 1 and len(addons) == 1, events_all
+    first = next(t for t in book["open"] + book["closed"] if not t.get("add"))
+    add = next(t for t in book["open"] + book["closed"] if t.get("add"))
+    assert add["entry"] > first["entry"] and abs(add["money"] - first["money"] / 2) < 1 and first.get("add_done")
