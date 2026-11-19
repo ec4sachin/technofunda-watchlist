@@ -356,3 +356,29 @@ def test_ema50_rule():
         assert stg.swing_setup(df, len(df) - 1) is None
     finally:
         stg.EMA50_MAX = keep
+
+
+def test_pyramid_backtest():
+    """19 Nov 2026 (backtest only): a second breakout while the first trade is in profit adds one more trade."""
+    storage.DATA = tempfile.mkdtemp()
+    c = uptrend_then_base(base=4)
+    c += [c[-1] * 1.0]                     # 5th base candle
+    top = max(c[-5:]) * 1.004
+    # breakout, a climb of ~8%, then a new tight 5-candle base, then a second breakout and a further rise
+    c += [top * (1.01 + 0.012 * k) for k in range(6)]
+    b2 = c[-1]
+    c += [b2 * x for x in (0.996, 1.0, 0.998, 1.001, 0.999)]
+    c += [b2 * 1.012 * (1.006 ** k) for k in range(15)]
+    st = {"id": "positional", "name": "P", "type": "positional", "capital": 1000000, "pct": 10}
+    plain = stg.backtest(st, {"ABC": hist_from(c, rng=0.002)}, {"ABC": "ABC"}, ["ABC"])
+    pyr = stg.backtest_pyramid(st, {"ABC": hist_from(c, rng=0.002)}, {"ABC": "ABC"}, ["ABC"], max_adds=1)
+    assert len(plain) == 1 and not plain[0].get("add")
+    adds = [t for t in pyr if t.get("add")]
+    assert len(pyr) == 2 and len(adds) == 1 and adds[0]["entry"] > plain[0]["entry"]
+    assert adds[0]["base_id"] == plain[0]["id"] and adds[0]["money"] == 50000.0      # half of the first buy's money
+    s = stg.pyramid_summary(pyr, "2000-01-01")
+    assert s["addons"] == 1
+    # portfolio: the add-on gets half of what the first trade got
+    p = stg.portfolio(pyr, "2000-01-01", capital=1000000, pct=10)
+    m = sorted(r["money"] for r in p["trades_list"])
+    assert m == [50000, 100000]
