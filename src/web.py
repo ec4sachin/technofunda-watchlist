@@ -1713,7 +1713,7 @@ function growthBt(t){
 function setupRows(list){
   if (!list || !list.length) return `<div class="empty">No setups today. When a stock meets all entry rules it appears here with its buy-stop price.</div>`;
   return `<div class="tbl"><table><thead><tr><th>Stock</th><th class="ra">Buy above</th><th class="ra">Stop</th><th class="ra">Risk</th><th class="ra">Qty</th><th class="ra">Amount</th><th class="ra">Base range</th></tr></thead><tbody>` +
-    list.map(x => `<tr><td><b>${esc(x.name)}</b><br><span class="sym mut">${esc(x.symbol)}</span></td><td class="num ra"><b>${inr2(x.buy_above)}</b>${x.max_open ? `<br><span class="mut" title="If the day opens above this price (3% above resistance), no buy">no buy if open &gt; ${inr2(x.max_open)}</span>` : ""}</td>
+    list.map(x => `<tr><td>${x.add ? '<span class="pill p-add" title="Add 1: half-size add-on to a trade already in profit">ADD</span> ' : ""}<b>${esc(x.name)}</b><br><span class="sym mut">${esc(x.symbol)}</span></td><td class="num ra"><b>${inr2(x.buy_above)}</b>${x.max_open ? `<br><span class="mut" title="If the day opens above this price (3% above resistance), no buy">no buy if open &gt; ${inr2(x.max_open)}</span>` : ""}</td>
       <td class="num ra">${inr2(x.stop)}</td><td class="num ra">${esc(x.risk_pct)}%</td><td class="num ra">${esc(x.qty)}</td><td class="num ra">${inr0(x.amount)}</td><td class="num ra">${esc(x.range_pct)}%</td></tr>`).join("") +
     `</tbody></table></div>`;
 }

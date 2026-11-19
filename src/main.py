@@ -715,7 +715,7 @@ def strategy_lines(st):
                      f"free ₹{c['cash']:,.0f} · next trade ₹{c['equity'] * c['pct'] / 100:,.0f} ({c['pct']:g}%)")
         n0 = len(L)
         for e in [x for x in st.get("entries", []) if x.get("strategy") == sid]:
-            L.append(f"🟢 BUY {html.escape(e['name'])} ({e['symbol']}) {e['qty']} @ ₹{e['price']:g} · stop ₹{e['stop']:g} · target ₹{e['target']:g}"
+            L.append(f"🟢 {'ADD (half size)' if e.get('add') else 'BUY'} {html.escape(e['name'])} ({e['symbol']}) {e['qty']} @ ₹{e['price']:g} · stop ₹{e['stop']:g} · target ₹{e['target']:g}"
                      + (f" · {html.escape(e['regime'].split(' → ')[-1])}" if e.get("regime") else ""))
         for e in [x for x in st.get("switched", []) if x.get("strategy") == sid]:
             L.append(f"🔁 {html.escape(e['name'])} ({e['symbol']}) now follows <b>{e['to'].capitalize()}</b> exits"
@@ -724,13 +724,13 @@ def strategy_lines(st):
             L.append(f"{'✅' if e['pnl'] >= 0 else '🔴'} SELL {html.escape(e['name'])} ({e['symbol']}) {e['qty']} @ ₹{e['price']:g} — "
                      f"{html.escape(e['reason'])} · P&amp;L ₹{e['pnl']:+,.0f}")
         for x in [x for x in st.get("skipped", []) if x.get("strategy", sid) == sid]:
-            L.append(f"⏭ Skipped {html.escape(x['name'])} ({x['symbol']}) — breakout, but no free capital")
+            L.append(f"⏭ Skipped {html.escape(x['name'])} ({x['symbol']}) — {'add-on ' if x.get('add') else ''}breakout, but no free capital")
         for x in [x for x in st.get("gap_skips", []) if x.get("strategy", sid) == sid]:
             L.append(f"⏭ Skipped {html.escape(x['name'])} ({x['symbol']}) — opened ₹{x['open']:g}, more than 3% above resistance (max ₹{x['max_open']:g})")
         items = (st.get("setups") or {}).get(sid) or []
         if items:
             L.append("⏳ <b>Setups for today</b> (buy-stop orders):")
-            L += [f"• {html.escape(x['name'])} ({x['symbol']}) — buy above ₹{x['buy_above']:g}"
+            L += [f"• {'ADD · ' if x.get('add') else ''}{html.escape(x['name'])} ({x['symbol']}) — buy above ₹{x['buy_above']:g}"
                   + (f" (no buy if it opens above ₹{x['max_open']:g})" if x.get("max_open") else "") + f", stop ₹{x['stop']:g}, "
                   f"qty {x['qty']} (risk {x['risk_pct']:g}%)" for x in items[:15]]
         if len(L) == n0:
@@ -908,9 +908,10 @@ def main():
                     pv = strategy.portfolio(tv, d2, capital=cap, pct=pct, rank=st_.get("rank"))
                     cmp_[v] = {k: pv[k] for k in ("return_pct", "trades", "win_rate", "max_drawdown_pct", "skipped")}
                 # pyramiding test (19 Nov 2026, backtest only): add on a new breakout while the first trade is in profit
-                pyr = {"none": {**cmp_["new"], "addons": 0}}
-                tp = strategy.backtest_pyramid(st_, charts, names, syms, mood=mood, max_adds=1)   # one add-on, half the money
-                pyr["add1"] = strategy.pyramid_summary(tp, d2, capital=cap, pct=pct, rank=st_.get("rank"))
+                # (Add 1 is live since 19 Nov 2026, so "trades" already include add-ons; "none" = without them)
+                tp = strategy.backtest_pyramid(st_, charts, names, syms, mood=mood, max_adds=0)
+                pyr = {"none": strategy.pyramid_summary(tp, d2, capital=cap, pct=pct, rank=st_.get("rank")),
+                       "add1": strategy.pyramid_summary(trades, d2, capital=cap, pct=pct, rank=st_.get("rank"))}
                 bt[st_["id"]] = {"entry_test": cmp_, "pyramid_test": pyr, "report": rep, "trades": [{k: t.get(k) for k in ("symbol", "name", "entry_date", "entry", "qty",
                                  "status", "pnl", "pnl_pct", "hold_days", "closed_on", "exits", "open_pnl", "type", "regime")} for t in keep],
                                  "as_of": today, "stocks": len(syms),

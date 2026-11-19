@@ -9,6 +9,8 @@ Swing Strategy rules (given by the user) - "version 5", chosen 4 Nov 2026 after 
     1. Daily EMA 10 > EMA 20 > EMA 50 > EMA 200
     2. The last 5 daily candles (BASE_CANDLES; 4 until 5 Nov 2026) are in a tight range: highest high - lowest low
        <= 6% of the current price. Resistance = highest high of those candles. Buy when price goes 0.5% above it (a buy-stop order).
+       Buy-stop level per strategy (19 Nov 2026): 1% above for SP / DT strategies, 0.5% for the Growth-list strategy
+       (a strategy can also have its own "trigger_pct" in data/strategies.json).
        Gap-up rule (18 Nov 2026): if the day OPENS above the 0.5% level, buy at the open only when the open is not more
        than 3% above the resistance; an open more than 3% above it = no buy that day (risk not favourable).
     3. The last candle's high is not more than 10% above EMA 10.
@@ -48,7 +50,9 @@ BASE_CANDLES = 5           # rule 2: number of candles in the tight base (5 chos
 BASE_RANGE = 0.06          # ... and the most their range may be (share of the current price)
 BASE_MEASURE = "hl"        # "hl" = highest high / lowest low (wicks count), "close" = closing prices only
 ROOM_RULE = False          # rule 4 / 6 (room to the 42-candle resistance) - off in version 5
-TRIGGER_ABOVE = 0.005      # buy-stop 0.5% above the resistance (was 1% until 18 Nov 2026)
+TRIGGER_ABOVE = None       # buy-stop above the resistance: None = each strategy's own level (19 Nov 2026), see trigger_of()
+TRIGGER_SP, TRIGGER_GROWTH = 0.01, 0.005   # 1% for SP / DT strategies, 0.5% for the Growth-list strategy (backtest 19 Nov 2026)
+ADD_ON = True              # Add 1 (19 Nov 2026): one add-on per trade on a new breakout while the first trade is in profit
 MAX_GAP = 0.03             # an open more than 3% above the resistance = no buy that day (rule of 18 Nov 2026)
 EMA50_MAX = None           # 0.15 = buy price must be less than 15% above the daily EMA 50 (added 18 Nov 2026,
                            # switched OFF 19 Nov 2026: worse in every backtest)
@@ -206,8 +210,20 @@ def _frame(hist):
     return Candles([t[i] for i in keep], pick(o), pick(h), pick(l), [c[i] for i in keep], vol, real)
 
 
-def swing_setup(df, i):
-    """Setup using candles up to row i (the last base candle). Returns the buy-stop plan or None."""
+def trigger_of(st):
+    """Buy-stop distance above the resistance for this strategy (a fraction, e.g. 0.01 = 1%)."""
+    if TRIGGER_ABOVE is not None:          # a backtest variant fixes it for all strategies
+        return TRIGGER_ABOVE
+    if (st or {}).get("trigger_pct") not in (None, ""):
+        return float(st["trigger_pct"]) / 100
+    return TRIGGER_GROWTH if (st or {}).get("list") == "GROWTH" else TRIGGER_SP
+
+
+def swing_setup(df, i, above=None):
+    """Setup using candles up to row i (the last base candle). Returns the buy-stop plan or None.
+    above = buy-stop distance above the resistance (default: 1%, or the backtest variant's level)."""
+    if above is None:
+        above = TRIGGER_ABOVE if TRIGGER_ABOVE is not None else TRIGGER_SP
     if i < 200 or i - 46 < 0:  # EMA 200 + 42 + base candles of history needed
         return None
     if not (df.e10[i] > df.e20[i] > df.e50[i] > df.e200[i]):                  # rule 1
@@ -223,7 +239,7 @@ def swing_setup(df, i):
         return None
     if df.h[i] > df.e10[i] * 1.10:                                           # rule 3
         return None
-    entry = round(res * (1 + TRIGGER_ABOVE), 2)
+    entry = round(res * (1 + above), 2)
     if EMA50_MAX is not None and entry >= df.e50[i] * (1 + EMA50_MAX):         # rule 4 (18 Nov 2026)
         return None
     r42 = float(df.h[i - 41 - n:i - n + 1].max())                                    # rule 4
@@ -232,7 +248,7 @@ def swing_setup(df, i):
         return None
     stop = max(low * (1 - STOP_BELOW_BASE), entry * (1 - MAX_RISK))
     score = _scores(df, i, entry, stop, (res - low) / price * 100)
-    return {"score": score, "trigger": entry, "max_open": round(res * (1 + MAX_GAP), 2) if MAX_GAP is not None else None, "stop": round(stop, 2), "base_low": round(low, 2), "resistance": round(res, 2), "r42": round(r42, 2),
+    return {"score": score, "trigger": entry, "above_pct": round(above * 100, 2), "max_open": round(res * (1 + MAX_GAP), 2) if MAX_GAP is not None else None, "stop": round(stop, 2), "base_low": round(low, 2), "resistance": round(res, 2), "r42": round(r42, 2),
             "room": round(room, 1) if r42 > entry else None, "range_pct": round((res - low) / price * 100, 1),
             "base_from": df.index[i - n + 1], "base_to": df.index[i]}
 
@@ -449,6 +465,16 @@ def turnover(df, i):
     return round(float(val.mean())) if len(val) else None
 
 
+def add_ok(base, df, j, day):
+    """Add 1 (live from 19 Nov 2026): may this open first trade get its one add-on on candle j?
+    Only once per trade, only while it is in profit (the candle before closed above the first buy price)."""
+    if not ADD_ON or base.get("add_done") or base.get("status") != "open":
+        return False
+    if day is not None and base["entry_date"] >= day:
+        return False
+    return j >= 1 and float(df.c[j - 1]) > base["entry"]
+
+
 def gap_too_big(plan, df, j):
     """True when candle j opens more than MAX_GAP (3%) above the resistance: no buy that day. MAX_GAP None = no limit."""
     if MAX_GAP is None:
@@ -459,8 +485,9 @@ def gap_too_big(plan, df, j):
 
 # Entry-rule comparison (18 Nov 2026): the old rule (1% above, any gap) vs the new rule (0.5% above, no buy on a gap > 3%)
 # (buy-stop above resistance, max gap, max distance above EMA 50)
-ENTRY_VARIANTS = {"old": (0.01, None, None), "new": (0.005, 0.03, None), "one_pct_gap3": (0.01, 0.03, None),
-                  "half_pct_any_gap": (0.005, None, None)}   # 19 Nov 2026: EMA 50 rule off; "new" = live rule
+# "new" = the live rule (each strategy's own buy-stop level: None = not fixed), 19 Nov 2026
+ENTRY_VARIANTS = {"old": (0.01, None, None), "new": (None, 0.03, None), "one_pct_gap3": (0.01, 0.03, None),
+                  "half_pct_gap3": (0.005, 0.03, None)}
 
 
 def backtest_variant(variant, *args, **kw):
@@ -476,7 +503,7 @@ def backtest_variant(variant, *args, **kw):
 
 def try_entry(st, sym, name, df, j, mode="paper", money=None, mood=None):
     """Entry on candle j if the setup on the candle before is triggered. Returns (trade, sells on the same day) or (None, [])."""
-    plan = swing_setup(df, j - 1)
+    plan = swing_setup(df, j - 1, above=trigger_of(st))
     if plan and not liquid(st, df, j - 1):
         return None, []
     if not plan or df.h[j] < plan["trigger"]:
@@ -500,7 +527,7 @@ def try_entry(st, sym, name, df, j, mode="paper", money=None, mood=None):
          "qty": qty, "remaining": qty, "stop": stop, "stop_reason": why, "days": 0,
          "target": round(entry * (1 + RULES[ttype]["target"]), 2),
          "booked": False, "signal_low": None, "signal_date": None, "exits": [], "pnl": 0.0,
-         "status": "open", "mode": mode, "money": round(money, 2), "peak": round(float(df.h[j]), 2), "plan": {k: plan[k] for k in ("resistance", "range_pct", "r42", "room", "score")}}
+         "status": "open", "mode": mode, "money": round(money, 2), "peak": round(float(df.h[j]), 2), "plan": {k: plan.get(k) for k in ("resistance", "range_pct", "r42", "room", "score", "above_pct")}}
     sells = []
     if df.l[j] <= t["stop"]:  # fell back to the stop on the same day
         s = _sell(t, df.index[j], t["remaining"], t["stop"], why + " — same day")
@@ -512,7 +539,8 @@ def try_entry(st, sym, name, df, j, mode="paper", money=None, mood=None):
 def _log_buy(t):
     return {"date": t["entry_date"], "strategy": t["strategy_name"], "mode": t["mode"], "action": "BUY", "symbol": t["symbol"],
             "name": t["name"], "qty": t["qty"], "price": t["entry"], "value": round(t["qty"] * t["entry"], 2),
-            "reason": f"Breakout above ₹{t['plan']['resistance']:g} + {TRIGGER_ABOVE * 100:g}% (stop ₹{t['stop']:g}, target ₹{t['target']:g})"
+            "reason": ("Add-on (half size) · " if t.get("add") else "")
+                      + f"Breakout above ₹{t['plan']['resistance']:g} + {t['plan'].get('above_pct') or 1:g}% (stop ₹{t['stop']:g}, target ₹{t['target']:g})"
                       + (f" · {t['regime']}" if t.get("regime") else ""),
             "pnl": "", "pnl_pct": "", "hold_days": "", "trade_id": t["id"]}
 
@@ -544,9 +572,10 @@ def run(settings, book, charts, sp, dt, today="", mood=None, growth=None):
         if st.get("type") not in TRADING_TYPES:
             continue
         lst = st.get("list", "SP")
-        mine = {t["symbol"]: t for t in book["open"] if t["strategy"] == sid}
+        mine = {t["symbol"]: t for t in book["open"] if t["strategy"] == sid and not t.get("add")}   # first trades
+        adds = {t["symbol"]: t for t in book["open"] if t["strategy"] == sid and t.get("add")}      # Add 1 trades
         on = bool(st.get("on"))
-        if not on and not mine:
+        if not on and not mine and not adds:
             continue  # OFF and nothing open. (OFF with open trades: they are still managed until they close)
         scan = set(sp) if lst == "SP" else set(dt) if lst == "DT" else set(growth) if lst == "GROWTH" else set(sp) | set(dt)
         if not on:
@@ -569,19 +598,19 @@ def run(settings, book, charts, sp, dt, today="", mood=None, growth=None):
             stats[sid]["wins"] += t["pnl"] > 0
             book["open"].remove(t)
             book["closed"].append(t)
-            mine.pop(t["symbol"], None)
+            (adds if t.get("add") else mine).pop(t["symbol"], None)
 
         # new candles of each stock since its last checked one. A stock seen for the first time (strategy just
         # switched ON, or newly added to the list) starts from its next new candle. Open trades get every missed
         # candle (so no stop loss is missed); other stocks at most the last MAX_CATCHUP_DAYS.
         todo = {}
         for sym, df in frames.items():
-            if sym not in scan and sym not in mine:
+            if sym not in scan and sym not in mine and sym not in adds:
                 continue
             since = seen.get(sym) or df.index[-1]
             seen[sym] = max(since, df.index[-1])   # never backwards (a chart one day short must not repeat a day)
             js = [k for k, d in enumerate(df.index) if d > since]
-            if sym not in mine:
+            if sym not in mine and sym not in adds:
                 js = js[-MAX_CATCHUP_DAYS:]
             if js:
                 todo[sym] = {df.index[k]: k for k in js}
@@ -589,28 +618,32 @@ def run(settings, book, charts, sp, dt, today="", mood=None, growth=None):
         for day in sorted({d for x in todo.values() for d in x}):
             exited = set()
             for sym in sorted(todo):
-                j, t = todo[sym].get(day), mine.get(sym)
-                if j is None or not t or t["entry_date"] >= day:
-                    continue
-                df = frames[sym]
-                before = t["type"]
-                sells = manage(t, df, j, mood)
-                if t["type"] != before:
-                    events.setdefault("switched", []).append({"symbol": sym, "name": t["name"], "strategy": sid, "to": t["type"],
-                                                              "target": None if t["booked"] else t["target"], "date": day})
-                for s_ in sells:
-                    events["exits"].append(s_)
-                    events["log"].append(_log_sell(s_, t))
-                if t["status"] == "closed":
-                    close(t)
-                    exited.add(sym)
+                j = todo[sym].get(day)
+                for t in [x for x in (mine.get(sym), adds.get(sym)) if x]:
+                    if j is None or t["entry_date"] >= day:
+                        continue
+                    df = frames[sym]
+                    before = t["type"]
+                    sells = manage(t, df, j, mood)
+                    if t["type"] != before:
+                        events.setdefault("switched", []).append({"symbol": sym, "name": t["name"], "strategy": sid, "to": t["type"],
+                                                                  "target": None if t["booked"] else t["target"], "date": day})
+                    for s_ in sells:
+                        events["exits"].append(s_)
+                        events["log"].append(_log_sell(s_, t))
+                    if t["status"] == "closed":
+                        close(t)
+                        exited.add(sym)
             signals = []
             for sym in sorted(todo):
                 j = todo[sym].get(day)
-                if j is None or j < 1 or sym in mine or sym in exited or sym not in scan:
+                if j is None or j < 1 or sym in exited or sym not in scan or sym in adds:
                     continue
                 df = frames[sym]
-                plan = swing_setup(df, j - 1)
+                base = mine.get(sym)
+                if base is not None and not add_ok(base, df, j, day):
+                    continue   # already held, and no Add 1 possible
+                plan = swing_setup(df, j - 1, above=trigger_of(st))
                 if plan and df.h[j] >= plan["trigger"] and liquid(st, df, j - 1):
                     if gap_too_big(plan, df, j):
                         events.setdefault("gap_skips", []).append({"symbol": sym, "name": names.get(sym, sym), "date": day, "strategy": sid,
@@ -619,16 +652,31 @@ def run(settings, book, charts, sp, dt, today="", mood=None, growth=None):
                     signals.append((rank_value(plan, st.get("rank")), sym, j))
             for _, sym, j in sorted(signals):
                 df = frames[sym]
-                money = trade_size(st, capital_of(st, book))
+                base = mine.get(sym)
+                cap = capital_of(st, book)
+                if base is not None:      # Add 1: half of the first buy's money, needs that much free cash
+                    money = float(base.get("money") or base["entry"] * base["qty"]) * ADD_FRACTION
+                    money = money if cap["cash"] >= money * 0.999 else 0.0
+                else:
+                    money = trade_size(st, cap)
                 if not money:
-                    events.setdefault("skipped", []).append({"symbol": sym, "name": names.get(sym, sym), "date": day, "strategy": sid})
+                    events.setdefault("skipped", []).append({"symbol": sym, "name": names.get(sym, sym), "date": day, "strategy": sid,
+                                                             "add": base is not None})
                     continue  # no free capital (all money in open trades)
                 t, sells = try_entry(st, sym, names.get(sym, sym), df, j, money=money, mood=mood)
                 if not t:
                     continue
+                if base is not None:
+                    if t["entry"] <= base["entry"]:
+                        continue          # an add-on only above the first buy price
+                    t["add"], t["base_id"] = 1, base["id"]
+                    t["id"] += "-add1"
+                    base["add_done"] = True
+                    adds[sym] = t
+                else:
+                    mine[sym] = t
                 book["open"].append(t)
-                mine[sym] = t
-                events["entries"].append({"symbol": sym, "name": t["name"], "qty": t["qty"], "price": t["entry"],
+                events["entries"].append({"symbol": sym, "name": t["name"], "qty": t["qty"], "price": t["entry"], "add": bool(t.get("add")),
                                           "stop": t["stop"], "target": t["target"], "strategy": sid, "regime": t.get("regime", "")})
                 events["log"].append(_log_buy(t))
                 for s_ in sells:
@@ -637,23 +685,25 @@ def run(settings, book, charts, sp, dt, today="", mood=None, growth=None):
                 if t["status"] == "closed":
                     close(t)
         if lst != "GROWTH" or growth_loaded:   # (growth prices missing today: keep its stocks' last checked days)
-            for sym in [x for x in seen if (x not in frames or x not in scan) and x not in mine]:
+            for sym in [x for x in seen if (x not in frames or x not in scan) and x not in mine and x not in adds]:
                 seen.pop(sym)  # stock left the lists
-        for sym, t in mine.items():  # last price of open trades (for stocks not in SP / DT, e.g. the growth list)
-            df = frames.get(sym)
+        for t in list(mine.values()) + list(adds.values()):  # last price of open trades (also stocks not in SP / DT)
+            df = frames.get(t["symbol"])
             if df is not None:
                 t["ltp"], t["ltp_date"] = round(float(df.c[-1]), 2), df.index[-1]
         # setups for the next session: a buy-stop to place today
         ready = []
         for sym in sorted(scan if on else ()):
             df = frames.get(sym)
-            if df is None or sym in mine:
+            base = mine.get(sym)
+            if df is None or sym in adds or (base is not None and not add_ok(base, df, len(df), None)):
                 continue
-            plan = swing_setup(df, len(df) - 1)
-            if plan and liquid(st, df, len(df) - 1):
+            plan = swing_setup(df, len(df) - 1, above=trigger_of(st))
+            if plan and liquid(st, df, len(df) - 1) and (base is None or plan["trigger"] > base["entry"]):
                 cap = capital_of(st, book)
-                qty = max(1, math.floor(cap["equity"] * cap["pct"] / 100 / plan["trigger"]))
-                ready.append({"symbol": sym, "name": names.get(sym, sym), "buy_above": plan["trigger"], "max_open": plan["max_open"], "stop": plan["stop"],
+                money = (float(base.get("money") or base["entry"] * base["qty"]) * ADD_FRACTION) if base else cap["equity"] * cap["pct"] / 100
+                qty = max(1, math.floor(money / plan["trigger"]))
+                ready.append({"symbol": sym, "name": names.get(sym, sym), "add": base is not None, "buy_above": plan["trigger"], "max_open": plan["max_open"], "stop": plan["stop"],
                               "qty": qty, "amount": round(qty * plan["trigger"], 2), "range_pct": plan["range_pct"],
                               "risk_pct": round((plan["trigger"] - plan["stop"]) / plan["trigger"] * 100, 1),
                               "as_of": df.index[-1], "score": plan["score"], "turnover": turnover(df, len(df) - 1), "_r": rank_value(plan, st.get("rank"))})
@@ -678,8 +728,13 @@ def run(settings, book, charts, sp, dt, today="", mood=None, growth=None):
 
 # ------------------------------------------------------------------ backtest
 def backtest(st, charts, names, symbols, money=100000.0, mood=None):
-    """The same rules on all past candles of `symbols` (one trade per stock at a time).
+    """The same rules on all past candles of `symbols` (one first trade per stock at a time, plus Add 1 when ADD_ON).
     Note: these are stocks in the list TODAY, so the result is more optimistic than real life."""
+    return backtest_pyramid(st, charts, names, symbols, money=money, mood=mood, max_adds=1 if ADD_ON else 0)
+
+
+def backtest_single(st, charts, names, symbols, money=100000.0, mood=None):
+    """The old backtest: one trade per stock at a time, no add-on."""
     trades = []
     for sym in symbols:
         df = _frame(charts.get(sym))
@@ -717,7 +772,7 @@ ADD_FRACTION = 0.5    # pyramiding test: the add-on gets half of the first buy's
 
 
 def backtest_pyramid(st, charts, names, symbols, money=100000.0, mood=None, max_adds=1):
-    """BACKTEST ONLY (asked 19 Nov 2026, not used in live trading): like backtest(), but while a stock is held a NEW
+    """Add 1 (backtested 19 Nov 2026, live from 19 Nov 2026 - ADD_ON): like backtest_single(), but while a stock is held a NEW
     setup breakout adds ONE more position (half of the first buy's money) when the first trade is in profit:
     the day before the breakout closed above the first buy price, and the new buy price is above it too.
     The add-on is its own trade (own stop / target / exits by the same rules). One add-on per first trade.
