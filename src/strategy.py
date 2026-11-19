@@ -705,6 +705,82 @@ def backtest(st, charts, names, symbols, money=100000.0, mood=None):
     return trades
 
 
+def _mark_open(t, df):
+    last = float(df.c[-1])
+    t["ltp"] = last
+    t["last_date"] = df.index[-1]
+    t["open_pnl"] = round((last - t["entry"]) * t["remaining"] - COST_PER_SIDE * t["remaining"] * (t["entry"] + last), 2)
+
+
+ADD_FRACTION = 0.5    # pyramiding test: the add-on gets half of the first buy's money (19 Nov 2026)
+
+
+def backtest_pyramid(st, charts, names, symbols, money=100000.0, mood=None, max_adds=1):
+    """BACKTEST ONLY (asked 19 Nov 2026, not used in live trading): like backtest(), but while a stock is held a NEW
+    setup breakout adds ONE more position (half of the first buy's money) when the first trade is in profit:
+    the day before the breakout closed above the first buy price, and the new buy price is above it too.
+    The add-on is its own trade (own stop / target / exits by the same rules). One add-on per first trade.
+    Add-on trades carry "add": 1 and "base_id" (the first trade); portfolio() gives them half of that trade's money
+    and skips them when the first trade itself was not taken."""
+    trades = []
+    for sym in symbols:
+        df = _frame(charts.get(sym))
+        if df is None or len(df) < 248:
+            continue
+        held, base, adds = [], None, 0
+        for j in range(247, len(df)):
+            closed_today = False
+            for t in list(held):
+                manage(t, df, j, mood)
+                if t["status"] == "closed":
+                    trades.append(t)
+                    held.remove(t)
+                    closed_today = True
+            if base is not None and base["status"] == "closed":
+                base = None      # first trade over: add-ons left keep running on their own rules, but no new adds
+            if closed_today:
+                continue
+            if not held:
+                t, _ = try_entry(st, sym, names.get(sym, sym), df, j, mode="backtest", money=money, mood=mood)
+                if t:
+                    base, adds = t, 0
+                    if t["status"] == "closed":
+                        trades.append(t)
+                        base = None
+                    else:
+                        held.append(t)
+                continue
+            if base is None or adds >= max_adds or float(df.c[j - 1]) <= base["entry"]:
+                continue
+            t, _ = try_entry(st, sym, names.get(sym, sym), df, j, mode="backtest", money=money * ADD_FRACTION, mood=mood)
+            if not t or t["entry"] <= base["entry"]:
+                continue
+            adds += 1
+            t["add"] = adds
+            t["base_id"] = base["id"]
+            t["id"] += f"-add{adds}"
+            if t["status"] == "closed":
+                trades.append(t)
+            else:
+                held.append(t)
+        for t in held:
+            _mark_open(t, df)
+            trades.append(t)
+    return trades
+
+
+def pyramid_summary(trades, start, end="9999", capital=DEF_CAPITAL, pct=DEF_PCT, rank=None):
+    """Portfolio result of a pyramid backtest + how the add-on trades alone did."""
+    p = portfolio(trades, start, end, capital=capital, pct=pct, rank=rank)
+    ad = [t for t in trades if t.get("add") and start <= t["entry_date"] < end]
+    done = [t for t in ad if t["status"] == "closed"]
+    rets = [t["pnl"] / (t["entry"] * t["qty"]) * 100 for t in done if t["qty"]]
+    return {"return_pct": p["return_pct"], "trades": p["trades"], "win_rate": p["win_rate"], "max_drawdown_pct": p["max_drawdown_pct"],
+            "skipped": p["skipped"], "addons": len(ad), "addon_closed": len(done),
+            "addon_win_rate": round(sum(1 for t in done if t["pnl"] > 0) / len(done) * 100, 1) if done else None,
+            "addon_avg_return_pct": round(sum(rets) / len(rets), 2) if rets else None}
+
+
 def portfolio(trades, start, end="9999", capital=DEF_CAPITAL, pct=DEF_PCT, rank=None):
     """The backtest trades taken in date order with one money pot: each trade gets pct% of the capital at that
     moment (profits grow the size), a trade is skipped when there is not enough free cash.
@@ -734,13 +810,19 @@ def portfolio(trades, start, end="9999", capital=DEF_CAPITAL, pct=DEF_PCT, rank=
                          "money": round(x["money"]), "pnl": round(x["gain"], 2), "pnl_pct": round(x["gain"] / x["money"] * 100, 2)})
         opn = keep
 
+    sizes = {}   # money given to each trade taken (add-on trades of the pyramiding test get a share of their first trade's)
     for t in todo:
         settle(t["entry_date"])
         equity = cash + sum(x["out"] for x in opn)
         size = equity * pct / 100
+        if t.get("base_id"):
+            if t["base_id"] not in sizes:
+                continue          # the first trade was not taken: nothing to add to
+            size = sizes[t["base_id"]] * ADD_FRACTION
         if cash < size * 0.999:
             skipped += 1
             continue
+        sizes[t.get("id")] = size
         cash -= size
         still = t["status"] != "closed"
         base = t["entry"] * t["qty"]

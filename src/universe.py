@@ -33,7 +33,7 @@ OUT = "universe_backtest.json"
 CODE_COLS = {"nse": ("nse code", "nse symbol", "nse", "symbol", "nse_code"),
              "bse": ("bse code", "bse", "bse_code", "scrip code", "security code")}
 NAME_COLS = ("name", "company", "company name", "stock")
-VERSION = "8"             # change to run the backtest again with new rules (8 = entry 0.5% + gap rule, 18 Nov 2026)
+VERSION = "9"             # change to run the backtest again with new rules (8 = entry 0.5% + gap rule, 18 Nov 2026; 9 = pyramiding test, 19 Nov 2026)
 PCT_TEST = (6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
 MAX_MCAP_CR = 25000        # only companies below ₹25,000 crore market cap (when the file has a market-cap column)
 
@@ -558,6 +558,11 @@ def run(settings, mood, today, now_year, stocks=None, charts=None, missing=None)
             "entry_test": {v: _rank_row(trades if v == "new" else strategy.backtest_variant(v, st, charts, names, syms, mood=mood),
                                         f"{first_year}-01-01", d2, cap, pct, st.get("rank") or strategy.RANK, first_year, now_year)
                            for v in strategy.ENTRY_VARIANTS},
+            # pyramiding test (19 Nov 2026, backtest only): whole period and last 2 years
+            "pyramid_test": {k: {"period": strategy.pyramid_summary(tp, f"{first_year}-01-01", capital=cap, pct=pct, rank=st.get("rank")),
+                                 "last2y": strategy.pyramid_summary(tp, d2, capital=cap, pct=pct, rank=st.get("rank"))}
+                             for k, tp in (("none", trades),
+                                           ("add1", strategy.backtest_pyramid(st, charts, names, syms, mood=mood, max_adds=1)))},
             "pct_test": {str(pc): _rank_row(trades, f"{first_year}-01-01", d2, cap, pc, st.get("rank") or strategy.RANK, first_year, now_year)
                          for pc in PCT_TEST},
         }

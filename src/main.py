@@ -907,7 +907,11 @@ def main():
                     tv = trades if v == "new" else strategy.backtest_variant(v, st_, charts, names, syms, mood=mood)
                     pv = strategy.portfolio(tv, d2, capital=cap, pct=pct, rank=st_.get("rank"))
                     cmp_[v] = {k: pv[k] for k in ("return_pct", "trades", "win_rate", "max_drawdown_pct", "skipped")}
-                bt[st_["id"]] = {"entry_test": cmp_, "report": rep, "trades": [{k: t.get(k) for k in ("symbol", "name", "entry_date", "entry", "qty",
+                # pyramiding test (19 Nov 2026, backtest only): add on a new breakout while the first trade is in profit
+                pyr = {"none": {**cmp_["new"], "addons": 0}}
+                tp = strategy.backtest_pyramid(st_, charts, names, syms, mood=mood, max_adds=1)   # one add-on, half the money
+                pyr["add1"] = strategy.pyramid_summary(tp, d2, capital=cap, pct=pct, rank=st_.get("rank"))
+                bt[st_["id"]] = {"entry_test": cmp_, "pyramid_test": pyr, "report": rep, "trades": [{k: t.get(k) for k in ("symbol", "name", "entry_date", "entry", "qty",
                                  "status", "pnl", "pnl_pct", "hold_days", "closed_on", "exits", "open_pnl", "type", "regime")} for t in keep],
                                  "as_of": today, "stocks": len(syms),
                                  "last2y": strategy.portfolio(trades, d2, capital=cap, pct=pct, rank=st_.get("rank")),
