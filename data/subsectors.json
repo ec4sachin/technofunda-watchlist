@@ -1317,5 +1317,15 @@
   "Electrical Equipment",
   "Transformers",
   "auto"
+ ],
+ "HMAAGRO": [
+  "FMCG & Food",
+  "Poultry, eggs & feed",
+  "auto"
+ ],
+ "FEDDERSHOL": [
+  "Financial Services",
+  "NBFC – lending",
+  "auto"
  ]
 }

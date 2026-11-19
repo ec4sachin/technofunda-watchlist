@@ -40,8 +40,8 @@
      "volume": 0.35
     }
    },
-   "ltp": 333.4,
-   "ltp_date": "2026-11-18"
+   "ltp": 331.1,
+   "ltp_date": "2026-11-17"
   },
   {
    "id": "swing-MODIS-2026-11-05",
@@ -83,8 +83,8 @@
      "volume": 1.02
     }
    },
-   "ltp": 458.15,
-   "ltp_date": "2026-11-18"
+   "ltp": 457.85,
+   "ltp_date": "2026-11-17"
   },
   {
    "id": "positional-DCI-2026-11-05",
@@ -126,8 +126,8 @@
      "volume": 0.35
     }
    },
-   "ltp": 333.4,
-   "ltp_date": "2026-11-18"
+   "ltp": 331.1,
+   "ltp_date": "2026-11-17"
   },
   {
    "id": "positional-MODIS-2026-11-05",
@@ -169,8 +169,8 @@
      "volume": 1.02
     }
    },
-   "ltp": 458.15,
-   "ltp_date": "2026-11-18"
+   "ltp": 457.85,
+   "ltp_date": "2026-11-17"
   },
   {
    "id": "switch-DCI-2026-11-05",
@@ -212,8 +212,8 @@
      "volume": 0.35
     }
    },
-   "ltp": 333.4,
-   "ltp_date": "2026-11-18",
+   "ltp": 331.1,
+   "ltp_date": "2026-11-17",
    "below50": 0,
    "switches": [
     "2026-11-06: → positional",
@@ -261,8 +261,8 @@
      "volume": 1.02
     }
    },
-   "ltp": 458.15,
-   "ltp_date": "2026-11-18",
+   "ltp": 457.85,
+   "ltp_date": "2026-11-17",
    "below50": 0,
    "switches": [
     "2026-11-06: → positional",
@@ -310,8 +310,8 @@
      "volume": 1.6
     }
    },
-   "ltp": 803.6,
-   "ltp_date": "2026-11-18",
+   "ltp": 787.85,
+   "ltp_date": "2026-11-17",
    "below50": 0,
    "switches": [
     "2026-11-06: → positional",
@@ -359,8 +359,8 @@
      "volume": 0.35
     }
    },
-   "ltp": 333.4,
-   "ltp_date": "2026-11-18",
+   "ltp": 331.1,
+   "ltp_date": "2026-11-17",
    "below50": 0,
    "switches": [
     "2026-11-06: → positional",
@@ -408,8 +408,8 @@
      "volume": 0.63
     }
    },
-   "ltp": 838.75,
-   "ltp_date": "2026-11-18",
+   "ltp": 829.2,
+   "ltp_date": "2026-11-17",
    "below50": 0,
    "switches": [
     "2026-11-06: → positional",
@@ -457,8 +457,8 @@
      "volume": 1.02
     }
    },
-   "ltp": 458.15,
-   "ltp_date": "2026-11-18",
+   "ltp": 457.85,
+   "ltp_date": "2026-11-17",
    "below50": 0,
    "switches": [
     "2026-11-06: → positional",
@@ -506,8 +506,8 @@
      "volume": 1.4
     }
    },
-   "ltp": 803.6,
-   "ltp_date": "2026-11-18"
+   "ltp": 787.85,
+   "ltp_date": "2026-11-17"
   },
   {
    "id": "positional-PANACHE-2026-11-06",
@@ -549,8 +549,8 @@
      "volume": 1.4
     }
    },
-   "ltp": 803.6,
-   "ltp_date": "2026-11-18"
+   "ltp": 787.85,
+   "ltp_date": "2026-11-17"
   },
   {
    "id": "switch-PANACHE-2026-11-06",
@@ -592,8 +592,8 @@
      "volume": 1.4
     }
    },
-   "ltp": 803.6,
-   "ltp_date": "2026-11-18",
+   "ltp": 787.85,
+   "ltp_date": "2026-11-17",
    "below50": 0,
    "switches": [
     "2026-11-08: → swing",
@@ -640,8 +640,8 @@
      "volume": 0.79
     }
    },
-   "ltp": 215.47,
-   "ltp_date": "2026-11-18",
+   "ltp": 211.25,
+   "ltp_date": "2026-11-17",
    "below50": 0,
    "switches": [
     "2026-11-11: → positional"
@@ -1074,8 +1074,8 @@
      "volume": 0.75
     }
    },
-   "ltp": 1091.1,
-   "ltp_date": "2026-11-18"
+   "ltp": 1109.55,
+   "ltp_date": "2026-11-17"
   },
   {
    "id": "swing-GRCL-2026-11-16",
@@ -1203,8 +1203,8 @@
      "volume": 1.09
     }
    },
-   "ltp": 680.3,
-   "ltp_date": "2026-11-18"
+   "ltp": 683.65,
+   "ltp_date": "2026-11-17"
   },
   {
    "id": "switch-GRCL-2026-11-16",
@@ -1289,8 +1289,8 @@
      "volume": 1.09
     }
    },
-   "ltp": 680.3,
-   "ltp_date": "2026-11-18"
+   "ltp": 683.65,
+   "ltp_date": "2026-11-17"
   }
  ],
  "closed": [
@@ -2384,9 +2384,18 @@
    "544434": "2026-11-18",
    "544551": "2026-11-18",
    "BRANDMAN": "2026-11-18",
-   "DHABRIYA": "2026-11-18",
    "ROCKINGDCE": "2026-11-17",
-   "RSL": "2026-11-18"
+   "ARROWGREEN": "2026-11-17",
+   "FEDDERSHOL": "2026-11-18",
+   "HEXAGON": "2026-11-17",
+   "JSIPL": "2026-11-17",
+   "SHANTIGOLD": "2026-11-17",
+   "UDAYJEW": "2026-11-17",
+   "HMAAGRO": "2026-11-17",
+   "ASIANENE": "2026-11-17",
+   "INFOBEAN": "2026-11-17",
+   "ORIRAIL": "2026-11-17",
+   "TAMBOLIIN": "2026-11-17"
   },
   "positional": {
    "INTEGRITY": "2026-11-12",
@@ -2604,9 +2613,18 @@
    "544434": "2026-11-18",
    "544551": "2026-11-18",
    "BRANDMAN": "2026-11-18",
-   "DHABRIYA": "2026-11-18",
    "ROCKINGDCE": "2026-11-17",
-   "RSL": "2026-11-18"
+   "ARROWGREEN": "2026-11-17",
+   "FEDDERSHOL": "2026-11-18",
+   "HEXAGON": "2026-11-17",
+   "JSIPL": "2026-11-17",
+   "SHANTIGOLD": "2026-11-17",
+   "UDAYJEW": "2026-11-17",
+   "HMAAGRO": "2026-11-17",
+   "ASIANENE": "2026-11-17",
+   "INFOBEAN": "2026-11-17",
+   "ORIRAIL": "2026-11-17",
+   "TAMBOLIIN": "2026-11-17"
   },
   "switch": {
    "INTEGRITY": "2026-11-12",
@@ -2824,9 +2842,18 @@
    "544434": "2026-11-18",
    "544551": "2026-11-18",
    "BRANDMAN": "2026-11-18",
-   "DHABRIYA": "2026-11-18",
    "ROCKINGDCE": "2026-11-17",
-   "RSL": "2026-11-18"
+   "ARROWGREEN": "2026-11-17",
+   "FEDDERSHOL": "2026-11-18",
+   "HEXAGON": "2026-11-17",
+   "JSIPL": "2026-11-17",
+   "SHANTIGOLD": "2026-11-17",
+   "UDAYJEW": "2026-11-17",
+   "HMAAGRO": "2026-11-17",
+   "ASIANENE": "2026-11-17",
+   "INFOBEAN": "2026-11-17",
+   "ORIRAIL": "2026-11-17",
+   "TAMBOLIIN": "2026-11-17"
   },
   "growth_switch": {
    "540718": "2026-11-18",
@@ -3269,7 +3296,7 @@
    "BTML": "2026-11-18",
    "CALSOFT": "2026-11-18",
    "CAMPUS": "2026-11-18",
-   "CANARYS": "2026-11-17",
+   "CANARYS": "2026-11-18",
    "CANTABIL": "2026-11-18",
    "CAPACITE": "2026-11-18",
    "CCAVENUE": "2026-11-18",
@@ -3520,7 +3547,7 @@
    "ONEPOINT": "2026-11-18",
    "ORBTEXP": "2026-11-18",
    "ORCHASP": "2026-11-18",
-   "ORIANA": "2026-11-17",
+   "ORIANA": "2026-11-18",
    "PAISALO": "2026-11-18",
    "PANORAMA": "2026-11-18",
    "PARACABLES": "2026-11-18",
@@ -3700,7 +3727,7 @@
    "TOUCHWOOD": "2026-11-18",
    "TRANSTEEL": "2026-11-17",
    "TSFINV": "2026-11-18",
-   "TUNWAL": "2026-11-17",
+   "TUNWAL": "2026-11-18",
    "UNIHEALTH": "2026-11-17",
    "URBAN": "2026-11-17",
    "UWCSL": "2026-11-17",
@@ -3741,18 +3768,18 @@
     "stop": 380.46,
     "qty": 311,
     "amount": 125255.25,
-    "range_pct": 4.2,
+    "range_pct": 4.3,
     "risk_pct": 5.5,
-    "as_of": "2026-11-18",
+    "as_of": "2026-11-17",
     "score": {
-     "tight": 4.25,
-     "strength": 16.31,
-     "near_high": 4.62,
-     "trend": 2.22,
+     "tight": 4.26,
+     "strength": 11.84,
+     "near_high": 4.83,
+     "trend": 2.09,
      "low_risk": 5.54,
-     "volume": 0.69
+     "volume": 0.7
     },
-    "turnover": 114845424
+    "turnover": 118455171
    },
    {
     "symbol": "LRRPL",
@@ -3774,27 +3801,6 @@
      "volume": 0.77
     },
     "turnover": 627784
-   },
-   {
-    "symbol": "NITINSPIN",
-    "name": "Nitin Spinners Ltd",
-    "buy_above": 695.36,
-    "max_open": 712.66,
-    "stop": 653.8,
-    "qty": 180,
-    "amount": 125164.8,
-    "range_pct": 4.6,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-18",
-    "score": {
-     "tight": 4.63,
-     "strength": 37.45,
-     "near_high": 2.42,
-     "trend": 7.32,
-     "low_risk": 5.98,
-     "volume": 0.95
-    },
-    "turnover": 102527400
    },
    {
     "symbol": "513502",
@@ -3839,27 +3845,6 @@
     "turnover": 3722975
    },
    {
-    "symbol": "DOLPHIN",
-    "name": "Dolphin Offshore",
-    "buy_above": 674.51,
-    "max_open": 691.28,
-    "stop": 634.04,
-    "qty": 185,
-    "amount": 124784.35,
-    "range_pct": 5.5,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-18",
-    "score": {
-     "tight": 5.46,
-     "strength": 53.89,
-     "near_high": 14.73,
-     "trend": 3.34,
-     "low_risk": 6.0,
-     "volume": 0.36
-    },
-    "turnover": 13202035
-   },
-   {
     "symbol": "INTEGRITY",
     "name": "Integrity Infra.",
     "buy_above": 201.5,
@@ -3890,16 +3875,16 @@
     "amount": 125241.16,
     "range_pct": 5.7,
     "risk_pct": 6.0,
-    "as_of": "2026-11-18",
+    "as_of": "2026-11-17",
     "score": {
-     "tight": 5.74,
-     "strength": 3.63,
-     "near_high": 14.56,
-     "trend": 1.65,
+     "tight": 5.72,
+     "strength": 2.64,
+     "near_high": 14.38,
+     "trend": 1.93,
      "low_risk": 6.0,
-     "volume": 0.41
+     "volume": 0.44
     },
-    "turnover": 161746921
+    "turnover": 173012074
    },
    {
     "symbol": "PARTH",
@@ -3941,7 +3926,7 @@
      "low_risk": 6.0,
      "volume": 0.53
     },
-    "turnover": 1167563247
+    "turnover": 1167627269
    },
    {
     "symbol": "TANFACIND",
@@ -3984,27 +3969,6 @@
      "volume": 0.97
     },
     "turnover": 1437792
-   },
-   {
-    "symbol": "ZOTA",
-    "name": "Zota Health Care Ltd",
-    "buy_above": 1343.79,
-    "max_open": 1377.21,
-    "stop": 1263.16,
-    "qty": 93,
-    "amount": 124972.47,
-    "range_pct": 4.8,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-18",
-    "score": {
-     "tight": 4.75,
-     "strength": 9.55,
-     "near_high": 24.45,
-     "trend": 3.69,
-     "low_risk": 6.0,
-     "volume": 0.7
-    },
-    "turnover": 73017460
    }
   ],
   "positional": [
@@ -4016,18 +3980,18 @@
     "stop": 380.46,
     "qty": 288,
     "amount": 115992.0,
-    "range_pct": 4.2,
+    "range_pct": 4.3,
     "risk_pct": 5.5,
-    "as_of": "2026-11-18",
+    "as_of": "2026-11-17",
     "score": {
-     "tight": 4.25,
-     "strength": 16.31,
-     "near_high": 4.62,
-     "trend": 2.22,
+     "tight": 4.26,
+     "strength": 11.84,
+     "near_high": 4.83,
+     "trend": 2.09,
      "low_risk": 5.54,
-     "volume": 0.69
+     "volume": 0.7
     },
-    "turnover": 114845424
+    "turnover": 118455171
    },
    {
     "symbol": "LRRPL",
@@ -4093,27 +4057,6 @@
     "turnover": 3722975
    },
    {
-    "symbol": "DOLPHIN",
-    "name": "Dolphin Offshore",
-    "buy_above": 674.51,
-    "max_open": 691.28,
-    "stop": 634.04,
-    "qty": 172,
-    "amount": 116015.72,
-    "range_pct": 5.5,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-18",
-    "score": {
-     "tight": 5.46,
-     "strength": 53.89,
-     "near_high": 14.73,
-     "trend": 3.34,
-     "low_risk": 6.0,
-     "volume": 0.36
-    },
-    "turnover": 13202035
-   },
-   {
     "symbol": "INTEGRITY",
     "name": "Integrity Infra.",
     "buy_above": 201.5,
@@ -4144,16 +4087,16 @@
     "amount": 115980.37,
     "range_pct": 5.7,
     "risk_pct": 6.0,
-    "as_of": "2026-11-18",
+    "as_of": "2026-11-17",
     "score": {
-     "tight": 5.74,
-     "strength": 3.63,
-     "near_high": 14.56,
-     "trend": 1.65,
+     "tight": 5.72,
+     "strength": 2.64,
+     "near_high": 14.38,
+     "trend": 1.93,
      "low_risk": 6.0,
-     "volume": 0.41
+     "volume": 0.44
     },
-    "turnover": 161746921
+    "turnover": 173012074
    },
    {
     "symbol": "PARTH",
@@ -4195,7 +4138,7 @@
      "low_risk": 6.0,
      "volume": 0.53
     },
-    "turnover": 1167563247
+    "turnover": 1167627269
    },
    {
     "symbol": "TANFACIND",
@@ -4238,27 +4181,6 @@
      "volume": 0.97
     },
     "turnover": 1437792
-   },
-   {
-    "symbol": "ZOTA",
-    "name": "Zota Health Care Ltd",
-    "buy_above": 1343.79,
-    "max_open": 1377.21,
-    "stop": 1263.16,
-    "qty": 86,
-    "amount": 115565.94,
-    "range_pct": 4.8,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-18",
-    "score": {
-     "tight": 4.75,
-     "strength": 9.55,
-     "near_high": 24.45,
-     "trend": 3.69,
-     "low_risk": 6.0,
-     "volume": 0.7
-    },
-    "turnover": 73017460
    }
   ],
   "switch": [
@@ -4270,18 +4192,18 @@
     "stop": 380.46,
     "qty": 288,
     "amount": 115992.0,
-    "range_pct": 4.2,
+    "range_pct": 4.3,
     "risk_pct": 5.5,
-    "as_of": "2026-11-18",
+    "as_of": "2026-11-17",
     "score": {
-     "tight": 4.25,
-     "strength": 16.31,
-     "near_high": 4.62,
-     "trend": 2.22,
+     "tight": 4.26,
+     "strength": 11.84,
+     "near_high": 4.83,
+     "trend": 2.09,
      "low_risk": 5.54,
-     "volume": 0.69
+     "volume": 0.7
     },
-    "turnover": 114845424
+    "turnover": 118455171
    },
    {
     "symbol": "LRRPL",
@@ -4347,27 +4269,6 @@
     "turnover": 3722975
    },
    {
-    "symbol": "DOLPHIN",
-    "name": "Dolphin Offshore",
-    "buy_above": 674.51,
-    "max_open": 691.28,
-    "stop": 634.04,
-    "qty": 172,
-    "amount": 116015.72,
-    "range_pct": 5.5,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-18",
-    "score": {
-     "tight": 5.46,
-     "strength": 53.89,
-     "near_high": 14.73,
-     "trend": 3.34,
-     "low_risk": 6.0,
-     "volume": 0.36
-    },
-    "turnover": 13202035
-   },
-   {
     "symbol": "INTEGRITY",
     "name": "Integrity Infra.",
     "buy_above": 201.5,
@@ -4398,16 +4299,16 @@
     "amount": 115980.37,
     "range_pct": 5.7,
     "risk_pct": 6.0,
-    "as_of": "2026-11-18",
+    "as_of": "2026-11-17",
     "score": {
-     "tight": 5.74,
-     "strength": 3.63,
-     "near_high": 14.56,
-     "trend": 1.65,
+     "tight": 5.72,
+     "strength": 2.64,
+     "near_high": 14.38,
+     "trend": 1.93,
      "low_risk": 6.0,
-     "volume": 0.41
+     "volume": 0.44
     },
-    "turnover": 161746921
+    "turnover": 173012074
    },
    {
     "symbol": "PARTH",
@@ -4449,7 +4350,7 @@
      "low_risk": 6.0,
      "volume": 0.53
     },
-    "turnover": 1167563247
+    "turnover": 1167627269
    },
    {
     "symbol": "TANFACIND",
@@ -4492,27 +4393,6 @@
      "volume": 0.97
     },
     "turnover": 1437792
-   },
-   {
-    "symbol": "ZOTA",
-    "name": "Zota Health Care Ltd",
-    "buy_above": 1343.79,
-    "max_open": 1377.21,
-    "stop": 1263.16,
-    "qty": 86,
-    "amount": 115565.94,
-    "range_pct": 4.8,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-18",
-    "score": {
-     "tight": 4.75,
-     "strength": 9.55,
-     "near_high": 24.45,
-     "trend": 3.69,
-     "low_risk": 6.0,
-     "volume": 0.7
-    },
-    "turnover": 73017460
    }
   ],
   "growth_switch": [
@@ -4542,63 +4422,42 @@
     "name": "Cons. Finvest",
     "buy_above": 331.3,
     "max_open": 339.54,
-    "stop": 316.8,
+    "stop": 316.9,
     "qty": 236,
     "amount": 78186.8,
     "range_pct": 3.0,
-    "risk_pct": 4.4,
-    "as_of": "2026-11-18",
+    "risk_pct": 4.3,
+    "as_of": "2026-11-17",
     "score": {
-     "tight": 3.02,
-     "strength": 42.18,
-     "near_high": 5.58,
-     "trend": 7.34,
-     "low_risk": 4.38,
-     "volume": 1.24
+     "tight": 2.98,
+     "strength": 43.63,
+     "near_high": 5.5,
+     "trend": 7.75,
+     "low_risk": 4.35,
+     "volume": 1.27
     },
-    "turnover": 5963484
+    "turnover": 6066818
    },
    {
     "symbol": "MANBA",
     "name": "Manba Finance",
-    "buy_above": 148.73,
-    "max_open": 152.43,
+    "buy_above": 149.19,
+    "max_open": 152.9,
     "stop": 140.87,
-    "qty": 527,
-    "amount": 78380.71,
-    "range_pct": 4.0,
-    "risk_pct": 5.3,
-    "as_of": "2026-11-18",
+    "qty": 525,
+    "amount": 78324.75,
+    "range_pct": 4.3,
+    "risk_pct": 5.6,
+    "as_of": "2026-11-17",
     "score": {
-     "tight": 3.99,
-     "strength": 35.07,
-     "near_high": 8.49,
-     "trend": 1.8,
-     "low_risk": 5.29,
-     "volume": 0.81
+     "tight": 4.28,
+     "strength": 28.33,
+     "near_high": 7.74,
+     "trend": 2.71,
+     "low_risk": 5.58,
+     "volume": 0.82
     },
-    "turnover": 19508059
-   },
-   {
-    "symbol": "KAPSTON",
-    "name": "Kapston Services",
-    "buy_above": 554.71,
-    "max_open": 568.51,
-    "stop": 521.73,
-    "qty": 141,
-    "amount": 78214.11,
-    "range_pct": 4.6,
-    "risk_pct": 5.9,
-    "as_of": "2026-11-18",
-    "score": {
-     "tight": 4.64,
-     "strength": 70.06,
-     "near_high": 12.71,
-     "trend": 1.94,
-     "low_risk": 5.95,
-     "volume": 0.53
-    },
-    "turnover": 25570940
+    "turnover": 19882083
    },
    {
     "symbol": "506854",
@@ -4671,18 +4530,60 @@
     "stop": 139.82,
     "qty": 527,
     "amount": 78385.98,
-    "range_pct": 6.0,
+    "range_pct": 5.8,
     "risk_pct": 6.0,
-    "as_of": "2026-11-18",
+    "as_of": "2026-11-17",
     "score": {
-     "tight": 6.0,
-     "strength": 36.62,
-     "near_high": 7.27,
-     "trend": 2.68,
+     "tight": 5.75,
+     "strength": 39.91,
+     "near_high": 2.75,
+     "trend": 7.8,
      "low_risk": 6.0,
-     "volume": 0.72
+     "volume": 0.74
     },
-    "turnover": 12592191
+    "turnover": 12817256
+   },
+   {
+    "symbol": "GOKULAGRO",
+    "name": "Gokul Agro",
+    "buy_above": 235.54,
+    "max_open": 241.4,
+    "stop": 221.41,
+    "qty": 333,
+    "amount": 78434.82,
+    "range_pct": 5.8,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-17",
+    "score": {
+     "tight": 5.79,
+     "strength": -7.56,
+     "near_high": 14.59,
+     "trend": 1.47,
+     "low_risk": 6.0,
+     "volume": 0.73
+    },
+    "turnover": 73027201
+   },
+   {
+    "symbol": "GOODLUCK",
+    "name": "Goodluck India",
+    "buy_above": 579.68,
+    "max_open": 594.1,
+    "stop": 544.9,
+    "qty": 135,
+    "amount": 78256.8,
+    "range_pct": 4.9,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-17",
+    "score": {
+     "tight": 4.88,
+     "strength": 25.8,
+     "near_high": 9.38,
+     "trend": 5.16,
+     "low_risk": 6.0,
+     "volume": 0.57
+    },
+    "turnover": 262650978
    },
    {
     "symbol": "HBLENGINE",
@@ -4703,7 +4604,28 @@
      "low_risk": 6.0,
      "volume": 0.73
     },
-    "turnover": 1064524908
+    "turnover": 1064572664
+   },
+   {
+    "symbol": "KAPSTON",
+    "name": "Kapston Services",
+    "buy_above": 559.68,
+    "max_open": 573.61,
+    "stop": 526.1,
+    "qty": 140,
+    "amount": 78355.2,
+    "range_pct": 5.5,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-17",
+    "score": {
+     "tight": 5.54,
+     "strength": 64.67,
+     "near_high": 12.4,
+     "trend": 2.38,
+     "low_risk": 6.0,
+     "volume": 0.52
+    },
+    "turnover": 25551975
    },
    {
     "symbol": "MINDACORP",
@@ -4713,39 +4635,18 @@
     "stop": 700.97,
     "qty": 105,
     "amount": 78299.55,
-    "range_pct": 5.6,
+    "range_pct": 5.7,
     "risk_pct": 6.0,
-    "as_of": "2026-11-18",
+    "as_of": "2026-11-17",
     "score": {
-     "tight": 5.65,
-     "strength": 38.59,
-     "near_high": 7.13,
-     "trend": 5.64,
+     "tight": 5.7,
+     "strength": 34.76,
+     "near_high": 7.96,
+     "trend": 4.93,
      "low_risk": 6.0,
-     "volume": 0.95
+     "volume": 0.94
     },
-    "turnover": 247444934
-   },
-   {
-    "symbol": "NAZARA",
-    "name": "Nazara Technolo.",
-    "buy_above": 437.43,
-    "max_open": 448.31,
-    "stop": 411.18,
-    "qty": 179,
-    "amount": 78299.97,
-    "range_pct": 5.8,
-    "risk_pct": 6.0,
-    "as_of": "2026-11-18",
-    "score": {
-     "tight": 5.83,
-     "strength": 39.02,
-     "near_high": 4.51,
-     "trend": 5.91,
-     "low_risk": 6.0,
-     "volume": 0.67
-    },
-    "turnover": 577356833
+    "turnover": 247108259
    },
    {
     "symbol": "RATNAVEER",
@@ -4766,7 +4667,7 @@
      "low_risk": 6.0,
      "volume": 0.53
     },
-    "turnover": 1167563247
+    "turnover": 1167627269
    },
    {
     "symbol": "ZENTEC",
@@ -4787,7 +4688,7 @@
      "low_risk": 6.0,
      "volume": 1.12
     },
-    "turnover": 871705836
+    "turnover": 871707129
    }
   ]
  },

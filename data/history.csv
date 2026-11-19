@@ -650,3 +650,16 @@ date,symbol,name,action,reason
 2026-11-18,DHABRIYA,Dhabriya Poly.,DT -> SP,close 476.65 back above 20 EMA 472.59 (new listing)
 2026-11-18,ROCKINGDCE,Rockingdeals Cir,DT -> SP,close 214.95 back above 200 EMA 210.51
 2026-11-18,RSL,Rajputana Stain.,DT -> SP,close 170.2 back above 20 EMA 169.2 (new listing)
+2026-11-19,HMAAGRO,HMA Agro Inds.,ADDED to SP,"marks 7.7/11; 3-month RS 91 (vs 3559 BSE stocks); from TTM Profit > 30%, Ready after 6 Months, 52W High"
+2026-11-19,FEDDERSHOL,Fedders Holding,ADDED to SP,"marks 6.1/11; 3-month RS 97 (vs 4105 BSE stocks); from TTM Profit > 30%, 52W High"
+2026-11-19,DHABRIYA,Dhabriya Poly.,SP -> DT,close 470.85 below 20 EMA 472.16 (new listing)
+2026-11-19,RSL,Rajputana Stain.,SP -> DT,close 167.93 below 20 EMA 169.1 (new listing)
+2026-11-19,ARROWGREEN,Arrow Greentech,DT -> SP,close 687.4 back above 200 EMA 674.54
+2026-11-19,ASIANENE,Asian Energy Services Ltd,DT -> SP,close 388.3 back above 200 EMA 387.18
+2026-11-19,HEXAGON,Hexagon Nutri.,DT -> SP,close 64.17 back above 20 EMA 61.2 (new listing)
+2026-11-19,INFOBEAN,InfoBeans Technologies Ltd,DT -> SP,close 159.14 back above 200 EMA 158.94
+2026-11-19,JSIPL,Jindal Supreme,DT -> SP,close 167.53 back above 20 EMA 162.16 (new listing)
+2026-11-19,ORIRAIL,Oriental Rail Infrastructure Ltd,DT -> SP,close 118.94 back above 20 EMA 117.95 (new listing)
+2026-11-19,SHANTIGOLD,Shanti Gold International,DT -> SP,close 260.5 back above 200 EMA 255.15
+2026-11-19,TAMBOLIIN,Tamboli Industri,DT -> SP,close 325.75 back above 20 EMA 319.46 (new listing)
+2026-11-19,UDAYJEW,Uday Jewellery,DT -> SP,close 220.77 back above 20 EMA 215.54 (new listing)
