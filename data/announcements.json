@@ -1,20 +1,20 @@
 {
- "last": "2026-11-19",
+ "last": "2026-11-20",
  "status": {
   "bse": {
-   "days": 1,
+   "days": 2,
    "rows": 0,
    "last_error": "HTTP 403 (AnnGetData/w?strCat=-1)"
   },
   "nse": {
-   "days": 1,
-   "rows": 106,
+   "days": 2,
+   "rows": 545,
    "last_error": ""
   },
   "matched": {
    "bse_codes": 93,
-   "nse_only_codes": 234,
-   "new": 0
+   "nse_only_codes": 235,
+   "new": 1
   }
  },
  "items": {
@@ -173,6 +173,14 @@
    }
   ],
   "LTFOODS": [
+   {
+    "d": "2026-11-19",
+    "t": "LT Foods Limited has informed the Exchange about PRESENTATION ON ACQUISITION OF BRAND MAYA KAIMAL",
+    "k": "Acquisition / JV",
+    "url": "https://nsearchives.nseindia.in/corporate/532783_19112026171323_Intimation.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-20"
+   },
    {
     "d": "2026-11-18",
     "t": "LT Foods Limited has informed the Exchange regarding a press release dated November 18, 2026, titled \"Please find enclosed herewith copy of Press Release on LT Foods further strengthens U.S. food portfolio with acquisition of the brand Maya Kaimal, a leading brand with mainstrea…",
