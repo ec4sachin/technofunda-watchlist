@@ -687,3 +687,19 @@ date,symbol,name,action,reason
 2026-11-20,DHABRIYA,Dhabriya Poly.,DT -> SP,close 476.65 back above 20 EMA 472.59 (new listing)
 2026-11-20,MARUSHIKA,Marushika Tech.,DT -> SP,close 129.5 back above 20 EMA 122.01 (new listing)
 2026-11-20,RSL,Rajputana Stain.,DT -> SP,close 170.2 back above 20 EMA 169.2 (new listing)
+2026-11-21,AONESTEELS,A-One Steels,ADDED to SP,"marks 9.9/11; RS: too new (under 3 months of prices); from TTM Profit > 30%, 52W High"
+2026-11-21,531569,Sanjivani Paranteral Ltd,SP -> DT,close 167.1 below 200 EMA 171.33
+2026-11-21,536565,Novelix Pharma.,SP -> DT,close 65.37 below 200 EMA 67.44
+2026-11-21,544330,Parmeshwar Metal,SP -> DT,close 230.35 below 200 EMA 231.7
+2026-11-21,ADISOFT,Adisoft Technol.,SP -> DT,close 271.75 below 20 EMA 275.59 (new listing)
+2026-11-21,DEEDEV,DEE Development,SP -> DT,close 513.7 below 200 EMA 528.26
+2026-11-21,DHABRIYA,Dhabriya Poly.,SP -> DT,close 472 below 20 EMA 472.53 (new listing)
+2026-11-21,FEDDERSHOL,Fedders Holding,SP -> DT,close 57.58 below 20 EMA 58.42 (new listing)
+2026-11-21,MONARCH,Monarch Networth,SP -> DT,close 340.4 below 200 EMA 341.02
+2026-11-21,PANAMAPET,Panama Petrochem,SP -> DT,close 407.05 below 200 EMA 411.14
+2026-11-21,RSL,Rajputana Stain.,SP -> DT,close 165.09 below 20 EMA 168.81 (new listing)
+2026-11-21,TEAMTECH,Teamtech Formwork,SP -> DT,close 158.05 below 20 EMA 159.08 (new listing)
+2026-11-21,HALDYNGL,Haldyn Glass,DT -> SP,close 135.48 back above 20 EMA 134.97 (new listing)
+2026-11-21,INFOBEAN,InfoBeans Technologies Ltd,DT -> SP,close 160.1 back above 200 EMA 158.96
+2026-11-21,JSIPL,Jindal Supreme,DT -> SP,close 164.14 back above 20 EMA 162.38 (new listing)
+2026-11-21,MPIMANIPAL,Manipal Payment and Identity Solutions Ltd,DT -> SP,close 322.8 back above 20 EMA 321.73 (new listing)

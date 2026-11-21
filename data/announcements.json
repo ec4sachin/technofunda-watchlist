@@ -1,5 +1,5 @@
 {
- "last": "2026-11-20",
+ "last": "2026-11-21",
  "status": {
   "bse": {
    "days": 2,
@@ -8,13 +8,13 @@
   },
   "nse": {
    "days": 2,
-   "rows": 545,
+   "rows": 485,
    "last_error": ""
   },
   "matched": {
    "bse_codes": 93,
-   "nse_only_codes": 235,
-   "new": 1
+   "nse_only_codes": 236,
+   "new": 4
   }
  },
  "items": {
@@ -304,6 +304,46 @@
     "url": "https://nsearchives.nseindia.in/corporate/VIVIANA_19112026105817_VIVIANA__Intimation_of_Receiving_Order_DHBVN_19112026.pdf",
     "ex": "NSE",
     "seen": "2026-11-19"
+   }
+  ],
+  "AEROENTER": [
+   {
+    "d": "2026-11-20",
+    "t": "Company has made investment of Rs. 10 crores in Aeroflex Finance Private Limited, the wholly-owned subsidiary.",
+    "k": "Acquisition / JV",
+    "url": "https://nsearchives.nseindia.in/corporate/SATINDUSTRIES_20112026181253_Investment_in_AFPL.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-21"
+   }
+  ],
+  "PDSL": [
+   {
+    "d": "2026-11-20",
+    "t": "PDS Limited has informed the Exchange regarding a press release dated November 20, 2026, titled \"Resilient by Design, Recognised Worldwide, PDS Earns Platinum and Gold at LACP 2026\".",
+    "k": "Business update",
+    "url": "https://nsearchives.nseindia.in/corporate/PDSL_20112026172030_Ltr_pressrelease_20112026.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-21"
+   }
+  ],
+  "SIMCA": [
+   {
+    "d": "2026-11-20",
+    "t": "Simca Advertising Limited has informed the Exchange regarding 'Securing Advertisement Rights Contract from Indian Railways Mumbai CST Division'.",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/SIMCA_20112026105630_Intimation_to_exchnage_for_Advertising_Rights_-_Indian_Railways.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-21"
+   }
+  ],
+  "SAHASRA": [
+   {
+    "d": "2026-11-21",
+    "t": "Sahasra Electronic Solutions Limited has informed the Exchange regarding a press release dated November 21, 2026, titled \"Sahasra Electronic Solutions Limited reports H1FY27 performance, business and operational highlights.\".",
+    "k": "Business update",
+    "url": "https://nsearchives.nseindia.in/corporate/SAHASRA_21112026093259_final_press_release.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-21"
    }
   ]
  }
