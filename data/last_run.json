@@ -1,8 +1,45 @@
 {
  "added": [],
  "rejected": [],
- "to_dt": [],
- "to_sp": [],
+ "to_dt": [
+  [
+   "ANTELOPUS",
+   "Antelopus Selan",
+   "close 832.95 < 200 EMA 836.14"
+  ],
+  [
+   "RBZJEWEL",
+   "RBZ Jewellers Lt",
+   "close 157.04 < 200 EMA 157.06"
+  ],
+  [
+   "SIDDHIKA",
+   "Siddhika Coatins",
+   "close 202.85 < 200 EMA 209.56"
+  ],
+  [
+   "SURYODAY",
+   "Suryoday Small Finance Bank Ltd",
+   "close 150.39 < 200 EMA 151.16"
+  ]
+ ],
+ "to_sp": [
+  [
+   "DHABRIYA",
+   "Dhabriya Poly.",
+   "close 476.75 > 20 EMA 472.94"
+  ],
+  [
+   "RAMBHAJO",
+   "Advit Jewels",
+   "close 334.35 > 20 EMA 325.16"
+  ],
+  [
+   "TECHNOCRAF",
+   "Technocraft Ven.",
+   "close 492.2 > 20 EMA 488.38"
+  ]
+ ],
  "removed": [],
  "unchecked": [],
  "investor_moves": [],
@@ -53,7 +90,7 @@
   [
    "AEROPLANE",
    "A C J K Exports",
-   "close 240.08 vs 20 EMA 229.73 → SP"
+   "close 242.7 vs 20 EMA 230.96 → SP"
   ],
   [
    "ANAWIL",
@@ -63,7 +100,7 @@
   [
    "AONESTEELS",
    "A-One Steels",
-   "close 479 (too new for any EMA)"
+   "close 477.95 vs 20 EMA 430.81 → SP"
   ],
   [
    "APSISAERO",
@@ -73,12 +110,12 @@
   [
    "BPLPHARMA",
    "Bharat Parenterals Ltd",
-   "close 2401 vs 20 EMA 2022.3 → SP"
+   "close 2312 vs 20 EMA 2049.94 → SP"
   ],
   [
    "HALDYNGL",
    "Haldyn Glass",
-   "close 135.48 vs 20 EMA 134.97 → SP"
+   "close 139.86 vs 20 EMA 135.44 → SP"
   ],
   [
    "JSIPL",
@@ -88,17 +125,17 @@
   [
    "KANOHAR",
    "Kanohar Elect.",
-   "close 1046.6 vs 20 EMA 1024.46 → SP"
+   "close 1034.15 vs 20 EMA 1025.4 → SP"
   ],
   [
    "KHAZANCHI",
    "Khazanchi Jewell",
-   "close 719.55 (too new for any EMA)"
+   "close 711.25 (too new for any EMA)"
   ],
   [
    "MARSONS",
    "Marsons",
-   "close 154.83 vs 20 EMA 147.89 → SP"
+   "close 152.56 vs 20 EMA 148.33 → SP"
   ],
   [
    "MARUSHIKA",
@@ -123,17 +160,17 @@
   [
    "SMT",
    "Sahajanand Medical Technologies Ltd",
-   "close 526.35 (too new for any EMA)"
+   "close 527.6 vs 20 EMA 511.98 → SP"
   ],
   [
    "SONA",
    "Sonaselection India",
-   "close 122.89 vs 20 EMA 110.58 → SP"
+   "close 121.61 vs 20 EMA 111.65 → SP"
   ],
   [
    "TRANSPEK",
    "Transpek Industry Ltd",
-   "close 1370.6 vs 20 EMA 1323.56 → SP"
+   "close 1361 vs 20 EMA 1327.12 → SP"
   ],
   [
    "544538",
@@ -208,12 +245,12 @@
   [
    "DEEPA",
    "Deepa Jewellers",
-   "close 197.08 vs 20 EMA 214.04"
+   "close 191.72 vs 20 EMA 211.9"
   ],
   [
    "DHABRIYA",
    "Dhabriya Poly.",
-   "close 472 vs 20 EMA 472.53"
+   "close 476.75 vs 20 EMA 472.94"
   ],
   [
    "EPWINDIA",
@@ -228,32 +265,32 @@
   [
    "FEDDERSHOL",
    "Fedders Holding",
-   "close 57.58 vs 20 EMA 58.42"
+   "close 54.52 vs 20 EMA 58.04"
   ],
   [
    "HEXAGON",
    "Hexagon Nutri.",
-   "close 60.38 vs 20 EMA 61.04"
+   "close 59.07 vs 20 EMA 60.85"
   ],
   [
    "ORIRAIL",
    "Oriental Rail Infrastructure Ltd",
-   "close 115.53 vs 20 EMA 117.58"
+   "close 116.93 vs 20 EMA 117.52"
   ],
   [
    "RAMBHAJO",
    "Advit Jewels",
-   "close 320.05 vs 20 EMA 324.19"
+   "close 334.35 vs 20 EMA 325.16"
   ],
   [
    "RSL",
    "Rajputana Stain.",
-   "close 165.09 vs 20 EMA 168.81"
+   "close 159.01 vs 20 EMA 167.88"
   ],
   [
    "SWASTIKAIN",
    "Swastika Infra",
-   "close 188 (too new for any EMA)"
+   "close 187.52 vs 20 EMA 195.66"
   ],
   [
    "TAALTECH",
@@ -263,7 +300,7 @@
   [
    "TAMBOLIIN",
    "Tamboli Industri",
-   "close 318.65 vs 20 EMA 319.23"
+   "close 308.8 vs 20 EMA 318.24"
   ],
   [
    "TEAMTECH",
@@ -273,7 +310,7 @@
   [
    "TECHNOCRAF",
    "Technocraft Ven.",
-   "close 486.55 vs 20 EMA 487.98"
+   "close 492.2 vs 20 EMA 488.38"
   ],
   [
    "UDAYJEW",
@@ -283,7 +320,7 @@
   [
    "XTRANET",
    "Xtranet Techno.",
-   "close 255.3 vs 20 EMA 268.86"
+   "close 262.05 vs 20 EMA 268.21"
   ],
   [
    "YAAP",
@@ -304,7 +341,7 @@
  "already_listed": 0,
  "price_date": "20 Nov 2026",
  "monthly_pass": 0,
- "mode": "auto",
+ "mode": "daily",
  "monthly_done": false,
- "run_at": "21 Nov 2026, 01:57 PM IST"
+ "run_at": "21 Nov 2026, 05:18 PM IST"
 }

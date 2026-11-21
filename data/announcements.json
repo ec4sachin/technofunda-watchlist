@@ -8,13 +8,13 @@
   },
   "nse": {
    "days": 1,
-   "rows": 54,
+   "rows": 123,
    "last_error": ""
   },
   "matched": {
    "bse_codes": 93,
    "nse_only_codes": 236,
-   "new": 3
+   "new": 4
   }
  },
  "items": {
@@ -85,6 +85,14 @@
    }
   ],
   "UNIDT": [
+   {
+    "d": "2026-11-21",
+    "t": "United Drilling Tools Limited has informed the Exchange about Bagging/Receiving of orders/contracts",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/UNIDT_21112026152444_letter_sign.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-21"
+   },
    {
     "d": "2026-11-16",
     "t": "United Drilling Tools Limited has informed the Exchange regarding a press release dated November 16, 2026, titled \"Earning Release\".",
@@ -358,6 +366,36 @@
     "t": "A-One Steels India Limited has informed the Exchange about the NCLT order approving the Scheme of Amalgamation",
     "k": "Order",
     "url": "https://nsearchives.nseindia.in/corporate/AONESTEELS_21112026122938_SE_Intimations_Signed.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-21"
+   }
+  ],
+  "KRYSTAL": [
+   {
+    "d": "2026-11-21",
+    "t": "Krystal Integrated Services Limited has informed the Exchange about Bagging/Receiving of orders/contracts",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/KISL123_21112026144554_Reg_30_intimation.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-21"
+   }
+  ],
+  "RATNAVEER": [
+   {
+    "d": "2026-11-21",
+    "t": "Ratnaveer Precision Engineering Limited has informed the Exchange regarding a press release dated November 21, 2026, titled \"Update on Copper Clad Laminate (CCL) Project - Disclosure under Regulation 30 of SEBI (LODR) Regulations, 2015.\".",
+    "k": "Business update",
+    "url": "https://nsearchives.nseindia.in/corporate/RATNAVEER_21112026143326_Press_release_Final_signed.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-21"
+   }
+  ],
+  "DHARARAIL": [
+   {
+    "d": "2026-11-21",
+    "t": "Dhara Rail Projects Limited has informed the Exchange about Awarding of order(s)/contract(s) dated 21st November, 2026",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/DHARA_21112026160024_Regulation_30_Dhara.pdf",
     "ex": "NSE",
     "seen": "2026-11-21"
    }
