@@ -8,13 +8,13 @@
   },
   "nse": {
    "days": 1,
-   "rows": 11,
+   "rows": 54,
    "last_error": ""
   },
   "matched": {
    "bse_codes": 93,
    "nse_only_codes": 236,
-   "new": 0
+   "new": 3
   }
  },
  "items": {
@@ -218,6 +218,14 @@
   ],
   "ANLON": [
    {
+    "d": "2026-11-21",
+    "t": "Anlon Technology Solutions Limited has informed the Exchange about Bagging/Receiving of orders/contracts",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/ANLON_21112026123749_Regulation_30_signed.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-21"
+   },
+   {
     "d": "2026-11-17",
     "t": "Anlon Technology Solutions Limited has informed the Exchange regarding a press release dated November 17, 2026, titled \"Financial Performance of the company for the Half year ended 30th September 2026.\"",
     "k": "Business update",
@@ -332,6 +340,24 @@
     "t": "Sahasra Electronic Solutions Limited has informed the Exchange regarding a press release dated November 21, 2026, titled \"Sahasra Electronic Solutions Limited reports H1FY27 performance, business and operational highlights.\".",
     "k": "Business update",
     "url": "https://nsearchives.nseindia.in/corporate/SAHASRA_21112026093259_final_press_release.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-21"
+   },
+   {
+    "d": "2026-11-21",
+    "t": "Sahasra Electronic Solutions Limited has informed the Exchange regarding a revised press release dated November 21, 2026, titled \"Submission of revised Press Release\".",
+    "k": "Business update",
+    "url": "https://nsearchives.nseindia.in/corporate/SAHASRA_21112026115811_final_revised_press_release.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-21"
+   }
+  ],
+  "AONESTEELS": [
+   {
+    "d": "2026-11-21",
+    "t": "A-One Steels India Limited has informed the Exchange about the NCLT order approving the Scheme of Amalgamation",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/AONESTEELS_21112026122938_SE_Intimations_Signed.pdf",
     "ex": "NSE",
     "seen": "2026-11-21"
    }
