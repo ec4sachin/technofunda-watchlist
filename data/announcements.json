@@ -2,19 +2,19 @@
  "last": "2026-11-21",
  "status": {
   "bse": {
-   "days": 2,
+   "days": 1,
    "rows": 0,
    "last_error": "HTTP 403 (AnnGetData/w?strCat=-1)"
   },
   "nse": {
-   "days": 2,
-   "rows": 485,
+   "days": 1,
+   "rows": 11,
    "last_error": ""
   },
   "matched": {
    "bse_codes": 93,
    "nse_only_codes": 236,
-   "new": 4
+   "new": 0
   }
  },
  "items": {
@@ -304,16 +304,6 @@
     "url": "https://nsearchives.nseindia.in/corporate/VIVIANA_19112026105817_VIVIANA__Intimation_of_Receiving_Order_DHBVN_19112026.pdf",
     "ex": "NSE",
     "seen": "2026-11-19"
-   }
-  ],
-  "AEROENTER": [
-   {
-    "d": "2026-11-20",
-    "t": "Company has made investment of Rs. 10 crores in Aeroflex Finance Private Limited, the wholly-owned subsidiary.",
-    "k": "Acquisition / JV",
-    "url": "https://nsearchives.nseindia.in/corporate/SATINDUSTRIES_20112026181253_Investment_in_AFPL.pdf",
-    "ex": "NSE",
-    "seen": "2026-11-21"
    }
   ],
   "PDSL": [
