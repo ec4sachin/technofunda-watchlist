@@ -548,13 +548,13 @@ function guideHTML(G, f, OB){
     return `<div class="gl${pc != null && pc >= 100 ? " inc" : ""}"><span class="gk">Order book${OB.asof ? ` <small>${esc(OB.asof)}</small>` : ""}</span><span>
       <b>${rng(OB.cr, v => "₹" + Math.round(v).toLocaleString("en-IN"))} cr</b>${pc != null ? ` = <b>${Math.round(pc)}%</b> of ${ly.fy} revenue ${crTxt(ly.sales)} (${(pc / 100).toFixed(1)}× a year of sales)` : ""}${OB.text ? ` <span class="mut">· ${esc(OB.text)}</span>` : ""}</span></div>`;
   }
-  function gRule(){      // same rule as the robot (13 Nov 2026): revenue guidance below 15% a year -> removed at the monthly review
+  function gRule(){      // same rule as the robot (13 Nov 2026; 20% from 21 Nov 2026): revenue guidance below 20% a year -> removed at the monthly review
     if (!R) return "";
     let yr = null;
     if (R.pct) yr = mid(R.pct);
     else if (R.cr && ly && ly.sales > 0) { const n = yrs(R); if (n >= 1) yr = (Math.pow(mid(R.cr) / ly.sales, 1 / n) - 1) * 100; }
-    if (yr == null || yr >= 15) return "";
-    return `<div class="gwarn">⚠ Revenue guidance ${pctTxt(yr)} a year is below 15% — removed from SP / DT at the monthly review.</div>`;
+    if (yr == null || yr >= 20) return "";
+    return `<div class="gwarn">⚠ Revenue guidance ${pctTxt(yr)} a year is below 20% — removed from SP / DT at the monthly review.</div>`;
   }
 }
 function qBlock(title, x, better){

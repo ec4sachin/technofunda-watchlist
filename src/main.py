@@ -111,9 +111,13 @@ def daily(sp, dt, settings, rules_cfg, state, today, report, history, snaps, cha
             ok = False
             mk = f"{mk} · {slow}"
         low_g = _low_guidance(code, snaps[code], rules_cfg, "new_stock_min_revenue_guidance") if ok else None
-        if low_g:         # management's revenue guidance below 15%: not added (rule of 13 Nov 2026)
+        if low_g:         # management's revenue guidance below 20% (rules.yaml): not added (13 Nov 2026; 20% from 21 Nov 2026)
             ok = False
             mk = f"{mk} · {low_g}"
+        no_g = _no_guidance_growth(code, m, snaps[code], rules_cfg) if ok else None
+        if no_g:          # no revenue guidance: TTM profit growth must be 25%+ instead (rule of 21 Nov 2026)
+            ok = False
+            mk = f"{mk} · {no_g}"
         rs_note = ""
         min_rs, min_rs3 = float(rules_cfg.get("new_stock_min_rs") or 0), float(rules_cfg.get("new_stock_min_rs3") or 0)
         if ok and not slow and (min_rs or min_rs3):   # Relative Strength ratings (1-99): 12-month and 3-month must be above the levels
@@ -415,6 +419,25 @@ def _slow_growth(m, rules_cfg, key):
     if q_level not in (None, "", 0):
         txt += f" and latest quarter profit growth {'not comparable' if q is None else f'{q:g}%'} (need above {float(q_level):g}%)"
     return txt
+
+
+def _no_guidance_growth(code, m, snap, rules_cfg, catalysts=None):
+    """New stock WITHOUT revenue guidance in Claude's catalyst notes (rule of 21 Nov 2026): it is added only when its
+    TTM profit growth is at least new_stock_no_guidance_min_profit_growth (25%). Returns the reason text when it fails,
+    else None. TTM growth not known: fails (nothing to check it with)."""
+    level = rules_cfg.get("new_stock_no_guidance_min_profit_growth")
+    if level in (None, "", 0):
+        return None
+    try:
+        if guided_growth(code, snap, catalysts) is not None:
+            return None                       # guidance given: the guidance rule decides
+    except Exception:
+        pass
+    g = (m or {}).get("profit_growth_ttm")
+    if g is not None and g >= float(level):
+        return None
+    return (f"no revenue guidance, and TTM profit growth {'not known' if g is None else f'{g:g}%'} "
+            f"(need {float(level):g}% or more without guidance)")
 
 
 def _fy_base(snap):
