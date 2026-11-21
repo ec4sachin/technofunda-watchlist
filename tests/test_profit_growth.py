@@ -61,9 +61,20 @@ def test():
         sp, dt, state = {}, {}, {"seen_email_ids": []}
         rep = {k: [] for k in ("added", "rejected", "to_dt", "to_sp", "removed", "unchecked", "no_price", "warnings",
                                "first_marked", "new_listing")}
-        main.daily(sp, dt, {"alerts": ["52W High"]}, cfg, state, "2026-11-11", rep, [], {}, {})
+        main.daily(sp, dt, {"alerts": ["52W High"]}, dict(cfg, new_stock_no_guidance_min_profit_growth=0), state, "2026-11-11", rep, [], {}, {})
         assert set(sp) == {"FAST", "NONE", "QTR"}, sp.keys()
         assert rep["rejected"][0][0] == "SLOW" and "TTM profit growth 12% (need 20% or more)" in rep["rejected"][0][2], rep["rejected"]
+        # 21 Nov 2026: a new stock with NO revenue guidance needs TTM profit growth of 25%+ (no quarter exception)
+        assert CFG["new_stock_no_guidance_min_profit_growth"] == 25
+        main.storage.save_json("catalysts.json", {})
+        emails.fetch_alert_stocks = lambda *a, **k: (dict(cands), [], {"52W High": 3})
+        sp, dt, state = {}, {}, {"seen_email_ids": []}
+        rep = {k: [] for k in ("added", "rejected", "to_dt", "to_sp", "removed", "unchecked", "no_price", "warnings",
+                               "first_marked", "new_listing")}
+        main.daily(sp, dt, {"alerts": ["52W High"]}, cfg, state, "2026-11-12", rep, [], {}, {})
+        assert set(sp) == {"FAST"}, sp.keys()
+        why = {r[0]: r[2] for r in rep["rejected"]}
+        assert "no revenue guidance" in why["QTR"] and "not known" in why["NONE"], why
     finally:
         fx.fetch_metrics, fx.score, fx.passes, fx.completeness, emails.fetch_alert_stocks = real
         for k in ("GMAIL_ADDRESS", "GMAIL_APP_PASSWORD"):

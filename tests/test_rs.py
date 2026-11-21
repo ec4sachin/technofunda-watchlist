@@ -135,6 +135,7 @@ def test_daily_gate():
         import yaml
         cfg = dict(yaml.safe_load(open(os.path.join(HERE, "..", "config", "rules.yaml"))))
         assert cfg["new_stock_min_rs"] == 0 and cfg["new_stock_min_rs3"] == 80
+        cfg["new_stock_no_guidance_min_profit_growth"] = 0   # this test checks the RS rule only (no-guidance profit rule has its own test)
         sp, dt, state, rep = {}, {}, {"seen_email_ids": []}, {k: [] for k in ("added", "rejected", "to_dt", "to_sp", "removed",
                                                                               "unchecked", "no_price", "warnings", "first_marked", "new_listing")}
         main.daily(sp, dt, {"alerts": ["52W High"]}, cfg, state, "2026-11-09", rep, [], {}, {})

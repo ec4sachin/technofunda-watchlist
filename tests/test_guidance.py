@@ -29,3 +29,20 @@ assert abs(main.guided_growth("F", H, cats) - 20) < 0.01 and low("F", H) is None
 assert low("C", {}) is None                                           # no quarters saved: not comparable -> kept
 assert main._low_guidance("A", Q, {"monthly_min_revenue_guidance": 0}, "monthly_min_revenue_guidance", cats) is None  # rule off
 print("guidance rule: all checks passed")
+
+
+def test_no_guidance_needs_25pct_profit_growth():
+    """21 Nov 2026: a new stock with NO revenue guidance is added only with TTM profit growth of 25% or more."""
+    import main
+    rules = {"new_stock_no_guidance_min_profit_growth": 25}
+    cats = {"G": {"guide": {"rev": {"fy": "FY27", "pct": [30, 30]}}}, "N": {"guide": {}}}
+    assert main._no_guidance_growth("G", {"profit_growth_ttm": 10}, None, rules, cats) is None      # has guidance: not this rule
+    assert main._no_guidance_growth("N", {"profit_growth_ttm": 30}, None, rules, cats) is None      # 30% >= 25%
+    assert "need 25" in main._no_guidance_growth("N", {"profit_growth_ttm": 22}, None, rules, cats)
+    assert "not known" in main._no_guidance_growth("X", {}, None, rules, cats)                       # no note, no TTM
+    assert main._no_guidance_growth("X", {"profit_growth_ttm": 5}, None, {}, cats) is None          # rule off
+
+
+if __name__ == "__main__":
+    test_no_guidance_needs_25pct_profit_growth()
+    print("no-guidance rule OK")
