@@ -1,5 +1,5 @@
 {
- "last": "2026-11-21",
+ "last": "2026-11-22",
  "status": {
   "bse": {
    "days": 1,
@@ -8,13 +8,13 @@
   },
   "nse": {
    "days": 1,
-   "rows": 123,
+   "rows": 9,
    "last_error": ""
   },
   "matched": {
    "bse_codes": 93,
    "nse_only_codes": 236,
-   "new": 4
+   "new": 0
   }
  },
  "items": {

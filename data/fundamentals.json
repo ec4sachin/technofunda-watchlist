@@ -1059,7 +1059,7 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-21"
+  "as_of": "2026-11-22"
  },
  "HOACFOODS": {
   "market_cap": 428.0,
@@ -4360,7 +4360,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-21"
+  "as_of": "2026-11-22"
  },
  "544812": {
   "market_cap": 219.0,
@@ -6627,7 +6627,7 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-21"
+  "as_of": "2026-11-22"
  },
  "AEROENTER": {
   "market_cap": 1445.0,
@@ -7576,7 +7576,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-21"
+  "as_of": "2026-11-22"
  },
  "BHARATSE": {
   "market_cap": 1331.0,
@@ -10803,7 +10803,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-21"
+  "as_of": "2026-11-22"
  },
  "FONEBOX": {
   "market_cap": 209.0,
@@ -11134,11 +11134,11 @@
   ]
  },
  "543895": {
-  "market_cap": 804.0,
-  "price": 490.0,
+  "market_cap": 817.0,
+  "price": 498.0,
   "high_52w": 595.0,
   "low_52w": 390.0,
-  "pe": 19.8,
+  "pe": 20.1,
   "book_value": 135.0,
   "dividend_yield": 0.0,
   "roce": 29.6,
@@ -11224,7 +11224,7 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-19"
+  "as_of": "2026-11-22"
  },
  "UTSSAV": {
   "market_cap": 2023.0,
@@ -11538,7 +11538,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-21"
+  "as_of": "2026-11-22"
  },
  "SHRIAHIMSA": {
   "market_cap": 945.0,
@@ -17412,7 +17412,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-21"
+  "as_of": "2026-11-22"
  },
  "BRANDMAN": {
   "market_cap": 263.0,
@@ -19681,7 +19681,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-21"
+  "as_of": "2026-11-22"
  },
  "NRAIL": {
   "market_cap": 1145.0,
@@ -20399,7 +20399,7 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-21"
+  "as_of": "2026-11-22"
  },
  "544458": {
   "market_cap": 1063.0,
@@ -22722,7 +22722,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-21"
+  "as_of": "2026-11-22"
  },
  "SUNLITE": {
   "market_cap": 827.0,
@@ -24323,7 +24323,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-21"
+  "as_of": "2026-11-22"
  },
  "517336": {
   "market_cap": 519.0,
@@ -24477,7 +24477,7 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-21"
+  "as_of": "2026-11-22"
  },
  "544667": {
   "market_cap": 142.0,
@@ -26767,7 +26767,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-21"
+  "as_of": "2026-11-22"
  },
  "KSHINTL": {
   "market_cap": 6872.0,
@@ -27924,7 +27924,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-21"
+  "as_of": "2026-11-22"
  },
  "544773": {
   "market_cap": 753.0,
@@ -28064,7 +28064,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-21"
+  "as_of": "2026-11-22"
  },
  "543916": {
   "market_cap": 934.0,
@@ -28507,7 +28507,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-21"
+  "as_of": "2026-11-22"
  },
  "AONESTEELS": {
   "market_cap": 3691.0,

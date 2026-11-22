@@ -1,45 +1,8 @@
 {
  "added": [],
  "rejected": [],
- "to_dt": [
-  [
-   "ANTELOPUS",
-   "Antelopus Selan",
-   "close 832.95 < 200 EMA 836.14"
-  ],
-  [
-   "RBZJEWEL",
-   "RBZ Jewellers Lt",
-   "close 157.04 < 200 EMA 157.06"
-  ],
-  [
-   "SIDDHIKA",
-   "Siddhika Coatins",
-   "close 202.85 < 200 EMA 209.56"
-  ],
-  [
-   "SURYODAY",
-   "Suryoday Small Finance Bank Ltd",
-   "close 150.39 < 200 EMA 151.16"
-  ]
- ],
- "to_sp": [
-  [
-   "DHABRIYA",
-   "Dhabriya Poly.",
-   "close 476.75 > 20 EMA 472.94"
-  ],
-  [
-   "RAMBHAJO",
-   "Advit Jewels",
-   "close 334.35 > 20 EMA 325.16"
-  ],
-  [
-   "TECHNOCRAF",
-   "Technocraft Ven.",
-   "close 492.2 > 20 EMA 488.38"
-  ]
- ],
+ "to_dt": [],
+ "to_sp": [],
  "removed": [],
  "unchecked": [],
  "investor_moves": [],
@@ -113,6 +76,11 @@
    "close 2312 vs 20 EMA 2049.94 → SP"
   ],
   [
+   "DHABRIYA",
+   "Dhabriya Poly.",
+   "close 476.75 vs 20 EMA 472.94 → SP"
+  ],
+  [
    "HALDYNGL",
    "Haldyn Glass",
    "close 139.86 vs 20 EMA 135.44 → SP"
@@ -148,6 +116,11 @@
    "close 322.8 vs 20 EMA 321.73 → SP"
   ],
   [
+   "RAMBHAJO",
+   "Advit Jewels",
+   "close 334.35 vs 20 EMA 325.16 → SP"
+  ],
+  [
    "SHUKRAPHAR",
    "Shukra Pharma.",
    "close 84.16 vs 20 EMA 78.43 → SP"
@@ -166,6 +139,11 @@
    "SONA",
    "Sonaselection India",
    "close 121.61 vs 20 EMA 111.65 → SP"
+  ],
+  [
+   "TECHNOCRAF",
+   "Technocraft Ven.",
+   "close 492.2 vs 20 EMA 488.38 → SP"
   ],
   [
    "TRANSPEK",
@@ -248,11 +226,6 @@
    "close 191.72 vs 20 EMA 211.9"
   ],
   [
-   "DHABRIYA",
-   "Dhabriya Poly.",
-   "close 476.75 vs 20 EMA 472.94"
-  ],
-  [
    "EPWINDIA",
    "EPW India",
    "close 220 vs 20 EMA 238.19"
@@ -276,11 +249,6 @@
    "ORIRAIL",
    "Oriental Rail Infrastructure Ltd",
    "close 116.93 vs 20 EMA 117.52"
-  ],
-  [
-   "RAMBHAJO",
-   "Advit Jewels",
-   "close 334.35 vs 20 EMA 325.16"
   ],
   [
    "RSL",
@@ -308,11 +276,6 @@
    "close 158.05 vs 20 EMA 159.08"
   ],
   [
-   "TECHNOCRAF",
-   "Technocraft Ven.",
-   "close 492.2 vs 20 EMA 488.38"
-  ],
-  [
    "UDAYJEW",
    "Uday Jewellery",
    "close 208.57 vs 20 EMA 213.94"
@@ -333,15 +296,15 @@
   "52W High": 0,
   "Daily Volume Scan": 0,
   "Weekly Volume Scan": 0,
-  "Ready after 6 Months": 0,
+  "Ready after 6 Months": 1,
   "Mukul Mahavir Agrawal": 0,
   "Ashish Kacholia": 0
  },
- "email_total": 0,
- "already_listed": 0,
+ "email_total": 1,
+ "already_listed": 1,
  "price_date": "20 Nov 2026",
  "monthly_pass": 0,
- "mode": "daily",
+ "mode": "auto",
  "monthly_done": false,
- "run_at": "21 Nov 2026, 05:18 PM IST"
+ "run_at": "22 Nov 2026, 01:50 PM IST"
 }
