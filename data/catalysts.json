@@ -3693,5 +3693,257 @@
    ]
   ],
   "guide": {}
+ },
+ "ALLCARGO": {
+  "text": "Domestic logistics company (express distribution, contract logistics, warehousing) after the group restructuring. ==Q2 FY27 profit ₹18–19 cr vs a ₹4–5 cr loss a year ago==, second profitable quarter in a row; ==EBITDA +24% to ₹77 cr, margin up to 13.9%== on pricing and cost control. H1 PAT ₹33 cr. Watch: revenue grew only 3% (H1 +7%); priorities are restoring volume growth; no guidance.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Multibagg – Allcargo Q2 EBITDA",
+    "https://www.multibagg.ai/market-pulse/articles/allcargo-logistics-q2-ebitda-growth-ppt-cmw2cpugy006o2mtk3qr52qkf"
+   ],
+   [
+    "InvestyWise – Allcargo H1 FY27",
+    "https://www.investywise.com/?p=129787"
+   ]
+  ],
+  "guide": {}
+ },
+ "ARMANFIN": {
+  "text": "Gujarat NBFC (microfinance, MSME and two-wheeler loans). ==Q2 FY27 profit a record ₹51.5 cr vs ₹8 cr a year ago==, revenue +47% to ₹235 cr, as ==credit costs fell (impairment ₹26 cr vs ₹38 cr)==. ==AUM crossed ₹3,000 cr== for the first time. Watch: microfinance stress can return; the big jump is from a weak base year.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Sahi – Arman Q2 FY27",
+    "https://www.sahi.com/news/arman-financial-services-reports-q2-consolidated-net-profit-of-51-5-crore-vs-8-crore-yoy"
+   ],
+   [
+    "Equitybulls – Arman Q2 & H1 FY27",
+    "https://www.equitybulls.com/news/378514/arman-financial-services-limited-reports-q2-h1-fy2027-results"
+   ]
+  ],
+  "guide": {}
+ },
+ "CARYSIL": {
+  "text": "Quartz and steel kitchen sink maker, mainly exports (US, UK). Q2 FY27 revenue +15% to a record ₹276 cr, but ==PAT only +4% to ₹28 cr==; quartz sink plants at ~92% use. Management keeps ==FY27 guidance of ~15% revenue growth== (some reports 15–20%) and 18–20% EBITDA margin. Watch: ==guidance is below your 20% rule – removed at the monthly review==; margins fell; trade/tariff uncertainty.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Multibagg – Carysil record Q2",
+    "https://www.multibagg.ai/market-pulse/articles/carysil-record-q2-revenue-growth-cmw95oc5o007j2mphgu38g8tx"
+   ],
+   [
+    "Univest – Carysil Q2 FY27",
+    "https://univest.in/blogs/carysil-q2-results-fy27-pat-28-crore"
+   ],
+   [
+    "Sovrenn – Carysil results",
+    "https://www.sovrenn.com/financial-results/carysil"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     15,
+     15
+    ],
+    "text": "~15% (some reports say 15–20%)"
+   },
+   "margin": {
+    "fy": "FY27",
+    "kind": "EBITDA",
+    "pct": [
+     18,
+     20
+    ]
+   }
+  }
+ },
+ "IMFA": {
+  "text": "India's largest integrated ferro-chrome maker (Odisha), with own chrome mines and power. ==Q2 FY27 revenue +35% to ₹968 cr, PAT +51% to ₹149 cr==; Q1 FY27 had been a record (revenue +50%, PAT +109%). ==Ferro-chrome output +32%== and sales volume up to ~82,000 t. Watch: profit dipped from Q1; earnings depend on ferro-chrome prices and stainless-steel demand; no guidance.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Univest – IMFA Q2 FY27",
+    "https://univest.in/blogs/indian-metals-and-ferro-alloys-q2-results-fy27-pat-148-crore"
+   ],
+   [
+    "SteelOrbis – IMFA Q2 output",
+    "https://www.steelorbis.com/steel-news/latest-news/indias-imfa-sees-32-rise-in-ferrochrome-output-in-q2-fy-2026-27-1489538.htm"
+   ],
+   [
+    "DSIJ – IMFA Q1 FY27",
+    "https://insights.dsij.in/dsijarticledetail/mukul-agrawal-backed-metal-stock-reports-record-q1-fy27-results-revenue-jumps-50-yoy-pat-surges-109-58765"
+   ]
+  ],
+  "guide": {}
+ },
+ "JKIL": {
+  "text": "Urban infrastructure EPC contractor (metros, flyovers, roads, tunnels) in Mumbai, NCR and Tamil Nadu. ==Q2 FY27 revenue +15% to ₹1,539 cr, PAT +25% to ₹113 cr==, EBITDA margin ~14.9%. ==Order book ₹22,711 cr== (~4× yearly revenue); ₹5,547 cr of orders won in H1, ₹8,000–10,000 cr order inflow targeted for FY27. Long-term targets: ==₹7,500 cr revenue in FY28, ₹10,000 cr by FY30==. Watch: H1 revenue grew only 8%; FY28 target implies ~15% a year from FY26.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Free Press Journal – J. Kumar Q2",
+    "https://www.freepressjournal.in/business/j-kumar-infraprojects-posts-rs-1539-cr-revenue-in-q2-order-book-stands-at-rs-22711-cr"
+   ],
+   [
+    "Sovrenn – J. Kumar Q2 FY27 concall",
+    "https://www.sovrenn.com/concall-summary/j-kumar-infraprojects/j-kumar-infraprojects-q2-fy27-concall-rs-22-711-cr-order-book-outlook"
+   ]
+  ],
+  "guide": {
+   "note": "Targets ₹7,500 cr revenue in FY28 and ₹10,000 cr by FY30; FY27 order inflow ₹8,000–10,000 cr"
+  },
+  "ob": {
+   "cr": [
+    22711
+   ],
+   "asof": "2026-09-30",
+   "text": "Elevated corridors/flyovers 47%"
+  }
+ },
+ "KRN": {
+  "text": "Heat-exchanger and HVAC coil maker (Neemrana), also for data-centre cooling. ==Q2 FY27 revenue more than doubled (+110%) to ₹319 cr, PAT +100% to ₹36 cr==; ==H1 revenue +114%, PAT +127%==; ==exports nearly tripled== (14 countries). New KRN HVAC subsidiary targets 50% capacity use this year, 80% next; management expects better revenue each quarter on a strong order book. Watch: Q2 EBITDA margin fell to 15% from 20%; Neemrana ramp-up slower than planned.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Outlook Business – KRN H1 FY27",
+    "https://www.outlookbusiness.com/spotlight/news-wire/krn-heat-exchanger-and-refrigeration-delivers-2x-growth-h1-fy27-revenue-up-114-pat-up-127-exports-nearly-triple"
+   ],
+   [
+    "Multibagg – KRN H1 margins",
+    "https://www.multibagg.ai/market-pulse/articles/krn-h1-revenue-margin-review-ppt-cmvure5gi000i2klzo29fydfd"
+   ],
+   [
+    "Sovrenn – KRN Q2 FY27",
+    "https://www.sovrenn.com/financial-results/krn-heat-exchanger-and-refrigeration?view=consolidated"
+   ]
+  ],
+  "guide": {}
+ },
+ "ESDS": {
+  "text": "Enterprise cloud and AI data-centre company (IaaS, managed services, SaaS), listed Sep 2026. ==Q2 FY27 revenue +48% to ₹138 cr, PAT +41% to ₹31 cr==. Raised ==₹720 cr in its IPO== for new data-centre capacity; ==Sharon AI billing starts mid-Q3 FY27==, IPO-funded capacity bills from Q1 FY28. Watch: costs rose 64% (margins down ~10 points); management gave no formal guidance; very high P/E.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Inc42 – ESDS Q2 FY27",
+    "https://inc42.com/buzz/esds-q2-profit-zooms-41-yoy-to-₹31-1-cr-revenue-up-48/"
+   ],
+   [
+    "CompoundingAI – ESDS Q2 analysis",
+    "https://compoundingai.in/market-news/esds-q2-fy27-results-analysis"
+   ],
+   [
+    "Multibagg – ESDS Q2 & IPO",
+    "https://www.multibagg.ai/market-pulse/articles/esds-software-solution-q2-results-announcement-cmvzmf3bb003b2vpeebfkjq42"
+   ]
+  ],
+  "guide": {}
+ },
+ "DEEDEV": {
+  "text": "Process piping solutions maker for power, oil & gas and process industries. Q2 FY27 revenue +8.5% to ₹293 cr, but ==PAT +32% to ₹23.5 cr== as it shifts to higher-margin material contracts; operating EBITDA margin 20%. ==Order book ₹2,586 cr==; ==H1 order inflow +97% to ₹1,179 cr==. Guidance: ==FY27 revenue ₹1,500 cr== with ~19% EBITDA margin; raised ₹300 cr equity. Watch: H2 must be much stronger (execution from December); long inventory cycle.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Sovrenn – DEE Q2 FY27 concall",
+    "https://www.sovrenn.com/concall-summary/dee-development-engineers/dee-development-engineers-q2-fy27-concall-rs-2-586-cr-order-book-outlook"
+   ],
+   [
+    "Equitybulls – DEE Q2 FY27",
+    "https://www.equitybulls.com/news/379015/dee-development-engineers-reports-q2-fy27-pat-of-23-crore-up-31-8-yoy"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "cr": [
+     1500,
+     1500
+    ]
+   },
+   "margin": {
+    "fy": "FY27",
+    "kind": "EBITDA",
+    "pct": [
+     19,
+     19
+    ]
+   }
+  },
+  "ob": {
+   "cr": [
+    2586
+   ],
+   "asof": "2026-10-31",
+   "text": "92% process piping"
+  }
+ },
+ "EPACKPEB": {
+  "text": "Pre-engineered steel buildings and sandwich panel maker. ==Record Q2 FY27 revenue ₹501 cr (+15.5%)==; ==H1 revenue +19% to ₹867 cr==; ==H1 order inflow +71% to ₹1,124 cr==. Management kept ==FY27 guidance of ₹1,900 cr revenue (~30% growth)== and 10–10.5% EBITDA margin, with new capacity ramping up. Watch: profit flat (Q2 PAT ₹29.6 cr, +0.4%); working capital up to ~60 days, operating cash flow negative.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Multibagg – EPack cash flow & guidance",
+    "https://www.multibagg.ai/market-pulse/articles/epack-cash-flow-receivables-q2-concall-cmw606oaa006y2bnxjwyjyp6q"
+   ],
+   [
+    "Sovrenn – EPack concall",
+    "https://www.sovrenn.com/concall-summary/epack-prefab-technologies"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "cr": [
+     1900,
+     1900
+    ],
+    "text": "~30% growth"
+   },
+   "margin": {
+    "fy": "FY27",
+    "kind": "EBITDA",
+    "pct": [
+     10,
+     10.5
+    ]
+   }
+  }
+ },
+ "ADVAIT": {
+  "text": "Power transmission products and energy-transition company (Ahmedabad) – OPGW, ERS, solar EPC, BESS, green hydrogen. ==Q2 FY27 revenue +41% to ₹221 cr, PAT +89% to ₹19 cr==, EBITDA margin up to 14.5%. ==Order book ₹1,575 cr (+47%)== after ~₹578 cr of Q2 wins. Guidance: ==40%+ revenue growth in FY27==; Dholera manufacturing plant (Phase 1) starts Q4 FY27. Watch: debt/equity doubled to 0.86× on capex.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "pv magazine – Advait Q2 FY27",
+    "https://www.pv-magazine-india.com/2026/11/02/advait-energy-transitions-reports-88-5-growth-in-q2-fy27-profit-as-order-book-reaches-inr-1575-crore/"
+   ],
+   [
+    "Multibagg – Advait order book",
+    "https://www.multibagg.ai/market-pulse/articles/advait-q2-orders-order-book-ppt-cmvxu5nn400202gq6r8o8jm7n"
+   ],
+   [
+    "Sovrenn – Advait guidance",
+    "https://www.sovrenn.com/financial-results/advait-energy-transitions?view=standalone"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     40,
+     40
+    ],
+    "text": "40%+ (management calls it conservative)"
+   }
+  },
+  "ob": {
+   "cr": [
+    1574.83
+   ],
+   "asof": "2026-09-30",
+   "text": "PTS 68%, renewables 32%"
+  }
  }
 }
