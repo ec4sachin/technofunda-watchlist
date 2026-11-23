@@ -3452,5 +3452,246 @@
     "text": "PAT margin 4–4.5%"
    }
   }
+ },
+ "ANAWIL": {
+  "text": "Tubular wind-tower maker for onshore wind farms. ==H1 FY27 revenue up 3.7× (+272%) to ₹154 cr – more than all of FY26 (₹143 cr)==; ==PAT up 6× (+539%) to ₹14.4 cr==; towers made rose to 107 from 62. ==Confirmed order book ₹396 cr== (plus ₹44 cr LOIs), to be executed by Q1 FY28. Guidance: ==FY27 revenue ₹450–500 cr, PAT ₹55–60 cr==, with H2 the stronger half. Watch: H2 must deliver ~₹300 cr+; Kutch plant still in trial runs; cash very low.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Multibagg – Anawil FY27 target",
+    "https://www.multibagg.ai/market-pulse/articles/anawil-fy27-revenue-target-kutch-announcement-cmw5jeicb000k2bnx8hfsy8d8"
+   ],
+   [
+    "Multibagg – Anawil H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/anawil-h1-revenue-growth-cmwjtmvpn00ci2ntk5emnx4l0"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "cr": [
+     450,
+     500
+    ]
+   },
+   "profit": {
+    "fy": "FY27",
+    "kind": "PAT",
+    "cr": [
+     55,
+     60
+    ]
+   }
+  },
+  "ob": {
+   "cr": [
+    395.58
+   ],
+   "asof": "2026-11-06",
+   "text": "Confirmed; plus ₹44 cr LOIs"
+  }
+ },
+ "APSISAERO": {
+  "text": "Precision parts maker for defence, aerospace and healthcare (defence ~61% of sales). ==H1 FY27 revenue +55% to ₹21 cr==, PAT +21% to ₹4.0 cr. ==Unit II commissioned in Aug 2026== (20 new machines, ~₹15 cr H2 revenue expected). ==Order book ₹31.8 cr== covers 1.2× H2 needs. Guidance: ==FY27 revenue ~₹48 cr==, long-term target ₹300 cr by FY32. Watch: margins fell (start-up costs of Unit II); small company; working capital days up.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Multibagg – Apsis H1 FY27 & target",
+    "https://www.multibagg.ai/market-pulse/articles/apsis-aerocom-fy27-revenue-target-cmwo3w5z0002q28rw6p3e2y75"
+   ],
+   [
+    "Multibagg – Apsis order book",
+    "https://www.multibagg.ai/market-pulse/articles/apsis-aerocom-order-book-cover-ppt-cmwfjf1aq003r2rl90wmd4qaq"
+   ],
+   [
+    "Sovrenn – Apsis Q2 FY27 concall",
+    "https://www.sovrenn.com/concall-summary/apsis-aerocom/apsis-aerocom-q2-fy27-concall-rs-300-cr-revenue-target-by-fy32-outlook"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "cr": [
+     48,
+     48
+    ]
+   },
+   "note": "Long-term target ₹300 cr revenue by FY32"
+  },
+  "ob": {
+   "cr": [
+    31.8
+   ],
+   "asof": "2026-09-30",
+   "text": "Defence 53%, aerospace 31%, healthcare 14%"
+  }
+ },
+ "DEEPAKFERT": {
+  "text": "Ammonia, nitric acid, technical ammonium nitrate and fertiliser maker. Q2 FY27 revenue +11% to ₹3,334 cr, but ==EBITDA +62% and PAT +84% to ₹394 cr==; ==H1 PAT +93% to ₹884 cr – already above all of FY26==. Industrial chemicals +24%, mining chemicals +25%. ==New TAN and nitric acid plants (₹3,850 cr capex) start earning from Q4 FY27==; export ban lifted Oct 2026. Watch: crop nutrition sales fell 13%; plant start delayed again; depreciation ₹180–200 cr a quarter from new plants.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "InvestyWise – Deepak Fertilisers Q2 FY27",
+    "https://www.investywise.com/deepak-fertilisers-and-petrochemicals-corporation-limited-q2-fy27-financial-results/"
+   ],
+   [
+    "Sovrenn – Deepak Fert Q2 FY27 concall",
+    "https://www.sovrenn.com/concall-summary/deepak-fertilizers-and-petrochemicals-corporation/deepak-fertilizers-and-petrochemicals-corporation-q2-fy27-concall-rs-3-334-cr-revenue-outlook"
+   ],
+   [
+    "Multibagg – Deepak Fert segments",
+    "https://www.multibagg.ai/market-pulse/articles/deepak-fertilisers-q2-chemicals-crop-ppt-cmwf43a3v00cx2sqry6d6taor"
+   ]
+  ],
+  "guide": {
+   "margin": {
+    "fy": "FY28",
+    "kind": "EBITDA",
+    "pct": [
+     22,
+     22
+    ],
+    "text": "Management: sustainable operating margin around 22%"
+   }
+  }
+ },
+ "HMAAGRO": {
+  "text": "Frozen buffalo meat and agro-products exporter. ==H1 FY27 revenue +49% to ₹4,890 cr==, ==PAT +72% to ₹155 cr==, EBITDA +58%; Q2 profit more than doubled from Q1. Watch: very thin margins (~3% PAT); finance costs up 82%; Q2 margin below last year; inventory build-up; no guidance.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Multibagg – HMA Agro H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/hma-agro-h1-fy27-profit-ppt-cmw2bgpjq005g2mtkch0l5v4q"
+   ],
+   [
+    "Sovrenn – HMA Agro results",
+    "https://www.sovrenn.com/financial-results/hma-agro-industries"
+   ]
+  ],
+  "guide": {}
+ },
+ "MARSONS": {
+  "text": "Transformer and grid-equipment maker (Kolkata). ==Q2 FY27 revenue +62% to ₹97 cr==, ==PAT +45% to ₹13.3 cr==; operating margin up to 18.5% from 15.2%; revenue nearly doubled from Q1. Declared its first FY27 interim dividend. Watch: Q1 profit had fallen; order book not disclosed; working-capital heavy business; no guidance.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Multibagg – Marsons Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/marsons-q2-profit-dividend-cmwexevjb006n2cqxluqpvwfe"
+   ],
+   [
+    "Univest – Marsons Q2 FY27",
+    "https://univest.in/blogs/marsons-q2-results-fy27-pat-13-crore"
+   ]
+  ],
+  "guide": {}
+ },
+ "MPIMANIPAL": {
+  "text": "Payment cards, identity, secure printing and IoT/smart-tagging solutions provider (listed Sep 2026 via ₹414 cr IPO). ==Q1 FY27 revenue +48% to ₹419 cr==, with ==emerging businesses doubling to ₹159 cr==; ==Q2 revenue ₹430 cr, PAT ₹81 cr (+4% QoQ), EBITDA margin 30.5%==; H1 PAT ₹159 cr. International business seen at 20–25% of revenue. Watch: Q2 year-on-year growth not disclosed; raw-material and currency costs.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Sovrenn – Manipal Payment Q2 FY27",
+    "https://www.sovrenn.com/financial-results/manipal-payment-and-identity-solutions"
+   ],
+   [
+    "Sovrenn – Manipal Payment concall",
+    "https://www.sovrenn.com/concall-summary/manipal-payment-and-identity-solutions"
+   ],
+   [
+    "Sahi – MPI Manipal IPO",
+    "https://www.sahi.com/news/mpimanipal-q2-revenue-rises-to-4-14-billion-versus-3-22-billion-yoy"
+   ]
+  ],
+  "guide": {}
+ },
+ "RAMBHAJO": {
+  "text": "Handcrafted Kundan, Polki and diamond jewellery maker (Jaipur). ==Q2 FY27 income +24% to ₹59 cr, PAT +28% to ₹12.8 cr==; ==H1 revenue +29% to ₹94.5 cr==; net margin high at ~22%. Q1 profit had risen 39%. Watch: EBITDA margin eased to 27.8%; high debt and large inventory (~6 months of sales); no guidance.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Multibagg – Advit Jewels Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/advit-jewels-q2-profit-rises-cmw3e41ar007u2mph23449lrc"
+   ],
+   [
+    "Sovrenn – Advit Jewels concall",
+    "https://www.sovrenn.com/concall-summary/advit-jewels"
+   ]
+  ],
+  "guide": {}
+ },
+ "544091": {
+  "text": "Testing, inspection and certification labs (automotive, defence, food, pharma, water). ==H1 FY27 revenue +33% to ₹72 cr, PAT +38% to ₹6.6 cr==; FY26 revenue had grown 77%. Planning ==₹63 cr capex in FY27 for new labs and testing capabilities==; EGM to widen business objects. Watch: profit fell from H2 FY26; cash very low, short-term borrowings up ₹15.5 cr.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Multibagg – Qualitek H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/qualitek-labs-h1-revenue-profit-announcement-cmwf7o9la001m2rl9dc4gnav6"
+   ],
+   [
+    "Multibagg – Qualitek capex",
+    "https://www.multibagg.ai/market-pulse/articles/qualitek-labs-h1-fy27-results-cmwf7n8ig001k2rl93dwoe608"
+   ]
+  ],
+  "guide": {}
+ },
+ "544391": {
+  "text": "Small trading company (jewellery and bullion, with retail and resort segments). ==H1 FY27 revenue +43% to ₹43 cr==, ==PAT nearly doubled (+96%) to ₹7.0 cr==; FY26 revenue had jumped 258%. Watch: receivables were high (~₹65 cr in March); business mix not clearly disclosed; very small company; no guidance.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Multibagg – Retaggio H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/retaggio-industries-first-half-profit-announcement-cmw3oh97h00k9jk2r9wuad6ex"
+   ],
+   [
+    "Whalesbook – Retaggio H1 FY27",
+    "https://www.whalesbook.com/corporate-news/English/other/Retaggio-Industries-Reports-96percent-Profit-Surge-to-Rs-702-Crore/6aec8950c6c6dccbb9158e61"
+   ]
+  ],
+  "guide": {}
+ },
+ "544765": {
+  "text": "Vegetarian cloud-kitchen and food-delivery chain (Delhi NCR; 92% of sales online). ==H1 FY27 revenue +47% to ₹100 cr==, ==PAT +63% to ₹10.4 cr==, EBITDA margin up to 14.6%. Runs 27 cloud kitchens, ==targets 50+==, 10 new in FY28, plus a Gurgaon fine-dine/banquet project. Watch: heavy reliance on food apps and Delhi NCR; ₹34 cr investment outflow funded partly by borrowing.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Multibagg – Vegorama H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/vegorama-fy24-fy26-revenue-margins-ppt-cmwncdbue000j2hmktm84gfz3"
+   ],
+   [
+    "Multibagg – Vegorama kitchens",
+    "https://www.multibagg.ai/market-pulse/articles/vegorama-kitchens-automation-margin-gain-ppt-cmwncdlnb000l2hmk4txowg7v"
+   ]
+  ],
+  "guide": {}
+ },
+ "KEN": {
+  "text": "Textile fabric maker (grey fabric, technical textiles). ==H1 FY27 revenue +46% to ₹404 cr==, ==PAT +67% to ₹9.3 cr==. Promoters bought ==₹16 cr of warrants== in Nov 2026. Watch: receivables jumped to ₹240 cr from ₹167 cr in six months; thin margins (~2%); weak operating cash flow; new CFO in Oct 2026.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Multibagg – Ken Enterprises H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/ken-enterprises-profit-rises-67-announcement-cmwjc8ytt005y2ntk9hwutqde"
+   ],
+   [
+    "Screener – Ken Enterprises",
+    "https://www.screener.in/company/KEN/"
+   ]
+  ],
+  "guide": {}
+ },
+ "544141": {
+  "text": "Stock broker (Pune) diversifying into margin funding, mutual funds, merchant banking and insurance. ==H1 FY27 revenue +30% to ₹34 cr==, ==PAT +37% to ₹14.3 cr==, EBITDA margin 65%. ==Margin-trading book crossed ₹100 cr==; targets 1 lakh customers by 2027. Watch: SEBI curbs halved option volumes in 2026; short-term borrowings up.",
+  "date": "2026-11-23",
+  "sources": [
+   [
+    "Multibagg – Pune E-Stock H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/pune-e-stock-broking-margin-ppt-cmvw1domd00002xubwhx9bzjm"
+   ],
+   [
+    "Multibagg – PESB beyond F&O",
+    "https://www.multibagg.ai/market-pulse/articles/pune-e-stock-beyond-derivatives-concall-cmw3mccx000bc2kqqt2y08zmq"
+   ]
+  ],
+  "guide": {}
  }
 }
