@@ -6557,11 +6557,11 @@
   ]
  },
  "XTRANET": {
-  "market_cap": 1372.0,
+  "market_cap": 1373.0,
   "price": 262.0,
   "high_52w": 359.0,
   "low_52w": 120.0,
-  "pe": 28.4,
+  "pe": 28.5,
   "book_value": 58.1,
   "dividend_yield": 0.0,
   "roce": 32.8,
@@ -10735,11 +10735,11 @@
   ]
  },
  "MPIMANIPAL": {
-  "market_cap": 7276.0,
-  "price": 314.0,
+  "market_cap": 7322.0,
+  "price": 315.0,
   "high_52w": 458.0,
   "low_52w": 295.0,
-  "pe": 26.9,
+  "pe": 27.1,
   "book_value": 54.6,
   "dividend_yield": 0.0,
   "roce": 44.9,
@@ -26695,7 +26695,7 @@
   ]
  },
  "KANOHAR": {
-  "market_cap": 7998.0,
+  "market_cap": 8001.0,
   "price": 1010.0,
   "high_52w": 1210.0,
   "low_52w": 672.0,

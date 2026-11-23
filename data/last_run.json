@@ -1,110 +1,8 @@
 {
  "added": [],
  "rejected": [],
- "to_dt": [
-  [
-   "542669",
-   "BMW Industries",
-   "close 49.57 < 200 EMA 49.82"
-  ],
-  [
-   "543351",
-   "Naapbooks",
-   "close 122.35 < 200 EMA 127.07"
-  ],
-  [
-   "544810",
-   "Sampark India",
-   "close 133.95 < 20 EMA 134.34"
-  ],
-  [
-   "ACETEC",
-   "Acetech E-Commerce",
-   "close 134 < 20 EMA 139.22"
-  ],
-  [
-   "APSISAERO",
-   "Apsis Aerocom Ltd",
-   "close 500.15 < 20 EMA 513.6"
-  ],
-  [
-   "BALUFORGE",
-   "Balu Forge Industries Ltd",
-   "close 501 < 200 EMA 506.21"
-  ],
-  [
-   "DHABRIYA",
-   "Dhabriya Poly.",
-   "close 472.65 < 20 EMA 472.91"
-  ],
-  [
-   "GKSL",
-   "Gujarat Kidney",
-   "close 147.5 < 200 EMA 148.67"
-  ],
-  [
-   "INFOBEAN",
-   "InfoBeans Technologies Ltd",
-   "close 158.14 < 200 EMA 158.95"
-  ],
-  [
-   "JSIPL",
-   "Jindal Supreme",
-   "close 161.15 < 20 EMA 162.26"
-  ],
-  [
-   "KANOHAR",
-   "Kanohar Elect.",
-   "close 1007.8 < 20 EMA 1023.7"
-  ],
-  [
-   "MAYURUNIQ",
-   "Mayur Uniquoters",
-   "close 694 < 200 EMA 696.72"
-  ],
-  [
-   "MPIMANIPAL",
-   "Manipal Payment and Identity Solutions Ltd",
-   "close 315.3 < 20 EMA 321.11"
-  ],
-  [
-   "SAHASRA",
-   "Sahasra Electronic Solutions Ltd",
-   "close 345.8 < 200 EMA 345.88"
-  ],
-  [
-   "SEAMECLTD",
-   "SEAMEC Ltd",
-   "close 1460.6 < 200 EMA 1479.16"
-  ],
-  [
-   "SHRINGARMS",
-   "Shringar House",
-   "close 232.65 < 200 EMA 236.1"
-  ],
-  [
-   "SOTL",
-   "Savita Oil Tech",
-   "close 569.9 < 200 EMA 582.42"
-  ],
-  [
-   "TRANSPEK",
-   "Transpek Industry Ltd",
-   "close 1326 < 20 EMA 1327.02"
-  ]
- ],
- "to_sp": [
-  [
-   "544844",
-   "Poojaa Precision Engg. Ltd",
-   "close 909.4 > 20 EMA 907.12"
-  ],
-  [
-   "PANAMAPET",
-   "Panama Petrochem",
-   "close 412.1 > 200 EMA 411.15"
-  ]
- ],
+ "to_dt": [],
+ "to_sp": [],
  "removed": [],
  "unchecked": [],
  "investor_moves": [],
@@ -138,19 +36,14 @@
    "close 310 vs 20 EMA 270.54 → SP"
   ],
   [
-   "544810",
-   "Sampark India",
-   "close 133.95 vs 20 EMA 134.34 → DT"
-  ],
-  [
    "544812",
    "Atharva Poly-Plast",
    "close 155.8 vs 20 EMA 148.01 → SP"
   ],
   [
-   "ACETEC",
-   "Acetech E-Commerce",
-   "close 134 vs 20 EMA 139.22 → DT"
+   "544844",
+   "Poojaa Precision Engg. Ltd",
+   "close 909.4 vs 20 EMA 907.12 → SP"
   ],
   [
    "AEROPLANE",
@@ -165,12 +58,7 @@
   [
    "AONESTEELS",
    "A-One Steels",
-   "close 479.55 (too new for any EMA)"
-  ],
-  [
-   "APSISAERO",
-   "Apsis Aerocom Ltd",
-   "close 500.15 vs 20 EMA 513.6 → DT"
+   "close 479.55 vs 20 EMA 435.59 → SP"
   ],
   [
    "BPLPHARMA",
@@ -178,24 +66,9 @@
    "close 2223.3 vs 20 EMA 2066.47 → SP"
   ],
   [
-   "DHABRIYA",
-   "Dhabriya Poly.",
-   "close 472.65 vs 20 EMA 472.91 → DT"
-  ],
-  [
    "HALDYNGL",
    "Haldyn Glass",
    "close 141.16 vs 20 EMA 135.98 → SP"
-  ],
-  [
-   "JSIPL",
-   "Jindal Supreme",
-   "close 161.15 vs 20 EMA 162.26 → DT"
-  ],
-  [
-   "KANOHAR",
-   "Kanohar Elect.",
-   "close 1007.8 vs 20 EMA 1023.7 → DT"
   ],
   [
    "KHAZANCHI",
@@ -211,11 +84,6 @@
    "MARUSHIKA",
    "Marushika Tech.",
    "close 129.45 vs 20 EMA 122.72 → SP"
-  ],
-  [
-   "MPIMANIPAL",
-   "Manipal Payment and Identity Solutions Ltd",
-   "close 315.3 vs 20 EMA 321.11 → DT"
   ],
   [
    "RAMBHAJO",
@@ -235,7 +103,7 @@
   [
    "SMT",
    "Sahajanand Medical Technologies Ltd",
-   "close 557.45 (too new for any EMA)"
+   "close 557.45 vs 20 EMA 516.91 → SP"
   ],
   [
    "SONA",
@@ -246,11 +114,6 @@
    "TECHNOCRAF",
    "Technocraft Ven.",
    "close 519.1 vs 20 EMA 491.31 → SP"
-  ],
-  [
-   "TRANSPEK",
-   "Transpek Industry Ltd",
-   "close 1326 vs 20 EMA 1327.02 → DT"
   ],
   [
    "544538",
@@ -303,9 +166,9 @@
    "close 91.5 vs 20 EMA 95.56"
   ],
   [
-   "544844",
-   "Poojaa Precision Engg. Ltd",
-   "close 909.4 vs 20 EMA 907.12"
+   "544810",
+   "Sampark India",
+   "close 133.95 vs 20 EMA 134.34"
   ],
   [
    "544980",
@@ -313,9 +176,19 @@
    "close 90 vs 20 EMA 92.49"
   ],
   [
+   "ACETEC",
+   "Acetech E-Commerce",
+   "close 134 vs 20 EMA 139.22"
+  ],
+  [
    "ADISOFT",
    "Adisoft Technol.",
    "close 258.2 vs 20 EMA 273.93"
+  ],
+  [
+   "APSISAERO",
+   "Apsis Aerocom Ltd",
+   "close 500.15 vs 20 EMA 513.6"
   ],
   [
    "BRANDMAN",
@@ -326,6 +199,11 @@
    "DEEPA",
    "Deepa Jewellers",
    "close 181.17 vs 20 EMA 208.95"
+  ],
+  [
+   "DHABRIYA",
+   "Dhabriya Poly.",
+   "close 472.65 vs 20 EMA 472.91"
   ],
   [
    "EPWINDIA",
@@ -348,6 +226,21 @@
    "close 57.92 vs 20 EMA 60.57"
   ],
   [
+   "JSIPL",
+   "Jindal Supreme",
+   "close 161.15 vs 20 EMA 162.26"
+  ],
+  [
+   "KANOHAR",
+   "Kanohar Elect.",
+   "close 1007.8 vs 20 EMA 1023.7"
+  ],
+  [
+   "MPIMANIPAL",
+   "Manipal Payment and Identity Solutions Ltd",
+   "close 315.3 vs 20 EMA 321.11"
+  ],
+  [
    "ORIRAIL",
    "Oriental Rail Infrastructure Ltd",
    "close 115.17 vs 20 EMA 117.3"
@@ -360,7 +253,7 @@
   [
    "SWASTIKAIN",
    "Swastika Infra",
-   "close 187.17 (too new for any EMA)"
+   "close 187.17 vs 20 EMA 194.83"
   ],
   [
    "TAALTECH",
@@ -376,6 +269,11 @@
    "TEAMTECH",
    "Teamtech Formwork",
    "close 152 vs 20 EMA 158.41"
+  ],
+  [
+   "TRANSPEK",
+   "Transpek Industry Ltd",
+   "close 1326 vs 20 EMA 1327.02"
   ],
   [
    "UDAYJEW",
@@ -408,5 +306,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "23 Nov 2026, 04:29 PM IST"
+ "run_at": "23 Nov 2026, 04:46 PM IST"
 }

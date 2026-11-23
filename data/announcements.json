@@ -8,13 +8,13 @@
   },
   "nse": {
    "days": 1,
-   "rows": 195,
+   "rows": 218,
    "last_error": ""
   },
   "matched": {
    "bse_codes": 93,
    "nse_only_codes": 236,
-   "new": 1
+   "new": 0
   }
  },
  "items": {
