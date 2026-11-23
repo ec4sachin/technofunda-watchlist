@@ -1,5 +1,5 @@
 {
- "last": "2026-11-22",
+ "last": "2026-11-23",
  "status": {
   "bse": {
    "days": 1,
@@ -8,13 +8,13 @@
   },
   "nse": {
    "days": 1,
-   "rows": 9,
+   "rows": 136,
    "last_error": ""
   },
   "matched": {
    "bse_codes": 93,
    "nse_only_codes": 236,
-   "new": 0
+   "new": 5
   }
  },
  "items": {
@@ -113,6 +113,22 @@
    }
   ],
   "PTCIL": [
+   {
+    "d": "2026-11-23",
+    "t": "Ptc Industries Limited has informed the Exchange about Bagging/Receiving of orders/contracts",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/PTCINDUSTRIES_23112026133047_20261123_Press_Release_Indian_Defence_Order.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-23"
+   },
+   {
+    "d": "2026-11-23",
+    "t": "Ptc Industries Limited has informed the Exchange regarding a press release dated November 23, 2026, titled \"PTC Industries Secures Major Indian Defence Order for 400 Tonnes of Titanium Products, Strengthening India's Defence Self-Reliance\".",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/PTCINDUSTRIES_23112026132757_20261123_Press_Release_Indian_Defence_Order.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-23"
+   },
    {
     "d": "2026-11-16",
     "t": "Ptc Industries Limited has informed the Exchange regarding a press release dated November 16, 2026, titled \"PTC Industries Reports Strong H1FY27 Performance;Profit After Tax Rises 168% over H1FY26\".",
@@ -226,6 +242,14 @@
   ],
   "ANLON": [
    {
+    "d": "2026-11-23",
+    "t": "Anlon Technology Solutions Limited has informed the Exchange about Bagging/Receiving of orders/contracts",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/ANLON_23112026114958_nagpur_regulation_30_signed.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-23"
+   },
+   {
     "d": "2026-11-21",
     "t": "Anlon Technology Solutions Limited has informed the Exchange about Bagging/Receiving of orders/contracts",
     "k": "Order",
@@ -263,6 +287,14 @@
    }
   ],
   "PROTEAN": [
+   {
+    "d": "2026-11-23",
+    "t": "Protean eGov Technologies Limited has informed the Exchange regarding 'Press Release titled Protean eGov Technologies Partners with UP Police for Digital Modernization; Strengthening Data Security and Digital Policing'.",
+    "k": "Business update",
+    "url": "https://nsearchives.nseindia.in/corporate/PROTEANCS_23112026133242_SEIntimation.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-23"
+   },
    {
     "d": "2026-11-18",
     "t": "Protean eGov Technologies Limited has informed the Exchange about Receipt of Order-In-Appeal from the Office of the Commissioner of Central Tax (Appeals-I), Bengaluru",
@@ -398,6 +430,16 @@
     "url": "https://nsearchives.nseindia.in/corporate/DHARA_21112026160024_Regulation_30_Dhara.pdf",
     "ex": "NSE",
     "seen": "2026-11-21"
+   }
+  ],
+  "GRCL": [
+   {
+    "d": "2026-11-23",
+    "t": "Gayatri Rubbers And Chemicals Limited has informed the Exchange regarding a press release dated November 23, 2026, titled \"Gayatri Rubbers and Chemicals Limited Secures Order for Elastomeric Components for India's High Speed Train, the Vande Bullet Assembled by BEML\".",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/GRCL_23112026134018_GRCL_Elastomeric_components__Rubber_Profiles__PR.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-23"
    }
   ]
  }
