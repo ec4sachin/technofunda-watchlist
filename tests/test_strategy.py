@@ -492,3 +492,35 @@ def test_gap5_sp():
         assert t is None                                       # Growth list: 4% is above its 3% limit
     finally:
         S.swing_setup = real
+
+
+def test_safety_pause():
+    """24 Nov 2026: no new buys after a 15% fall from the highest money point; buying again when the Smallcap 100 is above EMA 50."""
+    import strategy as S
+    st = {"id": "switch", "type": "switch", "capital": 1000000, "pct": 12}
+    book = {"open": [{"strategy": "switch", "entry": 100.0, "remaining": 1000, "pnl": 0, "ltp": 100.0}], "closed": [],
+            "realized": {"switch": 0.0}}
+    class M:
+        def __init__(self, up): self.up = up
+        def now(self): return (self.up, 1, 1, "2026-11-24")
+    assert S.update_guard(st, book, M(False), "2026-11-20") is None and not S.paused(st, book)
+    book["realized"]["switch"] = -150000.0                 # money 8.5 lakh = 15% below the 10 lakh high
+    assert S.update_guard(st, book, M(False), "2026-11-21") == "paused" and S.paused(st, book)
+    assert S.update_guard(st, book, M(False), "2026-11-22") is None and S.paused(st, book)   # market still weak
+    assert S.update_guard(st, book, M(True), "2026-11-23") == "resumed" and not S.paused(st, book)
+    assert book["guard"]["switch"]["peak"] == 850000.0      # the highest point starts again
+    book["open"][0]["ltp"] = 90.0                           # open trade down Rs 10,000: counted at today's price
+    assert S.equity_now(st, book) == 840000.0
+
+
+def test_portfolio_pause():
+    import strategy as S
+    def tr(d, pnl_pct, sym):
+        return {"symbol": sym, "name": sym, "entry_date": d, "entry": 100.0, "qty": 100, "remaining": 0, "status": "closed",
+                "closed_on": d, "pnl": pnl_pct * 100, "exits": [{"date": d, "qty": 100, "pnl": pnl_pct * 100}], "plan": {"score": {}}}
+    trades = [tr(f"2020-01-{i + 1:02d}", -40, f"L{i}") for i in range(5)] + [tr("2020-02-10", 30, "W")]
+    class M:
+        def on(self, day): return (day >= "2020-02-01", 1, 1, day)
+    a = S.portfolio(trades, "2020-01-01", capital=100000, pct=20)
+    b = S.portfolio(trades, "2020-01-01", capital=100000, pct=20, pause_dd=0.15, mood=M())
+    assert a["pauses"] == 0 and b["pauses"] == 1 and b["trades"] < a["trades"] and b["return_pct"] > a["return_pct"]

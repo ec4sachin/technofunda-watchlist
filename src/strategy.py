@@ -53,6 +53,9 @@ BASE_MEASURE = "hl"        # "hl" = highest high / lowest low (wicks count), "cl
 ROOM_RULE = False          # rule 4 / 6 (room to the 42-candle resistance) - off in version 5
 TRIGGER_ABOVE = None       # buy-stop above the resistance: None = each strategy's own level (19 Nov 2026), see trigger_of()
 TRIGGER_SP, TRIGGER_GROWTH = 0.01, 0.005   # 1% for SP / DT strategies, 0.5% for the Growth-list strategy (put back 24 Nov 2026 after the backtest)
+PAUSE_DD = 0.15            # safety rule (24 Nov 2026): no NEW buys once a strategy's money falls 15% below its highest point;
+                           # open trades keep their exits. Buying starts again when the Smallcap 100 closes above its EMA 50
+                           # (the highest point then starts again from the money at that moment). None = off.
 ADD_ON = True              # Add 1 (19 Nov 2026): one add-on per trade on a new breakout while the first trade is in profit
 MAX_GAP = "list"           # gap limit: "list" = each strategy's own (gap_of()); a number or None (no limit) = the same for all (backtest variants)
 GAP_SP, GAP_GROWTH = 0.05, 0.03   # an open more than this above the resistance = no buy that day (24 Nov 2026: SP strategies 5%, Growth list 3%)
@@ -436,6 +439,41 @@ def capital_of(st, book):
             "pct": float(st.get("pct", DEF_PCT))}
 
 
+def equity_now(st, book):
+    """Money of the strategy at today's prices: capital + closed profits + open trades at their last price."""
+    cap = capital_of(st, book)
+    mtm = sum((float(t.get("ltp") or t["entry"]) - t["entry"]) * t["remaining"] for t in book.get("open", [])
+              if t["strategy"] == st.get("id"))
+    return round(cap["equity"] + mtm, 2)
+
+
+def update_guard(st, book, mood, today=""):
+    """Safety rule: track the highest money point; pause new buys after a PAUSE_DD fall, resume when the
+    Smallcap 100 is back above its EMA 50. Returns "paused", "resumed" or None (no change)."""
+    if PAUSE_DD is None:
+        return None
+    g = book.setdefault("guard", {}).setdefault(st.get("id"), {})
+    eq = equity_now(st, book)
+    if not g.get("paused"):
+        g["peak"] = max(float(g.get("peak") or 0), eq, float(st.get("capital", DEF_CAPITAL)) if not g.get("peak") else 0)
+        g["equity"], g["fall_pct"] = eq, round((1 - eq / g["peak"]) * 100, 1) if g["peak"] else 0.0
+        if eq <= g["peak"] * (1 - PAUSE_DD):
+            g.update(paused=True, since=today)
+            return "paused"
+        return None
+    g["equity"], g["fall_pct"] = eq, round((1 - eq / g["peak"]) * 100, 1) if g.get("peak") else 0.0
+    m = mood.now() if mood else None
+    if m and m[0]:
+        g.update(paused=False, peak=eq, resumed=today, fall_pct=0.0)
+        g.pop("since", None)
+        return "resumed"
+    return None
+
+
+def paused(st, book):
+    return PAUSE_DD is not None and bool(((book.get("guard") or {}).get(st.get("id")) or {}).get("paused"))
+
+
 def trade_size(st, cap):
     """Money for one new trade: pct% of the current capital (needs that much free cash)."""
     size = cap["equity"] * cap["pct"] / 100
@@ -632,6 +670,7 @@ def run(settings, book, charts, sp, dt, today="", mood=None, growth=None):
         if not on and not mine and not adds:
             continue  # OFF and nothing open. (OFF with open trades: they are still managed until they close)
         scan = set(sp) if lst == "SP" else set(dt) if lst == "DT" else set(growth) if lst == "GROWTH" else set(sp) | set(dt)
+        stop_buys = paused(st, book)   # safety rule: no new buys (open trades are still managed)
         if not on:
             scan = set()
         seen = book["last_day"].get(sid)
@@ -691,7 +730,7 @@ def run(settings, book, charts, sp, dt, today="", mood=None, growth=None):
             signals = []
             for sym in sorted(todo):
                 j = todo[sym].get(day)
-                if j is None or j < 1 or sym in exited or sym not in scan or sym in adds:
+                if j is None or j < 1 or sym in exited or sym not in scan or sym in adds or stop_buys:
                     continue
                 df = frames[sym]
                 base = mine.get(sym)
@@ -748,7 +787,7 @@ def run(settings, book, charts, sp, dt, today="", mood=None, growth=None):
                 t["ltp"], t["ltp_date"] = round(float(df.c[-1]), 2), df.index[-1]
         # setups for the next session: a buy-stop to place today
         ready = []
-        for sym in sorted(scan if on else ()):
+        for sym in sorted(scan if on and not stop_buys else ()):
             df = frames.get(sym)
             base = mine.get(sym)
             if df is None or sym in adds or (base is not None and not add_ok(base, df, len(df), None)):
@@ -771,6 +810,11 @@ def run(settings, book, charts, sp, dt, today="", mood=None, growth=None):
                 {"above": m[0], "close": m[1], "ema50": m[2], "date": m[3], "rules": "Positional" if m[0] else "Swing"} if m else None)
         book.setdefault("capital", {})[sid] = capital_of(st, book)
         events.setdefault("capital", {})[sid] = book["capital"][sid]
+        ch = update_guard(st, book, mood, today or max((f.index[-1] for f in frames.values()), default=""))
+        if ch:
+            g = book["guard"][sid]
+            events.setdefault("guard", []).append({"strategy": sid, "change": ch, "equity": g["equity"], "peak": g["peak"]})
+        events.setdefault("guard_now", {})[sid] = dict(book.get("guard", {}).get(sid) or {})
     # keep the last 300 closed trades of each strategy (one busy strategy must not push out the others)
     keep, n = [], {}
     for t in reversed(book["closed"]):
@@ -892,10 +936,12 @@ def pyramid_summary(trades, start, end="9999", capital=DEF_CAPITAL, pct=DEF_PCT,
             "addon_avg_return_pct": round(sum(rets) / len(rets), 2) if rets else None}
 
 
-def portfolio(trades, start, end="9999", capital=DEF_CAPITAL, pct=DEF_PCT, rank=None):
+def portfolio(trades, start, end="9999", capital=DEF_CAPITAL, pct=DEF_PCT, rank=None, pause_dd=None, mood=None):
     """The backtest trades taken in date order with one money pot: each trade gets pct% of the capital at that
     moment (profits grow the size), a trade is skipped when there is not enough free cash.
-    Trade results already include costs."""
+    Trade results already include costs.
+    pause_dd (e.g. 0.15) = the safety rule: no new trades once the money (closed results, open trades at cost) is that far
+    below its highest point, until the Smallcap 100 (mood) is above its EMA 50 again."""
     # open trades count at today's price (their booked part + the rest at the last close)
     todo = sorted([t for t in trades if start <= t["entry_date"] < end and (t["status"] == "closed" or "open_pnl" in t)],
                   key=lambda t: (t["entry_date"], rank_value(t, rank), t["symbol"]))
@@ -922,9 +968,21 @@ def portfolio(trades, start, end="9999", capital=DEF_CAPITAL, pct=DEF_PCT, rank=
         opn = keep
 
     sizes = {}   # money given to each trade taken (add-on trades of the pyramiding test get a share of their first trade's)
+    top, halted, pauses = float(capital), False, 0
     for t in todo:
         settle(t["entry_date"])
         equity = cash + sum(x["out"] for x in opn)
+        if pause_dd is not None:
+            if halted:
+                m = mood.on(t["entry_date"]) if mood else None
+                if m and m[0]:
+                    halted, top = False, equity
+            else:
+                top = max(top, equity)
+                if equity <= top * (1 - pause_dd):
+                    halted, pauses = True, pauses + 1
+            if halted:
+                continue
         size = equity * pct / 100
         if t.get("base_id"):
             if t["base_id"] not in sizes:
@@ -955,7 +1013,7 @@ def portfolio(trades, start, end="9999", capital=DEF_CAPITAL, pct=DEF_PCT, rank=
     first = todo[0]["entry_date"] if todo else start
     n_open = sum(1 for r in rows if r.get("open"))
     return {"start": start, "capital": capital, "pct": pct, "final": round(cash, 2), "profit": round(cash - capital, 2), "open_trades": n_open,
-            "return_pct": round((cash / capital - 1) * 100, 1), "trades": taken, "skipped": skipped, "wins": wins,
+            "return_pct": round((cash / capital - 1) * 100, 1), "trades": taken, "skipped": skipped, "wins": wins, "pauses": pauses,
             "win_rate": round(wins / taken * 100, 1) if taken else None, "max_drawdown_pct": round(dd * 100, 1),
             "months": months, "curve": curve, "first_trade": first, "trades_list": rows[-200:][::-1]}
 

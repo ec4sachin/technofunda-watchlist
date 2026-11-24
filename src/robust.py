@@ -17,7 +17,7 @@ import storage
 import strategy
 
 OUT = "robust_test.json"
-TEST_VERSION = "1"
+TEST_VERSION = "2"             # 2 = with the 15% pause rule (24 Nov 2026)
 STRATEGY_ID = "switch"                     # Smart Switch (SP list)
 TRIGGERS = (0.005, 0.01, 0.015)            # buy-stop above the resistance
 GAPS = (0.03, 0.05, None)                  # gap-up limit (None = no limit)
@@ -35,10 +35,10 @@ def _week_ago(today):
     return (date.fromisoformat(today) - timedelta(days=7)).isoformat()
 
 
-def _row(trades, st, a, b):
+def _row(trades, st, a, b, pause=None, mood=None):
     cap, pct = float(st.get("capital", strategy.DEF_CAPITAL)), float(st.get("pct", strategy.DEF_PCT))
-    p = strategy.portfolio(trades, a, b, capital=cap, pct=pct, rank=st.get("rank"))
-    return {k: p.get(k) for k in ("return_pct", "max_drawdown_pct", "trades", "win_rate")}
+    p = strategy.portfolio(trades, a, b, capital=cap, pct=pct, rank=st.get("rank"), pause_dd=pause, mood=mood)
+    return {k: p.get(k) for k in ("return_pct", "max_drawdown_pct", "trades", "win_rate") + (("pauses",) if pause else ())}
 
 
 def _years(trades, st, first, last):
@@ -90,7 +90,7 @@ def _trades(st, charts, names, syms, mood):
     return {"live_key": live_key, "sets": sets, "double": double, "stocks": len(syms)}
 
 
-def _summary(st, tr_sets, today, now_year, strong=None):
+def _summary(st, tr_sets, today, now_year, strong=None, mood=None):
     f = (lambda tt: only_strong(tt, strong)) if strong is not None else (lambda tt: tt)
     grid = []
     for (tr, gp), tt in tr_sets["sets"].items():
@@ -109,6 +109,10 @@ def _summary(st, tr_sets, today, now_year, strong=None):
             "walk_forward": {"chosen_on_2017_2022": {"trigger_pct": best["trigger_pct"], "gap_pct": best["gap_pct"]},
                              "chosen_in": best["in"], "chosen_out": best["out"], "live_in": live["in"], "live_out": live["out"]},
             "costs": {"normal": _row(lv, st, IN_SAMPLE[0], "9999"), "double": _row(f(tr_sets["double"]), st, IN_SAMPLE[0], "9999")},
+            # safety rule (24 Nov 2026): pause new buys after a 15% fall, until the Smallcap 100 is above its EMA 50
+            "pause_rule": {"without": _row(lv, st, IN_SAMPLE[0], "9999"),
+                           "with_15pct_pause": _row(lv, st, IN_SAMPLE[0], "9999", pause=0.15, mood=mood),
+                           "with_10pct_pause": _row(lv, st, IN_SAMPLE[0], "9999", pause=0.10, mood=mood)},
             "by_year": _years(lv, st, int(IN_SAMPLE[0][:4]), now_year)}
 
 
@@ -120,10 +124,10 @@ def run(strat_cfg, sp_charts, sp_names, sp_syms, list_charts, list_names, mood, 
            "rules": {"trigger_pct": strategy.trigger_of(st) * 100, "gap_pct": (strategy.gap_of(st) or 0) * 100 or None,
                      "max_risk_pct": strategy.MAX_RISK * 100, "cost_per_side_pct": strategy.COST_PER_SIDE * 100},
            "periods": {"in_sample": IN_SAMPLE, "out_of_sample": OUT_SAMPLE}}
-    out["sp_list"] = _summary(st, _trades(st, sp_charts, sp_names, sp_syms, mood), today, now_year)
+    out["sp_list"] = _summary(st, _trades(st, sp_charts, sp_names, sp_syms, mood), today, now_year, mood=mood)
     if list_charts:
         tl = _trades(st, list_charts, list_names, sorted(list_charts), mood)
-        out["stock_list"] = _summary(st, tl, today, now_year)
-        out["stock_list_strong_only"] = _summary(st, tl, today, now_year, strong=strong_on_day(list_charts))
+        out["stock_list"] = _summary(st, tl, today, now_year, mood=mood)
+        out["stock_list_strong_only"] = _summary(st, tl, today, now_year, strong=strong_on_day(list_charts), mood=mood)
     storage.save_json(OUT, out)
     return out

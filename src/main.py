@@ -737,6 +737,15 @@ def strategy_lines(st):
             gain = c["equity"] - c["start"]
             L.append(f"💰 Capital ₹{c['equity']:,.0f} ({gain / c['start'] * 100:+.1f}%) · in trades ₹{c['invested']:,.0f} · "
                      f"free ₹{c['cash']:,.0f} · next trade ₹{c['equity'] * c['pct'] / 100:,.0f} ({c['pct']:g}%)")
+        for e in [x for x in st.get("guard", []) if x.get("strategy") == sid]:
+            if e["change"] == "paused":
+                L.append(f"⛔ <b>SAFETY PAUSE</b>: money ₹{e['equity']:,.0f} is {strategy.PAUSE_DD * 100:g}%+ below its highest ₹{e['peak']:,.0f} — "
+                         "no new buys until the Smallcap 100 closes above its EMA 50 (open trades keep their stops and exits)")
+            else:
+                L.append(f"▶️ <b>Buying again</b>: Smallcap 100 is back above its EMA 50 (safety pause ended)")
+        gd = (st.get("guard_now") or {}).get(sid) or {}
+        if gd.get("paused") and not any(x.get("strategy") == sid for x in st.get("guard", [])):
+            L.append(f"⛔ Safety pause since {gd.get('since', '')}: no new buys (money {gd.get('fall_pct', 0):g}% below its highest)")
         n0 = len(L)
         for e in [x for x in st.get("entries", []) if x.get("strategy") == sid]:
             L.append(f"🟢 {'ADD (half size)' if e.get('add') else 'BUY'} {html.escape(e['name'])} ({e['symbol']}) {e['qty']} @ ₹{e['price']:g} · stop ₹{e['stop']:g} · target ₹{e['target']:g}"
