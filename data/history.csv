@@ -742,3 +742,12 @@ date,symbol,name,action,reason
 2026-11-24,MPIMANIPAL,Manipal Payment and Identity Solutions Ltd,DT -> SP,close 322.8 back above 20 EMA 321.73 (new listing)
 2026-11-24,SHRINGARMS,Shringar House,DT -> SP,close 236.25 back above 200 EMA 236.14
 2026-11-24,TRANSPEK,Transpek Industry Ltd,DT -> SP,close 1361 back above 20 EMA 1327.12 (new listing)
+2026-11-24,DHABRIYA,Dhabriya Poly.,SP -> DT,close 472.65 below 20 EMA 472.91 (new listing)
+2026-11-24,GKSL,Gujarat Kidney,SP -> DT,close 147.5 below 200 EMA 148.67
+2026-11-24,INFOBEAN,InfoBeans Technologies Ltd,SP -> DT,close 158.14 below 200 EMA 158.95
+2026-11-24,JSIPL,Jindal Supreme,SP -> DT,close 161.15 below 20 EMA 162.26 (new listing)
+2026-11-24,MAYURUNIQ,Mayur Uniquoters,SP -> DT,close 694 below 200 EMA 696.72
+2026-11-24,MPIMANIPAL,Manipal Payment and Identity Solutions Ltd,SP -> DT,close 315.3 below 20 EMA 321.11 (new listing)
+2026-11-24,SHRINGARMS,Shringar House,SP -> DT,close 232.65 below 200 EMA 236.1
+2026-11-24,TRANSPEK,Transpek Industry Ltd,SP -> DT,close 1326 below 20 EMA 1327.02 (new listing)
+2026-11-24,ANLON,Anlon Tech,DT -> SP,close 596.4 back above 200 EMA 576.06
