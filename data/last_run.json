@@ -1,55 +1,8 @@
 {
  "added": [],
  "rejected": [],
- "to_dt": [
-  [
-   "DHABRIYA",
-   "Dhabriya Poly.",
-   "close 472.65 < 20 EMA 472.91"
-  ],
-  [
-   "GKSL",
-   "Gujarat Kidney",
-   "close 147.5 < 200 EMA 148.67"
-  ],
-  [
-   "INFOBEAN",
-   "InfoBeans Technologies Ltd",
-   "close 158.14 < 200 EMA 158.95"
-  ],
-  [
-   "JSIPL",
-   "Jindal Supreme",
-   "close 161.15 < 20 EMA 162.26"
-  ],
-  [
-   "MAYURUNIQ",
-   "Mayur Uniquoters",
-   "close 694 < 200 EMA 696.72"
-  ],
-  [
-   "MPIMANIPAL",
-   "Manipal Payment and Identity Solutions Ltd",
-   "close 315.3 < 20 EMA 321.11"
-  ],
-  [
-   "SHRINGARMS",
-   "Shringar House",
-   "close 232.65 < 200 EMA 236.1"
-  ],
-  [
-   "TRANSPEK",
-   "Transpek Industry Ltd",
-   "close 1326 < 20 EMA 1327.02"
-  ]
- ],
- "to_sp": [
-  [
-   "ANLON",
-   "Anlon Tech",
-   "close 596.4 > 200 EMA 576.06"
-  ]
- ],
+ "to_dt": [],
+ "to_sp": [],
  "removed": [],
  "unchecked": [],
  "investor_moves": [],
@@ -100,7 +53,7 @@
   [
    "AONESTEELS",
    "A-One Steels",
-   "close 479.55 (too new for any EMA)"
+   "close 479.55 vs 20 EMA 435.59 → SP"
   ],
   [
    "BPLPHARMA",
@@ -108,19 +61,9 @@
    "close 2223.3 vs 20 EMA 2066.47 → SP"
   ],
   [
-   "DHABRIYA",
-   "Dhabriya Poly.",
-   "close 472.65 vs 20 EMA 472.91 → DT"
-  ],
-  [
    "HALDYNGL",
    "Haldyn Glass",
    "close 141.16 vs 20 EMA 135.98 → SP"
-  ],
-  [
-   "JSIPL",
-   "Jindal Supreme",
-   "close 161.15 vs 20 EMA 162.26 → DT"
   ],
   [
    "KHAZANCHI",
@@ -136,11 +79,6 @@
    "MARUSHIKA",
    "Marushika Tech.",
    "close 129.45 vs 20 EMA 122.72 → SP"
-  ],
-  [
-   "MPIMANIPAL",
-   "Manipal Payment and Identity Solutions Ltd",
-   "close 315.3 vs 20 EMA 321.11 → DT"
   ],
   [
    "RAMBHAJO",
@@ -160,7 +98,7 @@
   [
    "SMT",
    "Sahajanand Medical Technologies Ltd",
-   "close 557.45 (too new for any EMA)"
+   "close 557.45 vs 20 EMA 516.91 → SP"
   ],
   [
    "SONA",
@@ -171,11 +109,6 @@
    "TECHNOCRAF",
    "Technocraft Ven.",
    "close 519.1 vs 20 EMA 491.31 → SP"
-  ],
-  [
-   "TRANSPEK",
-   "Transpek Industry Ltd",
-   "close 1326 vs 20 EMA 1327.02 → DT"
   ],
   [
    "544538",
@@ -268,6 +201,11 @@
    "close 181.17 vs 20 EMA 208.95"
   ],
   [
+   "DHABRIYA",
+   "Dhabriya Poly.",
+   "close 472.65 vs 20 EMA 472.91"
+  ],
+  [
    "EPWINDIA",
    "EPW India",
    "close 210 vs 20 EMA 235.5"
@@ -288,9 +226,19 @@
    "close 57.92 vs 20 EMA 60.57"
   ],
   [
+   "JSIPL",
+   "Jindal Supreme",
+   "close 161.15 vs 20 EMA 162.26"
+  ],
+  [
    "KANOHAR",
    "Kanohar Elect.",
    "close 1007.8 vs 20 EMA 1023.7"
+  ],
+  [
+   "MPIMANIPAL",
+   "Manipal Payment and Identity Solutions Ltd",
+   "close 315.3 vs 20 EMA 321.11"
   ],
   [
    "ORIRAIL",
@@ -305,7 +253,7 @@
   [
    "SWASTIKAIN",
    "Swastika Infra",
-   "close 187.17 (too new for any EMA)"
+   "close 187.17 vs 20 EMA 194.83"
   ],
   [
    "TAALTECH",
@@ -321,6 +269,11 @@
    "TEAMTECH",
    "Teamtech Formwork",
    "close 152 vs 20 EMA 158.41"
+  ],
+  [
+   "TRANSPEK",
+   "Transpek Industry Ltd",
+   "close 1326 vs 20 EMA 1327.02"
   ],
   [
    "UDAYJEW",
@@ -351,7 +304,7 @@
  "already_listed": 0,
  "price_date": "23 Nov 2026",
  "monthly_pass": 0,
- "mode": "daily",
+ "mode": "auto",
  "monthly_done": false,
- "run_at": "24 Nov 2026, 02:34 PM IST"
+ "run_at": "24 Nov 2026, 04:44 PM IST"
 }

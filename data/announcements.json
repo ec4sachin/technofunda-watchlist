@@ -8,13 +8,13 @@
   },
   "nse": {
    "days": 1,
-   "rows": 88,
+   "rows": 165,
    "last_error": ""
   },
   "matched": {
    "bse_codes": 93,
    "nse_only_codes": 237,
-   "new": 0
+   "new": 2
   }
  },
  "items": {
@@ -456,6 +456,26 @@
     "t": "Business Update on Full-Container Export Consignment to Hong Kong-Regulation 30 of SEBI (Listing Obligations and Disclosure Requirements) Regulations, 2015 (\"Listing Regulations\")",
     "k": "Business update",
     "url": "https://nsearchives.nseindia.in/corporate/HOAC_24112026124138_HOAC_business_update_new_vidisha_plant_FInal-1_signed.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-24"
+   }
+  ],
+  "HEXAGON": [
+   {
+    "d": "2026-11-24",
+    "t": "Hexagon Nutrition Limited has informed the Exchange regarding 'Dr. Nikhil Kelkar, Promoter and Joint Managing Director of the Company acquired 35,000 Equity shares through open market transactions'.",
+    "k": "Acquisition / JV",
+    "url": "https://nsearchives.nseindia.in/corporate/HEXAGONNUTRITION_24112026164216_HNL-Promoter-NK.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-24"
+   }
+  ],
+  "RBZJEWEL": [
+   {
+    "d": "2026-11-24",
+    "t": "Rbz Jewellers Limited has informed the Exchange regarding a press release dated November 24, 2026, titled \"Opening of New Showroom of the Company at Rajkot - Gujarat \".",
+    "k": "Business update",
+    "url": "https://nsearchives.nseindia.in/corporate/RBZ_24112026161202_SigedPressRelease.pdf",
     "ex": "NSE",
     "seen": "2026-11-24"
    }
