@@ -749,7 +749,7 @@ def strategy_lines(st):
         for x in [x for x in st.get("skipped", []) if x.get("strategy", sid) == sid]:
             L.append(f"⏭ Skipped {html.escape(x['name'])} ({x['symbol']}) — {'add-on ' if x.get('add') else ''}breakout, but no free capital")
         for x in [x for x in st.get("gap_skips", []) if x.get("strategy", sid) == sid]:
-            L.append(f"⏭ Skipped {html.escape(x['name'])} ({x['symbol']}) — opened ₹{x['open']:g}, more than 3% above resistance (max ₹{x['max_open']:g})")
+            L.append(f"⏭ Skipped {html.escape(x['name'])} ({x['symbol']}) — opened ₹{x['open']:g}, more than {x.get('gap_pct', 3):g}% above resistance (max ₹{x['max_open']:g})")
         items = (st.get("setups") or {}).get(sid) or []
         if items:
             L.append("⏳ <b>Setups for today</b> (buy-stop orders):")

@@ -11,8 +11,9 @@ Swing Strategy rules (given by the user) - "version 5", chosen 4 Nov 2026 after 
        <= 6% of the current price. Resistance = highest high of those candles. Buy when price goes 0.5% above it (a buy-stop order).
        Buy-stop level per strategy (19 Nov 2026): 1% above for SP / DT strategies, 0.5% for the Growth-list strategy
        (a strategy can also have its own "trigger_pct" in data/strategies.json).
-       Gap-up rule (18 Nov 2026): if the day OPENS above the 0.5% level, buy at the open only when the open is not more
-       than 3% above the resistance; an open more than 3% above it = no buy that day (risk not favourable).
+       Gap-up rule: if the day OPENS above the buy-stop level, buy at the open only when the open is not more than the
+       gap limit above the resistance; a bigger gap = no buy that day. Gap limit per strategy (24 Nov 2026, see gap_of()):
+       5% for the SP / DT strategies (was 3% from 18 Nov 2026), 3% for the Growth-list strategy.
     3. The last candle's high is not more than 10% above EMA 10.
     4. (18 Nov 2026, switched OFF 19 Nov 2026 after the backtest - EMA50_MAX = None) The buy price is less than 15% above
        the daily EMA 50.
@@ -53,7 +54,8 @@ ROOM_RULE = False          # rule 4 / 6 (room to the 42-candle resistance) - off
 TRIGGER_ABOVE = None       # buy-stop above the resistance: None = each strategy's own level (19 Nov 2026), see trigger_of()
 TRIGGER_SP, TRIGGER_GROWTH = 0.01, 0.005   # 1% for SP / DT strategies, 0.5% for the Growth-list strategy (backtest 19 Nov 2026)
 ADD_ON = True              # Add 1 (19 Nov 2026): one add-on per trade on a new breakout while the first trade is in profit
-MAX_GAP = 0.03             # an open more than 3% above the resistance = no buy that day (rule of 18 Nov 2026)
+MAX_GAP = "list"           # gap limit: "list" = each strategy's own (gap_of()); a number or None (no limit) = the same for all (backtest variants)
+GAP_SP, GAP_GROWTH = 0.05, 0.03   # an open more than this above the resistance = no buy that day (24 Nov 2026: SP 5%, Growth 3%)
 EMA50_MAX = None           # 0.15 = buy price must be less than 15% above the daily EMA 50 (added 18 Nov 2026,
                            # switched OFF 19 Nov 2026: worse in every backtest)
 STOP_BELOW_BASE = 0.01     # stop 1% below the base low
@@ -221,11 +223,22 @@ def trigger_of(st):
     return TRIGGER_GROWTH if (st or {}).get("list") == "GROWTH" else TRIGGER_SP
 
 
-def swing_setup(df, i, above=None):
+def gap_of(st):
+    """Gap limit above the resistance for this strategy (a fraction; None = no limit)."""
+    if MAX_GAP != "list":                  # a backtest variant fixes it for all strategies
+        return MAX_GAP
+    if (st or {}).get("gap_pct") not in (None, ""):
+        return float(st["gap_pct"]) / 100
+    return GAP_GROWTH if (st or {}).get("list") == "GROWTH" else GAP_SP
+
+
+def swing_setup(df, i, above=None, gap="list"):
     """Setup using candles up to row i (the last base candle). Returns the buy-stop plan or None.
     above = buy-stop distance above the resistance (default: 1%, or the backtest variant's level)."""
     if above is None:
         above = TRIGGER_ABOVE if TRIGGER_ABOVE is not None else TRIGGER_SP
+    if gap == "list":
+        gap = gap_of(None)
     if i < 200 or i - 46 < 0:  # EMA 200 + 42 + base candles of history needed
         return None
     if not (df.e10[i] > df.e20[i] > df.e50[i] > df.e200[i]):                  # rule 1
@@ -250,7 +263,7 @@ def swing_setup(df, i, above=None):
         return None
     stop = stop_of(low, entry)
     score = _scores(df, i, entry, stop, (res - low) / price * 100)
-    return {"score": score, "trigger": entry, "above_pct": round(above * 100, 2), "max_open": round(res * (1 + MAX_GAP), 2) if MAX_GAP is not None else None, "stop": round(stop, 2), "base_low": round(low, 2), "resistance": round(res, 2), "r42": round(r42, 2),
+    return {"score": score, "trigger": entry, "above_pct": round(above * 100, 2), "max_gap": gap, "max_open": round(res * (1 + gap), 2) if gap is not None else None, "stop": round(stop, 2), "base_low": round(low, 2), "resistance": round(res, 2), "r42": round(r42, 2),
             "room": round(room, 1) if r42 > entry else None, "range_pct": round((res - low) / price * 100, 1),
             "base_from": df.index[i - n + 1], "base_to": df.index[i]}
 
@@ -494,31 +507,36 @@ def stop_reason(stop, base_low):
 def gap_too_big(plan, df, j):
     """True when candle j opens more than MAX_GAP (3%) above the resistance and (GAP_COMEBACK) never comes back
     down to that level during the day: no buy. MAX_GAP None = no limit."""
-    if MAX_GAP is None:
+    g = _plan_gap(plan)
+    if g is None:
         return False
     o = df.o[j]
-    cap = plan["resistance"] * (1 + MAX_GAP)
+    cap = plan["resistance"] * (1 + g)
     if not (o is not None and o == o and float(o) > cap):
         return False
     return not (GAP_COMEBACK and float(df.l[j]) <= cap)
+
+
+def _plan_gap(plan):
+    return plan["max_gap"] if "max_gap" in plan else gap_of(None)
 
 
 def fill_price(plan, df, j):
     """Buy price on candle j (the buy-stop was hit): the buy-stop, or the open on a gap up within the limit,
     or the 3% level when the day opened above it and came back down (GAP_COMEBACK)."""
     o = float(df.o[j])
-    if MAX_GAP is not None and o > plan["resistance"] * (1 + MAX_GAP):
-        return round(plan["resistance"] * (1 + MAX_GAP), 2)
+    g = _plan_gap(plan)
+    if g is not None and o > plan["resistance"] * (1 + g):
+        return round(plan["resistance"] * (1 + g), 2)
     return max(plan["trigger"], o)
 
 
 # Entry-rule comparison (18 Nov 2026): the old rule (1% above, any gap) vs the new rule (0.5% above, no buy on a gap > 3%)
 # (buy-stop above resistance, max gap, max distance above EMA 50)
 # "new" = the live rule (each strategy's own buy-stop level: None = not fixed), 19 Nov 2026
-# 24 Nov 2026 test: "comeback" = gap above 3% still buys if the price comes back to the 3% level that day
-# (stop stays 1% below the base, max 6% below the buy price - user's choice 24 Nov 2026)
-ENTRY_VARIANTS = {"old": {"TRIGGER_ABOVE": 0.01, "MAX_GAP": None}, "new": {},
-                  "comeback": {"GAP_COMEBACK": True}}
+# 24 Nov 2026: "new" = live (SP strategies 5% gap limit, Growth list 3%); "gap3" = 3% for all (the rule of 18-24 Nov);
+# "old" = 1% buy-stop and no gap limit. (The "comeback" test of 24 Nov 2026 was not used: GAP_COMEBACK stays False.)
+ENTRY_VARIANTS = {"old": {"TRIGGER_ABOVE": 0.01, "MAX_GAP": None}, "new": {}, "gap3": {"MAX_GAP": 0.03}}
 
 
 def backtest_variant(variant, *args, **kw):
@@ -534,12 +552,12 @@ def backtest_variant(variant, *args, **kw):
 
 def try_entry(st, sym, name, df, j, mode="paper", money=None, mood=None):
     """Entry on candle j if the setup on the candle before is triggered. Returns (trade, sells on the same day) or (None, [])."""
-    plan = swing_setup(df, j - 1, above=trigger_of(st))
+    plan = swing_setup(df, j - 1, above=trigger_of(st), gap=gap_of(st))
     if plan and not liquid(st, df, j - 1):
         return None, []
     if not plan or df.h[j] < plan["trigger"]:
         return None, []
-    if gap_too_big(plan, df, j):   # opened more than 3% above the resistance: risk not favourable, no buy
+    if gap_too_big(plan, df, j):   # opened more than the gap limit above the resistance: risk not favourable, no buy
         return None, []
     sid = st.get("id")
     entry = fill_price(plan, df, j)  # buy-stop, the open on a gap up, or the 3% level when it came back
@@ -674,11 +692,12 @@ def run(settings, book, charts, sp, dt, today="", mood=None, growth=None):
                 base = mine.get(sym)
                 if base is not None and not add_ok(base, df, j, day):
                     continue   # already held, and no Add 1 possible
-                plan = swing_setup(df, j - 1, above=trigger_of(st))
+                plan = swing_setup(df, j - 1, above=trigger_of(st), gap=gap_of(st))
                 if plan and df.h[j] >= plan["trigger"] and liquid(st, df, j - 1):
                     if gap_too_big(plan, df, j):
                         events.setdefault("gap_skips", []).append({"symbol": sym, "name": names.get(sym, sym), "date": day, "strategy": sid,
-                                                                   "open": round(float(df.o[j]), 2), "max_open": plan["max_open"]})
+                                                                   "open": round(float(df.o[j]), 2), "max_open": plan["max_open"],
+                                                                   "gap_pct": round(plan["max_gap"] * 100, 1)})
                         continue
                     signals.append((rank_value(plan, st.get("rank")), sym, j))
             for _, sym, j in sorted(signals):
@@ -729,12 +748,12 @@ def run(settings, book, charts, sp, dt, today="", mood=None, growth=None):
             base = mine.get(sym)
             if df is None or sym in adds or (base is not None and not add_ok(base, df, len(df), None)):
                 continue
-            plan = swing_setup(df, len(df) - 1, above=trigger_of(st))
+            plan = swing_setup(df, len(df) - 1, above=trigger_of(st), gap=gap_of(st))
             if plan and liquid(st, df, len(df) - 1) and (base is None or plan["trigger"] > base["entry"]):
                 cap = capital_of(st, book)
                 money = (float(base.get("money") or base["entry"] * base["qty"]) * ADD_FRACTION) if base else cap["equity"] * cap["pct"] / 100
                 qty = max(1, math.floor(money / plan["trigger"]))
-                ready.append({"symbol": sym, "name": names.get(sym, sym), "add": base is not None, "buy_above": plan["trigger"], "max_open": plan["max_open"], "stop": plan["stop"],
+                ready.append({"symbol": sym, "name": names.get(sym, sym), "add": base is not None, "buy_above": plan["trigger"], "max_open": plan["max_open"], "gap_pct": round(plan["max_gap"] * 100, 1) if plan["max_gap"] is not None else None, "stop": plan["stop"],
                               "qty": qty, "amount": round(qty * plan["trigger"], 2), "range_pct": plan["range_pct"],
                               "risk_pct": round((plan["trigger"] - plan["stop"]) / plan["trigger"] * 100, 1),
                               "as_of": df.index[-1], "score": plan["score"], "turnover": turnover(df, len(df) - 1), "_r": rank_value(plan, st.get("rank"))})

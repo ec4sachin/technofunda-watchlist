@@ -42,7 +42,7 @@ def _single_trade_flow():
     df = stg._frame(h)
     plan = stg.swing_setup(df, len(df) - 1)
     assert plan, "setup expected after a steady uptrend + tight base"
-    assert plan["range_pct"] <= 6 and plan["trigger"] == round(max(h["h"][-4:]) * 1.01, 2) and plan["max_open"] == round(max(h["h"][-4:]) * 1.03, 2)
+    assert plan["range_pct"] <= 6 and plan["trigger"] == round(max(h["h"][-4:]) * 1.01, 2) and plan["max_open"] == round(max(h["h"][-4:]) * 1.05, 2)
     # rule 3: stretched far above EMA 10 -> no setup
     hs = hist_from(closes[:-1] + [closes[-1] * 1.2])
     assert stg.swing_setup(stg._frame(hs), len(hs["t"]) - 1) is None
@@ -325,7 +325,7 @@ def test_gap_rule():
     import strategy as S
     class D:  # minimal candle frame for try_entry
         pass
-    plan = {"trigger": 100.5, "max_open": 103.0, "resistance": 100.0, "base_low": 96.0, "stop": 95.0,
+    plan = {"trigger": 100.5, "max_open": 103.0, "max_gap": 0.03, "resistance": 100.0, "base_low": 96.0, "stop": 95.0,
             "range_pct": 4.0, "r42": 0, "room": None, "score": {}}
     real = S.swing_setup
     S.swing_setup = lambda df, i, **kw: plan
@@ -379,9 +379,10 @@ def test_entry_variants_restore():
     import strategy as S
     keep = (S.TRIGGER_ABOVE, S.MAX_GAP, S.GAP_COMEBACK, S.MAX_RISK, S.STOP_MODE)
     real = S.backtest
-    S.backtest = lambda *a, **k: (S.GAP_COMEBACK, S.MAX_RISK, S.STOP_MODE)
+    S.backtest = lambda *a, **k: (S.gap_of({"list": "SP"}), S.gap_of({"list": "GROWTH"}), S.MAX_RISK)
     try:
-        assert S.backtest_variant("comeback") == (True, 0.06, "base")
+        assert S.backtest_variant("gap3") == (0.03, 0.03, 0.06)
+        assert S.backtest_variant("old") == (None, None, 0.06)
     finally:
         S.backtest = real
     assert (S.TRIGGER_ABOVE, S.MAX_GAP, S.GAP_COMEBACK, S.MAX_RISK, S.STOP_MODE) == keep
@@ -435,6 +436,7 @@ def test_trigger_per_strategy():
     """19 Nov 2026: 1% above the resistance for SP / DT strategies, 0.5% for the Growth-list strategy."""
     assert stg.trigger_of({"list": "SP"}) == 0.01 and stg.trigger_of({"list": "BOTH"}) == 0.01
     assert stg.trigger_of({"list": "GROWTH"}) == 0.005
+    assert stg.gap_of({"list": "SP"}) == 0.05 and stg.gap_of({"list": "GROWTH"}) == 0.03   # 24 Nov 2026
     assert stg.trigger_of({"list": "SP", "trigger_pct": 0.75}) == 0.0075
 
 
@@ -464,3 +466,29 @@ def test_live_add_on():
     first = next(t for t in book["open"] + book["closed"] if not t.get("add"))
     add = next(t for t in book["open"] + book["closed"] if t.get("add"))
     assert add["entry"] > first["entry"] and abs(add["money"] - first["money"] / 2) < 1 and first.get("add_done")
+
+
+def test_gap5_sp():
+    """24 Nov 2026: SP strategies buy at the open on a gap up to 5% above resistance; more = no buy. Growth list keeps 3%."""
+    import strategy as S
+    class D:
+        pass
+    def frame(o, h, l):
+        d = D(); d.o = [99, o]; d.h = [100, h]; d.l = [98, l]; d.c = [99, h]; d.index = ["2026-11-23", "2026-11-24"]
+        d.e50 = [95.0, 95.0]
+        return d
+    real = S.swing_setup
+    S.swing_setup = lambda df, i, above=None, gap="list": {"trigger": 101.0, "resistance": 100.0, "base_low": 96.0, "stop": 95.0,
+                                                             "max_gap": gap, "max_open": 100 * (1 + gap), "range_pct": 4.0, "r42": 0,
+                                                             "room": None, "score": {}}
+    try:
+        sp = {"id": "swing", "name": "Swing", "type": "swing", "list": "SP", "capital": 100000, "pct": 10}
+        gr = {"id": "growth_switch", "name": "G", "type": "switch", "list": "GROWTH", "capital": 100000, "pct": 10}
+        t, _ = S.try_entry(sp, "ABC", "ABC", frame(104.0, 106.0, 103.5), 1, money=10000)
+        assert t and t["entry"] == 104.0                       # gap 4%: SP buys at the open
+        t, _ = S.try_entry(sp, "ABC", "ABC", frame(105.5, 107.0, 105.0), 1, money=10000)
+        assert t is None                                       # gap 5.5%: no buy
+        t, _ = S.try_entry(gr, "ABC", "ABC", frame(104.0, 106.0, 103.5), 1, money=10000)
+        assert t is None                                       # Growth list: 4% is above its 3% limit
+    finally:
+        S.swing_setup = real
