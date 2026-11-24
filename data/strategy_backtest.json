@@ -21,6 +21,13 @@
     "win_rate": 46.3,
     "max_drawdown_pct": 6.7,
     "skipped": 61
+   },
+   "growth_prev": {
+    "return_pct": 82.5,
+    "trades": 205,
+    "win_rate": 47.3,
+    "max_drawdown_pct": 6.7,
+    "skipped": 64
    }
   },
   "pyramid_test": {
@@ -13156,6 +13163,13 @@
     "win_rate": 34.0,
     "max_drawdown_pct": 4.1,
     "skipped": 91
+   },
+   "growth_prev": {
+    "return_pct": 83.6,
+    "trades": 106,
+    "win_rate": 34.0,
+    "max_drawdown_pct": 4.1,
+    "skipped": 86
    }
   },
   "pyramid_test": {
@@ -22186,6 +22200,13 @@
     "win_rate": 45.9,
     "max_drawdown_pct": 1.9,
     "skipped": 80
+   },
+   "growth_prev": {
+    "return_pct": 101.9,
+    "trades": 150,
+    "win_rate": 46.0,
+    "max_drawdown_pct": 1.9,
+    "skipped": 81
    }
   },
   "pyramid_test": {
