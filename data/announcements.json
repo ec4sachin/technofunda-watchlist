@@ -8,13 +8,13 @@
   },
   "nse": {
    "days": 1,
-   "rows": 30,
+   "rows": 70,
    "last_error": ""
   },
   "matched": {
    "bse_codes": 93,
    "nse_only_codes": 237,
-   "new": 0
+   "new": 1
   }
  },
  "items": {
@@ -448,6 +448,16 @@
     "url": "https://nsearchives.nseindia.in/corporate/GRCL_23112026134018_GRCL_Elastomeric_components__Rubber_Profiles__PR.pdf",
     "ex": "NSE",
     "seen": "2026-11-23"
+   }
+  ],
+  "HOACFOODS": [
+   {
+    "d": "2026-11-24",
+    "t": "Business Update on Full-Container Export Consignment to Hong Kong-Regulation 30 of SEBI (Listing Obligations and Disclosure Requirements) Regulations, 2015 (\"Listing Regulations\")",
+    "k": "Business update",
+    "url": "https://nsearchives.nseindia.in/corporate/HOAC_24112026124138_HOAC_business_update_new_vidisha_plant_FInal-1_signed.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-24"
    }
   ]
  }

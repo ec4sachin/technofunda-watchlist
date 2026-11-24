@@ -53,7 +53,7 @@
   [
    "AONESTEELS",
    "A-One Steels",
-   "close 479.55 (too new for any EMA)"
+   "close 477.95 vs 20 EMA 430.81 → SP"
   ],
   [
    "BPLPHARMA",
@@ -113,7 +113,7 @@
   [
    "SMT",
    "Sahajanand Medical Technologies Ltd",
-   "close 557.45 (too new for any EMA)"
+   "close 557.45 vs 20 EMA 516.91 → SP"
   ],
   [
    "SONA",
@@ -258,7 +258,7 @@
   [
    "SWASTIKAIN",
    "Swastika Infra",
-   "close 187.17 (too new for any EMA)"
+   "close 187.52 vs 20 EMA 195.66"
   ],
   [
    "TAALTECH",
@@ -306,5 +306,5 @@
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "24 Nov 2026, 11:34 AM IST"
+ "run_at": "24 Nov 2026, 01:39 PM IST"
 }
