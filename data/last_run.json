@@ -1,87 +1,8 @@
 {
- "added": [
-  [
-   "ROTO",
-   "Roto Pumps",
-   "marks 9.9/11 · 3-month RS 85 (vs 3598 BSE stocks) · TTM Profit > 30%, 52W High"
-  ]
- ],
- "rejected": [
-  [
-   "CLSEL",
-   "Chamanlal Setia",
-   "10.5/11 · 3-month RS 42 (need above 80)"
-  ],
-  [
-   "SPORTKING",
-   "Sportking India",
-   "10.5/11 · 3-month RS 73 (need above 80)"
-  ],
-  [
-   "KNACK",
-   "Knack Packaging",
-   "5/11 · 3-month RS 64 (need above 80)"
-  ]
- ],
- "to_dt": [
-  [
-   "543895",
-   "Exhicon Events",
-   "close 490.25 < 200 EMA 491.01"
-  ],
-  [
-   "544844",
-   "Poojaa Precision Engg. Ltd",
-   "close 900.85 < 20 EMA 906.31"
-  ]
- ],
- "to_sp": [
-  [
-   "539522",
-   "Grovy India",
-   "close 54.66 > 200 EMA 53.78"
-  ],
-  [
-   "DHABRIYA",
-   "Dhabriya Poly.",
-   "close 476.75 > 20 EMA 472.94"
-  ],
-  [
-   "GKSL",
-   "Gujarat Kidney",
-   "close 149.28 > 200 EMA 148.69"
-  ],
-  [
-   "INFOBEAN",
-   "InfoBeans Technologies Ltd",
-   "close 160.1 > 200 EMA 158.96"
-  ],
-  [
-   "JSIPL",
-   "Jindal Supreme",
-   "close 164.14 > 20 EMA 162.38"
-  ],
-  [
-   "MAYURUNIQ",
-   "Mayur Uniquoters",
-   "close 706.7 > 200 EMA 696.75"
-  ],
-  [
-   "MPIMANIPAL",
-   "Manipal Payment and Identity Solutions Ltd",
-   "close 322.8 > 20 EMA 321.73"
-  ],
-  [
-   "SHRINGARMS",
-   "Shringar House",
-   "close 236.25 > 200 EMA 236.14"
-  ],
-  [
-   "TRANSPEK",
-   "Transpek Industry Ltd",
-   "close 1361 > 20 EMA 1327.12"
-  ]
- ],
+ "added": [],
+ "rejected": [],
+ "to_dt": [],
+ "to_sp": [],
  "removed": [],
  "unchecked": [],
  "investor_moves": [],
@@ -120,11 +41,6 @@
    "close 155.8 vs 20 EMA 148.01 → SP"
   ],
   [
-   "544844",
-   "Poojaa Precision Engg. Ltd",
-   "close 900.85 vs 20 EMA 906.31 → DT"
-  ],
-  [
    "AEROPLANE",
    "A C J K Exports",
    "close 235.55 vs 20 EMA 231.4 → SP"
@@ -145,9 +61,19 @@
    "close 2312 vs 20 EMA 2049.94 → SP"
   ],
   [
+   "DHABRIYA",
+   "Dhabriya Poly.",
+   "close 476.75 vs 20 EMA 472.94 → SP"
+  ],
+  [
    "HALDYNGL",
    "Haldyn Glass",
    "close 139.86 vs 20 EMA 135.44 → SP"
+  ],
+  [
+   "JSIPL",
+   "Jindal Supreme",
+   "close 164.14 vs 20 EMA 162.38 → SP"
   ],
   [
    "KHAZANCHI",
@@ -163,6 +89,11 @@
    "MARUSHIKA",
    "Marushika Tech.",
    "close 129.45 vs 20 EMA 122.72 → SP"
+  ],
+  [
+   "MPIMANIPAL",
+   "Manipal Payment and Identity Solutions Ltd",
+   "close 322.8 vs 20 EMA 321.73 → SP"
   ],
   [
    "RAMBHAJO",
@@ -193,6 +124,11 @@
    "TECHNOCRAF",
    "Technocraft Ven.",
    "close 519.1 vs 20 EMA 491.31 → SP"
+  ],
+  [
+   "TRANSPEK",
+   "Transpek Industry Ltd",
+   "close 1361 vs 20 EMA 1327.12 → SP"
   ],
   [
    "544538",
@@ -250,6 +186,11 @@
    "close 133.95 vs 20 EMA 134.34"
   ],
   [
+   "544844",
+   "Poojaa Precision Engg. Ltd",
+   "close 900.85 vs 20 EMA 906.31"
+  ],
+  [
    "544980",
    "SJP Ultrasonics",
    "close 90 vs 20 EMA 92.49"
@@ -280,11 +221,6 @@
    "close 181.17 vs 20 EMA 208.95"
   ],
   [
-   "DHABRIYA",
-   "Dhabriya Poly.",
-   "close 476.75 vs 20 EMA 472.94"
-  ],
-  [
    "EPWINDIA",
    "EPW India",
    "close 210 vs 20 EMA 235.5"
@@ -305,19 +241,9 @@
    "close 57.92 vs 20 EMA 60.57"
   ],
   [
-   "JSIPL",
-   "Jindal Supreme",
-   "close 164.14 vs 20 EMA 162.38"
-  ],
-  [
    "KANOHAR",
    "Kanohar Elect.",
    "close 1007.8 vs 20 EMA 1023.7"
-  ],
-  [
-   "MPIMANIPAL",
-   "Manipal Payment and Identity Solutions Ltd",
-   "close 322.8 vs 20 EMA 321.73"
   ],
   [
    "ORIRAIL",
@@ -350,11 +276,6 @@
    "close 152 vs 20 EMA 158.41"
   ],
   [
-   "TRANSPEK",
-   "Transpek Industry Ltd",
-   "close 1361 vs 20 EMA 1327.12"
-  ],
-  [
    "UDAYJEW",
    "Uday Jewellery",
    "close 208.57 vs 20 EMA 213.94"
@@ -371,19 +292,19 @@
   ]
  ],
  "per_alert": {
-  "TTM Profit > 30%": 5,
-  "52W High": 6,
-  "Daily Volume Scan": 6,
-  "Weekly Volume Scan": 4,
-  "Ready after 6 Months": 1,
+  "TTM Profit > 30%": 0,
+  "52W High": 0,
+  "Daily Volume Scan": 0,
+  "Weekly Volume Scan": 0,
+  "Ready after 6 Months": 0,
   "Mukul Mahavir Agrawal": 0,
   "Ashish Kacholia": 0
  },
- "email_total": 12,
- "already_listed": 8,
+ "email_total": 0,
+ "already_listed": 0,
  "price_date": "23 Nov 2026",
  "monthly_pass": 0,
  "mode": "daily",
  "monthly_done": false,
- "run_at": "24 Nov 2026, 09:56 AM IST"
+ "run_at": "24 Nov 2026, 10:40 AM IST"
 }
