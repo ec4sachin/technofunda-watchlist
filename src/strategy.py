@@ -58,6 +58,8 @@ EMA50_MAX = None           # 0.15 = buy price must be less than 15% above the da
                            # switched OFF 19 Nov 2026: worse in every backtest)
 STOP_BELOW_BASE = 0.01     # stop 1% below the base low
 MAX_RISK = 0.06            # ... but never more than 6% below the buy price
+STOP_MODE = "base"         # "base" = 1% below the base low, capped at MAX_RISK; "fixed" = always MAX_RISK below the buy price (test of 24 Nov 2026)
+GAP_COMEBACK = False       # True = an open above the 3% limit still buys if the price comes back down to the 3% level that day (test of 24 Nov 2026)
 TIME_STOP_DAYS, TIME_STOP_GAIN = 10, 0.03
 TARGET, BOOK_FRACTION = 0.20, 0.5
 # Exit rules of each strategy type (entry rules are the same for both)
@@ -246,7 +248,7 @@ def swing_setup(df, i, above=None):
     room = (r42 - entry) / price * 100
     if ROOM_RULE and r42 > entry and 1 < room < 15:   # rule 4 + rule 6 (switched off in version 5)
         return None
-    stop = max(low * (1 - STOP_BELOW_BASE), entry * (1 - MAX_RISK))
+    stop = stop_of(low, entry)
     score = _scores(df, i, entry, stop, (res - low) / price * 100)
     return {"score": score, "trigger": entry, "above_pct": round(above * 100, 2), "max_open": round(res * (1 + MAX_GAP), 2) if MAX_GAP is not None else None, "stop": round(stop, 2), "base_low": round(low, 2), "resistance": round(res, 2), "r42": round(r42, 2),
             "room": round(room, 1) if r42 > entry else None, "range_pct": round((res - low) / price * 100, 1),
@@ -475,30 +477,59 @@ def add_ok(base, df, j, day):
     return j >= 1 and float(df.c[j - 1]) > base["entry"]
 
 
+def stop_of(base_low, entry):
+    """Stop-loss for a buy at entry: 1% below the base low but at most MAX_RISK below the buy price,
+    or (STOP_MODE "fixed") always MAX_RISK below the buy price."""
+    if STOP_MODE == "fixed":
+        return entry * (1 - MAX_RISK)
+    return max(base_low * (1 - STOP_BELOW_BASE), entry * (1 - MAX_RISK))
+
+
+def stop_reason(stop, base_low):
+    if STOP_MODE != "fixed" and stop == round(base_low * (1 - STOP_BELOW_BASE), 2):
+        return f"Stop loss (1% below {BASE_CANDLES}-candle base)"
+    return f"Stop loss ({MAX_RISK * 100:g}% {'below buy price' if STOP_MODE == 'fixed' else 'max risk'})"
+
+
 def gap_too_big(plan, df, j):
-    """True when candle j opens more than MAX_GAP (3%) above the resistance: no buy that day. MAX_GAP None = no limit."""
+    """True when candle j opens more than MAX_GAP (3%) above the resistance and (GAP_COMEBACK) never comes back
+    down to that level during the day: no buy. MAX_GAP None = no limit."""
     if MAX_GAP is None:
         return False
     o = df.o[j]
-    return o is not None and o == o and float(o) > plan["resistance"] * (1 + MAX_GAP)
+    cap = plan["resistance"] * (1 + MAX_GAP)
+    if not (o is not None and o == o and float(o) > cap):
+        return False
+    return not (GAP_COMEBACK and float(df.l[j]) <= cap)
+
+
+def fill_price(plan, df, j):
+    """Buy price on candle j (the buy-stop was hit): the buy-stop, or the open on a gap up within the limit,
+    or the 3% level when the day opened above it and came back down (GAP_COMEBACK)."""
+    o = float(df.o[j])
+    if MAX_GAP is not None and o > plan["resistance"] * (1 + MAX_GAP):
+        return round(plan["resistance"] * (1 + MAX_GAP), 2)
+    return max(plan["trigger"], o)
 
 
 # Entry-rule comparison (18 Nov 2026): the old rule (1% above, any gap) vs the new rule (0.5% above, no buy on a gap > 3%)
 # (buy-stop above resistance, max gap, max distance above EMA 50)
 # "new" = the live rule (each strategy's own buy-stop level: None = not fixed), 19 Nov 2026
-ENTRY_VARIANTS = {"old": (0.01, None, None), "new": (None, 0.03, None), "one_pct_gap3": (0.01, 0.03, None),
-                  "half_pct_gap3": (0.005, 0.03, None)}
+# 24 Nov 2026 test: "comeback" = gap above 3% still buys if the price comes back to the 3% level that day
+# (stop stays 1% below the base, max 6% below the buy price - user's choice 24 Nov 2026)
+ENTRY_VARIANTS = {"old": {"TRIGGER_ABOVE": 0.01, "MAX_GAP": None}, "new": {},
+                  "comeback": {"GAP_COMEBACK": True}}
 
 
 def backtest_variant(variant, *args, **kw):
     """backtest() with another entry rule for a moment (the module settings are put back afterwards)."""
-    global TRIGGER_ABOVE, MAX_GAP, EMA50_MAX
-    keep = (TRIGGER_ABOVE, MAX_GAP, EMA50_MAX)
-    TRIGGER_ABOVE, MAX_GAP, EMA50_MAX = ENTRY_VARIANTS[variant]
+    g = globals()
+    keep = {k: g[k] for k in ENTRY_VARIANTS[variant]}
+    g.update(ENTRY_VARIANTS[variant])
     try:
         return backtest(*args, **kw)
     finally:
-        TRIGGER_ABOVE, MAX_GAP, EMA50_MAX = keep
+        g.update(keep)
 
 
 def try_entry(st, sym, name, df, j, mode="paper", money=None, mood=None):
@@ -511,7 +542,7 @@ def try_entry(st, sym, name, df, j, mode="paper", money=None, mood=None):
     if gap_too_big(plan, df, j):   # opened more than 3% above the resistance: risk not favourable, no buy
         return None, []
     sid = st.get("id")
-    entry = max(plan["trigger"], float(df.o[j]))  # gap up above the trigger: filled at the open
+    entry = fill_price(plan, df, j)  # buy-stop, the open on a gap up, or the 3% level when it came back
     if EMA50_MAX is not None and entry >= df.e50[j - 1] * (1 + EMA50_MAX):   # gap open 15%+ above EMA 50: no buy
         return None, []
     money = float(money if money is not None else st.get("capital", DEF_CAPITAL) * st.get("pct", DEF_PCT) / 100)
@@ -519,8 +550,8 @@ def try_entry(st, sym, name, df, j, mode="paper", money=None, mood=None):
     qty = math.floor(money / entry)
     if qty < 1:
         return None, []
-    stop = round(max(plan["base_low"] * (1 - STOP_BELOW_BASE), entry * (1 - MAX_RISK)), 2)
-    why = f"Stop loss (1% below {BASE_CANDLES}-candle base)" if stop == round(plan["base_low"] * (1 - STOP_BELOW_BASE), 2) else "Stop loss (6% max risk)"
+    stop = round(stop_of(plan["base_low"], entry), 2)
+    why = stop_reason(stop, plan["base_low"])
     t = {"id": f"{sid}-{sym}-{df.index[j]}", "strategy": sid, "strategy_name": st.get("name", sid),
          "symbol": sym, "name": name, "entry_date": df.index[j], "entry": round(entry, 2),
          "type": ttype, "regime": regime, "switch": st.get("type") == "switch",

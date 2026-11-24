@@ -351,8 +351,40 @@ def test_gap_rule():
             assert t is None                                   # with the rule switched on: no buy
         finally:
             S.EMA50_MAX = None
+        e50 = 95.0
+        S.GAP_COMEBACK = True                                  # 24 Nov 2026 test rule
+        try:
+            t, _ = S.try_entry(st, "ABC", "ABC", frame(103.5, 106.0, 102.0), 1, money=10000)
+            assert t and t["entry"] == 103.0                   # opened 3.5% up, came back to the 3% level: bought there
+            t, _ = S.try_entry(st, "ABC", "ABC", frame(104.0, 106.0, 103.5), 1, money=10000)
+            assert t is None                                   # never came back to 3%: no buy
+        finally:
+            S.GAP_COMEBACK = False
+        keep = (S.MAX_RISK, S.STOP_MODE)
+        try:
+            S.MAX_RISK = 0.08
+            t, _ = S.try_entry(st, "ABC", "ABC", frame(99.5, 101.5, 99.0), 1, money=10000)
+            assert t["stop"] == 95.04                          # base stop 96 x 0.99, inside the 8% limit
+            S.STOP_MODE = "fixed"
+            t, _ = S.try_entry(st, "ABC", "ABC", frame(99.5, 101.5, 99.0), 1, money=10000)
+            assert t["stop"] == round(100.5 * 0.92, 2) and "8%" in t["stop_reason"]
+        finally:
+            S.MAX_RISK, S.STOP_MODE = keep
     finally:
         S.swing_setup = real
+
+
+def test_entry_variants_restore():
+    """backtest_variant puts every setting back afterwards."""
+    import strategy as S
+    keep = (S.TRIGGER_ABOVE, S.MAX_GAP, S.GAP_COMEBACK, S.MAX_RISK, S.STOP_MODE)
+    real = S.backtest
+    S.backtest = lambda *a, **k: (S.GAP_COMEBACK, S.MAX_RISK, S.STOP_MODE)
+    try:
+        assert S.backtest_variant("comeback") == (True, 0.06, "base")
+    finally:
+        S.backtest = real
+    assert (S.TRIGGER_ABOVE, S.MAX_GAP, S.GAP_COMEBACK, S.MAX_RISK, S.STOP_MODE) == keep
 
 
 def test_ema50_rule():
