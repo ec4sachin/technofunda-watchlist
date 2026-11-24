@@ -21,6 +21,7 @@ import prices  # noqa: E402
 import storage  # noqa: E402
 import announce  # noqa: E402
 import strategy  # noqa: E402
+import robust  # noqa: E402
 import market  # noqa: E402
 import universe  # noqa: E402
 import rs  # noqa: E402
@@ -962,6 +963,15 @@ def main():
                     print(f"Stock-list backtest: {u['with_prices']} of {u['stocks']} stocks with prices")
         except Exception as e:
             report["warnings"].append(f"Stock-list backtest failed: {e}")
+        # Fairer test of Smart Switch before real money (24 Nov 2026): weekly, on the day full stock-list prices are downloaded
+        try:
+            if robust.due(today) and u_due and not g_failed and g_charts:
+                names_ = {k: (sp.get(k) or dt.get(k) or {}).get("name") or k for k in charts}
+                g_names = {s_: n_ for s_, n_, _, _ in (g_stocks or [])}
+                robust.run(strat_cfg, charts, names_, sorted(s_ for s_ in sp if s_ in charts), g_charts, g_names, mood, today, now.year)
+                print("Robust test of Smart Switch saved")
+        except Exception as e:
+            report["warnings"].append(f"Robust strategy test failed: {e}")
     # Monthly paper-trading check (first run of each month): live result vs what the backtest expected
     if mode in ("auto", "daily") and str(state.get("last_strategy_check", ""))[:7] != today[:7]:
         try:

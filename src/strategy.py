@@ -9,11 +9,11 @@ Swing Strategy rules (given by the user) - "version 5", chosen 4 Nov 2026 after 
     1. Daily EMA 10 > EMA 20 > EMA 50 > EMA 200
     2. The last 5 daily candles (BASE_CANDLES; 4 until 5 Nov 2026) are in a tight range: highest high - lowest low
        <= 6% of the current price. Resistance = highest high of those candles. Buy when price goes 0.5% above it (a buy-stop order).
-       Buy-stop level (24 Nov 2026): 1% above the resistance for all strategies (Growth list was 0.5% from 19 Nov 2026)
+       Buy-stop level: 1% above the resistance for SP / DT strategies, 0.5% for the Growth-list strategy
        (a strategy can also have its own "trigger_pct" in data/strategies.json).
        Gap-up rule: if the day OPENS above the buy-stop level, buy at the open only when the open is not more than the
        gap limit above the resistance; a bigger gap = no buy that day. Gap limit per strategy (24 Nov 2026, see gap_of()):
-       5% for all strategies (24 Nov 2026; was 3% from 18 Nov 2026).
+       5% for the SP / DT strategies (24 Nov 2026; was 3% from 18 Nov 2026), 3% for the Growth-list strategy.
     3. The last candle's high is not more than 10% above EMA 10.
     4. (18 Nov 2026, switched OFF 19 Nov 2026 after the backtest - EMA50_MAX = None) The buy price is less than 15% above
        the daily EMA 50.
@@ -52,10 +52,10 @@ BASE_RANGE = 0.06          # ... and the most their range may be (share of the c
 BASE_MEASURE = "hl"        # "hl" = highest high / lowest low (wicks count), "close" = closing prices only
 ROOM_RULE = False          # rule 4 / 6 (room to the 42-candle resistance) - off in version 5
 TRIGGER_ABOVE = None       # buy-stop above the resistance: None = each strategy's own level (19 Nov 2026), see trigger_of()
-TRIGGER_SP, TRIGGER_GROWTH = 0.01, 0.01   # 1% above the resistance for all 4 strategies (24 Nov 2026; Growth list was 0.5% from 19 Nov 2026)
+TRIGGER_SP, TRIGGER_GROWTH = 0.01, 0.005   # 1% for SP / DT strategies, 0.5% for the Growth-list strategy (put back 24 Nov 2026 after the backtest)
 ADD_ON = True              # Add 1 (19 Nov 2026): one add-on per trade on a new breakout while the first trade is in profit
 MAX_GAP = "list"           # gap limit: "list" = each strategy's own (gap_of()); a number or None (no limit) = the same for all (backtest variants)
-GAP_SP, GAP_GROWTH = 0.05, 0.05   # an open more than this above the resistance = no buy that day (24 Nov 2026: 5% for all 4 strategies)
+GAP_SP, GAP_GROWTH = 0.05, 0.03   # an open more than this above the resistance = no buy that day (24 Nov 2026: SP strategies 5%, Growth list 3%)
 EMA50_MAX = None           # 0.15 = buy price must be less than 15% above the daily EMA 50 (added 18 Nov 2026,
                            # switched OFF 19 Nov 2026: worse in every backtest)
 STOP_BELOW_BASE = 0.01     # stop 1% below the base low
@@ -534,18 +534,21 @@ def fill_price(plan, df, j):
 # Entry-rule comparison (18 Nov 2026): the old rule (1% above, any gap) vs the new rule (0.5% above, no buy on a gap > 3%)
 # (buy-stop above resistance, max gap, max distance above EMA 50)
 # "new" = the live rule (each strategy's own buy-stop level: None = not fixed), 19 Nov 2026
-# 24 Nov 2026: "new" = live (5% gap limit for all strategies); "gap3" = 3% for all (the rule of 18-24 Nov);
+# 24 Nov 2026: "new" = live (SP strategies 1% / 5% gap, Growth list 0.5% / 3%); "gap3" = 3% for all (the rule of 18-24 Nov);
 # "old" = 1% buy-stop and no gap limit. (The "comeback" test of 24 Nov 2026 was not used: GAP_COMEBACK stays False.)
-# "growth_prev" = the Growth-list rule before 24 Nov 2026 (0.5% buy-stop, 3% gap limit; no change for SP strategies)
-ENTRY_VARIANTS = {"old": {"TRIGGER_ABOVE": 0.01, "MAX_GAP": None}, "new": {}, "gap3": {"MAX_GAP": 0.03},
-                  "growth_prev": {"TRIGGER_GROWTH": 0.005, "GAP_GROWTH": 0.03}}
+ENTRY_VARIANTS = {"old": {"TRIGGER_ABOVE": 0.01, "MAX_GAP": None}, "new": {}, "gap3": {"MAX_GAP": 0.03}}
 
 
 def backtest_variant(variant, *args, **kw):
     """backtest() with another entry rule for a moment (the module settings are put back afterwards)."""
+    return backtest_with(ENTRY_VARIANTS[variant], *args, **kw)
+
+
+def backtest_with(overrides, *args, **kw):
+    """backtest() with some module settings changed for a moment, e.g. {"TRIGGER_ABOVE": 0.005, "COST_PER_SIDE": 0.004}."""
     g = globals()
-    keep = {k: g[k] for k in ENTRY_VARIANTS[variant]}
-    g.update(ENTRY_VARIANTS[variant])
+    keep = {k: g[k] for k in overrides}
+    g.update(overrides)
     try:
         return backtest(*args, **kw)
     finally:

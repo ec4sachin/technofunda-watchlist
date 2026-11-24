@@ -435,8 +435,8 @@ def test_pyramid_backtest():
 def test_trigger_per_strategy():
     """19 Nov 2026: 1% above the resistance for SP / DT strategies, 0.5% for the Growth-list strategy."""
     assert stg.trigger_of({"list": "SP"}) == 0.01 and stg.trigger_of({"list": "BOTH"}) == 0.01
-    assert stg.trigger_of({"list": "GROWTH"}) == 0.01   # 24 Nov 2026: 1% for all
-    assert stg.gap_of({"list": "SP"}) == 0.05 and stg.gap_of({"list": "GROWTH"}) == 0.05   # 24 Nov 2026: 5% for all
+    assert stg.trigger_of({"list": "GROWTH"}) == 0.005
+    assert stg.gap_of({"list": "SP"}) == 0.05 and stg.gap_of({"list": "GROWTH"}) == 0.03   # 24 Nov 2026
     assert stg.trigger_of({"list": "SP", "trigger_pct": 0.75}) == 0.0075
 
 
@@ -469,7 +469,7 @@ def test_live_add_on():
 
 
 def test_gap5_sp():
-    """24 Nov 2026: SP strategies buy at the open on a gap up to 5% above resistance; more = no buy. Growth list too (same day)."""
+    """24 Nov 2026: SP strategies buy at the open on a gap up to 5% above resistance; more = no buy. Growth list keeps 3%."""
     import strategy as S
     class D:
         pass
@@ -489,6 +489,6 @@ def test_gap5_sp():
         t, _ = S.try_entry(sp, "ABC", "ABC", frame(105.5, 107.0, 105.0), 1, money=10000)
         assert t is None                                       # gap 5.5%: no buy
         t, _ = S.try_entry(gr, "ABC", "ABC", frame(104.0, 106.0, 103.5), 1, money=10000)
-        assert t and t["entry"] == 104.0                       # Growth list: 5% limit too (24 Nov 2026)
+        assert t is None                                       # Growth list: 4% is above its 3% limit
     finally:
         S.swing_setup = real
