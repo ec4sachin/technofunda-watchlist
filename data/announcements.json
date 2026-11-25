@@ -1,20 +1,20 @@
 {
- "last": "2026-11-24",
+ "last": "2026-11-25",
  "status": {
   "bse": {
-   "days": 1,
+   "days": 2,
    "rows": 0,
    "last_error": "HTTP 403 (AnnGetData/w?strCat=-1)"
   },
   "nse": {
-   "days": 1,
-   "rows": 165,
+   "days": 2,
+   "rows": 311,
    "last_error": ""
   },
   "matched": {
    "bse_codes": 93,
    "nse_only_codes": 237,
-   "new": 2
+   "new": 4
   }
  },
  "items": {
@@ -167,6 +167,22 @@
    }
   ],
   "TECHERA": [
+   {
+    "d": "2026-11-24",
+    "t": "TechEra Engineering (India) Limited has informed the Exchange regarding 'TechEra Engineering (India) Limited Secures Purchase Orders worth &#8377;8.63 Crore for Space Launch Vehicle Ground Support Equipment'.",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/TECHERA_24112026182743_TechEra_Press_Release_24Nov2026.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-25"
+   },
+   {
+    "d": "2026-11-24",
+    "t": "TechEra Engineering (India) Limited has informed the Exchange about Bagging/Receiving of orders/contracts",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/TECHERA_24112026182001_NSE_Announcement.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-25"
+   },
    {
     "d": "2026-11-16",
     "t": "TechEra Engineering (India) Limited has informed the Exchange about Bagging/Receiving of orders/contracts",
@@ -432,6 +448,14 @@
   ],
   "DHARARAIL": [
    {
+    "d": "2026-11-24",
+    "t": "Dhara Rail Projects Limited has informed the Exchange about Awarding of order(s)/contract(s)",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/DHARA_24112026185413_Dhara_Order_24_november.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-25"
+   },
+   {
     "d": "2026-11-21",
     "t": "Dhara Rail Projects Limited has informed the Exchange about Awarding of order(s)/contract(s) dated 21st November, 2026",
     "k": "Order",
@@ -468,6 +492,14 @@
     "url": "https://nsearchives.nseindia.in/corporate/HEXAGONNUTRITION_24112026164216_HNL-Promoter-NK.pdf",
     "ex": "NSE",
     "seen": "2026-11-24"
+   },
+   {
+    "d": "2026-11-24",
+    "t": "Hexagon Nutrition Limited has informed the Exchange regarding 'Mr. Vikram Kelkar, Promoter and Managing Director of the Company acquired 35,000 Equity shares through open market transactions'.",
+    "k": "Acquisition / JV",
+    "url": "https://nsearchives.nseindia.in/corporate/HEXAGONNUTRITION_24112026165055_HNL-Promoter-VK.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-25"
    }
   ],
   "RBZJEWEL": [
