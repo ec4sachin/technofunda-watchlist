@@ -5203,5 +5203,129 @@
    ]
   ],
   "guide": {}
+ },
+ "HEXAGON": {
+  "text": "⚠ Profit flat. Micronutrient premixes, clinical and therapeutic nutrition maker (Hexagon Nutrition), listed June 2026. ==H1 FY27 revenue +27% to ₹214 cr==, but ==PAT slightly down to ₹16.2 cr== as EBITDA margin fell to 10.6% from 13.3%; Q2 revenue +15%. Management guides ==20–25% revenue growth for FY27==. Watch: margin recovery; Q2 growth slowed.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Hexagon H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/hexagon-nutrition-h1-margin-pressure-ppt-cmwkfmog5000628lwn3i6luis"
+   ],
+   [
+    "Multibagg – Hexagon Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/hexagon-nutrition-h1-fy27-results-cmwkfllgg000428lwm64f2jqo"
+   ],
+   [
+    "Sovrenn – Hexagon Q2 concall",
+    "https://www.sovrenn.com/concall-summary/hexagon-nutrition/hexagon-nutrition-q2-fy27-concall-20-25-revenue-growth-guidance-outlook"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     20,
+     25
+    ]
+   }
+  }
+ },
+ "HIRECT": {
+  "text": "⚠ Profit down. Power semiconductors, power electronics and railway traction equipment maker (Hirect, formerly Hind Rectifiers). Q2 FY27 ==record income ₹317 cr (+39%)==, but ==consolidated PAT −81% to ₹2.9 cr== (standalone ₹14.5 cr, roughly flat); H1 consolidated profit −66%. Expenses rose faster than sales and operating cash flow turned negative. Watch: subsidiary losses; margin recovery.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Hirect Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/hirect-q2-profit-income-cmwapid5t00362qo6mqasdmsw"
+   ],
+   [
+    "Sovrenn – Hirect Q2 FY27",
+    "https://www.sovrenn.com/financial-results/hind-rectifiers"
+   ],
+   [
+    "Multibagg – Hirect underlying profit",
+    "https://www.multibagg.ai/market-pulse/articles/hirect-limited-revenue-profit-falls-announcement-cmwaem014000h2imh8ded9at6"
+   ]
+  ],
+  "guide": {}
+ },
+ "THOMASCOTT": {
+  "text": "Apparel maker and brand licensee (Thomas Scott India). ==Q2 FY27 revenue +39% to ₹79 cr, PAT +33% to ₹6.3 cr==; ==H1 revenue +31%, PAT +43%==. Licensed-brands business +52% to ₹49 cr; signed exclusive ==Forever 21 and Dockers licences== for India, Nepal and Bangladesh (no revenue yet). Watch: Q2 EBITDA margin fell to 13.3%.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Thomas Scott Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/thomas-scott-q2-revenue-growth-cmwj8d2uk006k2rp5efmmabva"
+   ],
+   [
+    "Multibagg – Thomas Scott H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/thomas-scott-h1-profit-margin-ppt-cmweprrk2006u2npiqzekw6ep"
+   ],
+   [
+    "Multibagg – Thomas Scott licences",
+    "https://www.multibagg.ai/market-pulse/articles/thomas-scott-india-limited-revenue-concall-cmwj8dzoe006l2rp51q7cvnz6"
+   ]
+  ],
+  "guide": {}
+ },
+ "UNIDT": {
+  "text": "⚠ Weak results. Oil-drilling tools and equipment maker (United Drilling Tools). Q2 FY27 ==revenue −68% to ₹17.5 cr, net profit −70% to ₹1.7 cr==; revenue also fell ~49% vs Q1. Business is lumpy and depends on ONGC/oil-company orders. Watch: order inflow; next quarter recovery.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – United Drilling Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/united-drilling-tools-q2-profit-cmwgj2h5300892rpbhxnrojke"
+   ],
+   [
+    "Univest – United Drilling Q2 FY27",
+    "https://univest.in/blogs/united-drilling-tools-q2-results-fy27-pat-2-crore"
+   ]
+  ],
+  "guide": {}
+ },
+ "TBI": {
+  "text": "⚠ Slow profit growth. Maize/corn milling company (TBI Corn, SME) supplying snack makers, feed and breweries. ==H1 FY27 consolidated revenue +44% to ₹196 cr== after new capacity (390 TPD), but ==standalone profit only +13% to ₹11.6 cr==; utilisation fell to 67%, borrowings up 32%. Targets ~35% CAGR growth till FY28. Watch: operating cash flow fell sharply.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Sovrenn – TBI Corn H1 FY27",
+    "https://www.sovrenn.com/financial-results/tbi-corn"
+   ],
+   [
+    "Multibagg – TBI Corn H1 profit",
+    "https://www.multibagg.ai/market-pulse/articles/tbi-corn-h1-profit-cmw5khoz500522bnx4pguyakk"
+   ],
+   [
+    "Multibagg – TBI Corn capacity",
+    "https://www.multibagg.ai/market-pulse/articles/tbi-corn-reaches-390-tpd-ppt-cmwl930cw003732p1g6u8nizp"
+   ],
+   [
+    "ScanX – TBI Corn FY26",
+    "https://scanx.trade/stock-market-news/companies/tbi-corn-reports-fy26-net-profit-of-1836-04-lakh/41886183"
+   ]
+  ],
+  "guide": {
+   "note": "~35% CAGR growth targeted till FY28"
+  }
+ },
+ "FEDDERSHOL": {
+  "text": "⚠ Slow profit growth. Investment, finance and consultancy company (Fedders Holding, formerly IM+ Capitals). Q2 FY27 ==revenue +93% to ₹104 cr, but PAT only +11% to ₹16 cr==; Q1 FY27 profit fell ~34%. Very high P/E and lumpy, treasury-type earnings. Watch: auditor qualified the Q1 consolidated review.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Univest – Fedders Holding Q2 FY27",
+    "https://univest.in/blogs/fedders-holding-q2-results-fy27-pat-16-crore"
+   ],
+   [
+    "AskFuzz – Fedders Q1 FY27",
+    "https://askfuzz.ai/discover/news/companies/fedders-holding-q1-profit-drops-34-26-to-10-82-crore"
+   ],
+   [
+    "Screener – Fedders Holding",
+    "https://www.screener.in/company/511628"
+   ]
+  ],
+  "guide": {}
  }
 }
