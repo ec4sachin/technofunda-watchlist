@@ -5726,5 +5726,119 @@
   "guide": {
    "note": "80–85 new screens in FY27 (100+ possible)"
   }
+ },
+ "ACETEC": {
+  "text": "⚠ Profit flat. Thane e-commerce company – dropshipping, teleshopping and cross-border selling (Acetech E-Commerce, SME). ==H1 FY27 consolidated revenue +17% to ₹47 cr, but net profit −5% to ₹5.5 cr==; standalone revenue only +2%. Watch: growth now coming from the overseas subsidiary; no guidance.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Acetech H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/acetech-h1-revenue-rises-cmwj8w6q6007l2rp50ga90kkx"
+   ],
+   [
+    "Screener – Acetech",
+    "https://www.screener.in/company/ACETEC/consolidated/"
+   ]
+  ],
+  "guide": {}
+ },
+ "500346": {
+  "text": "⚠ Weak results. Punjab government-backed telecom/electronics equipment maker (Punjab Communications). Q2 FY27 ==revenue fell to ₹5.3 cr from ₹8.2 cr== a year ago (and ₹5.8 cr in Q1); expenses were about double revenue. Auditor flagged qualifications on inventory valuation and provisions. Watch: very small, loss-prone business.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "InvestyWise – Punjab Communications Q2 FY27",
+    "https://www.investywise.com/?p=136204"
+   ]
+  ],
+  "guide": {}
+ },
+ "513507": {
+  "text": "Industrial packaging (steel drums/containers) maker (Gujarat Containers). Q2 FY27 ==sales +21% to ₹44.5 cr, net profit +199%==; Q1 FY27 profit was also +125% to ₹3.8 cr on volume growth. New Unit III at Dahej being commissioned. Watch: steel input costs; small size.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "JM Financial – Gujarat Containers Q2 FY27",
+    "https://www.jmfinancialservices.in/market-news-and-insights/1741866"
+   ],
+   [
+    "JM Financial – Gujarat Containers Q1 FY27",
+    "https://www.jmfinancialservices.in/market-news-and-insights/1713850"
+   ],
+   [
+    "ScanX – Gujarat Containers Q1",
+    "https://scanx.trade/stock-market-news/companies/gujarat-containers-q1-results-net-profit-rises-126-yoy/46768823"
+   ]
+  ],
+  "guide": {}
+ },
+ "530741": {
+  "text": "Bengaluru egg-powder and egg-products maker for food processors (Ovobel Foods). ==H1 FY27 profit more than doubled to ₹19.9 cr==; Q1 FY27 profit was +460% on sales +32%. But the September quarter was below both last year and June. Watch: egg-price cycle; Q2 slowdown.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Ovobel H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/ovobel-foods-first-half-profit-doubles-announcement-cmw4z3iy5000h2gmfut7arykz"
+   ],
+   [
+    "JM Financial – Ovobel Q1 FY27",
+    "https://www.jmfinancialservices.in/market-news-and-insights/1720713"
+   ]
+  ],
+  "guide": {}
+ },
+ "531569": {
+  "text": "WHO-GMP injectables and oral-solids pharma maker, ~96% exports (Sanjivani Paranteral). Q2 FY27 ==revenue +63% to ₹25.3 cr, PAT +87–153% (₹3.1–4.1 cr standalone/consolidated)==; EBITDA margin ~26%. New SPL Infusion plant is ramping up. Watch: export-market disruptions; rising debt and depreciation.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Sanjivani Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/sanjivani-q2-earnings-shipping-disruption-ppt-cmw4ts0b30059u02ry95eat51"
+   ],
+   [
+    "Univest – Sanjivani Q2 FY27",
+    "https://univest.in/blogs/sanjivani-paranteral-q2-results-fy27-pat-3-crore"
+   ]
+  ],
+  "guide": {}
+ },
+ "544047": {
+  "text": "⚠ Slow YoY growth. Jamnagar brass-scrap recycler and brass-component maker (Siyaram Recycling, SME). ==H1 FY27 revenue only +9% YoY to ₹230 cr==, EBITDA ₹9.1 cr (vs ₹9.4 cr), PAT ₹2.6 cr; strong recovery vs a weak H2 FY26. Management expects ==FY27 revenue above ₹600 cr== (lifetime high). Watch: thin 4% margin; H2 must be much bigger.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "ThePrint – Siyaram H1 FY27",
+    "https://theprint.in/ani-press-releases/siyaram-recycling-industries-reports-strong-h1-fy27/3086793/"
+   ],
+   [
+    "Sharpely – Siyaram PAT",
+    "https://sharpely.in/stocks/544047-bom/news"
+   ],
+   [
+    "Screener – Siyaram",
+    "https://www.screener.in/company/544047/"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "cr": [
+     600,
+     600
+    ],
+    "text": "above ₹600 cr"
+   }
+  }
+ },
+ "544458": {
+  "text": "Refrigeration and HVAC systems maker (Shree Refrigerations, SME). ==H1 FY27 revenue +85% to ₹93 cr, EBITDA +124%, PAT +361%==. Watch: order-driven, lumpy business; working capital.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "CXOToday – Shree Refrigerations H1 FY27",
+    "https://cxotoday.com/media-coverage/shree-refrigerations-limited-reports-h1-fy27-performance-with/"
+   ]
+  ],
+  "guide": {}
  }
 }
