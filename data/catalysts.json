@@ -3945,5 +3945,181 @@
    "asof": "2026-09-30",
    "text": "PTS 68%, renewables 32%"
   }
+ },
+ "APOLLOPIPE": {
+  "text": "⚠ Weak profit. PVC/CPVC pipes maker, now entering tiles (Mazzini) and windows. Q2 FY27 revenue +31% to ₹310 cr (volume +13%), Varanasi plant started, but ==EBITDA −27% and PAT only ₹0.6 cr== (H1 a loss of ₹10 cr). Target: ==~25%+ revenue growth in FY27==, 25%+ CAGR for 3 years. Watch: margins hit by PVC price swings; profit propped by other income and low tax; borrowings up 66%.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Equitybulls – Apollo Pipes Q2 FY27",
+    "https://www.equitybulls.com/news/378571/apollo-pipes-limited-announces-q2-fy27-results"
+   ],
+   [
+    "Sovrenn – Apollo Pipes Q2 FY27",
+    "https://www.sovrenn.com/financial-results/apollo-pipes"
+   ],
+   [
+    "Multibagg – Apollo Pipes H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/apollo-pipes-h1-earnings-pressure-ppt-cmw3k9ikr008pjk2r8dyr24ol"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     25,
+     25
+    ],
+    "text": "~25% or more"
+   }
+  }
+ },
+ "GUFICBIO": {
+  "text": "Injectable and critical-care pharma maker. ==Q2 FY27 revenue +22% to ₹288 cr, PAT +39.5% to ₹23.5 cr== on strong domestic volumes. ==New Indore plant reached EBITDA break-even== and should cover interest and depreciation by Q4 FY27. Target: EBITDA margin ==18.5% next year== (17.2% now), 20–25% long term. Watch: Indore plant ramp-up; export approvals take time.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Univest – Gufic Q2 FY27",
+    "https://univest.in/blogs/gufic-biosciences-q2-results-fy27-pat-23-crore"
+   ],
+   [
+    "Arthneeti – Gufic Q2 FY27",
+    "https://www.arthneeti.com/insights/gufic-biosciences-ltd-q2-fy27-earnings"
+   ],
+   [
+    "Sovrenn – Gufic Q2 FY27 concall",
+    "https://www.sovrenn.com/concall-summary/gufic-biosciences/gufic-biosciences-q2-fy27-concall-17-23-ebitda-margin-outlook"
+   ]
+  ],
+  "guide": {
+   "margin": {
+    "fy": "FY28",
+    "kind": "EBITDA",
+    "pct": [
+     18.5,
+     18.5
+    ],
+    "text": "20–25% long term"
+   }
+  }
+ },
+ "PROTEAN": {
+  "text": "⚠ Weak results. Digital public infrastructure company (PAN/tax services, Aadhaar Seva Kendra, SERSAI). Q2 FY27 revenue only +8% to ₹271 cr and ==PAT −33% to ₹16 cr== because of upfront costs for new government projects (RFPs); Q1 profit had fallen 75%. Management says most of that spending is behind it for H2. Watch: profit recovery in H2 FY27; dependence on government contracts.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Univest – Protean Q2 FY27",
+    "https://univest.in/blogs/protean-e-gov-technologies-q2-results-fy27-pat-16-crore"
+   ],
+   [
+    "Multibagg – Protean Q2 profit",
+    "https://www.multibagg.ai/market-pulse/articles/protean-q2-profit-rfp-costs-ppt-cmw3m6mab00drjk2rjhh2kdaa"
+   ],
+   [
+    "Sovrenn – Protean concall",
+    "https://www.sovrenn.com/concall-summary/protean-egov-technologies"
+   ]
+  ],
+  "guide": {}
+ },
+ "NPST": {
+  "text": "UPI payments and digital-banking tech platform for banks. ==Q2 FY27 revenue +45% to ₹68 cr, PAT +34% to ₹13 cr==; ==H1 income +60%==. Guidance: ==FY27 revenue ₹342 cr (60–70% growth)==, H2-heavy; ==Sri Lanka deals priced ~15× India rates== start contributing in Q4 FY27. Watch: H2 needs ~₹216 cr revenue; EBITDA margin fell to 24% from 29%.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – NPST Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/npst-q2-income-margin-results-ppt-cmwc7d6xk00ew2rpb4vjmg5im"
+   ],
+   [
+    "Univest – NPST Q2 FY27",
+    "https://univest.in/blogs/network-people-services-technologies-q2-results-fy27-pat-13-crore"
+   ],
+   [
+    "Sahi – NPST guidance",
+    "https://www.sahi.com/news/network-people-services-maintains-60-70-fy27-revenue-growth-target-driven-by-h2-execution"
+   ],
+   [
+    "Sovrenn – NPST Q2 concall",
+    "https://www.sovrenn.com/concall-summary/network-people-services-technologies/network-people-services-technologies-q2-fy27-concall-rs-67-7-cr-revenue-outlook"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     60,
+     70
+    ],
+    "text": "₹342 cr"
+   }
+  }
+ },
+ "ROTO": {
+  "text": "Progressive-cavity pump maker for wastewater, sugar, oil & gas, mining and renewables, with global distribution. ==Q2 FY27 revenue +55% to ₹100 cr, PAT +245% to ₹20.6 cr== (Q1 PAT ₹9.3 cr); operating profit +155%. ==H1 revenue +35%==. Subsidiary Roto Energy Systems is being merged in. Watch: one strong quarter after a weak FY26; cash flow fell.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "JM Financial – Roto Pumps Q2",
+    "https://www.jmfinancialservices.in/market-news-and-insights/1748331"
+   ],
+   [
+    "Univest – Roto Pumps Q2 FY27",
+    "https://univest.in/blogs/roto-pumps-q2-results-fy27-pat-21-crore"
+   ],
+   [
+    "Sovrenn – Roto Pumps Q2 FY27",
+    "https://www.sovrenn.com/financial-results/roto-pumps"
+   ]
+  ],
+  "guide": {}
+ },
+ "ZOTA": {
+  "text": "⚠ Loss-making. Generic-medicine pharmacy chain (Davaindia, 2,840 stores) plus pharma maker. Q2 FY27 ==revenue +55% to ₹199 cr, Davaindia sales +76%==, and EBITDA turned positive (₹7.9 cr), but ==net loss ₹26 cr== (Q1 loss ₹44 cr). Plans 600–800 new stores this year, 5,000+ by FY29. Watch: losses continue while stores expand; store additions slowed in Q2.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Zota Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/zota-health-care-q2-revenue-cmw1b7osz008u31qlgt1ne978"
+   ],
+   [
+    "Sovrenn – Zota Q2 FY27",
+    "https://www.sovrenn.com/financial-results/zota-health-care"
+   ],
+   [
+    "EconoTimes – Zota Q2",
+    "https://econotimes.com/Zota-Health-Care-Revenue-Rises-54-58-as-Quarterly-Loss-Widens-1766573"
+   ]
+  ],
+  "guide": {}
+ },
+ "DOLPHIN": {
+  "text": "Offshore marine services company (vessels / barges for oil & gas). ==Q2 FY27 revenue +78% to ₹44 cr (consolidated), PAT +20% to ₹18.8 cr==; operating profit +25%. Watch: profit growing much slower than revenue; earnings depend on vessel deployment and oil & gas activity; no guidance.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Univest – Dolphin Offshore Q2 FY27",
+    "https://univest.in/blogs/dolphin-offshore-enterprises-q2-results-fy27-pat-19-crore"
+   ],
+   [
+    "Kotak Neo – Dolphin Q2 FY27",
+    "https://www.kotakneo.com/financial-results/dolphin-offshore-enterprises-india-share-price-q2fy2026-27-results/"
+   ]
+  ],
+  "guide": {}
+ },
+ "PREMIERPOL": {
+  "text": "Maker of vinyl flooring, PVC sheeting and artificial leather. ==Q2 FY27 revenue +38% to ₹115 cr, PAT +22% to ₹9.8 cr==; Q1 FY27 had revenue +35% and PAT +52%. Watch: profit growing slower than sales; PVC raw-material prices; no guidance.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Premier Polyfilm Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/premier-polyfilm-q2-fy27-results-cmv28nzw700002yn2lv21eeox"
+   ],
+   [
+    "JM Financial – Premier Polyfilm Q2",
+    "https://www.jmfinancialservices.in/market-news-and-insights/1736120"
+   ]
+  ],
+  "guide": {}
  }
 }
