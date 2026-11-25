@@ -4726,5 +4726,162 @@
    ]
   ],
   "guide": {}
+ },
+ "HUHTAMAKI": {
+  "text": "⚠ Profit down (one-off). Flexible-packaging and labels maker; follows a Jan–Dec year. Q3 2026 ==net sales +24% to ₹748 cr== (volume +7%), but ==PAT −19% to ₹29.7 cr== after a ₹9.6 cr Baddi labels-plant restructuring charge (profit +18% excluding one-offs). Existing capacity can support 2–3 years of growth without big capex. Watch: September raw-material spike hits Q4 margins; EBITDA margin fell to 8.8%.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Huhtamaki Q3 2026",
+    "https://www.multibagg.ai/market-pulse/articles/huhtamaki-india-q3-sales-growth-cmvz8vmt0002q2hly8n6lc3xs"
+   ],
+   [
+    "Multibagg – Huhtamaki Baddi closure",
+    "https://www.multibagg.ai/market-pulse/articles/huhtamaki-india-baddi-labels-closure-concall-cmvzxaobg007v2vpe6egnvg9v"
+   ],
+   [
+    "Multibagg – Huhtamaki capacity",
+    "https://www.multibagg.ai/market-pulse/articles/huhtamaki-india-capacity-growth-capex-concall-cmvzxfmhb007x2vped1b2s6t6"
+   ]
+  ],
+  "guide": {}
+ },
+ "STAR": {
+  "text": "⚠ Slow profit growth. Generic pharma maker (Strides Pharma) selling in US and other regulated markets. Q2 FY27 ==revenue +17% to a record ₹1,430 cr==, with ==ex-US business +31% and now bigger than the US==; EBITDA +8% to ₹251 cr. But ==reported PAT only +2%== (operational PAT +12%). Watch: gross margin fell to 56% from 58%; debt rose in H1.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Strides Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/strides-record-q2-revenue-cmvz5yvju000p2hlyoz9jlbt5"
+   ],
+   [
+    "Univest – Strides Q2 FY27",
+    "https://univest.in/blogs/strides-pharma-science-q2-results-fy27-pat-134-crore"
+   ],
+   [
+    "InvestyWise – Strides Q2 FY27",
+    "https://www.investywise.com/?p=125854"
+   ]
+  ],
+  "guide": {}
+ },
+ "RAYMONDLSL": {
+  "text": "⚠ Profit down. Raymond Lifestyle – suiting fabrics, branded apparel (Raymond, Park Avenue) and garment exports. Q2 FY27 ==record income ₹2,125 cr (+14%)==, garmenting +26%, branded apparel +20%; but ==PAT −10% to ₹68 cr== as marketing and input costs rose (EBITDA margin 12.7% vs 13.9%). Net cash ₹69 cr. Watch: margins; export demand.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Raymond Lifestyle Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/raymond-lifestyle-q2-income-cmvzl1r7d002p2vpe2462iynm"
+   ],
+   [
+    "Apparel Resources – Raymond Lifestyle Q2",
+    "https://apparelresources.com/business-news/manufacturing/raymond-lifestyle-q2-revenue-rises-13-2-to-rs-2075-crore-in-q2-fy27/"
+   ],
+   [
+    "Univest – Raymond Lifestyle Q2 FY27",
+    "https://univest.in/blogs/raymond-lifestyle-q2-results-fy27-pat-68-crore"
+   ]
+  ],
+  "guide": {}
+ },
+ "PRAKASH": {
+  "text": "⚠ Slow profit growth. Integrated steel maker with own power and mining (Prakash Industries). Q2 FY27 ==revenue +24% to ₹896 cr==, but ==PAT only +6% to ₹65 cr==; Q1 FY27 revenue was flat and PAT fell (₹71 cr vs ₹91 cr). Watch: steel price cycle; profit not keeping pace with sales.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Univest – Prakash Industries Q2 FY27",
+    "https://univest.in/blogs/prakash-industries-q2-results-fy27-pat-65-crore"
+   ],
+   [
+    "Multibagg – Prakash Industries Q1 base",
+    "https://www.multibagg.ai/market-pulse/articles/prakash-industries-q2-results-meet-cmwdm16pn00kh2dqp7s0ocvuc"
+   ],
+   [
+    "Indmoney – Prakash Q1 FY27",
+    "https://www.indmoney.com/stocks/prakash-industries-ltd-share-price/results"
+   ]
+  ],
+  "guide": {}
+ },
+ "VENKEYS": {
+  "text": "Poultry, animal-health products and oilseed company (Venky's India). Q2 FY27 ==revenue +33% to ₹1,066 cr and PAT ₹14.6 cr vs a ₹26.5 cr loss== a year ago; Q1 FY27 PAT was ₹50 cr (+212%). Management guides ==at least 15% top-line growth== for FY27. Watch: ==guidance is below your 20% rule – removal at the monthly review==; Q2 profit −71% vs Q1; poultry prices are volatile.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Venky's Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/venkys-q2-profit-return-announcement-cmwemkdqe001u2npipgt39m99"
+   ],
+   [
+    "Sovrenn – Venky's Q2 FY27 concall",
+    "https://www.sovrenn.com/concall-summary/venky-s-india/venky-s-india-q2-fy27-concall-minimum-15-top-line-growth-guidance-outlook"
+   ],
+   [
+    "Sahi – Venky's Q1 FY27",
+    "https://www.sahi.com/news/venky-s-india-q1-standalone-net-profit-rises-to-50-crore-from-15-8-crore-yoy-551-PE1_CORP"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     15,
+     15
+    ],
+    "text": "at least 15%"
+   }
+  }
+ },
+ "WENDT": {
+  "text": "Super-abrasives, grinding tools and machines maker (Wendt India, Carborundum Universal group). Q2 FY27 ==revenue +27% to ₹72.5 cr, net profit +103% to ₹5.5 cr==; Q1 FY27 profit was +63% to ₹6.2 cr. Watch: very high P/E (~87); profit fell 11% vs Q1; demand from auto/engineering customers.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Kotak Neo – Wendt Q2 FY27",
+    "https://www.kotakneo.com/financial-results/wendt-india-share-price-q2fy2026-27-results/"
+   ],
+   [
+    "Sahi – Wendt Q2 FY27",
+    "https://www.sahi.com/news/wendt-reports-q2-net-profit-of-5-5-crore-with-revenue-up-at-72-5-crore"
+   ],
+   [
+    "Sahi – Wendt Q1 FY27",
+    "https://www.sahi.com/news/wendt-india-reports-q1-consolidated-net-profit-of-62m-rupees-revenue-at-709m-rupees-306-PE1_CORP"
+   ]
+  ],
+  "guide": {}
+ },
+ "LUXIND": {
+  "text": "⚠ Weak results. Innerwear, thermals and casual-wear maker (Lux Industries). Q2 FY27 ==revenue −8% to ₹718 cr==, net profit only +4% to ₹24 cr; Vertical A (mass brands) −17%. EBITDA margin improved to 6.4%. Watch: falling sales; working capital up to 217 days.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Lux Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/lux-industries-limited-q2-ebitda-ppt-cmw3344e9000w2gta4dtxvny9"
+   ],
+   [
+    "Multibagg – Lux Q2 segments",
+    "https://www.multibagg.ai/market-pulse/articles/lux-industries-limited-q2-results-announcement-cmw1rls6c000z2go5tfmrtavs"
+   ]
+  ],
+  "guide": {}
+ },
+ "TRACXN": {
+  "text": "⚠ Loss-making. Private-market data platform (Tracxn) on subscription. Q2 FY27 ==revenue flat at ₹21.3 cr==, EBITDA loss ₹5.9 cr, ==net loss ₹4.1 cr== (vs ₹5.6 cr). India revenue +6.9% QoQ (~30% annualised) and is 53% of sales; paid accounts +13%. Watch: no growth overall yet; negative free cash flow.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Inc42 – Tracxn Q2 FY27",
+    "https://inc42.com/buzz/tracxn-q2-loss-narrows-26-yoy-to-₹4-1-cr-revenue-stays-flat/"
+   ],
+   [
+    "Multibagg – Tracxn EBITDA loss",
+    "https://www.multibagg.ai/market-pulse/articles/tracxn-ebitda-loss-growth-investment-concall-cmw3kvr3f0059s02ri84kcsci"
+   ],
+   [
+    "Multibagg – Tracxn India growth",
+    "https://www.multibagg.ai/market-pulse/articles/tracxn-india-growth-playbook-scales-concall-cmw3kvom400arjk2roht0jnjq"
+   ]
+  ],
+  "guide": {}
  }
 }
