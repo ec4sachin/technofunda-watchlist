@@ -4883,5 +4883,126 @@
    ]
   ],
   "guide": {}
+ },
+ "CAPACITE": {
+  "text": "⚠ Profit down. Building and factory construction contractor (Capacit'e Infraprojects), Mumbai. Q2 FY27 ==record revenue ₹771 cr (+19%)==, but ==PAT −3 to −7% to ~₹48 cr== as margins narrowed (EBITDA margin 15.4% vs 16.8%). ==Order book ₹13,013 cr== (~5× yearly sales); ₹2,487 cr of orders won so far in FY27. Guidance: ==FY27 revenue growth ~20%== (₹4,500 cr target mentioned), 15.5–16% EBITDA margin. Watch: H2 must run above ₹850 cr a quarter.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Capacite Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/capacite-record-revenue-profit-falls-ppt-cmw3dkm0o00632mphuwbggdh9"
+   ],
+   [
+    "Multibagg – Capacite margins",
+    "https://www.multibagg.ai/market-pulse/articles/capacite-q2-revenue-margin-cmw1yhb4p00302vphkt86kcv5"
+   ],
+   [
+    "Sahi – Capacite FY27 guidance",
+    "https://www.sahi.com/news/capacite-infra-targets-20-fy27-revenue-growth-and-guides-15-5-16-ebitda-margin-4599-PE1_COR"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     20,
+     20
+    ]
+   },
+   "margin": {
+    "fy": "FY27",
+    "kind": "EBITDA",
+    "pct": [
+     15.5,
+     16
+    ]
+   }
+  },
+  "ob": {
+   "cr": [
+    13013
+   ],
+   "asof": "2026-09-30",
+   "text": "Public 54%, private 46%; residential 64%"
+  }
+ },
+ "IFBIND": {
+  "text": "⚠ Profit down. Home appliances (front-load washers, ACs, dishwashers) plus engineering and steel businesses (IFB Industries). Q2 FY27 ==revenue +15% to ₹1,576 cr==, but ==net profit −25% to ₹38 cr==; appliance margin hit as material costs rose ~4.3% of sales and price hikes did not cover it. Cost-saving target ~₹149 cr for FY27. Watch: margin recovery; commodity and rupee costs.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – IFB Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/ifb-industries-q2-profit-decline-cmwap48wy002y2qo6f6hzalii"
+   ],
+   [
+    "Multibagg – IFB margins",
+    "https://www.multibagg.ai/market-pulse/articles/ifb-appliance-margin-cost-pressure-concall-cmwap4ew5002z2qo6dcu8xxml"
+   ]
+  ],
+  "guide": {}
+ },
+ "INDOAMIN": {
+  "text": "⚠ Profit down. Specialty amines and agro-intermediate chemicals maker (Indo Amines). Q2 FY27 ==revenue +39% to ₹385 cr==, but ==net profit −52% to ₹8.6 cr== (vs ₹18.1 cr); H1 sales +35%, profit −16%. Watch: margin squeeze; H1 cash flow negative.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Univest – Indo Amines Q2 FY27",
+    "https://univest.in/blogs/indo-amines-q2-results-fy27-pat-9-crore"
+   ],
+   [
+    "Multibagg – Indo Amines H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/indo-amines-first-half-results-announcement-cmw4wfm9u006tu02r07rco3so"
+   ]
+  ],
+  "guide": {}
+ },
+ "KIRLFER": {
+  "text": "⚠ Slow growth. Castings, pig iron, steel and tubes maker (Kirloskar Ferrous). Q2 FY27 ==revenue +17% to ₹2,047 cr== (record), but ==PAT only +10% to ₹98 cr==; EBITDA margin fell to 10.9% from 12.2%. Capex ₹274 cr so far in FY27 for efficiency and green energy. Watch: margins; no guidance.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Kirloskar Ferrous Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/kirloskar-ferrous-q2-revenue-growth-cmw4od1nh000tqk2rurwckqb9"
+   ],
+   [
+    "Multibagg – KFIL margins",
+    "https://www.multibagg.ai/market-pulse/articles/kfil-q2-margin-pressure-ppt-cmvwljxqs000d2gmt7jsemyb9"
+   ]
+  ],
+  "guide": {}
+ },
+ "SAFARI": {
+  "text": "⚠ Profit down. Luggage maker (Safari, Urban Jungle, Carlton licence). Q2 FY27 ==revenue only +9% to ₹582 cr, PAT −21% to ₹37 cr==; H1 standalone profit −36%. Board approved capacity expansion (Jaipur, Halol debottlenecking) and premium push via 20-year Carlton licence. Watch: competition and margin pressure.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Univest – Safari Q2 FY27",
+    "https://univest.in/blogs/safari-industries-q2-results-fy27-pat-37-crore"
+   ],
+   [
+    "BW Retail – Safari Q2",
+    "https://bwretailworld.com/sector/fashion-lifestyle/safari-industries-q2-revenue-rises-9-1-to-rs-582-cr"
+   ],
+   [
+    "DSIJ – Safari capacity",
+    "https://insights.dsij.in/markets/reports/report-details/safari-industries-india-ltd/46083"
+   ]
+  ],
+  "guide": {}
+ },
+ "SARDAEN": {
+  "text": "⚠ Weak quarter. Power, mining, steel and ferro-alloys company (Sarda Energy & Minerals). Q2 FY27 ==income −6% to ₹1,505 cr, PAT −2% to ₹320 cr== because of planned plant shutdowns; but ==H1 EBITDA a record ₹1,326 cr (+4%), H1 PAT ₹799 cr (+4.5%)==. Acquired a manganese-ore block in Andhra Pradesh. Watch: hydropower is seasonal; growth is slow.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "InvestyWise – Sarda H1 FY27",
+    "https://www.investywise.com/?p=127306"
+   ],
+   [
+    "Sahi – Sarda Q2 FY27",
+    "https://www.sahi.com/news/sarda-energy-minerals-reports-q2-consolidated-net-profit-of-3-1-billion"
+   ]
+  ],
+  "guide": {}
  }
 }
