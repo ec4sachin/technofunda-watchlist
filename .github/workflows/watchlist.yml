@@ -55,9 +55,10 @@ jobs:
           git add data docs
           git diff --cached --quiet && exit 0
           git commit -m "Watchlist update $(TZ=Asia/Kolkata date +'%d %b %Y')"
-          for i in 1 2 3; do
-            git pull --rebase -q && git push -q && exit 0
-            git rebase --abort 2>/dev/null; sleep 10
+          for i in 1 2 3 4 5; do
+            if git pull --rebase -q && git -c push.negotiate=true push -q; then exit 0; fi
+            git rebase --abort 2>/dev/null || true
+            echo "Push failed (try $i of 5) - waiting and trying again"; sleep 30
           done
           echo "failed=1" >> "$GITHUB_OUTPUT"   # publish the dashboard anyway, then mark the run as failed
 
