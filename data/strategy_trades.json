@@ -3923,7 +3923,34 @@
    "512377": "2026-11-23",
    "BCSSL": "2026-11-23",
    "544975": "2026-11-23",
-   "TSFINV": "2026-11-23"
+   "TSFINV": "2026-11-23",
+   "SAIFL": "2026-11-23",
+   "SHRADHA": "2026-11-23",
+   "SIGNORIA": "2026-11-23",
+   "SILKFLEX": "2026-11-23",
+   "TGL": "2026-11-23",
+   "TIMESCAN": "2026-11-23",
+   "TIRUPATIFL": "2026-11-23",
+   "TOUCHWOOD": "2026-11-23",
+   "TRANSTEEL": "2026-11-23",
+   "TUNWAL": "2026-11-23",
+   "UNIHEALTH": "2026-11-23",
+   "URBAN": "2026-11-23",
+   "UWCSL": "2026-11-23",
+   "VEEKAYEM": "2026-11-23",
+   "VERITAAS": "2026-11-23",
+   "VERTOZ": "2026-11-23",
+   "VILAS": "2026-11-23",
+   "VILINBIO": "2026-11-23",
+   "VINSYS": "2026-11-23",
+   "VINYAS": "2026-11-23",
+   "VISHNUINFR": "2026-11-23",
+   "VR": "2026-11-23",
+   "WALPAR": "2026-11-23",
+   "WINSOL": "2026-11-23",
+   "WTICAB": "2026-11-23",
+   "YASHOPTICS": "2026-11-23",
+   "ZEAL": "2026-11-23"
   }
  },
  "setups": {
@@ -5108,6 +5135,29 @@
     "turnover": 17570096
    },
    {
+    "symbol": "TIPSMUSIC",
+    "name": "Tips Music",
+    "add": false,
+    "buy_above": 838.67,
+    "max_open": 859.53,
+    "gap_pct": 3.0,
+    "stop": 788.35,
+    "qty": 93,
+    "amount": 77996.31,
+    "range_pct": 5.1,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 5.14,
+     "strength": 22.21,
+     "near_high": 3.51,
+     "trend": 8.89,
+     "low_risk": 6.0,
+     "volume": 0.82
+    },
+    "turnover": 395865866
+   },
+   {
     "symbol": "YATHARTH",
     "name": "Yatharth Hospital & Trauma Care Services Ltd",
     "add": true,
@@ -5129,6 +5179,29 @@
      "volume": 0.66
     },
     "turnover": 304427675
+   },
+   {
+    "symbol": "ZENTEC",
+    "name": "Zen Technologies",
+    "add": false,
+    "buy_above": 1766.79,
+    "max_open": 1810.74,
+    "gap_pct": 3.0,
+    "stop": 1660.78,
+    "qty": 44,
+    "amount": 77738.76,
+    "range_pct": 5.7,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 5.71,
+     "strength": 5.66,
+     "near_high": 17.08,
+     "trend": 0.51,
+     "low_risk": 6.0,
+     "volume": 1.14
+    },
+    "turnover": 866562018
    }
   ]
  },
