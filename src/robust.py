@@ -17,7 +17,7 @@ import storage
 import strategy
 
 OUT = "robust_test.json"
-TEST_VERSION = "2"             # 2 = with the 15% pause rule (24 Nov 2026)
+TEST_VERSION = "3"             # 3 = with tight-base rule 2b (bodies <= 5%), 25 Nov 2026; 2 = with the 15% pause rule (24 Nov 2026)
 STRATEGY_ID = "switch"                     # Smart Switch (SP list)
 TRIGGERS = (0.005, 0.01, 0.015)            # buy-stop above the resistance
 GAPS = (0.03, 0.05, None)                  # gap-up limit (None = no limit)

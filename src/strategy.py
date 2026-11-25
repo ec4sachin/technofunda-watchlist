@@ -8,7 +8,8 @@ Swing Strategy rules (given by the user) - "version 5", chosen 4 Nov 2026 after 
   Entry (all must be true; checked on the candles before the entry day)
     1. Daily EMA 10 > EMA 20 > EMA 50 > EMA 200
     2. The last 5 daily candles (BASE_CANDLES; 4 until 5 Nov 2026) are in a tight range: highest high - lowest low
-       <= 6% of the current price. Resistance = highest high of those candles. Buy when price goes 0.5% above it (a buy-stop order).
+       <= 6% of the current price, OR (rule 2b, 25 Nov 2026) highest open/close - lowest open/close <= 5% of the
+       current price - either one is enough. Resistance = highest high of those candles. Buy when price goes 0.5% above it (a buy-stop order).
        Buy-stop level: 1% above the resistance for SP / DT strategies, 0.5% for the Growth-list strategy
        (a strategy can also have its own "trigger_pct" in data/strategies.json).
        Gap-up rule: if the day OPENS above the buy-stop level, buy at the open only when the open is not more than the
@@ -50,6 +51,8 @@ MAX_CATCHUP_DAYS = 10
 BASE_CANDLES = 5           # rule 2: number of candles in the tight base (5 chosen 5 Nov 2026 after backtest; was 4)
 BASE_RANGE = 0.06          # ... and the most their range may be (share of the current price)
 BASE_MEASURE = "hl"        # "hl" = highest high / lowest low (wicks count), "close" = closing prices only
+BASE_BODY_RANGE = 0.05     # rule 2b (25 Nov 2026): the base is ALSO tight when the candle bodies (highest open/close -
+                           # lowest open/close) span <= 5% of the current price. Either 2 or 2b is enough. None = off.
 ROOM_RULE = False          # rule 4 / 6 (room to the 42-candle resistance) - off in version 5
 TRIGGER_ABOVE = None       # buy-stop above the resistance: None = each strategy's own level (19 Nov 2026), see trigger_of()
 TRIGGER_SP, TRIGGER_GROWTH = 0.01, 0.005   # 1% for SP / DT strategies, 0.5% for the Growth-list strategy (put back 24 Nov 2026 after the backtest)
@@ -253,7 +256,11 @@ def swing_setup(df, i, above=None, gap="list"):
         res, low = float(df.c[i - n + 1:i + 1].max()), float(df.c[i - n + 1:i + 1].min())
     else:
         res, low = float(df.h[i - n + 1:i + 1].max()), float(df.l[i - n + 1:i + 1].min())
-    if (res - low) > BASE_RANGE * price:                                     # rule 2
+    body_hi = float(max(df.o[i - n + 1:i + 1].max(), df.c[i - n + 1:i + 1].max()))
+    body_lo = float(min(df.o[i - n + 1:i + 1].min(), df.c[i - n + 1:i + 1].min()))
+    tight_hl = (res - low) <= BASE_RANGE * price                                 # rule 2
+    tight_body = BASE_BODY_RANGE is not None and (body_hi - body_lo) <= BASE_BODY_RANGE * price   # rule 2b
+    if not (tight_hl or tight_body):
         return None
     if df.h[i] > df.e10[i] * 1.10:                                           # rule 3
         return None
@@ -268,6 +275,7 @@ def swing_setup(df, i, above=None, gap="list"):
     score = _scores(df, i, entry, stop, (res - low) / price * 100)
     return {"score": score, "trigger": entry, "above_pct": round(above * 100, 2), "max_gap": gap, "max_open": round(res * (1 + gap), 2) if gap is not None else None, "stop": round(stop, 2), "base_low": round(low, 2), "resistance": round(res, 2), "r42": round(r42, 2),
             "room": round(room, 1) if r42 > entry else None, "range_pct": round((res - low) / price * 100, 1),
+            "body_pct": round((body_hi - body_lo) / price * 100, 1), "tight_by": "wicks" if tight_hl else "bodies",
             "base_from": df.index[i - n + 1], "base_to": df.index[i]}
 
 

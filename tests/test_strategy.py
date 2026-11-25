@@ -524,3 +524,25 @@ def test_portfolio_pause():
     a = S.portfolio(trades, "2020-01-01", capital=100000, pct=20)
     b = S.portfolio(trades, "2020-01-01", capital=100000, pct=20, pause_dd=0.15, mood=M())
     assert a["pauses"] == 0 and b["pauses"] == 1 and b["trades"] < a["trades"] and b["return_pct"] > a["return_pct"]
+
+
+def test_body_tight_base():
+    """Rule 2b (25 Nov 2026): long wicks (>6%) but bodies within 5% still count as a tight base."""
+    closes = uptrend_then_base(base=5) + [0] * 0
+    closes = closes[:-5] + [closes[-6] * x for x in (0.995, 1.0, 0.998, 1.001, 1.0)]
+    h = hist_from(closes)
+    n = len(closes)
+    for k in range(n - 5, n):          # long wicks: 4% above and below each body
+        h["h"][k] = max(h["o"][k], h["c"][k]) * 1.04
+        h["l"][k] = min(h["o"][k], h["c"][k]) * 0.96
+    df = stg._frame(h)
+    keep = stg.BASE_BODY_RANGE
+    try:
+        stg.BASE_BODY_RANGE = None
+        assert stg.swing_setup(df, n - 1) is None          # wicks alone: too wide
+        stg.BASE_BODY_RANGE = 0.05
+        plan = stg.swing_setup(df, n - 1)
+        assert plan is not None and plan["tight_by"] == "bodies" and plan["body_pct"] <= 5
+        assert plan["resistance"] == round(max(h["h"][n - 5:]), 2)   # buy level still from the highest high
+    finally:
+        stg.BASE_BODY_RANGE = keep
