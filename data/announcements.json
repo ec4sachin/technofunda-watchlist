@@ -8,13 +8,13 @@
   },
   "nse": {
    "days": 1,
-   "rows": 0,
-   "last_error": "HTTP 403"
+   "rows": 113,
+   "last_error": ""
   },
   "matched": {
    "bse_codes": 93,
    "nse_only_codes": 237,
-   "new": 0
+   "new": 1
   }
  },
  "items": {
@@ -351,6 +351,14 @@
    }
   ],
   "BETA": [
+   {
+    "d": "2026-11-25",
+    "t": "Beta Drugs Limited has informed the Exchange regarding a press release dated November 25, 2026, titled \"Beta Drugs Limited receives COFEPRIS certification for select Oncology Products, reinforcing Its global quality credentials and strengthening its position in the high-growth M…",
+    "k": "Product / approval",
+    "url": "https://nsearchives.nseindia.in/corporate/BETA_25112026130954_press_release_cofepris.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-25"
+   },
    {
     "d": "2026-11-19",
     "t": "Beta Drugs Limited has informed the Exchange regarding a press release dated November 19, 2026, titled \"Beta Drugs Limited ( Beta ) forms Oncology Joint Venture withIMGSA Groupe SPA ( IMGSA )\".",

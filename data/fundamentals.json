@@ -1003,11 +1003,11 @@
   "as_of": "2026-11-24"
  },
  "ESCONET": {
-  "market_cap": 431.0,
-  "price": 327.0,
+  "market_cap": 422.0,
+  "price": 320.0,
   "high_52w": 407.0,
   "low_52w": 91.2,
-  "pe": 16.8,
+  "pe": 16.4,
   "book_value": 75.0,
   "dividend_yield": 0.0,
   "roce": 11.8,
@@ -7506,8 +7506,8 @@
   ]
  },
  "DEEPA": {
-  "market_cap": 1673.0,
-  "price": 174.0,
+  "market_cap": 1681.0,
+  "price": 175.0,
   "high_52w": 277.0,
   "low_52w": 165.0,
   "pe": 14.6,
@@ -10735,11 +10735,11 @@
   ]
  },
  "MPIMANIPAL": {
-  "market_cap": 7198.0,
-  "price": 310.0,
+  "market_cap": 7214.0,
+  "price": 311.0,
   "high_52w": 458.0,
   "low_52w": 295.0,
-  "pe": 26.7,
+  "pe": 26.8,
   "book_value": 54.6,
   "dividend_yield": 0.0,
   "roce": 44.9,
@@ -19619,11 +19619,11 @@
   ]
  },
  "544844": {
-  "market_cap": 1877.0,
-  "price": 941.0,
+  "market_cap": 1879.0,
+  "price": 942.0,
   "high_52w": 1066.0,
   "low_52w": 447.0,
-  "pe": 41.6,
+  "pe": 41.7,
   "book_value": 151.0,
   "dividend_yield": 0.0,
   "roce": 33.4,
@@ -20327,11 +20327,11 @@
   ]
  },
  "ESDS": {
-  "market_cap": 12270.0,
-  "price": 1047.0,
+  "market_cap": 12219.0,
+  "price": 1042.0,
   "high_52w": 1864.0,
   "low_52w": 746.0,
-  "pe": 95.0,
+  "pe": 94.6,
   "book_value": 110.0,
   "dividend_yield": 0.0,
   "roce": 30.2,
@@ -24419,11 +24419,11 @@
   "as_of": "2026-11-16"
  },
  "SMT": {
-  "market_cap": 5454.0,
+  "market_cap": 5460.0,
   "price": 537.0,
   "high_52w": 579.0,
   "low_52w": 347.0,
-  "pe": 76.0,
+  "pe": 76.1,
   "dividend_yield": 0.0,
   "roce": 11.4,
   "roe": 10.4,
@@ -26695,11 +26695,11 @@
   ]
  },
  "KANOHAR": {
-  "market_cap": 7969.0,
-  "price": 1006.0,
+  "market_cap": 7993.0,
+  "price": 1009.0,
   "high_52w": 1210.0,
   "low_52w": 672.0,
-  "pe": 48.4,
+  "pe": 48.6,
   "book_value": 93.3,
   "dividend_yield": 0.0,
   "roce": 54.3,
@@ -27992,11 +27992,11 @@
   "as_of": "2026-11-18"
  },
  "TECHNOCRAF": {
-  "market_cap": 2036.0,
-  "price": 514.0,
+  "market_cap": 2020.0,
+  "price": 510.0,
   "high_52w": 568.0,
   "low_52w": 284.0,
-  "pe": 42.4,
+  "pe": 42.0,
   "book_value": 95.4,
   "dividend_yield": 0.0,
   "roce": 30.8,

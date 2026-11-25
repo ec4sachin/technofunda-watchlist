@@ -7,9 +7,7 @@
  "unchecked": [],
  "investor_moves": [],
  "no_price": [],
- "warnings": [
-  "Exchange announcements could not be read today — will try again next run"
- ],
+ "warnings": [],
  "first_marked": [],
  "new_listing": [
   [
@@ -308,5 +306,5 @@
  "monthly_pass": 0,
  "mode": "auto",
  "monthly_done": false,
- "run_at": "25 Nov 2026, 02:16 PM IST"
+ "run_at": "25 Nov 2026, 02:38 PM IST"
 }
