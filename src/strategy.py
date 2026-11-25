@@ -51,7 +51,7 @@ MAX_CATCHUP_DAYS = 10
 BASE_CANDLES = 5           # rule 2: number of candles in the tight base (5 chosen 5 Nov 2026 after backtest; was 4)
 BASE_RANGE = 0.06          # ... and the most their range may be (share of the current price)
 BASE_MEASURE = "hl"        # "hl" = highest high / lowest low (wicks count), "close" = closing prices only
-BASE_BODY_RANGE = 0.05     # rule 2b (25 Nov 2026): the base is ALSO tight when the candle bodies (highest open/close -
+BASE_BODY_RANGE = None     # rule 2b (25 Nov 2026, switched OFF same day after the backtest: Smart Switch 1501% -> 378%; 0.05 = on): the base is ALSO tight when the candle bodies (highest open/close -
                            # lowest open/close) span <= 5% of the current price. Either 2 or 2b is enough. None = off.
 ROOM_RULE = False          # rule 4 / 6 (room to the 42-candle resistance) - off in version 5
 TRIGGER_ABOVE = None       # buy-stop above the resistance: None = each strategy's own level (19 Nov 2026), see trigger_of()
