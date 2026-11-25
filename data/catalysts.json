@@ -5004,5 +5004,204 @@
    ]
   ],
   "guide": {}
+ },
+ "MEGATHERM": {
+  "text": "⚠ Profit down. Kolkata induction-furnace and transformer maker (Megatherm Induction, SME). ==H1 FY27 income +20% to ₹196 cr, but PAT −21% to ₹9.5 cr==; EBITDA margin fell to 9.1% from 12.3% on higher costs. Management keeps ==FY27 guidance of ₹450 cr revenue== (EBITDA ₹59 cr), H2-heavy; Gulf orders ~₹80–90 cr. Watch: Middle-East delays; needs a much bigger H2.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Megatherm H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/megatherm-h1fy27-income-profit-cmwjtnwif00cy2ntkg245n82v"
+   ],
+   [
+    "Sovrenn – Megatherm H1 FY27 concall",
+    "https://www.sovrenn.com/concall-summary/megatherm-induction/megatherm-induction-q2-fy27-concall-rs-195-cr-revenue-outlook"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "cr": [
+     450,
+     450
+    ]
+   },
+   "profit": {
+    "fy": "FY27",
+    "kind": "EBITDA",
+    "cr": [
+     59,
+     59
+    ]
+   }
+  }
+ },
+ "VIDYAWIRES": {
+  "text": "Anand (Gujarat) maker of copper and aluminium winding wires and conductors (Vidya Wires), listed 2025–26. ==Q2 FY27 sales +54% to ₹578 cr, net profit +42% to ₹14.8 cr==; Q1 FY27 PAT was also +42%. Management guides ==20–40% revenue growth== and better EBITDA per kg (₹60–65 by FY28) as new capacity starts. Watch: thin margins; copper price swings.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "InvestyWise – Vidya Wires Q2 FY27",
+    "https://www.investywise.com/?p=130624"
+   ],
+   [
+    "Univest – Vidya Wires Q2 FY27",
+    "https://univest.in/blogs/vidya-wires-q2-results-fy27-pat-15-crore"
+   ],
+   [
+    "Arthneeti – Vidya Wires guidance",
+    "https://www.arthneeti.com/insights/vidya-wires-q2-fy27-earnings"
+   ],
+   [
+    "Sahi – Vidya Wires Q1 FY27",
+    "https://www.sahi.com/news/vidya-wires-q1-cons-net-profit-rises-to-171m-rupees-vs-121m-yoy-5585280-PE1_"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     20,
+     40
+    ]
+   }
+  }
+ },
+ "JSIPL": {
+  "text": "Steel pipes, tubes and infrastructure products maker (Jindal Supreme India), listed Sep 2026. ==Q2 FY27 revenue +36% to ₹216 cr, PAT +132% to ₹9.9 cr==; EBITDA margin up to 7.8% from 4.8% as value-added products reached 57.5% of mix. IPO cut debt/equity to 0.4. Watch: thin margins; working capital used cash in H1.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Jindal Supreme Q2 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/jindal-q2-fy27-profit-growth-ppt-cmwhxs10h00na2rpb4y6x7nyg"
+   ],
+   [
+    "Multibagg – Jindal Supreme mix",
+    "https://www.multibagg.ai/market-pulse/articles/jindal-supreme-value-added-mix-ppt-cmwhxs0jh00n92rpb12rtrxe9"
+   ],
+   [
+    "Multibagg – Jindal Supreme debt",
+    "https://www.multibagg.ai/market-pulse/articles/jindal-supreme-debt-cash-flow-ppt-cmwhxsboe00nb2rpb2487g75o"
+   ]
+  ],
+  "guide": {}
+ },
+ "TRANSPEK": {
+  "text": "Vadodara specialty-chemicals maker (Transpek Industry). Q2 FY27 ==revenue +21% to ₹194 cr, PAT +63% to ₹20.6 cr== – a recovery after a weak Q1 FY27 (profit −43%). Shifting towards domestic sales and specialty chemicals (22% of mix). Watch: chemicals cycle; Q1 weakness means H1 is still soft.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Univest – Transpek Q2 FY27",
+    "https://univest.in/blogs/transpek-industry-q2-results-fy27-pat-21-crore"
+   ],
+   [
+    "Multibagg – Transpek Q1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/transpek-profit-falls-q2-results-cmwf0rnlm00362sqreaat4zd2"
+   ]
+  ],
+  "guide": {}
+ },
+ "TAALTECH": {
+  "text": "Aerospace engineering services and aircraft charter company (TAAL Tech). ==Q2 FY27 revenue +41% to ₹68.6 cr, PAT +49% to ₹21.2 cr==; Q1 FY27 had revenue +42%, PAT +42%. High ROE (~25%); declared an interim dividend. Watch: depends on a few aerospace clients; no guidance.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "JM Financial – TAAL Tech Q2 FY27",
+    "https://www.jmfinancialservices.in/market-news-and-insights/1743683"
+   ],
+   [
+    "Sahi – TAAL Tech Q2 FY27",
+    "https://www.sahi.com/news/taal-tech-reports-q2-net-profit-of-21-2-crore-vs-14-3-crore-yoy"
+   ],
+   [
+    "Univest – TAAL Q1 FY27",
+    "https://univest.in/blogs/taal-technologies-q1-results-fy27-pat-19-crore"
+   ]
+  ],
+  "guide": {}
+ },
+ "LAXMIINDIA": {
+  "text": "Jaipur NBFC lending to small businesses (secured MSME ~81% of loans), vehicles and construction. ==Q2 FY27 PAT +64% to ₹15.4 cr==; ==H1 PAT +66%, AUM +33% to ₹1,844 cr==, NIM up to 11.3%, 209 branches. Guidance: ==AUM growth 35–40% in FY27== (raised), NII and PAT growth 35–40%; credit cost 1–1.25%. Watch: ₹5.9 cr provision on an assigned portfolio; may need equity later.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Laxmi India Finance H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/laxmi-india-finance-h1-pat-ppt-cmwepnmll006e2npipv80sjix"
+   ],
+   [
+    "Sovrenn – Laxmi India Finance Q2 concall",
+    "https://www.sovrenn.com/concall-summary/laxmi-india-finance/laxmi-india-finance-q2-fy27-concall-35-40-aum-growth-guidance-outlook"
+   ],
+   [
+    "Univest – Laxmi India Finance Q2",
+    "https://univest.in/blogs/laxmi-india-finance-q2-results-fy27-pat-15-crore"
+   ],
+   [
+    "Multibagg – Laxmi India guidance",
+    "https://www.multibagg.ai/market-pulse/articles/laxmi-india-finance-h1-pat-cmwlu689k000b2wpmse4iy8x7"
+   ]
+  ],
+  "guide": {
+   "profit": {
+    "fy": "FY27",
+    "kind": "PAT",
+    "pct": [
+     35,
+     40
+    ]
+   },
+   "note": "AUM growth 35–40% in FY27; NII and PAT growth 35–40%"
+  }
+ },
+ "DBREALTY": {
+  "text": "⚠ Profit down. Mumbai real-estate developer (Valor Estate, formerly DB Realty). Q2 FY27 ==revenue +14% to ₹156 cr, but consolidated PAT −16% to ₹8.4 cr==; standalone net loss ₹23.8 cr. Revenue depends on project completions. Watch: lumpy real-estate revenue; profit falling.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Angel One – Valor Estate Q2 FY27",
+    "https://www.angelone.in/news/stocks/valor-estate-share-price-declines-over-5-as-q2fy27-net-profit-falls-15-9"
+   ],
+   [
+    "Univest – Valor Estate Q2 FY27",
+    "https://univest.in/blogs/valor-estate-q2-results-fy27-pat-8-crore"
+   ]
+  ],
+  "guide": {}
+ },
+ "RELTD": {
+  "text": "⚠ Profit down. Solar power producer and EPC company with an EV business (Ravindra Energy). Q2 FY27 ==revenue +55% to ₹190 cr, but PAT −38% to ₹19 cr==. Renewable EBITDA rose to ₹94 cr in H1 (from ₹67 cr); targets ==500 MW operating by March 2027== (261 MW now) and ~₹600 cr EPC revenue in FY27. Watch: profit drop; EV unit still building.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Univest – Ravindra Energy Q2 FY27",
+    "https://univest.in/blogs/ravindra-energy-q2-results-fy27-pat-19-crore"
+   ],
+   [
+    "Multibagg – Ravindra 500 MW target",
+    "https://www.multibagg.ai/market-pulse/articles/ravindra-energy-targets-500mw-march-concall-cmw9bdryk00a52mpheqh6vpdy"
+   ],
+   [
+    "Sovrenn – Ravindra EPC guidance",
+    "https://www.sovrenn.com/financial-results/ravindra-energy?view=standalone"
+   ]
+  ],
+  "guide": {
+   "note": "500 MW operating renewable capacity by March 2027; EPC revenue ~₹600 cr in FY27"
+  }
+ },
+ "PPL": {
+  "text": "PVC pipes and flexible-packaging maker (Prakash Pipes). ==Q2 FY27 revenue +43% to ₹259 cr, net profit +72% to ₹16.1 cr==; operating profit +25%; revenue has risen four quarters in a row. Watch: PVC price swings; packaging margins.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Univest – Prakash Pipes Q2 FY27",
+    "https://univest.in/blogs/prakash-pipes-q2-results-fy27-pat-16-crore"
+   ],
+   [
+    "Equitybulls – Prakash Pipes Q2 FY27",
+    "https://www.equitybulls.com/news/378824/prakash-pipes-ltd-reports-q2-h1-fy27-results"
+   ]
+  ],
+  "guide": {}
  }
 }
