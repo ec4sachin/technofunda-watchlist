@@ -5840,5 +5840,146 @@
    ]
   ],
   "guide": {}
+ },
+ "544354": {
+  "text": "⚠ Slow profit growth. Ahmedabad solar EPC and rooftop installer (Solarium Green Energy). ==H1 FY27 revenue +166% to ₹310 cr, but PAT only +14% to ₹10.5 cr== as gross margin nearly halved to 21.6%. ==Order book ₹721 cr== (incl. two 50 MWac single-site EPC jobs). Watch: ==operating cash flow −₹74–78 cr, receivables up to ₹282 cr==.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Solarium H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/solarium-green-energy-h1-results-cmwi78zxc00oo2rpbevykv1il"
+   ],
+   [
+    "Multibagg – Solarium margins",
+    "https://www.multibagg.ai/market-pulse/articles/solarium-h1-revenue-margin-mix-ppt-cmwi79ofd00or2rpb483gen3h"
+   ],
+   [
+    "Multibagg – Solarium order book",
+    "https://www.multibagg.ai/market-pulse/articles/solarium-single-site-epc-shift-ppt-cmwi79szb00ot2rpb5lujswuq"
+   ]
+  ],
+  "guide": {},
+  "ob": {
+   "cr": [
+    720.87
+   ],
+   "asof": "2026-09-30",
+   "text": "Incl. ₹461 cr EPC work"
+  }
+ },
+ "544435": {
+  "text": "⚠ Profit flat. Adtech and digital-media company (Adcounty Media India), Ashish Kacholia-backed. ==H1 FY27 revenue +41% to ₹50 cr, but PAT flat at ₹8.4 cr==; Q2 profit −25% as margins fell. Management blamed international-market swings and client management changes. Watch: Q2 margin drop; low P/E (~8).",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Adcounty H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/adcounty-media-h1-revenue-margins-ppt-cmwkp5p32002a2smyc32deswx"
+   ],
+   [
+    "JM Financial – Adcounty Q2 FY27",
+    "https://www.jmfinancialservices.in/market-news-and-insights/1749787"
+   ]
+  ],
+  "guide": {}
+ },
+ "544463": {
+  "text": "⚠ Slow profit growth. Navi Mumbai warehousing and liquid-terminal services firm for the oil and petrochemical sector (Repono). ==H1 FY27 income +22% to ₹37 cr, EBITDA +18%, but PAT only +9% to ₹3.5 cr==. Building a rail-fed petroleum oil terminal at Mathura (EPC + O&M). Watch: terminal construction progress.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Outlook Business – Repono H1 FY27",
+    "https://www.outlookbusiness.com/spotlight/news-wire/repono-limited-reports-216-growth-in-h1-fy27-total-income-net-profit-rises-89-to-rs-351-cr"
+   ],
+   [
+    "Daily Guardian – Repono H1 FY27",
+    "https://thedailyguardian.com/india/repono-limited-reports-21-6-growth-in-h1-fy27-total-income-net-profit-rises-8-9-to-rs-3-51-cr-775108/amp/"
+   ]
+  ],
+  "guide": {}
+ },
+ "544531": {
+  "text": "Digital textile-printing ecosystem company – printers, inks and sublimation paper (True Colors). ==H1 FY27 revenue +21% to ₹183 cr, PAT +43% to ₹21 cr==; EBITDA margin up to 17.7%. Paper volume more than doubled; consumables now 56% of sales. In line with guidance of ==20%+ revenue growth==. Watch: machine sales fell 18%.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – True Colors H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/true-colors-h1-pat-growth-cmwaqmjyw00412qo6tfa2oyhz"
+   ],
+   [
+    "Equitybulls – True Colors H1 FY27",
+    "https://www.equitybulls.com/news/378216/true-colors-ltd-reports-h1fy27-results"
+   ],
+   [
+    "Multibagg – True Colors mix",
+    "https://www.multibagg.ai/market-pulse/articles/true-colors-paper-recurring-revenue-ppt-cmvwi4e0e00152vpnclci0lyo"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     20,
+     20
+    ],
+    "text": "20%+"
+   }
+  }
+ },
+ "543991": {
+  "text": "Pune environmental-tech and compliance company (Techknowgreen Solutions) with patented air-cleaning tech. ==H1 FY27 revenue +46% to ₹24.6 cr==; confirmed order book ₹46 cr; ~35 new customers. Management targets ==30–40% yearly growth==; interim dividend ₹0.50. Watch: H1 profit not stated in sources – check filing; operations used cash.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Sovrenn – Techknowgreen Q2 concall",
+    "https://www.sovrenn.com/concall-summary/techknowgreen-solutions/techknowgreen-solutions-q2-fy27-concall-rs-46-cr-order-book-outlook"
+   ],
+   [
+    "Screener – Techknowgreen",
+    "https://www.screener.in/company/543991/consolidated/"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     30,
+     40
+    ]
+   }
+  },
+  "ob": {
+   "cr": [
+    46
+   ],
+   "asof": "2026-09-30",
+   "text": "Confirmed order book"
+  }
+ },
+ "544695": {
+  "text": "Delhi scaffolding and formwork maker and renter (Msafe Equipments). ==H1 FY27 revenue +47% to ₹72 cr, PAT +50% to ₹15.8 cr==; operating margin ~40%. Rentals tripled; capacity at 9,000 TPA, target raised to 15,000 TPA; Mathura plant by May 2027. Management confident of ==₹150 cr FY27 revenue (maybe ₹170 cr)==. Watch: H2 must nearly double.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Sovrenn – Msafe H1 FY27",
+    "https://www.sovrenn.com/concall-summary/msafe-equipments"
+   ],
+   [
+    "Multibagg – Msafe rentals",
+    "https://www.multibagg.ai/market-pulse/articles/msafe-steel-rental-growth-concall-cmw3cycui00472mpho62lqsor"
+   ],
+   [
+    "Sovrenn – Msafe guidance",
+    "https://www.sovrenn.com/financial-results/msafe-equipments"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "cr": [
+     150,
+     170
+    ]
+   }
+  }
  }
 }
