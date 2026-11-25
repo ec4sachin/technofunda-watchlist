@@ -5981,5 +5981,110 @@
     ]
    }
   }
+ },
+ "526071": {
+  "text": "⚠ Weak results. Securities trading, advisory and bullion-trading company (Stellant Securities). Q2 FY27 ==revenue −50% to ₹20.6 cr and net profit −99% to ₹0.4 cr== (vs ₹29 cr); Q1 FY27 profit was ₹17 cr. Earnings swing with market gains. Watch: very lumpy, treasury-type profit; ₹78 cr preferential issue.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Univest – Stellant Q2 FY27",
+    "https://univest.in/blogs/stellant-securities-q2-results-fy27-pat-0-4-crore"
+   ],
+   [
+    "Kalkine – Stellant Q1 FY27",
+    "https://www.kalkine.co.in/article/earnings/stellant-securities-q1-fy27-results-net-profit-jumps-906-to-1707-crore-revenue-rises-408"
+   ]
+  ],
+  "guide": {}
+ },
+ "526638": {
+  "text": "⚠ Profit down. Technical textiles and geotextiles maker with some property business (Texel Industries). Q2 FY27 ==sales +45% to ₹48 cr, but net profit −11%==; Q1 FY27 profit was +36% on sales +11%. Watch: thin margins; profit not keeping pace with sales.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "JM Financial – Texel Q2 FY27",
+    "https://www.jmfinancialservices.in/market-news-and-insights/1742850"
+   ],
+   [
+    "JM Financial – Texel Q1 FY27",
+    "https://www.jmfinancialservices.in/market-news-and-insights/1723494"
+   ]
+  ],
+  "guide": {}
+ },
+ "538565": {
+  "text": "Food/seafood processing and trading company (Vistar Amar). Q2 FY27 ==sales +140% to ₹27 cr, net profit ₹0.83 cr vs a loss== a year ago; Q1 FY27 revenue +132% to ₹63 cr with profit ₹4.1 cr. Watch: very volatile quarterly profit; thin margins.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Univest – Vistar Amar Q2 FY27",
+    "https://univest.in/blogs/vistar-amar-q2-results-fy27-pat-0-83-crore"
+   ],
+   [
+    "Multibagg – Vistar Amar Q1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/vistar-amar-q1-fy27-results-cmw0javgz001r2ft8thx4t661"
+   ]
+  ],
+  "guide": {}
+ },
+ "541083": {
+  "text": "⚠ Slow profit growth. Kitchen-chimney and built-in appliance maker (Inflame Appliances, SME). ==H1 FY27 income +21% to ₹92 cr, EBITDA +26%, but PAT only +8% to ₹3.8 cr== because of higher tax. Chimney volumes up to 1.57 lakh units. Management guides ~35% growth for FY28; plans BLDC-motor JV to cut China dependence. Watch: BIS hob rules as a new driver.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Inflame H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/inflame-h1-fy27-profit-growth-ppt-cmwka4qa400022smpbn8mddyx"
+   ],
+   [
+    "Sovrenn – Inflame Q2 concall",
+    "https://www.sovrenn.com/concall-summary/inflame-appliances/inflame-appliances-q2-fy27-concall-rs-92-3-cr-revenue-35-fy28-guidance-outlook"
+   ]
+  ],
+  "guide": {
+   "note": "~35% growth guided for FY28"
+  }
+ },
+ "544735": {
+  "text": "AI-powered loyalty and rewards technology company (Novus Loyalty, SME), listed March 2026. ==H1 FY27 revenue +37% to ₹98 cr, PAT +32% to ₹7.6 cr==; EBITDA +21%. New Dubai subsidiary expects ₹7–8 cr Middle-East revenue in FY27 and ₹12–15 cr next year. Watch: most IPO money still unused.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Arthneeti – Novus Loyalty H1 FY27",
+    "https://www.arthneeti.com/insights/novus-loyalty-ltd-q2-fy27-earnings"
+   ],
+   [
+    "Multibagg – Novus Middle East",
+    "https://www.multibagg.ai/market-pulse/articles/novus-loyalty-middle-east-revenue-concall-cmw1eplfl009g31qll8kvdupf"
+   ]
+  ],
+  "guide": {}
+ },
+ "544755": {
+  "text": "Beauty and personal-care brand with franchise stores and online sales (Recode Studios), Mukul Agrawal holds 5.6%. ==H1 FY27 revenue +24% to ₹46 cr, PAT +27% to ₹4.9 cr==; franchise share doubled to 37%. Promoters guide ==at least 50% growth in FY27== – H2 must accelerate. Watch: EBITDA margin fell; operating cash outflow ₹10 cr.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Recode H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/recode-studios-limited-h1-fy27-ppt-cmwk6ctvr00072hp3fa7mt5qm"
+   ],
+   [
+    "Multibagg – Recode guidance",
+    "https://www.multibagg.ai/market-pulse/articles/recode-guides-fy27-growth-expansion-ppt-cmwk6clds00062hp3kl1azkld"
+   ],
+   [
+    "BW Retail – Recode cash flow",
+    "https://bwretailworld.com/beauty/recode-studios-revenue-rises-24-operating-cash-outflow-at-rs-10-23-cr"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     50,
+     50
+    ],
+    "text": "at least 50%"
+   }
+  }
  }
 }
