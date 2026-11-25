@@ -5559,5 +5559,172 @@
    ]
   ],
   "guide": {}
+ },
+ "ADVENTHTL": {
+  "text": "⚠ Weak results. Hotel owner-developer (Advent Hotels International). Q2 FY27 ==revenue −4% to ₹74 cr, net profit only ₹1.5 cr==; Q1 FY27 profit fell 79% to ₹6.8 cr. Stock near its yearly low. December quarter is usually the strongest. Watch: Q3 hotel season; joint-venture losses.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Sahi – Advent Hotels Q2 FY27",
+    "https://www.sahi.com/news/advent-hotels-reports-q2-revenue-of-741m-rupees-vs-770m-yoy"
+   ],
+   [
+    "Univest – Advent Hotels review",
+    "https://univest.in/blogs/advent-hotels-international-analyst-review"
+   ],
+   [
+    "Multibagg – Advent Q1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/advent-hotels-q2-results-cmw0mswmj003l2ft8ib9rjsir"
+   ]
+  ],
+  "guide": {}
+ },
+ "AGARIND": {
+  "text": "Bitumen, bitumen-emulsion and petrochemical logistics company (Agarwal Industrial Corporation), supplying road builders. Q2 FY27 ==revenue +26% to ₹309 cr, net profit +30% to ₹16 cr==, a recovery after weak FY26 quarters. Watch: crude/bitumen prices; monsoon-season road demand; stock fell ~60% in a year.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Arthneeti – Agarwal Industrial Q2 FY27",
+    "https://www.arthneeti.com/insights/agarwal-indl-q2-fy27-earnings"
+   ],
+   [
+    "Univest – Agarwal Industrial Q2",
+    "https://univest.in/blogs/agarwal-industrial-corporation-q2-results-fy27-pat-16-crore"
+   ],
+   [
+    "Sahi – Agarwal Industrial Q2",
+    "https://www.sahi.com/news/agarwal-industrial-corp-reports-q2-revenue-of-309-crore-vs-245-crore-yoy"
+   ]
+  ],
+  "guide": {}
+ },
+ "ASHWINI": {
+  "text": "⚠ Profit sharply lower. Container-trucking logistics company in Maharashtra and Gujarat (Ashwini Container Movers, SME). ==H1 FY27 revenue +36% to ₹74.8 cr==, but ==H1 net profit only ₹0.83 cr== (FY26 full-year PAT was ₹14 cr). Port delays at JNPA from Middle-East disruption hit operations. Watch: check the profit drop in the filing; capex ₹61 cr.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Arthneeti – Ashwini Q2 FY27",
+    "https://www.arthneeti.com/insights/ashwini-container-movers-ltd-q2-fy27-earnings"
+   ],
+   [
+    "Screener – Ashwini",
+    "https://www.screener.in/company/ASHWINI/"
+   ],
+   [
+    "ScanX – Ashwini FY26",
+    "https://scanx.trade/stock-market-news/companies/ashwini-container-movers-fy26-pat-rises-22-to-14-06-crore/44973518"
+   ]
+  ],
+  "guide": {}
+ },
+ "BELLACASA": {
+  "text": "⚠ Profit down. Jaipur home-textile and apparel maker/retailer (Bella Casa Fashion & Retail). Q2 FY27 ==sales +11% to ₹139 cr, but net profit −37% to ₹4 cr==; Q1 FY27 profit also fell 46%. EBITDA +10%, so higher interest/depreciation ate profit. Watch: two weak quarters in a row.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "JM Financial – Bella Casa Q2 FY27",
+    "https://www.jmfinancialservices.in/market-news-and-insights/1745941"
+   ],
+   [
+    "Arthneeti – Bella Casa Q2",
+    "https://www.arthneeti.com/insights/bella-casa-fashion-retail-ltd-q2-fy27-earnings"
+   ],
+   [
+    "JM Financial – Bella Casa Q1 FY27",
+    "https://www.jmfinancialservices.in/market-news-and-insights/1723486"
+   ]
+  ],
+  "guide": {}
+ },
+ "BETA": {
+  "text": "Oncology generics maker – branded cancer drugs, contract manufacturing (CMO) and APIs (Beta Drugs). ==H1 FY27 revenue +29% to ₹263 cr, PAT +43% to ₹34 cr==; gross margin up to 56%. Management keeps ==FY27 guidance of ₹535 cr+ revenue== at 23–24% EBITDA margin (H2-heavy); 872 export registrations in pipeline. Watch: platinum-API supply delays.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "5paisa – Beta Drugs H1 FY27",
+    "https://www.5paisa.com/blog/beta-drugs-h1-fy27-results-revenue-pat"
+   ],
+   [
+    "Multibagg – Beta Drugs guidance",
+    "https://www.multibagg.ai/market-pulse/articles/beta-drugs-h1-revenue-growth-cmvztzud3006e2vpem4ppxg02"
+   ],
+   [
+    "Multibagg – Beta outlook",
+    "https://www.multibagg.ai/market-pulse/articles/beta-drugs-retains-growth-outlook-announcement-cmw1590s7006a31qlyd0ltabp"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "cr": [
+     535,
+     535
+    ]
+   },
+   "margin": {
+    "fy": "FY27",
+    "kind": "EBITDA",
+    "pct": [
+     23,
+     24
+    ]
+   }
+  }
+ },
+ "BRANDMAN": {
+  "text": "Sports and lifestyle brand distributor/retailer (Brandman Retail). Q2 FY27 ==revenue +35% to ₹47 cr, net profit +30% to ₹5.2 cr==. Low P/E (~9). Watch: profit can swing quarter to quarter; brand-licence renewals.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Univest – Brandman Q2 FY27",
+    "https://univest.in/blogs/brandman-retail-q2-results-fy27-pat-5-crore"
+   ],
+   [
+    "Arthneeti – Brandman Q2",
+    "https://www.arthneeti.com/insights/brandman-retail-ltd-q2-fy27-earnings"
+   ]
+  ],
+  "guide": {}
+ },
+ "CANARYS": {
+  "text": "⚠ Weak results. Bengaluru IT and digital-engineering services firm (Canarys Automations, SME) with US arm Fortira. ==H1 FY27 revenue −2% to ₹98 cr, PAT −29% to ₹6.4 cr==; margin fell. Management targets at least 20% yearly revenue growth. Watch: growth has stalled after FY26's jump.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Canarys H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/canarys-automations-h1-profit-drop-announcement-cmwfk3e2h005z2rl9s0gcegm0"
+   ],
+   [
+    "Arthneeti – Canarys guidance",
+    "https://www.arthneeti.com/insights/canarys-automations-ltd-q1-fy27-earnings"
+   ]
+  ],
+  "guide": {
+   "rev": {
+    "fy": "FY27",
+    "pct": [
+     20,
+     20
+    ],
+    "text": "minimum 20% a year"
+   }
+  }
+ },
+ "CONNPLEX": {
+  "text": "Ahmedabad franchise-led cinema chain (Connplex Cinemas, SME). ==H1 FY27 revenue +54% to ₹98.5 cr, net profit +30% to ₹17 cr==; interim dividend ₹0.50. Management guides ==80–85 new screens in FY27== (maybe 100+), with 230+ screens in the FY27–28 pipeline. Watch: screen additions have been slower than promised; film slate.",
+  "date": "2026-11-25",
+  "sources": [
+   [
+    "Multibagg – Connplex H1 FY27",
+    "https://www.multibagg.ai/market-pulse/articles/connplex-cinemas-h1-dividend-profit-cmw3kyph6002nc42rfkvjo6s8"
+   ],
+   [
+    "Sovrenn – Connplex H1 FY27",
+    "https://www.sovrenn.com/financial-results/connplex-cinemas"
+   ]
+  ],
+  "guide": {
+   "note": "80–85 new screens in FY27 (100+ possible)"
+  }
  }
 }
