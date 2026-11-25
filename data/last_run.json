@@ -7,7 +7,9 @@
  "unchecked": [],
  "investor_moves": [],
  "no_price": [],
- "warnings": [],
+ "warnings": [
+  "Exchange announcements could not be read today — will try again next run"
+ ],
  "first_marked": [],
  "new_listing": [
   [
@@ -295,16 +297,16 @@
   "TTM Profit > 30%": 0,
   "52W High": 0,
   "Daily Volume Scan": 0,
-  "Weekly Volume Scan": 2,
-  "Ready after 6 Months": 1,
+  "Weekly Volume Scan": 0,
+  "Ready after 6 Months": 0,
   "Mukul Mahavir Agrawal": 0,
   "Ashish Kacholia": 0
  },
- "email_total": 3,
- "already_listed": 3,
+ "email_total": 0,
+ "already_listed": 0,
  "price_date": "23 Nov 2026",
  "monthly_pass": 0,
- "mode": "daily",
+ "mode": "auto",
  "monthly_done": false,
- "run_at": "25 Nov 2026, 10:22 AM IST"
+ "run_at": "25 Nov 2026, 02:16 PM IST"
 }

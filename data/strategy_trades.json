@@ -3892,7 +3892,6 @@
    "SHEETAL": "2026-11-23",
    "543436": "2026-11-11",
    "SHERA": "2026-11-23",
-   "SHRADHA": "2026-11-23",
    "UNITEDPOLY": "2026-11-23",
    "V2RETAIL": "2026-11-23",
    "VADILALIND": "2026-11-23",
@@ -3904,13 +3903,11 @@
    "VIKASLIFE": "2026-11-23",
    "VIKRAMSOLR": "2026-11-23",
    "ZTECH": "2026-11-23",
-   "SIGNORIA": "2026-11-23",
    "SILKFLEX": "2026-11-23",
    "SONUINFRA": "2026-11-23",
    "SYSTANGO": "2026-11-23",
    "TARACHAND": "2026-11-23",
    "TECHLABS": "2026-11-23",
-   "TOUCHWOOD": "2026-11-23",
    "VIVIANA": "2026-11-23",
    "544930": "2026-11-23",
    "APEXECO": "2026-11-23",
@@ -3928,28 +3925,8 @@
    "512377": "2026-11-23",
    "BCSSL": "2026-11-23",
    "544975": "2026-11-23",
-   "TGL": "2026-11-23",
    "TIMESCAN": "2026-11-23",
-   "TIRUPATIFL": "2026-11-23",
-   "TRANSTEEL": "2026-11-23",
-   "TSFINV": "2026-11-23",
-   "TUNWAL": "2026-11-23",
-   "UNIHEALTH": "2026-11-23",
-   "URBAN": "2026-11-23",
-   "UWCSL": "2026-11-23",
-   "VEEKAYEM": "2026-11-23",
-   "VERITAAS": "2026-11-23",
-   "VERTOZ": "2026-11-23",
-   "VILAS": "2026-11-23",
-   "VILINBIO": "2026-11-23",
-   "VINSYS": "2026-11-23",
    "VINYAS": "2026-11-23",
-   "VISHNUINFR": "2026-11-23",
-   "VR": "2026-11-23",
-   "WALPAR": "2026-11-23",
-   "WINSOL": "2026-11-23",
-   "WTICAB": "2026-11-23",
-   "YASHOPTICS": "2026-11-23",
    "ZEAL": "2026-11-23"
   }
  },
@@ -4002,6 +3979,52 @@
     "turnover": 2734072
    },
    {
+    "symbol": "ARIES",
+    "name": "Aries Agro",
+    "add": false,
+    "buy_above": 569.59,
+    "max_open": 592.15,
+    "gap_pct": 5.0,
+    "stop": 535.41,
+    "qty": 221,
+    "amount": 125879.39,
+    "range_pct": 10.3,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 10.32,
+     "strength": 49.2,
+     "near_high": 6.0,
+     "trend": 11.08,
+     "low_risk": 6.0,
+     "volume": 0.29
+    },
+    "turnover": 6928072
+   },
+   {
+    "symbol": "AYMSYNTEX",
+    "name": "AYM Syntex Ltd",
+    "add": false,
+    "buy_above": 288.66,
+    "max_open": 300.09,
+    "gap_pct": 5.0,
+    "stop": 271.34,
+    "qty": 436,
+    "amount": 125855.76,
+    "range_pct": 9.5,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 9.52,
+     "strength": 28.12,
+     "near_high": 18.52,
+     "trend": 0.78,
+     "low_risk": 6.0,
+     "volume": 1.21
+    },
+    "turnover": 33110612
+   },
+   {
     "symbol": "BIKEWO",
     "name": "Bikewo Green",
     "add": false,
@@ -4025,6 +4048,29 @@
     "turnover": 4523295
    },
    {
+    "symbol": "DANISH",
+    "name": "Danish Power",
+    "add": false,
+    "buy_above": 997.88,
+    "max_open": 1037.4,
+    "gap_pct": 5.0,
+    "stop": 938.01,
+    "qty": 126,
+    "amount": 125732.88,
+    "range_pct": 6.3,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 6.27,
+     "strength": 14.48,
+     "near_high": 11.32,
+     "trend": 3.52,
+     "low_risk": 6.0,
+     "volume": 0.86
+    },
+    "turnover": 25551881
+   },
+   {
     "symbol": "INTEGRITY",
     "name": "Integrity Infra.",
     "add": false,
@@ -4046,6 +4092,29 @@
      "volume": 0.85
     },
     "turnover": 1327386
+   },
+   {
+    "symbol": "KMEW",
+    "name": "Knowledge Marine & Engineering Works Ltd",
+    "add": false,
+    "buy_above": 781.13,
+    "max_open": 812.07,
+    "gap_pct": 5.0,
+    "stop": 734.26,
+    "qty": 161,
+    "amount": 125761.93,
+    "range_pct": 10.3,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 10.28,
+     "strength": 64.11,
+     "near_high": 8.28,
+     "trend": 10.61,
+     "low_risk": 6.0,
+     "volume": 1.22
+    },
+    "turnover": 542130150
    },
    {
     "symbol": "MODIS",
@@ -4092,6 +4161,29 @@
      "volume": 0.83
     },
     "turnover": 9481678
+   },
+   {
+    "symbol": "PDSL",
+    "name": "PDS Ltd",
+    "add": false,
+    "buy_above": 429.25,
+    "max_open": 446.25,
+    "gap_pct": 5.0,
+    "stop": 403.5,
+    "qty": 293,
+    "amount": 125770.25,
+    "range_pct": 6.2,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 6.19,
+     "strength": 40.44,
+     "near_high": 2.76,
+     "trend": 11.65,
+     "low_risk": 6.0,
+     "volume": 2.36
+    },
+    "turnover": 376099877
    },
    {
     "symbol": "PTCIL",
@@ -4184,6 +4276,52 @@
      "volume": 0.61
     },
     "turnover": 13563731
+   },
+   {
+    "symbol": "UYFINCORP",
+    "name": "U. Y. Fincorp",
+    "add": false,
+    "buy_above": 31.82,
+    "max_open": 33.08,
+    "gap_pct": 5.0,
+    "stop": 29.91,
+    "qty": 3962,
+    "amount": 126070.84,
+    "range_pct": 7.1,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 7.14,
+     "strength": 106.57,
+     "near_high": 3.54,
+     "trend": 18.64,
+     "low_risk": 6.0,
+     "volume": 0.97
+    },
+    "turnover": 10618270
+   },
+   {
+    "symbol": "VETO",
+    "name": "Veto Switchgears",
+    "add": false,
+    "buy_above": 139.04,
+    "max_open": 144.54,
+    "gap_pct": 5.0,
+    "stop": 130.7,
+    "qty": 906,
+    "amount": 125970.24,
+    "range_pct": 6.4,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 6.38,
+     "strength": 19.41,
+     "near_high": 14.37,
+     "trend": 2.09,
+     "low_risk": 6.0,
+     "volume": 0.69
+    },
+    "turnover": 4256479
    },
    {
     "symbol": "VRLLOG",
@@ -4303,6 +4441,52 @@
     "turnover": 2734072
    },
    {
+    "symbol": "ARIES",
+    "name": "Aries Agro",
+    "add": false,
+    "buy_above": 569.59,
+    "max_open": 592.15,
+    "gap_pct": 5.0,
+    "stop": 535.41,
+    "qty": 202,
+    "amount": 115057.18,
+    "range_pct": 10.3,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 10.32,
+     "strength": 49.2,
+     "near_high": 6.0,
+     "trend": 11.08,
+     "low_risk": 6.0,
+     "volume": 0.29
+    },
+    "turnover": 6928072
+   },
+   {
+    "symbol": "AYMSYNTEX",
+    "name": "AYM Syntex Ltd",
+    "add": false,
+    "buy_above": 288.66,
+    "max_open": 300.09,
+    "gap_pct": 5.0,
+    "stop": 271.34,
+    "qty": 399,
+    "amount": 115175.34,
+    "range_pct": 9.5,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 9.52,
+     "strength": 28.12,
+     "near_high": 18.52,
+     "trend": 0.78,
+     "low_risk": 6.0,
+     "volume": 1.21
+    },
+    "turnover": 33110612
+   },
+   {
     "symbol": "BIKEWO",
     "name": "Bikewo Green",
     "add": false,
@@ -4324,6 +4508,29 @@
      "volume": 0.51
     },
     "turnover": 4523295
+   },
+   {
+    "symbol": "DANISH",
+    "name": "Danish Power",
+    "add": false,
+    "buy_above": 997.88,
+    "max_open": 1037.4,
+    "gap_pct": 5.0,
+    "stop": 938.01,
+    "qty": 115,
+    "amount": 114756.2,
+    "range_pct": 6.3,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 6.27,
+     "strength": 14.48,
+     "near_high": 11.32,
+     "trend": 3.52,
+     "low_risk": 6.0,
+     "volume": 0.86
+    },
+    "turnover": 25551881
    },
    {
     "symbol": "INTEGRITY",
@@ -4349,6 +4556,29 @@
     "turnover": 1327386
    },
    {
+    "symbol": "KMEW",
+    "name": "Knowledge Marine & Engineering Works Ltd",
+    "add": false,
+    "buy_above": 781.13,
+    "max_open": 812.07,
+    "gap_pct": 5.0,
+    "stop": 734.26,
+    "qty": 147,
+    "amount": 114826.11,
+    "range_pct": 10.3,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 10.28,
+     "strength": 64.11,
+     "near_high": 8.28,
+     "trend": 10.61,
+     "low_risk": 6.0,
+     "volume": 1.22
+    },
+    "turnover": 542130150
+   },
+   {
     "symbol": "MODIS",
     "name": "Modi's Navnirman",
     "add": true,
@@ -4372,6 +4602,29 @@
     "turnover": 44656243
    },
    {
+    "symbol": "NITINSPIN",
+    "name": "Nitin Spinners Ltd",
+    "add": true,
+    "buy_above": 732.2,
+    "max_open": 761.2,
+    "gap_pct": 5.0,
+    "stop": 688.27,
+    "qty": 79,
+    "amount": 57843.8,
+    "range_pct": 7.4,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 7.36,
+     "strength": 35.61,
+     "near_high": 3.55,
+     "trend": 9.03,
+     "low_risk": 6.0,
+     "volume": 1.13
+    },
+    "turnover": 130350572
+   },
+   {
     "symbol": "PANACHE",
     "name": "Panache Digilife",
     "add": true,
@@ -4393,6 +4646,29 @@
      "volume": 0.83
     },
     "turnover": 9481678
+   },
+   {
+    "symbol": "PDSL",
+    "name": "PDS Ltd",
+    "add": false,
+    "buy_above": 429.25,
+    "max_open": 446.25,
+    "gap_pct": 5.0,
+    "stop": 403.5,
+    "qty": 268,
+    "amount": 115039.0,
+    "range_pct": 6.2,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 6.19,
+     "strength": 40.44,
+     "near_high": 2.76,
+     "trend": 11.65,
+     "low_risk": 6.0,
+     "volume": 2.36
+    },
+    "turnover": 376099877
    },
    {
     "symbol": "PTCIL",
@@ -4485,6 +4761,52 @@
      "volume": 0.61
     },
     "turnover": 13563731
+   },
+   {
+    "symbol": "UYFINCORP",
+    "name": "U. Y. Fincorp",
+    "add": false,
+    "buy_above": 31.82,
+    "max_open": 33.08,
+    "gap_pct": 5.0,
+    "stop": 29.91,
+    "qty": 3626,
+    "amount": 115379.32,
+    "range_pct": 7.1,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 7.14,
+     "strength": 106.57,
+     "near_high": 3.54,
+     "trend": 18.64,
+     "low_risk": 6.0,
+     "volume": 0.97
+    },
+    "turnover": 10618270
+   },
+   {
+    "symbol": "VETO",
+    "name": "Veto Switchgears",
+    "add": false,
+    "buy_above": 139.04,
+    "max_open": 144.54,
+    "gap_pct": 5.0,
+    "stop": 130.7,
+    "qty": 830,
+    "amount": 115403.2,
+    "range_pct": 6.4,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 6.38,
+     "strength": 19.41,
+     "near_high": 14.37,
+     "trend": 2.09,
+     "low_risk": 6.0,
+     "volume": 0.69
+    },
+    "turnover": 4256479
    },
    {
     "symbol": "VRLLOG",
@@ -4604,6 +4926,52 @@
     "turnover": 2734072
    },
    {
+    "symbol": "ARIES",
+    "name": "Aries Agro",
+    "add": false,
+    "buy_above": 569.59,
+    "max_open": 592.15,
+    "gap_pct": 5.0,
+    "stop": 535.41,
+    "qty": 202,
+    "amount": 115057.18,
+    "range_pct": 10.3,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 10.32,
+     "strength": 49.2,
+     "near_high": 6.0,
+     "trend": 11.08,
+     "low_risk": 6.0,
+     "volume": 0.29
+    },
+    "turnover": 6928072
+   },
+   {
+    "symbol": "AYMSYNTEX",
+    "name": "AYM Syntex Ltd",
+    "add": false,
+    "buy_above": 288.66,
+    "max_open": 300.09,
+    "gap_pct": 5.0,
+    "stop": 271.34,
+    "qty": 399,
+    "amount": 115175.34,
+    "range_pct": 9.5,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 9.52,
+     "strength": 28.12,
+     "near_high": 18.52,
+     "trend": 0.78,
+     "low_risk": 6.0,
+     "volume": 1.21
+    },
+    "turnover": 33110612
+   },
+   {
     "symbol": "BIKEWO",
     "name": "Bikewo Green",
     "add": false,
@@ -4625,6 +4993,29 @@
      "volume": 0.51
     },
     "turnover": 4523295
+   },
+   {
+    "symbol": "DANISH",
+    "name": "Danish Power",
+    "add": false,
+    "buy_above": 997.88,
+    "max_open": 1037.4,
+    "gap_pct": 5.0,
+    "stop": 938.01,
+    "qty": 115,
+    "amount": 114756.2,
+    "range_pct": 6.3,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 6.27,
+     "strength": 14.48,
+     "near_high": 11.32,
+     "trend": 3.52,
+     "low_risk": 6.0,
+     "volume": 0.86
+    },
+    "turnover": 25551881
    },
    {
     "symbol": "INTEGRITY",
@@ -4650,6 +5041,29 @@
     "turnover": 1327386
    },
    {
+    "symbol": "KMEW",
+    "name": "Knowledge Marine & Engineering Works Ltd",
+    "add": false,
+    "buy_above": 781.13,
+    "max_open": 812.07,
+    "gap_pct": 5.0,
+    "stop": 734.26,
+    "qty": 147,
+    "amount": 114826.11,
+    "range_pct": 10.3,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 10.28,
+     "strength": 64.11,
+     "near_high": 8.28,
+     "trend": 10.61,
+     "low_risk": 6.0,
+     "volume": 1.22
+    },
+    "turnover": 542130150
+   },
+   {
     "symbol": "MODIS",
     "name": "Modi's Navnirman",
     "add": true,
@@ -4673,6 +5087,29 @@
     "turnover": 44656243
    },
    {
+    "symbol": "NITINSPIN",
+    "name": "Nitin Spinners Ltd",
+    "add": true,
+    "buy_above": 732.2,
+    "max_open": 761.2,
+    "gap_pct": 5.0,
+    "stop": 688.27,
+    "qty": 79,
+    "amount": 57843.8,
+    "range_pct": 7.4,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 7.36,
+     "strength": 35.61,
+     "near_high": 3.55,
+     "trend": 9.03,
+     "low_risk": 6.0,
+     "volume": 1.13
+    },
+    "turnover": 130350572
+   },
+   {
     "symbol": "PANACHE",
     "name": "Panache Digilife",
     "add": true,
@@ -4694,6 +5131,29 @@
      "volume": 0.83
     },
     "turnover": 9481678
+   },
+   {
+    "symbol": "PDSL",
+    "name": "PDS Ltd",
+    "add": false,
+    "buy_above": 429.25,
+    "max_open": 446.25,
+    "gap_pct": 5.0,
+    "stop": 403.5,
+    "qty": 268,
+    "amount": 115039.0,
+    "range_pct": 6.2,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 6.19,
+     "strength": 40.44,
+     "near_high": 2.76,
+     "trend": 11.65,
+     "low_risk": 6.0,
+     "volume": 2.36
+    },
+    "turnover": 376099877
    },
    {
     "symbol": "PTCIL",
@@ -4786,6 +5246,52 @@
      "volume": 0.61
     },
     "turnover": 13563731
+   },
+   {
+    "symbol": "UYFINCORP",
+    "name": "U. Y. Fincorp",
+    "add": false,
+    "buy_above": 31.82,
+    "max_open": 33.08,
+    "gap_pct": 5.0,
+    "stop": 29.91,
+    "qty": 3626,
+    "amount": 115379.32,
+    "range_pct": 7.1,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 7.14,
+     "strength": 106.57,
+     "near_high": 3.54,
+     "trend": 18.64,
+     "low_risk": 6.0,
+     "volume": 0.97
+    },
+    "turnover": 10618270
+   },
+   {
+    "symbol": "VETO",
+    "name": "Veto Switchgears",
+    "add": false,
+    "buy_above": 139.04,
+    "max_open": 144.54,
+    "gap_pct": 5.0,
+    "stop": 130.7,
+    "qty": 830,
+    "amount": 115403.2,
+    "range_pct": 6.4,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 6.38,
+     "strength": 19.41,
+     "near_high": 14.37,
+     "trend": 2.09,
+     "low_risk": 6.0,
+     "volume": 0.69
+    },
+    "turnover": 4256479
    },
    {
     "symbol": "VRLLOG",
@@ -5020,6 +5526,121 @@
     "turnover": 44656243
    },
    {
+    "symbol": "526775",
+    "name": "Valiant Commun.",
+    "add": false,
+    "buy_above": 1626.79,
+    "max_open": 1667.26,
+    "gap_pct": 3.0,
+    "stop": 1529.18,
+    "qty": 48,
+    "amount": 78085.92,
+    "range_pct": 7.7,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 7.7,
+     "strength": 35.85,
+     "near_high": 18.52,
+     "trend": 2.36,
+     "low_risk": 6.0,
+     "volume": 0.9
+    },
+    "turnover": 29321297
+   },
+   {
+    "symbol": "543373",
+    "name": "Shri Venkatesh",
+    "add": false,
+    "buy_above": 759.03,
+    "max_open": 777.91,
+    "gap_pct": 3.0,
+    "stop": 713.49,
+    "qty": 103,
+    "amount": 78180.09,
+    "range_pct": 8.2,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 8.18,
+     "strength": 189.42,
+     "near_high": 5.09,
+     "trend": 8.91,
+     "low_risk": 6.0,
+     "volume": 0.55
+    },
+    "turnover": 6276243
+   },
+   {
+    "symbol": "544310",
+    "name": "Yash Highvoltage",
+    "add": false,
+    "buy_above": 1301.47,
+    "max_open": 1333.85,
+    "gap_pct": 3.0,
+    "stop": 1223.38,
+    "qty": 60,
+    "amount": 78088.2,
+    "range_pct": 6.0,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 6.04,
+     "strength": 54.35,
+     "near_high": 6.45,
+     "trend": 4.76,
+     "low_risk": 6.0,
+     "volume": 0.96
+    },
+    "turnover": 118514093
+   },
+   {
+    "symbol": "ALGOQUANT",
+    "name": "Algoquant Fin",
+    "add": false,
+    "buy_above": 87.83,
+    "max_open": 90.01,
+    "gap_pct": 3.0,
+    "stop": 82.56,
+    "qty": 890,
+    "amount": 78168.7,
+    "range_pct": 7.2,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 7.19,
+     "strength": 41.7,
+     "near_high": 4.61,
+     "trend": 10.01,
+     "low_risk": 6.0,
+     "volume": 0.96
+    },
+    "turnover": 108142342
+   },
+   {
+    "symbol": "ARVSMART",
+    "name": "Arvind SmartSp.",
+    "add": false,
+    "buy_above": 651.39,
+    "max_open": 667.59,
+    "gap_pct": 3.0,
+    "stop": 612.31,
+    "qty": 120,
+    "amount": 78166.8,
+    "range_pct": 6.0,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 6.04,
+     "strength": 1.76,
+     "near_high": 11.58,
+     "trend": 2.89,
+     "low_risk": 6.0,
+     "volume": 0.25
+    },
+    "turnover": 32708565
+   },
+   {
     "symbol": "CONSOFINVT",
     "name": "Cons. Finvest",
     "add": false,
@@ -5041,6 +5662,52 @@
      "volume": 1.04
     },
     "turnover": 5078689
+   },
+   {
+    "symbol": "CUBEXTUB",
+    "name": "Cubex Tubings",
+    "add": true,
+    "buy_above": 225.28,
+    "max_open": 230.88,
+    "gap_pct": 3.0,
+    "stop": 211.76,
+    "qty": 177,
+    "amount": 39874.56,
+    "range_pct": 7.9,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 7.88,
+     "strength": 133.83,
+     "near_high": 13.46,
+     "trend": 20.71,
+     "low_risk": 6.0,
+     "volume": 0.28
+    },
+    "turnover": 7900848
+   },
+   {
+    "symbol": "DANISH",
+    "name": "Danish Power",
+    "add": false,
+    "buy_above": 992.94,
+    "max_open": 1017.64,
+    "gap_pct": 3.0,
+    "stop": 933.36,
+    "qty": 78,
+    "amount": 77449.32,
+    "range_pct": 6.3,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 6.27,
+     "strength": 14.48,
+     "near_high": 11.32,
+     "trend": 3.52,
+     "low_risk": 6.0,
+     "volume": 0.86
+    },
+    "turnover": 25551881
    },
    {
     "symbol": "JYOTICNC",
@@ -5066,6 +5733,29 @@
     "turnover": 922999375
    },
    {
+    "symbol": "KMEW",
+    "name": "Knowledge Marine & Engineering Works Ltd",
+    "add": false,
+    "buy_above": 777.27,
+    "max_open": 796.6,
+    "gap_pct": 3.0,
+    "stop": 730.63,
+    "qty": 100,
+    "amount": 77727.0,
+    "range_pct": 10.3,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 10.28,
+     "strength": 64.11,
+     "near_high": 8.28,
+     "trend": 10.61,
+     "low_risk": 6.0,
+     "volume": 1.22
+    },
+    "turnover": 542130150
+   },
+   {
     "symbol": "KRISHANA",
     "name": "Krishana Phosch.",
     "add": false,
@@ -5087,6 +5777,75 @@
      "volume": 0.91
     },
     "turnover": 253164231
+   },
+   {
+    "symbol": "KROSS",
+    "name": "Kross Ltd",
+    "add": false,
+    "buy_above": 293.21,
+    "max_open": 300.5,
+    "gap_pct": 3.0,
+    "stop": 275.62,
+    "qty": 266,
+    "amount": 77993.86,
+    "range_pct": 6.2,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 6.23,
+     "strength": 44.61,
+     "near_high": 15.13,
+     "trend": 3.12,
+     "low_risk": 6.0,
+     "volume": 0.87
+    },
+    "turnover": 416669517
+   },
+   {
+    "symbol": "MBAPL",
+    "name": "M B Agro Prod.",
+    "add": false,
+    "buy_above": 199.99,
+    "max_open": 204.97,
+    "gap_pct": 3.0,
+    "stop": 187.99,
+    "qty": 391,
+    "amount": 78196.09,
+    "range_pct": 6.3,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 6.27,
+     "strength": 75.89,
+     "near_high": 8.04,
+     "trend": 9.17,
+     "low_risk": 6.0,
+     "volume": 0.97
+    },
+    "turnover": 220603097
+   },
+   {
+    "symbol": "NAZARA",
+    "name": "Nazara Technolo.",
+    "add": false,
+    "buy_above": 437.43,
+    "max_open": 448.31,
+    "gap_pct": 3.0,
+    "stop": 411.18,
+    "qty": 178,
+    "amount": 77862.54,
+    "range_pct": 7.1,
+    "risk_pct": 6.0,
+    "as_of": "2026-11-23",
+    "score": {
+     "tight": 7.06,
+     "strength": 43.74,
+     "near_high": 5.81,
+     "trend": 3.75,
+     "low_risk": 6.0,
+     "volume": 0.58
+    },
+    "turnover": 485280314
    },
    {
     "symbol": "PANACHE",
@@ -5135,27 +5894,27 @@
     "turnover": 17570096
    },
    {
-    "symbol": "TIPSMUSIC",
-    "name": "Tips Music",
+    "symbol": "UYFINCORP",
+    "name": "U. Y. Fincorp",
     "add": false,
-    "buy_above": 838.67,
-    "max_open": 859.53,
+    "buy_above": 31.66,
+    "max_open": 32.45,
     "gap_pct": 3.0,
-    "stop": 788.35,
-    "qty": 93,
-    "amount": 77996.31,
-    "range_pct": 5.1,
+    "stop": 29.76,
+    "qty": 2470,
+    "amount": 78200.2,
+    "range_pct": 7.1,
     "risk_pct": 6.0,
     "as_of": "2026-11-23",
     "score": {
-     "tight": 5.14,
-     "strength": 22.21,
-     "near_high": 3.51,
-     "trend": 8.89,
+     "tight": 7.14,
+     "strength": 106.57,
+     "near_high": 3.54,
+     "trend": 18.64,
      "low_risk": 6.0,
-     "volume": 0.82
+     "volume": 0.97
     },
-    "turnover": 395865866
+    "turnover": 10618270
    },
    {
     "symbol": "YATHARTH",
