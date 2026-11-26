@@ -70,3 +70,12 @@ date,strategy,mode,action,symbol,name,qty,price,value,reason,pnl,pnl_pct,hold_da
 2026-11-23,Smart Switch,paper,SELL,OBSCP,OBSC Perfection,137,820.65,112429.05,Stop loss (6% max risk),-7640.13,-6.0,12,switch-OBSCP-2026-11-11
 2026-11-23,Smart Switch · Growth list,paper,BUY,GCSL,Gretex Corporate,46,854.7,39316.2,"Add-on (half size) · Breakout above ₹849 + 0.5% (stop ₹808.43, target ₹1111.11) · Smallcap 100 19,444 above EMA 50 19,210 → Positional exits",,,,growth_switch-GCSL-2026-11-23-add1
 2026-11-23,Smart Switch · Growth list,paper,BUY,AGARWALEYE,Dr Agarwal's Hea,139,561.29,78019.31,"Breakout above ₹558.5 + 0.5% (stop ₹529.65, target ₹729.68) · Smallcap 100 19,444 above EMA 50 19,210 → Positional exits",,,,growth_switch-AGARWALEYE-2026-11-23
+2026-11-25,Swing Strategy,paper,SELL,544141,Pune e-Stock Broking,238,327.24,77883.12,Target +20% (50% booked),12694.95,20.0,13,swing-544141-2026-11-12
+2026-11-25,Swing Strategy,paper,BUY,BIKEWO,Bikewo Green,990,128.95,127660.5,"Breakout above ₹127 + 1% (stop ₹121.21, target ₹154.74)",,,,swing-BIKEWO-2026-11-25
+2026-11-25,Positional Trading,paper,SELL,544141,Pune e-Stock Broking,220,354.51,77992.2,Target +30% (50% booked),17722.23,30.0,13,positional-544141-2026-11-12
+2026-11-25,Positional Trading,paper,BUY,BIKEWO,Bikewo Green,911,128.95,117473.45,"Breakout above ₹127 + 1% (stop ₹121.21, target ₹167.63)",,,,positional-BIKEWO-2026-11-25
+2026-11-25,Smart Switch,paper,SELL,544141,Pune e-Stock Broking,220,354.51,77992.2,Target +30% (50% booked),17722.23,30.0,13,switch-544141-2026-11-12
+2026-11-25,Smart Switch,paper,BUY,BIKEWO,Bikewo Green,911,128.95,117473.45,"Breakout above ₹127 + 1% (stop ₹121.21, target ₹167.63) · Smallcap 100 19,314 above EMA 50 19,215 → Positional exits",,,,switch-BIKEWO-2026-11-25
+2026-11-25,Smart Switch · Growth list,paper,BUY,540718,Aayush Art,57,1365.79,77850.03,"Breakout above ₹1359 + 0.5% (stop ₹1329.08, target ₹1775.53) · Smallcap 100 19,314 above EMA 50 19,215 → Positional exits",,,,growth_switch-540718-2026-11-25
+2026-11-25,Smart Switch · Growth list,paper,BUY,543997,Organic Recyclin,371,210.45,78076.95,"Breakout above ₹209.4 + 0.5% (stop ₹202.95, target ₹273.58) · Smallcap 100 19,314 above EMA 50 19,215 → Positional exits",,,,growth_switch-543997-2026-11-25
+2026-11-25,Smart Switch · Growth list,paper,BUY,YATHARTH,Yatharth Hospital & Trauma Care Services Ltd,35,1135.2,39732.0,"Add-on (half size) · Breakout above ₹1129.55 + 0.5% (stop ₹1067.09, target ₹1475.76) · Smallcap 100 19,314 above EMA 50 19,215 → Positional exits",,,,growth_switch-YATHARTH-2026-11-25-add1

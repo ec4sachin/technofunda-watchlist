@@ -2,68 +2,68 @@
  "swing": {
   "entry_test": {
    "old": {
-    "return_pct": 77.2,
-    "trades": 202,
-    "win_rate": 46.0,
+    "return_pct": 82.7,
+    "trades": 203,
+    "win_rate": 46.3,
     "max_drawdown_pct": 8.4,
-    "skipped": 65
+    "skipped": 63
    },
    "new": {
-    "return_pct": 71.8,
-    "trades": 204,
-    "win_rate": 45.6,
+    "return_pct": 77.1,
+    "trades": 205,
+    "win_rate": 45.9,
     "max_drawdown_pct": 8.4,
-    "skipped": 64
+    "skipped": 62
    },
    "gap3": {
-    "return_pct": 66.0,
-    "trades": 202,
-    "win_rate": 44.6,
+    "return_pct": 61.5,
+    "trades": 204,
+    "win_rate": 44.1,
     "max_drawdown_pct": 8.4,
-    "skipped": 61
+    "skipped": 57
    }
   },
   "pyramid_test": {
    "none": {
-    "return_pct": 65.7,
-    "trades": 176,
-    "win_rate": 46.6,
+    "return_pct": 70.3,
+    "trades": 178,
+    "win_rate": 47.2,
     "max_drawdown_pct": 9.7,
-    "skipped": 52,
+    "skipped": 48,
     "addons": 0,
     "addon_closed": 0,
     "addon_win_rate": null,
     "addon_avg_return_pct": null
    },
    "add1": {
-    "return_pct": 71.8,
-    "trades": 204,
-    "win_rate": 45.6,
+    "return_pct": 77.1,
+    "trades": 205,
+    "win_rate": 45.9,
     "max_drawdown_pct": 8.4,
-    "skipped": 64,
-    "addons": 52,
-    "addon_closed": 49,
-    "addon_win_rate": 40.8,
-    "addon_avg_return_pct": 2.96
+    "skipped": 62,
+    "addons": 50,
+    "addon_closed": 47,
+    "addon_win_rate": 42.6,
+    "addon_avg_return_pct": 3.23
    }
   },
   "report": {
-   "trades": 267,
-   "open": 13,
-   "wins": 118,
-   "losses": 149,
-   "win_rate": 44.2,
-   "total_pnl": 581762.86,
-   "open_pnl": 49303.28,
-   "avg_win": 10739.44,
-   "avg_loss": -4600.61,
-   "profit_factor": 1.85,
-   "expectancy": 2178.89,
-   "avg_return_pct": 2.47,
+   "trades": 261,
+   "open": 15,
+   "wins": 115,
+   "losses": 146,
+   "win_rate": 44.1,
+   "total_pnl": 568215.18,
+   "open_pnl": 45701.73,
+   "avg_win": 10869.07,
+   "avg_loss": -4669.37,
+   "profit_factor": 1.83,
+   "expectancy": 2177.07,
+   "avg_return_pct": 2.48,
    "best": 42721.71,
    "worst": -14274.04,
    "max_drawdown": 141462.01,
-   "avg_hold_days": 17.3,
+   "avg_hold_days": 17.4,
    "first": "2024-12-09",
    "last": "2026-11-18",
    "curve": [
@@ -713,427 +713,403 @@
     ],
     [
      "2026-07-14",
-     317229.75
-    ],
-    [
-     "2026-07-14",
-     316068.17
+     315803.5
     ],
     [
      "2026-07-15",
-     331144.3
+     330879.63
     ],
     [
      "2026-07-15",
-     324761.04
+     324496.37
     ],
     [
      "2026-07-16",
-     326627.02
+     326362.35
     ],
     [
      "2026-07-17",
-     326962.83
-    ],
-    [
-     "2026-07-17",
-     323772.44
+     326698.16
     ],
     [
      "2026-07-22",
-     323768.35
+     326694.07
     ],
     [
      "2026-07-22",
-     320580.11
+     323505.83
     ],
     [
      "2026-07-23",
-     363301.82
+     366227.54
     ],
     [
      "2026-07-23",
-     349027.78
+     351953.5
     ],
     [
      "2026-07-23",
-     343149.44
+     346075.16
     ],
     [
      "2026-07-24",
-     340998.94
+     343924.66
     ],
     [
      "2026-07-24",
-     339708.48
+     342634.2
     ],
     [
      "2026-07-24",
-     357959.52
+     360885.24
     ],
     [
      "2026-07-24",
-     357719.49
+     360645.21
     ],
     [
      "2026-07-27",
-     354035.85
+     356961.57
     ],
     [
      "2026-07-28",
-     347701.61
+     350627.33
     ],
     [
      "2026-07-28",
-     341340.04
+     344265.76
     ],
     [
      "2026-07-29",
-     343015.59
+     345941.31
     ],
     [
      "2026-07-31",
-     341423.4
+     344349.12
     ],
     [
      "2026-08-03",
-     335058.83
+     337984.55
     ],
     [
      "2026-08-04",
-     336420.18
+     339345.9
     ],
     [
      "2026-08-06",
-     337937.1
+     340862.82
     ],
     [
      "2026-08-06",
-     337292.32
+     340218.04
     ],
     [
      "2026-08-10",
-     336938.01
+     342525.01
     ],
     [
      "2026-08-10",
-     339244.98
+     342841.69
     ],
     [
      "2026-08-10",
-     339561.66
-    ],
-    [
-     "2026-08-10",
-     380448.94
+     383728.97
     ],
     [
      "2026-08-12",
-     377265.02
+     380545.05
     ],
     [
      "2026-08-12",
-     370884.87
+     374164.9
     ],
     [
      "2026-08-12",
-     367728.57
+     371008.6
     ],
     [
      "2026-08-17",
-     361343.56
+     364623.59
     ],
     [
      "2026-08-20",
-     361029.54
+     364309.57
     ],
     [
      "2026-08-20",
-     357892.31
+     361172.34
     ],
     [
      "2026-08-25",
-     359802.48
-    ],
-    [
-     "2026-08-25",
-     362342.59
-    ],
-    [
-     "2026-08-26",
-     362125.16
+     363082.51
     ],
     [
      "2026-08-28",
-     355748.78
+     356706.13
     ],
     [
      "2026-08-28",
-     382959.6
+     383916.95
     ],
     [
      "2026-08-31",
-     385442.82
+     386400.17
     ],
     [
      "2026-08-31",
-     379755.64
+     380712.99
     ],
     [
      "2026-09-01",
-     373367.66
+     374325.01
     ],
     [
      "2026-09-01",
-     375556.29
+     376513.64
     ],
     [
      "2026-09-02",
-     390061.32
+     370131.5
     ],
     [
      "2026-09-02",
-     383679.18
-    ],
-    [
-     "2026-09-02",
-     382239.23
+     368691.55
     ],
     [
      "2026-09-03",
-     383366.63
+     369818.95
     ],
     [
      "2026-09-08",
-     384208.56
+     370660.88
     ],
     [
      "2026-09-09",
-     385332.89
+     371785.21
     ],
     [
      "2026-09-09",
-     387832.69
+     374285.01
     ],
     [
      "2026-09-10",
-     381465.76
+     367918.08
     ],
     [
      "2026-09-11",
-     402000.48
+     388452.8
     ],
     [
      "2026-09-11",
-     409428.04
+     395880.36
     ],
     [
      "2026-09-11",
-     410898.17
+     397350.49
     ],
     [
      "2026-09-11",
-     404528.6
+     390980.92
     ],
     [
      "2026-09-11",
-     398170.0
+     384622.32
     ],
     [
      "2026-09-11",
-     415973.03
+     402425.35
     ],
     [
      "2026-09-11",
-     422330.09
+     408782.41
     ],
     [
      "2026-09-11",
-     415942.13
+     402394.45
     ],
     [
      "2026-09-11",
-     411834.4
+     398286.72
     ],
     [
      "2026-09-15",
-     408641.27
+     395093.59
     ],
     [
      "2026-09-15",
-     402562.76
+     389015.08
     ],
     [
      "2026-09-16",
-     419471.57
+     405923.89
     ],
     [
      "2026-09-16",
-     438727.22
+     425179.54
     ],
     [
      "2026-09-16",
-     468841.07
+     455293.39
     ],
     [
      "2026-09-16",
-     463071.8
+     449524.12
     ],
     [
      "2026-09-16",
-     459878.79
+     446331.11
     ],
     [
      "2026-09-17",
-     481982.4
+     468434.72
     ],
     [
      "2026-09-17",
-     490212.55
+     476664.87
     ],
     [
      "2026-09-17",
-     509028.58
+     495480.9
     ],
     [
      "2026-09-18",
-     507996.77
+     494449.09
     ],
     [
      "2026-09-18",
-     503185.16
+     489637.48
     ],
     [
      "2026-09-21",
-     503118.32
+     489570.64
     ],
     [
      "2026-09-22",
-     496739.01
+     483191.33
     ],
     [
      "2026-09-24",
-     527945.93
+     514398.25
     ],
     [
      "2026-09-28",
-     527546.09
+     513998.41
     ],
     [
      "2026-09-29",
-     542826.66
+     529278.98
     ],
     [
      "2026-09-29",
-     542273.51
+     528725.83
     ],
     [
      "2026-09-30",
-     570056.44
+     556508.76
     ],
     [
      "2026-09-30",
-     583039.51
+     569491.83
     ],
     [
      "2026-10-01",
-     600613.02
+     587065.34
     ],
     [
      "2026-10-07",
-     611129.29
+     597581.61
     ],
     [
      "2026-10-07",
-     610773.92
+     597226.24
     ],
     [
      "2026-10-08",
-     604473.87
+     590926.19
     ],
     [
      "2026-10-09",
-     625873.1
+     612325.42
     ],
     [
      "2026-10-09",
-     621525.02
+     607977.34
     ],
     [
      "2026-10-09",
-     622151.01
+     608603.33
     ],
     [
      "2026-10-14",
-     621564.91
+     608017.23
     ],
     [
      "2026-10-15",
-     621399.32
+     607851.64
     ],
     [
      "2026-10-19",
-     637298.67
+     623750.99
     ],
     [
      "2026-10-21",
-     629692.39
+     616144.71
     ],
     [
      "2026-10-21",
-     626130.09
+     612582.41
     ],
     [
      "2026-10-21",
-     619783.46
+     606235.78
     ],
     [
      "2026-10-22",
-     612180.65
+     598632.97
     ],
     [
      "2026-10-22",
-     611729.84
+     598182.16
     ],
     [
      "2026-10-22",
-     605344.39
+     591796.71
     ],
     [
      "2026-10-23",
-     598956.11
+     585408.43
     ],
     [
      "2026-10-23",
-     600737.53
+     587189.85
     ],
     [
      "2026-10-26",
-     597585.57
+     584037.89
     ],
     [
      "2026-10-28",
-     595569.21
+     582021.53
     ],
     [
      "2026-11-02",
-     589199.22
+     575651.54
     ],
     [
      "2026-11-02",
-     590603.78
+     577056.1
     ],
     [
      "2026-11-13",
-     584206.26
+     570658.58
     ],
     [
      "2026-11-13",
-     579902.54
+     566354.86
     ],
     [
      "2026-11-18",
-     581762.86
+     568215.18
     ]
    ],
    "months": {
@@ -1156,16 +1132,48 @@
     "2026-04": 22701.61,
     "2026-05": 92391.96,
     "2026-06": 67706.22,
-    "2026-07": 70303.82,
-    "2026-08": 38332.24,
-    "2026-09": 203283.87,
+    "2026-07": 73229.54,
+    "2026-08": 36363.87,
+    "2026-09": 188778.84,
     "2026-10": 12529.7,
     "2026-11": -13806.35
    },
-   "without_best": 539041.15,
+   "without_best": 525493.47,
    "best_trade": "Gandhar Oil Ref. 2026-06-15"
   },
   "trades": [
+   {
+    "symbol": "PTCIL",
+    "name": "PTC Industries Ltd",
+    "entry_date": "2026-11-25",
+    "entry": 24880.0,
+    "qty": 4,
+    "status": "open",
+    "pnl": 0.0,
+    "pnl_pct": null,
+    "hold_days": null,
+    "closed_on": null,
+    "exits": [],
+    "open_pnl": -2394.08,
+    "type": "swing",
+    "regime": ""
+   },
+   {
+    "symbol": "TAURIAN",
+    "name": "Taurian MPS",
+    "entry_date": "2026-11-25",
+    "entry": 737.3,
+    "qty": 135,
+    "status": "open",
+    "pnl": 0.0,
+    "pnl_pct": null,
+    "hold_days": null,
+    "closed_on": null,
+    "exits": [],
+    "open_pnl": 6.05,
+    "type": "swing",
+    "regime": ""
+   },
    {
     "symbol": "RATNAVEER",
     "name": "Ratnaveer Precision Engineering",
@@ -1178,7 +1186,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": 2998.63,
+    "open_pnl": 3317.99,
     "type": "swing",
     "regime": ""
    },
@@ -1226,7 +1234,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": -4719.21,
+    "open_pnl": -4910.08,
     "type": "swing",
     "regime": ""
    },
@@ -1290,7 +1298,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": 1.7,
+    "open_pnl": -388.52,
     "type": "swing",
     "regime": ""
    },
@@ -1306,7 +1314,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": 1109.79,
+    "open_pnl": 158.0,
     "type": "swing",
     "regime": ""
    },
@@ -2831,39 +2839,6 @@
     "regime": ""
    },
    {
-    "symbol": "APOLLOPIPE",
-    "name": "Apollo Pipes Ltd",
-    "entry_date": "2026-08-17",
-    "entry": 535.1,
-    "qty": 186,
-    "status": "closed",
-    "pnl": 14505.03,
-    "pnl_pct": 14.57,
-    "hold_days": 16,
-    "closed_on": "2026-09-02",
-    "exits": [
-     {
-      "date": "2026-08-25",
-      "qty": 93,
-      "price": 642.12,
-      "reason": "Target +20% (50% booked)",
-      "pnl": 9733.9,
-      "charges": 218.96
-     },
-     {
-      "date": "2026-09-02",
-      "qty": 93,
-      "price": 588.65,
-      "reason": "Trailing EMA 10 exit",
-      "pnl": 4771.13,
-      "charges": 209.02
-     }
-    ],
-    "open_pnl": null,
-    "type": "swing",
-    "regime": ""
-   },
-   {
     "symbol": "GANDHAR",
     "name": "Gandhar Oil Ref.",
     "entry_date": "2026-08-17",
@@ -2973,31 +2948,6 @@
       "reason": "Stop loss (6% max risk)",
       "pnl": -6385.01,
       "charges": 387.78
-     }
-    ],
-    "open_pnl": null,
-    "type": "swing",
-    "regime": ""
-   },
-   {
-    "symbol": "WSTCSTPAPR",
-    "name": "West Coast Paper Mills Ltd",
-    "entry_date": "2026-08-12",
-    "entry": 608.02,
-    "qty": 82,
-    "status": "closed",
-    "pnl": -217.43,
-    "pnl_pct": -0.44,
-    "hold_days": 14,
-    "closed_on": "2026-08-26",
-    "exits": [
-     {
-      "date": "2026-08-26",
-      "qty": 82,
-      "price": 607.8,
-      "reason": "Time stop (10 days, under +3%)",
-      "pnl": -217.43,
-      "charges": 199.39
      }
     ],
     "open_pnl": null,
@@ -3279,31 +3229,6 @@
     "regime": ""
    },
    {
-    "symbol": "WSTCSTPAPR",
-    "name": "West Coast Paper Mills Ltd",
-    "entry_date": "2026-08-05",
-    "entry": 588.73,
-    "qty": 169,
-    "status": "closed",
-    "pnl": 2540.11,
-    "pnl_pct": 2.55,
-    "hold_days": 20,
-    "closed_on": "2026-08-25",
-    "exits": [
-     {
-      "date": "2026-08-25",
-      "qty": 169,
-      "price": 606.15,
-      "reason": "Time stop (10 days, under +3%)",
-      "pnl": 2540.11,
-      "charges": 403.87
-     }
-    ],
-    "open_pnl": null,
-    "type": "swing",
-    "regime": ""
-   },
-   {
     "symbol": "EIMCOELECO",
     "name": "Eimco Elecon (India)",
     "entry_date": "2026-08-03",
@@ -3430,31 +3355,6 @@
       "reason": "Stop loss (6% max risk)",
       "pnl": -6364.57,
       "charges": 386.57
-     }
-    ],
-    "open_pnl": null,
-    "type": "swing",
-    "regime": ""
-   },
-   {
-    "symbol": "APOLLOPIPE",
-    "name": "Apollo Pipes Ltd",
-    "entry_date": "2026-07-27",
-    "entry": 507.02,
-    "qty": 197,
-    "status": "closed",
-    "pnl": -354.31,
-    "pnl_pct": -0.35,
-    "hold_days": 14,
-    "closed_on": "2026-08-10",
-    "exits": [
-     {
-      "date": "2026-08-10",
-      "qty": 197,
-      "price": 507.25,
-      "reason": "Time stop (10 days, under +3%)",
-      "pnl": -354.31,
-      "charges": 399.62
      }
     ],
     "open_pnl": null,
@@ -3887,31 +3787,6 @@
     "regime": ""
    },
    {
-    "symbol": "WSTCSTPAPR",
-    "name": "West Coast Paper Mills Ltd",
-    "entry_date": "2026-07-08",
-    "entry": 548.78,
-    "qty": 91,
-    "status": "closed",
-    "pnl": -3190.39,
-    "pnl_pct": -6.39,
-    "hold_days": 9,
-    "closed_on": "2026-07-17",
-    "exits": [
-     {
-      "date": "2026-07-17",
-      "qty": 91,
-      "price": 515.85,
-      "reason": "Stop loss (6% max risk)",
-      "pnl": -3190.39,
-      "charges": 193.76
-     }
-    ],
-    "open_pnl": null,
-    "type": "swing",
-    "regime": ""
-   },
-   {
     "symbol": "ZOTA",
     "name": "Zota Health Care Ltd",
     "entry_date": "2026-07-08",
@@ -4063,31 +3938,6 @@
       "reason": "Time stop (10 days, under +3%)",
       "pnl": 1865.98,
       "charges": 401.67
-     }
-    ],
-    "open_pnl": null,
-    "type": "swing",
-    "regime": ""
-   },
-   {
-    "symbol": "WSTCSTPAPR",
-    "name": "West Coast Paper Mills Ltd",
-    "entry_date": "2026-06-30",
-    "entry": 525.0,
-    "qty": 190,
-    "status": "closed",
-    "pnl": 264.67,
-    "pnl_pct": 0.27,
-    "hold_days": 14,
-    "closed_on": "2026-07-14",
-    "exits": [
-     {
-      "date": "2026-07-14",
-      "qty": 190,
-      "price": 528.5,
-      "reason": "Time stop (10 days, under +3%)",
-      "pnl": 264.67,
-      "charges": 400.33
      }
     ],
     "open_pnl": null,
@@ -8596,21 +8446,21 @@
     "regime": ""
    }
   ],
-  "as_of": "2026-11-25",
-  "stocks": 199,
+  "as_of": "2026-11-26",
+  "stocks": 197,
   "last2y": {
-   "start": "2024-11-25",
+   "start": "2024-11-26",
    "capital": 1000000.0,
    "pct": 13.0,
-   "final": 1717641.24,
-   "profit": 717641.24,
-   "open_trades": 10,
-   "return_pct": 71.8,
-   "trades": 204,
-   "skipped": 64,
-   "wins": 93,
+   "final": 1770620.84,
+   "profit": 770620.84,
+   "open_trades": 12,
+   "return_pct": 77.1,
+   "trades": 205,
+   "skipped": 62,
+   "wins": 94,
    "pauses": 0,
-   "win_rate": 45.6,
+   "win_rate": 45.9,
    "max_drawdown_pct": 8.4,
    "months": {
     "2024-12": 44121.15,
@@ -8633,10 +8483,10 @@
     "2026-05": 131563.88,
     "2026-06": 33637.41,
     "2026-07": 86536.41,
-    "2026-08": 74551.66,
-    "2026-09": 34301.42,
-    "2026-10": 17927.36,
-    "2026-11": 103795.0
+    "2026-08": 61422.91,
+    "2026-09": 90566.46,
+    "2026-10": 32783.61,
+    "2026-11": 98782.05
    },
    "curve": [
     [
@@ -8721,32 +8571,72 @@
     ],
     [
      "2026-08",
-     1561617.4
+     1548488.65
     ],
     [
      "2026-09",
-     1595918.82
+     1639055.11
     ],
     [
      "2026-10",
-     1613846.18
+     1671838.72
     ],
     [
      "2026-11",
-     1717641.18
+     1770620.77
     ]
    ],
    "first_trade": "2024-11-27",
    "trades_list": [
     {
+     "name": "Taurian MPS",
+     "symbol": "TAURIAN",
+     "entry_date": "2026-11-25",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 230179,
+     "pnl": 13.99,
+     "pnl_pct": 0.01
+    },
+    {
+     "name": "PTC Industries Ltd",
+     "symbol": "PTCIL",
+     "entry_date": "2026-11-25",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 230901,
+     "pnl": -5554.62,
+     "pnl_pct": -2.41
+    },
+    {
      "name": "Ratnaveer Precision Engineering",
      "symbol": "RATNAVEER",
      "entry_date": "2026-11-23",
-     "closed_on": "2026-11-23",
+     "closed_on": "2026-11-25",
      "open": true,
-     "money": 222425,
-     "pnl": 6680.39,
-     "pnl_pct": 3.0
+     "money": 229971,
+     "pnl": 7642.64,
+     "pnl_pct": 3.32
+    },
+    {
+     "name": "Yatharth Hospital & Trauma Care Services Ltd",
+     "symbol": "YATHARTH",
+     "entry_date": "2026-11-13",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 212925,
+     "pnl": -832.05,
+     "pnl_pct": -0.39
+    },
+    {
+     "name": "Aptus Pharma",
+     "symbol": "544529",
+     "entry_date": "2026-11-12",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 107970,
+     "pnl": 344.13,
+     "pnl_pct": 0.32
     },
     {
      "name": "Lead Reclaim",
@@ -8754,8 +8644,8 @@
      "entry_date": "2026-11-19",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 208951,
-     "pnl": 16823.0,
+     "money": 216455,
+     "pnl": 17427.23,
      "pnl_pct": 8.05
     },
     {
@@ -8764,8 +8654,8 @@
      "entry_date": "2026-11-17",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 102771,
-     "pnl": -4821.83,
+     "money": 106462,
+     "pnl": -4995.01,
      "pnl_pct": -4.69
     },
     {
@@ -8774,29 +8664,9 @@
      "entry_date": "2026-11-16",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 205542,
-     "pnl": -3202.25,
+     "money": 212925,
+     "pnl": -3317.26,
      "pnl_pct": -1.56
-    },
-    {
-     "name": "Yatharth Hospital & Trauma Care Services Ltd",
-     "symbol": "YATHARTH",
-     "entry_date": "2026-11-13",
-     "closed_on": "2026-11-23",
-     "open": true,
-     "money": 205542,
-     "pnl": 3.51,
-     "pnl_pct": 0.0
-    },
-    {
-     "name": "Aptus Pharma",
-     "symbol": "544529",
-     "entry_date": "2026-11-12",
-     "closed_on": "2026-11-23",
-     "open": true,
-     "money": 104227,
-     "pnl": 2333.37,
-     "pnl_pct": 2.24
     },
     {
      "name": "DC Infotech",
@@ -8804,8 +8674,8 @@
      "entry_date": "2026-11-05",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 208454,
-     "pnl": 18190.48,
+     "money": 215941,
+     "pnl": 18843.83,
      "pnl_pct": 8.73
     },
     {
@@ -8814,8 +8684,8 @@
      "entry_date": "2026-11-05",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 208454,
-     "pnl": 44595.01,
+     "money": 215941,
+     "pnl": 46196.72,
      "pnl_pct": 21.39
     },
     {
@@ -8824,8 +8694,8 @@
      "entry_date": "2026-10-30",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 209800,
-     "pnl": 24597.54,
+     "money": 217339,
+     "pnl": 25481.43,
      "pnl_pct": 11.72
     },
     {
@@ -8844,8 +8714,8 @@
      "entry_date": "2026-11-03",
      "closed_on": "2026-11-18",
      "open": false,
-     "money": 208454,
-     "pnl": 3891.32,
+     "money": 215941,
+     "pnl": 4031.08,
      "pnl_pct": 1.87
     },
     {
@@ -8854,8 +8724,8 @@
      "entry_date": "2026-11-09",
      "closed_on": "2026-11-13",
      "open": false,
-     "money": 104227,
-     "pnl": -9037.08,
+     "money": 107970,
+     "pnl": -9361.66,
      "pnl_pct": -8.67
     },
     {
@@ -8864,8 +8734,8 @@
      "entry_date": "2026-11-02",
      "closed_on": "2026-11-13",
      "open": false,
-     "money": 208454,
-     "pnl": -13357.89,
+     "money": 215941,
+     "pnl": -13837.66,
      "pnl_pct": -6.41
     },
     {
@@ -8874,8 +8744,8 @@
      "entry_date": "2026-10-29",
      "closed_on": "2026-11-02",
      "open": false,
-     "money": 209800,
-     "pnl": -13402.41,
+     "money": 217339,
+     "pnl": -13884.02,
      "pnl_pct": -6.39
     },
     {
@@ -8884,39 +8754,29 @@
      "entry_date": "2026-10-16",
      "closed_on": "2026-11-02",
      "open": false,
-     "money": 215761,
-     "pnl": 3047.07,
+     "money": 221528,
+     "pnl": 3128.51,
      "pnl_pct": 1.41
     },
     {
-     "name": "Manaksia Steels",
-     "symbol": "MANAKSTEEL",
-     "entry_date": "2026-10-19",
-     "closed_on": "2026-10-22",
-     "open": false,
-     "money": 216966,
-     "pnl": -13856.35,
-     "pnl_pct": -6.39
-    },
-    {
-     "name": "Lead Reclaim",
-     "symbol": "LRRPL",
-     "entry_date": "2026-10-14",
-     "closed_on": "2026-10-23",
-     "open": false,
-     "money": 213345,
-     "pnl": -13633.74,
-     "pnl_pct": -6.39
-    },
-    {
-     "name": "Zelio E-Mobility",
-     "symbol": "544563",
-     "entry_date": "2026-10-13",
+     "name": "L. T. Elevator",
+     "symbol": "544518",
+     "entry_date": "2026-10-16",
      "closed_on": "2026-10-21",
      "open": false,
-     "money": 106666,
-     "pnl": -7749.49,
-     "pnl_pct": -7.27
+     "money": 221528,
+     "pnl": -16891.39,
+     "pnl_pct": -7.62
+    },
+    {
+     "name": "Saakshi Medtech",
+     "symbol": "SAAKSHI",
+     "entry_date": "2026-10-13",
+     "closed_on": "2026-10-28",
+     "open": false,
+     "money": 219274,
+     "pnl": -4425.79,
+     "pnl_pct": -2.02
     },
     {
      "name": "Hoac Foods",
@@ -8924,8 +8784,8 @@
      "entry_date": "2026-10-09",
      "closed_on": "2026-10-26",
      "open": false,
-     "money": 105119,
-     "pnl": -6714.56,
+     "money": 107960,
+     "pnl": -6896.05,
      "pnl_pct": -6.39
     },
     {
@@ -8934,8 +8794,8 @@
      "entry_date": "2026-10-08",
      "closed_on": "2026-10-22",
      "open": false,
-     "money": 213332,
-     "pnl": -16245.92,
+     "money": 219098,
+     "pnl": -16685.03,
      "pnl_pct": -7.62
     },
     {
@@ -8944,8 +8804,8 @@
      "entry_date": "2026-10-07",
      "closed_on": "2026-10-22",
      "open": false,
-     "money": 210237,
-     "pnl": -951.55,
+     "money": 215920,
+     "pnl": -977.27,
      "pnl_pct": -0.45
     },
     {
@@ -8954,8 +8814,8 @@
      "entry_date": "2026-09-30",
      "closed_on": "2026-10-23",
      "open": false,
-     "money": 207469,
-     "pnl": 4031.85,
+     "money": 213077,
+     "pnl": 4140.83,
      "pnl_pct": 1.94
     },
     {
@@ -8964,8 +8824,8 @@
      "entry_date": "2026-09-30",
      "closed_on": "2026-10-19",
      "open": false,
-     "money": 207469,
-     "pnl": 33069.8,
+     "money": 213077,
+     "pnl": 33963.64,
      "pnl_pct": 15.94
     },
     {
@@ -8984,8 +8844,8 @@
      "entry_date": "2026-09-29",
      "closed_on": "2026-10-14",
      "open": false,
-     "money": 207469,
-     "pnl": -1221.75,
+     "money": 213077,
+     "pnl": -1254.77,
      "pnl_pct": -0.59
     },
     {
@@ -8994,8 +8854,8 @@
      "entry_date": "2026-09-17",
      "closed_on": "2026-10-09",
      "open": false,
-     "money": 210754,
-     "pnl": 1320.19,
+     "money": 216392,
+     "pnl": 1355.51,
      "pnl_pct": 0.63
     },
     {
@@ -9004,8 +8864,8 @@
      "entry_date": "2026-09-22",
      "closed_on": "2026-10-07",
      "open": false,
-     "money": 104720,
-     "pnl": -745.48,
+     "money": 107548,
+     "pnl": -765.61,
      "pnl_pct": -0.71
     },
     {
@@ -9014,8 +8874,8 @@
      "entry_date": "2026-09-21",
      "closed_on": "2026-10-07",
      "open": false,
-     "money": 209440,
-     "pnl": 22038.14,
+     "money": 215096,
+     "pnl": 22633.32,
      "pnl_pct": 10.52
     },
     {
@@ -9034,8 +8894,8 @@
      "entry_date": "2026-09-11",
      "closed_on": "2026-09-28",
      "open": false,
-     "money": 207493,
-     "pnl": -829.97,
+     "money": 210836,
+     "pnl": -843.35,
      "pnl_pct": -0.4
     },
     {
@@ -9044,8 +8904,8 @@
      "entry_date": "2026-09-16",
      "closed_on": "2026-09-22",
      "open": false,
-     "money": 207493,
-     "pnl": -13255.48,
+     "money": 213128,
+     "pnl": -13615.47,
      "pnl_pct": -6.39
     },
     {
@@ -9064,8 +8924,8 @@
      "entry_date": "2026-09-03",
      "closed_on": "2026-09-18",
      "open": false,
-     "money": 206981,
-     "pnl": -9981.29,
+     "money": 204041,
+     "pnl": -9839.48,
      "pnl_pct": -4.82
     },
     {
@@ -9074,39 +8934,39 @@
      "entry_date": "2026-08-10",
      "closed_on": "2026-09-17",
      "open": false,
-     "money": 201377,
-     "pnl": 44522.64,
+     "money": 201548,
+     "pnl": 44560.59,
      "pnl_pct": 22.11
     },
     {
-     "name": "Rolex Rings",
-     "symbol": "ROLEXRINGS",
+     "name": "Gandhar Oil Ref.",
+     "symbol": "GANDHAR",
+     "entry_date": "2026-09-01",
+     "closed_on": "2026-09-16",
+     "open": false,
+     "money": 203750,
+     "pnl": -11777.61,
+     "pnl_pct": -5.78
+    },
+    {
+     "name": "Fonebox Retail",
+     "symbol": "FONEBOX",
+     "entry_date": "2026-08-31",
+     "closed_on": "2026-09-16",
+     "open": false,
+     "money": 201304,
+     "pnl": 60620.24,
+     "pnl_pct": 30.11
+    },
+    {
+     "name": "Gandhar Oil Ref.",
+     "symbol": "GANDHAR",
      "entry_date": "2026-09-10",
-     "closed_on": "2026-09-11",
+     "closed_on": "2026-09-15",
      "open": false,
-     "money": 207118,
-     "pnl": -13233.65,
+     "money": 101875,
+     "pnl": -6507.49,
      "pnl_pct": -6.39
-    },
-    {
-     "name": "Nuvama Wealth Management Ltd",
-     "symbol": "NUVAMA",
-     "entry_date": "2026-09-02",
-     "closed_on": "2026-09-11",
-     "open": false,
-     "money": 206691,
-     "pnl": -13203.97,
-     "pnl_pct": -6.39
-    },
-    {
-     "name": "Knowledge Marine & Engineering Works Ltd",
-     "symbol": "KMEW",
-     "entry_date": "2026-08-26",
-     "closed_on": "2026-09-11",
-     "open": false,
-     "money": 203010,
-     "pnl": 2993.58,
-     "pnl_pct": 1.47
     },
     {
      "name": "Hoac Foods",
@@ -9134,8 +8994,8 @@
      "entry_date": "2026-09-09",
      "closed_on": "2026-09-10",
      "open": false,
-     "money": 208852,
-     "pnl": -13343.28,
+     "money": 205912,
+     "pnl": -13155.41,
      "pnl_pct": -6.39
     },
     {
@@ -9154,19 +9014,19 @@
      "entry_date": "2026-08-20",
      "closed_on": "2026-09-03",
      "open": false,
-     "money": 197966,
-     "pnl": 2236.02,
+     "money": 198135,
+     "pnl": 2237.93,
      "pnl_pct": 1.13
     },
     {
-     "name": "Apollo Pipes Ltd",
-     "symbol": "APOLLOPIPE",
+     "name": "Gandhar Oil Ref.",
+     "symbol": "GANDHAR",
      "entry_date": "2026-08-17",
-     "closed_on": "2026-09-02",
+     "closed_on": "2026-08-31",
      "open": false,
-     "money": 198045,
-     "pnl": 28862.59,
-     "pnl_pct": 14.57
+     "money": 198214,
+     "pnl": 4924.97,
+     "pnl_pct": 2.48
     },
     {
      "name": "Swaraj Suiting",
@@ -9184,8 +9044,8 @@
      "entry_date": "2026-08-13",
      "closed_on": "2026-08-17",
      "open": false,
-     "money": 199704,
-     "pnl": -12758.15,
+     "money": 199874,
+     "pnl": -12769.03,
      "pnl_pct": -6.39
     },
     {
@@ -9194,9 +9054,19 @@
      "entry_date": "2026-08-10",
      "closed_on": "2026-08-12",
      "open": false,
-     "money": 201377,
-     "pnl": -12867.62,
+     "money": 201548,
+     "pnl": -12878.59,
      "pnl_pct": -6.39
+    },
+    {
+     "name": "Sambhv Steel",
+     "symbol": "SAMBHV",
+     "entry_date": "2026-07-27",
+     "closed_on": "2026-08-10",
+     "open": false,
+     "money": 196578,
+     "pnl": 623.1,
+     "pnl_pct": 0.32
     },
     {
      "name": "Indo Count Industries Ltd",
@@ -9207,16 +9077,6 @@
      "money": 196578,
      "pnl": 4548.01,
      "pnl_pct": 2.31
-    },
-    {
-     "name": "Apollo Pipes Ltd",
-     "symbol": "APOLLOPIPE",
-     "entry_date": "2026-07-27",
-     "closed_on": "2026-08-10",
-     "open": false,
-     "money": 196578,
-     "pnl": -697.31,
-     "pnl_pct": -0.35
     },
     {
      "name": "Univastu India",
@@ -10727,21 +10587,11 @@
      "money": 136770,
      "pnl": -8738.15,
      "pnl_pct": -6.39
-    },
-    {
-     "name": "PDS Ltd",
-     "symbol": "PDSL",
-     "entry_date": "2024-12-09",
-     "closed_on": "2024-12-23",
-     "open": false,
-     "money": 131634,
-     "pnl": 785.78,
-     "pnl_pct": 0.6
     }
    ]
   },
   "year2": {
-   "start": "2024-11-25",
+   "start": "2024-11-26",
    "capital": 1000000.0,
    "pct": 13.0,
    "final": 1056739.92,
@@ -11708,18 +11558,18 @@
    ]
   },
   "year1": {
-   "start": "2025-11-25",
+   "start": "2025-11-26",
    "capital": 1000000.0,
    "pct": 13.0,
-   "final": 1626378.54,
-   "profit": 626378.54,
-   "open_trades": 10,
-   "return_pct": 62.6,
-   "trades": 116,
-   "skipped": 55,
-   "wins": 58,
+   "final": 1676543.2,
+   "profit": 676543.2,
+   "open_trades": 12,
+   "return_pct": 67.7,
+   "trades": 117,
+   "skipped": 53,
+   "wins": 59,
    "pauses": 0,
-   "win_rate": 50.0,
+   "win_rate": 50.4,
    "max_drawdown_pct": 0.0,
    "months": {
     "2025-12": 17261.17,
@@ -11730,10 +11580,10 @@
     "2026-05": 124573.54,
     "2026-06": 31850.17,
     "2026-07": 81938.53,
-    "2026-08": 70590.53,
-    "2026-09": 32478.9,
-    "2026-10": 16974.84,
-    "2026-11": 98280.13
+    "2026-08": 58159.37,
+    "2026-09": 85754.41,
+    "2026-10": 31041.75,
+    "2026-11": 93533.52
    },
    "curve": [
     [
@@ -11770,32 +11620,72 @@
     ],
     [
      "2026-08",
-     1478644.69
+     1466213.53
     ],
     [
      "2026-09",
-     1511123.59
+     1551967.94
     ],
     [
      "2026-10",
-     1528098.43
+     1583009.69
     ],
     [
      "2026-11",
-     1626378.56
+     1676543.21
     ]
    ],
    "first_trade": "2025-12-01",
    "trades_list": [
     {
+     "name": "Taurian MPS",
+     "symbol": "TAURIAN",
+     "entry_date": "2026-11-25",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 217949,
+     "pnl": 13.25,
+     "pnl_pct": 0.01
+    },
+    {
+     "name": "PTC Industries Ltd",
+     "symbol": "PTCIL",
+     "entry_date": "2026-11-25",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 218633,
+     "pnl": -5259.49,
+     "pnl_pct": -2.41
+    },
+    {
      "name": "Ratnaveer Precision Engineering",
      "symbol": "RATNAVEER",
      "entry_date": "2026-11-23",
-     "closed_on": "2026-11-23",
+     "closed_on": "2026-11-25",
      "open": true,
-     "money": 210607,
-     "pnl": 6325.44,
-     "pnl_pct": 3.0
+     "money": 217752,
+     "pnl": 7236.57,
+     "pnl_pct": 3.32
+    },
+    {
+     "name": "Yatharth Hospital & Trauma Care Services Ltd",
+     "symbol": "YATHARTH",
+     "entry_date": "2026-11-13",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 201612,
+     "pnl": -787.84,
+     "pnl_pct": -0.39
+    },
+    {
+     "name": "Aptus Pharma",
+     "symbol": "544529",
+     "entry_date": "2026-11-12",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 102234,
+     "pnl": 325.85,
+     "pnl_pct": 0.32
     },
     {
      "name": "Lead Reclaim",
@@ -11803,8 +11693,8 @@
      "entry_date": "2026-11-19",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 197848,
-     "pnl": 15929.15,
+     "money": 204955,
+     "pnl": 16501.28,
      "pnl_pct": 8.05
     },
     {
@@ -11813,8 +11703,8 @@
      "entry_date": "2026-11-17",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 97311,
-     "pnl": -4565.63,
+     "money": 100806,
+     "pnl": -4729.62,
      "pnl_pct": -4.69
     },
     {
@@ -11823,29 +11713,9 @@
      "entry_date": "2026-11-16",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 194621,
-     "pnl": -3032.1,
+     "money": 201612,
+     "pnl": -3141.01,
      "pnl_pct": -1.56
-    },
-    {
-     "name": "Yatharth Hospital & Trauma Care Services Ltd",
-     "symbol": "YATHARTH",
-     "entry_date": "2026-11-13",
-     "closed_on": "2026-11-23",
-     "open": true,
-     "money": 194621,
-     "pnl": 3.33,
-     "pnl_pct": 0.0
-    },
-    {
-     "name": "Aptus Pharma",
-     "symbol": "544529",
-     "entry_date": "2026-11-12",
-     "closed_on": "2026-11-23",
-     "open": true,
-     "money": 98689,
-     "pnl": 2209.4,
-     "pnl_pct": 2.24
     },
     {
      "name": "DC Infotech",
@@ -11853,8 +11723,8 @@
      "entry_date": "2026-11-05",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 197378,
-     "pnl": 17223.98,
+     "money": 204467,
+     "pnl": 17842.61,
      "pnl_pct": 8.73
     },
     {
@@ -11863,8 +11733,8 @@
      "entry_date": "2026-11-05",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 197378,
-     "pnl": 42225.56,
+     "money": 204467,
+     "pnl": 43742.17,
      "pnl_pct": 21.39
     },
     {
@@ -11873,8 +11743,8 @@
      "entry_date": "2026-10-30",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 198653,
-     "pnl": 23290.61,
+     "money": 205791,
+     "pnl": 24127.54,
      "pnl_pct": 11.72
     },
     {
@@ -11893,8 +11763,8 @@
      "entry_date": "2026-11-03",
      "closed_on": "2026-11-18",
      "open": false,
-     "money": 197378,
-     "pnl": 3684.56,
+     "money": 204467,
+     "pnl": 3816.9,
      "pnl_pct": 1.87
     },
     {
@@ -11903,8 +11773,8 @@
      "entry_date": "2026-11-09",
      "closed_on": "2026-11-13",
      "open": false,
-     "money": 98689,
-     "pnl": -8556.91,
+     "money": 102234,
+     "pnl": -8864.25,
      "pnl_pct": -8.67
     },
     {
@@ -11913,8 +11783,8 @@
      "entry_date": "2026-11-02",
      "closed_on": "2026-11-13",
      "open": false,
-     "money": 197378,
-     "pnl": -12648.15,
+     "money": 204467,
+     "pnl": -13102.43,
      "pnl_pct": -6.41
     },
     {
@@ -11923,8 +11793,8 @@
      "entry_date": "2026-10-29",
      "closed_on": "2026-11-02",
      "open": false,
-     "money": 198653,
-     "pnl": -12690.31,
+     "money": 205791,
+     "pnl": -13146.32,
      "pnl_pct": -6.39
     },
     {
@@ -11933,39 +11803,29 @@
      "entry_date": "2026-10-16",
      "closed_on": "2026-11-02",
      "open": false,
-     "money": 204297,
-     "pnl": 2885.17,
+     "money": 209757,
+     "pnl": 2962.28,
      "pnl_pct": 1.41
     },
     {
-     "name": "Manaksia Steels",
-     "symbol": "MANAKSTEEL",
-     "entry_date": "2026-10-19",
-     "closed_on": "2026-10-22",
-     "open": false,
-     "money": 205438,
-     "pnl": -13120.13,
-     "pnl_pct": -6.39
-    },
-    {
-     "name": "Lead Reclaim",
-     "symbol": "LRRPL",
-     "entry_date": "2026-10-14",
-     "closed_on": "2026-10-23",
-     "open": false,
-     "money": 202009,
-     "pnl": -12909.35,
-     "pnl_pct": -6.39
-    },
-    {
-     "name": "Zelio E-Mobility",
-     "symbol": "544563",
-     "entry_date": "2026-10-13",
+     "name": "L. T. Elevator",
+     "symbol": "544518",
+     "entry_date": "2026-10-16",
      "closed_on": "2026-10-21",
      "open": false,
-     "money": 100999,
-     "pnl": -7337.74,
-     "pnl_pct": -7.27
+     "money": 209757,
+     "pnl": -15993.91,
+     "pnl_pct": -7.62
+    },
+    {
+     "name": "Saakshi Medtech",
+     "symbol": "SAAKSHI",
+     "entry_date": "2026-10-13",
+     "closed_on": "2026-10-28",
+     "open": false,
+     "money": 207624,
+     "pnl": -4190.64,
+     "pnl_pct": -2.02
     },
     {
      "name": "Hoac Foods",
@@ -11973,8 +11833,8 @@
      "entry_date": "2026-10-09",
      "closed_on": "2026-10-26",
      "open": false,
-     "money": 99534,
-     "pnl": -6357.8,
+     "money": 102224,
+     "pnl": -6529.64,
      "pnl_pct": -6.39
     },
     {
@@ -11983,8 +11843,8 @@
      "entry_date": "2026-10-08",
      "closed_on": "2026-10-22",
      "open": false,
-     "money": 201997,
-     "pnl": -15382.73,
+     "money": 207457,
+     "pnl": -15798.51,
      "pnl_pct": -7.62
     },
     {
@@ -11993,8 +11853,8 @@
      "entry_date": "2026-10-07",
      "closed_on": "2026-10-22",
      "open": false,
-     "money": 199067,
-     "pnl": -900.99,
+     "money": 204448,
+     "pnl": -925.34,
      "pnl_pct": -0.45
     },
     {
@@ -12003,8 +11863,8 @@
      "entry_date": "2026-09-30",
      "closed_on": "2026-10-23",
      "open": false,
-     "money": 196446,
-     "pnl": 3817.63,
+     "money": 201756,
+     "pnl": 3920.82,
      "pnl_pct": 1.94
     },
     {
@@ -12013,8 +11873,8 @@
      "entry_date": "2026-09-30",
      "closed_on": "2026-10-19",
      "open": false,
-     "money": 196446,
-     "pnl": 31312.71,
+     "money": 201756,
+     "pnl": 32159.07,
      "pnl_pct": 15.94
     },
     {
@@ -12033,8 +11893,8 @@
      "entry_date": "2026-09-29",
      "closed_on": "2026-10-14",
      "open": false,
-     "money": 196446,
-     "pnl": -1156.83,
+     "money": 201756,
+     "pnl": -1188.1,
      "pnl_pct": -0.59
     },
     {
@@ -12043,8 +11903,8 @@
      "entry_date": "2026-09-17",
      "closed_on": "2026-10-09",
      "open": false,
-     "money": 199557,
-     "pnl": 1250.05,
+     "money": 204895,
+     "pnl": 1283.49,
      "pnl_pct": 0.63
     },
     {
@@ -12053,8 +11913,8 @@
      "entry_date": "2026-09-22",
      "closed_on": "2026-10-07",
      "open": false,
-     "money": 99156,
-     "pnl": -705.87,
+     "money": 101834,
+     "pnl": -724.93,
      "pnl_pct": -0.71
     },
     {
@@ -12063,8 +11923,8 @@
      "entry_date": "2026-09-21",
      "closed_on": "2026-10-07",
      "open": false,
-     "money": 198312,
-     "pnl": 20867.2,
+     "money": 203667,
+     "pnl": 21430.75,
      "pnl_pct": 10.52
     },
     {
@@ -12083,8 +11943,8 @@
      "entry_date": "2026-09-11",
      "closed_on": "2026-09-28",
      "open": false,
-     "money": 196468,
-     "pnl": -785.87,
+     "money": 199634,
+     "pnl": -798.54,
      "pnl_pct": -0.4
     },
     {
@@ -12093,8 +11953,8 @@
      "entry_date": "2026-09-16",
      "closed_on": "2026-09-22",
      "open": false,
-     "money": 196468,
-     "pnl": -12551.19,
+     "money": 201804,
+     "pnl": -12892.05,
      "pnl_pct": -6.39
     },
     {
@@ -12113,8 +11973,8 @@
      "entry_date": "2026-09-03",
      "closed_on": "2026-09-18",
      "open": false,
-     "money": 195984,
-     "pnl": -9450.96,
+     "money": 193200,
+     "pnl": -9316.68,
      "pnl_pct": -4.82
     },
     {
@@ -12123,39 +11983,39 @@
      "entry_date": "2026-08-10",
      "closed_on": "2026-09-17",
      "open": false,
-     "money": 190677,
-     "pnl": 42157.04,
+     "money": 190840,
+     "pnl": 42192.97,
      "pnl_pct": 22.11
     },
     {
-     "name": "Rolex Rings",
-     "symbol": "ROLEXRINGS",
+     "name": "Gandhar Oil Ref.",
+     "symbol": "GANDHAR",
+     "entry_date": "2026-09-01",
+     "closed_on": "2026-09-16",
+     "open": false,
+     "money": 192924,
+     "pnl": -11151.84,
+     "pnl_pct": -5.78
+    },
+    {
+     "name": "Fonebox Retail",
+     "symbol": "FONEBOX",
+     "entry_date": "2026-08-31",
+     "closed_on": "2026-09-16",
+     "open": false,
+     "money": 190608,
+     "pnl": 57399.33,
+     "pnl_pct": 30.11
+    },
+    {
+     "name": "Gandhar Oil Ref.",
+     "symbol": "GANDHAR",
      "entry_date": "2026-09-10",
-     "closed_on": "2026-09-11",
+     "closed_on": "2026-09-15",
      "open": false,
-     "money": 196113,
-     "pnl": -12530.51,
+     "money": 96462,
+     "pnl": -6161.73,
      "pnl_pct": -6.39
-    },
-    {
-     "name": "Nuvama Wealth Management Ltd",
-     "symbol": "NUVAMA",
-     "entry_date": "2026-09-02",
-     "closed_on": "2026-09-11",
-     "open": false,
-     "money": 195709,
-     "pnl": -12502.41,
-     "pnl_pct": -6.39
-    },
-    {
-     "name": "Knowledge Marine & Engineering Works Ltd",
-     "symbol": "KMEW",
-     "entry_date": "2026-08-26",
-     "closed_on": "2026-09-11",
-     "open": false,
-     "money": 192224,
-     "pnl": 2834.53,
-     "pnl_pct": 1.47
     },
     {
      "name": "Hoac Foods",
@@ -12183,8 +12043,8 @@
      "entry_date": "2026-09-09",
      "closed_on": "2026-09-10",
      "open": false,
-     "money": 197755,
-     "pnl": -12634.32,
+     "money": 194971,
+     "pnl": -12456.43,
      "pnl_pct": -6.39
     },
     {
@@ -12203,19 +12063,19 @@
      "entry_date": "2026-08-20",
      "closed_on": "2026-09-03",
      "open": false,
-     "money": 187448,
-     "pnl": 2117.22,
+     "money": 187608,
+     "pnl": 2119.02,
      "pnl_pct": 1.13
     },
     {
-     "name": "Apollo Pipes Ltd",
-     "symbol": "APOLLOPIPE",
+     "name": "Gandhar Oil Ref.",
+     "symbol": "GANDHAR",
      "entry_date": "2026-08-17",
-     "closed_on": "2026-09-02",
+     "closed_on": "2026-08-31",
      "open": false,
-     "money": 187523,
-     "pnl": 27329.05,
-     "pnl_pct": 14.57
+     "money": 187682,
+     "pnl": 4663.3,
+     "pnl_pct": 2.48
     },
     {
      "name": "Swaraj Suiting",
@@ -12233,8 +12093,8 @@
      "entry_date": "2026-08-13",
      "closed_on": "2026-08-17",
      "open": false,
-     "money": 189093,
-     "pnl": -12080.28,
+     "money": 189254,
+     "pnl": -12090.58,
      "pnl_pct": -6.39
     },
     {
@@ -12243,9 +12103,19 @@
      "entry_date": "2026-08-10",
      "closed_on": "2026-08-12",
      "open": false,
-     "money": 190677,
-     "pnl": -12183.93,
+     "money": 190840,
+     "pnl": -12194.31,
      "pnl_pct": -6.39
+    },
+    {
+     "name": "Sambhv Steel",
+     "symbol": "SAMBHV",
+     "entry_date": "2026-07-27",
+     "closed_on": "2026-08-10",
+     "open": false,
+     "money": 186133,
+     "pnl": 589.99,
+     "pnl_pct": 0.32
     },
     {
      "name": "Indo Count Industries Ltd",
@@ -12256,16 +12126,6 @@
      "money": 186133,
      "pnl": 4306.36,
      "pnl_pct": 2.31
-    },
-    {
-     "name": "Apollo Pipes Ltd",
-     "symbol": "APOLLOPIPE",
-     "entry_date": "2026-07-27",
-     "closed_on": "2026-08-10",
-     "open": false,
-     "money": 186133,
-     "pnl": -660.26,
-     "pnl_pct": -0.35
     },
     {
      "name": "Univastu India",
@@ -12952,20 +12812,20 @@
   "index_from": "2018-04-02",
   "by_year": {
    "2017": {
-    "final": 1473401.04,
+    "final": 1458322.53,
     "open_trades": 0,
-    "return_pct": 47.3,
-    "trades": 81,
-    "win_rate": 49.4,
+    "return_pct": 45.8,
+    "trades": 77,
+    "win_rate": 51.9,
     "max_drawdown_pct": 3.3
    },
    "2018": {
-    "final": 958262.7,
+    "final": 966801.58,
     "open_trades": 0,
-    "return_pct": -4.2,
-    "trades": 32,
-    "win_rate": 28.1,
-    "max_drawdown_pct": 5.9
+    "return_pct": -3.3,
+    "trades": 30,
+    "win_rate": 30.0,
+    "max_drawdown_pct": 5.1
    },
    "2019": {
     "final": 986209.19,
@@ -12976,43 +12836,43 @@
     "max_drawdown_pct": 3.8
    },
    "2020": {
-    "final": 1271061.01,
+    "final": 1266019.52,
     "open_trades": 0,
-    "return_pct": 27.1,
-    "trades": 31,
-    "win_rate": 51.6,
-    "max_drawdown_pct": 5.3
+    "return_pct": 26.6,
+    "trades": 30,
+    "win_rate": 50.0,
+    "max_drawdown_pct": 5.5
    },
    "2021": {
-    "final": 1666809.6,
+    "final": 1570003.11,
     "open_trades": 0,
-    "return_pct": 66.7,
-    "trades": 68,
-    "win_rate": 50.0,
-    "max_drawdown_pct": 2.1
+    "return_pct": 57.0,
+    "trades": 65,
+    "win_rate": 49.2,
+    "max_drawdown_pct": 3.0
    },
    "2022": {
-    "final": 1000566.25,
+    "final": 952392.39,
     "open_trades": 0,
-    "return_pct": 0.1,
-    "trades": 47,
-    "win_rate": 23.4,
-    "max_drawdown_pct": 7.3
+    "return_pct": -4.8,
+    "trades": 43,
+    "win_rate": 20.9,
+    "max_drawdown_pct": 9.0
    },
    "2023": {
-    "final": 1239168.06,
+    "final": 1355021.88,
     "open_trades": 0,
-    "return_pct": 23.9,
-    "trades": 109,
-    "win_rate": 44.0,
-    "max_drawdown_pct": 6.5
+    "return_pct": 35.5,
+    "trades": 103,
+    "win_rate": 45.6,
+    "max_drawdown_pct": 4.9
    },
    "2024": {
-    "final": 1310961.94,
+    "final": 1366646.99,
     "open_trades": 0,
-    "return_pct": 31.1,
-    "trades": 86,
-    "win_rate": 40.7,
+    "return_pct": 36.7,
+    "trades": 87,
+    "win_rate": 41.4,
     "max_drawdown_pct": 4.1
    },
    "2025": {
@@ -13024,92 +12884,92 @@
     "max_drawdown_pct": 8.4
    },
    "2026": {
-    "final": 1505724.21,
-    "open_trades": 10,
-    "return_pct": 50.6,
-    "trades": 106,
-    "win_rate": 48.1,
+    "final": 1552167.37,
+    "open_trades": 12,
+    "return_pct": 55.2,
+    "trades": 107,
+    "win_rate": 48.6,
     "max_drawdown_pct": 0.7
    }
   },
   "stocks_with_history": {
-   "2017": 31,
-   "2018": 34,
-   "2019": 42,
-   "2020": 44,
-   "2021": 46,
-   "2022": 47,
-   "2023": 53,
-   "2024": 64,
-   "2025": 84,
-   "2026": 99
+   "2017": 29,
+   "2018": 32,
+   "2019": 40,
+   "2020": 42,
+   "2021": 43,
+   "2022": 44,
+   "2023": 50,
+   "2024": 61,
+   "2025": 81,
+   "2026": 96
   }
  },
  "positional": {
   "entry_test": {
    "old": {
-    "return_pct": 85.0,
-    "trades": 103,
-    "win_rate": 35.0,
+    "return_pct": 80.6,
+    "trades": 104,
+    "win_rate": 33.7,
+    "max_drawdown_pct": 4.1,
+    "skipped": 85
+   },
+   "new": {
+    "return_pct": 82.2,
+    "trades": 102,
+    "win_rate": 34.3,
     "max_drawdown_pct": 4.1,
     "skipped": 87
    },
-   "new": {
-    "return_pct": 83.2,
-    "trades": 101,
-    "win_rate": 34.7,
-    "max_drawdown_pct": 4.1,
-    "skipped": 89
-   },
    "gap3": {
-    "return_pct": 82.0,
-    "trades": 101,
-    "win_rate": 33.7,
+    "return_pct": 81.0,
+    "trades": 102,
+    "win_rate": 33.3,
     "max_drawdown_pct": 4.1,
-    "skipped": 88
+    "skipped": 86
    }
   },
   "pyramid_test": {
    "none": {
-    "return_pct": 78.9,
-    "trades": 92,
-    "win_rate": 33.7,
+    "return_pct": 78.1,
+    "trades": 93,
+    "win_rate": 33.3,
     "max_drawdown_pct": 4.7,
-    "skipped": 71,
+    "skipped": 69,
     "addons": 0,
     "addon_closed": 0,
     "addon_win_rate": null,
     "addon_avg_return_pct": null
    },
    "add1": {
-    "return_pct": 83.2,
-    "trades": 101,
-    "win_rate": 34.7,
+    "return_pct": 82.2,
+    "trades": 102,
+    "win_rate": 34.3,
     "max_drawdown_pct": 4.1,
-    "skipped": 89,
-    "addons": 54,
-    "addon_closed": 46,
-    "addon_win_rate": 17.4,
-    "addon_avg_return_pct": 1.5
+    "skipped": 87,
+    "addons": 52,
+    "addon_closed": 44,
+    "addon_win_rate": 18.2,
+    "addon_avg_return_pct": 1.86
    }
   },
   "report": {
-   "trades": 190,
-   "open": 26,
-   "wins": 45,
-   "losses": 145,
-   "win_rate": 23.7,
-   "total_pnl": 618733.32,
-   "open_pnl": 283745.49,
-   "avg_win": 31781.48,
-   "avg_loss": -5596.09,
-   "profit_factor": 1.76,
-   "expectancy": 3256.49,
-   "avg_return_pct": 3.43,
+   "trades": 186,
+   "open": 27,
+   "wins": 43,
+   "losses": 143,
+   "win_rate": 23.1,
+   "total_pnl": 555050.81,
+   "open_pnl": 275731.71,
+   "avg_win": 31630.57,
+   "avg_loss": -5629.82,
+   "profit_factor": 1.69,
+   "expectancy": 2984.14,
+   "avg_return_pct": 3.19,
    "best": 82528.59,
    "worst": -14274.04,
    "max_drawdown": 191207.87,
-   "avg_hold_days": 39.9,
+   "avg_hold_days": 39.7,
    "first": "2024-12-09",
    "last": "2026-11-13",
    "curve": [
@@ -13574,304 +13434,288 @@
      109083.41
     ],
     [
-     "2026-07-17",
-     105893.02
-    ],
-    [
      "2026-07-22",
-     102704.78
+     105895.17
     ],
     [
      "2026-07-23",
-     150406.92
+     153597.31
     ],
     [
      "2026-07-23",
-     136132.88
+     139323.27
     ],
     [
      "2026-07-23",
-     130254.54
+     133444.93
     ],
     [
      "2026-07-27",
-     126570.9
+     129761.29
     ],
     [
      "2026-07-28",
-     120236.66
+     123427.05
     ],
     [
      "2026-07-29",
-     117048.96
+     120239.35
     ],
     [
      "2026-07-30",
-     134101.02
+     137291.41
     ],
     [
      "2026-07-31",
-     127287.82
+     130478.21
     ],
     [
      "2026-08-03",
-     120976.16
+     124166.55
     ],
     [
      "2026-08-04",
-     117862.68
+     121053.07
     ],
     [
      "2026-08-05",
-     136182.38
+     139372.77
     ],
     [
      "2026-08-11",
-     169414.98
+     172605.37
     ],
     [
      "2026-08-11",
-     184725.84
+     187916.23
     ],
     [
      "2026-08-12",
-     178345.69
+     181536.08
     ],
     [
      "2026-08-12",
-     175189.39
+     178379.78
     ],
     [
      "2026-08-13",
-     172017.15
+     175207.54
     ],
     [
      "2026-08-13",
-     165634.85
+     168825.24
     ],
     [
      "2026-08-17",
-     159249.84
+     162440.23
     ],
     [
      "2026-08-17",
-     183733.41
+     186923.8
     ],
     [
      "2026-08-18",
-     254683.39
+     257873.78
     ],
     [
      "2026-08-28",
-     248307.01
+     251497.4
     ],
     [
      "2026-08-31",
-     245474.32
+     248664.71
     ],
     [
      "2026-09-01",
-     239086.34
+     242276.73
     ],
     [
      "2026-09-02",
-     232704.2
+     235894.59
     ],
     [
      "2026-09-08",
-     226607.51
+     229797.9
     ],
     [
      "2026-09-10",
-     220240.58
+     223430.97
     ],
     [
      "2026-09-11",
-     217070.47
+     220260.86
     ],
     [
      "2026-09-11",
-     210711.87
+     213902.26
     ],
     [
      "2026-09-11",
-     204323.91
+     207514.3
     ],
     [
      "2026-09-15",
-     198245.4
+     201435.79
     ],
     [
      "2026-09-15",
-     191886.34
+     195076.73
     ],
     [
      "2026-09-16",
-     206549.52
+     191901.89
     ],
     [
      "2026-09-16",
-     203370.21
+     226299.35
     ],
     [
      "2026-09-16",
-     200195.37
+     259531.95
     ],
     [
      "2026-09-16",
-     234592.83
+     256647.32
     ],
     [
      "2026-09-16",
-     267825.43
+     250277.9
     ],
     [
      "2026-09-16",
-     264940.8
+     244386.78
     ],
     [
      "2026-09-16",
-     258571.38
+     241193.77
     ],
     [
      "2026-09-16",
-     252680.26
-    ],
-    [
-     "2026-09-16",
-     249487.25
-    ],
-    [
-     "2026-09-16",
-     243335.67
+     235042.19
     ],
     [
      "2026-09-21",
-     236962.55
+     228669.07
     ],
     [
      "2026-09-22",
-     230583.24
+     222289.76
     ],
     [
      "2026-09-29",
-     224239.34
+     215945.86
     ],
     [
      "2026-10-12",
-     220940.58
+     212647.1
     ],
     [
      "2026-10-13",
-     217870.61
+     209577.13
     ],
     [
      "2026-10-13",
-     261477.22
+     253183.74
     ],
     [
      "2026-10-14",
-     289948.31
+     281654.83
     ],
     [
      "2026-10-14",
-     301840.3
-    ],
-    [
-     "2026-10-14",
-     357229.33
+     293546.82
     ],
     [
      "2026-10-21",
-     349623.05
+     285940.54
     ],
     [
      "2026-10-21",
-     346060.75
+     282378.24
     ],
     [
      "2026-10-21",
-     339816.59
+     276134.08
     ],
     [
      "2026-10-21",
-     359919.57
+     296237.06
     ],
     [
      "2026-10-22",
-     352316.76
+     288634.25
     ],
     [
      "2026-10-22",
-     349127.69
+     285445.18
     ],
     [
      "2026-10-22",
-     377068.65
+     313386.14
     ],
     [
      "2026-10-23",
-     425778.33
+     362095.82
     ],
     [
      "2026-10-23",
-     439881.44
+     376198.93
     ],
     [
      "2026-10-23",
-     433523.32
+     369840.81
     ],
     [
      "2026-10-23",
-     457685.74
+     394003.23
     ],
     [
      "2026-10-23",
-     454496.85
+     390814.34
     ],
     [
      "2026-10-23",
-     471670.41
+     407987.9
     ],
     [
      "2026-10-23",
-     465284.74
+     401602.23
     ],
     [
      "2026-10-26",
-     485417.26
+     421734.75
     ],
     [
      "2026-10-26",
-     479033.97
+     415351.46
     ],
     [
      "2026-10-28",
-     522220.77
+     458538.26
     ],
     [
      "2026-11-02",
-     515850.78
+     452168.27
     ],
     [
      "2026-11-02",
-     505903.37
+     442220.86
     ],
     [
      "2026-11-04",
-     588431.96
+     524749.45
     ],
     [
      "2026-11-04",
-     629499.49
+     565816.98
     ],
     [
      "2026-11-13",
-     623037.04
+     559354.53
     ],
     [
      "2026-11-13",
-     618733.32
+     555050.81
     ]
    ],
    "months": {
@@ -13891,16 +13735,32 @@
     "2026-03": -25431.71,
     "2026-05": 35047.83,
     "2026-06": 10178.94,
-    "2026-07": 10012.37,
+    "2026-07": 13202.76,
     "2026-08": 118186.5,
-    "2026-09": -21234.98,
-    "2026-10": 297981.43,
+    "2026-09": -32718.85,
+    "2026-10": 242592.4,
     "2026-11": 96512.55
    },
-   "without_best": 536204.73,
+   "without_best": 472522.22,
    "best_trade": "Hoac Foods 2026-03-24"
   },
   "trades": [
+   {
+    "symbol": "TAURIAN",
+    "name": "Taurian MPS",
+    "entry_date": "2026-11-25",
+    "entry": 737.3,
+    "qty": 135,
+    "status": "open",
+    "pnl": 0.0,
+    "pnl_pct": null,
+    "hold_days": null,
+    "closed_on": null,
+    "exits": [],
+    "open_pnl": 6.05,
+    "type": "positional",
+    "regime": ""
+   },
    {
     "symbol": "RATNAVEER",
     "name": "Ratnaveer Precision Engineering",
@@ -13913,7 +13773,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": 2998.63,
+    "open_pnl": 3317.99,
     "type": "positional",
     "regime": ""
    },
@@ -13945,7 +13805,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": -4719.21,
+    "open_pnl": -4910.08,
     "type": "positional",
     "regime": ""
    },
@@ -13977,7 +13837,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": 1.7,
+    "open_pnl": -388.52,
     "type": "positional",
     "regime": ""
    },
@@ -13993,7 +13853,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": 1109.79,
+    "open_pnl": 158.0,
     "type": "positional",
     "regime": ""
    },
@@ -14066,7 +13926,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": 4196.44,
+    "open_pnl": 2246.2,
     "type": "positional",
     "regime": ""
    },
@@ -15043,31 +14903,6 @@
     "regime": ""
    },
    {
-    "symbol": "APOLLOPIPE",
-    "name": "Apollo Pipes Ltd",
-    "entry_date": "2026-08-17",
-    "entry": 535.1,
-    "qty": 93,
-    "status": "closed",
-    "pnl": -3179.31,
-    "pnl_pct": -6.39,
-    "hold_days": 30,
-    "closed_on": "2026-09-16",
-    "exits": [
-     {
-      "date": "2026-09-16",
-      "qty": 93,
-      "price": 502.99,
-      "reason": "Stop loss (6% max risk)",
-      "pnl": -3179.31,
-      "charges": 193.08
-     }
-    ],
-    "open_pnl": null,
-    "type": "positional",
-    "regime": ""
-   },
-   {
     "symbol": "GANDHAR",
     "name": "Gandhar Oil Ref.",
     "entry_date": "2026-08-17",
@@ -15079,7 +14914,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": -1363.41,
+    "open_pnl": -3880.05,
     "type": "positional",
     "regime": ""
    },
@@ -15104,7 +14939,7 @@
       "charges": 90.69
      }
     ],
-    "open_pnl": 4621.52,
+    "open_pnl": 4576.61,
     "type": "positional",
     "regime": ""
    },
@@ -15358,39 +15193,6 @@
     "regime": ""
    },
    {
-    "symbol": "APOLLOPIPE",
-    "name": "Apollo Pipes Ltd",
-    "entry_date": "2026-07-27",
-    "entry": 507.02,
-    "qty": 197,
-    "status": "closed",
-    "pnl": 14663.18,
-    "pnl_pct": 14.68,
-    "hold_days": 51,
-    "closed_on": "2026-09-16",
-    "exits": [
-     {
-      "date": "2026-08-25",
-      "qty": 98,
-      "price": 659.13,
-      "reason": "Target +30% (50% booked)",
-      "pnl": 14678.21,
-      "charges": 228.57
-     },
-     {
-      "date": "2026-09-16",
-      "qty": 99,
-      "price": 508.9,
-      "reason": "Trailing EMA 50 exit (2 closes below)",
-      "pnl": -15.03,
-      "charges": 201.15
-     }
-    ],
-    "open_pnl": null,
-    "type": "positional",
-    "regime": ""
-   },
-   {
     "symbol": "ICIL",
     "name": "Indo Count Industries Ltd",
     "entry_date": "2026-07-27",
@@ -15461,7 +15263,7 @@
       "charges": 229.51
      }
     ],
-    "open_pnl": 22799.25,
+    "open_pnl": 20639.46,
     "type": "positional",
     "regime": ""
    },
@@ -15519,7 +15321,7 @@
       "charges": 168.15
      }
     ],
-    "open_pnl": 18187.91,
+    "open_pnl": 18053.18,
     "type": "positional",
     "regime": ""
    },
@@ -15732,31 +15534,6 @@
     "regime": ""
    },
    {
-    "symbol": "WSTCSTPAPR",
-    "name": "West Coast Paper Mills Ltd",
-    "entry_date": "2026-07-08",
-    "entry": 548.78,
-    "qty": 91,
-    "status": "closed",
-    "pnl": -3190.39,
-    "pnl_pct": -6.39,
-    "hold_days": 9,
-    "closed_on": "2026-07-17",
-    "exits": [
-     {
-      "date": "2026-07-17",
-      "qty": 91,
-      "price": 515.85,
-      "reason": "Stop loss (6% max risk)",
-      "pnl": -3190.39,
-      "charges": 193.76
-     }
-    ],
-    "open_pnl": null,
-    "type": "positional",
-    "regime": ""
-   },
-   {
     "symbol": "ZOTA",
     "name": "Zota Health Care Ltd",
     "entry_date": "2026-07-08",
@@ -15883,39 +15660,6 @@
       "reason": "Stop loss (6% max risk)",
       "pnl": -3113.48,
       "charges": 189.11
-     }
-    ],
-    "open_pnl": null,
-    "type": "positional",
-    "regime": ""
-   },
-   {
-    "symbol": "WSTCSTPAPR",
-    "name": "West Coast Paper Mills Ltd",
-    "entry_date": "2026-06-30",
-    "entry": 525.0,
-    "qty": 190,
-    "status": "closed",
-    "pnl": 55389.03,
-    "pnl_pct": 55.53,
-    "hold_days": 106,
-    "closed_on": "2026-10-14",
-    "exits": [
-     {
-      "date": "2026-09-07",
-      "qty": 95,
-      "price": 682.5,
-      "reason": "Target +30% (50% booked)",
-      "pnl": 14733.07,
-      "charges": 229.43
-     },
-     {
-      "date": "2026-10-14",
-      "qty": 95,
-      "price": 955.92,
-      "reason": "Climax exit (1.4× EMA 50 = ₹955.92)",
-      "pnl": 40655.96,
-      "charges": 281.37
      }
     ],
     "open_pnl": null,
@@ -19527,21 +19271,21 @@
     "regime": ""
    }
   ],
-  "as_of": "2026-11-25",
-  "stocks": 199,
+  "as_of": "2026-11-26",
+  "stocks": 197,
   "last2y": {
-   "start": "2024-11-25",
+   "start": "2024-11-26",
    "capital": 1000000.0,
    "pct": 12.0,
-   "final": 1832325.01,
-   "profit": 832325.01,
-   "open_trades": 13,
-   "return_pct": 83.2,
-   "trades": 101,
-   "skipped": 89,
+   "final": 1822469.23,
+   "profit": 822469.23,
+   "open_trades": 14,
+   "return_pct": 82.2,
+   "trades": 102,
+   "skipped": 87,
    "wins": 35,
    "pauses": 0,
-   "win_rate": 34.7,
+   "win_rate": 34.3,
    "max_drawdown_pct": 4.1,
    "months": {
     "2024-12": 40196.38,
@@ -19565,7 +19309,7 @@
     "2026-08": 127518.75,
     "2026-09": 16325.48,
     "2026-10": 54926.35,
-    "2026-11": 316478.29
+    "2026-11": 306622.49
    },
    "curve": [
     [
@@ -19654,30 +19398,80 @@
     ],
     [
      "2026-11",
-     1832325.03
+     1822469.23
     ]
    ],
    "first_trade": "2024-11-27",
    "trades_list": [
     {
+     "name": "Taurian MPS",
+     "symbol": "TAURIAN",
+     "entry_date": "2026-11-25",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 218695,
+     "pnl": 13.29,
+     "pnl_pct": 0.01
+    },
+    {
      "name": "Ratnaveer Precision Engineering",
      "symbol": "RATNAVEER",
      "entry_date": "2026-11-23",
-     "closed_on": "2026-11-23",
+     "closed_on": "2026-11-25",
      "open": true,
-     "money": 219089,
-     "pnl": 6580.21,
-     "pnl_pct": 3.0
+     "money": 219351,
+     "pnl": 7289.71,
+     "pnl_pct": 3.32
     },
     {
      "name": "L T Foods Ltd",
      "symbol": "LTFOODS",
      "entry_date": "2026-11-19",
-     "closed_on": "2026-11-23",
+     "closed_on": "2026-11-25",
      "open": true,
      "money": 202084,
-     "pnl": -9563.75,
-     "pnl_pct": -4.73
+     "pnl": -9950.56,
+     "pnl_pct": -4.92
+    },
+    {
+     "name": "Yatharth Hospital & Trauma Care Services Ltd",
+     "symbol": "YATHARTH",
+     "entry_date": "2026-11-13",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 200653,
+     "pnl": -784.09,
+     "pnl_pct": -0.39
+    },
+    {
+     "name": "Aptus Pharma",
+     "symbol": "544529",
+     "entry_date": "2026-11-12",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 90254,
+     "pnl": 287.66,
+     "pnl_pct": 0.32
+    },
+    {
+     "name": "Aptus Pharma",
+     "symbol": "544529",
+     "entry_date": "2026-11-03",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 180507,
+     "pnl": 4068.57,
+     "pnl_pct": 2.25
+    },
+    {
+     "name": "Gandhar Oil Ref.",
+     "symbol": "GANDHAR",
+     "entry_date": "2026-08-17",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 164364,
+     "pnl": -6381.14,
+     "pnl_pct": -3.88
     },
     {
      "name": "Nitin Spinners Ltd",
@@ -19690,26 +19484,6 @@
      "pnl_pct": 1.56
     },
     {
-     "name": "Yatharth Hospital & Trauma Care Services Ltd",
-     "symbol": "YATHARTH",
-     "entry_date": "2026-11-13",
-     "closed_on": "2026-11-23",
-     "open": true,
-     "money": 200653,
-     "pnl": 3.43,
-     "pnl_pct": 0.0
-    },
-    {
-     "name": "Aptus Pharma",
-     "symbol": "544529",
-     "entry_date": "2026-11-12",
-     "closed_on": "2026-11-23",
-     "open": true,
-     "money": 90254,
-     "pnl": 2020.55,
-     "pnl_pct": 2.24
-    },
-    {
      "name": "DC Infotech",
      "symbol": "DCI",
      "entry_date": "2026-11-05",
@@ -19718,26 +19492,6 @@
      "money": 197912,
      "pnl": 17270.6,
      "pnl_pct": 8.73
-    },
-    {
-     "name": "Aptus Pharma",
-     "symbol": "544529",
-     "entry_date": "2026-11-03",
-     "closed_on": "2026-11-23",
-     "open": true,
-     "money": 180507,
-     "pnl": 7601.07,
-     "pnl_pct": 4.21
-    },
-    {
-     "name": "Gandhar Oil Ref.",
-     "symbol": "GANDHAR",
-     "entry_date": "2026-08-17",
-     "closed_on": "2026-11-23",
-     "open": true,
-     "money": 164364,
-     "pnl": -2242.27,
-     "pnl_pct": -1.36
     },
     {
      "name": "Proventus Agro.",
@@ -20672,7 +20426,7 @@
    ]
   },
   "year2": {
-   "start": "2024-11-25",
+   "start": "2024-11-26",
    "capital": 1000000.0,
    "pct": 12.0,
    "final": 1106996.73,
@@ -21299,18 +21053,18 @@
    ]
   },
   "year1": {
-   "start": "2025-11-25",
+   "start": "2025-11-26",
    "capital": 1000000.0,
    "pct": 12.0,
-   "final": 1742017.81,
-   "profit": 742017.81,
-   "open_trades": 13,
-   "return_pct": 74.2,
-   "trades": 50,
-   "skipped": 66,
+   "final": 1666265.51,
+   "profit": 666265.51,
+   "open_trades": 14,
+   "return_pct": 66.6,
+   "trades": 52,
+   "skipped": 62,
    "wins": 25,
    "pauses": 0,
-   "win_rate": 50.0,
+   "win_rate": 48.1,
    "max_drawdown_pct": 2.2,
    "months": {
     "2026-01": -10525.41,
@@ -21319,11 +21073,11 @@
     "2026-04": 17686.55,
     "2026-05": 102795.54,
     "2026-06": 26014.55,
-    "2026-07": -22853.17,
-    "2026-08": 48506.15,
-    "2026-09": 37051.46,
-    "2026-10": 113383.95,
-    "2026-11": 362515.96
+    "2026-07": -18319.34,
+    "2026-08": 34809.39,
+    "2026-09": 37513.11,
+    "2026-10": 68414.78,
+    "2026-11": 340434.08
    },
    "curve": [
     [
@@ -21352,46 +21106,96 @@
     ],
     [
      "2026-07",
-     1180560.32
+     1185094.15
     ],
     [
      "2026-08",
-     1229066.47
+     1219903.54
     ],
     [
      "2026-09",
-     1266117.93
+     1257416.65
     ],
     [
      "2026-10",
-     1379501.88
+     1325831.43
     ],
     [
      "2026-11",
-     1742017.84
+     1666265.51
     ]
    ],
    "first_trade": "2025-12-01",
    "trades_list": [
     {
+     "name": "Taurian MPS",
+     "symbol": "TAURIAN",
+     "entry_date": "2026-11-25",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 199950,
+     "pnl": 12.15,
+     "pnl_pct": 0.01
+    },
+    {
      "name": "Ratnaveer Precision Engineering",
      "symbol": "RATNAVEER",
      "entry_date": "2026-11-23",
-     "closed_on": "2026-11-23",
+     "closed_on": "2026-11-25",
      "open": true,
-     "money": 208291,
-     "pnl": 6255.9,
-     "pnl_pct": 3.0
+     "money": 199461,
+     "pnl": 6628.7,
+     "pnl_pct": 3.32
+    },
+    {
+     "name": "Yatharth Hospital & Trauma Care Services Ltd",
+     "symbol": "YATHARTH",
+     "entry_date": "2026-11-13",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 173365,
+     "pnl": -677.46,
+     "pnl_pct": -0.39
     },
     {
      "name": "Aptus Pharma",
      "symbol": "544529",
      "entry_date": "2026-11-12",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 78940,
+     "pnl": 251.6,
+     "pnl_pct": 0.32
+    },
+    {
+     "name": "Aptus Pharma",
+     "symbol": "544529",
+     "entry_date": "2026-11-03",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 157880,
+     "pnl": 3558.57,
+     "pnl_pct": 2.25
+    },
+    {
+     "name": "Gandhar Oil Ref.",
+     "symbol": "GANDHAR",
+     "entry_date": "2026-08-17",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 146388,
+     "pnl": -5683.27,
+     "pnl_pct": -3.88
+    },
+    {
+     "name": "Nitin Spinners Ltd",
+     "symbol": "NITINSPIN",
+     "entry_date": "2026-11-16",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 82136,
-     "pnl": 1838.81,
-     "pnl_pct": 2.24
+     "money": 173365,
+     "pnl": 2702.62,
+     "pnl_pct": 1.56
     },
     {
      "name": "DC Infotech",
@@ -21399,8 +21203,8 @@
      "entry_date": "2026-11-05",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 179756,
-     "pnl": 15686.22,
+     "money": 173365,
+     "pnl": 15128.51,
      "pnl_pct": 8.73
     },
     {
@@ -21414,54 +21218,14 @@
      "pnl_pct": 21.37
     },
     {
-     "name": "Aptus Pharma",
-     "symbol": "544529",
-     "entry_date": "2026-11-03",
-     "closed_on": "2026-11-23",
-     "open": true,
-     "money": 164271,
-     "pnl": 6917.38,
-     "pnl_pct": 4.21
-    },
-    {
-     "name": "Gayatri Rubbers",
-     "symbol": "GRCL",
-     "entry_date": "2026-11-02",
-     "closed_on": "2026-11-23",
-     "open": true,
-     "money": 79499,
-     "pnl": 3573.23,
-     "pnl_pct": 4.49
-    },
-    {
-     "name": "Gayatri Rubbers",
-     "symbol": "GRCL",
-     "entry_date": "2026-10-16",
-     "closed_on": "2026-11-23",
-     "open": true,
-     "money": 158997,
-     "pnl": 11935.05,
-     "pnl_pct": 7.51
-    },
-    {
      "name": "Lead Reclaim",
      "symbol": "LRRPL",
      "entry_date": "2026-09-21",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 153089,
-     "pnl": 32032.61,
+     "money": 152036,
+     "pnl": 31812.44,
      "pnl_pct": 20.92
-    },
-    {
-     "name": "Gandhar Oil Ref.",
-     "symbol": "GANDHAR",
-     "entry_date": "2026-08-17",
-     "closed_on": "2026-11-23",
-     "open": true,
-     "money": 147488,
-     "pnl": -2012.04,
-     "pnl_pct": -1.36
     },
     {
      "name": "Panache Digilife",
@@ -21529,8 +21293,8 @@
      "entry_date": "2026-10-29",
      "closed_on": "2026-11-02",
      "open": false,
-     "money": 165540,
-     "pnl": -10575.01,
+     "money": 159100,
+     "pnl": -10163.59,
      "pnl_pct": -6.39
     },
     {
@@ -21539,8 +21303,8 @@
      "entry_date": "2026-09-22",
      "closed_on": "2026-10-23",
      "open": false,
-     "money": 76544,
-     "pnl": -4889.65,
+     "money": 76018,
+     "pnl": -4856.04,
      "pnl_pct": -6.39
     },
     {
@@ -21549,9 +21313,19 @@
      "entry_date": "2026-09-17",
      "closed_on": "2026-10-23",
      "open": false,
-     "money": 153089,
-     "pnl": -9782.34,
+     "money": 152036,
+     "pnl": -9715.1,
      "pnl_pct": -6.39
+    },
+    {
+     "name": "AVT Natural Prod",
+     "symbol": "AVTNPL",
+     "entry_date": "2026-08-14",
+     "closed_on": "2026-10-23",
+     "open": false,
+     "money": 145844,
+     "pnl": 35261.51,
+     "pnl_pct": 24.18
     },
     {
      "name": "Prizor Viztech",
@@ -21559,8 +21333,8 @@
      "entry_date": "2026-07-23",
      "closed_on": "2026-10-22",
      "open": false,
-     "money": 141667,
-     "pnl": 39678.41,
+     "money": 142211,
+     "pnl": 39830.8,
      "pnl_pct": 28.01
     },
     {
@@ -21584,23 +21358,13 @@
      "pnl_pct": 48.81
     },
     {
-     "name": "West Coast Paper Mills Ltd",
-     "symbol": "WSTCSTPAPR",
-     "entry_date": "2026-06-30",
-     "closed_on": "2026-10-14",
-     "open": false,
-     "money": 144410,
-     "pnl": 80187.55,
-     "pnl_pct": 55.53
-    },
-    {
      "name": "Ceigall India",
      "symbol": "CEIGALL",
      "entry_date": "2026-09-16",
      "closed_on": "2026-09-22",
      "open": false,
-     "money": 150587,
-     "pnl": -9620.11,
+     "money": 149535,
+     "pnl": -9552.89,
      "pnl_pct": -6.39
     },
     {
@@ -21609,8 +21373,8 @@
      "entry_date": "2026-09-01",
      "closed_on": "2026-09-16",
      "open": false,
-     "money": 73744,
-     "pnl": -4262.71,
+     "money": 73194,
+     "pnl": -4230.93,
      "pnl_pct": -5.78
     },
     {
@@ -21629,8 +21393,8 @@
      "entry_date": "2026-09-01",
      "closed_on": "2026-09-15",
      "open": false,
-     "money": 150130,
-     "pnl": -9135.97,
+     "money": 149040,
+     "pnl": -9069.67,
      "pnl_pct": -6.09
     },
     {
@@ -21639,8 +21403,8 @@
      "entry_date": "2026-08-13",
      "closed_on": "2026-08-17",
      "open": false,
-     "money": 146952,
-     "pnl": -9388.06,
+     "money": 145844,
+     "pnl": -9317.28,
      "pnl_pct": -6.39
     },
     {
@@ -21654,6 +21418,16 @@
      "pnl_pct": 24.53
     },
     {
+     "name": "Prizor Viztech",
+     "symbol": "PRIZOR",
+     "entry_date": "2026-08-03",
+     "closed_on": "2026-08-12",
+     "open": false,
+     "money": 71106,
+     "pnl": -4542.46,
+     "pnl_pct": -6.39
+    },
+    {
      "name": "Saakshi Medtech",
      "symbol": "SAAKSHI",
      "entry_date": "2026-04-15",
@@ -21664,24 +21438,24 @@
      "pnl_pct": 33.23
     },
     {
+     "name": "XPRO India Ltd",
+     "symbol": "XPROINDIA",
+     "entry_date": "2026-06-30",
+     "closed_on": "2026-08-03",
+     "open": false,
+     "money": 144410,
+     "pnl": -9225.08,
+     "pnl_pct": -6.39
+    },
+    {
      "name": "Lead Reclaim",
      "symbol": "LRRPL",
      "entry_date": "2026-07-17",
      "closed_on": "2026-07-23",
      "open": false,
-     "money": 144137,
-     "pnl": -20577.83,
+     "money": 144690,
+     "pnl": -20656.86,
      "pnl_pct": -14.28
-    },
-    {
-     "name": "West Coast Paper Mills Ltd",
-     "symbol": "WSTCSTPAPR",
-     "entry_date": "2026-07-08",
-     "closed_on": "2026-07-17",
-     "open": false,
-     "money": 72205,
-     "pnl": -4612.86,
-     "pnl_pct": -6.39
     },
     {
      "name": "Ceigall India",
@@ -21878,20 +21652,20 @@
   "index_from": "2018-04-02",
   "by_year": {
    "2017": {
-    "final": 1738526.65,
+    "final": 1703271.23,
     "open_trades": 0,
-    "return_pct": 73.9,
-    "trades": 52,
-    "win_rate": 46.2,
-    "max_drawdown_pct": 1.2
+    "return_pct": 70.3,
+    "trades": 49,
+    "win_rate": 46.9,
+    "max_drawdown_pct": 0.8
    },
    "2018": {
-    "final": 905155.29,
+    "final": 919562.3,
     "open_trades": 0,
-    "return_pct": -9.5,
-    "trades": 27,
-    "win_rate": 11.1,
-    "max_drawdown_pct": 10.4
+    "return_pct": -8.0,
+    "trades": 25,
+    "win_rate": 12.0,
+    "max_drawdown_pct": 9.7
    },
    "2019": {
     "final": 966768.33,
@@ -21902,35 +21676,35 @@
     "max_drawdown_pct": 5.1
    },
    "2020": {
-    "final": 1280800.44,
+    "final": 1289888.13,
     "open_trades": 0,
-    "return_pct": 28.1,
-    "trades": 27,
-    "win_rate": 40.7,
+    "return_pct": 29.0,
+    "trades": 26,
+    "win_rate": 42.3,
     "max_drawdown_pct": 2.7
    },
    "2021": {
-    "final": 1442358.82,
+    "final": 1425228.87,
     "open_trades": 0,
-    "return_pct": 44.2,
-    "trades": 50,
-    "win_rate": 36.0,
-    "max_drawdown_pct": 3.9
+    "return_pct": 42.5,
+    "trades": 46,
+    "win_rate": 37.0,
+    "max_drawdown_pct": 4.5
    },
    "2022": {
-    "final": 1116122.84,
+    "final": 1027117.88,
     "open_trades": 0,
-    "return_pct": 11.6,
-    "trades": 46,
-    "win_rate": 19.6,
-    "max_drawdown_pct": 3.2
+    "return_pct": 2.7,
+    "trades": 42,
+    "win_rate": 16.7,
+    "max_drawdown_pct": 9.5
    },
    "2023": {
-    "final": 1502965.08,
+    "final": 1674320.23,
     "open_trades": 0,
-    "return_pct": 50.3,
-    "trades": 59,
-    "win_rate": 37.3,
+    "return_pct": 67.4,
+    "trades": 57,
+    "win_rate": 38.6,
     "max_drawdown_pct": 7.6
    },
    "2024": {
@@ -21950,92 +21724,92 @@
     "max_drawdown_pct": 3.3
    },
    "2026": {
-    "final": 1556738.87,
-    "open_trades": 13,
-    "return_pct": 55.7,
+    "final": 1528125.73,
+    "open_trades": 14,
+    "return_pct": 52.8,
     "trades": 46,
-    "win_rate": 50.0,
+    "win_rate": 47.8,
     "max_drawdown_pct": 3.8
    }
   },
   "stocks_with_history": {
-   "2017": 31,
-   "2018": 34,
-   "2019": 42,
-   "2020": 44,
-   "2021": 46,
-   "2022": 47,
-   "2023": 53,
-   "2024": 64,
-   "2025": 84,
-   "2026": 99
+   "2017": 29,
+   "2018": 32,
+   "2019": 40,
+   "2020": 42,
+   "2021": 43,
+   "2022": 44,
+   "2023": 50,
+   "2024": 61,
+   "2025": 81,
+   "2026": 96
   }
  },
  "switch": {
   "entry_test": {
    "old": {
-    "return_pct": 92.1,
-    "trades": 151,
-    "win_rate": 43.7,
+    "return_pct": 85.7,
+    "trades": 154,
+    "win_rate": 42.9,
     "max_drawdown_pct": 2.0,
-    "skipped": 78
+    "skipped": 75
    },
    "new": {
-    "return_pct": 85.2,
-    "trades": 153,
-    "win_rate": 42.5,
+    "return_pct": 79.0,
+    "trades": 156,
+    "win_rate": 41.7,
     "max_drawdown_pct": 2.0,
-    "skipped": 77
+    "skipped": 74
    },
    "gap3": {
-    "return_pct": 84.6,
-    "trades": 151,
-    "win_rate": 42.4,
+    "return_pct": 78.4,
+    "trades": 154,
+    "win_rate": 41.6,
     "max_drawdown_pct": 2.0,
-    "skipped": 76
+    "skipped": 73
    }
   },
   "pyramid_test": {
    "none": {
-    "return_pct": 78.9,
-    "trades": 130,
-    "win_rate": 43.1,
+    "return_pct": 74.0,
+    "trades": 132,
+    "win_rate": 42.4,
     "max_drawdown_pct": 2.4,
-    "skipped": 65,
+    "skipped": 63,
     "addons": 0,
     "addon_closed": 0,
     "addon_win_rate": null,
     "addon_avg_return_pct": null
    },
    "add1": {
-    "return_pct": 85.2,
-    "trades": 153,
-    "win_rate": 42.5,
+    "return_pct": 79.0,
+    "trades": 156,
+    "win_rate": 41.7,
     "max_drawdown_pct": 2.0,
-    "skipped": 77,
-    "addons": 57,
-    "addon_closed": 54,
-    "addon_win_rate": 29.6,
-    "addon_avg_return_pct": 3.67
+    "skipped": 74,
+    "addons": 55,
+    "addon_closed": 52,
+    "addon_win_rate": 30.8,
+    "addon_avg_return_pct": 4.06
    }
   },
   "report": {
-   "trades": 237,
-   "open": 14,
-   "wins": 87,
-   "losses": 150,
-   "win_rate": 36.7,
-   "total_pnl": 933079.6,
-   "open_pnl": 57332.44,
-   "avg_win": 19254.62,
-   "avg_loss": -4947.15,
-   "profit_factor": 2.26,
-   "expectancy": 3937.04,
-   "avg_return_pct": 4.38,
+   "trades": 233,
+   "open": 16,
+   "wins": 85,
+   "losses": 148,
+   "win_rate": 36.5,
+   "total_pnl": 875593.99,
+   "open_pnl": 51780.65,
+   "avg_win": 18956.43,
+   "avg_loss": -4970.96,
+   "profit_factor": 2.19,
+   "expectancy": 3757.91,
+   "avg_return_pct": 4.23,
    "best": 82214.12,
    "worst": -14274.04,
    "max_drawdown": 101583.39,
-   "avg_hold_days": 30.8,
+   "avg_hold_days": 30.4,
    "first": "2024-12-09",
    "last": "2026-11-13",
    "curve": [
@@ -22588,404 +22362,388 @@
      185654.88
     ],
     [
-     "2026-07-17",
-     182464.49
-    ],
-    [
      "2026-07-22",
-     179276.25
+     182466.64
     ],
     [
      "2026-07-23",
-     226978.39
+     230168.78
     ],
     [
      "2026-07-23",
-     212704.35
+     215894.74
     ],
     [
      "2026-07-23",
-     206826.01
+     210016.4
     ],
     [
      "2026-07-27",
-     203142.37
+     206332.76
     ],
     [
      "2026-07-28",
-     196808.13
+     199998.52
     ],
     [
      "2026-07-29",
-     193620.43
+     196810.82
     ],
     [
      "2026-07-30",
-     210672.49
+     213862.88
     ],
     [
      "2026-07-31",
-     203859.29
+     207049.68
     ],
     [
      "2026-08-03",
-     197547.63
+     200738.02
     ],
     [
      "2026-08-04",
-     194434.15
+     197624.54
     ],
     [
      "2026-08-05",
-     212753.85
+     215944.24
     ],
     [
      "2026-08-11",
-     245986.45
+     249176.84
     ],
     [
      "2026-08-11",
-     261297.31
+     264487.7
     ],
     [
      "2026-08-12",
-     254917.16
+     258107.55
     ],
     [
      "2026-08-12",
-     251760.86
+     254951.25
     ],
     [
      "2026-08-13",
-     248588.62
+     251779.01
     ],
     [
      "2026-08-13",
-     242206.32
+     245396.71
     ],
     [
      "2026-08-17",
-     235821.31
+     239011.7
     ],
     [
      "2026-08-17",
-     260304.88
+     263495.27
     ],
     [
      "2026-08-18",
-     331254.86
+     334445.25
     ],
     [
      "2026-08-28",
-     324878.48
+     328068.87
     ],
     [
      "2026-08-31",
-     322045.79
+     325236.18
     ],
     [
      "2026-09-01",
-     315657.81
+     318848.2
     ],
     [
      "2026-09-02",
-     309275.67
+     312466.06
     ],
     [
      "2026-09-08",
-     303178.98
+     306369.37
     ],
     [
      "2026-09-10",
-     296812.05
+     300002.44
     ],
     [
      "2026-09-11",
-     293641.94
+     296832.33
     ],
     [
      "2026-09-11",
-     287283.34
+     290473.73
     ],
     [
      "2026-09-11",
-     280895.38
+     284085.77
     ],
     [
      "2026-09-15",
-     274816.87
+     278007.26
     ],
     [
      "2026-09-15",
-     268457.81
+     271648.2
     ],
     [
      "2026-09-16",
-     265278.5
+     272758.95
     ],
     [
      "2026-09-16",
-     266389.25
+     269584.11
     ],
     [
      "2026-09-16",
-     263214.41
+     302816.71
     ],
     [
      "2026-09-16",
-     296447.01
+     299932.08
     ],
     [
      "2026-09-16",
-     293562.38
+     293562.66
     ],
     [
      "2026-09-16",
-     287192.96
+     287671.54
     ],
     [
      "2026-09-16",
-     281301.84
+     284478.53
     ],
     [
      "2026-09-16",
-     278108.83
+     286154.08
     ],
     [
      "2026-09-16",
-     279784.38
+     285460.09
     ],
     [
      "2026-09-16",
-     279090.39
+     283339.04
     ],
     [
      "2026-09-16",
-     276969.34
-    ],
-    [
-     "2026-09-16",
-     270817.76
+     277187.46
     ],
     [
      "2026-09-17",
-     302286.84
+     308656.54
     ],
     [
      "2026-09-17",
-     315602.88
+     321972.58
     ],
     [
      "2026-09-17",
-     397817.0
+     404186.7
     ],
     [
      "2026-09-17",
-     438730.74
+     445100.44
     ],
     [
      "2026-09-17",
-     462524.11
+     468893.81
     ],
     [
      "2026-09-17",
-     493695.89
+     500065.59
     ],
     [
      "2026-09-17",
-     524594.72
+     530964.42
     ],
     [
      "2026-09-18",
-     523562.91
+     529932.61
     ],
     [
      "2026-09-18",
-     518751.3
+     525121.0
     ],
     [
      "2026-09-18",
-     553767.78
+     560137.48
     ],
     [
      "2026-09-22",
-     570130.35
-    ],
-    [
-     "2026-09-22",
-     563751.04
+     553758.17
     ],
     [
      "2026-09-29",
-     563351.2
+     553358.33
     ],
     [
      "2026-09-29",
-     557007.3
+     547014.43
     ],
     [
      "2026-09-29",
-     556217.41
+     546224.54
     ],
     [
      "2026-09-30",
-     588970.54
+     578977.67
     ],
     [
      "2026-09-30",
-     604809.21
+     594816.34
     ],
     [
      "2026-09-30",
-     621882.93
+     611890.06
     ],
     [
      "2026-10-01",
-     656398.96
+     646406.09
     ],
     [
      "2026-10-01",
-     676565.4
+     666572.53
     ],
     [
      "2026-10-01",
-     698395.68
+     688402.81
     ],
     [
      "2026-10-01",
-     718922.62
+     708929.75
     ],
     [
      "2026-10-07",
-     744025.58
+     734032.71
     ],
     [
      "2026-10-07",
-     754541.85
+     744548.98
     ],
     [
      "2026-10-07",
-     754186.48
+     744193.61
     ],
     [
      "2026-10-08",
-     790397.9
+     780405.03
     ],
     [
      "2026-10-08",
-     804955.51
+     794962.64
     ],
     [
      "2026-10-08",
-     798655.46
+     788662.59
     ],
     [
      "2026-10-09",
-     825031.91
+     815039.04
     ],
     [
      "2026-10-09",
-     820683.83
+     810690.96
     ],
     [
      "2026-10-09",
-     851776.81
+     841783.94
     ],
     [
      "2026-10-09",
-     866554.85
+     856561.98
     ],
     [
      "2026-10-09",
-     867180.84
-    ],
-    [
-     "2026-10-12",
-     914673.58
+     857187.97
     ],
     [
      "2026-10-14",
-     914087.48
+     856601.87
     ],
     [
      "2026-10-15",
-     913921.89
+     856436.28
     ],
     [
      "2026-10-19",
-     929821.24
+     872335.63
     ],
     [
      "2026-10-21",
-     922214.96
+     864729.35
     ],
     [
      "2026-10-21",
-     918652.66
+     861167.05
     ],
     [
      "2026-10-21",
-     912306.03
+     854820.42
     ],
     [
      "2026-10-21",
-     928933.3
+     871447.69
     ],
     [
      "2026-10-22",
-     921330.49
+     863844.88
     ],
     [
      "2026-10-22",
-     936772.88
+     879287.27
     ],
     [
      "2026-10-22",
-     936322.07
+     878836.46
     ],
     [
      "2026-10-22",
-     929936.62
+     872451.01
     ],
     [
      "2026-10-22",
-     955966.15
+     898480.54
     ],
     [
      "2026-10-23",
-     949577.87
+     892092.26
     ],
     [
      "2026-10-26",
-     946425.91
+     888940.3
     ],
     [
      "2026-10-26",
-     953932.43
+     896446.82
     ],
     [
      "2026-10-28",
-     951916.07
+     894430.46
     ],
     [
      "2026-11-02",
-     945546.08
+     888060.47
     ],
     [
      "2026-11-02",
-     946950.64
+     889465.03
     ],
     [
      "2026-11-13",
-     940553.12
+     883067.51
     ],
     [
      "2026-11-13",
-     936249.4
+     878763.79
     ],
     [
      "2026-11-13",
-     933079.6
+     875593.99
     ]
    ],
    "months": {
@@ -23007,16 +22765,48 @@
     "2026-03": 5230.74,
     "2026-05": 32051.71,
     "2026-06": -18838.23,
-    "2026-07": 10012.37,
+    "2026-07": 13202.76,
     "2026-08": 118186.5,
-    "2026-09": 299837.14,
-    "2026-10": 330033.14,
+    "2026-09": 286653.88,
+    "2026-10": 282540.4,
     "2026-11": -18836.47
    },
-   "without_best": 850865.48,
+   "without_best": 793379.87,
    "best_trade": "Hoac Foods 2026-03-24"
   },
   "trades": [
+   {
+    "symbol": "PTCIL",
+    "name": "PTC Industries Ltd",
+    "entry_date": "2026-11-25",
+    "entry": 24880.0,
+    "qty": 4,
+    "status": "open",
+    "pnl": 0.0,
+    "pnl_pct": null,
+    "hold_days": null,
+    "closed_on": null,
+    "exits": [],
+    "open_pnl": -2394.08,
+    "type": "positional",
+    "regime": "Smallcap 100 19,314 above EMA 50 19,215 → Positional exits"
+   },
+   {
+    "symbol": "TAURIAN",
+    "name": "Taurian MPS",
+    "entry_date": "2026-11-25",
+    "entry": 737.3,
+    "qty": 135,
+    "status": "open",
+    "pnl": 0.0,
+    "pnl_pct": null,
+    "hold_days": null,
+    "closed_on": null,
+    "exits": [],
+    "open_pnl": 6.05,
+    "type": "positional",
+    "regime": "Smallcap 100 19,314 above EMA 50 19,215 → Positional exits"
+   },
    {
     "symbol": "RATNAVEER",
     "name": "Ratnaveer Precision Engineering",
@@ -23029,7 +22819,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": 2998.63,
+    "open_pnl": 3317.99,
     "type": "positional",
     "regime": "Smallcap 100 19,444 above EMA 50 19,210 → Positional exits"
    },
@@ -23077,7 +22867,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": -4719.21,
+    "open_pnl": -4910.08,
     "type": "positional",
     "regime": "Smallcap 100 19,332 above EMA 50 19,190 → Positional exits"
    },
@@ -23141,7 +22931,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": 1.7,
+    "open_pnl": -388.52,
     "type": "positional",
     "regime": "Smallcap 100 19,707 above EMA 50 19,145 → Positional exits"
    },
@@ -23157,7 +22947,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": 1109.79,
+    "open_pnl": 158.0,
     "type": "positional",
     "regime": "Smallcap 100 19,489 above EMA 50 19,122 → Positional exits"
    },
@@ -23230,7 +23020,7 @@
     "hold_days": null,
     "closed_on": null,
     "exits": [],
-    "open_pnl": 4196.44,
+    "open_pnl": 2246.2,
     "type": "positional",
     "regime": "Smallcap 100 18,595 below EMA 50 19,130 → Swing exits"
    },
@@ -24506,31 +24296,6 @@
     "regime": "Smallcap 100 19,809 above EMA 50 19,124 → Positional exits"
    },
    {
-    "symbol": "APOLLOPIPE",
-    "name": "Apollo Pipes Ltd",
-    "entry_date": "2026-08-17",
-    "entry": 535.1,
-    "qty": 93,
-    "status": "closed",
-    "pnl": -3179.31,
-    "pnl_pct": -6.39,
-    "hold_days": 30,
-    "closed_on": "2026-09-16",
-    "exits": [
-     {
-      "date": "2026-09-16",
-      "qty": 93,
-      "price": 502.99,
-      "reason": "Stop loss (6% max risk)",
-      "pnl": -3179.31,
-      "charges": 193.08
-     }
-    ],
-    "open_pnl": null,
-    "type": "swing",
-    "regime": "Smallcap 100 19,739 above EMA 50 19,096 → Positional exits"
-   },
-   {
     "symbol": "GANDHAR",
     "name": "Gandhar Oil Ref.",
     "entry_date": "2026-08-17",
@@ -24844,39 +24609,6 @@
     "open_pnl": null,
     "type": "swing",
     "regime": "Smallcap 100 19,254 above EMA 50 18,730 → Positional exits"
-   },
-   {
-    "symbol": "APOLLOPIPE",
-    "name": "Apollo Pipes Ltd",
-    "entry_date": "2026-07-27",
-    "entry": 507.02,
-    "qty": 197,
-    "status": "closed",
-    "pnl": 16362.57,
-    "pnl_pct": 16.38,
-    "hold_days": 57,
-    "closed_on": "2026-09-22",
-    "exits": [
-     {
-      "date": "2026-08-25",
-      "qty": 98,
-      "price": 659.13,
-      "reason": "Target +30% (50% booked)",
-      "pnl": 14678.21,
-      "charges": 228.57
-     },
-     {
-      "date": "2026-09-22",
-      "qty": 99,
-      "price": 526.1,
-      "reason": "Trailing EMA 50 exit (2 closes below)",
-      "pnl": 1684.36,
-      "charges": 204.56
-     }
-    ],
-    "open_pnl": null,
-    "type": "positional",
-    "regime": "Smallcap 100 18,875 above EMA 50 18,646 → Positional exits"
    },
    {
     "symbol": "ICIL",
@@ -25269,31 +25001,6 @@
     "regime": "Smallcap 100 19,213 above EMA 50 18,270 → Positional exits"
    },
    {
-    "symbol": "WSTCSTPAPR",
-    "name": "West Coast Paper Mills Ltd",
-    "entry_date": "2026-07-08",
-    "entry": 548.78,
-    "qty": 91,
-    "status": "closed",
-    "pnl": -3190.39,
-    "pnl_pct": -6.39,
-    "hold_days": 9,
-    "closed_on": "2026-07-17",
-    "exits": [
-     {
-      "date": "2026-07-17",
-      "qty": 91,
-      "price": 515.85,
-      "reason": "Stop loss (6% max risk)",
-      "pnl": -3190.39,
-      "charges": 193.76
-     }
-    ],
-    "open_pnl": null,
-    "type": "positional",
-    "regime": "Smallcap 100 19,213 above EMA 50 18,270 → Positional exits"
-   },
-   {
     "symbol": "ZOTA",
     "name": "Zota Health Care Ltd",
     "entry_date": "2026-07-08",
@@ -25424,39 +25131,6 @@
     ],
     "open_pnl": null,
     "type": "positional",
-    "regime": "Smallcap 100 18,673 above EMA 50 18,039 → Positional exits"
-   },
-   {
-    "symbol": "WSTCSTPAPR",
-    "name": "West Coast Paper Mills Ltd",
-    "entry_date": "2026-06-30",
-    "entry": 525.0,
-    "qty": 190,
-    "status": "closed",
-    "pnl": 47492.74,
-    "pnl_pct": 47.61,
-    "hold_days": 104,
-    "closed_on": "2026-10-12",
-    "exits": [
-     {
-      "date": "2026-09-07",
-      "qty": 95,
-      "price": 682.5,
-      "reason": "Target +30% (50% booked)",
-      "pnl": 14733.07,
-      "charges": 229.43
-     },
-     {
-      "date": "2026-10-12",
-      "qty": 95,
-      "price": 872.63,
-      "reason": "Climax exit (1.2× EMA 10 = ₹872.63)",
-      "pnl": 32759.67,
-      "charges": 265.55
-     }
-    ],
-    "open_pnl": null,
-    "type": "swing",
     "regime": "Smallcap 100 18,673 above EMA 50 18,039 → Positional exits"
    },
    {
@@ -29695,21 +29369,21 @@
     "regime": "Smallcap 100 18,265 below EMA 50 18,439 → Swing exits"
    }
   ],
-  "as_of": "2026-11-25",
-  "stocks": 199,
+  "as_of": "2026-11-26",
+  "stocks": 197,
   "last2y": {
-   "start": "2024-11-25",
+   "start": "2024-11-26",
    "capital": 1000000.0,
    "pct": 12.0,
-   "final": 1851768.45,
-   "profit": 851768.45,
-   "open_trades": 10,
-   "return_pct": 85.2,
-   "trades": 153,
-   "skipped": 77,
+   "final": 1789948.05,
+   "profit": 789948.05,
+   "open_trades": 12,
+   "return_pct": 79.0,
+   "trades": 156,
+   "skipped": 74,
    "wins": 65,
    "pauses": 0,
-   "win_rate": 42.5,
+   "win_rate": 41.7,
    "max_drawdown_pct": 2.0,
    "months": {
     "2024-12": 75932.1,
@@ -29731,10 +29405,10 @@
     "2026-05": 70955.07,
     "2026-06": 17260.66,
     "2026-07": -2177.82,
-    "2026-08": 104275.83,
-    "2026-09": 205689.1,
-    "2026-10": 90521.78,
-    "2026-11": 71524.56
+    "2026-08": 93763.46,
+    "2026-09": 204244.55,
+    "2026-10": 53940.25,
+    "2026-11": 58242.6
    },
    "curve": [
     [
@@ -29815,32 +29489,82 @@
     ],
     [
      "2026-08",
-     1484032.97
+     1473520.6
     ],
     [
      "2026-09",
-     1689722.07
+     1677765.15
     ],
     [
      "2026-10",
-     1780243.85
+     1731705.4
     ],
     [
      "2026-11",
-     1851768.41
+     1789948.0
     ]
    ],
    "first_trade": "2024-11-27",
    "trades_list": [
     {
+     "name": "Taurian MPS",
+     "symbol": "TAURIAN",
+     "entry_date": "2026-11-25",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 214792,
+     "pnl": 13.06,
+     "pnl_pct": 0.01
+    },
+    {
+     "name": "PTC Industries Ltd",
+     "symbol": "PTCIL",
+     "entry_date": "2026-11-25",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 215414,
+     "pnl": -5182.06,
+     "pnl_pct": -2.41
+    },
+    {
      "name": "Ratnaveer Precision Engineering",
      "symbol": "RATNAVEER",
      "entry_date": "2026-11-23",
-     "closed_on": "2026-11-23",
+     "closed_on": "2026-11-25",
      "open": true,
-     "money": 221414,
-     "pnl": 6650.03,
-     "pnl_pct": 3.0
+     "money": 214058,
+     "pnl": 7113.81,
+     "pnl_pct": 3.32
+    },
+    {
+     "name": "Yatharth Hospital & Trauma Care Services Ltd",
+     "symbol": "YATHARTH",
+     "entry_date": "2026-11-13",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 202730,
+     "pnl": -792.21,
+     "pnl_pct": -0.39
+    },
+    {
+     "name": "Aptus Pharma",
+     "symbol": "544529",
+     "entry_date": "2026-11-12",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 103106,
+     "pnl": 328.63,
+     "pnl_pct": 0.32
+    },
+    {
+     "name": "Aptus Pharma",
+     "symbol": "544529",
+     "entry_date": "2026-11-03",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 206212,
+     "pnl": 4647.94,
+     "pnl_pct": 2.25
     },
     {
      "name": "Gayatri Rubbers",
@@ -29848,8 +29572,8 @@
      "entry_date": "2026-11-17",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 104206,
-     "pnl": -4889.16,
+     "money": 101365,
+     "pnl": -4755.85,
      "pnl_pct": -4.69
     },
     {
@@ -29858,29 +29582,9 @@
      "entry_date": "2026-11-16",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 208413,
-     "pnl": -3246.96,
+     "money": 202730,
+     "pnl": -3158.43,
      "pnl_pct": -1.56
-    },
-    {
-     "name": "Yatharth Hospital & Trauma Care Services Ltd",
-     "symbol": "YATHARTH",
-     "entry_date": "2026-11-13",
-     "closed_on": "2026-11-23",
-     "open": true,
-     "money": 208413,
-     "pnl": 3.56,
-     "pnl_pct": 0.0
-    },
-    {
-     "name": "Aptus Pharma",
-     "symbol": "544529",
-     "entry_date": "2026-11-12",
-     "closed_on": "2026-11-23",
-     "open": true,
-     "money": 105996,
-     "pnl": 2372.97,
-     "pnl_pct": 2.24
     },
     {
      "name": "DC Infotech",
@@ -29888,8 +29592,8 @@
      "entry_date": "2026-11-05",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 211992,
-     "pnl": 18499.21,
+     "money": 206212,
+     "pnl": 17994.83,
      "pnl_pct": 8.73
     },
     {
@@ -29898,19 +29602,9 @@
      "entry_date": "2026-11-05",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 211992,
-     "pnl": 45296.81,
+     "money": 206212,
+     "pnl": 44061.79,
      "pnl_pct": 21.37
-    },
-    {
-     "name": "Aptus Pharma",
-     "symbol": "544529",
-     "entry_date": "2026-11-03",
-     "closed_on": "2026-11-23",
-     "open": true,
-     "money": 211992,
-     "pnl": 8926.86,
-     "pnl_pct": 4.21
     },
     {
      "name": "Proventus Agro.",
@@ -29918,8 +29612,8 @@
      "entry_date": "2026-10-30",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 213629,
-     "pnl": 25046.49,
+     "money": 207805,
+     "pnl": 24363.59,
      "pnl_pct": 11.72
     },
     {
@@ -29928,8 +29622,8 @@
      "entry_date": "2026-10-15",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 220717,
-     "pnl": 16336.98,
+     "money": 214768,
+     "pnl": 15896.65,
      "pnl_pct": 7.4
     },
     {
@@ -29938,8 +29632,8 @@
      "entry_date": "2026-11-09",
      "closed_on": "2026-11-13",
      "open": false,
-     "money": 105996,
-     "pnl": -9190.45,
+     "money": 103106,
+     "pnl": -8939.87,
      "pnl_pct": -8.67
     },
     {
@@ -29948,8 +29642,8 @@
      "entry_date": "2026-11-02",
      "closed_on": "2026-11-13",
      "open": false,
-     "money": 211992,
-     "pnl": -13584.59,
+     "money": 206212,
+     "pnl": -13214.21,
      "pnl_pct": -6.41
     },
     {
@@ -29958,8 +29652,8 @@
      "entry_date": "2026-10-30",
      "closed_on": "2026-11-13",
      "open": false,
-     "money": 110358,
-     "pnl": -7050.16,
+     "money": 107384,
+     "pnl": -6860.13,
      "pnl_pct": -6.39
     },
     {
@@ -29968,8 +29662,8 @@
      "entry_date": "2026-10-29",
      "closed_on": "2026-11-02",
      "open": false,
-     "money": 213629,
-     "pnl": -13647.03,
+     "money": 207805,
+     "pnl": -13274.94,
      "pnl_pct": -6.39
     },
     {
@@ -29978,8 +29672,8 @@
      "entry_date": "2026-10-19",
      "closed_on": "2026-10-22",
      "open": false,
-     "money": 221803,
-     "pnl": -14165.31,
+     "money": 215847,
+     "pnl": -13784.9,
      "pnl_pct": -6.39
     },
     {
@@ -29988,8 +29682,8 @@
      "entry_date": "2026-10-14",
      "closed_on": "2026-10-23",
      "open": false,
-     "money": 220717,
-     "pnl": -14104.84,
+     "money": 214768,
+     "pnl": -13724.67,
      "pnl_pct": -6.39
     },
     {
@@ -29998,8 +29692,8 @@
      "entry_date": "2026-10-13",
      "closed_on": "2026-10-21",
      "open": false,
-     "money": 220860,
-     "pnl": -14109.7,
+     "money": 214910,
+     "pnl": -13729.58,
      "pnl_pct": -6.39
     },
     {
@@ -30008,8 +29702,8 @@
      "entry_date": "2026-10-13",
      "closed_on": "2026-10-21",
      "open": false,
-     "money": 105366,
-     "pnl": -7655.06,
+     "money": 105662,
+     "pnl": -7676.52,
      "pnl_pct": -7.27
     },
     {
@@ -30018,8 +29712,8 @@
      "entry_date": "2026-10-13",
      "closed_on": "2026-10-28",
      "open": false,
-     "money": 220860,
-     "pnl": -4457.79,
+     "money": 214910,
+     "pnl": -4337.7,
      "pnl_pct": -2.02
     },
     {
@@ -30028,8 +29722,8 @@
      "entry_date": "2026-10-09",
      "closed_on": "2026-10-26",
      "open": false,
-     "money": 104757,
-     "pnl": -6691.44,
+     "money": 105064,
+     "pnl": -6711.09,
      "pnl_pct": -6.39
     },
     {
@@ -30038,8 +29732,8 @@
      "entry_date": "2026-10-08",
      "closed_on": "2026-10-22",
      "open": false,
-     "money": 210733,
-     "pnl": -16047.96,
+     "money": 211323,
+     "pnl": -16092.95,
      "pnl_pct": -7.62
     },
     {
@@ -30048,8 +29742,8 @@
      "entry_date": "2026-10-07",
      "closed_on": "2026-10-22",
      "open": false,
-     "money": 209513,
-     "pnl": -948.27,
+     "money": 210129,
+     "pnl": -951.06,
      "pnl_pct": -0.45
     },
     {
@@ -30058,8 +29752,8 @@
      "entry_date": "2026-08-17",
      "closed_on": "2026-10-22",
      "open": false,
-     "money": 176691,
-     "pnl": 27301.32,
+     "money": 175430,
+     "pnl": 27106.4,
      "pnl_pct": 15.45
     },
     {
@@ -30068,8 +29762,8 @@
      "entry_date": "2026-09-30",
      "closed_on": "2026-10-19",
      "open": false,
-     "money": 202767,
-     "pnl": 32320.19,
+     "money": 201332,
+     "pnl": 32091.48,
      "pnl_pct": 15.94
     },
     {
@@ -30078,19 +29772,9 @@
      "entry_date": "2026-09-29",
      "closed_on": "2026-10-14",
      "open": false,
-     "money": 202767,
-     "pnl": -1194.06,
+     "money": 201332,
+     "pnl": -1185.61,
      "pnl_pct": -0.59
-    },
-    {
-     "name": "West Coast Paper Mills Ltd",
-     "symbol": "WSTCSTPAPR",
-     "entry_date": "2026-06-30",
-     "closed_on": "2026-10-12",
-     "open": false,
-     "money": 165832,
-     "pnl": 78955.65,
-     "pnl_pct": 47.61
     },
     {
      "name": "Proventus Agro.",
@@ -30098,8 +29782,8 @@
      "entry_date": "2026-10-06",
      "closed_on": "2026-10-09",
      "open": false,
-     "money": 205163,
-     "pnl": -9010.77,
+     "money": 205810,
+     "pnl": -9039.17,
      "pnl_pct": -4.39
     },
     {
@@ -30108,8 +29792,8 @@
      "entry_date": "2026-09-17",
      "closed_on": "2026-10-09",
      "open": false,
-     "money": 205221,
-     "pnl": 1285.53,
+     "money": 202931,
+     "pnl": 1271.19,
      "pnl_pct": 0.63
     },
     {
@@ -30138,8 +29822,8 @@
      "entry_date": "2026-10-06",
      "closed_on": "2026-10-08",
      "open": false,
-     "money": 205163,
-     "pnl": -13105.4,
+     "money": 205810,
+     "pnl": -13146.7,
      "pnl_pct": -6.39
     },
     {
@@ -30148,8 +29832,8 @@
      "entry_date": "2026-09-22",
      "closed_on": "2026-10-07",
      "open": false,
-     "money": 102086,
-     "pnl": -726.73,
+     "money": 101360,
+     "pnl": -721.56,
      "pnl_pct": -0.71
     },
     {
@@ -30158,8 +29842,8 @@
      "entry_date": "2026-09-21",
      "closed_on": "2026-10-07",
      "open": false,
-     "money": 204172,
-     "pnl": 21483.86,
+     "money": 202720,
+     "pnl": 21331.04,
      "pnl_pct": 10.52
     },
     {
@@ -30168,9 +29852,19 @@
      "entry_date": "2026-08-14",
      "closed_on": "2026-10-07",
      "open": false,
-     "money": 176137,
-     "pnl": 44243.48,
+     "money": 174866,
+     "pnl": 43924.17,
      "pnl_pct": 25.12
+    },
+    {
+     "name": "Eimco Elecon (India)",
+     "symbol": "EIMCOELECO",
+     "entry_date": "2026-08-03",
+     "closed_on": "2026-10-01",
+     "open": false,
+     "money": 164300,
+     "pnl": 33566.62,
+     "pnl_pct": 20.43
     },
     {
      "name": "Ceigall India",
@@ -30178,19 +29872,19 @@
      "entry_date": "2026-09-16",
      "closed_on": "2026-09-22",
      "open": false,
-     "money": 183343,
-     "pnl": -11712.7,
+     "money": 181054,
+     "pnl": -11566.45,
      "pnl_pct": -6.39
     },
     {
-     "name": "Nitin Spinners Ltd",
-     "symbol": "NITINSPIN",
+     "name": "Eimco Elecon (India)",
+     "symbol": "EIMCOELECO",
      "entry_date": "2026-09-03",
      "closed_on": "2026-09-18",
      "open": false,
-     "money": 181206,
-     "pnl": -8738.3,
-     "pnl_pct": -4.82
+     "money": 82150,
+     "pnl": -1763.78,
+     "pnl_pct": -2.15
     },
     {
      "name": "Panache Digilife",
@@ -30228,8 +29922,8 @@
      "entry_date": "2026-09-01",
      "closed_on": "2026-09-16",
      "open": false,
-     "money": 88346,
-     "pnl": -5106.74,
+     "money": 87715,
+     "pnl": -5070.29,
      "pnl_pct": -5.78
     },
     {
@@ -30278,8 +29972,8 @@
      "entry_date": "2026-08-13",
      "closed_on": "2026-08-17",
      "open": false,
-     "money": 176137,
-     "pnl": -11252.6,
+     "money": 174866,
+     "pnl": -11171.39,
      "pnl_pct": -6.39
     },
     {
@@ -30311,6 +30005,16 @@
      "money": 155246,
      "pnl": 51592.39,
      "pnl_pct": 33.23
+    },
+    {
+     "name": "XPRO India Ltd",
+     "symbol": "XPROINDIA",
+     "entry_date": "2026-06-30",
+     "closed_on": "2026-08-03",
+     "open": false,
+     "money": 165832,
+     "pnl": -10593.58,
+     "pnl_pct": -6.39
     },
     {
      "name": "Ceigall India",
@@ -31365,7 +31069,7 @@
    ]
   },
   "year2": {
-   "start": "2024-11-25",
+   "start": "2024-11-26",
    "capital": 1000000.0,
    "pct": 12.0,
    "final": 1158782.07,
@@ -32192,18 +31896,18 @@
    ]
   },
   "year1": {
-   "start": "2025-11-25",
+   "start": "2025-11-26",
    "capital": 1000000.0,
    "pct": 12.0,
-   "final": 1598844.54,
-   "profit": 598844.54,
-   "open_trades": 10,
-   "return_pct": 59.9,
-   "trades": 79,
-   "skipped": 64,
+   "final": 1545467.88,
+   "profit": 545467.88,
+   "open_trades": 12,
+   "return_pct": 54.5,
+   "trades": 82,
+   "skipped": 61,
    "wins": 38,
    "pauses": 0,
-   "win_rate": 48.1,
+   "win_rate": 46.3,
    "max_drawdown_pct": 0.2,
    "months": {
     "2025-12": 15933.4,
@@ -32213,10 +31917,10 @@
     "2026-05": 61263.66,
     "2026-06": 14903.12,
     "2026-07": -1880.36,
-    "2026-08": 90033.31,
-    "2026-09": 177595.03,
-    "2026-10": 78157.87,
-    "2026-11": 61755.38
+    "2026-08": 80956.77,
+    "2026-09": 176347.8,
+    "2026-10": 46572.78,
+    "2026-11": 50287.52
    },
    "curve": [
     [
@@ -32249,32 +31953,82 @@
     ],
     [
      "2026-08",
-     1281336.28
+     1272259.74
     ],
     [
      "2026-09",
-     1458931.31
+     1448607.54
     ],
     [
      "2026-10",
-     1537089.18
+     1495180.32
     ],
     [
      "2026-11",
-     1598844.56
+     1545467.84
     ]
    ],
    "first_trade": "2025-12-01",
    "trades_list": [
     {
+     "name": "Taurian MPS",
+     "symbol": "TAURIAN",
+     "entry_date": "2026-11-25",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 185455,
+     "pnl": 11.27,
+     "pnl_pct": 0.01
+    },
+    {
+     "name": "PTC Industries Ltd",
+     "symbol": "PTCIL",
+     "entry_date": "2026-11-25",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 185992,
+     "pnl": -4474.27,
+     "pnl_pct": -2.41
+    },
+    {
      "name": "Ratnaveer Precision Engineering",
      "symbol": "RATNAVEER",
      "entry_date": "2026-11-23",
-     "closed_on": "2026-11-23",
+     "closed_on": "2026-11-25",
      "open": true,
-     "money": 191172,
-     "pnl": 5741.74,
-     "pnl_pct": 3.0
+     "money": 184821,
+     "pnl": 6142.17,
+     "pnl_pct": 3.32
+    },
+    {
+     "name": "Yatharth Hospital & Trauma Care Services Ltd",
+     "symbol": "YATHARTH",
+     "entry_date": "2026-11-13",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 175040,
+     "pnl": -684.0,
+     "pnl_pct": -0.39
+    },
+    {
+     "name": "Aptus Pharma",
+     "symbol": "544529",
+     "entry_date": "2026-11-12",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 89023,
+     "pnl": 283.74,
+     "pnl_pct": 0.32
+    },
+    {
+     "name": "Aptus Pharma",
+     "symbol": "544529",
+     "entry_date": "2026-11-03",
+     "closed_on": "2026-11-25",
+     "open": true,
+     "money": 178046,
+     "pnl": 4013.1,
+     "pnl_pct": 2.25
     },
     {
      "name": "Gayatri Rubbers",
@@ -32282,8 +32036,8 @@
      "entry_date": "2026-11-17",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 89973,
-     "pnl": -4221.37,
+     "money": 87520,
+     "pnl": -4106.27,
      "pnl_pct": -4.69
     },
     {
@@ -32292,29 +32046,9 @@
      "entry_date": "2026-11-16",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 179947,
-     "pnl": -2803.48,
+     "money": 175040,
+     "pnl": -2727.04,
      "pnl_pct": -1.56
-    },
-    {
-     "name": "Yatharth Hospital & Trauma Care Services Ltd",
-     "symbol": "YATHARTH",
-     "entry_date": "2026-11-13",
-     "closed_on": "2026-11-23",
-     "open": true,
-     "money": 179947,
-     "pnl": 3.08,
-     "pnl_pct": 0.0
-    },
-    {
-     "name": "Aptus Pharma",
-     "symbol": "544529",
-     "entry_date": "2026-11-12",
-     "closed_on": "2026-11-23",
-     "open": true,
-     "money": 91518,
-     "pnl": 2048.86,
-     "pnl_pct": 2.24
     },
     {
      "name": "DC Infotech",
@@ -32322,8 +32056,8 @@
      "entry_date": "2026-11-05",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 183037,
-     "pnl": 15972.49,
+     "money": 178046,
+     "pnl": 15537.0,
      "pnl_pct": 8.73
     },
     {
@@ -32332,19 +32066,9 @@
      "entry_date": "2026-11-05",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 183037,
-     "pnl": 39109.94,
+     "money": 178046,
+     "pnl": 38043.61,
      "pnl_pct": 21.37
-    },
-    {
-     "name": "Aptus Pharma",
-     "symbol": "544529",
-     "entry_date": "2026-11-03",
-     "closed_on": "2026-11-23",
-     "open": true,
-     "money": 183037,
-     "pnl": 7707.59,
-     "pnl_pct": 4.21
     },
     {
      "name": "Proventus Agro.",
@@ -32352,8 +32076,8 @@
      "entry_date": "2026-10-30",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 184451,
-     "pnl": 21625.51,
+     "money": 179422,
+     "pnl": 21035.89,
      "pnl_pct": 11.72
     },
     {
@@ -32362,8 +32086,8 @@
      "entry_date": "2026-10-15",
      "closed_on": "2026-11-23",
      "open": true,
-     "money": 190570,
-     "pnl": 14105.59,
+     "money": 185434,
+     "pnl": 13725.41,
      "pnl_pct": 7.4
     },
     {
@@ -32372,8 +32096,8 @@
      "entry_date": "2026-11-09",
      "closed_on": "2026-11-13",
      "open": false,
-     "money": 91518,
-     "pnl": -7935.17,
+     "money": 89023,
+     "pnl": -7718.82,
      "pnl_pct": -8.67
     },
     {
@@ -32382,8 +32106,8 @@
      "entry_date": "2026-11-02",
      "closed_on": "2026-11-13",
      "open": false,
-     "money": 183037,
-     "pnl": -11729.14,
+     "money": 178046,
+     "pnl": -11409.35,
      "pnl_pct": -6.41
     },
     {
@@ -32392,8 +32116,8 @@
      "entry_date": "2026-10-30",
      "closed_on": "2026-11-13",
      "open": false,
-     "money": 95285,
-     "pnl": -6087.21,
+     "money": 92717,
+     "pnl": -5923.14,
      "pnl_pct": -6.39
     },
     {
@@ -32402,8 +32126,8 @@
      "entry_date": "2026-10-29",
      "closed_on": "2026-11-02",
      "open": false,
-     "money": 184451,
-     "pnl": -11783.05,
+     "money": 179422,
+     "pnl": -11461.78,
      "pnl_pct": -6.39
     },
     {
@@ -32412,8 +32136,8 @@
      "entry_date": "2026-10-19",
      "closed_on": "2026-10-22",
      "open": false,
-     "money": 191508,
-     "pnl": -12230.54,
+     "money": 186365,
+     "pnl": -11902.09,
      "pnl_pct": -6.39
     },
     {
@@ -32422,8 +32146,8 @@
      "entry_date": "2026-10-14",
      "closed_on": "2026-10-23",
      "open": false,
-     "money": 190570,
-     "pnl": -12178.33,
+     "money": 185434,
+     "pnl": -11850.09,
      "pnl_pct": -6.39
     },
     {
@@ -32432,8 +32156,8 @@
      "entry_date": "2026-10-13",
      "closed_on": "2026-10-21",
      "open": false,
-     "money": 190694,
-     "pnl": -12182.52,
+     "money": 185557,
+     "pnl": -11854.33,
      "pnl_pct": -6.39
     },
     {
@@ -32442,8 +32166,8 @@
      "entry_date": "2026-10-13",
      "closed_on": "2026-10-21",
      "open": false,
-     "money": 90975,
-     "pnl": -6609.49,
+     "money": 91230,
+     "pnl": -6628.02,
      "pnl_pct": -7.27
     },
     {
@@ -32452,8 +32176,8 @@
      "entry_date": "2026-10-13",
      "closed_on": "2026-10-28",
      "open": false,
-     "money": 190694,
-     "pnl": -3848.92,
+     "money": 185557,
+     "pnl": -3745.23,
      "pnl_pct": -2.02
     },
     {
@@ -32462,8 +32186,8 @@
      "entry_date": "2026-10-09",
      "closed_on": "2026-10-26",
      "open": false,
-     "money": 90449,
-     "pnl": -5777.49,
+     "money": 90714,
+     "pnl": -5794.46,
      "pnl_pct": -6.39
     },
     {
@@ -32472,8 +32196,8 @@
      "entry_date": "2026-10-08",
      "closed_on": "2026-10-22",
      "open": false,
-     "money": 181950,
-     "pnl": -13856.05,
+     "money": 182460,
+     "pnl": -13894.89,
      "pnl_pct": -7.62
     },
     {
@@ -32482,8 +32206,8 @@
      "entry_date": "2026-10-07",
      "closed_on": "2026-10-22",
      "open": false,
-     "money": 180897,
-     "pnl": -818.75,
+     "money": 181428,
+     "pnl": -821.16,
      "pnl_pct": -0.45
     },
     {
@@ -32492,8 +32216,8 @@
      "entry_date": "2026-08-17",
      "closed_on": "2026-10-22",
      "open": false,
-     "money": 152558,
-     "pnl": 23572.36,
+     "money": 151469,
+     "pnl": 23404.07,
      "pnl_pct": 15.45
     },
     {
@@ -32502,8 +32226,8 @@
      "entry_date": "2026-09-30",
      "closed_on": "2026-10-19",
      "open": false,
-     "money": 175072,
-     "pnl": 27905.73,
+     "money": 173833,
+     "pnl": 27708.27,
      "pnl_pct": 15.94
     },
     {
@@ -32512,19 +32236,9 @@
      "entry_date": "2026-09-29",
      "closed_on": "2026-10-14",
      "open": false,
-     "money": 175072,
-     "pnl": -1030.97,
+     "money": 173833,
+     "pnl": -1023.67,
      "pnl_pct": -0.59
-    },
-    {
-     "name": "West Coast Paper Mills Ltd",
-     "symbol": "WSTCSTPAPR",
-     "entry_date": "2026-06-30",
-     "closed_on": "2026-10-12",
-     "open": false,
-     "money": 143182,
-     "pnl": 68171.48,
-     "pnl_pct": 47.61
     },
     {
      "name": "Proventus Agro.",
@@ -32532,8 +32246,8 @@
      "entry_date": "2026-10-06",
      "closed_on": "2026-10-09",
      "open": false,
-     "money": 177141,
-     "pnl": -7780.04,
+     "money": 177699,
+     "pnl": -7804.56,
      "pnl_pct": -4.39
     },
     {
@@ -32542,8 +32256,8 @@
      "entry_date": "2026-09-17",
      "closed_on": "2026-10-09",
      "open": false,
-     "money": 177191,
-     "pnl": 1109.95,
+     "money": 175214,
+     "pnl": 1097.56,
      "pnl_pct": 0.63
     },
     {
@@ -32572,8 +32286,8 @@
      "entry_date": "2026-10-06",
      "closed_on": "2026-10-08",
      "open": false,
-     "money": 177141,
-     "pnl": -11315.39,
+     "money": 177699,
+     "pnl": -11351.06,
      "pnl_pct": -6.39
     },
     {
@@ -32582,8 +32296,8 @@
      "entry_date": "2026-09-22",
      "closed_on": "2026-10-07",
      "open": false,
-     "money": 88143,
-     "pnl": -627.47,
+     "money": 87516,
+     "pnl": -623.01,
      "pnl_pct": -0.71
     },
     {
@@ -32592,8 +32306,8 @@
      "entry_date": "2026-09-21",
      "closed_on": "2026-10-07",
      "open": false,
-     "money": 176285,
-     "pnl": 18549.49,
+     "money": 175031,
+     "pnl": 18417.53,
      "pnl_pct": 10.52
     },
     {
@@ -32602,9 +32316,19 @@
      "entry_date": "2026-08-14",
      "closed_on": "2026-10-07",
      "open": false,
-     "money": 152080,
-     "pnl": 38200.48,
+     "money": 150982,
+     "pnl": 37924.78,
      "pnl_pct": 25.12
+    },
+    {
+     "name": "Eimco Elecon (India)",
+     "symbol": "EIMCOELECO",
+     "entry_date": "2026-08-03",
+     "closed_on": "2026-10-01",
+     "open": false,
+     "money": 141859,
+     "pnl": 28981.92,
+     "pnl_pct": 20.43
     },
     {
      "name": "Ceigall India",
@@ -32612,19 +32336,19 @@
      "entry_date": "2026-09-16",
      "closed_on": "2026-09-22",
      "open": false,
-     "money": 158301,
-     "pnl": -10112.92,
+     "money": 156324,
+     "pnl": -9986.65,
      "pnl_pct": -6.39
     },
     {
-     "name": "Nitin Spinners Ltd",
-     "symbol": "NITINSPIN",
+     "name": "Eimco Elecon (India)",
+     "symbol": "EIMCOELECO",
      "entry_date": "2026-09-03",
      "closed_on": "2026-09-18",
      "open": false,
-     "money": 156456,
-     "pnl": -7544.78,
-     "pnl_pct": -4.82
+     "money": 70929,
+     "pnl": -1522.87,
+     "pnl_pct": -2.15
     },
     {
      "name": "Panache Digilife",
@@ -32662,8 +32386,8 @@
      "entry_date": "2026-09-01",
      "closed_on": "2026-09-16",
      "open": false,
-     "money": 76279,
-     "pnl": -4409.24,
+     "money": 75734,
+     "pnl": -4377.76,
      "pnl_pct": -5.78
     },
     {
@@ -32712,8 +32436,8 @@
      "entry_date": "2026-08-13",
      "closed_on": "2026-08-17",
      "open": false,
-     "money": 152080,
-     "pnl": -9715.66,
+     "money": 150982,
+     "pnl": -9645.54,
      "pnl_pct": -6.39
     },
     {
@@ -32745,6 +32469,16 @@
      "money": 134042,
      "pnl": 44545.64,
      "pnl_pct": 33.23
+    },
+    {
+     "name": "XPRO India Ltd",
+     "symbol": "XPROINDIA",
+     "entry_date": "2026-06-30",
+     "closed_on": "2026-08-03",
+     "open": false,
+     "money": 143182,
+     "pnl": -9146.66,
+     "pnl_pct": -6.39
     },
     {
      "name": "Ceigall India",
@@ -33061,20 +32795,20 @@
   "index_from": "2018-04-02",
   "by_year": {
    "2017": {
-    "final": 1424041.74,
+    "final": 1417346.59,
     "open_trades": 0,
-    "return_pct": 42.4,
-    "trades": 83,
-    "win_rate": 49.4,
+    "return_pct": 41.7,
+    "trades": 78,
+    "win_rate": 51.3,
     "max_drawdown_pct": 3.0
    },
    "2018": {
-    "final": 951795.06,
+    "final": 959614.85,
     "open_trades": 0,
-    "return_pct": -4.8,
-    "trades": 32,
-    "win_rate": 25.0,
-    "max_drawdown_pct": 5.5
+    "return_pct": -4.0,
+    "trades": 30,
+    "win_rate": 26.7,
+    "max_drawdown_pct": 4.7
    },
    "2019": {
     "final": 998557.57,
@@ -33085,36 +32819,36 @@
     "max_drawdown_pct": 3.5
    },
    "2020": {
-    "final": 1284767.82,
+    "final": 1293876.45,
     "open_trades": 0,
-    "return_pct": 28.5,
-    "trades": 29,
-    "win_rate": 44.8,
+    "return_pct": 29.4,
+    "trades": 28,
+    "win_rate": 46.4,
     "max_drawdown_pct": 2.7
    },
    "2021": {
-    "final": 1479952.68,
+    "final": 1457838.77,
     "open_trades": 0,
-    "return_pct": 48.0,
-    "trades": 50,
-    "win_rate": 42.0,
-    "max_drawdown_pct": 3.9
+    "return_pct": 45.8,
+    "trades": 47,
+    "win_rate": 40.4,
+    "max_drawdown_pct": 4.5
    },
    "2022": {
-    "final": 1073478.68,
+    "final": 981819.73,
     "open_trades": 0,
-    "return_pct": 7.3,
-    "trades": 46,
-    "win_rate": 21.7,
-    "max_drawdown_pct": 4.1
+    "return_pct": -1.8,
+    "trades": 42,
+    "win_rate": 19.0,
+    "max_drawdown_pct": 7.6
    },
    "2023": {
-    "final": 1787659.31,
+    "final": 1912521.15,
     "open_trades": 0,
-    "return_pct": 78.8,
-    "trades": 65,
-    "win_rate": 43.1,
-    "max_drawdown_pct": 6.0
+    "return_pct": 91.3,
+    "trades": 67,
+    "win_rate": 40.3,
+    "max_drawdown_pct": 4.7
    },
    "2024": {
     "final": 1195866.14,
@@ -33133,25 +32867,25 @@
     "max_drawdown_pct": 2.1
    },
    "2026": {
-    "final": 1505448.54,
-    "open_trades": 10,
-    "return_pct": 50.5,
-    "trades": 69,
-    "win_rate": 46.4,
+    "final": 1455189.87,
+    "open_trades": 12,
+    "return_pct": 45.5,
+    "trades": 72,
+    "win_rate": 44.4,
     "max_drawdown_pct": 0.6
    }
   },
   "stocks_with_history": {
-   "2017": 31,
-   "2018": 34,
-   "2019": 42,
-   "2020": 44,
-   "2021": 46,
-   "2022": 47,
-   "2023": 53,
-   "2024": 64,
-   "2025": 84,
-   "2026": 99
+   "2017": 29,
+   "2018": 32,
+   "2019": 40,
+   "2020": 42,
+   "2021": 43,
+   "2022": 44,
+   "2023": 50,
+   "2024": 61,
+   "2025": 81,
+   "2026": 96
   }
  },
  "_market": {
@@ -33199,7 +32933,7 @@
     "partial": false
    },
    "2026": {
-    "change": 9.0,
+    "change": 8.6,
     "above_ema50_days_pct": 61,
     "phase": "sideways",
     "partial": true
