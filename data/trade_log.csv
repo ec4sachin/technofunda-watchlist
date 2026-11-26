@@ -79,3 +79,9 @@ date,strategy,mode,action,symbol,name,qty,price,value,reason,pnl,pnl_pct,hold_da
 2026-11-25,Smart Switch · Growth list,paper,BUY,540718,Aayush Art,57,1365.79,77850.03,"Breakout above ₹1359 + 0.5% (stop ₹1329.08, target ₹1775.53) · Smallcap 100 19,314 above EMA 50 19,215 → Positional exits",,,,growth_switch-540718-2026-11-25
 2026-11-25,Smart Switch · Growth list,paper,BUY,543997,Organic Recyclin,371,210.45,78076.95,"Breakout above ₹209.4 + 0.5% (stop ₹202.95, target ₹273.58) · Smallcap 100 19,314 above EMA 50 19,215 → Positional exits",,,,growth_switch-543997-2026-11-25
 2026-11-25,Smart Switch · Growth list,paper,BUY,YATHARTH,Yatharth Hospital & Trauma Care Services Ltd,35,1135.2,39732.0,"Add-on (half size) · Breakout above ₹1129.55 + 0.5% (stop ₹1067.09, target ₹1475.76) · Smallcap 100 19,314 above EMA 50 19,215 → Positional exits",,,,growth_switch-YATHARTH-2026-11-25-add1
+2026-11-25,Swing Strategy,paper,SELL,GRCL,Gayatri Rubbers,193,623.7,120374.1,Stop loss (1% below 5-candle base),-4871.36,-3.51,9,swing-GRCL-2026-11-16
+2026-11-25,Swing Strategy,paper,BUY,SHEETAL,Sheetal Univer.,317,400.92,127091.64,"Breakout above ₹396.95 + 1% (stop ₹376.86, target ₹481.1)",,,,swing-SHEETAL-2026-11-25
+2026-11-25,Positional Trading,paper,SELL,GRCL,Gayatri Rubbers,179,623.7,111642.3,Stop loss (1% below 5-candle base),-4518.0,-3.51,9,positional-GRCL-2026-11-16
+2026-11-25,Positional Trading,paper,BUY,SHEETAL,Sheetal Univer.,291,400.92,116667.72,"Breakout above ₹396.95 + 1% (stop ₹376.86, target ₹521.2)",,,,positional-SHEETAL-2026-11-25
+2026-11-25,Smart Switch,paper,SELL,GRCL,Gayatri Rubbers,179,623.7,111642.3,Stop loss (1% below 5-candle base),-4518.0,-3.51,9,switch-GRCL-2026-11-16
+2026-11-25,Smart Switch,paper,BUY,SHEETAL,Sheetal Univer.,291,400.92,116667.72,"Breakout above ₹396.95 + 1% (stop ₹376.86, target ₹521.2) · Smallcap 100 19,314 above EMA 50 19,215 → Positional exits",,,,switch-SHEETAL-2026-11-25

@@ -2,13 +2,13 @@
  "last": "2026-11-26",
  "status": {
   "bse": {
-   "days": 2,
+   "days": 1,
    "rows": 0,
    "last_error": "HTTP 403 (AnnGetData/w?strCat=-1)"
   },
   "nse": {
-   "days": 2,
-   "rows": 457,
+   "days": 1,
+   "rows": 142,
    "last_error": ""
   },
   "matched": {
@@ -386,6 +386,14 @@
   ],
   "VIVIANA": [
    {
+    "d": "2026-11-26",
+    "t": "Viviana Power Tech Limited has informed the Exchange about L1 Stage successful bidder having amount of Rs. 463.57 Cr (Rupees Four Hundred Sixty-Three Crores and Fifty-Seven Lakhs) for Pashchim Gujarat Vij Company Limited-Gujarat Wire Free City Scheme",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/VIVIANA_26112026095405_VIVIANA__Intimation_of_L1_Stage_Successful_bidder_PGVCL_25112026.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-26"
+   },
+   {
     "d": "2026-11-19",
     "t": "Viviana Power Tech Limited has informed the Exchange about Receiving of a new turnkey contract amounting to Rs.1,24,00,00,000.00 (Rupees One Hundred Twenty-Four Crore Only), inclusive of taxes, from the client M/s. Dakshin Haryana Bijli Vitran Nigam Limited (DHBVNL).",
     "k": "Order",
@@ -552,6 +560,26 @@
     "t": "Significant movement in price has been observed in Sunlite Recycling Industries Limited. The Exchange, in order to ensure that investors have latest relevant information about the company and to inform the market place so that the interest of the investors is safeguarded, has wr…",
     "k": "Order",
     "url": "https://nsearchives.nseindia.in/corporate/-",
+    "ex": "NSE",
+    "seen": "2026-11-26"
+   }
+  ],
+  "BELLACASA": [
+   {
+    "d": "2026-11-26",
+    "t": "Bella Casa Fashion & Retail Limited has informed the Exchange about Action(s) initiated or orders passed",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/BELLACASA_26112026143801_Disclosure_Regulation_30_ROC_checked.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-26"
+   }
+  ],
+  "ADISOFT": [
+   {
+    "d": "2026-11-26",
+    "t": "Adisoft Technologies Limited has informed the Exchange regarding a press release dated November 25, 2026, titled \"Adisoft Technologies Bags Order Equivalent to 17 Percent of H1 FY27 Total Income\".",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/ADISOFT_26112026123815_Press_release.pdf",
     "ex": "NSE",
     "seen": "2026-11-26"
    }
