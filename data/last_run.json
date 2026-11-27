@@ -1,89 +1,37 @@
 {
  "added": [],
- "rejected": [
-  [
-   "SANGHVIMOV",
-   "Sanghvi Movers",
-   "6.6/11 · no revenue guidance, and TTM profit growth 21% (need 25% or more without guidance)"
-  ]
- ],
- "to_dt": [
-  [
-   "522294",
-   "T & I Global",
-   "close 176.2 < 200 EMA 180.02"
-  ],
-  [
-   "530427",
-   "Choksi Asia",
-   "close 191.05 < 200 EMA 191.39"
-  ],
-  [
-   "539522",
-   "Grovy India",
-   "close 52.9 < 200 EMA 53.83"
-  ],
-  [
-   "544406",
-   "Unified Data",
-   "close 406 < 200 EMA 406.64"
-  ],
-  [
-   "RAPIDFLEET",
-   "Rapid Fleet",
-   "close 195 < 200 EMA 198.97"
-  ]
- ],
+ "rejected": [],
+ "to_dt": [],
  "to_sp": [
   [
-   "513502",
-   "Baroda Extrusion",
-   "close 9.7 > 200 EMA 9.16"
+   "ASHIANA",
+   "Ashiana Housing",
+   "close 360.1 > 200 EMA 352.75"
   ],
   [
-   "542669",
-   "BMW Industries",
-   "close 49.87 > 200 EMA 49.84"
+   "BALUFORGE",
+   "Balu Forge Industries Ltd",
+   "close 528.9 > 200 EMA 506.44"
   ],
   [
-   "544675",
-   "Gabion Technol.",
-   "close 101.1 > 200 EMA 97.65"
+   "DENTALKART",
+   "Vasa Denticity Ltd",
+   "close 468.85 > 200 EMA 448.87"
   ],
   [
-   "544695",
-   "Msafe Equipments",
-   "close 245.35 > 200 EMA 223.81"
+   "PANAMAPET",
+   "Panama Petrochem",
+   "close 419.5 > 200 EMA 411.22"
   ],
   [
-   "BRANDMAN",
-   "Brandman Retail Ltd",
-   "close 148 > 20 EMA 145.98"
+   "SWASTIKAIN",
+   "Swastika Infra",
+   "close 197.19 > 20 EMA 194.77"
   ],
   [
-   "FCL",
-   "Fineotex Chemical Ltd",
-   "close 43.03 > 200 EMA 41.69"
-  ],
-  [
-   "HEXAGON",
-   "Hexagon Nutri.",
-   "close 60.88 > 20 EMA 60.58"
-  ],
-  [
-   "SHRINGARMS",
-   "Shringar House",
-   "close 241.3 > 200 EMA 236.15"
-  ],
-  [
-   "THOMASCOTT",
-   "Thomas Scott India Ltd",
-   "close 325.2 > 200 EMA 290.48"
-  ],
-  [
-   "WSTCSTPAPR",
-   "West Coast Paper Mills Ltd",
-   "close 651.15 > 200 EMA 608.24"
+   "TAMBOLIIN",
+   "Tamboli Industri",
+   "close 320.9 > 20 EMA 317.64"
   ]
  ],
  "removed": [],
@@ -131,12 +79,12 @@
   [
    "AEROPLANE",
    "A C J K Exports",
-   "close 236.41 vs 20 EMA 231.88 → SP"
+   "close 233.64 vs 20 EMA 232.04 → SP"
   ],
   [
    "AONESTEELS",
    "A-One Steels",
-   "close 461.65 (too new for any EMA)"
+   "close 461.65 vs 20 EMA 440.74 → SP"
   ],
   [
    "APSISAERO",
@@ -146,17 +94,27 @@
   [
    "BPLPHARMA",
    "Bharat Parenterals Ltd",
-   "close 2180.7 vs 20 EMA 2077.36 → SP"
+   "close 2239.1 vs 20 EMA 2092.78 → SP"
+  ],
+  [
+   "BRANDMAN",
+   "Brandman Retail Ltd",
+   "close 148 vs 20 EMA 145.98 → SP"
   ],
   [
    "DHABRIYA",
    "Dhabriya Poly.",
-   "close 474.6 vs 20 EMA 473.07 → SP"
+   "close 480.1 vs 20 EMA 473.74 → SP"
   ],
   [
    "HALDYNGL",
    "Haldyn Glass",
-   "close 150.26 vs 20 EMA 137.34 → SP"
+   "close 153.33 vs 20 EMA 138.87 → SP"
+  ],
+  [
+   "HEXAGON",
+   "Hexagon Nutri.",
+   "close 60.88 vs 20 EMA 60.58 → SP"
   ],
   [
    "MARSONS",
@@ -171,17 +129,17 @@
   [
    "ORIRAIL",
    "Oriental Rail Infrastructure Ltd",
-   "close 118.66 vs 20 EMA 117.43 → SP"
+   "close 118.78 vs 20 EMA 117.56 → SP"
   ],
   [
    "RAMBHAJO",
    "Advit Jewels",
-   "close 331.45 vs 20 EMA 326.19 → SP"
+   "close 328.05 vs 20 EMA 326.37 → SP"
   ],
   [
    "SHUKRAPHAR",
    "Shukra Pharma.",
-   "close 88.01 vs 20 EMA 80.16 → SP"
+   "close 89.96 vs 20 EMA 81.09 → SP"
   ],
   [
    "SIMCA",
@@ -191,12 +149,12 @@
   [
    "SMT",
    "Sahajanand Medical Technologies Ltd",
-   "close 553.3 (too new for any EMA)"
+   "close 553.3 vs 20 EMA 523.52 → SP"
   ],
   [
    "SONA",
    "Sonaselection India",
-   "close 122.67 vs 20 EMA 113.86 → SP"
+   "close 123.11 vs 20 EMA 114.76 → SP"
   ],
   [
    "TEAMTECH",
@@ -206,7 +164,7 @@
   [
    "TECHNOCRAF",
    "Technocraft Ven.",
-   "close 509.7 vs 20 EMA 493.06 → SP"
+   "close 500.45 vs 20 EMA 493.77 → SP"
   ],
   [
    "544538",
@@ -279,14 +237,9 @@
    "close 393.95 vs 20 EMA 400.18"
   ],
   [
-   "BRANDMAN",
-   "Brandman Retail Ltd",
-   "close 148 vs 20 EMA 145.98"
-  ],
-  [
    "DEEPA",
    "Deepa Jewellers",
-   "close 175.45 vs 20 EMA 205.75"
+   "close 182.92 vs 20 EMA 203.56"
   ],
   [
    "EPWINDIA",
@@ -301,62 +254,57 @@
   [
    "FEDDERSHOL",
    "Fedders Holding",
-   "close 53.72 vs 20 EMA 57.3"
-  ],
-  [
-   "HEXAGON",
-   "Hexagon Nutri.",
-   "close 60.88 vs 20 EMA 60.58"
+   "close 54.59 vs 20 EMA 57.04"
   ],
   [
    "JSIPL",
    "Jindal Supreme",
-   "close 162.07 vs 20 EMA 162.24"
+   "close 159.47 vs 20 EMA 161.97"
   ],
   [
    "KANOHAR",
    "Kanohar Elect.",
-   "close 1001.6 vs 20 EMA 1021.58"
+   "close 992.2 vs 20 EMA 1018.76"
   ],
   [
    "KHAZANCHI",
    "Khazanchi Jewell",
-   "close 707.7 vs 20 EMA 713.77"
+   "close 711.75 vs 20 EMA 713.55"
   ],
   [
    "MPIMANIPAL",
    "Manipal Payment and Identity Solutions Ltd",
-   "close 313.65 vs 20 EMA 320.39"
+   "close 309.7 vs 20 EMA 319.36"
   ],
   [
    "RSL",
    "Rajputana Stain.",
-   "close 157.44 vs 20 EMA 166.26"
+   "close 156.3 vs 20 EMA 165.31"
   ],
   [
    "SWASTIKAIN",
    "Swastika Infra",
-   "close 197.19 (too new for any EMA)"
+   "close 197.19 vs 20 EMA 194.77"
   ],
   [
    "TAALTECH",
    "TAAL Tech Ltd",
-   "close 835.6 vs 20 EMA 905.69"
+   "close 839.95 vs 20 EMA 899.42"
   ],
   [
    "TAMBOLIIN",
    "Tamboli Industri",
-   "close 309.3 vs 20 EMA 317.3"
+   "close 320.9 vs 20 EMA 317.64"
   ],
   [
    "TRANSPEK",
    "Transpek Industry Ltd",
-   "close 1281.2 vs 20 EMA 1322.65"
+   "close 1270 vs 20 EMA 1317.64"
   ],
   [
    "UDAYJEW",
    "Uday Jewellery",
-   "close 194.51 vs 20 EMA 210.92"
+   "close 203.38 vs 20 EMA 210.2"
   ],
   [
    "XTRANET",
@@ -370,19 +318,19 @@
   ]
  ],
  "per_alert": {
-  "TTM Profit > 30%": 1,
-  "52W High": 3,
+  "TTM Profit > 30%": 0,
+  "52W High": 0,
   "Daily Volume Scan": 0,
-  "Weekly Volume Scan": 2,
+  "Weekly Volume Scan": 0,
   "Ready after 6 Months": 0,
   "Mukul Mahavir Agrawal": 0,
   "Ashish Kacholia": 0
  },
- "email_total": 5,
- "already_listed": 4,
+ "email_total": 0,
+ "already_listed": 0,
  "price_date": "26 Nov 2026",
  "monthly_pass": 0,
  "mode": "auto",
  "monthly_done": false,
- "run_at": "27 Nov 2026, 08:32 AM IST"
+ "run_at": "27 Nov 2026, 03:20 PM IST"
 }

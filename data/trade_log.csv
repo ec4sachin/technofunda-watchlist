@@ -87,3 +87,5 @@ date,strategy,mode,action,symbol,name,qty,price,value,reason,pnl,pnl_pct,hold_da
 2026-11-25,Smart Switch,paper,BUY,SHEETAL,Sheetal Univer.,291,400.92,116667.72,"Breakout above ₹396.95 + 1% (stop ₹376.86, target ₹521.2) · Smallcap 100 19,314 above EMA 50 19,215 → Positional exits",,,,switch-SHEETAL-2026-11-25
 2026-11-26,Smart Switch · Growth list,paper,SELL,YATHARTH,Yatharth Hospital & Trauma Care Services Ltd,35,1067.09,37348.15,Stop loss (6% max risk),-2538.01,-6.0,1,growth_switch-YATHARTH-2026-11-25-add1
 2026-11-26,Smart Switch · Growth list,paper,BUY,526873,Rajasthan Securities,1126,69.24,77964.24,"Breakout above ₹68.9 + 0.5% (stop ₹67.12, target ₹90.01) · Smallcap 100 19,229 above EMA 50 19,215 → Positional exits",,,,growth_switch-526873-2026-11-26
+2026-11-26,Swing Strategy,paper,SELL,DCI,DC Infotech,382,336.15,128409.3,"Time stop (10 days, under +3%)",-1937.52,-1.09,21,swing-DCI-2026-11-05
+2026-11-26,Swing Strategy,paper,BUY,ZOTA,Zota Health Care Ltd,94,1344.31,126365.14,"Breakout above ₹1331 + 1% (stop ₹1263.65, target ₹1613.17)",,,,swing-ZOTA-2026-11-26
