@@ -85,3 +85,5 @@ date,strategy,mode,action,symbol,name,qty,price,value,reason,pnl,pnl_pct,hold_da
 2026-11-25,Positional Trading,paper,BUY,SHEETAL,Sheetal Univer.,291,400.92,116667.72,"Breakout above ₹396.95 + 1% (stop ₹376.86, target ₹521.2)",,,,positional-SHEETAL-2026-11-25
 2026-11-25,Smart Switch,paper,SELL,GRCL,Gayatri Rubbers,179,623.7,111642.3,Stop loss (1% below 5-candle base),-4518.0,-3.51,9,switch-GRCL-2026-11-16
 2026-11-25,Smart Switch,paper,BUY,SHEETAL,Sheetal Univer.,291,400.92,116667.72,"Breakout above ₹396.95 + 1% (stop ₹376.86, target ₹521.2) · Smallcap 100 19,314 above EMA 50 19,215 → Positional exits",,,,switch-SHEETAL-2026-11-25
+2026-11-26,Smart Switch · Growth list,paper,SELL,YATHARTH,Yatharth Hospital & Trauma Care Services Ltd,35,1067.09,37348.15,Stop loss (6% max risk),-2538.01,-6.0,1,growth_switch-YATHARTH-2026-11-25-add1
+2026-11-26,Smart Switch · Growth list,paper,BUY,526873,Rajasthan Securities,1126,69.24,77964.24,"Breakout above ₹68.9 + 0.5% (stop ₹67.12, target ₹90.01) · Smallcap 100 19,229 above EMA 50 19,215 → Positional exits",,,,growth_switch-526873-2026-11-26

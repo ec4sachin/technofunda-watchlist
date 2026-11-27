@@ -1,20 +1,20 @@
 {
- "last": "2026-11-26",
+ "last": "2026-11-27",
  "status": {
   "bse": {
-   "days": 1,
+   "days": 2,
    "rows": 0,
    "last_error": "HTTP 403 (AnnGetData/w?strCat=-1)"
   },
   "nse": {
-   "days": 1,
-   "rows": 142,
+   "days": 2,
+   "rows": 432,
    "last_error": ""
   },
   "matched": {
    "bse_codes": 93,
    "nse_only_codes": 237,
-   "new": 3
+   "new": 6
   }
  },
  "items": {
@@ -258,6 +258,14 @@
   ],
   "ANLON": [
    {
+    "d": "2026-11-26",
+    "t": "Anlon Technology Solutions Limited has informed the Exchange about Bagging/Receiving of orders/contracts",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/ANLON_26112026173429_regulation_30_yamuna_noida_signed.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-27"
+   },
+   {
     "d": "2026-11-25",
     "t": "Anlon Technology Solutions Limited has informed the Exchange about Bagging/Receiving of orders/contracts",
     "k": "Order",
@@ -470,6 +478,22 @@
   ],
   "RATNAVEER": [
    {
+    "d": "2026-11-26",
+    "t": "Ratnaveer Precision Engineering Limited has informed the Exchange regarding a revised press release dated November 26, 2026, titled \"Press Release - Update on Copper Clad Laminate (CCL) Project - Disclosure under Regulation 30of SEBI (LODR) Regulations, 2015.\".",
+    "k": "Business update",
+    "url": "https://nsearchives.nseindia.in/corporate/RATNAVEER_26112026163619_Press_release_signed.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-27"
+   },
+   {
+    "d": "2026-11-26",
+    "t": "Ratnaveer Precision Engineering Limited has informed the Exchange regarding a press release dated November 26, 2026, titled \"Press Release - Update on Copper Clad Laminate (CCL) Project - Disclosure under Regulation 30 of SEBI (LODR) Regulations, 2015.\".",
+    "k": "Business update",
+    "url": "https://nsearchives.nseindia.in/corporate/RATNAVEER_26112026155306_Press_release_signed.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-27"
+   },
+   {
     "d": "2026-11-21",
     "t": "Ratnaveer Precision Engineering Limited has informed the Exchange regarding a press release dated November 21, 2026, titled \"Update on Copper Clad Laminate (CCL) Project - Disclosure under Regulation 30 of SEBI (LODR) Regulations, 2015.\".",
     "k": "Business update",
@@ -582,6 +606,36 @@
     "url": "https://nsearchives.nseindia.in/corporate/ADISOFT_26112026123815_Press_release.pdf",
     "ex": "NSE",
     "seen": "2026-11-26"
+   }
+  ],
+  "COMSYN": [
+   {
+    "d": "2026-11-26",
+    "t": "Commercial Syn Bags Limited has informed the Exchange about change in Management",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/COMSYN1984_26112026181746_SELetterReg30.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-27"
+   }
+  ],
+  "DBREALTY": [
+   {
+    "d": "2026-11-26",
+    "t": "Intimation under Regulation 30 of the SEBI (LODR) Regulations, 2015 - acquisition made by the Company.",
+    "k": "Acquisition / JV",
+    "url": "https://nsearchives.nseindia.in/corporate/DBR_26112026174401_SE_Intimation_acquisition_of_additional_shares_of_Pandora.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-27"
+   }
+  ],
+  "ASHIANA": [
+   {
+    "d": "2026-11-26",
+    "t": "Ashiana Housing Limited has informed the Exchange about acquisition of land in Chennai by Kairav Developers Limited, a Joint Venture Entity of Ashiana Housing Limited, as per the details in the pdf attached.",
+    "k": "Acquisition / JV",
+    "url": "https://nsearchives.nseindia.in/corporate/ASHIANA_26112026172510_PressReleaseChennaiLandDealSIGNED.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-27"
    }
   ]
  }
