@@ -752,10 +752,10 @@ function drawPanel(){
         `<button class="rg" data-tf="${k}" aria-pressed="${k === curTf}">${l}</button>`).join("")}${topLinks}</div>
       <div class="ranges" role="group" aria-label="Period">${[["3M", 63], ["6M", 126], ["1Y", 260], ["3Y", 780], ["5Y", 1300], ["All", 0]].map(([l, n]) =>
         `<button class="rg" data-range="${n}" aria-pressed="${n === curRange && !ZOOM[curTf]}">${l}</button>`).join("")}
-      <span class="vz" role="group" aria-label="Price zoom (up-down)"><button class="rg" data-vz="out" title="Zoom out up-down (Shift + mouse wheel also works)" aria-label="Zoom out vertically">↕−</button><button class="rg" data-vz="in" title="Zoom in up-down (Shift + mouse wheel also works)" aria-label="Zoom in vertically">↕+</button><button class="rg" data-vz="auto" title="Fit prices to the screen again" aria-label="Auto fit prices">Auto</button></span>
+      <span class="vz" role="group" aria-label="Price zoom (up-down)"><button class="rg" data-vz="out" title="Zoom out up-down (or mouse wheel / Ctrl + wheel on the price numbers on the right)" aria-label="Zoom out vertically">↕−</button><button class="rg" data-vz="in" title="Zoom in up-down (or mouse wheel / Ctrl + wheel on the price numbers on the right)" aria-label="Zoom in vertically">↕+</button><button class="rg" data-vz="auto" title="Fit prices to the screen again" aria-label="Auto fit prices">Auto</button></span>
       <div class="legend" id="legend"></div></div>
       <div class="chartbox" id="chartbox"><div class="empty" style="border:0">Loading chart…</div></div>
-      <div class="src"><span id="chartsrc"></span> <b>Tip:</b> right-click the chart (long-press on a phone) to set a price alert. Up-down zoom: ↕+ / ↕− buttons, Shift + mouse wheel, or drag the price numbers on the right up / down (double-click them or tap Auto to fit again).</div>`;
+      <div class="src"><span id="chartsrc"></span> <b>Tip:</b> right-click the chart (long-press on a phone) to set a price alert. Up-down zoom: put the mouse on the price numbers on the right and scroll (Ctrl + scroll also works), ↕+ / ↕− buttons, Shift + mouse wheel, or drag the price numbers on the right up / down (double-click them or tap Auto to fit again).</div>`;
     drawChart();
   } else if (curTab === "fund") {
     body.innerHTML = fundHTML(D.fund[r.symbol]) + links;
@@ -857,9 +857,15 @@ async function drawChart(){
   for (const a of [...activeAlerts(), ...AL.pending].filter(x => x.symbol === sym))
     main.createPriceLine({price: +a.price, color: tok("--accent"), lineWidth: 1, lineStyle: 2, axisLabelVisible: true, title: "🔔 " + String(a.op).slice(0, 6)});
   attachMenu(box);
-  if (!box.__vzWheel) {          // Shift + mouse wheel = zoom up-down (plain wheel still zooms left-right)
-    box.__vzWheel = true;
-    box.addEventListener("wheel", e => { if (!e.shiftKey || !chartObj) return; e.preventDefault(); e.stopPropagation();
+  if (!box.__vzWheel) {          // zoom up-down: mouse wheel (with or without Ctrl) over the price numbers on the right, or Shift + wheel anywhere
+    box.__vzWheel = true;          // (wheel / Ctrl + wheel over the candles still zooms left-right) - 28 Nov 2026
+    box.addEventListener("wheel", e => {
+      if (!chartObj) return;
+      let onPrices = false;
+      try { const r = box.getBoundingClientRect(), w = chartObj.priceScale("right").width();
+            onPrices = w > 0 && e.clientX >= r.right - w - 2 && e.clientX <= r.right; } catch (err) {}
+      if (!e.shiftKey && !onPrices) return;
+      e.preventDefault(); e.stopPropagation();
       setVZ((e.deltaY || e.deltaX) < 0 ? VZ * 1.15 : VZ / 1.15); }, {capture: true, passive: false});
   }
   setRange();
