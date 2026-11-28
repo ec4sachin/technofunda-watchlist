@@ -6466,5 +6466,68 @@
    ]
   ],
   "guide": {}
+ },
+ "DHARARAIL": {
+  "text": "Railway maintenance company: annual maintenance contracts and repair services for railway rolling stock. ==H1 FY27 sales ₹35 cr, net profit ₹10 cr== – ==revenue +26.5% and profit +44.3% YoY== (company presentation). ==Order book ₹192.81 cr== (over 5× half-year sales). New ₹2.46 cr AMC order from Daulatram in November. No revenue guidance found. Watch: steady new railway orders and execution of the order book in H2.",
+  "date": "2026-11-28",
+  "sources": [
+   [
+    "Screener – Dhara Rail Projects",
+    "https://www.screener.in/company/DHARARAIL/"
+   ]
+  ],
+  "guide": {},
+  "ob": {
+   "cr": [
+    192.81
+   ],
+   "asof": "Sep 2026",
+   "text": "H1 FY27 investor presentation"
+  }
+ },
+ "PRATHAM": {
+  "text": "⚠ Slow profit growth. Oil & gas pipeline and water EPC contractor. ==H1 FY27 consolidated sales ₹88 cr vs ₹68 cr (+29%)==, but ==net profit only ₹5.7 cr vs ₹5.1 cr (+12%)==. ==Borrowings up 85% to ₹70 cr== since Sep 2025, and the tax rate was unusually low (9.4%). Standalone results were weaker (sales ₹32.8 cr vs ₹45.7 cr). No guidance or order book number found. Watch: whether profit catches up with sales and debt stops rising.",
+  "date": "2026-11-28",
+  "sources": [
+   [
+    "Sovrenn – Pratham EPC results",
+    "https://www.sovrenn.com/financial-results/pratham-epc-projects"
+   ],
+   [
+    "Screener – Pratham EPC",
+    "https://www.screener.in/company/PRATHAM/"
+   ]
+  ],
+  "guide": {}
+ },
+ "SHREEOSFM": {
+  "text": "⚠ Profit down. Employee transportation and vehicle rental company. ==H1 FY27 sales ₹82 cr vs ₹76 cr (+8%)==, but ==net profit fell to ₹3.5 cr from ₹4.9 cr (−29%)== and operating margin dropped to 7.4% from 12.6%. Other income was 52% of pre-tax profit. ==Open offer by Flywings Simulator==: promoters agreed on 12 Nov 2026 to sell 72 lakh shares. No guidance found. Watch: margin recovery and the new owner's plans after the open offer.",
+  "date": "2026-11-28",
+  "sources": [
+   [
+    "Sovrenn – Shree OSFM results",
+    "https://www.sovrenn.com/financial-results/shree-osfm-e-mobility"
+   ],
+   [
+    "Screener – Shree OSFM E-Mobility",
+    "https://www.screener.in/company/SHREEOSFM/"
+   ]
+  ],
+  "guide": {}
+ },
+ "544623": {
+  "text": "B2B peanut butter maker (Mother Nutri Foods, BSE SME) with 10+ flavours. ==H1 FY27 revenue ₹72.81 cr vs about ₹50 cr a year ago (≈+46%)== and ==net profit ₹7.04 cr vs about ₹5 cr (≈+41%)==. FY26 profit rose 75% on revenue +36.6%. No guidance or order book found. Watch: that growth holds in H2 and margins stay steady.",
+  "date": "2026-11-28",
+  "sources": [
+   [
+    "Screener – Mother Nutri Foods",
+    "https://www.screener.in/company/544623/"
+   ],
+   [
+    "Whalesbook – Mother Nutri FY26",
+    "https://www.whalesbook.com/corporate-news/English/consumer-products/Mother-Nutri-Foods-Posts-754percent-Profit-Jump-Revenue-Up-366percent-For-FY26/6a1b2651de28c5c0a9137216"
+   ]
+  ],
+  "guide": {}
  }
 }
