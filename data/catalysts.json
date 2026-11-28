@@ -2670,8 +2670,8 @@
   }
  },
  "ADISOFT": {
-  "text": "Industrial automation solutions provider (Pune), mainly for auto plants and now expanding into pharma, packaging, warehousing and white goods. ==H1 FY27 income +48% to ₹74 cr, EBITDA doubled (+106%), PAT +118% to ₹11.6 cr==; margins up sharply (EBITDA 23%). New ==70,000 sq ft Bhosari plant, partly live from end-Q3 FY27, built for 4–5× today's revenue==. Guidance: ==~25% revenue growth, 13–14% PAT margin, debt-free by year-end==. Watch: unaudited press-release numbers; H2-heavy business.",
-  "date": "2026-11-15",
+  "text": "Industrial automation solutions provider (Pune), mainly for auto plants and now expanding into pharma, packaging, warehousing and white goods. ==H1 FY27 income +48% to ₹74 cr, EBITDA doubled (+106%), PAT +118% to ₹11.6 cr==; margins up sharply (EBITDA 23%). ==New ₹12.56 cr order (27 Nov), about 17% of H1 income==, to be executed by March 2027; order book was ==~₹50 cr in Oct 2026==. New ==70,000 sq ft Bhosari plant, partly live from Dec 2026==. Guidance: ==~25% revenue growth, 13–14% PAT margin, debt-free by year-end==. Watch: unaudited press-release numbers; H2-heavy business; client not named.",
+  "date": "2026-11-28",
   "sources": [
    [
     "Outlook Business – Adisoft H1 FY27",
@@ -2680,6 +2680,10 @@
    [
     "Outlook Business – Adisoft new facility",
     "https://www.outlookbusiness.com/spotlight/news-wire/adisoft-technologies-closes-a-strong-h1-fy27-new-facility-to-support-45x-scale"
+   ],
+   [
+    "EquityBulls – Adisoft ₹12.56 cr order",
+    "https://www.equitybulls.com/news/379770/adisoft-technologies-bags-12-56-crore-order-equivalent"
    ]
   ],
   "guide": {
@@ -2697,6 +2701,13 @@
      14
     ]
    }
+  },
+  "ob": {
+   "cr": [
+    50
+   ],
+   "asof": "Oct 2026",
+   "text": "before the ₹12.56 cr order of 27 Nov"
   }
  },
  "544442": {
