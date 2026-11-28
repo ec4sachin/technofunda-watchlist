@@ -8586,7 +8586,7 @@
    }
   ],
   "as_of": "2026-11-28",
-  "stocks": 208,
+  "stocks": 209,
   "last2y": {
    "start": "2024-11-28",
    "capital": 1000000.0,
@@ -12973,27 +12973,27 @@
     "max_drawdown_pct": 5.3
    },
    "2021": {
-    "final": 1605124.14,
+    "final": 1592172.3,
     "open_trades": 0,
-    "return_pct": 60.5,
-    "trades": 68,
-    "win_rate": 48.5,
+    "return_pct": 59.2,
+    "trades": 69,
+    "win_rate": 47.8,
     "max_drawdown_pct": 2.1
    },
    "2022": {
-    "final": 1000566.25,
+    "final": 1017673.45,
     "open_trades": 0,
-    "return_pct": 0.1,
-    "trades": 47,
-    "win_rate": 23.4,
-    "max_drawdown_pct": 7.3
+    "return_pct": 1.8,
+    "trades": 48,
+    "win_rate": 25.0,
+    "max_drawdown_pct": 6.0
    },
    "2023": {
-    "final": 1252496.04,
+    "final": 1214050.79,
     "open_trades": 0,
-    "return_pct": 25.2,
-    "trades": 109,
-    "win_rate": 42.2,
+    "return_pct": 21.4,
+    "trades": 108,
+    "win_rate": 42.6,
     "max_drawdown_pct": 5.7
    },
    "2024": {
@@ -13024,14 +13024,14 @@
   "stocks_with_history": {
    "2017": 32,
    "2018": 35,
-   "2019": 43,
-   "2020": 45,
-   "2021": 46,
-   "2022": 47,
-   "2023": 53,
-   "2024": 63,
-   "2025": 84,
-   "2026": 100
+   "2019": 44,
+   "2020": 46,
+   "2021": 47,
+   "2022": 48,
+   "2023": 54,
+   "2024": 64,
+   "2025": 85,
+   "2026": 101
   }
  },
  "positional": {
@@ -19499,7 +19499,7 @@
    }
   ],
   "as_of": "2026-11-28",
-  "stocks": 208,
+  "stocks": 209,
   "last2y": {
    "start": "2024-11-28",
    "capital": 1000000.0,
@@ -21891,36 +21891,36 @@
     "max_drawdown_pct": 2.7
    },
    "2021": {
-    "final": 1434885.23,
+    "final": 1424769.39,
     "open_trades": 0,
-    "return_pct": 43.5,
-    "trades": 49,
-    "win_rate": 36.7,
+    "return_pct": 42.5,
+    "trades": 50,
+    "win_rate": 36.0,
     "max_drawdown_pct": 4.3
    },
    "2022": {
-    "final": 1116122.84,
+    "final": 1104480.21,
     "open_trades": 0,
-    "return_pct": 11.6,
-    "trades": 46,
-    "win_rate": 19.6,
+    "return_pct": 10.4,
+    "trades": 47,
+    "win_rate": 19.1,
     "max_drawdown_pct": 3.2
    },
    "2023": {
-    "final": 1680471.06,
+    "final": 1907317.58,
     "open_trades": 0,
-    "return_pct": 68.0,
-    "trades": 60,
-    "win_rate": 36.7,
-    "max_drawdown_pct": 9.0
+    "return_pct": 90.7,
+    "trades": 61,
+    "win_rate": 41.0,
+    "max_drawdown_pct": 8.9
    },
    "2024": {
-    "final": 1124275.41,
+    "final": 1115827.88,
     "open_trades": 0,
-    "return_pct": 12.4,
-    "trades": 69,
-    "win_rate": 23.2,
-    "max_drawdown_pct": 3.1
+    "return_pct": 11.6,
+    "trades": 70,
+    "win_rate": 22.9,
+    "max_drawdown_pct": 3.9
    },
    "2025": {
     "final": 1094044.08,
@@ -21942,14 +21942,14 @@
   "stocks_with_history": {
    "2017": 32,
    "2018": 35,
-   "2019": 43,
-   "2020": 45,
-   "2021": 46,
-   "2022": 47,
-   "2023": 53,
-   "2024": 63,
-   "2025": 84,
-   "2026": 100
+   "2019": 44,
+   "2020": 46,
+   "2021": 47,
+   "2022": 48,
+   "2023": 54,
+   "2024": 64,
+   "2025": 85,
+   "2026": 101
   }
  },
  "switch": {
@@ -29640,7 +29640,7 @@
    }
   ],
   "as_of": "2026-11-28",
-  "stocks": 208,
+  "stocks": 209,
   "last2y": {
    "start": "2024-11-28",
    "capital": 1000000.0,
@@ -32957,27 +32957,27 @@
     "max_drawdown_pct": 2.7
    },
    "2021": {
-    "final": 1467709.25,
+    "final": 1457116.08,
     "open_trades": 0,
-    "return_pct": 46.8,
-    "trades": 50,
-    "win_rate": 40.0,
+    "return_pct": 45.7,
+    "trades": 51,
+    "win_rate": 39.2,
     "max_drawdown_pct": 4.3
    },
    "2022": {
-    "final": 1073478.68,
+    "final": 1073374.94,
     "open_trades": 0,
     "return_pct": 7.3,
-    "trades": 46,
-    "win_rate": 21.7,
+    "trades": 47,
+    "win_rate": 21.3,
     "max_drawdown_pct": 4.1
    },
    "2023": {
-    "final": 1673738.19,
+    "final": 2064280.86,
     "open_trades": 0,
-    "return_pct": 67.4,
-    "trades": 66,
-    "win_rate": 33.3,
+    "return_pct": 106.4,
+    "trades": 64,
+    "win_rate": 40.6,
     "max_drawdown_pct": 6.2
    },
    "2024": {
@@ -33008,14 +33008,14 @@
   "stocks_with_history": {
    "2017": 32,
    "2018": 35,
-   "2019": 43,
-   "2020": 45,
-   "2021": 46,
-   "2022": 47,
-   "2023": 53,
-   "2024": 63,
-   "2025": 84,
-   "2026": 100
+   "2019": 44,
+   "2020": 46,
+   "2021": 47,
+   "2022": 48,
+   "2023": 54,
+   "2024": 64,
+   "2025": 85,
+   "2026": 101
   }
  },
  "_market": {

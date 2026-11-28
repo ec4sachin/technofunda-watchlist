@@ -1342,5 +1342,10 @@
   "Capital Goods",
   "Compressors, Pumps & Diesel Engines",
   "auto"
+ ],
+ "ONEPOINT": [
+  "Other",
+  "Business Process Outsourcing (BPO)/ Knowledge Process Outsourcing (KPO)",
+  "auto"
  ]
 }

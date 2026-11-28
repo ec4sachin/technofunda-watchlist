@@ -28680,5 +28680,98 @@
   },
   "basis": "Consolidated",
   "as_of": "2026-11-24"
+ },
+ "ONEPOINT": {
+  "market_cap": 1962.0,
+  "price": 74.6,
+  "high_52w": 87.6,
+  "low_52w": 40.6,
+  "pe": 35.9,
+  "book_value": 18.0,
+  "dividend_yield": 0.0,
+  "roce": 9.59,
+  "roe": 7.98,
+  "roe_3y": 10.0,
+  "sales_growth_ttm": 86.0,
+  "sales_growth_3y": 31.0,
+  "sales_growth_5y": 25.0,
+  "profit_growth_ttm": 50.0,
+  "profit_growth_3y": 57.0,
+  "profit_growth_5y": 35.0,
+  "sales_growth_qtr_yoy": 146.48,
+  "profit_growth_qtr_yoy": 80.0,
+  "opm_latest_qtr": 24.0,
+  "opm_last_year": 23.0,
+  "net_profit_ttm": 54.0,
+  "debt_to_equity": 0.56,
+  "interest_coverage": 6.78,
+  "cfo_to_profit_5y": 2.16,
+  "debtor_days": 113.0,
+  "working_capital_days": 106.0,
+  "promoter_holding": 52.28,
+  "promoter_change_1y": -0.01,
+  "fii_dii_latest": 5.84,
+  "shareholders_latest": 52694.0,
+  "result_period_months": 3,
+  "sector_path": [
+   "",
+   "",
+   "Commercial Services & Supplies",
+   "Business Process Outsourcing (BPO)/ Knowledge Process Outsourcing (KPO)"
+  ],
+  "quarters": {
+   "t": [
+    "Dec 2024",
+    "Mar 2025",
+    "Jun 2025",
+    "Sep 2025",
+    "Dec 2025",
+    "Mar 2026",
+    "Jun 2026",
+    "Sep 2026"
+   ],
+   "sales": [
+    66.0,
+    67.0,
+    69.0,
+    71.0,
+    77.0,
+    96.0,
+    158.0,
+    175.0
+   ],
+   "profit": [
+    8.0,
+    9.0,
+    9.0,
+    10.0,
+    9.0,
+    10.0,
+    16.0,
+    18.0
+   ],
+   "opm": [
+    24.0,
+    18.0,
+    22.0,
+    24.0,
+    24.0,
+    23.0,
+    23.0,
+    24.0
+   ],
+   "eps": [
+    0.33,
+    0.33,
+    0.36,
+    0.37,
+    0.33,
+    0.39,
+    0.62,
+    0.7
+   ]
+  },
+  "basis": "Consolidated",
+  "as_of": "2026-11-28"
  }
 }

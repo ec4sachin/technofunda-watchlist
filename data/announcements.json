@@ -2,19 +2,19 @@
  "last": "2026-11-28",
  "status": {
   "bse": {
-   "days": 2,
+   "days": 1,
    "rows": 0,
    "last_error": "HTTP 403 (AnnGetData/w?strCat=-1)"
   },
   "nse": {
-   "days": 2,
-   "rows": 466,
+   "days": 1,
+   "rows": 49,
    "last_error": ""
   },
   "matched": {
    "bse_codes": 93,
-   "nse_only_codes": 237,
-   "new": 2
+   "nse_only_codes": 238,
+   "new": 0
   }
  },
  "items": {

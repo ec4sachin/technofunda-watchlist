@@ -1,65 +1,14 @@
 {
- "added": [],
+ "added": [
+  [
+   "ONEPOINT",
+   "One Point One Solutions",
+   "marks 9.9/11 · 3-month RS 96 (vs 3563 BSE stocks) · Asked by Sacheen"
+  ]
+ ],
  "rejected": [],
- "to_dt": [
-  [
-   "519097",
-   "Ritesh Intl.",
-   "close 71.25 < 200 EMA 73.84"
-  ],
-  [
-   "544746",
-   "Safety Controls & Devices Ltd",
-   "close 69.93 < 20 EMA 72"
-  ],
-  [
-   "APSISAERO",
-   "Apsis Aerocom Ltd",
-   "close 507.75 < 20 EMA 514.76"
-  ],
-  [
-   "TEAMTECH",
-   "Teamtech Formwork",
-   "close 153.3 < 20 EMA 158.2"
-  ]
- ],
- "to_sp": [
-  [
-   "522294",
-   "T & I Global",
-   "close 188.95 > 200 EMA 180.11"
-  ],
-  [
-   "530427",
-   "Choksi Asia",
-   "close 196.7 > 200 EMA 191.52"
-  ],
-  [
-   "531569",
-   "Sanjivani Paranteral Ltd",
-   "close 171.5 > 200 EMA 171.13"
-  ],
-  [
-   "ADISOFT",
-   "Adisoft Technol.",
-   "close 275 > 20 EMA 271.48"
-  ],
-  [
-   "KANOHAR",
-   "Kanohar Elect.",
-   "close 1028.05 > 20 EMA 1019.65"
-  ],
-  [
-   "RAPIDFLEET",
-   "Rapid Fleet",
-   "close 205.6 > 200 EMA 199.04"
-  ],
-  [
-   "RBZJEWEL",
-   "RBZ Jewellers Lt",
-   "close 159.57 > 200 EMA 156.97"
-  ]
- ],
+ "to_dt": [],
+ "to_sp": [],
  "removed": [],
  "unchecked": [],
  "investor_moves": [],
@@ -76,11 +25,6 @@
    "544740",
    "TIPCO Engineering",
    "close 415.25 vs 20 EMA 350.13 → SP"
-  ],
-  [
-   "544746",
-   "Safety Controls & Devices Ltd",
-   "close 69.93 vs 20 EMA 72 → DT"
   ],
   [
    "544765",
@@ -103,6 +47,11 @@
    "close 98.1 vs 20 EMA 93.85 → SP"
   ],
   [
+   "ADISOFT",
+   "Adisoft Technol.",
+   "close 275 vs 20 EMA 271.48 → SP"
+  ],
+  [
    "AEROPLANE",
    "A C J K Exports",
    "close 243.33 vs 20 EMA 233.12 → SP"
@@ -110,12 +59,7 @@
   [
    "AONESTEELS",
    "A-One Steels",
-   "close 456 (too new for any EMA)"
-  ],
-  [
-   "APSISAERO",
-   "Apsis Aerocom Ltd",
-   "close 507.75 vs 20 EMA 514.76 → DT"
+   "close 461.65 vs 20 EMA 440.43 → SP"
   ],
   [
    "BPLPHARMA",
@@ -141,6 +85,11 @@
    "HEXAGON",
    "Hexagon Nutri.",
    "close 60.88 vs 20 EMA 60.58 → SP"
+  ],
+  [
+   "KANOHAR",
+   "Kanohar Elect.",
+   "close 1028.05 vs 20 EMA 1019.65 → SP"
   ],
   [
    "MARSONS",
@@ -175,7 +124,7 @@
   [
    "SMT",
    "Sahajanand Medical Technologies Ltd",
-   "close 527.85 (too new for any EMA)"
+   "close 527.85 vs 20 EMA 522.69 → SP"
   ],
   [
    "SONA",
@@ -185,17 +134,12 @@
   [
    "SWASTIKAIN",
    "Swastika Infra",
-   "close 194.64 (too new for any EMA)"
+   "close 197.19 vs 20 EMA 194.95 → SP"
   ],
   [
    "TAMBOLIIN",
    "Tamboli Industri",
    "close 330.65 vs 20 EMA 318.88 → SP"
-  ],
-  [
-   "TEAMTECH",
-   "Teamtech Formwork",
-   "close 153.3 vs 20 EMA 158.2 → DT"
   ],
   [
    "TECHNOCRAF",
@@ -233,6 +177,11 @@
    "close 178.9 vs 20 EMA 180.16"
   ],
   [
+   "544746",
+   "Safety Controls & Devices Ltd",
+   "close 69.93 vs 20 EMA 72"
+  ],
+  [
    "544755",
    "Recode Studios",
    "close 305.2 vs 20 EMA 368.2"
@@ -263,14 +212,14 @@
    "close 130 vs 20 EMA 137.55"
   ],
   [
-   "ADISOFT",
-   "Adisoft Technol.",
-   "close 275 vs 20 EMA 271.48"
-  ],
-  [
    "ANAWIL",
    "Anawil Wire and Engineering Ltd",
    "close 390 vs 20 EMA 399.21"
+  ],
+  [
+   "APSISAERO",
+   "Apsis Aerocom Ltd",
+   "close 507.75 vs 20 EMA 514.76"
   ],
   [
    "DEEPA",
@@ -298,11 +247,6 @@
    "close 159.47 vs 20 EMA 161.97"
   ],
   [
-   "KANOHAR",
-   "Kanohar Elect.",
-   "close 1028.05 vs 20 EMA 1019.65"
-  ],
-  [
    "KHAZANCHI",
    "Khazanchi Jewell",
    "close 711.75 vs 20 EMA 713.55"
@@ -321,6 +265,11 @@
    "TAALTECH",
    "TAAL Tech Ltd",
    "close 839.95 vs 20 EMA 899.42"
+  ],
+  [
+   "TEAMTECH",
+   "Teamtech Formwork",
+   "close 153.3 vs 20 EMA 158.2"
   ],
   [
    "TRANSPEK",
@@ -344,19 +293,19 @@
   ]
  ],
  "per_alert": {
-  "TTM Profit > 30%": 8,
-  "52W High": 8,
-  "Daily Volume Scan": 1,
-  "Weekly Volume Scan": 1,
+  "TTM Profit > 30%": 0,
+  "52W High": 0,
+  "Daily Volume Scan": 0,
+  "Weekly Volume Scan": 0,
   "Ready after 6 Months": 0,
   "Mukul Mahavir Agrawal": 0,
   "Ashish Kacholia": 0
  },
- "email_total": 9,
- "already_listed": 9,
+ "email_total": 0,
+ "already_listed": 0,
  "price_date": "27 Nov 2026",
  "monthly_pass": 0,
- "mode": "daily",
+ "mode": "auto",
  "monthly_done": false,
- "run_at": "28 Nov 2026, 08:56 AM IST"
+ "run_at": "28 Nov 2026, 01:23 PM IST"
 }
