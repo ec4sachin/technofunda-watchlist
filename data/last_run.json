@@ -3,18 +3,12 @@
  "rejected": [],
  "to_dt": [
   [
-   "RAMBHAJO",
-   "Advit Jewels",
-   "close 320.1 < 20 EMA 325.77"
+   "SWASTIKAIN",
+   "Swastika Infra",
+   "close 194.64 < 20 EMA 194.92"
   ]
  ],
- "to_sp": [
-  [
-   "KRYSTAL",
-   "Krystal Integrat",
-   "close 612.65 > 200 EMA 604.82"
-  ]
- ],
+ "to_sp": [],
  "removed": [],
  "unchecked": [],
  "investor_moves": [],
@@ -65,7 +59,7 @@
   [
    "AONESTEELS",
    "A-One Steels",
-   "close 456 (too new for any EMA)"
+   "close 456 vs 20 EMA 441.95 → SP"
   ],
   [
    "BPLPHARMA",
@@ -113,11 +107,6 @@
    "close 119.81 vs 20 EMA 117.77 → SP"
   ],
   [
-   "RAMBHAJO",
-   "Advit Jewels",
-   "close 320.1 vs 20 EMA 325.77 → DT"
-  ],
-  [
    "SHUKRAPHAR",
    "Shukra Pharma.",
    "close 89.99 vs 20 EMA 81.94 → SP"
@@ -130,7 +119,7 @@
   [
    "SMT",
    "Sahajanand Medical Technologies Ltd",
-   "close 527.85 (too new for any EMA)"
+   "close 527.85 vs 20 EMA 522.69 → SP"
   ],
   [
    "SONA",
@@ -140,7 +129,7 @@
   [
    "SWASTIKAIN",
    "Swastika Infra",
-   "close 194.64 (too new for any EMA)"
+   "close 194.64 vs 20 EMA 194.92 → DT"
   ],
   [
    "TAMBOLIIN",
@@ -263,6 +252,11 @@
    "close 306.15 vs 20 EMA 318.09"
   ],
   [
+   "RAMBHAJO",
+   "Advit Jewels",
+   "close 320.1 vs 20 EMA 325.77"
+  ],
+  [
    "RSL",
    "Rajputana Stain.",
    "close 157.44 vs 20 EMA 164.56"
@@ -313,5 +307,5 @@
  "monthly_pass": 0,
  "mode": "auto",
  "monthly_done": false,
- "run_at": "28 Nov 2026, 02:04 PM IST"
+ "run_at": "28 Nov 2026, 02:31 PM IST"
 }
