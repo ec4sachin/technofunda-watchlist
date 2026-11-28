@@ -1,14 +1,20 @@
 {
- "added": [
+ "added": [],
+ "rejected": [],
+ "to_dt": [
   [
-   "ONEPOINT",
-   "One Point One Solutions",
-   "marks 9.9/11 · 3-month RS 96 (vs 3563 BSE stocks) · Asked by Sacheen"
+   "RAMBHAJO",
+   "Advit Jewels",
+   "close 320.1 < 20 EMA 325.77"
   ]
  ],
- "rejected": [],
- "to_dt": [],
- "to_sp": [],
+ "to_sp": [
+  [
+   "KRYSTAL",
+   "Krystal Integrat",
+   "close 612.65 > 200 EMA 604.82"
+  ]
+ ],
  "removed": [],
  "unchecked": [],
  "investor_moves": [],
@@ -59,12 +65,12 @@
   [
    "AONESTEELS",
    "A-One Steels",
-   "close 461.65 vs 20 EMA 440.43 → SP"
+   "close 456 (too new for any EMA)"
   ],
   [
    "BPLPHARMA",
    "Bharat Parenterals Ltd",
-   "close 2239.1 vs 20 EMA 2092.78 → SP"
+   "close 2327.2 vs 20 EMA 2115.13 → SP"
   ],
   [
    "BRANDMAN",
@@ -74,17 +80,17 @@
   [
    "DHABRIYA",
    "Dhabriya Poly.",
-   "close 480.1 vs 20 EMA 473.74 → SP"
+   "close 483.4 vs 20 EMA 474.66 → SP"
   ],
   [
    "HALDYNGL",
    "Haldyn Glass",
-   "close 153.33 vs 20 EMA 138.87 → SP"
+   "close 151.1 vs 20 EMA 140.03 → SP"
   ],
   [
    "HEXAGON",
    "Hexagon Nutri.",
-   "close 60.88 vs 20 EMA 60.58 → SP"
+   "close 61.77 vs 20 EMA 60.7 → SP"
   ],
   [
    "KANOHAR",
@@ -104,17 +110,17 @@
   [
    "ORIRAIL",
    "Oriental Rail Infrastructure Ltd",
-   "close 118.78 vs 20 EMA 117.56 → SP"
+   "close 119.81 vs 20 EMA 117.77 → SP"
   ],
   [
    "RAMBHAJO",
    "Advit Jewels",
-   "close 328.05 vs 20 EMA 326.37 → SP"
+   "close 320.1 vs 20 EMA 325.77 → DT"
   ],
   [
    "SHUKRAPHAR",
    "Shukra Pharma.",
-   "close 89.96 vs 20 EMA 81.09 → SP"
+   "close 89.99 vs 20 EMA 81.94 → SP"
   ],
   [
    "SIMCA",
@@ -124,17 +130,17 @@
   [
    "SMT",
    "Sahajanand Medical Technologies Ltd",
-   "close 527.85 vs 20 EMA 522.69 → SP"
+   "close 527.85 (too new for any EMA)"
   ],
   [
    "SONA",
    "Sonaselection India",
-   "close 123.11 vs 20 EMA 114.76 → SP"
+   "close 123.6 vs 20 EMA 115.61 → SP"
   ],
   [
    "SWASTIKAIN",
    "Swastika Infra",
-   "close 197.19 vs 20 EMA 194.95 → SP"
+   "close 194.64 (too new for any EMA)"
   ],
   [
    "TAMBOLIIN",
@@ -224,7 +230,7 @@
   [
    "DEEPA",
    "Deepa Jewellers",
-   "close 182.92 vs 20 EMA 203.56"
+   "close 184.6 vs 20 EMA 201.75"
   ],
   [
    "EPWINDIA",
@@ -239,32 +245,32 @@
   [
    "FEDDERSHOL",
    "Fedders Holding",
-   "close 54.59 vs 20 EMA 57.04"
+   "close 53.9 vs 20 EMA 56.74"
   ],
   [
    "JSIPL",
    "Jindal Supreme",
-   "close 159.47 vs 20 EMA 161.97"
+   "close 158.47 vs 20 EMA 161.64"
   ],
   [
    "KHAZANCHI",
    "Khazanchi Jewell",
-   "close 711.75 vs 20 EMA 713.55"
+   "close 708.8 vs 20 EMA 713.04"
   ],
   [
    "MPIMANIPAL",
    "Manipal Payment and Identity Solutions Ltd",
-   "close 309.7 vs 20 EMA 319.36"
+   "close 306.15 vs 20 EMA 318.09"
   ],
   [
    "RSL",
    "Rajputana Stain.",
-   "close 156.3 vs 20 EMA 165.31"
+   "close 157.44 vs 20 EMA 164.56"
   ],
   [
    "TAALTECH",
    "TAAL Tech Ltd",
-   "close 839.95 vs 20 EMA 899.42"
+   "close 838.55 vs 20 EMA 893.62"
   ],
   [
    "TEAMTECH",
@@ -274,12 +280,12 @@
   [
    "TRANSPEK",
    "Transpek Industry Ltd",
-   "close 1270 vs 20 EMA 1317.64"
+   "close 1283.2 vs 20 EMA 1314.36"
   ],
   [
    "UDAYJEW",
    "Uday Jewellery",
-   "close 203.38 vs 20 EMA 210.2"
+   "close 203.58 vs 20 EMA 209.57"
   ],
   [
    "XTRANET",
@@ -307,5 +313,5 @@
  "monthly_pass": 0,
  "mode": "auto",
  "monthly_done": false,
- "run_at": "28 Nov 2026, 01:23 PM IST"
+ "run_at": "28 Nov 2026, 02:04 PM IST"
 }

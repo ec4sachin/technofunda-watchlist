@@ -90,3 +90,4 @@ date,strategy,mode,action,symbol,name,qty,price,value,reason,pnl,pnl_pct,hold_da
 2026-11-26,Swing Strategy,paper,SELL,DCI,DC Infotech,382,336.15,128409.3,"Time stop (10 days, under +3%)",-1937.52,-1.09,21,swing-DCI-2026-11-05
 2026-11-26,Swing Strategy,paper,BUY,ZOTA,Zota Health Care Ltd,94,1344.31,126365.14,"Breakout above ₹1331 + 1% (stop ₹1263.65, target ₹1613.17)",,,,swing-ZOTA-2026-11-26
 2026-11-27,Swing Strategy,paper,SELL,544529,Aptus Pharma,273,489.7,133688.1,"Time stop (10 days, under +3%)",3223.77,2.89,16,swing-544529-2026-11-11
+2026-11-27,Swing Strategy,paper,BUY,MEGAFLEX,Mega Flex Plast.,641,198.5,127238.5,"Breakout above ₹190 + 1% (stop ₹186.59, target ₹238.2)",,,,swing-MEGAFLEX-2026-11-27
