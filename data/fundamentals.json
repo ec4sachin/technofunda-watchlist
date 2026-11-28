@@ -1003,11 +1003,11 @@
   "as_of": "2026-11-27"
  },
  "ESCONET": {
-  "market_cap": 454.0,
-  "price": 344.0,
+  "market_cap": 461.0,
+  "price": 349.0,
   "high_52w": 407.0,
   "low_52w": 91.2,
-  "pe": 17.7,
+  "pe": 18.0,
   "book_value": 75.0,
   "dividend_yield": 0.0,
   "roce": 11.8,
@@ -1059,7 +1059,7 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-27"
+  "as_of": "2026-11-28"
  },
  "HOACFOODS": {
   "market_cap": 428.0,
@@ -4299,7 +4299,7 @@
   "price": 92.0,
   "high_52w": 113.0,
   "low_52w": 75.2,
-  "pe": 5.75,
+  "pe": 5.74,
   "book_value": 40.5,
   "dividend_yield": 0.0,
   "roce": 84.0,
@@ -4360,7 +4360,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-27"
+  "as_of": "2026-11-28"
  },
  "544812": {
   "market_cap": 219.0,
@@ -6557,7 +6557,7 @@
   ]
  },
  "XTRANET": {
-  "market_cap": 1347.0,
+  "market_cap": 1348.0,
   "price": 258.0,
   "high_52w": 359.0,
   "low_52w": 120.0,
@@ -6627,7 +6627,7 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-27"
+  "as_of": "2026-11-28"
  },
  "AEROENTER": {
   "market_cap": 1445.0,
@@ -7506,11 +7506,11 @@
   ]
  },
  "DEEPA": {
-  "market_cap": 1767.0,
-  "price": 184.0,
+  "market_cap": 1774.0,
+  "price": 185.0,
   "high_52w": 277.0,
   "low_52w": 165.0,
-  "pe": 15.4,
+  "pe": 15.5,
   "book_value": 55.4,
   "dividend_yield": 0.0,
   "roce": 51.6,
@@ -7576,7 +7576,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-27"
+  "as_of": "2026-11-28"
  },
  "BHARATSE": {
   "market_cap": 1331.0,
@@ -10735,11 +10735,11 @@
   ]
  },
  "MPIMANIPAL": {
-  "market_cap": 7092.0,
+  "market_cap": 7097.0,
   "price": 306.0,
   "high_52w": 458.0,
   "low_52w": 295.0,
-  "pe": 26.2,
+  "pe": 26.3,
   "book_value": 54.6,
   "dividend_yield": 0.0,
   "roce": 44.9,
@@ -10803,7 +10803,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-27"
+  "as_of": "2026-11-28"
  },
  "FONEBOX": {
   "market_cap": 209.0,
@@ -11538,7 +11538,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-27"
+  "as_of": "2026-11-28"
  },
  "SHRIAHIMSA": {
   "market_cap": 945.0,
@@ -17412,7 +17412,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-27"
+  "as_of": "2026-11-28"
  },
  "BRANDMAN": {
   "market_cap": 263.0,
@@ -19619,8 +19619,8 @@
   ]
  },
  "544844": {
-  "market_cap": 2058.0,
-  "price": 1032.0,
+  "market_cap": 2056.0,
+  "price": 1031.0,
   "high_52w": 1066.0,
   "low_52w": 447.0,
   "pe": 45.6,
@@ -19681,7 +19681,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-27"
+  "as_of": "2026-11-28"
  },
  "NRAIL": {
   "market_cap": 1145.0,
@@ -20327,11 +20327,11 @@
   ]
  },
  "ESDS": {
-  "market_cap": 13468.0,
-  "price": 1149.0,
+  "market_cap": 13504.0,
+  "price": 1152.0,
   "high_52w": 1864.0,
   "low_52w": 746.0,
-  "pe": 104.0,
+  "pe": 105.0,
   "book_value": 110.0,
   "dividend_yield": 0.0,
   "roce": 30.2,
@@ -20399,7 +20399,7 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-27"
+  "as_of": "2026-11-28"
  },
  "544458": {
   "market_cap": 1063.0,
@@ -22652,8 +22652,8 @@
   ]
  },
  "SWASTIKAIN": {
-  "market_cap": 661.0,
-  "price": 194.0,
+  "market_cap": 664.0,
+  "price": 195.0,
   "high_52w": 256.0,
   "low_52w": 186.0,
   "pe": 13.6,
@@ -22722,7 +22722,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-27"
+  "as_of": "2026-11-28"
  },
  "SUNLITE": {
   "market_cap": 827.0,
@@ -24323,7 +24323,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-27"
+  "as_of": "2026-11-28"
  },
  "517336": {
   "market_cap": 519.0,
@@ -24419,11 +24419,11 @@
   "as_of": "2026-11-16"
  },
  "SMT": {
-  "market_cap": 5404.0,
-  "price": 532.0,
+  "market_cap": 5365.0,
+  "price": 528.0,
   "high_52w": 579.0,
   "low_52w": 347.0,
-  "pe": 75.2,
+  "pe": 74.7,
   "dividend_yield": 0.0,
   "roce": 11.4,
   "roe": 10.4,
@@ -24477,7 +24477,7 @@
    ]
   },
   "basis": "Consolidated",
-  "as_of": "2026-11-27"
+  "as_of": "2026-11-28"
  },
  "544667": {
   "market_cap": 142.0,
@@ -26695,8 +26695,8 @@
   ]
  },
  "KANOHAR": {
-  "market_cap": 8148.0,
-  "price": 1029.0,
+  "market_cap": 8141.0,
+  "price": 1028.0,
   "high_52w": 1210.0,
   "low_52w": 672.0,
   "pe": 49.5,
@@ -26767,7 +26767,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-27"
+  "as_of": "2026-11-28"
  },
  "KSHINTL": {
   "market_cap": 6872.0,
@@ -27862,11 +27862,11 @@
   "as_of": "2026-11-14"
  },
  "JSIPL": {
-  "market_cap": 807.0,
+  "market_cap": 809.0,
   "price": 158.0,
   "high_52w": 218.0,
   "low_52w": 120.0,
-  "pe": 28.7,
+  "pe": 28.8,
   "book_value": 42.1,
   "dividend_yield": 0.0,
   "roce": 19.7,
@@ -27924,7 +27924,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-27"
+  "as_of": "2026-11-28"
  },
  "544773": {
   "market_cap": 753.0,
@@ -27992,7 +27992,7 @@
   "as_of": "2026-11-18"
  },
  "TECHNOCRAF": {
-  "market_cap": 1987.0,
+  "market_cap": 1988.0,
   "price": 502.0,
   "high_52w": 568.0,
   "low_52w": 284.0,
@@ -28064,7 +28064,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-27"
+  "as_of": "2026-11-28"
  },
  "543916": {
   "market_cap": 934.0,
@@ -28437,8 +28437,8 @@
   "as_of": "2026-11-19"
  },
  "SONA": {
-  "market_cap": 701.0,
-  "price": 123.0,
+  "market_cap": 702.0,
+  "price": 124.0,
   "high_52w": 130.0,
   "low_52w": 88.1,
   "pe": 18.9,
@@ -28507,7 +28507,7 @@
    ]
   },
   "basis": "Standalone",
-  "as_of": "2026-11-27"
+  "as_of": "2026-11-28"
  },
  "AONESTEELS": {
   "market_cap": 3691.0,

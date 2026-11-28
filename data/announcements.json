@@ -1,20 +1,20 @@
 {
- "last": "2026-11-27",
+ "last": "2026-11-28",
  "status": {
   "bse": {
-   "days": 1,
+   "days": 2,
    "rows": 0,
    "last_error": "HTTP 403 (AnnGetData/w?strCat=-1)"
   },
   "nse": {
-   "days": 1,
-   "rows": 154,
+   "days": 2,
+   "rows": 466,
    "last_error": ""
   },
   "matched": {
    "bse_codes": 93,
    "nse_only_codes": 237,
-   "new": 1
+   "new": 2
   }
  },
  "items": {
@@ -620,6 +620,14 @@
   ],
   "DBREALTY": [
    {
+    "d": "2026-11-27",
+    "t": "Intimation under Regulation 30 of SEBI (Listing Obligations and Disclosure Requirements) Regulations 2015 -Order passed under Income-Tax Act, 1961",
+    "k": "Order",
+    "url": "https://nsearchives.nseindia.in/corporate/DBR_27112026192944_SE_Intimation_Income_Tax_Order_against_HVPL.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-28"
+   },
+   {
     "d": "2026-11-26",
     "t": "Intimation under Regulation 30 of the SEBI (LODR) Regulations, 2015 - acquisition made by the Company.",
     "k": "Acquisition / JV",
@@ -646,6 +654,16 @@
     "url": "https://nsearchives.nseindia.in/corporate/OBSCPERFECTION_27112026122931_OBSCP_Disclosure_Receipt_of_Nomination_Letter.pdf",
     "ex": "NSE",
     "seen": "2026-11-27"
+   }
+  ],
+  "AEROPLANE": [
+   {
+    "d": "2026-11-27",
+    "t": "Amir Chand Jagdish Kumar (Exports) Limited has informed the Exchange regarding a press release dated November 27, 2026, titled \"Rashmika Mandanna becomes brand ambassador for Aeroplane Rice & FMCG\".",
+    "k": "Business update",
+    "url": "https://nsearchives.nseindia.in/corporate/ACJKEL12_27112026230300_Amir_Chand_Press_Release.pdf",
+    "ex": "NSE",
+    "seen": "2026-11-28"
    }
   ]
  }
